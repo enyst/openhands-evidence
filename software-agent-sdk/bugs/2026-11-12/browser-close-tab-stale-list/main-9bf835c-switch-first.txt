@@ -1,0 +1,21 @@
+iter  0: 'Closed tab # A191, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 11 ms
+iter  1: 'Closed tab # 6E4E, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 11 ms
+iter  2: 'Closed tab # FBF2, now on http://127.0.0' -> immediate list=OK
+iter  3: 'Closed tab # 12AD, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 13 ms
+iter  4: 'Closed tab # F4E7, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 11 ms
+iter  5: 'Closed tab # 0832, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 15 ms
+iter  6: 'Closed tab # 2F17, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 12 ms
+iter  7: 'Closed tab # B53D, now on http://127.0.0' -> immediate list=OK
+iter  8: 'Closed tab # C418, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 11 ms
+iter  9: 'Closed tab # F682, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 11 ms
+iter 10: 'Closed tab # 31C5, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 11 ms
+iter 11: 'Closed tab # 4527, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 11 ms
+iter 12: 'Closed tab # 4E0E, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 12 ms
+iter 13: 'Closed tab # 1626, now on http://127.0.0' -> immediate list=OK
+iter 14: 'Closed tab # E842, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 11 ms
+iter 15: 'Closed tab # DC89, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 13 ms
+iter 16: 'Closed tab # C212, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 16 ms
+iter 17: 'Closed tab # 56C1, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 13 ms
+iter 18: 'Closed tab # C187, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 12 ms
+iter 19: 'Closed tab # E5A8, now on http://127.0.0' -> immediate list=STALE(2 tabs), converged to 1 after 12 ms
+RESULT fix=False switch_first=True recording=False stale=17/20 max_lag_ms=16

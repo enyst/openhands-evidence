@@ -1,0 +1,512 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S15/browse --timeout 300 \
+  --check status eq finished --check browser_tools len-eq 14 --check shared_executors eq 1 \
+  --check mcp_schemas eq true --check guidance_on_all eq true \
+  --check steps.navigate.text contains "Navigated to: http://127.0.0.1" \
+  --check steps.state.text contains '"interactive_elements"' --check steps.state.text contains "your name" \
+  --check steps.state.content_types contains ImageContent \
+  --check screenshot_files len-eq 1 --check screenshot_named_in_state eq true \
+  --check steps.content.text contains "# Home Page" --check steps.content.text contains "[Go to page two]" \
+  --check steps.content_paged.text contains "started from char 2,000" \
+  --check steps.content_paged.text not-contains "# Home Page" \
+  --check steps.scroll.text eq "Scrolled down" \
+  --check steps.type.text contains "Typed 'Ada' into element" --check steps.click.text contains "Clicked element" \
+  --check steps.after_click.text contains "Hello Ada" \
+  --check steps.state_page2.text contains page2.html --check steps.on_page2.text contains "# Second Page" \
+  --check steps.back.text eq "Navigated back" --check steps.state_after_back.text contains index.html \
+  --check steps.new_tab.text contains "Opened new tab with URL" --check tabs_seen eq 2 \
+  --check steps.switch_tab.text contains "Switched to tab" --check steps.close_tab.text contains "Closed tab" \
+  --check tabs_left eq 1 \
+  --check storage_has_page_values eq true --check steps.set_storage.text eq "Storage set successfully" \
+  --check storage_restored eq true \
+  --check steps.missing_element.text contains "Element with index 99999 not found" \
+  --check steps.stop_unstarted.text contains "Not recording" \
+  --check chrome_processes_before_close ge 1 --check chrome_processes_after_close eq 0
+{
+  "ok": true,
+  "steps": {
+    "navigate": {
+      "tool": "browser_navigate",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Navigated to: http://127.0.0.1:42805/index.html",
+      "text_len": 47,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "state": {
+      "tool": "browser_get_state",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "{\n  \"url\": \"http://127.0.0.1:42805/index.html\",\n  \"title\": \"127.0.0.1:42805/index.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:42805/index.html\",\n      \"title\": \"127.0.0.1:42805/index.html\"\n    }\n  ],\n  \"interactive_elements\": [\n    {\n      \"index\": 2,\n      \"tag\": \"input\",\n      \"text\": \"\",\n      \"placeholder\": \"your name\"\n    },\n    {\n      \"index\": 6,\n      \"tag\": \"button\",\n      \"text\": \"Greet\"\n    },\n    {\n      \"index\": 24,\n      \"tag\": \"a\",\n      \"text\": \"Go to page two\",\n      \"href\": \"/page2.html\"\n    }\n  ]\n}\nScreenshot saved to: /tmp/claude-0/scratch/runs/FIX/sdk/S15-final/work/S15-browser-01/block1/runs/20261112-123809-01b29f/conversations/fe330ad358bb44b5b20dbfb29c045e54/observations/browser_screenshot_a74491e6.png\n",
+      "text_len": 748,
+      "content_types": [
+        "TextContent",
+        "TextContent",
+        "ImageContent"
+      ]
+    },
+    "content": {
+      "tool": "browser_get_content",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,663 HTML chars \u2192 7,375 initial markdown \u2192 7,172 filtered markdown (filtered 203 chars of noise)\n</content_stats>\n\n<webpage_content>\n# Home Page\nnobody greeted yet\nGreet[Go to page two](/page2.html)\nFiller paragraph 0 for scrolling.\nFiller paragraph 1 for scrolling.\nFiller paragraph 2 for scrolling.\nFiller paragraph 3 for scrolling.\nFiller paragraph 4 for scrolling.\nFiller paragraph 5 for scrolling.\nFiller paragraph 6 for scrolling.\nFiller paragraph 7 for scrolling.\nFiller paragraph 8 for scrolling.\nFiller paragraph 9 for scrolling.\nFiller paragraph 10 for scrolling.\nFiller paragraph 11 for scrolling.\nFiller paragraph 12 for scrolling.\nFiller paragraph 13 for scrolling.\nFiller paragraph 14 for scrolling.\nFiller paragraph 15 for scrolling.\nFiller paragraph 16 for scrolling.\nFiller paragraph 17 for scrolling.\nFiller paragraph 18 for scrolling.\nFiller paragraph 19 for scrolling.\nFiller paragraph 20 for scrolling.\nFiller paragraph 21 for scrolling.\nFiller paragraph 22 for scrolling.\nFiller paragraph 23 for scrolling.\nFiller paragraph 24 for scrolling.\nFiller paragraph 25 for scrolling.\nFiller paragraph 26 for scrolling.\nFiller paragraph 27 for scrolling.\nFiller paragraph 28 for scrolling.\nFiller paragraph 29 for scrolling.\nFiller paragraph 30 for scrolling.\nFiller paragraph 31 for scrolling.\nFiller paragraph 32 for scrolling.\nFiller paragraph 33 for scrolling.\nFiller paragraph 34 for scro",
+      "text_len": 7428,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "content_paged": {
+      "tool": "browser_get_content",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,644 HTML chars \u2192 7,360 initial markdown \u2192 7,157 filtered markdown (started from char 2,000) (filtered 203 chars of noise)\n</content_stats>\n\n<webpage_content>\n\nFiller paragraph 56 for scrolling.\nFiller paragraph 57 for scrolling.\nFiller paragraph 58 for scrolling.\nFiller paragraph 59 for scrolling.\nFiller paragraph 60 for scrolling.\nFiller paragraph 61 for scrolling.\nFiller paragraph 62 for scrolling.\nFiller paragraph 63 for scrolling.\nFiller paragraph 64 for scrolling.\nFiller paragraph 65 for scrolling.\nFiller paragraph 66 for scrolling.\nFiller paragraph 67 for scrolling.\nFiller paragraph 68 for scrolling.\nFiller paragraph 69 for scrolling.\nFiller paragraph 70 for scrolling.\nFiller paragraph 71 for scrolling.\nFiller paragraph 72 for scrolling.\nFiller paragraph 73 for scrolling.\nFiller paragraph 74 for scrolling.\nFiller paragraph 75 for scrolling.\nFiller paragraph 76 for scrolling.\nFiller paragraph 77 for scrolling.\nFiller paragraph 78 for scrolling.\nFiller paragraph 79 for scrolling.\nFiller paragraph 80 for scrolling.\nFiller paragraph 81 for scrolling.\nFiller paragraph 82 for scrolling.\nFiller paragraph 83 for scrolling.\nFiller paragraph 84 for scrolling.\nFiller paragraph 85 for scrolling.\nFiller paragraph 86 for scrolling.\nFiller paragraph 87 for scrolling.\nFiller paragraph 88 for scrolling.\nFiller paragraph 89 for scrolling.\nFiller paragraph 90 for scrolling.\nFiller paragraph 91 fo",
+      "text_len": 5439,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "scroll": {
+      "tool": "browser_scroll",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Scrolled down",
+      "text_len": 13,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "type": {
+      "tool": "browser_type",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Typed 'Ada' into element 2",
+      "text_len": 26,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "click": {
+      "tool": "browser_click",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Clicked element 6",
+      "text_len": 17,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "state_after_click": {
+      "tool": "browser_get_state",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "{\n  \"url\": \"http://127.0.0.1:42805/index.html\",\n  \"title\": \"127.0.0.1:42805/index.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:42805/index.html\",\n      \"title\": \"127.0.0.1:42805/index.html\"\n    }\n  ],\n  \"interactive_elements\": [\n    {\n      \"index\": 2,\n      \"tag\": \"input\",\n      \"text\": \"\",\n      \"placeholder\": \"your name\"\n    },\n    {\n      \"index\": 6,\n      \"tag\": \"button\",\n      \"text\": \"Greet\"\n    },\n    {\n      \"index\": 24,\n      \"tag\": \"a\",\n      \"text\": \"Go to page two\",\n      \"href\": \"/page2.html\"\n    }\n  ]\n}",
+      "text_len": 534,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "after_click": {
+      "tool": "browser_get_content",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,667 HTML chars \u2192 7,351 initial markdown \u2192 7,148 filtered markdown (filtered 203 chars of noise)\n</content_stats>\n\n<webpage_content>\n# Home Page\nHello Ada\nGreetGo to page two\nFiller paragraph 0 for scrolling.\nFiller paragraph 1 for scrolling.\nFiller paragraph 2 for scrolling.\nFiller paragraph 3 for scrolling.\nFiller paragraph 4 for scrolling.\nFiller paragraph 5 for scrolling.\nFiller paragraph 6 for scrolling.\nFiller paragraph 7 for scrolling.\nFiller paragraph 8 for scrolling.\nFiller paragraph 9 for scrolling.\nFiller paragraph 10 for scrolling.\nFiller paragraph 11 for scrolling.\nFiller paragraph 12 for scrolling.\nFiller paragraph 13 for scrolling.\nFiller paragraph 14 for scrolling.\nFiller paragraph 15 for scrolling.\nFiller paragraph 16 for scrolling.\nFiller paragraph 17 for scrolling.\nFiller paragraph 18 for scrolling.\nFiller paragraph 19 for scrolling.\nFiller paragraph 20 for scrolling.\nFiller paragraph 21 for scrolling.\nFiller paragraph 22 for scrolling.\nFiller paragraph 23 for scrolling.\nFiller paragraph 24 for scrolling.\nFiller paragraph 25 for scrolling.\nFiller paragraph 26 for scrolling.\nFiller paragraph 27 for scrolling.\nFiller paragraph 28 for scrolling.\nFiller paragraph 29 for scrolling.\nFiller paragraph 30 for scrolling.\nFiller paragraph 31 for scrolling.\nFiller paragraph 32 for scrolling.\nFiller paragraph 33 for scrolling.\nFiller paragraph 34 for scrolling.\nFiller paragraph ",
+      "text_len": 7404,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "follow_link": {
+      "tool": "browser_click",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Clicked element 24",
+      "text_len": 18,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "state_page2": {
+      "tool": "browser_get_state",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "{\n  \"url\": \"http://127.0.0.1:42805/page2.html\",\n  \"title\": \"127.0.0.1:42805/page2.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:42805/page2.html\",\n      \"title\": \"127.0.0.1:42805/page2.html\"\n    }\n  ],\n  \"interactive_elements\": [\n    {\n      \"index\": 650,\n      \"tag\": \"a\",\n      \"text\": \"Back home\",\n      \"href\": \"/index.html\"\n    }\n  ]\n}",
+      "text_len": 350,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "on_page2": {
+      "tool": "browser_get_content",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "<url>\nhttp://127.0.0.1:42805/page2.html\n</url>\n<content>\n<content_stats>\nContent processed: 122 HTML chars \u2192 53 initial markdown \u2192 51 filtered markdown (filtered 2 chars of noise)\n</content_stats>\n\n<webpage_content>\n# Second Page\nWelcome to the second page.\nBack home\n</webpage_content>\n</content>",
+      "text_len": 297,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "back": {
+      "tool": "browser_go_back",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Navigated back",
+      "text_len": 14,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "state_after_back": {
+      "tool": "browser_get_state",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "{\n  \"url\": \"http://127.0.0.1:42805/index.html\",\n  \"title\": \"Home Page\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:42805/index.html\",\n      \"title\": \"Home Page\"\n    }\n  ],\n  \"interactive_elements\": [\n    {\n      \"index\": 653,\n      \"tag\": \"input\",\n      \"text\": \"\",\n      \"placeholder\": \"your name\"\n    },\n    {\n      \"index\": 657,\n      \"tag\": \"button\",\n      \"text\": \"Greet\"\n    },\n    {\n      \"index\": 675,\n      \"tag\": \"a\",\n      \"text\": \"Go to page two\",\n      \"href\": \"/page2.html\"\n    }\n  ]\n}",
+      "text_len": 505,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "after_back": {
+      "tool": "browser_get_content",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,670 HTML chars \u2192 7,360 initial markdown \u2192 7,157 filtered markdown (filtered 203 chars of noise)\n</content_stats>\n\n<webpage_content>\n# Home Page\nnobody greeted yet\nGreetGo to page two\nFiller paragraph 0 for scrolling.\nFiller paragraph 1 for scrolling.\nFiller paragraph 2 for scrolling.\nFiller paragraph 3 for scrolling.\nFiller paragraph 4 for scrolling.\nFiller paragraph 5 for scrolling.\nFiller paragraph 6 for scrolling.\nFiller paragraph 7 for scrolling.\nFiller paragraph 8 for scrolling.\nFiller paragraph 9 for scrolling.\nFiller paragraph 10 for scrolling.\nFiller paragraph 11 for scrolling.\nFiller paragraph 12 for scrolling.\nFiller paragraph 13 for scrolling.\nFiller paragraph 14 for scrolling.\nFiller paragraph 15 for scrolling.\nFiller paragraph 16 for scrolling.\nFiller paragraph 17 for scrolling.\nFiller paragraph 18 for scrolling.\nFiller paragraph 19 for scrolling.\nFiller paragraph 20 for scrolling.\nFiller paragraph 21 for scrolling.\nFiller paragraph 22 for scrolling.\nFiller paragraph 23 for scrolling.\nFiller paragraph 24 for scrolling.\nFiller paragraph 25 for scrolling.\nFiller paragraph 26 for scrolling.\nFiller paragraph 27 for scrolling.\nFiller paragraph 28 for scrolling.\nFiller paragraph 29 for scrolling.\nFiller paragraph 30 for scrolling.\nFiller paragraph 31 for scrolling.\nFiller paragraph 32 for scrolling.\nFiller paragraph 33 for scrolling.\nFiller paragraph 34 for scrolling.\nFiller p",
+      "text_len": 7413,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "new_tab": {
+      "tool": "browser_navigate",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Opened new tab with URL: http://127.0.0.1:42805/page2.html",
+      "text_len": 58,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "tabs": {
+      "tool": "browser_list_tabs",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "[\n  {\n    \"tab_id\": \"655D\",\n    \"url\": \"http://127.0.0.1:42805/index.html\",\n    \"title\": \"Home Page\"\n  },\n  {\n    \"tab_id\": \"8085\",\n    \"url\": \"http://127.0.0.1:42805/page2.html\",\n    \"title\": \"127.0.0.1:42805/page2.html\"\n  }\n]",
+      "text_len": 227,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "get_storage": {
+      "tool": "browser_get_storage",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "{\n  \"cookies\": [\n    {\n      \"name\": \"session\",\n      \"value\": \"abc123\",\n      \"domain\": \"127.0.0.1\",\n      \"path\": \"/\",\n      \"expires\": -1,\n      \"size\": 13,\n      \"httpOnly\": false,\n      \"secure\": false,\n      \"session\": true,\n      \"priority\": \"Medium\",\n      \"sourceScheme\": \"NonSecure\",\n      \"sourcePort\": 42805\n    }\n  ],\n  \"origins\": [\n    {\n      \"origin\": \"http://127.0.0.1:42805\",\n      \"localStorage\": [\n        {\n          \"name\": \"theme\",\n          \"value\": \"dark\"\n        }\n      ]\n    }\n  ]\n}",
+      "text_len": 510,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "set_storage": {
+      "tool": "browser_set_storage",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Storage set successfully",
+      "text_len": 24,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "get_storage_again": {
+      "tool": "browser_get_storage",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "{\n  \"cookies\": [\n    {\n      \"name\": \"session\",\n      \"value\": \"abc123\",\n      \"domain\": \"127.0.0.1\",\n      \"path\": \"/\",\n      \"expires\": -1,\n      \"size\": 13,\n      \"httpOnly\": false,\n      \"secure\": false,\n      \"session\": true,\n      \"priority\": \"Medium\",\n      \"sourceScheme\": \"NonSecure\",\n      \"sourcePort\": 42805\n    },\n    {\n      \"name\": \"restored\",\n      \"value\": \"yes\",\n      \"domain\": \"127.0.0.1\",\n      \"path\": \"/\",\n      \"expires\": -1,\n      \"size\": 11,\n      \"httpOnly\": false,\n      \"secure\": false,\n      \"session\": true,\n      \"priority\": \"Medium\",\n      \"sourceScheme\": \"NonSecure\",\n      \"sourcePort\": 80\n    }\n  ],\n  \"origins\": [\n    {\n      \"origin\": \"http://127.0.0.1:42805\",\n      \"localStorage\": [\n        {\n          \"name\": \"restored_key\",\n          \"value\": \"restored_value\"\n        },\n        {\n          \"name\": \"theme\",\n          \"value\": \"dark\"\n        }\n      ]\n    }\n  ]\n}",
+      "text_len": 906,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "missing_element": {
+      "tool": "browser_click",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Element with index 99999 not found",
+      "text_len": 34,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "stop_unstarted": {
+      "tool": "browser_stop_recording",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Error: Not recording. Call browser_start_recording first.",
+      "text_len": 57,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "start_recording": {
+      "tool": "browser_start_recording",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Recording started",
+      "text_len": 17,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "switch_tab": {
+      "tool": "browser_switch_tab",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Switched to tab 655D: http://127.0.0.1:42805/index.html",
+      "text_len": 55,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "close_tab": {
+      "tool": "browser_close_tab",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "Closed tab # 8085, now on http://127.0.0.1:42805/index.html",
+      "text_len": 59,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "tabs_after_close": {
+      "tool": "browser_list_tabs",
+      "kind": "BrowserObservation",
+      "is_error": false,
+      "text": "[\n  {\n    \"tab_id\": \"655D\",\n    \"url\": \"http://127.0.0.1:42805/index.html\",\n    \"title\": \"Home Page\"\n  },\n  {\n    \"tab_id\": \"8085\",\n    \"url\": \"http://127.0.0.1:42805/page2.html\",\n    \"title\": \"127.0.0.1:42805/page2.html\"\n  }\n]",
+      "text_len": 227,
+      "content_types": [
+        "TextContent"
+      ]
+    }
+  },
+  "browser_tools": [
+    "browser_click",
+    "browser_close_tab",
+    "browser_get_content",
+    "browser_get_state",
+    "browser_get_storage",
+    "browser_go_back",
+    "browser_list_tabs",
+    "browser_navigate",
+    "browser_scroll",
+    "browser_set_storage",
+    "browser_start_recording",
+    "browser_stop_recording",
+    "browser_switch_tab",
+    "browser_type"
+  ],
+  "shared_executors": 1,
+  "mcp_schemas": true,
+  "guidance_on_all": true,
+  "index_map": {
+    "input": 2,
+    "button": 6,
+    "a": 24
+  },
+  "tab_ids": [
+    "655D",
+    "8085"
+  ],
+  "status": "finished",
+  "storage_has_page_values": true,
+  "storage_restored": true,
+  "tabs_seen": 2,
+  "tabs_left": 2,
+  "screenshot_files": [
+    "browser_screenshot_a74491e6.png"
+  ],
+  "screenshot_named_in_state": true,
+  "recordings_dir_exists": true,
+  "chrome_processes_before_close": 3,
+  "chrome_processes_after_close": 0,
+  "_exit": 0,
+  "_seconds": 13.4,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "browser_tools len-eq 14",
+      "ok": true,
+      "actual": "[\"browser_click\", \"browser_close_tab\", \"browser_get_content\", \"browser_get_state\", \"browser_get_storage\", \"browser_go_back\", \"browser_list_tabs\", \"browser_navigate\", \"browser_scroll\", \"browser_set_sto"
+    },
+    {
+      "check": "shared_executors eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "mcp_schemas eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "guidance_on_all eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.navigate.text contains Navigated to: http://127.0.0.1",
+      "ok": true,
+      "actual": "Navigated to: http://127.0.0.1:42805/index.html"
+    },
+    {
+      "check": "steps.state.text contains \"interactive_elements\"",
+      "ok": true,
+      "actual": "{\n  \"url\": \"http://127.0.0.1:42805/index.html\",\n  \"title\": \"127.0.0.1:42805/index.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:42805/index.html\",\n      \"title\": \"127.0.0.1:42805/index.html\""
+    },
+    {
+      "check": "steps.state.text contains your name",
+      "ok": true,
+      "actual": "{\n  \"url\": \"http://127.0.0.1:42805/index.html\",\n  \"title\": \"127.0.0.1:42805/index.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:42805/index.html\",\n      \"title\": \"127.0.0.1:42805/index.html\""
+    },
+    {
+      "check": "steps.state.content_types contains ImageContent",
+      "ok": true,
+      "actual": "[\"TextContent\", \"TextContent\", \"ImageContent\"]"
+    },
+    {
+      "check": "screenshot_files len-eq 1",
+      "ok": true,
+      "actual": "[\"browser_screenshot_a74491e6.png\"]"
+    },
+    {
+      "check": "screenshot_named_in_state eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.content.text contains # Home Page",
+      "ok": true,
+      "actual": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,663 HTML chars \u2192 7,375 initial markdown \u2192 7,172 filtered markdown (filtered 203 chars of noise)\n</content_"
+    },
+    {
+      "check": "steps.content.text contains [Go to page two]",
+      "ok": true,
+      "actual": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,663 HTML chars \u2192 7,375 initial markdown \u2192 7,172 filtered markdown (filtered 203 chars of noise)\n</content_"
+    },
+    {
+      "check": "steps.content_paged.text contains started from char 2,000",
+      "ok": true,
+      "actual": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,644 HTML chars \u2192 7,360 initial markdown \u2192 7,157 filtered markdown (started from char 2,000) (filtered 203 "
+    },
+    {
+      "check": "steps.content_paged.text not-contains # Home Page",
+      "ok": true,
+      "actual": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,644 HTML chars \u2192 7,360 initial markdown \u2192 7,157 filtered markdown (started from char 2,000) (filtered 203 "
+    },
+    {
+      "check": "steps.scroll.text eq Scrolled down",
+      "ok": true,
+      "actual": "Scrolled down"
+    },
+    {
+      "check": "steps.type.text contains Typed 'Ada' into element",
+      "ok": true,
+      "actual": "Typed 'Ada' into element 2"
+    },
+    {
+      "check": "steps.click.text contains Clicked element",
+      "ok": true,
+      "actual": "Clicked element 6"
+    },
+    {
+      "check": "steps.after_click.text contains Hello Ada",
+      "ok": true,
+      "actual": "<url>\nhttp://127.0.0.1:42805/index.html\n</url>\n<content>\n<content_stats>\nContent processed: 8,667 HTML chars \u2192 7,351 initial markdown \u2192 7,148 filtered markdown (filtered 203 chars of noise)\n</content_"
+    },
+    {
+      "check": "steps.state_page2.text contains page2.html",
+      "ok": true,
+      "actual": "{\n  \"url\": \"http://127.0.0.1:42805/page2.html\",\n  \"title\": \"127.0.0.1:42805/page2.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:42805/page2.html\",\n      \"title\": \"127.0.0.1:42805/page2.html\""
+    },
+    {
+      "check": "steps.on_page2.text contains # Second Page",
+      "ok": true,
+      "actual": "<url>\nhttp://127.0.0.1:42805/page2.html\n</url>\n<content>\n<content_stats>\nContent processed: 122 HTML chars \u2192 53 initial markdown \u2192 51 filtered markdown (filtered 2 chars of noise)\n</content_stats>\n\n<w"
+    },
+    {
+      "check": "steps.back.text eq Navigated back",
+      "ok": true,
+      "actual": "Navigated back"
+    },
+    {
+      "check": "steps.state_after_back.text contains index.html",
+      "ok": true,
+      "actual": "{\n  \"url\": \"http://127.0.0.1:42805/index.html\",\n  \"title\": \"Home Page\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:42805/index.html\",\n      \"title\": \"Home Page\"\n    }\n  ],\n  \"interactive_element"
+    },
+    {
+      "check": "steps.new_tab.text contains Opened new tab with URL",
+      "ok": true,
+      "actual": "Opened new tab with URL: http://127.0.0.1:42805/page2.html"
+    },
+    {
+      "check": "tabs_seen eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "steps.switch_tab.text contains Switched to tab",
+      "ok": true,
+      "actual": "Switched to tab 655D: http://127.0.0.1:42805/index.html"
+    },
+    {
+      "check": "steps.close_tab.text contains Closed tab",
+      "ok": true,
+      "actual": "Closed tab # 8085, now on http://127.0.0.1:42805/index.html"
+    },
+    {
+      "check": "tabs_left eq 1",
+      "ok": false,
+      "actual": "2"
+    },
+    {
+      "check": "storage_has_page_values eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.set_storage.text eq Storage set successfully",
+      "ok": true,
+      "actual": "Storage set successfully"
+    },
+    {
+      "check": "storage_restored eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.missing_element.text contains Element with index 99999 not found",
+      "ok": true,
+      "actual": "Element with index 99999 not found"
+    },
+    {
+      "check": "steps.stop_unstarted.text contains Not recording",
+      "ok": true,
+      "actual": "Error: Not recording. Call browser_start_recording first."
+    },
+    {
+      "check": "chrome_processes_before_close ge 1",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "chrome_processes_after_close eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 1 after 14s]

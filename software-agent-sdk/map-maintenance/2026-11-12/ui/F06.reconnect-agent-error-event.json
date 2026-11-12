@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "status": 200,
+  "contentType": "application/json",
+  "body": {
+    "items": [
+      {
+        "id": "e3027bd5-798e-446a-9425-3e87a8e6a733",
+        "timestamp": "2026-11-12T12:26:44.470202",
+        "source": "agent",
+        "parent_id": "37c2873b-4c4d-4795-9b9c-87f201e05662",
+        "tool_name": "terminal",
+        "tool_call_id": "call_00_PMaG2L4ltcOZyHilCfuN1639",
+        "error": "A restart occurred while this tool was in progress. This may indicate a fatal memory error or system crash. The tool execution was interrupted and did not complete.",
+        "classification": {
+          "kind": "internal",
+          "retryable": false,
+          "user_action": "none"
+        },
+        "recovery_reason": "server_restart",
+        "kind": "AgentErrorEvent"
+      }
+    ],
+    "next_page_id": null
+  }
+}
