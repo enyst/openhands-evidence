@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/f93ceb9b-d6bf-421e-9ebb-b4947b1128df/events/search",
+    "query": [
+      [
+        "kind",
+        "openhands.sdk.event.llm_convertible.observation.AgentErrorEvent"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "554",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "1d0065b4-39bf-4a13-aba9-7db092c4d6e0",
+          "timestamp": "2026-11-12T12:05:09.176973",
+          "source": "agent",
+          "parent_id": "0df9b86f-2f10-48d3-baf5-d3f92eb75da5",
+          "tool_name": "terminal",
+          "tool_call_id": "call_qa_3004672f",
+          "error": "A restart occurred while this tool was in progress. This may indicate a fatal memory error or system crash. The tool execution was interrupted and did not complete.",
+          "classification": {
+            "kind": "internal",
+            "retryable": false,
+            "user_action": "none"
+          },
+          "recovery_reason": "server_restart",
+          "kind": "AgentErrorEvent"
+        }
+      ],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 66
+}

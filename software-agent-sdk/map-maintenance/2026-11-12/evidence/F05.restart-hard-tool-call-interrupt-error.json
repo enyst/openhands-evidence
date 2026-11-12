@@ -1,0 +1,44 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/59e8199c-68f6-42a5-83aa-78fdbf0af106/events/search",
+    "query": [
+      [
+        "kind",
+        "openhands.sdk.event.llm_convertible.observation.AgentErrorEvent"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "428",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "010400ee-7f3f-43a2-97de-0f6a70a64987",
+          "timestamp": "2026-11-12T12:03:49.661605",
+          "source": "agent",
+          "parent_id": "e4659043-5c7e-4908-bf0b-d6cd30675588",
+          "tool_name": "terminal",
+          "tool_call_id": "call_qa_17d065b8",
+          "error": "Tool call interrupted before completion. The conversation was paused.",
+          "classification": {
+            "kind": "agent_action",
+            "retryable": true,
+            "user_action": "retry"
+          },
+          "kind": "AgentErrorEvent"
+        }
+      ],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 73
+}
