@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/1c77d56e-199a-4d47-8d6a-3f2f54cb14e5/events/f63f0ac6-f7f0-432d-b44c-4d318c25266a",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "329",
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "f63f0ac6-f7f0-432d-b44c-4d318c25266a",
+      "timestamp": "2026-11-12T12:13:13.356465",
+      "source": "user",
+      "parent_id": "ce34722e-33bc-419f-bfb1-9760ed63a653",
+      "target_event_id": "ce34722e-33bc-419f-bfb1-9760ed63a653",
+      "emoji": "heart",
+      "removed": false,
+      "target_text_ending": "QA_PID hello",
+      "target_text_clipped": false,
+      "kind": "ReactionEvent"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 58
+}
