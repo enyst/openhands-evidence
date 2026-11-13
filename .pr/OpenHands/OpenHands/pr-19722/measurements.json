@@ -1,0 +1,238 @@
+{
+  "neutral-desktop-settings": {
+    "badge": {
+      "color": "rgb(59, 130, 246)",
+      "bg": "rgb(30, 58, 95)",
+      "border": "rgba(0, 0, 0, 0)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": null,
+      "text": "Update"
+    },
+    "notice": {
+      "color": "rgb(59, 130, 246)",
+      "bg": "rgb(30, 58, 95)",
+      "border": "oklab(0.623083 -0.0332476 -0.185052 / 0.3)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": null,
+      "text": "Version 1.40.0 is available. What's new"
+    },
+    "dialog": {
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(32, 32, 32)",
+      "border": "rgb(64, 64, 64)",
+      "heightCap": "800px",
+      "overflow": "auto",
+      "href": null,
+      "text": "Agent CanvasVersion1.39.0Check for updatesVersion 1.40.0 is available. What's newHow to updateRun one of the commands below:npmDockernpm install -g @openhands/agent-canvas@latest"
+    },
+    "notesHover": {
+      "color": "rgb(59, 130, 246)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "border": "rgb(64, 64, 64)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": "https://github.com/OpenHands/OpenHands/releases",
+      "text": "What's new"
+    }
+  },
+  "neutral-phone-settings": {
+    "badge": {
+      "color": "rgb(59, 130, 246)",
+      "bg": "rgb(30, 58, 95)",
+      "border": "rgba(0, 0, 0, 0)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": null,
+      "text": "Update"
+    },
+    "notice": {
+      "color": "rgb(59, 130, 246)",
+      "bg": "rgb(30, 58, 95)",
+      "border": "oklab(0.623083 -0.0332476 -0.185052 / 0.3)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": null,
+      "text": "Version 1.40.0 is available. What's new"
+    },
+    "dialog": {
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(32, 32, 32)",
+      "border": "rgb(64, 64, 64)",
+      "heightCap": "675.2px",
+      "overflow": "auto",
+      "href": null,
+      "text": "Agent CanvasVersion1.39.0Check for updatesVersion 1.40.0 is available. What's newHow to updateRun one of the commands below:npmDockernpm install -g @openhands/agent-canvas@latest"
+    },
+    "notesHover": {
+      "color": "rgb(59, 130, 246)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "border": "rgb(64, 64, 64)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": "https://github.com/OpenHands/OpenHands/releases",
+      "text": "What's new"
+    }
+  },
+  "neutral-desktop-sidebar": {
+    "tile": {
+      "icon": {
+        "color": "rgb(59, 130, 246)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "rgb(64, 64, 64)",
+        "heightCap": "none",
+        "overflow": "hidden",
+        "href": null,
+        "text": ""
+      }
+    },
+    "modal": {
+      "icon": {
+        "color": "rgb(59, 130, 246)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "rgb(64, 64, 64)",
+        "heightCap": "none",
+        "overflow": "hidden",
+        "href": null,
+        "text": ""
+      },
+      "badge": {
+        "color": "rgb(59, 130, 246)",
+        "bg": "rgb(30, 58, 95)",
+        "border": "rgba(0, 0, 0, 0)",
+        "heightCap": "none",
+        "overflow": "visible",
+        "href": null,
+        "text": "1.40.0"
+      },
+      "copy": {
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "rgb(64, 64, 64)",
+        "heightCap": "none",
+        "overflow": "visible",
+        "href": null,
+        "text": "You're on 1.39.0. To update to 1.40.0, copy a command below, run it in your terminal, then restart Agent Canvas. What's new"
+      }
+    }
+  },
+  "light-desktop-settings": {
+    "badge": {
+      "color": "rgb(0, 104, 174)",
+      "bg": "color(srgb 0.9 0.940784 0.968235)",
+      "border": "oklab(0.505394 -0.0508024 -0.126706 / 0.3)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": null,
+      "text": "Update"
+    },
+    "notice": {
+      "color": "rgb(0, 104, 174)",
+      "bg": "color(srgb 0.9 0.940784 0.968235)",
+      "border": "oklab(0.505394 -0.0508024 -0.126706 / 0.4)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": null,
+      "text": "Version 1.40.0 is available. What's new"
+    },
+    "dialog": {
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgb(243, 243, 243)",
+      "border": "rgb(196, 196, 196)",
+      "heightCap": "800px",
+      "overflow": "auto",
+      "href": null,
+      "text": "Agent CanvasVersion1.39.0Check for updatesVersion 1.40.0 is available. What's newHow to updateRun one of the commands below:npmDockernpm install -g @openhands/agent-canvas@latest"
+    },
+    "notesHover": {
+      "color": "rgb(0, 104, 174)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "border": "rgb(196, 196, 196)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": "https://github.com/OpenHands/OpenHands/releases",
+      "text": "What's new"
+    }
+  },
+  "light-phone-settings": {
+    "badge": {
+      "color": "rgb(0, 104, 174)",
+      "bg": "color(srgb 0.9 0.940784 0.968235)",
+      "border": "oklab(0.505394 -0.0508024 -0.126706 / 0.3)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": null,
+      "text": "Update"
+    },
+    "notice": {
+      "color": "rgb(0, 104, 174)",
+      "bg": "color(srgb 0.9 0.940784 0.968235)",
+      "border": "oklab(0.505394 -0.0508024 -0.126706 / 0.4)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": null,
+      "text": "Version 1.40.0 is available. What's new"
+    },
+    "dialog": {
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgb(243, 243, 243)",
+      "border": "rgb(196, 196, 196)",
+      "heightCap": "675.2px",
+      "overflow": "auto",
+      "href": null,
+      "text": "Agent CanvasVersion1.39.0Check for updatesVersion 1.40.0 is available. What's newHow to updateRun one of the commands below:npmDockernpm install -g @openhands/agent-canvas@latest"
+    },
+    "notesHover": {
+      "color": "rgb(0, 104, 174)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "border": "rgb(196, 196, 196)",
+      "heightCap": "none",
+      "overflow": "visible",
+      "href": "https://github.com/OpenHands/OpenHands/releases",
+      "text": "What's new"
+    }
+  },
+  "light-desktop-sidebar": {
+    "tile": {
+      "icon": {
+        "color": "rgb(0, 104, 174)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "rgb(196, 196, 196)",
+        "heightCap": "none",
+        "overflow": "hidden",
+        "href": null,
+        "text": ""
+      }
+    },
+    "modal": {
+      "icon": {
+        "color": "rgb(0, 104, 174)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "rgb(196, 196, 196)",
+        "heightCap": "none",
+        "overflow": "hidden",
+        "href": null,
+        "text": ""
+      },
+      "badge": {
+        "color": "rgb(0, 104, 174)",
+        "bg": "color(srgb 0.9 0.940784 0.968235)",
+        "border": "oklab(0.505394 -0.0508024 -0.126706 / 0.3)",
+        "heightCap": "none",
+        "overflow": "visible",
+        "href": null,
+        "text": "1.40.0"
+      },
+      "copy": {
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "rgb(196, 196, 196)",
+        "heightCap": "none",
+        "overflow": "visible",
+        "href": null,
+        "text": "You're on 1.39.0. To update to 1.40.0, copy a command below, run it in your terminal, then restart Agent Canvas. What's new"
+      }
+    }
+  }
+}
