@@ -1,0 +1,164 @@
+{
+  "desktop-llm": {
+    "viewport": [
+      1440,
+      1000
+    ],
+    "maxHeight": "788px",
+    "rootFont": "16px",
+    "step": {
+      "width": 582,
+      "height": 626
+    },
+    "content": {
+      "height": 438,
+      "scrollHeight": 438,
+      "overflow": "auto"
+    },
+    "controls": [
+      {
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "visible": true,
+        "disabled": false
+      }
+    ]
+  },
+  "desktop-hello": {
+    "viewport": [
+      1440,
+      1000
+    ],
+    "maxHeight": "788px",
+    "rootFont": "16px",
+    "step": {
+      "width": 582,
+      "height": 788
+    },
+    "content": {
+      "height": 448,
+      "scrollHeight": 448,
+      "overflow": "visible"
+    },
+    "controls": [
+      {
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "visible": true,
+        "disabled": false
+      }
+    ]
+  },
+  "phone-llm": {
+    "viewport": [
+      390,
+      844
+    ],
+    "maxHeight": "647.6px",
+    "rootFont": "16px",
+    "step": {
+      "width": 293,
+      "height": 646
+    },
+    "content": {
+      "height": 438,
+      "scrollHeight": 438,
+      "overflow": "auto"
+    },
+    "controls": [
+      {
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "visible": true,
+        "disabled": false
+      }
+    ]
+  },
+  "phone-hello": {
+    "viewport": [
+      390,
+      844
+    ],
+    "maxHeight": "647.6px",
+    "rootFont": "16px",
+    "step": {
+      "width": 293,
+      "height": 647.59375
+    },
+    "content": {
+      "height": 308,
+      "scrollHeight": 308,
+      "overflow": "visible"
+    },
+    "controls": [
+      {
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "visible": true,
+        "disabled": false
+      }
+    ]
+  },
+  "390x600-llm": {
+    "viewport": [
+      390,
+      600
+    ],
+    "maxHeight": "428px",
+    "rootFont": "16px",
+    "step": {
+      "width": 293,
+      "height": 428
+    },
+    "content": {
+      "height": 220,
+      "scrollHeight": 438,
+      "overflow": "auto"
+    },
+    "controls": [
+      {
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "visible": true,
+        "disabled": false
+      }
+    ]
+  },
+  "390x600-hello": {
+    "viewport": [
+      390,
+      600
+    ],
+    "maxHeight": "428px",
+    "rootFont": "16px",
+    "step": {
+      "width": 293,
+      "height": 428
+    },
+    "content": {
+      "height": 88,
+      "scrollHeight": 88,
+      "overflow": "visible"
+    },
+    "controls": [
+      {
+        "visible": true,
+        "disabled": false
+      },
+      {
+        "visible": true,
+        "disabled": false
+      }
+    ]
+  }
+}
