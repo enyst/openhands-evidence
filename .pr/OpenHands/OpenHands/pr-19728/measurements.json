@@ -1,0 +1,114 @@
+{
+  "neutral-desktop": {
+    "rest": {
+      "checked": "true",
+      "remove": "false",
+      "label": "Disable skill",
+      "stroke": "none",
+      "width": "1px",
+      "color": "rgb(255, 255, 255)",
+      "background": "rgba(0, 0, 0, 0)",
+      "viewport": [
+        1440,
+        1000
+      ]
+    },
+    "remove": {
+      "checked": "true",
+      "remove": "true",
+      "label": "Disable skill",
+      "stroke": "rgb(231, 106, 94)",
+      "width": "2.5px",
+      "color": "rgb(231, 106, 94)",
+      "background": "oklab(0.673219 0.139819 0.0730553 / 0.24)",
+      "viewport": [
+        1440,
+        1000
+      ]
+    }
+  },
+  "neutral-phone": {
+    "rest": {
+      "checked": "true",
+      "remove": "false",
+      "label": "Disable skill",
+      "stroke": "none",
+      "width": "1px",
+      "color": "rgb(255, 255, 255)",
+      "background": "rgba(0, 0, 0, 0)",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    "remove": {
+      "checked": "true",
+      "remove": "true",
+      "label": "Disable skill",
+      "stroke": "rgb(231, 106, 94)",
+      "width": "2.5px",
+      "color": "rgb(231, 106, 94)",
+      "background": "oklab(0.673219 0.139819 0.0730553 / 0.24)",
+      "viewport": [
+        390,
+        844
+      ]
+    }
+  },
+  "light-desktop": {
+    "rest": {
+      "checked": "true",
+      "remove": "false",
+      "label": "Disable skill",
+      "stroke": "none",
+      "width": "1px",
+      "color": "rgb(31, 31, 31)",
+      "background": "rgba(0, 0, 0, 0)",
+      "viewport": [
+        1440,
+        1000
+      ]
+    },
+    "remove": {
+      "checked": "true",
+      "remove": "true",
+      "label": "Disable skill",
+      "stroke": "rgb(255, 255, 255)",
+      "width": "2.5px",
+      "color": "rgb(255, 255, 255)",
+      "background": "rgb(193, 42, 28)",
+      "viewport": [
+        1440,
+        1000
+      ]
+    }
+  },
+  "light-phone": {
+    "rest": {
+      "checked": "true",
+      "remove": "false",
+      "label": "Disable skill",
+      "stroke": "none",
+      "width": "1px",
+      "color": "rgb(31, 31, 31)",
+      "background": "rgba(0, 0, 0, 0)",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    "remove": {
+      "checked": "true",
+      "remove": "true",
+      "label": "Disable skill",
+      "stroke": "rgb(255, 255, 255)",
+      "width": "2.5px",
+      "color": "rgb(255, 255, 255)",
+      "background": "rgb(193, 42, 28)",
+      "viewport": [
+        390,
+        844
+      ]
+    }
+  }
+}
