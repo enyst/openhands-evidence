@@ -1,0 +1,17 @@
+@openhands/agent-canvas 1.40.0
+
+Default stack versions:
+  agent-server:    1.62.0
+  automation:      1.32.1
+
+Compatibility:
+  agent-server:    >= 1.59.0
+
+Default ports:
+  ingress:         8000
+  agent-server:    18000
+  automation:      18001
+
+Override versions via environment variables:
+  OH_AGENT_SERVER_VERSION, OH_AGENT_SERVER_GIT_REF, OH_AGENT_SERVER_LOCAL_PATH
+  OH_AUTOMATION_VERSION, OH_AUTOMATION_GIT_REF
