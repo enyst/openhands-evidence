@@ -1,0 +1,41 @@
+# checkout: /home/user/software-agent-sdk @ 3c66af1d14d0a7fbe74b8dc4218412ec7a877b79
+$ control-sdk exec -- python span_content.py content
+exit: 0
+--- stdout ---
+{
+  "mode": "content",
+  "LMNR_INSTRUMENTS": null,
+  "status": "finished",
+  "provider_calls": 2,
+  "span_names": {
+    "conversation.send_message": 1,
+    "litellm.completion": 2,
+    "llm.openai/gpt-4o-mini": 2,
+    "TerminalAction": 1,
+    "agent.step": 2,
+    "FinishAction": 1,
+    "conversation.run": 1,
+    "conversation": 1
+  },
+  "llm_spans_with_gen_ai_input": 2,
+  "llm_span_has_redacted_marker": true,
+  "api_key": {},
+  "reasoning": {
+    "litellm.completion": [
+      "gen_ai.output.messages"
+    ]
+  },
+  "credential": {
+    "conversation.send_message": [
+      "lmnr.span.input"
+    ],
+    "litellm.completion": [
+      "gen_ai.input.messages"
+    ]
+  }
+}
+--- stderr ---
+[11/14/26 09:24:52] WARNING  No persistence_dir provided; falling   state.py:627
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+
