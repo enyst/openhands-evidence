@@ -1,0 +1,52 @@
+$ cd /home/user/software-agent-sdk   # fix worktree $S/defects/gateway-paused-409/fix at dcf6babc337e53e9e3cc86e35e138c22f4a48e6b (branch claude/fix-gateway-continue-paused-conversation)
+$ python3 $S/bin/subreap.py bash $S/defects/gateway-paused-409/repro.sh fix $S/defects/gateway-paused-409/fix
+{"doctor_ok":true}
+{"build_git_sha":"dcf6babc337e53e9e3cc86e35e138c22f4a48e6b","version":"1.62.0"}
+=== case A: paused after /interrupt ===
+[A] status before gateway call: paused
+[A] GATEWAY RESPONSE: {"status":200,"elapsed_ms":2088,"body":{"id":"chatcmpl-a1933b0f67744022979146798abb4d34","choices":[{"finish_reason":"stop","index":0,"message":{"content":"GW_ANSWER_A","role":"assistant"}}],"created":1794649832,"model":"openhands_gw-model","object":"chat.completion","usage":{"completion_tokens":5,"prompt_tokens":10,"total_tokens":15}},"conversation_header":"5a92d01e-9be3-4968-b425-12f3ce7478ef"}
+[A] status right after response: finished
+[A] status 5 s later: finished
+[A] user messages containing GW_TURN_A: 1
+[A] events (state updates omitted): ["SystemPromptEvent","MessageEvent:user:DIRECT_A","InterruptEvent","MessageEvent:user:GW_TURN_A","MessageEvent:agent:GW_ANSWER_A"]
+[A] model calls received by the conversation's stub: 2
+=== case B: paused after /pause (the run stops after its current step) ===
+[B] status before gateway call: paused
+[B] GATEWAY RESPONSE: {"status":200,"elapsed_ms":2079,"body":{"id":"chatcmpl-1dd24496339c454db76aa7ec1c515e9a","choices":[{"finish_reason":"stop","index":0,"message":{"content":"GW_ANSWER_B","role":"assistant"}}],"created":1794649852,"model":"openhands_gw-model","object":"chat.completion","usage":{"completion_tokens":5,"prompt_tokens":10,"total_tokens":15}},"conversation_header":"564d754b-d762-484f-aea3-ed91daf8f5f1"}
+[B] status right after response: finished
+[B] status 5 s later: finished
+[B] user messages containing GW_TURN_B: 1
+[B] events (state updates omitted): ["SystemPromptEvent","MessageEvent:user:DIRECT_B","PauseEvent","ActionEvent","AgentErrorEvent","MessageEvent:user:GW_TURN_B","MessageEvent:agent:GW_ANSWER_B"]
+[B] model calls received by the conversation's stub: 2
+=== case C: finished ===
+[C] status before gateway call: finished
+[C] GATEWAY RESPONSE: {"status":200,"elapsed_ms":2082,"body":{"id":"chatcmpl-80db723726f649be85fa7619bd4ff84f","choices":[{"finish_reason":"stop","index":0,"message":{"content":"GW_ANSWER_C","role":"assistant"}}],"created":1794649863,"model":"openhands_gw-model","object":"chat.completion","usage":{"completion_tokens":5,"prompt_tokens":10,"total_tokens":15}},"conversation_header":"6e05f7b0-3c40-4dbe-9e06-ffdf22f2f2dd"}
+[C] status right after response: finished
+[C] status 5 s later: finished
+[C] user messages containing GW_TURN_C: 1
+[C] events (state updates omitted): ["SystemPromptEvent","MessageEvent:user:DIRECT_C","MessageEvent:agent:DIRECT_ANSWER_C","MessageEvent:user:GW_TURN_C","MessageEvent:agent:GW_ANSWER_C"]
+[C] model calls received by the conversation's stub: 2
+=== case D: idle (never run) ===
+[D] status before gateway call: idle
+[D] GATEWAY RESPONSE: {"status":200,"elapsed_ms":2109,"body":{"id":"chatcmpl-d86c880a73e54c9a9690dcf94f1366c5","choices":[{"finish_reason":"stop","index":0,"message":{"content":"GW_ANSWER_D","role":"assistant"}}],"created":1794649874,"model":"openhands_gw-model","object":"chat.completion","usage":{"completion_tokens":5,"prompt_tokens":10,"total_tokens":15}},"conversation_header":"44e42876-b59e-474d-9f69-87dad3899aad"}
+[D] status right after response: finished
+[D] status 5 s later: finished
+[D] user messages containing GW_TURN_D: 1
+[D] events (state updates omitted): ["SystemPromptEvent","MessageEvent:user:GW_TURN_D","MessageEvent:agent:GW_ANSWER_D"]
+[D] model calls received by the conversation's stub: 1
+=== case E: error ===
+[E] status before gateway call: error
+[E] GATEWAY RESPONSE: {"status":200,"elapsed_ms":2076,"body":{"id":"chatcmpl-0c3e39c939174c458ac41ed7aee5f748","choices":[{"finish_reason":"stop","index":0,"message":{"content":"GW_ANSWER_E","role":"assistant"}}],"created":1794649888,"model":"openhands_gw-model","object":"chat.completion","usage":{"completion_tokens":5,"prompt_tokens":10,"total_tokens":15}},"conversation_header":"1d864363-e148-46fe-a42c-71417989fce5"}
+[E] status right after response: finished
+[E] status 5 s later: finished
+[E] user messages containing GW_TURN_E: 1
+[E] events (state updates omitted): ["SystemPromptEvent","MessageEvent:user:DIRECT_E","ConversationErrorEvent","MessageEvent:user:GW_TURN_E","MessageEvent:agent:GW_ANSWER_E"]
+[E] model calls received by the conversation's stub: 2
+=== case F: paused after /interrupt, inner route /events/_gateway/run ===
+[F] status before gateway call: paused
+[F] INNER ROUTE RESPONSE: {"status":200,"elapsed_ms":84,"body":{"status":"finished","final_response":"GW_ANSWER_F","usage":{"model":"default","prompt_tokens":10,"completion_tokens":5,"cache_read_tokens":0,"cache_write_tokens":0,"reasoning_tokens":0,"context_window":0,"per_turn_token":0,"response_id":""}}}
+[F] status right after response: finished
+[F] status 5 s later: finished
+[F] user messages containing GW_TURN_F: 1
+[F] events (state updates omitted): ["SystemPromptEvent","MessageEvent:user:DIRECT_F","InterruptEvent","MessageEvent:user:GW_TURN_F","MessageEvent:agent:GW_ANSWER_F"]
+[F] model calls received by the conversation's stub: 2
