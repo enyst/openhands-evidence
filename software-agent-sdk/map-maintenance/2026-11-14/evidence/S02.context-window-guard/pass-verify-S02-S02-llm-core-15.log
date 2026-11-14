@@ -1,0 +1,167 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg token-count --check plain gt 5 --check with_tools gt 100 --check longer gt 200
+control-sdk program S02/llm_calls --arg context-guard \
+  --check short_window_error eq LLMContextWindowTooSmallError --check configured_max_output missing \
+  --check fallback_max_output eq 16384 \
+  --check advertised_64000.advertised eq 64000 --check advertised_64000.configured missing \
+  --check advertised_64000.effective eq 16384 --check advertised_64000.sent eq 16384 \
+  --check advertised_8192.effective eq 8192 --check advertised_8192.sent eq 8192 \
+  --check explicit_32000.effective eq 32000 --check explicit_32000.sent eq 32000
+control-sdk program S02/llm_calls --arg context-guard --env ALLOW_SHORT_CONTEXT_WINDOWS=true \
+  --check short_window_error missing
+{
+  "ok": true,
+  "mode": "token-count",
+  "plain": 18,
+  "with_tools": 179,
+  "longer": 223,
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "plain gt 5",
+      "ok": true,
+      "actual": "18"
+    },
+    {
+      "check": "with_tools gt 100",
+      "ok": true,
+      "actual": "179"
+    },
+    {
+      "check": "longer gt 200",
+      "ok": true,
+      "actual": "223"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "context-guard",
+  "short_window_error": "LLMContextWindowTooSmallError",
+  "allow_env": null,
+  "fallback_max_output": 16384,
+  "fallback_cap": 16384,
+  "configured_max_output": null,
+  "advertised_64000": {
+    "error": null,
+    "advertised": 64000,
+    "configured": null,
+    "effective": 16384,
+    "sent": 16384
+  },
+  "advertised_8192": {
+    "error": null,
+    "advertised": 8192,
+    "configured": null,
+    "effective": 8192,
+    "sent": 8192
+  },
+  "explicit_32000": {
+    "error": null,
+    "advertised": 64000,
+    "configured": 32000,
+    "effective": 32000,
+    "sent": 32000
+  },
+  "_exit": 0,
+  "_seconds": 5.9,
+  "checks": [
+    {
+      "check": "short_window_error eq LLMContextWindowTooSmallError",
+      "ok": true,
+      "actual": "LLMContextWindowTooSmallError"
+    },
+    {
+      "check": "configured_max_output missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "fallback_max_output eq 16384",
+      "ok": true,
+      "actual": "16384"
+    },
+    {
+      "check": "advertised_64000.advertised eq 64000",
+      "ok": true,
+      "actual": "64000"
+    },
+    {
+      "check": "advertised_64000.configured missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "advertised_64000.effective eq 16384",
+      "ok": true,
+      "actual": "16384"
+    },
+    {
+      "check": "advertised_64000.sent eq 16384",
+      "ok": true,
+      "actual": "16384"
+    },
+    {
+      "check": "advertised_8192.effective eq 8192",
+      "ok": true,
+      "actual": "8192"
+    },
+    {
+      "check": "advertised_8192.sent eq 8192",
+      "ok": true,
+      "actual": "8192"
+    },
+    {
+      "check": "explicit_32000.effective eq 32000",
+      "ok": true,
+      "actual": "32000"
+    },
+    {
+      "check": "explicit_32000.sent eq 32000",
+      "ok": true,
+      "actual": "32000"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "context-guard",
+  "short_window_error": null,
+  "allow_env": "true",
+  "fallback_max_output": 16384,
+  "fallback_cap": 16384,
+  "configured_max_output": null,
+  "advertised_64000": {
+    "error": null,
+    "advertised": 64000,
+    "configured": null,
+    "effective": 16384,
+    "sent": 16384
+  },
+  "advertised_8192": {
+    "error": null,
+    "advertised": 8192,
+    "configured": null,
+    "effective": 8192,
+    "sent": 8192
+  },
+  "explicit_32000": {
+    "error": null,
+    "advertised": 64000,
+    "configured": 32000,
+    "effective": 32000,
+    "sent": 32000
+  },
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "short_window_error missing",
+      "ok": true,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 0 after 17s]

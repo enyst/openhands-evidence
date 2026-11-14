@@ -1,0 +1,30 @@
+{
+  "file": "F07-session-socket.md",
+  "bullet": "Non-JSON and binary frames (`F07.error-non-json`).",
+  "ids": [
+    "F07.error-non-json"
+  ],
+  "line": 195,
+  "script": "mkdir -p \"$AGENT_SERVER_VERIFY_RUN/fixtures\"\ncat > \"$AGENT_SERVER_VERIFY_RUN/fixtures/qa-f07-raw-frames.py\" <<'EOF'\nimport json, os, sys\nfrom websockets.sync.client import connect\n\nurl = os.environ[\"AGENT_SERVER_URL\"].replace(\"http\", \"ws\", 1) + \"/sockets/session/\" + sys.argv[1]\nwith connect(url) as ws:\n    ws.send(json.dumps({\"type\": \"auth\", \"session_api_key\": os.environ[\"SESSION_API_KEY\"]}))\n    ws.send(\"QA_F07 this is not JSON\")\n    ws.send(b\"QA_F07 binary frame\")\n    ws.send(\"{}\")\n    frames = [json.loads(ws.recv(timeout=10)) for _ in range(5)]\ntypes = [f[\"type\"] for f in frames]\ncodes = [f.get(\"code\") for f in frames if f[\"type\"] == \"error\"]\nprint(\"types\", types, \"codes\", codes)\nassert types == [\"sync\", \"transient\", \"error\", \"error\", \"error\"], types\nassert codes[0] == \"JSONDecodeError\" and codes[2] == \"ValidationError\", codes\nprint(\"QA_OK\")\nEOF\ncontrol-agent-server exec --expect-output QA_OK --save \"F07.error-non-json/raw-$CID\" -- .venv/bin/python \"$AGENT_SERVER_VERIFY_RUN/fixtures/qa-f07-raw-frames.py\" \"$CID\"\ncontrol-agent-server api GET \"/api/conversations/$CID/events/count\" --check . eq 5\n",
+  "exit_code": 1,
+  "elapsed_ms": 473,
+  "failed_line": 20,
+  "failed_command": "control-agent-server exec --expect-output QA_OK --save \"F07.error-non-json/raw-$CID\" -- .venv/bin/python \"$AGENT_SERVER_VERIFY_RUN/fixtures/qa-f07-raw-frames.py\" \"$CID\"",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 181,
+    "stdout_tail": "types ['error', 'sync', 'transient', 'error', 'error'] codes ['JSONDecodeError', 'KeyError', 'ValidationError']\n",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-103644-6c0f-map-f07/fixtures/qa-f07-raw-frames.py\", line 14, in <module>\n    assert types == [\"sync\", \"transient\", \"error\", \"error\", \"error\"], types\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ['error', 'sync', 'transient', 'error', 'error']\n",
+    "hint": {
+      "missing": [
+        "QA_OK"
+      ],
+      "unexpected": []
+    },
+    "saved": "/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-103644-6c0f-map-f07/evidence/F07.error-non-json/raw-f0c2b1f8-d82b-4600-8617-cbed0df21b94.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 181,\n  \"stdout_tail\": \"types ['error', 'sync', 'transient', 'error', 'error'] codes ['JSONDecodeError', 'KeyError', 'ValidationError']\\n\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-103644-6c0f-map-f07/fixtures/qa-f07-raw-frames.py\\\", line 14, in <module>\\n    assert types == [\\\"sync\\\", \\\"transient\\\", \\\"error\\\", \\\"error\\\", \\\"error\\\"], types\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError: ['error', 'sync', 'transient', 'error', 'error']\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-103644-6c0f-map-f07/evidence/F07.error-non-json/raw-f0c2b1f8-d82b-4600-8617-cbed0df21b94.json\"\n}\n",
+  "stderr": ""
+}

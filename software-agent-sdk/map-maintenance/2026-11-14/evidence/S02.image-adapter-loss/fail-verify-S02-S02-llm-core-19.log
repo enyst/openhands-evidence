@@ -1,0 +1,79 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg image-adapter-loss \
+  --check user_image.vision_active eq true --check user_image.delivered_or_refused_once eq true \
+  --check user_image.error eq LLMBadRequestError --check user_image.retries eq 0 --check user_image.requests eq 0 \
+  --check tool_image.delivered_or_refused_once eq true \
+  --check tool_image.error eq LLMBadRequestError --check tool_image.retries eq 0 --check tool_image.requests eq 0
+{
+  "ok": true,
+  "mode": "image-adapter-loss",
+  "user_image": {
+    "vision_active": true,
+    "error": "LLMServiceUnavailableError",
+    "message": "litellm.InternalServerError: InternalServerError: DeepseekException - The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a compatible adapter or an explicitly configured OpenAI-compatible transport; enabling vision alone cannot fix adapter-leve",
+    "retries": 2,
+    "requests": 0,
+    "image_parts_sent": null,
+    "delivered_or_refused_once": false
+  },
+  "tool_image": {
+    "vision_active": true,
+    "error": "LLMServiceUnavailableError",
+    "message": "litellm.InternalServerError: InternalServerError: DeepseekException - The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a compatible adapter or an explicitly configured OpenAI-compatible transport; enabling vision alone cannot fix adapter-leve",
+    "retries": 2,
+    "requests": 0,
+    "image_parts_sent": null,
+    "delivered_or_refused_once": false
+  },
+  "_exit": 0,
+  "_seconds": 6.2,
+  "checks": [
+    {
+      "check": "user_image.vision_active eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "user_image.delivered_or_refused_once eq true",
+      "ok": false,
+      "actual": "false"
+    },
+    {
+      "check": "user_image.error eq LLMBadRequestError",
+      "ok": false,
+      "actual": "LLMServiceUnavailableError"
+    },
+    {
+      "check": "user_image.retries eq 0",
+      "ok": false,
+      "actual": "2"
+    },
+    {
+      "check": "user_image.requests eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "tool_image.delivered_or_refused_once eq true",
+      "ok": false,
+      "actual": "false"
+    },
+    {
+      "check": "tool_image.error eq LLMBadRequestError",
+      "ok": false,
+      "actual": "LLMServiceUnavailableError"
+    },
+    {
+      "check": "tool_image.retries eq 0",
+      "ok": false,
+      "actual": "2"
+    },
+    {
+      "check": "tool_image.requests eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 1 after 6s]

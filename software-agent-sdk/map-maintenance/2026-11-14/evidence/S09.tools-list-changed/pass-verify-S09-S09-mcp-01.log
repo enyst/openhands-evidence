@@ -1,0 +1,448 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/conversation --arg main \
+  --check error missing --check status eq finished \
+  --check first_tools contains echo --check first_tools contains nested --check first_tools not-contains verify_echo \
+  --check nested_schema.required eq '["config"]' --check nested_schema.config_type eq object \
+  --check nested_schema.config_props eq '["limits", "tags", "title"]' --check nested_schema.tags_type eq array \
+  --check nested_schema.max_type eq integer --check nested_schema.has_summary eq true \
+  --check nested_schema.description eq "Accept a nested object." \
+  --check kind_schema_props contains kind \
+  --check texts.0 contains "echo: hello" --check texts.1 contains "echo: with extras" \
+  --check texts.2 contains count=1 --check texts.3 contains count=2 \
+  --check texts.4 contains "title=t tags=a,b max=3 note=None" --check texts.5 contains kind=special \
+  --check texts.6 contains "tool failed: on purpose" --check results.7.content eq '["ImageContent", "TextContent"]' \
+  --check texts.8 contains '{"answer":42' \
+  --check texts.9 contains 321-terkes --check texts.10 contains 321-terkes \
+  --check texts.11 contains 'echo: dflt $HOST_ONLY' --check texts.12 contains "echo: <secret-hidden>" \
+  --check texts.13 contains 654-kot --check texts.14 contains dflt-other \
+  --check texts.17 contains 42 --check errors eq '["fail"]' \
+  --check calls_with_extra len-ge 1 --check calls_with_extra.0 gt 0 --check last_tools_have_extra eq false \
+  --check secret_values_persisted len-eq 0
+{
+  "ok": true,
+  "mode": "main",
+  "error": null,
+  "status": "finished",
+  "results": [
+    {
+      "tool": "echo",
+      "text": "[Tool 'echo' executed.]echo: hello",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "echo",
+      "text": "[Tool 'echo' executed.]echo: with extras",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "counter",
+      "text": "[Tool 'counter' executed.]count=1 pid=6005",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "counter",
+      "text": "[Tool 'counter' executed.]count=2 pid=6005",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "nested",
+      "text": "[Tool 'nested' executed.]title=t tags=a,b max=3 note=None",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "kind_echo",
+      "text": "[Tool 'kind_echo' executed.]kind=special",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "fail",
+      "text": "[Tool 'fail' executed.]Error calling tool 'fail': tool failed: on purpose",
+      "is_error": true,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "picture",
+      "text": "[Tool 'picture' executed.]a red dot",
+      "is_error": false,
+      "content": [
+        "ImageContent",
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "structured",
+      "text": "[Tool 'structured' executed.]{\"answer\":42,\"items\":[\"a\",\"b\"]}",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "reverse",
+      "text": "[Tool 'reverse' executed.]321-terkes",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "reverse",
+      "text": "[Tool 'reverse' executed.]321-terkes",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "echo",
+      "text": "[Tool 'echo' executed.]echo: dflt $HOST_ONLY",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "echo",
+      "text": "[Tool 'echo' executed.]echo: <secret-hidden>",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "getenv",
+      "text": "[Tool 'getenv' executed.]654-kot",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "getenv",
+      "text": "[Tool 'getenv' executed.]dflt-other",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "register_extra",
+      "text": "[Tool 'register_extra' executed.]registered",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "slow",
+      "text": "[Tool 'slow' executed.]slept",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "extra",
+      "text": "[Tool 'extra' executed.]42",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "remove_extra",
+      "text": "[Tool 'remove_extra' executed.]removed",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "slow",
+      "text": "[Tool 'slow' executed.]slept",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    },
+    {
+      "tool": "finish",
+      "text": "done",
+      "is_error": false,
+      "content": [
+        "TextContent"
+      ]
+    }
+  ],
+  "texts": [
+    "[Tool 'echo' executed.]echo: hello",
+    "[Tool 'echo' executed.]echo: with extras",
+    "[Tool 'counter' executed.]count=1 pid=6005",
+    "[Tool 'counter' executed.]count=2 pid=6005",
+    "[Tool 'nested' executed.]title=t tags=a,b max=3 note=None",
+    "[Tool 'kind_echo' executed.]kind=special",
+    "[Tool 'fail' executed.]Error calling tool 'fail': tool failed: on purpose",
+    "[Tool 'picture' executed.]a red dot",
+    "[Tool 'structured' executed.]{\"answer\":42,\"items\":[\"a\",\"b\"]}",
+    "[Tool 'reverse' executed.]321-terkes",
+    "[Tool 'reverse' executed.]321-terkes",
+    "[Tool 'echo' executed.]echo: dflt $HOST_ONLY",
+    "[Tool 'echo' executed.]echo: <secret-hidden>",
+    "[Tool 'getenv' executed.]654-kot",
+    "[Tool 'getenv' executed.]dflt-other",
+    "[Tool 'register_extra' executed.]registered",
+    "[Tool 'slow' executed.]slept",
+    "[Tool 'extra' executed.]42",
+    "[Tool 'remove_extra' executed.]removed",
+    "[Tool 'slow' executed.]slept",
+    "done"
+  ],
+  "errors": [
+    "fail"
+  ],
+  "first_tools": [
+    "add",
+    "counter",
+    "die",
+    "echo",
+    "fail",
+    "finish",
+    "getenv",
+    "headers",
+    "kind_echo",
+    "nested",
+    "picture",
+    "register_extra",
+    "register_late",
+    "remove_extra",
+    "reverse",
+    "session",
+    "slow",
+    "structured"
+  ],
+  "nested_schema": {
+    "required": [
+      "config"
+    ],
+    "config_type": "object",
+    "config_props": [
+      "limits",
+      "tags",
+      "title"
+    ],
+    "tags_type": "array",
+    "max_type": "integer",
+    "has_summary": true,
+    "has_security_risk": true,
+    "description": "Accept a nested object."
+  },
+  "kind_schema_props": [
+    "kind",
+    "security_risk",
+    "summary"
+  ],
+  "calls_with_extra": [
+    16,
+    17,
+    18
+  ],
+  "last_tools_have_extra": false,
+  "secret_values_persisted": [],
+  "placeholder_persisted": false,
+  "_exit": 0,
+  "_seconds": 10.7,
+  "checks": [
+    {
+      "check": "error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "first_tools contains echo",
+      "ok": true,
+      "actual": "[\"add\", \"counter\", \"die\", \"echo\", \"fail\", \"finish\", \"getenv\", \"headers\", \"kind_echo\", \"nested\", \"picture\", \"register_extra\", \"register_late\", \"remove_extra\", \"reverse\", \"session\", \"slow\", \"structured\""
+    },
+    {
+      "check": "first_tools contains nested",
+      "ok": true,
+      "actual": "[\"add\", \"counter\", \"die\", \"echo\", \"fail\", \"finish\", \"getenv\", \"headers\", \"kind_echo\", \"nested\", \"picture\", \"register_extra\", \"register_late\", \"remove_extra\", \"reverse\", \"session\", \"slow\", \"structured\""
+    },
+    {
+      "check": "first_tools not-contains verify_echo",
+      "ok": true,
+      "actual": "[\"add\", \"counter\", \"die\", \"echo\", \"fail\", \"finish\", \"getenv\", \"headers\", \"kind_echo\", \"nested\", \"picture\", \"register_extra\", \"register_late\", \"remove_extra\", \"reverse\", \"session\", \"slow\", \"structured\""
+    },
+    {
+      "check": "nested_schema.required eq [\"config\"]",
+      "ok": true,
+      "actual": "[\"config\"]"
+    },
+    {
+      "check": "nested_schema.config_type eq object",
+      "ok": true,
+      "actual": "object"
+    },
+    {
+      "check": "nested_schema.config_props eq [\"limits\", \"tags\", \"title\"]",
+      "ok": true,
+      "actual": "[\"limits\", \"tags\", \"title\"]"
+    },
+    {
+      "check": "nested_schema.tags_type eq array",
+      "ok": true,
+      "actual": "array"
+    },
+    {
+      "check": "nested_schema.max_type eq integer",
+      "ok": true,
+      "actual": "integer"
+    },
+    {
+      "check": "nested_schema.has_summary eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "nested_schema.description eq Accept a nested object.",
+      "ok": true,
+      "actual": "Accept a nested object."
+    },
+    {
+      "check": "kind_schema_props contains kind",
+      "ok": true,
+      "actual": "[\"kind\", \"security_risk\", \"summary\"]"
+    },
+    {
+      "check": "texts.0 contains echo: hello",
+      "ok": true,
+      "actual": "[Tool 'echo' executed.]echo: hello"
+    },
+    {
+      "check": "texts.1 contains echo: with extras",
+      "ok": true,
+      "actual": "[Tool 'echo' executed.]echo: with extras"
+    },
+    {
+      "check": "texts.2 contains count=1",
+      "ok": true,
+      "actual": "[Tool 'counter' executed.]count=1 pid=6005"
+    },
+    {
+      "check": "texts.3 contains count=2",
+      "ok": true,
+      "actual": "[Tool 'counter' executed.]count=2 pid=6005"
+    },
+    {
+      "check": "texts.4 contains title=t tags=a,b max=3 note=None",
+      "ok": true,
+      "actual": "[Tool 'nested' executed.]title=t tags=a,b max=3 note=None"
+    },
+    {
+      "check": "texts.5 contains kind=special",
+      "ok": true,
+      "actual": "[Tool 'kind_echo' executed.]kind=special"
+    },
+    {
+      "check": "texts.6 contains tool failed: on purpose",
+      "ok": true,
+      "actual": "[Tool 'fail' executed.]Error calling tool 'fail': tool failed: on purpose"
+    },
+    {
+      "check": "results.7.content eq [\"ImageContent\", \"TextContent\"]",
+      "ok": true,
+      "actual": "[\"ImageContent\", \"TextContent\"]"
+    },
+    {
+      "check": "texts.8 contains {\"answer\":42",
+      "ok": true,
+      "actual": "[Tool 'structured' executed.]{\"answer\":42,\"items\":[\"a\",\"b\"]}"
+    },
+    {
+      "check": "texts.9 contains 321-terkes",
+      "ok": true,
+      "actual": "[Tool 'reverse' executed.]321-terkes"
+    },
+    {
+      "check": "texts.10 contains 321-terkes",
+      "ok": true,
+      "actual": "[Tool 'reverse' executed.]321-terkes"
+    },
+    {
+      "check": "texts.11 contains echo: dflt $HOST_ONLY",
+      "ok": true,
+      "actual": "[Tool 'echo' executed.]echo: dflt $HOST_ONLY"
+    },
+    {
+      "check": "texts.12 contains echo: <secret-hidden>",
+      "ok": true,
+      "actual": "[Tool 'echo' executed.]echo: <secret-hidden>"
+    },
+    {
+      "check": "texts.13 contains 654-kot",
+      "ok": true,
+      "actual": "[Tool 'getenv' executed.]654-kot"
+    },
+    {
+      "check": "texts.14 contains dflt-other",
+      "ok": true,
+      "actual": "[Tool 'getenv' executed.]dflt-other"
+    },
+    {
+      "check": "texts.17 contains 42",
+      "ok": true,
+      "actual": "[Tool 'extra' executed.]42"
+    },
+    {
+      "check": "errors eq [\"fail\"]",
+      "ok": true,
+      "actual": "[\"fail\"]"
+    },
+    {
+      "check": "calls_with_extra len-ge 1",
+      "ok": true,
+      "actual": "[16, 17, 18]"
+    },
+    {
+      "check": "calls_with_extra.0 gt 0",
+      "ok": true,
+      "actual": "16"
+    },
+    {
+      "check": "last_tools_have_extra eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "secret_values_persisted len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    }
+  ]
+}
+
+[exit 0 after 11s]

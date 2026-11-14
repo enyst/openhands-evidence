@@ -1,0 +1,307 @@
+{
+  "file": "F07-session-socket.md",
+  "bullet": "Invalid message (`F07.error-frame`).",
+  "ids": [
+    "F07.error-frame"
+  ],
+  "line": 179,
+  "script": "control-agent-server ws listen \"/sockets/session/$CID\" --send '{\"content\":\"QA_F07_BAD\"}' --send '[1, 2]' \\\n  --duration 5 --expect-frames 4 --expect-open --save \"F07.error-frame/invalid-$CID\"\ncontrol-agent-server state cat \"evidence/F07.error-frame/invalid-$CID.json\" \\\n  --check frames.1.direction eq sent --check frames.2.direction eq sent \\\n  --check frames.5.frame.type eq error --check frames.5.frame.code eq ValidationError --check frames.5.frame.detail contains role \\\n  --check frames.6.frame.type eq error --check frames.6.frame.code eq ValidationError\ncontrol-agent-server api GET \"/api/conversations/$CID/events/count\" --check . eq 5\n",
+  "exit_code": 1,
+  "elapsed_ms": 5664,
+  "failed_line": 3,
+  "failed_command": "control-agent-server state cat \"evidence/F07.error-frame/invalid-$CID.json\" --check frames.1.direction eq sent --check frames.2.direction eq sent --check frames.5.frame.type eq error --check frames.5.frame.code eq ValidationError --check frames.5.frame.detail contains role --check frames.6.frame.type eq error --check frames.6.frame.code eq ValidationError",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "path": "evidence/F07.error-frame/invalid-6870d220-9b15-47b6-afe8-d159f6df296b.json",
+    "bytes": 9048,
+    "mode": "0o644",
+    "content": {
+      "summary": {
+        "opened": true,
+        "frames": 4,
+        "kinds": {
+          "error": 2,
+          "sync": 1,
+          "transient:ConversationStateUpdateEvent": 1
+        },
+        "stopped": "duration",
+        "close": null
+      },
+      "frames": [
+        {
+          "direction": "opened",
+          "at": "2026-11-14T09:48:51Z"
+        },
+        {
+          "direction": "sent",
+          "at": "2026-11-14T09:48:51Z",
+          "frame": {
+            "content": "QA_F07_BAD"
+          }
+        },
+        {
+          "direction": "sent",
+          "at": "2026-11-14T09:48:51Z",
+          "frame": [
+            1,
+            2
+          ]
+        },
+        {
+          "direction": "received",
+          "at": "2026-11-14T09:48:51Z",
+          "kind": "error",
+          "frame": {
+            "type": "error",
+            "code": "ValidationError",
+            "detail": "1 validation error for Message\nrole\n  Field required [type=missing, input_value={'content': 'QA_F07_BAD'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing"
+          }
+        },
+        {
+          "direction": "received",
+          "at": "2026-11-14T09:48:51Z",
+          "kind": "sync",
+          "frame": {
+            "type": "sync",
+            "through_seq": 4
+          }
+        },
+        {
+          "direction": "received",
+          "at": "2026-11-14T09:48:51Z",
+          "kind": "transient:ConversationStateUpdateEvent",
+          "frame": {
+            "type": "transient",
+            "event": {
+              "id": "ecf4dcf8-f3a5-452e-917d-4860fbf9245c",
+              "timestamp": "2026-11-14T09:48:51.273831",
+              "source": "environment",
+              "key": "full_state",
+              "value": {
+                "id": "6870d220-9b15-47b6-afe8-d159f6df296b",
+                "agent": {
+                  "llm": {
+                    "model": "deepseek/deepseek-flash",
+                    "api_key": "**********",
+                    "auth_type": "api_key",
+                    "openrouter_site_url": "https://docs.all-hands.dev/",
+                    "openrouter_app_name": "OpenHands",
+                    "num_retries": 5,
+                    "retry_multiplier": 8.0,
+                    "retry_min_wait": 8,
+                    "retry_max_wait": 64,
+                    "timeout": 300,
+                    "stream_idle_timeout": 300.0,
+                    "max_message_chars": 30000,
+                    "api_mode": "auto",
+                    "capability_overrides": {},
+                    "stream": false,
+                    "drop_params": true,
+                    "disable_stop_word": false,
+                    "caching_prompt": true,
+                    "log_completions_to_file": false,
+                    "log_completions": false,
+                    "log_completions_folder": "logs/completions",
+                    "native_tool_calling": true,
+                    "reasoning_effort": "high",
+                    "enable_encrypted_reasoning": true,
+                    "prompt_cache_retention": "24h",
+                    "extended_thinking_budget": 200000,
+                    "usage_id": "default",
+                    "litellm_extra_body": {},
+                    "is_subscription": false
+                  },
+                  "tools": [],
+                  "mcp_config": {},
+                  "include_default_tools": [
+                    "FinishTool"
+                  ],
+                  "agent_context": {
+                    "skills": [],
+                    "load_user_skills": false,
+                    "load_public_skills": false,
+                    "marketplace_path": "marketplaces/default.json",
+                    "registered_marketplaces": [],
+                    "load_project_skills": false,
+                    "load_memory": false,
+                    "disabled_skills": [],
+                    "current_datetime": "2026-11-14T09:48:30.861374Z"
+                  },
+                  "system_prompt_filename": "system_prompt.j2",
+                  "security_policy_filename": "security_policy.j2",
+                  "system_prompt_kwargs": {
+                    "llm_security_analyzer": true
+                  },
+                  "condenser": {
+                    "llm": {
+                      "model": "deepseek/deepseek-flash",
+                      "api_key": "**********",
+                      "auth_type": "api_key",
+                      "openrouter_site_url": "https://docs.all-hands.dev/",
+                      "openrouter_app_name": "OpenHands",
+                      "num_retries": 5,
+                      "retry_multiplier": 8.0,
+                      "retry_min_wait": 8,
+                      "retry_max_wait": 64,
+                      "timeout": 300,
+                      "stream_idle_timeout": 300.0,
+                      "max_message_chars": 30000,
+                      "api_mode": "auto",
+                      "capability_overrides": {},
+                      "stream": false,
+                      "drop_params": true,
+                      "disable_stop_word": false,
+                      "caching_prompt": true,
+                      "log_completions_to_file": false,
+                      "log_completions": false,
+                      "log_completions_folder": "logs/completions",
+                      "native_tool_calling": true,
+                      "reasoning_effort": "high",
+                      "enable_encrypted_reasoning": true,
+                      "prompt_cache_retention": "24h",
+                      "extended_thinking_budget": 200000,
+                      "usage_id": "condenser",
+                      "litellm_extra_body": {},
+                      "is_subscription": false
+                    },
+                    "max_size": 240,
+                    "keep_first": 2,
+                    "minimum_progress": 0.1,
+                    "hard_context_reset_max_retries": 5,
+                    "hard_context_reset_context_scaling": 0.8,
+                    "kind": "LLMSummarizingCondenser"
+                  },
+                  "tool_concurrency_limit": 1,
+                  "kind": "Agent"
+                },
+                "workspace": {
+                  "working_dir": "/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-094819-5e1b-map-f07/fixtures/workspaces/094830-850893",
+                  "kind": "LocalWorkspace"
+                },
+                "persistence_dir": "/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-094819-5e1b-map-f07/server/workspace/conversations/6870d2209b1547b6afe8d159f6df296b",
+                "max_iterations": 500,
+                "stuck_detection": true,
+                "execution_status": "idle",
+                "confirmation_policy": {
+                  "kind": "NeverConfirm"
+                },
+                "activated_knowledge_skills": [],
+                "activated_path_rules": [],
+                "invoked_skills": [],
+                "ambient_plugin_skills": [],
+                "ambient_plugin_mcp_servers": [],
+                "blocked_actions": {},
+                "blocked_messages": {},
+                "last_user_message_id": "26170066-42ce-4d2c-9222-47391403f622",
+                "leaf_event_id": "26170066-42ce-4d2c-9222-47391403f622",
+                "head_is_empty": false,
+                "stats": {
+                  "usage_to_metrics": {
+                    "default": {
+                      "model_name": "deepseek/deepseek-flash",
+                      "accumulated_cost": 0.0,
+                      "accumulated_token_usage": {
+                        "model": "deepseek/deepseek-flash",
+                        "prompt_tokens": 0,
+                        "completion_tokens": 0,
+                        "cache_read_tokens": 0,
+                        "cache_write_tokens": 0,
+                        "reasoning_tokens": 0,
+                        "context_window": 0,
+                        "per_turn_token": 0,
+                        "response_id": ""
+                      },
+                      "costs": [],
+                      "response_latencies": [],
+                      "token_usages": []
+                    },
+                    "condenser": {
+                      "model_name": "deepseek/deepseek-flash",
+                      "accumulated_cost": 0.0,
+                      "accumulated_token_usage": {
+                        "model": "deepseek/deepseek-flash",
+                        "prompt_tokens": 0,
+                        "completion_tokens": 0,
+                        "cache_read_tokens": 0,
+                        "cache_write_tokens": 0,
+                        "reasoning_tokens": 0,
+                        "context_window": 0,
+                        "per_turn_token": 0,
+                        "response_id": ""
+                      },
+                      "costs": [],
+                      "response_latencies": [],
+                      "token_usages": []
+                    }
+                  }
+                },
+                "secret_registry": {
+                  "secret_sources": {}
+                },
+                "tags": {},
+                "agent_state": {}
+              },
+              "kind": "ConversationStateUpdateEvent"
+            }
+          }
+        },
+        {
+          "direction": "received",
+          "at": "2026-11-14T09:48:51Z",
+          "kind": "error",
+          "frame": {
+            "type": "error",
+            "code": "ValidationError",
+            "detail": "1 validation error for Message\n  Input should be a valid dictionary or instance of Message [type=model_type, input_value=[1, 2], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type"
+          }
+        },
+        {
+          "direction": "ended",
+          "at": "2026-11-14T09:48:56Z",
+          "stopped": "duration",
+          "close": null
+        }
+      ]
+    },
+    "checks": [
+      {
+        "check": "frames.1.direction eq sent",
+        "ok": true,
+        "actual": "sent"
+      },
+      {
+        "check": "frames.2.direction eq sent",
+        "ok": true,
+        "actual": "sent"
+      },
+      {
+        "check": "frames.5.frame.type eq error",
+        "ok": false,
+        "actual": "transient"
+      },
+      {
+        "check": "frames.5.frame.code eq ValidationError",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "frames.5.frame.detail contains role",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "frames.6.frame.type eq error",
+        "ok": true,
+        "actual": "error"
+      },
+      {
+        "check": "frames.6.frame.code eq ValidationError",
+        "ok": true,
+        "actual": "ValidationError"
+      }
+    ]
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"path\": \"/sockets/session/6870d220-9b15-47b6-afe8-d159f6df296b\",\n  \"opened\": true,\n  \"frames\": 4,\n  \"kinds\": {\n    \"error\": 2,\n    \"sync\": 1,\n    \"transient:ConversationStateUpdateEvent\": 1\n  },\n  \"stopped\": \"duration\",\n  \"close\": null,\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-094819-5e1b-map-f07/evidence/F07.error-frame/invalid-6870d220-9b15-47b6-afe8-d159f6df296b.json\",\n  \"first_frames\": [\n    {\n      \"kind\": \"error\",\n      \"frame\": {\n        \"type\": \"error\",\n        \"code\": \"ValidationError\",\n        \"detail\": \"1 validation error for Message\\nrole\\n  Field required [type=missing, input_value={'content': 'QA_F07_BAD'}, input_type=dict]\\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\"\n      }\n    },\n    {\n      \"kind\": \"sync\",\n      \"frame\": {\n        \"type\": \"sync\",\n        \"through_seq\": 4\n      }\n    },\n    {\n      \"kind\": \"transient:ConversationStateUpdateEvent\",\n      \"frame\": \"{\\\"type\\\": \\\"transient\\\", \\\"event\\\": {\\\"id\\\": \\\"ecf4dcf8-f3a5-452e-917d-4860fbf9245c\\\", \\\"timestamp\\\": \\\"2026-11-14T09:48:51.273831\\\", \\\"source\\\": \\\"environment\\\", \\\"key\\\": \\\"full_state\\\", \\\"value\\\": {\\\"id\\\": \\\"6870d220-9b15-47b6-afe8-d159f6df296b\\\", \\\"agent\\\": {\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"api_key\\\": \\\"**********\\\", \\\"auth_type\\\": \\\"api_key\\\", \\\"openrouter_site_url\\\": \\\"https://docs.all-hands.dev/\\\", \\\"openrouter_app_name\\u2026\"\n    },\n    {\n      \"kind\": \"error\",\n      \"frame\": {\n        \"type\": \"error\",\n        \"code\": \"ValidationError\",\n        \"detail\": \"1 validation error for Message\\n  Input should be a valid dictionary or instance of Message [type=model_type, input_value=[1, 2], input_type=list]\\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\"\n      }\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"path\": \"evidence/F07.error-frame/invalid-6870d220-9b15-47b6-afe8-d159f6df296b.json\",\n  \"bytes\": 9048,\n  \"mode\": \"0o644\",\n  \"content\": {\n    \"summary\": {\n      \"opened\": true,\n      \"frames\": 4,\n      \"kinds\": {\n        \"error\": 2,\n        \"sync\": 1,\n        \"transient:ConversationStateUpdateEvent\": 1\n      },\n      \"stopped\": \"duration\",\n      \"close\": null\n    },\n    \"frames\": [\n      {\n        \"direction\": \"opened\",\n        \"at\": \"2026-11-14T09:48:51Z\"\n      },\n      {\n        \"direction\": \"sent\",\n        \"at\": \"2026-11-14T09:48:51Z\",\n        \"frame\": {\n          \"content\": \"QA_F07_BAD\"\n        }\n      },\n      {\n        \"direction\": \"sent\",\n        \"at\": \"2026-11-14T09:48:51Z\",\n        \"frame\": [\n          1,\n          2\n        ]\n      },\n      {\n        \"direction\": \"received\",\n        \"at\": \"2026-11-14T09:48:51Z\",\n        \"kind\": \"error\",\n        \"frame\": {\n          \"type\": \"error\",\n          \"code\": \"ValidationError\",\n          \"detail\": \"1 validation error for Message\\nrole\\n  Field required [type=missing, input_value={'content': 'QA_F07_BAD'}, input_type=dict]\\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\"\n        }\n      },\n      {\n        \"direction\": \"received\",\n        \"at\": \"2026-11-14T09:48:51Z\",\n        \"kind\": \"sync\",\n        \"frame\": {\n          \"type\": \"sync\",\n          \"through_seq\": 4\n        }\n      },\n      {\n        \"direction\": \"received\",\n        \"at\": \"2026-11-14T09:48:51Z\",\n        \"kind\": \"transient:ConversationStateUpdateEvent\",\n        \"frame\": {\n          \"type\": \"transient\",\n          \"event\": {\n            \"id\": \"ecf4dcf8-f3a5-452e-917d-4860fbf9245c\",\n            \"timestamp\": \"2026-11-14T09:48:51.273831\",\n            \"source\": \"environment\",\n            \"key\": \"full_state\",\n            \"value\": {\n              \"id\": \"6870d220-9b15-47b6-afe8-d159f6df296b\",\n              \"agent\": {\n                \"llm\": {\n                  \"model\": \"deepseek/deepseek-flash\",\n                  \"api_key\": \"**********\",\n                  \"auth_type\": \"api_key\",\n                  \"openrouter_site_url\": \"https://docs.all-hands.dev/\",\n                  \"openrouter_app_name\": \"OpenHands\",\n                  \"num_retries\": 5,\n                  \"retry_multiplier\": 8.0,\n                  \"retry_min_wait\": 8,\n                  \"retry_max_wait\": 64,\n                  \"timeout\": 300,\n                  \"stream_idle_timeout\": 300.0,\n                  \"max_message_chars\": 30000,\n                  \"api_mode\": \"auto\",\n                  \"capability_overrides\": {},\n                  \"stream\": false,\n                  \"drop_params\": true,\n                  \"disable_stop_word\": false,\n                  \"caching_prompt\": true,\n                  \"log_completions_to_file\": false,\n                  \"log_completions\": false,\n                  \"log_completions_folder\": \"logs/completions\",\n                  \"native_tool_calling\": true,\n                  \"reasoning_effort\": \"high\",\n                  \"enable_encrypted_reasoning\": true,\n                  \"prompt_cache_retention\": \"24h\",\n                  \"extended_thinking_budget\": 200000,\n                  \"usage_id\": \"default\",\n                  \"litellm_extra_body\": {},\n                  \"is_subscription\": false\n                },\n                \"tools\": [],\n                \"mcp_config\": {},\n                \"include_default_tools\": [\n                  \"FinishTool\"\n                ],\n                \"agent_context\": {\n                  \"skills\": [],\n                  \"load_user_skills\": false,\n                  \"load_public_skills\": false,\n                  \"marketplace_path\": \"marketplaces/default.json\",\n                  \"registered_marketplaces\": [],\n                  \"load_project_skills\": false,\n                  \"load_memory\": false,\n                  \"disabled_skills\": [],\n                  \"current_datetime\": \"2026-11-14T09:48:30.861374Z\"\n                },\n                \"system_prompt_filename\": \"system_prompt.j2\",\n                \"security_policy_filename\": \"security_policy.j2\",\n                \"system_prompt_kwargs\": {\n                  \"llm_security_analyzer\": true\n                },\n                \"condenser\": {\n                  \"llm\": {\n                    \"model\": \"deepseek/deepseek-flash\",\n                    \"api_key\": \"**********\",\n                    \"auth_type\": \"api_key\",\n                    \"openrouter_site_url\": \"https://docs.all-hands.dev/\",\n                    \"openrouter_app_name\": \"OpenHands\",\n                    \"num_retries\": 5,\n                    \"retry_multiplier\": 8.0,\n                    \"retry_min_wait\": 8,\n                    \"retry_max_wait\": 64,\n                    \"timeout\": 300,\n                    \"stream_idle_timeout\": 300.0,\n                    \"max_message_chars\": 30000,\n                    \"api_mode\": \"auto\",\n                    \"capability_overrides\": {},\n                    \"stream\": false,\n                    \"drop_params\": true,\n                    \"disable_stop_word\": false,\n                    \"caching_prompt\": true,\n                    \"log_completions_to_file\": false,\n                    \"log_completions\": false,\n                    \"log_completions_folder\": \"logs/completions\",\n                    \"native_tool_calling\": true,\n                    \"reasoning_effort\": \"high\",\n                    \"enable_encrypted_reasoning\": true,\n                    \"prompt_cache_retention\": \"24h\",\n                    \"extended_thinking_budget\": 200000,\n                    \"usage_id\": \"condenser\",\n                    \"litellm_extra_body\": {},\n                    \"is_subscription\": false\n                  },\n                  \"max_size\": 240,\n                  \"keep_first\": 2,\n                  \"minimum_progress\": 0.1,\n                  \"hard_context_reset_max_retries\": 5,\n                  \"hard_context_reset_context_scaling\": 0.8,\n                  \"kind\": \"LLMSummarizingCondenser\"\n                },\n                \"tool_concurrency_limit\": 1,\n                \"kind\": \"Agent\"\n              },\n              \"workspace\": {\n                \"working_dir\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-094819-5e1b-map-f07/fixtures/workspaces/094830-850893\",\n                \"kind\": \"LocalWorkspace\"\n              },\n              \"persistence_dir\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-094819-5e1b-map-f07/server/workspace/conversations/6870d2209b1547b6afe8d159f6df296b\",\n              \"max_iterations\": 500,\n              \"stuck_detection\": true,\n              \"execution_status\": \"idle\",\n              \"confirmation_policy\": {\n                \"kind\": \"NeverConfirm\"\n              },\n              \"activated_knowledge_skills\": [],\n              \"activated_path_rules\": [],\n              \"invoked_skills\": [],\n              \"ambient_plugin_skills\": [],\n              \"ambient_plugin_mcp_servers\": [],\n              \"blocked_actions\": {},\n              \"blocked_messages\": {},\n              \"last_user_message_id\": \"26170066-42ce-4d2c-9222-47391403f622\",\n              \"leaf_event_id\": \"26170066-42ce-4d2c-9222-47391403f622\",\n              \"head_is_empty\": false,\n              \"stats\": {\n                \"usage_to_metrics\": {\n                  \"default\": {\n                    \"model_name\": \"deepseek/deepseek-flash\",\n                    \"accumulated_cost\": 0.0,\n                    \"accumulated_token_usage\": {\n                      \"model\": \"deepseek/deepseek-flash\",\n                      \"prompt_tokens\": 0,\n                      \"completion_tokens\": 0,\n                      \"cache_read_tokens\": 0,\n                      \"cache_write_tokens\": 0,\n                      \"reasoning_tokens\": 0,\n                      \"context_window\": 0,\n                      \"per_turn_token\": 0,\n                      \"response_id\": \"\"\n                    },\n                    \"costs\": [],\n                    \"response_latencies\": [],\n                    \"token_usages\": []\n                  },\n                  \"condenser\": {\n                    \"model_name\": \"deepseek/deepseek-flash\",\n                    \"accumulated_cost\": 0.0,\n                    \"accumulated_token_usage\": {\n                      \"model\": \"deepseek/deepseek-flash\",\n                      \"prompt_tokens\": 0,\n                      \"completion_tokens\": 0,\n                      \"cache_read_tokens\": 0,\n                      \"cache_write_tokens\": 0,\n                      \"reasoning_tokens\": 0,\n                      \"context_window\": 0,\n                      \"per_turn_token\": 0,\n                      \"response_id\": \"\"\n                    },\n                    \"costs\": [],\n                    \"response_latencies\": [],\n                    \"token_usages\": []\n                  }\n                }\n              },\n              \"secret_registry\": {\n                \"secret_sources\": {}\n              },\n              \"tags\": {},\n              \"agent_state\": {}\n            },\n            \"kind\": \"ConversationStateUpdateEvent\"\n          }\n        }\n      },\n      {\n        \"direction\": \"received\",\n        \"at\": \"2026-11-14T09:48:51Z\",\n        \"kind\": \"error\",\n        \"frame\": {\n          \"type\": \"error\",\n          \"code\": \"ValidationError\",\n          \"detail\": \"1 validation error for Message\\n  Input should be a valid dictionary or instance of Message [type=model_type, input_value=[1, 2], input_type=list]\\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\"\n        }\n      },\n      {\n        \"direction\": \"ended\",\n        \"at\": \"2026-11-14T09:48:56Z\",\n        \"stopped\": \"duration\",\n        \"close\": null\n      }\n    ]\n  },\n  \"checks\": [\n    {\n      \"check\": \"frames.1.direction eq sent\",\n      \"ok\": true,\n      \"actual\": \"sent\"\n    },\n    {\n      \"check\": \"frames.2.direction eq sent\",\n      \"ok\": true,\n      \"actual\": \"sent\"\n    },\n    {\n      \"check\": \"frames.5.frame.type eq error\",\n      \"ok\": false,\n      \"actual\": \"transient\"\n    },\n    {\n      \"check\": \"frames.5.frame.code eq ValidationError\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"frames.5.frame.detail contains role\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"frames.6.frame.type eq error\",\n      \"ok\": true,\n      \"actual\": \"error\"\n    },\n    {\n      \"check\": \"frames.6.frame.code eq ValidationError\",\n      \"ok\": true,\n      \"actual\": \"ValidationError\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

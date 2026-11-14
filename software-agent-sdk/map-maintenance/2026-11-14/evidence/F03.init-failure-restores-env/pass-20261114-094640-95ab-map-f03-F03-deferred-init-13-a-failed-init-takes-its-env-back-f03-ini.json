@@ -1,0 +1,17 @@
+{
+  "file": "F03-deferred-init.md",
+  "bullet": "A failed init takes its env back (`F03.init-failure-restores-env`).",
+  "ids": [
+    "F03.init-failure-restores-env"
+  ],
+  "line": 312,
+  "script": "control-agent-server api POST /api/bash/execute_bash_command --auth none --header 'X-Session-API-Key: qa-user-key' \\\n  --json '{\"command\":\"echo \\\"PROBE=$PROBE_VAR FAILED_ONLY=[${QA_F03_FAILED_ONLY-unset}]\\\"\"}' --expect 200 \\\n  --check stdout contains 'PROBE=qa-hello' --check stdout contains 'FAILED_ONLY=[unset]' --save F03.init-failure-restores-env/env\n",
+  "exit_code": 0,
+  "elapsed_ms": 357,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/bash/execute_bash_command\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": {\n      \"command\": \"echo \\\"PROBE=$PROBE_VAR FAILED_ONLY=[${QA_F03_FAILED_ONLY-unset}]\\\"\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"237\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"id\": \"cdebf1937ad644788dc51f801f5f3550\",\n      \"timestamp\": \"2026-11-14T09:47:07.769338Z\",\n      \"command_id\": \"39c7adef2c984568a62fe3bd4ffe8fe2\",\n      \"order\": 0,\n      \"exit_code\": 0,\n      \"stdout\": \"PROBE=qa-hello FAILED_ONLY=[unset]\\n\",\n      \"stderr\": null,\n      \"kind\": \"BashOutput\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 63,\n  \"checks\": [\n    {\n      \"check\": \"stdout contains PROBE=qa-hello\",\n      \"ok\": true,\n      \"actual\": \"PROBE=qa-hello FAILED_ONLY=[unset]\\n\"\n    },\n    {\n      \"check\": \"stdout contains FAILED_ONLY=[unset]\",\n      \"ok\": true,\n      \"actual\": \"PROBE=qa-hello FAILED_ONLY=[unset]\\n\"\n    }\n  ],\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-094640-95ab-map-f03/evidence/F03.init-failure-restores-env/env.json\"\n}\n",
+  "stderr": ""
+}

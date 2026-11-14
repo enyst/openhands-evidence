@@ -1,0 +1,30 @@
+{
+  "file": "F19-mcp.md",
+  "bullet": "Redirect URI on the public origin (`F19.oauth-public-redirect`), known bug #6828.",
+  "ids": [
+    "F19.oauth-public-redirect"
+  ],
+  "line": 628,
+  "script": "REDIRECT_OF='import json, sys, urllib.parse as u; print(json.dumps({\"redirect_uri\": u.parse_qs(u.urlsplit(sys.argv[1]).query)[\"redirect_uri\"][0]}))'\nPSTART=$(jq -nc --argjson s \"$OAUTH_SRV\" '{server: $s, timeout: 5}')\nLAU=$(control-agent-server api POST /api/mcp/oauth/start --json \"$PSTART\" --expect 200 --check ok eq true --field authorization_url)\n\"$PY\" -c \"$REDIRECT_OF\" \"$LAU\" | control-agent-server assert --check redirect_uri matches '^http://localhost:[0-9]+/callback$'\nstop_public() {\n  control-agent-server stop --run \"$PUB\" >/dev/null\n}\nPUB=$(control-agent-server launch --new --name f19-public --env OH_WEB_URL=https://qa-f19.example/qa-f19 --print-run)\ntrap stop_public EXIT\ncontrol-agent-server config --run \"$PUB\" | jq -e '.server_env.OH_WEB_URL == \"https://qa-f19.example/qa-f19\"'\nPAU=$(control-agent-server api POST /api/mcp/oauth/start --run \"$PUB\" --json \"$PSTART\" --expect 200 --check ok eq true \\\n  --check authorization_url matches \"^http://127.0.0.1:$OAUTH_PORT/authorize\\\\?\" --save F19.oauth-public-redirect/start --field authorization_url)\n\"$PY\" -c \"$REDIRECT_OF\" \"$PAU\" | control-agent-server assert --check redirect_uri matches '^https://qa-f19\\.example/qa-f19/'  # bug: value.redirect_uri matches '^http://localhost:[0-9]+/callback$'\ncontrol-agent-server stop --run \"$PUB\"\ntrap - EXIT\n",
+  "exit_code": 1,
+  "elapsed_ms": 10340,
+  "failed_line": 13,
+  "failed_command": "control-agent-server assert --check redirect_uri matches '^https://qa-f19\\.example/qa-f19/'",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "value": {
+      "redirect_uri": "http://localhost:53435/callback"
+    },
+    "checks": [
+      {
+        "check": "redirect_uri matches ^https://qa-f19\\.example/qa-f19/",
+        "ok": false,
+        "actual": "http://localhost:53435/callback"
+      }
+    ],
+    "hint": "failed check: redirect_uri matches ^https://qa-f19\\.example/qa-f19/"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"value\": {\n    \"redirect_uri\": \"http://localhost:58143/callback\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"redirect_uri matches ^http://localhost:[0-9]+/callback$\",\n      \"ok\": true,\n      \"actual\": \"http://localhost:58143/callback\"\n    }\n  ]\n}\ntrue\n{\n  \"ok\": false,\n  \"value\": {\n    \"redirect_uri\": \"http://localhost:53435/callback\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"redirect_uri matches ^https://qa-f19\\\\.example/qa-f19/\",\n      \"ok\": false,\n      \"actual\": \"http://localhost:53435/callback\"\n    }\n  ],\n  \"hint\": \"failed check: redirect_uri matches ^https://qa-f19\\\\.example/qa-f19/\"\n}\n",
+  "stderr": ""
+}

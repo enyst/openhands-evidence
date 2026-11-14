@@ -1,0 +1,210 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/routing --arg fallback \
+  --check transient.text eq "from fallback 2" --check transient.fallback1_requests eq 1 \
+  --check transient.fallback2_requests eq 1 --check transient.primary_cost eq 0.14 \
+  --check transient.cost_models.0 eq openai/gpt-4.1-mini --check transient.cost_models len-eq 1 \
+  --check next_call.text eq "primary again" --check next_call.primary_requests eq 2 \
+  --check next_call.primary_cost eq 0.28 --check next_call.cost_models.1 eq openai/gpt-4o-mini \
+  --check non_transient.error eq LLMBadRequestError --check non_transient.fallback_requests eq 0 \
+  --check budget_denial.fallback_requests eq 0 \
+  --check quota.text eq "from quota fallback" --check quota.primary_requests eq 1 \
+  --check all_fail.error eq LLMRateLimitError --check all_fail.fallback_requests eq 1 \
+  --check responses.text eq "responses fallback" --check responses.paths.0 eq /v1/responses \
+  --check async.text eq "async fallback" \
+  --check in_conversation.status eq finished --check in_conversation.fallback_requests eq 1 \
+  --check in_conversation.usage_ids len-eq 1 --check in_conversation.primary_cost eq 0.14 \
+  --check in_conversation.cost_models.0 eq openai/gpt-4.1-mini
+{
+  "ok": true,
+  "mode": "fallback",
+  "transient": {
+    "text": "from fallback 2",
+    "error": null,
+    "primary_requests": 1,
+    "fallback1_requests": 1,
+    "fallback2_requests": 1,
+    "primary_cost": 0.14,
+    "cost_models": [
+      "openai/gpt-4.1-mini"
+    ]
+  },
+  "next_call": {
+    "text": "primary again",
+    "primary_requests": 2,
+    "primary_cost": 0.28,
+    "cost_models": [
+      "openai/gpt-4.1-mini",
+      "openai/gpt-4o-mini"
+    ]
+  },
+  "non_transient": {
+    "error": "LLMBadRequestError",
+    "fallback_requests": 0
+  },
+  "budget_denial": {
+    "error": "LLMRateLimitError",
+    "fallback_requests": 0
+  },
+  "quota": {
+    "text": "from quota fallback",
+    "error": null,
+    "primary_requests": 1
+  },
+  "all_fail": {
+    "error": "LLMRateLimitError",
+    "fallback_requests": 1
+  },
+  "responses": {
+    "text": "responses fallback",
+    "error": null,
+    "paths": [
+      "/v1/responses"
+    ]
+  },
+  "async": {
+    "text": "async fallback",
+    "error": null
+  },
+  "in_conversation": {
+    "status": "finished",
+    "fallback_requests": 1,
+    "usage_ids": [
+      "primary"
+    ],
+    "primary_cost": 0.14,
+    "cost_models": [
+      "openai/gpt-4.1-mini"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 13.4,
+  "checks": [
+    {
+      "check": "transient.text eq from fallback 2",
+      "ok": true,
+      "actual": "from fallback 2"
+    },
+    {
+      "check": "transient.fallback1_requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "transient.fallback2_requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "transient.primary_cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "transient.cost_models.0 eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "transient.cost_models len-eq 1",
+      "ok": true,
+      "actual": "[\"openai/gpt-4.1-mini\"]"
+    },
+    {
+      "check": "next_call.text eq primary again",
+      "ok": true,
+      "actual": "primary again"
+    },
+    {
+      "check": "next_call.primary_requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "next_call.primary_cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "next_call.cost_models.1 eq openai/gpt-4o-mini",
+      "ok": true,
+      "actual": "openai/gpt-4o-mini"
+    },
+    {
+      "check": "non_transient.error eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "non_transient.fallback_requests eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "budget_denial.fallback_requests eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "quota.text eq from quota fallback",
+      "ok": true,
+      "actual": "from quota fallback"
+    },
+    {
+      "check": "quota.primary_requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "all_fail.error eq LLMRateLimitError",
+      "ok": true,
+      "actual": "LLMRateLimitError"
+    },
+    {
+      "check": "all_fail.fallback_requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "responses.text eq responses fallback",
+      "ok": true,
+      "actual": "responses fallback"
+    },
+    {
+      "check": "responses.paths.0 eq /v1/responses",
+      "ok": true,
+      "actual": "/v1/responses"
+    },
+    {
+      "check": "async.text eq async fallback",
+      "ok": true,
+      "actual": "async fallback"
+    },
+    {
+      "check": "in_conversation.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "in_conversation.fallback_requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "in_conversation.usage_ids len-eq 1",
+      "ok": true,
+      "actual": "[\"primary\"]"
+    },
+    {
+      "check": "in_conversation.primary_cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "in_conversation.cost_models.0 eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    }
+  ]
+}
+
+[exit 0 after 14s]

@@ -1,0 +1,68 @@
+{
+  "file": "F16-workspace-serving-and-vscode.md",
+  "bullet": "Editor resource with an empty `tkn` (`F16.vscode-resource-empty-tkn`), known bug #6803.",
+  "ids": [
+    "F16.vscode-resource-empty-tkn"
+  ],
+  "line": 568,
+  "script": "ROOT=\"$F/code-server\"\nmkdir -p \"$ROOT/bin\" \"$ROOT/lib\"\nln -sfn \"$(command -v node)\" \"$ROOT/lib/node\"\ncat > \"$ROOT/bin/stand-in.cjs\" <<'EOF'\nconst http = require(\"node:http\");\nconst socket = process.argv[process.argv.indexOf(\"--socket\") + 1];\nhttp\n  .createServer((req, res) => {\n    res.writeHead(200, { \"Content-Type\": \"application/json\" });\n    res.end(JSON.stringify({ editor: \"qa-f16-stand-in\", url: req.url }));\n  })\n  .listen(socket);\nEOF\nprintf '#!/bin/sh\\nexec \"$(dirname \"$0\")/../lib/node\" \"$(dirname \"$0\")/stand-in.cjs\" \"$@\"\\n' > \"$ROOT/bin/code-server\"\nchmod +x \"$ROOT/bin/code-server\"\nPX=\nstop_editor() {\n  test -z \"$PX\" || control-agent-server stop --run \"$PX\" >/dev/null\n  control-agent-server stop --run \"$ED\" >/dev/null\n}\nED=$(control-agent-server launch --new --vscode --name f16-editor --env \"CODE_SERVER_ROOT=$ROOT\" --print-run)\ntrap stop_editor EXIT\ncontrol-agent-server api GET /api/vscode/status --run \"$ED\" --expect 200 --check . eq '{\"running\": true, \"enabled\": true}'\nEPORT=$(control-agent-server api GET /api/vscode/url --run \"$ED\" --expect 200 --check url matches '^http://localhost:[0-9]+/\\?tkn=' --field url)\nEPORT=${EPORT#http://localhost:}\nEPORT=${EPORT%%/*}\nPX=$(QA_F16_TKN=$(cat \"$ED/private/session_api_key\") control-agent-server attach --url \"http://127.0.0.1:$EPORT\" --key-env QA_F16_TKN --name f16-editor-port --print-run)\ncontrol-agent-server api --run \"$PX\" --auth none GET /stable-qa-f16/vscode-remote-resource --query path=/qa-f16/theme.json --expect 401\ncontrol-agent-server api --run \"$PX\" --auth none --jar qa-f16-editor GET / --query \"tkn=$(cat \"$PX/private/session_api_key\")\" --query folder=workspace \\\n  --expect 303 --check-header location eq '/?folder=workspace' --check-header set-cookie contains openhands_editor_ \\\n  --check-header set-cookie contains HttpOnly --save F16.vscode-resource-empty-tkn/exchange\ncontrol-agent-server api --run \"$PX\" --auth none --jar qa-f16-editor GET / --query folder=workspace --expect 200 \\\n  --check editor eq qa-f16-stand-in --check url eq '/?folder=workspace'\ncontrol-agent-server api --run \"$PX\" --auth none --jar qa-f16-editor GET /stable-qa-f16/vscode-remote-resource --query path=/qa-f16/theme.json \\\n  --expect 200 --check url eq '/stable-qa-f16/vscode-remote-resource?path=%2Fqa-f16%2Ftheme.json' --save F16.vscode-resource-empty-tkn/cookie-no-tkn\ncontrol-agent-server api --run \"$PX\" --auth none GET /stable-qa-f16/vscode-remote-resource --query path=/qa-f16/theme.json --query tkn= \\\n  --expect 401 --check-header set-cookie missing --save F16.vscode-resource-empty-tkn/empty-tkn-no-cookie\ncontrol-agent-server api --run \"$PX\" --auth none --jar qa-f16-editor GET /stable-qa-f16/vscode-remote-resource --query path=/qa-f16/theme.json --query tkn=qa-f16-wrong \\\n  --expect 401 --check-header set-cookie missing --save F16.vscode-resource-empty-tkn/wrong-tkn\ncontrol-agent-server api --run \"$PX\" --auth none --jar qa-f16-editor GET /stable-qa-f16/vscode-remote-resource --query path=/qa-f16/theme.json --query tkn= \\\n  --expect 200 --check editor eq qa-f16-stand-in --check url contains 'path=%2Fqa-f16%2Ftheme.json' --save F16.vscode-resource-empty-tkn/empty-tkn-cookie  # bug: status eq 401\ncontrol-agent-server stop --run \"$PX\"\ncontrol-agent-server stop --run \"$ED\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 11675,
+  "failed_line": 40,
+  "failed_command": "control-agent-server api --run \"$PX\" --auth none --jar qa-f16-editor GET /stable-qa-f16/vscode-remote-resource --query path=/qa-f16/theme.json --query tkn= --expect 200 --check editor eq qa-f16-stand-in --check url contains 'path=%2Fqa-f16%2Ftheme.json' --save F16.vscode-resource-empty-tkn/empty-tkn-cookie",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 401,
+    "request": {
+      "method": "GET",
+      "path": "/stable-qa-f16/vscode-remote-resource",
+      "query": [
+        [
+          "path",
+          "/qa-f16/theme.json"
+        ],
+        [
+          "tkn",
+          ""
+        ]
+      ],
+      "auth": "none",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 401,
+      "headers": {},
+      "body": "",
+      "truncated": false
+    },
+    "elapsed_ms": 59,
+    "checks": [
+      {
+        "check": "editor eq qa-f16-stand-in",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "url contains path=%2Fqa-f16%2Ftheme.json",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "jar": {
+      "openhands_editor_c2f5848cb55c43e2": {
+        "path": "/",
+        "attributes": [
+          "httponly",
+          "path",
+          "samesite"
+        ]
+      }
+    },
+    "saved": "/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-095718-d2ff-f16-editor-port/evidence/F16.vscode-resource-empty-tkn/empty-tkn-cookie.json",
+    "hint": "expected 200, got 401"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/vscode/status\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"31\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"running\": true,\n      \"enabled\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 71,\n  \"checks\": [\n    {\n      \"check\": \". eq {\\\"running\\\": true, \\\"enabled\\\": true}\",\n      \"ok\": true,\n      \"actual\": \"{\\\"running\\\": true, \\\"enabled\\\": true}\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 401,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/stable-qa-f16/vscode-remote-resource\",\n    \"query\": [\n      [\n        \"path\",\n        \"/qa-f16/theme.json\"\n      ]\n    ],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 401,\n    \"headers\": {},\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 63\n}\n{\n  \"ok\": true,\n  \"status\": 303,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/\",\n    \"query\": [\n      [\n        \"tkn\",\n        \"<redacted:session-api-key>\"\n      ],\n      [\n        \"folder\",\n        \"workspace\"\n      ]\n    ],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 303,\n    \"headers\": {\n      \"set-cookie\": \"openhands_editor_c2f5848cb55c43e2=c255d507d610c543fd6e178e31dfa4bc1cdc2420a0e596fbc6a12fa5612814d9; Path=/; HttpOnly; SameSite=Lax\",\n      \"cache-control\": \"no-store\",\n      \"location\": \"/?folder=workspace\"\n    },\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 78,\n  \"checks\": [\n    {\n      \"check\": \"header location eq /?folder=workspace\",\n      \"ok\": true,\n      \"actual\": \"/?folder=workspace\"\n    },\n    {\n      \"check\": \"header set-cookie contains openhands_editor_\",\n      \"ok\": true,\n      \"actual\": \"openhands_editor_c2f5848cb55c43e2=c255d507d610c543fd6e178e31dfa4bc1cdc2420a0e596fbc6a12fa5612814d9; Path=/; HttpOnly; SameSite=Lax\"\n    },\n    {\n      \"check\": \"header set-cookie contains HttpOnly\",\n      \"ok\": true,\n      \"actual\": \"openhands_editor_c2f5848cb55c43e2=c255d507d610c543fd6e178e31dfa4bc1cdc2420a0e596fbc6a12fa5612814d9; Path=/; HttpOnly; SameSite=Lax\"\n    }\n  ],\n  \"jar\": {\n    \"openhands_editor_c2f5848cb55c43e2\": {\n      \"path\": \"/\",\n      \"attributes\": [\n        \"httponly\",\n        \"path\",\n        \"samesite\"\n      ]\n    }\n  },\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-095718-d2ff-f16-editor-port/evidence/F16.vscode-resource-empty-tkn/exchange.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/\",\n    \"query\": [\n      [\n        \"folder\",\n        \"workspace\"\n      ]\n    ],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"editor\": \"qa-f16-stand-in\",\n      \"url\": \"/?folder=workspace\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 69,\n  \"checks\": [\n    {\n      \"check\": \"editor eq qa-f16-stand-in\",\n      \"ok\": true,\n      \"actual\": \"qa-f16-stand-in\"\n    },\n    {\n      \"check\": \"url eq /?folder=workspace\",\n      \"ok\": true,\n      \"actual\": \"/?folder=workspace\"\n    }\n  ],\n  \"jar\": {\n    \"openhands_editor_c2f5848cb55c43e2\": {\n      \"path\": \"/\",\n      \"attributes\": [\n        \"httponly\",\n        \"path\",\n        \"samesite\"\n      ]\n    }\n  }\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/stable-qa-f16/vscode-remote-resource\",\n    \"query\": [\n      [\n        \"path\",\n        \"/qa-f16/theme.json\"\n      ]\n    ],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"editor\": \"qa-f16-stand-in\",\n      \"url\": \"/stable-qa-f16/vscode-remote-resource?path=%2Fqa-f16%2Ftheme.json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 66,\n  \"checks\": [\n    {\n      \"check\": \"url eq /stable-qa-f16/vscode-remote-resource?path=%2Fqa-f16%2Ftheme.json\",\n      \"ok\": true,\n      \"actual\": \"/stable-qa-f16/vscode-remote-resource?path=%2Fqa-f16%2Ftheme.json\"\n    }\n  ],\n  \"jar\": {\n    \"openhands_editor_c2f5848cb55c43e2\": {\n      \"path\": \"/\",\n      \"attributes\": [\n        \"httponly\",\n        \"path\",\n        \"samesite\"\n      ]\n    }\n  },\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-095718-d2ff-f16-editor-port/evidence/F16.vscode-resource-empty-tkn/cookie-no-tkn.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 401,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/stable-qa-f16/vscode-remote-resource\",\n    \"query\": [\n      [\n        \"path\",\n        \"/qa-f16/theme.json\"\n      ],\n      [\n        \"tkn\",\n        \"\"\n      ]\n    ],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 401,\n    \"headers\": {},\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"header set-cookie missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-095718-d2ff-f16-editor-port/evidence/F16.vscode-resource-empty-tkn/empty-tkn-no-cookie.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 401,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/stable-qa-f16/vscode-remote-resource\",\n    \"query\": [\n      [\n        \"path\",\n        \"/qa-f16/theme.json\"\n      ],\n      [\n        \"tkn\",\n        \"qa-f16-wrong\"\n      ]\n    ],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 401,\n    \"headers\": {},\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"header set-cookie missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ],\n  \"jar\": {\n    \"openhands_editor_c2f5848cb55c43e2\": {\n      \"path\": \"/\",\n      \"attributes\": [\n        \"httponly\",\n        \"path\",\n        \"samesite\"\n      ]\n    }\n  },\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-095718-d2ff-f16-editor-port/evidence/F16.vscode-resource-empty-tkn/wrong-tkn.json\"\n}\n{\n  \"ok\": false,\n  \"status\": 401,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/stable-qa-f16/vscode-remote-resource\",\n    \"query\": [\n      [\n        \"path\",\n        \"/qa-f16/theme.json\"\n      ],\n      [\n        \"tkn\",\n        \"\"\n      ]\n    ],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 401,\n    \"headers\": {},\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 59,\n  \"checks\": [\n    {\n      \"check\": \"editor eq qa-f16-stand-in\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"url contains path=%2Fqa-f16%2Ftheme.json\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"jar\": {\n    \"openhands_editor_c2f5848cb55c43e2\": {\n      \"path\": \"/\",\n      \"attributes\": [\n        \"httponly\",\n        \"path\",\n        \"samesite\"\n      ]\n    }\n  },\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-095718-d2ff-f16-editor-port/evidence/F16.vscode-resource-empty-tkn/empty-tkn-cookie.json\",\n  \"hint\": \"expected 200, got 401\"\n}\n",
+  "stderr": ""
+}

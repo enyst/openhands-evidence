@@ -1,0 +1,119 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S10/plugin_hooks \
+  --check execution_status_after_reload eq finished \
+  --check post_tool_use_matchers_after_load eq 3 --check post_tool_use_matchers_after_reload eq 3 \
+  --check session_start_matchers_before_reload eq 2 --check session_start_matchers_after_reload eq 2 \
+  --check lines_added_by_reload len-eq 0 \
+  --check order_third_run eq '["explicit", "attached", "runtime", "explicit", "attached", "runtime"]' \
+  --check post_hook_commands_third_run len-eq 6
+{
+  "ok": true,
+  "execution_status": "finished",
+  "order_after_first_run": [
+    "start-attached",
+    "explicit",
+    "attached",
+    "explicit",
+    "attached"
+  ],
+  "order": [
+    "start-attached",
+    "explicit",
+    "attached",
+    "explicit",
+    "attached",
+    "start-attached",
+    "start-runtime",
+    "explicit",
+    "attached",
+    "runtime",
+    "explicit",
+    "attached",
+    "runtime"
+  ],
+  "post_tool_use_matchers_before_load": 2,
+  "post_tool_use_matchers_after_load": 3,
+  "post_hook_commands": [
+    "echo explicit >> order.log",
+    "echo attached >> order.log",
+    "echo explicit >> order.log",
+    "echo attached >> order.log",
+    "echo explicit >> order.log",
+    "echo attached >> order.log",
+    "echo runtime >> order.log",
+    "echo explicit >> order.log",
+    "echo attached >> order.log",
+    "echo runtime >> order.log"
+  ],
+  "resolved_plugins": [
+    "/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/edit/.agents/skills/verify-sdk/programs/S10/marketplace/plugins/attached-hooks",
+    "/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/edit/.agents/skills/verify-sdk/programs/S10/marketplace/plugins/runtime-hooks"
+  ],
+  "lines_added_by_reload": [],
+  "post_tool_use_matchers_after_reload": 3,
+  "session_start_matchers_before_reload": 2,
+  "session_start_matchers_after_reload": 2,
+  "order_third_run": [
+    "explicit",
+    "attached",
+    "runtime",
+    "explicit",
+    "attached",
+    "runtime"
+  ],
+  "post_hook_commands_third_run": [
+    "echo explicit >> order.log",
+    "echo attached >> order.log",
+    "echo runtime >> order.log",
+    "echo explicit >> order.log",
+    "echo attached >> order.log",
+    "echo runtime >> order.log"
+  ],
+  "execution_status_after_reload": "finished",
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "execution_status_after_reload eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "post_tool_use_matchers_after_load eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "post_tool_use_matchers_after_reload eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "session_start_matchers_before_reload eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "session_start_matchers_after_reload eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "lines_added_by_reload len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "order_third_run eq [\"explicit\", \"attached\", \"runtime\", \"explicit\", \"attached\", \"runtime\"]",
+      "ok": true,
+      "actual": "[\"explicit\", \"attached\", \"runtime\", \"explicit\", \"attached\", \"runtime\"]"
+    },
+    {
+      "check": "post_hook_commands_third_run len-eq 6",
+      "ok": true,
+      "actual": "[\"echo explicit >> order.log\", \"echo attached >> order.log\", \"echo runtime >> order.log\", \"echo explicit >> order.log\", \"echo attached >> order.log\", \"echo runtime >> order.log\"]"
+    }
+  ]
+}
+
+[exit 0 after 6s]

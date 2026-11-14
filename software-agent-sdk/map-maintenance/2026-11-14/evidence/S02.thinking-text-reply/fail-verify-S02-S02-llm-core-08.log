@@ -1,0 +1,73 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/provider_run --arg anthropic-text \
+  --check execution_status eq finished --check agent_messages eq 2 \
+  --check message_thinking.0 eq "considering the answer" \
+  --check message_signatures.0 eq sig-1 --check thinking_sent_back.0 eq sig-1
+{
+  "ok": true,
+  "mode": "anthropic-text",
+  "execution_status": "finished",
+  "requests": 2,
+  "paths": [
+    "/v1/messages"
+  ],
+  "actions": [],
+  "observation_text": "",
+  "uses_responses_api": false,
+  "request_tools": [
+    "finish",
+    "terminal"
+  ],
+  "first_body_keys": [
+    "max_tokens",
+    "messages",
+    "model",
+    "system",
+    "thinking",
+    "tools"
+  ],
+  "accumulated_cost": 0.0012,
+  "costs": 2,
+  "token_usages": 2,
+  "response_latencies": 2,
+  "prompt_tokens": 200,
+  "agent_messages": 2,
+  "message_thinking": [
+    "considering the answer"
+  ],
+  "message_signatures": [
+    null
+  ],
+  "thinking_sent_back": [],
+  "_exit": 0,
+  "_seconds": 7.7,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "agent_messages eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "message_thinking.0 eq considering the answer",
+      "ok": true,
+      "actual": "considering the answer"
+    },
+    {
+      "check": "message_signatures.0 eq sig-1",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "thinking_sent_back.0 eq sig-1",
+      "ok": false,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 1 after 8s]

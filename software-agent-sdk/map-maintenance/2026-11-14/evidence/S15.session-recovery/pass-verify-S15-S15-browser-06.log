@@ -1,0 +1,101 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S15/browser_setup --arg hang --timeout 400 \
+  --check steps.allowed.is_error eq false \
+  --check steps.hang1.is_error eq true --check steps.hang1.text contains "timed out after 12 seconds" \
+  --check steps.hang2.text contains "timed out after 12 seconds" \
+  --check steps.hang3.text contains "timed out after 30 seconds" \
+  --check steps.hang3.text contains "The browser session has been reset" --check reset_warning eq true \
+  --check steps.recovered.is_error eq false --check steps.recovered_state.text contains page2.html \
+  --check chrome_processes_after_close eq 0
+{
+  "ok": true,
+  "mode": "hang",
+  "steps": {
+    "allowed": {
+      "is_error": false,
+      "text": "Navigated to: http://127.0.0.1:37329/index.html"
+    },
+    "state": {
+      "is_error": false,
+      "text": "{\n  \"url\": \"http://127.0.0.1:37329/index.html\",\n  \"title\": \"127.0.0.1:37329/index.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:37329/index.html\",\n      \"title\": \"127.0.0.1:37329/index.html\"\n    }\n  ],\n  \"interactive_elements\": [\n    {\n      \"index\": 2,\n      \"tag\": \"input\",\n      \"text\": \"\",\n      \"placeholder\": \"your name\"\n    },\n    {\n      \"index\": 6,\n      \"tag\": \"button\",\n      \"te"
+    },
+    "hang1": {
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nBrowser operation failed: Operation timed out after 12 seconds"
+    },
+    "hang2": {
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nBrowser operation failed: Operation timed out after 12 seconds"
+    },
+    "hang3": {
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nBrowser operation failed: Operation timed out after 30 seconds\n\nThe browser session has been reset after multiple consecutive failures (possible crash). The browser will be restarted on the next action. Please retry your action."
+    },
+    "recovered": {
+      "is_error": false,
+      "text": "Navigated to: http://127.0.0.1:37329/page2.html"
+    },
+    "recovered_state": {
+      "is_error": false,
+      "text": "{\n  \"url\": \"http://127.0.0.1:37329/page2.html\",\n  \"title\": \"127.0.0.1:37329/page2.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:37329/page2.html\",\n      \"title\": \"127.0.0.1:37329/page2.html\"\n    }\n  ],\n  \"interactive_elements\": [\n    {\n      \"index\": 17,\n      \"tag\": \"a\",\n      \"text\": \"Back home\",\n      \"href\": \"/index.html\"\n    }\n  ]\n}"
+    }
+  },
+  "reset_warning": true,
+  "chrome_processes_after_close": 0,
+  "_exit": 0,
+  "_seconds": 77.5,
+  "checks": [
+    {
+      "check": "steps.allowed.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.hang1.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.hang1.text contains timed out after 12 seconds",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nBrowser operation failed: Operation timed out after 12 seconds"
+    },
+    {
+      "check": "steps.hang2.text contains timed out after 12 seconds",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nBrowser operation failed: Operation timed out after 12 seconds"
+    },
+    {
+      "check": "steps.hang3.text contains timed out after 30 seconds",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nBrowser operation failed: Operation timed out after 30 seconds\n\nThe browser session has been reset after multiple consecutive failures (possible crash). The brow"
+    },
+    {
+      "check": "steps.hang3.text contains The browser session has been reset",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nBrowser operation failed: Operation timed out after 30 seconds\n\nThe browser session has been reset after multiple consecutive failures (possible crash). The brow"
+    },
+    {
+      "check": "reset_warning eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.recovered.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.recovered_state.text contains page2.html",
+      "ok": true,
+      "actual": "{\n  \"url\": \"http://127.0.0.1:37329/page2.html\",\n  \"title\": \"127.0.0.1:37329/page2.html\",\n  \"tabs\": [\n    {\n      \"url\": \"http://127.0.0.1:37329/page2.html\",\n      \"title\": \"127.0.0.1:37329/page2.html\""
+    },
+    {
+      "check": "chrome_processes_after_close eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 78s]

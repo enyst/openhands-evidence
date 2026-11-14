@@ -1,0 +1,108 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/client --arg restart \
+  --check http_before.0 contains count=1 \
+  --check http_after_restart.1 eq false --check http_after_restart.0 contains count=1 \
+  --check http_after_restart_again.1 eq false --check http_after_restart_again.0 contains count=2 \
+  --check handshake_before.0 contains count=1 \
+  --check handshake_after_restart_again.1 eq false --check handshake_after_restart_again.0 matches 'count=[12]' \
+  --check stdio_after_exit_again.1 eq false --check stdio_after_exit_again.0 matches 'count=[12]'
+{
+  "ok": true,
+  "mode": "restart",
+  "http_before": [
+    "[Tool 'counter' executed.]count=1 pid=6838",
+    false
+  ],
+  "http_after_restart": [
+    "[Tool 'counter' executed.]count=1 pid=6841",
+    false
+  ],
+  "http_after_restart_again": [
+    "[Tool 'counter' executed.]count=2 pid=6841",
+    false
+  ],
+  "handshake_before": [
+    "[Tool 'counter' executed.]count=1 pid=6844",
+    false
+  ],
+  "handshake_after_restart": [
+    "Error calling MCP tool counter: Session not found",
+    true
+  ],
+  "handshake_after_restart_again": [
+    "Error calling MCP tool counter: Session not found",
+    true
+  ],
+  "stdio_before": [
+    "[Tool 'counter' executed.]count=1 pid=6850",
+    false
+  ],
+  "stdio_die": [
+    "[Tool 'die' executed.]dying pid=6850",
+    false
+  ],
+  "stdio_after_exit": [
+    "Error calling MCP tool counter: Connection closed",
+    true
+  ],
+  "stdio_after_exit_again": [
+    "Error calling MCP tool counter: Connection closed",
+    true
+  ],
+  "_exit": 0,
+  "_seconds": 14.0,
+  "checks": [
+    {
+      "check": "http_before.0 contains count=1",
+      "ok": true,
+      "actual": "[Tool 'counter' executed.]count=1 pid=6838"
+    },
+    {
+      "check": "http_after_restart.1 eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "http_after_restart.0 contains count=1",
+      "ok": true,
+      "actual": "[Tool 'counter' executed.]count=1 pid=6841"
+    },
+    {
+      "check": "http_after_restart_again.1 eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "http_after_restart_again.0 contains count=2",
+      "ok": true,
+      "actual": "[Tool 'counter' executed.]count=2 pid=6841"
+    },
+    {
+      "check": "handshake_before.0 contains count=1",
+      "ok": true,
+      "actual": "[Tool 'counter' executed.]count=1 pid=6844"
+    },
+    {
+      "check": "handshake_after_restart_again.1 eq false",
+      "ok": false,
+      "actual": "true"
+    },
+    {
+      "check": "handshake_after_restart_again.0 matches count=[12]",
+      "ok": false,
+      "actual": "Error calling MCP tool counter: Session not found"
+    },
+    {
+      "check": "stdio_after_exit_again.1 eq false",
+      "ok": false,
+      "actual": "true"
+    },
+    {
+      "check": "stdio_after_exit_again.0 matches count=[12]",
+      "ok": false,
+      "actual": "Error calling MCP tool counter: Connection closed"
+    }
+  ]
+}
+
+[exit 1 after 14s]

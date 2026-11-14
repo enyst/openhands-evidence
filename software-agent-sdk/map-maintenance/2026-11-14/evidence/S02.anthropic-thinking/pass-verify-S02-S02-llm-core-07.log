@@ -1,0 +1,100 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/provider_run --arg anthropic \
+  --check execution_status eq finished --check paths.0 eq /v1/messages \
+  --check thinking_param.type eq enabled --check thinking_param.budget_tokens eq 4095 --check max_tokens eq 4096 \
+  --check anthropic_beta contains interleaved-thinking --check action_thinking_blocks eq 1 \
+  --check thinking_sent_back.0 eq sig-1 --check cache_control_markers eq 2
+{
+  "ok": true,
+  "mode": "anthropic",
+  "execution_status": "finished",
+  "requests": 2,
+  "paths": [
+    "/v1/messages"
+  ],
+  "actions": [
+    "terminal",
+    "finish"
+  ],
+  "observation_text": "provider-run\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/sdk/verify-S02/work/S02-llm-core",
+  "uses_responses_api": false,
+  "request_tools": [
+    "finish",
+    "terminal"
+  ],
+  "first_body_keys": [
+    "max_tokens",
+    "messages",
+    "model",
+    "system",
+    "thinking",
+    "tools"
+  ],
+  "accumulated_cost": 0.0012,
+  "costs": 2,
+  "token_usages": 2,
+  "response_latencies": 2,
+  "prompt_tokens": 200,
+  "thinking_param": {
+    "type": "enabled",
+    "budget_tokens": 4095
+  },
+  "max_tokens": 4096,
+  "thinking_sent_back": [
+    "sig-1"
+  ],
+  "action_thinking_blocks": 1,
+  "cache_control_markers": 2,
+  "anthropic_beta": "interleaved-thinking-2025-05-14",
+  "_exit": 0,
+  "_seconds": 8.9,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "paths.0 eq /v1/messages",
+      "ok": true,
+      "actual": "/v1/messages"
+    },
+    {
+      "check": "thinking_param.type eq enabled",
+      "ok": true,
+      "actual": "enabled"
+    },
+    {
+      "check": "thinking_param.budget_tokens eq 4095",
+      "ok": true,
+      "actual": "4095"
+    },
+    {
+      "check": "max_tokens eq 4096",
+      "ok": true,
+      "actual": "4096"
+    },
+    {
+      "check": "anthropic_beta contains interleaved-thinking",
+      "ok": true,
+      "actual": "interleaved-thinking-2025-05-14"
+    },
+    {
+      "check": "action_thinking_blocks eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "thinking_sent_back.0 eq sig-1",
+      "ok": true,
+      "actual": "sig-1"
+    },
+    {
+      "check": "cache_control_markers eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 9s]

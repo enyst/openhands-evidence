@@ -1,0 +1,123 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg image-input \
+  --check openai.vision_active eq true --check openai.status eq finished \
+  --check openai.image_urls.0 matches '^https://' --check openai.image_urls.1 matches '^data:image/png' \
+  --check anthropic_21_images.images eq 21 --check anthropic_21_images.max_side le 2000 \
+  --check anthropic_2_images.max_side eq 2600
+control-sdk program S01/loop --arg image-non-vision \
+  --check vision_active eq false --check status eq finished --check llm_calls eq 0 \
+  --check agent_reply contains "does not support image" \
+  --check followup.status eq finished --check followup.llm_calls eq 1 --check followup.agent_messages eq 2
+{
+  "ok": true,
+  "mode": "image-input",
+  "openai": {
+    "vision_active": true,
+    "status": "finished",
+    "image_urls": [
+      "https://example.com/ca",
+      "data:image/png;base64,"
+    ]
+  },
+  "anthropic_21_images": {
+    "images": 21,
+    "max_side": 2000
+  },
+  "anthropic_2_images": {
+    "images": 2,
+    "max_side": 2600
+  },
+  "_exit": 0,
+  "_seconds": 12.5,
+  "checks": [
+    {
+      "check": "openai.vision_active eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "openai.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "openai.image_urls.0 matches ^https://",
+      "ok": true,
+      "actual": "https://example.com/ca"
+    },
+    {
+      "check": "openai.image_urls.1 matches ^data:image/png",
+      "ok": true,
+      "actual": "data:image/png;base64,"
+    },
+    {
+      "check": "anthropic_21_images.images eq 21",
+      "ok": true,
+      "actual": "21"
+    },
+    {
+      "check": "anthropic_21_images.max_side le 2000",
+      "ok": true,
+      "actual": "2000"
+    },
+    {
+      "check": "anthropic_2_images.max_side eq 2600",
+      "ok": true,
+      "actual": "2600"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "image-non-vision",
+  "vision_active": false,
+  "status": "finished",
+  "llm_calls": 0,
+  "agent_reply": "I received your image, but the currently selected model (test-model) does not support image understanding. Please switch to a multimodal model to analyze the image.",
+  "followup": {
+    "status": "finished",
+    "llm_calls": 1,
+    "agent_messages": 2
+  },
+  "_exit": 0,
+  "_seconds": 5.4,
+  "checks": [
+    {
+      "check": "vision_active eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "llm_calls eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "agent_reply contains does not support image",
+      "ok": true,
+      "actual": "I received your image, but the currently selected model (test-model) does not support image understanding. Please switch to a multimodal model to analyze the image."
+    },
+    {
+      "check": "followup.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "followup.llm_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "followup.agent_messages eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 18s]

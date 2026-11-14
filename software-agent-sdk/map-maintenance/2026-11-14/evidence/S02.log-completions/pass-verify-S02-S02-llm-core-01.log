@@ -1,0 +1,166 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/provider_run --arg chat \
+  --check execution_status eq finished --check actions.0 eq terminal --check actions.1 eq finish \
+  --check observation_text contains provider-run --check paths.0 eq /v1/chat/completions \
+  --check uses_responses_api eq false --check request_tools contains terminal --check request_tools contains finish \
+  --check sent.temperature eq 0.3 --check sent.top_p eq 0.9 --check sent.max_completion_tokens eq 123 \
+  --check sent.seed eq 7 --check sent.verify_extra eq yes --check header_forwarded eq true \
+  --check accumulated_cost eq 0.28 --check costs eq 2 --check token_usages eq 2 \
+  --check response_latencies eq 2 --check prompt_tokens eq 200 --check log_files eq 2 \
+  --check reasoning_content_on_action eq "think about echo"
+{
+  "ok": true,
+  "mode": "chat",
+  "execution_status": "finished",
+  "requests": 2,
+  "paths": [
+    "/v1/chat/completions"
+  ],
+  "actions": [
+    "terminal",
+    "finish"
+  ],
+  "observation_text": "provider-run\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/sdk/verify-S02/work/S02-llm-core",
+  "uses_responses_api": false,
+  "request_tools": [
+    "finish",
+    "terminal"
+  ],
+  "first_body_keys": [
+    "max_completion_tokens",
+    "messages",
+    "model",
+    "prompt_cache_key",
+    "seed",
+    "temperature",
+    "tools",
+    "top_p",
+    "verify_extra"
+  ],
+  "accumulated_cost": 0.28,
+  "costs": 2,
+  "token_usages": 2,
+  "response_latencies": 2,
+  "prompt_tokens": 200,
+  "sent": {
+    "temperature": 0.3,
+    "top_p": 0.9,
+    "max_completion_tokens": 123,
+    "seed": 7,
+    "verify_extra": "yes"
+  },
+  "header_forwarded": true,
+  "log_files": 2,
+  "reasoning_content_on_action": "think about echo",
+  "_exit": 0,
+  "_seconds": 11.5,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "actions.0 eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    },
+    {
+      "check": "actions.1 eq finish",
+      "ok": true,
+      "actual": "finish"
+    },
+    {
+      "check": "observation_text contains provider-run",
+      "ok": true,
+      "actual": "provider-run\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/sdk/verify-S02/work/S02-llm-core"
+    },
+    {
+      "check": "paths.0 eq /v1/chat/completions",
+      "ok": true,
+      "actual": "/v1/chat/completions"
+    },
+    {
+      "check": "uses_responses_api eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "request_tools contains terminal",
+      "ok": true,
+      "actual": "[\"finish\", \"terminal\"]"
+    },
+    {
+      "check": "request_tools contains finish",
+      "ok": true,
+      "actual": "[\"finish\", \"terminal\"]"
+    },
+    {
+      "check": "sent.temperature eq 0.3",
+      "ok": true,
+      "actual": "0.3"
+    },
+    {
+      "check": "sent.top_p eq 0.9",
+      "ok": true,
+      "actual": "0.9"
+    },
+    {
+      "check": "sent.max_completion_tokens eq 123",
+      "ok": true,
+      "actual": "123"
+    },
+    {
+      "check": "sent.seed eq 7",
+      "ok": true,
+      "actual": "7"
+    },
+    {
+      "check": "sent.verify_extra eq yes",
+      "ok": true,
+      "actual": "yes"
+    },
+    {
+      "check": "header_forwarded eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "accumulated_cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "costs eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "token_usages eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "response_latencies eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "prompt_tokens eq 200",
+      "ok": true,
+      "actual": "200"
+    },
+    {
+      "check": "log_files eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "reasoning_content_on_action eq think about echo",
+      "ok": true,
+      "actual": "think about echo"
+    }
+  ]
+}
+
+[exit 0 after 12s]

@@ -1,0 +1,100 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg ask-usage \
+  --check status eq finished --check answer eq "A side answer." --check requests eq 2 \
+  --check disk_after_turn.agent.cost eq 0.14 \
+  --check memory_after_ask.agent.cost eq 0.14 --check memory_after_ask.ask-agent-llm.cost eq 0.14 \
+  --check disk_after_ask.agent.cost eq 0.14 --check disk_after_ask.ask-agent-llm.cost eq 0.14 \
+  --check reloaded.ask-agent-llm.cost eq 0.14 --check reloaded_combined_cost eq 0.28
+{
+  "ok": true,
+  "mode": "ask-usage",
+  "status": "finished",
+  "answer": "A side answer.",
+  "requests": 2,
+  "disk_after_turn": {
+    "agent": {
+      "cost": 0.14,
+      "calls": 1
+    }
+  },
+  "memory_after_ask": {
+    "agent": {
+      "cost": 0.14,
+      "calls": 1
+    },
+    "ask-agent-llm": {
+      "cost": 0.14,
+      "calls": 1
+    }
+  },
+  "disk_after_ask": {
+    "agent": {
+      "cost": 0.14,
+      "calls": 1
+    }
+  },
+  "reloaded": {
+    "agent": {
+      "cost": 0.14,
+      "calls": 1
+    }
+  },
+  "reloaded_combined_cost": 0.14,
+  "reloaded_events": 4,
+  "_exit": 0,
+  "_seconds": 6.4,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "answer eq A side answer.",
+      "ok": true,
+      "actual": "A side answer."
+    },
+    {
+      "check": "requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "disk_after_turn.agent.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "memory_after_ask.agent.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "memory_after_ask.ask-agent-llm.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "disk_after_ask.agent.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "disk_after_ask.ask-agent-llm.cost eq 0.14",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "reloaded.ask-agent-llm.cost eq 0.14",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "reloaded_combined_cost eq 0.28",
+      "ok": false,
+      "actual": "0.14"
+    }
+  ]
+}
+
+[exit 1 after 7s]

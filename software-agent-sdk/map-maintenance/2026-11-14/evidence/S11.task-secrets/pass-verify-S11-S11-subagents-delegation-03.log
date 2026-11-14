@@ -1,0 +1,63 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/task_secrets \
+  --check execution_status eq finished --check parent_probe eq set \
+  --check task_statuses len-eq 2 --check parent_masked eq true --check secret_leaked eq false \
+  --check create_probe eq set --check resume_probe eq set
+{
+  "ok": true,
+  "execution_status": "finished",
+  "parent_probe": "set",
+  "task_statuses": [
+    "completed",
+    "completed"
+  ],
+  "sub_probes": [
+    "set",
+    "set"
+  ],
+  "create_probe": "set",
+  "resume_probe": "set",
+  "parent_masked": true,
+  "secret_leaked": false,
+  "_exit": 0,
+  "_seconds": 9.2,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "parent_probe eq set",
+      "ok": true,
+      "actual": "set"
+    },
+    {
+      "check": "task_statuses len-eq 2",
+      "ok": true,
+      "actual": "[\"completed\", \"completed\"]"
+    },
+    {
+      "check": "parent_masked eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "secret_leaked eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "create_probe eq set",
+      "ok": true,
+      "actual": "set"
+    },
+    {
+      "check": "resume_probe eq set",
+      "ok": true,
+      "actual": "set"
+    }
+  ]
+}
+
+[exit 0 after 9s]

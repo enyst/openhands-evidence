@@ -1,0 +1,237 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S20/traced_conversation --arg content \
+  --check status eq finished --check llm_spans eq 3 --check content.completion_logging eq false \
+  --check content.spans_with_input eq 3 --check content.spans_with_output eq 3 \
+  --check content.first_input_roles.0 eq system --check content.first_input_roles.1 eq user \
+  --check content.input_has_user_text eq true --check content.output_has_text eq true \
+  --check content.output_has_tool_call eq true --check content.laminar_copy_matches eq true \
+  --check content.spans_with_token_totals eq 3 --check content.input_tokens.0 eq 100 --check content.output_tokens.0 eq 20 \
+  --check content.reasoning_in_llm_spans eq false --check content.credential_in_llm_spans eq false \
+  --check content.credential_redacted eq true --check content.api_key_in_any_span eq false
+{
+  "ok": true,
+  "mode": "content",
+  "status": "finished",
+  "enabled": true,
+  "import_seconds": 4.76,
+  "lmnr_imported_at_start": true,
+  "lmnr_imported": true,
+  "otlp_posts": 1,
+  "auth_header": null,
+  "warnings": [],
+  "summary": {
+    "count": 16,
+    "names": [
+      "FinishAction",
+      "TerminalAction",
+      "agent.step",
+      "conversation",
+      "conversation.run",
+      "conversation.send_message",
+      "litellm.completion",
+      "llm.openai/gpt-4o-mini"
+    ],
+    "traces": 1,
+    "ancestry": {
+      "conversation.send_message": [
+        "conversation"
+      ],
+      "litellm.completion": [
+        "llm.openai/gpt-4o-mini",
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "llm.openai/gpt-4o-mini": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "TerminalAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "agent.step": [
+        "conversation.run",
+        "conversation"
+      ],
+      "FinishAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "conversation.run": [
+        "conversation"
+      ],
+      "conversation": []
+    }
+  },
+  "root": {
+    "found": true,
+    "is_trace_root": true,
+    "attributes": {
+      "lmnr.association.properties.session_id": "938bfd4d-d3c7-453b-91ab-91832364860f"
+    }
+  },
+  "root_user_id": null,
+  "root_session_id_is_conversation": true,
+  "root_attr_ticket": null,
+  "root_meta_ticket": null,
+  "root_automation_id": null,
+  "root_tag_team": null,
+  "root_tags": null,
+  "parent_trace_joined": false,
+  "root_has_parent": false,
+  "conversation_traces": 1,
+  "steps": 3,
+  "tool_spans": 4,
+  "terminal_spans": 3,
+  "tool_call_ids": [
+    "call_1_0",
+    "call_2_0",
+    "call_2_1",
+    "call_3_0"
+  ],
+  "terminal_input_is_action": true,
+  "tools_under_step": true,
+  "parallel_terminal_parents": 2,
+  "llm_spans": 3,
+  "llm_costs": [
+    2.7e-05
+  ],
+  "llm_cache_read": [
+    0
+  ],
+  "llm_under_step": 3,
+  "llm_under_conversation": 3,
+  "title_operation": [],
+  "ask_operation": [],
+  "content": {
+    "completion_logging": false,
+    "spans_with_input": 3,
+    "spans_with_output": 3,
+    "first_input_roles": [
+      "system",
+      "user"
+    ],
+    "input_has_user_text": true,
+    "output_has_text": true,
+    "output_has_tool_call": true,
+    "laminar_copy_matches": true,
+    "input_tokens": [
+      100
+    ],
+    "output_tokens": [
+      20
+    ],
+    "spans_with_token_totals": 3,
+    "reasoning_in_llm_spans": false,
+    "reasoning_elsewhere": [
+      "litellm.completion"
+    ],
+    "credential_elsewhere": [
+      "conversation.send_message",
+      "litellm.completion"
+    ],
+    "credential_in_llm_spans": false,
+    "credential_redacted": true,
+    "api_key_in_any_span": false
+  },
+  "_exit": 0,
+  "_seconds": 8.5,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "llm_spans eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "content.completion_logging eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "content.spans_with_input eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "content.spans_with_output eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "content.first_input_roles.0 eq system",
+      "ok": true,
+      "actual": "system"
+    },
+    {
+      "check": "content.first_input_roles.1 eq user",
+      "ok": true,
+      "actual": "user"
+    },
+    {
+      "check": "content.input_has_user_text eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "content.output_has_text eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "content.output_has_tool_call eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "content.laminar_copy_matches eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "content.spans_with_token_totals eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "content.input_tokens.0 eq 100",
+      "ok": true,
+      "actual": "100"
+    },
+    {
+      "check": "content.output_tokens.0 eq 20",
+      "ok": true,
+      "actual": "20"
+    },
+    {
+      "check": "content.reasoning_in_llm_spans eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "content.credential_in_llm_spans eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "content.credential_redacted eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "content.api_key_in_any_span eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 9s]

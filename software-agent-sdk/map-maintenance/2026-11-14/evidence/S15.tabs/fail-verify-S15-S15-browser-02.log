@@ -1,0 +1,31 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S15/close_tab --timeout 300 \
+  --check setup_ok eq true --check all_closed eq true --check stale_lists eq 0
+{
+  "ok": true,
+  "rounds": 5,
+  "setup_ok": true,
+  "all_closed": true,
+  "stale_lists": 4,
+  "_exit": 0,
+  "_seconds": 13.7,
+  "checks": [
+    {
+      "check": "setup_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "all_closed eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stale_lists eq 0",
+      "ok": false,
+      "actual": "4"
+    }
+  ]
+}
+
+[exit 1 after 14s]

@@ -1,0 +1,288 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/client --arg negotiation \
+  --check stdio.mode eq auto --check stdio.has_initialize_result eq false \
+  --check stdio.session_ids eq 3 --check stdio.calls_in_session eq '[1, 1, 1]' \
+  --check stdio.process_counter eq '["count=1", "count=2"]' --check stdio.same_process eq true \
+  --check stdio.in_request_notification_adds_tool eq true --check stdio.in_request_notification_removes_tool eq true \
+  --check stdio.late_notification_adds_tool eq false --check stdio.reported_new_tools eq '["extra"]' \
+  --check http.mode eq auto --check http.has_initialize_result eq false \
+  --check http.session_ids eq 3 --check http.calls_in_session eq '[1, 1, 1]' \
+  --check http.process_counter eq '["count=1", "count=2"]' \
+  --check http.in_request_notification_adds_tool eq true --check http.in_request_notification_removes_tool eq true \
+  --check http.late_notification_adds_tool eq false \
+  --check http_handshake_only.mode eq auto --check http_handshake_only.has_initialize_result eq true \
+  --check http_handshake_only.session_ids eq 1 --check http_handshake_only.calls_in_session eq '[1, 2, 3]' \
+  --check http_handshake_only.in_request_notification_adds_tool eq true \
+  --check http_handshake_only.late_notification_adds_tool eq true \
+  --check http_handshake_only.reported_new_tools eq '["extra", "late"]' \
+  --check sse.mode eq auto --check sse.has_initialize_result eq true \
+  --check sse.session_ids eq 1 --check sse.calls_in_session eq '[1, 2, 3]' \
+  --check sse.process_counter eq '["count=1", "count=2"]' \
+  --check sse.in_request_notification_adds_tool eq true --check sse.in_request_notification_removes_tool eq true \
+  --check sse.late_notification_adds_tool eq true --check sse.reported_new_tools eq '["extra", "late"]'
+{
+  "ok": true,
+  "mode": "negotiation",
+  "stdio": {
+    "mode": "auto",
+    "has_initialize_result": false,
+    "session_ids": 3,
+    "calls_in_session": [
+      1,
+      1,
+      1
+    ],
+    "process_counter": [
+      "count=1",
+      "count=2"
+    ],
+    "same_process": true,
+    "in_request_notification_adds_tool": true,
+    "in_request_notification_removes_tool": true,
+    "late_notification_adds_tool": false,
+    "reported_new_tools": [
+      "extra"
+    ]
+  },
+  "http": {
+    "mode": "auto",
+    "has_initialize_result": false,
+    "session_ids": 3,
+    "calls_in_session": [
+      1,
+      1,
+      1
+    ],
+    "process_counter": [
+      "count=1",
+      "count=2"
+    ],
+    "same_process": true,
+    "in_request_notification_adds_tool": true,
+    "in_request_notification_removes_tool": true,
+    "late_notification_adds_tool": false,
+    "reported_new_tools": [
+      "extra"
+    ]
+  },
+  "http_handshake_only": {
+    "mode": "auto",
+    "has_initialize_result": true,
+    "session_ids": 1,
+    "calls_in_session": [
+      1,
+      2,
+      3
+    ],
+    "process_counter": [
+      "count=1",
+      "count=2"
+    ],
+    "same_process": true,
+    "in_request_notification_adds_tool": true,
+    "in_request_notification_removes_tool": true,
+    "late_notification_adds_tool": true,
+    "reported_new_tools": [
+      "extra",
+      "late"
+    ]
+  },
+  "sse": {
+    "mode": "auto",
+    "has_initialize_result": true,
+    "session_ids": 1,
+    "calls_in_session": [
+      1,
+      2,
+      3
+    ],
+    "process_counter": [
+      "count=1",
+      "count=2"
+    ],
+    "same_process": true,
+    "in_request_notification_adds_tool": true,
+    "in_request_notification_removes_tool": true,
+    "late_notification_adds_tool": true,
+    "reported_new_tools": [
+      "extra",
+      "late"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 18.8,
+  "checks": [
+    {
+      "check": "stdio.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "stdio.has_initialize_result eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "stdio.session_ids eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "stdio.calls_in_session eq [1, 1, 1]",
+      "ok": true,
+      "actual": "[1, 1, 1]"
+    },
+    {
+      "check": "stdio.process_counter eq [\"count=1\", \"count=2\"]",
+      "ok": true,
+      "actual": "[\"count=1\", \"count=2\"]"
+    },
+    {
+      "check": "stdio.same_process eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stdio.in_request_notification_adds_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stdio.in_request_notification_removes_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stdio.late_notification_adds_tool eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "stdio.reported_new_tools eq [\"extra\"]",
+      "ok": true,
+      "actual": "[\"extra\"]"
+    },
+    {
+      "check": "http.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "http.has_initialize_result eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "http.session_ids eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "http.calls_in_session eq [1, 1, 1]",
+      "ok": true,
+      "actual": "[1, 1, 1]"
+    },
+    {
+      "check": "http.process_counter eq [\"count=1\", \"count=2\"]",
+      "ok": true,
+      "actual": "[\"count=1\", \"count=2\"]"
+    },
+    {
+      "check": "http.in_request_notification_adds_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "http.in_request_notification_removes_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "http.late_notification_adds_tool eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "http_handshake_only.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "http_handshake_only.has_initialize_result eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "http_handshake_only.session_ids eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "http_handshake_only.calls_in_session eq [1, 2, 3]",
+      "ok": true,
+      "actual": "[1, 2, 3]"
+    },
+    {
+      "check": "http_handshake_only.in_request_notification_adds_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "http_handshake_only.late_notification_adds_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "http_handshake_only.reported_new_tools eq [\"extra\", \"late\"]",
+      "ok": true,
+      "actual": "[\"extra\", \"late\"]"
+    },
+    {
+      "check": "sse.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "sse.has_initialize_result eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "sse.session_ids eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "sse.calls_in_session eq [1, 2, 3]",
+      "ok": true,
+      "actual": "[1, 2, 3]"
+    },
+    {
+      "check": "sse.process_counter eq [\"count=1\", \"count=2\"]",
+      "ok": true,
+      "actual": "[\"count=1\", \"count=2\"]"
+    },
+    {
+      "check": "sse.in_request_notification_adds_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "sse.in_request_notification_removes_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "sse.late_notification_adds_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "sse.reported_new_tools eq [\"extra\", \"late\"]",
+      "ok": true,
+      "actual": "[\"extra\", \"late\"]"
+    }
+  ]
+}
+
+[exit 0 after 19s]

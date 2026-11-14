@@ -1,0 +1,330 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg features \
+  --check features.openai/gpt-5-mini.reasoning_effort eq true --check features.openai/gpt-5-mini.responses_api eq true \
+  --check features.openai/gpt-4o-mini.reasoning_effort eq false \
+  --check features.anthropic/claude-sonnet-4-5-20250929.thinking_mode eq manual \
+  --check features.anthropic/claude-sonnet-4-5-20250929.prompt_cache eq true \
+  --check features.deepseek/deepseek-chat.vision eq false --check proxy_prefix_stripped eq true \
+  --check 'features.deepseek/deepseek-v4\.1-flash.vision' eq true --check 'features.deepseek/deepseek-v4\.1-flash.force_string' eq false \
+  --check 'features.litellm_proxy/deepseek-v4\.1-flash.vision' eq true \
+  --check vision_precedence.sdk.vision eq true --check vision_precedence.sdk.source eq sdk \
+  --check vision_precedence.registry.vision eq true --check vision_precedence.registry.source eq sdk \
+  --check vision_precedence.endpoint.vision eq false --check vision_precedence.endpoint.source eq endpoint \
+  --check vision_precedence.caller.vision eq true --check vision_precedence.caller.source eq caller \
+  --check vision_precedence.unknown_model.source eq discovery \
+  --check sent.gpt5.reasoning_effort eq high --check sent.gpt5.temperature missing --check sent.gpt5.top_p missing \
+  --check sent.gpt4o.reasoning_effort missing --check sent.gpt4o.temperature eq 0.5 --check sent.gpt4o.top_p eq 0.9 \
+  --check sent.azure.max_tokens eq true --check sent.azure.max_completion_tokens eq false \
+  --check sent.openrouter.openrouter_headers eq true
+{
+  "ok": true,
+  "mode": "features",
+  "features": {
+    "openai/gpt-5-mini": {
+      "reasoning_effort": true,
+      "thinking_mode": "none",
+      "sampling_params": null,
+      "prompt_cache": false,
+      "responses_api": true,
+      "vision": true,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    },
+    "openai/gpt-4o-mini": {
+      "reasoning_effort": false,
+      "thinking_mode": "none",
+      "sampling_params": null,
+      "prompt_cache": false,
+      "responses_api": false,
+      "vision": true,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    },
+    "anthropic/claude-sonnet-4-5-20250929": {
+      "reasoning_effort": true,
+      "thinking_mode": "manual",
+      "sampling_params": null,
+      "prompt_cache": true,
+      "responses_api": false,
+      "vision": true,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    },
+    "anthropic/claude-opus-4-5-20251101": {
+      "reasoning_effort": true,
+      "thinking_mode": "none",
+      "sampling_params": null,
+      "prompt_cache": true,
+      "responses_api": false,
+      "vision": true,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    },
+    "litellm_proxy/anthropic/claude-sonnet-4-5-20250929": {
+      "reasoning_effort": true,
+      "thinking_mode": "manual",
+      "sampling_params": null,
+      "prompt_cache": true,
+      "responses_api": false,
+      "vision": true,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    },
+    "deepseek/deepseek-chat": {
+      "reasoning_effort": true,
+      "thinking_mode": "none",
+      "sampling_params": null,
+      "prompt_cache": false,
+      "responses_api": false,
+      "vision": false,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    },
+    "deepseek/deepseek-v4.1-flash": {
+      "reasoning_effort": true,
+      "thinking_mode": "none",
+      "sampling_params": null,
+      "prompt_cache": false,
+      "responses_api": false,
+      "vision": true,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    },
+    "litellm_proxy/deepseek-v4.1-flash": {
+      "reasoning_effort": false,
+      "thinking_mode": "none",
+      "sampling_params": null,
+      "prompt_cache": false,
+      "responses_api": false,
+      "vision": true,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    },
+    "moonshot/kimi-k2-0711-preview": {
+      "reasoning_effort": false,
+      "thinking_mode": "none",
+      "sampling_params": null,
+      "prompt_cache": false,
+      "responses_api": false,
+      "vision": false,
+      "inline_images": false,
+      "force_string": false,
+      "stop_words": true
+    }
+  },
+  "proxy_prefix_stripped": true,
+  "vision_precedence": {
+    "sdk": {
+      "vision": true,
+      "source": "sdk"
+    },
+    "endpoint": {
+      "vision": false,
+      "source": "endpoint"
+    },
+    "registry": {
+      "vision": true,
+      "source": "sdk"
+    },
+    "caller": {
+      "vision": true,
+      "source": "caller"
+    },
+    "unknown_model": {
+      "vision": false,
+      "source": "discovery"
+    }
+  },
+  "sent": {
+    "gpt5": {
+      "error": null,
+      "reasoning_effort": "high",
+      "temperature": null,
+      "top_p": null,
+      "max_tokens": false,
+      "max_completion_tokens": true,
+      "openrouter_headers": true
+    },
+    "gpt4o": {
+      "error": null,
+      "reasoning_effort": null,
+      "temperature": 0.5,
+      "top_p": 0.9,
+      "max_tokens": false,
+      "max_completion_tokens": true,
+      "openrouter_headers": true
+    },
+    "azure": {
+      "error": null,
+      "reasoning_effort": null,
+      "temperature": 0.5,
+      "top_p": 0.9,
+      "max_tokens": true,
+      "max_completion_tokens": false,
+      "openrouter_headers": true
+    },
+    "openrouter": {
+      "error": null,
+      "reasoning_effort": null,
+      "temperature": 0.5,
+      "top_p": 0.9,
+      "max_tokens": false,
+      "max_completion_tokens": true,
+      "openrouter_headers": true
+    }
+  },
+  "_exit": 0,
+  "_seconds": 6.9,
+  "checks": [
+    {
+      "check": "features.openai/gpt-5-mini.reasoning_effort eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "features.openai/gpt-5-mini.responses_api eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "features.openai/gpt-4o-mini.reasoning_effort eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "features.anthropic/claude-sonnet-4-5-20250929.thinking_mode eq manual",
+      "ok": true,
+      "actual": "manual"
+    },
+    {
+      "check": "features.anthropic/claude-sonnet-4-5-20250929.prompt_cache eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "features.deepseek/deepseek-chat.vision eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "proxy_prefix_stripped eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "features.deepseek/deepseek-v4\\.1-flash.vision eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "features.deepseek/deepseek-v4\\.1-flash.force_string eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "features.litellm_proxy/deepseek-v4\\.1-flash.vision eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "vision_precedence.sdk.vision eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "vision_precedence.sdk.source eq sdk",
+      "ok": true,
+      "actual": "sdk"
+    },
+    {
+      "check": "vision_precedence.registry.vision eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "vision_precedence.registry.source eq sdk",
+      "ok": true,
+      "actual": "sdk"
+    },
+    {
+      "check": "vision_precedence.endpoint.vision eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "vision_precedence.endpoint.source eq endpoint",
+      "ok": true,
+      "actual": "endpoint"
+    },
+    {
+      "check": "vision_precedence.caller.vision eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "vision_precedence.caller.source eq caller",
+      "ok": true,
+      "actual": "caller"
+    },
+    {
+      "check": "vision_precedence.unknown_model.source eq discovery",
+      "ok": true,
+      "actual": "discovery"
+    },
+    {
+      "check": "sent.gpt5.reasoning_effort eq high",
+      "ok": true,
+      "actual": "high"
+    },
+    {
+      "check": "sent.gpt5.temperature missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "sent.gpt5.top_p missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "sent.gpt4o.reasoning_effort missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "sent.gpt4o.temperature eq 0.5",
+      "ok": true,
+      "actual": "0.5"
+    },
+    {
+      "check": "sent.gpt4o.top_p eq 0.9",
+      "ok": true,
+      "actual": "0.9"
+    },
+    {
+      "check": "sent.azure.max_tokens eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "sent.azure.max_completion_tokens eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "sent.openrouter.openrouter_headers eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 7s]

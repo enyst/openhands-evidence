@@ -1,0 +1,185 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg image-guard \
+  --check unsupported.vision_active eq false --check unsupported.errors.completion eq LLMBadRequestError \
+  --check unsupported.errors.acompletion eq LLMBadRequestError --check unsupported.errors.responses eq LLMBadRequestError \
+  --check unsupported.errors.aresponses eq LLMBadRequestError --check unsupported.requests eq 0 \
+  --check unsupported.message contains "Image-bearing request cannot be sent" \
+  --check unsupported.token_count gt 0 --check unsupported.formatted_messages eq 2 \
+  --check disabled.vision_active eq false --check disabled.errors.completion eq LLMBadRequestError \
+  --check disabled.errors.aresponses eq LLMBadRequestError --check disabled.requests eq 0 --check disabled.token_count gt 0 \
+  --check older_image.error missing --check older_image.requests eq 1 --check older_image.image_parts_sent eq 0 \
+  --check override.vision_active eq true --check override.error missing --check override.requests eq 1 \
+  --check override.image_parts_sent gt 0 --check vision_model.requests eq 1 --check vision_model.image_parts_sent gt 0
+{
+  "ok": true,
+  "mode": "image-guard",
+  "unsupported": {
+    "vision_active": false,
+    "errors": {
+      "completion": "LLMBadRequestError",
+      "acompletion": "LLMBadRequestError",
+      "responses": "LLMBadRequestError",
+      "aresponses": "LLMBadRequestError"
+    },
+    "message": "Image-bearing request cannot be sent to 'openai/gpt-3.5-turbo': vision is disabled or unsupported. Configure a vision-capable model, an explicit capability override, or delegate the images first.",
+    "requests": 0,
+    "token_count": 17,
+    "formatted_messages": 2,
+    "formatted_image_parts": 0
+  },
+  "disabled": {
+    "vision_active": false,
+    "errors": {
+      "completion": "LLMBadRequestError",
+      "acompletion": "LLMBadRequestError",
+      "responses": "LLMBadRequestError",
+      "aresponses": "LLMBadRequestError"
+    },
+    "message": "Image-bearing request cannot be sent to 'openai/gpt-4o-mini': vision is disabled or unsupported. Configure a vision-capable model, an explicit capability override, or delegate the images first.",
+    "requests": 0,
+    "token_count": 17,
+    "formatted_messages": 2,
+    "formatted_image_parts": 0
+  },
+  "older_image": {
+    "error": null,
+    "text": "ok",
+    "requests": 1,
+    "image_parts_sent": 0
+  },
+  "override": {
+    "vision_active": true,
+    "error": null,
+    "text": "a cat",
+    "requests": 1,
+    "image_parts_sent": 2
+  },
+  "vision_model": {
+    "vision_active": true,
+    "error": null,
+    "text": "a cat",
+    "requests": 1,
+    "image_parts_sent": 2
+  },
+  "_exit": 0,
+  "_seconds": 7.7,
+  "checks": [
+    {
+      "check": "unsupported.vision_active eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "unsupported.errors.completion eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "unsupported.errors.acompletion eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "unsupported.errors.responses eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "unsupported.errors.aresponses eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "unsupported.requests eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "unsupported.message contains Image-bearing request cannot be sent",
+      "ok": true,
+      "actual": "Image-bearing request cannot be sent to 'openai/gpt-3.5-turbo': vision is disabled or unsupported. Configure a vision-capable model, an explicit capability override, or delegate the images first."
+    },
+    {
+      "check": "unsupported.token_count gt 0",
+      "ok": true,
+      "actual": "17"
+    },
+    {
+      "check": "unsupported.formatted_messages eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "disabled.vision_active eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "disabled.errors.completion eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "disabled.errors.aresponses eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "disabled.requests eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "disabled.token_count gt 0",
+      "ok": true,
+      "actual": "17"
+    },
+    {
+      "check": "older_image.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "older_image.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "older_image.image_parts_sent eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "override.vision_active eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "override.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "override.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "override.image_parts_sent gt 0",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "vision_model.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "vision_model.image_parts_sent gt 0",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 8s]

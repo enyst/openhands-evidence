@@ -1,0 +1,100 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/switching --arg shared-llm \
+  --check requests eq 3 --check statuses.0 eq finished --check statuses.1 eq finished \
+  --check llm_after_first.cost eq 0.14 \
+  --check first.calls eq 1 --check first.cost eq 0.14 --check first_combined_cost eq 0.14 \
+  --check second.calls eq 2 --check second.cost eq 0.28 --check second_combined_cost eq 0.28 \
+  --check llm.calls eq 3 --check llm.cost eq 0.42
+{
+  "ok": true,
+  "mode": "shared-llm",
+  "requests": 3,
+  "llm_after_first": {
+    "cost": 0.14,
+    "calls": 1
+  },
+  "first": {
+    "cost": 0.14,
+    "calls": 1
+  },
+  "second": {
+    "cost": 0.28,
+    "calls": 2
+  },
+  "llm": {
+    "cost": 0.42,
+    "calls": 3
+  },
+  "first_combined_cost": 0.14,
+  "second_combined_cost": 0.28,
+  "statuses": [
+    "finished",
+    "finished"
+  ],
+  "_exit": 0,
+  "_seconds": 6.9,
+  "checks": [
+    {
+      "check": "requests eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "statuses.0 eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "statuses.1 eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "llm_after_first.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "first.calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "first.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "first_combined_cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "second.calls eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "second.cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "second_combined_cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "llm.calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "llm.cost eq 0.42",
+      "ok": true,
+      "actual": "0.42"
+    }
+  ]
+}
+
+[exit 0 after 7s]

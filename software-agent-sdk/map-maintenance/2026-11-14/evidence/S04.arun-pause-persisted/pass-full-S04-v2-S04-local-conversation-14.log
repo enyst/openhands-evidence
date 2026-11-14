@@ -1,0 +1,79 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/control --arg arun-pause-persisted \
+  --check disk_status_before_pause eq running --check pause_returned_after_s lt 1 \
+  --check disk_status_mid_call eq paused --check model_call_still_in_flight eq true \
+  --check status eq paused --check disk_status_after_arun eq paused \
+  --check llm_calls eq 1 --check pause_events eq 1 \
+  --check status_after_resume eq finished --check disk_status_after_resume eq finished
+{
+  "ok": true,
+  "mode": "arun-pause-persisted",
+  "disk_status_before_pause": "running",
+  "pause_returned_after_s": 0.0,
+  "disk_status_mid_call": "paused",
+  "model_call_still_in_flight": true,
+  "pause_events_mid_call": 1,
+  "status": "paused",
+  "disk_status_after_arun": "paused",
+  "llm_calls": 1,
+  "pause_events": 1,
+  "status_after_resume": "finished",
+  "disk_status_after_resume": "finished",
+  "llm_calls_after_resume": 2,
+  "_exit": 0,
+  "_seconds": 11.6,
+  "checks": [
+    {
+      "check": "disk_status_before_pause eq running",
+      "ok": true,
+      "actual": "running"
+    },
+    {
+      "check": "pause_returned_after_s lt 1",
+      "ok": true,
+      "actual": "0.0"
+    },
+    {
+      "check": "disk_status_mid_call eq paused",
+      "ok": true,
+      "actual": "paused"
+    },
+    {
+      "check": "model_call_still_in_flight eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "status eq paused",
+      "ok": true,
+      "actual": "paused"
+    },
+    {
+      "check": "disk_status_after_arun eq paused",
+      "ok": true,
+      "actual": "paused"
+    },
+    {
+      "check": "llm_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "pause_events eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "status_after_resume eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "disk_status_after_resume eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 12s]

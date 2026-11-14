@@ -1,0 +1,149 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/switching --arg switch-usage \
+  --check status eq finished --check requests.a eq 2 --check requests.b eq 3 \
+  --check before_switch.ask-agent-llm.calls eq 1 --check before_switch.condenser.calls eq 0 \
+  --check after_switch.agent.cost eq 0.14 --check after_switch.other.cost eq 0.14 \
+  --check after_switch.ask-agent-llm.calls eq 2 --check after_switch.ask-agent-llm.cost eq 0.28 \
+  --check after_switch.ask-agent-llm.models contains openai/gpt-4.1-mini \
+  --check after_switch.condenser.calls eq 1 --check after_switch.condenser.cost eq 0.14 \
+  --check after_switch.condenser.models.0 eq openai/gpt-4.1-mini \
+  --check combined_cost eq 0.7
+{
+  "ok": true,
+  "mode": "switch-usage",
+  "requests": {
+    "a": 2,
+    "b": 3
+  },
+  "side_answer": "B answers",
+  "before_switch": {
+    "agent": {
+      "cost": 0.14,
+      "calls": 1,
+      "models": [
+        "openai/gpt-4o-mini"
+      ]
+    },
+    "condenser": {
+      "cost": 0.0,
+      "calls": 0,
+      "models": []
+    },
+    "ask-agent-llm": {
+      "cost": 0.14,
+      "calls": 1,
+      "models": [
+        "openai/gpt-4o-mini"
+      ]
+    }
+  },
+  "after_switch": {
+    "agent": {
+      "cost": 0.14,
+      "calls": 1,
+      "models": [
+        "openai/gpt-4o-mini"
+      ]
+    },
+    "condenser": {
+      "cost": 0.14,
+      "calls": 1,
+      "models": [
+        "openai/gpt-4.1-mini"
+      ]
+    },
+    "ask-agent-llm": {
+      "cost": 0.28,
+      "calls": 2,
+      "models": [
+        "openai/gpt-4.1-mini",
+        "openai/gpt-4o-mini"
+      ]
+    },
+    "other": {
+      "cost": 0.14,
+      "calls": 1,
+      "models": [
+        "openai/gpt-4.1-mini"
+      ]
+    }
+  },
+  "combined_cost": 0.7,
+  "status": "finished",
+  "_exit": 0,
+  "_seconds": 7.3,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "requests.a eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "requests.b eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "before_switch.ask-agent-llm.calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "before_switch.condenser.calls eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "after_switch.agent.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "after_switch.other.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "after_switch.ask-agent-llm.calls eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "after_switch.ask-agent-llm.cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "after_switch.ask-agent-llm.models contains openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "[\"openai/gpt-4.1-mini\", \"openai/gpt-4o-mini\"]"
+    },
+    {
+      "check": "after_switch.condenser.calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "after_switch.condenser.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "after_switch.condenser.models.0 eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "combined_cost eq 0.7",
+      "ok": true,
+      "actual": "0.7"
+    }
+  ]
+}
+
+[exit 0 after 7s]

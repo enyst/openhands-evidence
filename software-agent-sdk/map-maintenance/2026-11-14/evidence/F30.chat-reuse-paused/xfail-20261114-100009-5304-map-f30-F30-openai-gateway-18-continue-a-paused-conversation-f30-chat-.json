@@ -1,0 +1,77 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Continue a paused conversation (`F30.chat-reuse-paused`), known bug #6842.",
+  "ids": [
+    "F30.chat-reuse-paused"
+  ],
+  "line": 632,
+  "script": "PAUSED=$(control-agent-server fixture llm-stub --name qa-f30-paused --step hang:300 --step reply:QA_F30_PAUSED_OK --print-path)\nPCID=$(control-agent-server conversation start --tools none --no-autotitle --prompt QA_F30_PAUSED_DIRECT --print-id \\\n  --llm-json \"{\\\"model\\\": \\\"openai/qa-stub\\\", \\\"base_url\\\": \\\"$PAUSED/v1\\\", \\\"api_key\\\": \\\"qa-f30-stub\\\", \\\"num_retries\\\": 0}\")\ncontrol-agent-server conversation wait \"$PCID\" --until running --timeout 30\ncontrol-agent-server sink read --name qa-f30-paused --expect-min 1 --wait 30 > /dev/null\ncontrol-agent-server api POST \"/api/conversations/$PCID/interrupt\" --expect 200 --quiet\ncontrol-agent-server conversation wait \"$PCID\" --until paused --timeout 30\ncontrol-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $PCID\" \\\n  --json '{\"model\": \"openhands_deepseek-flash\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_PAUSED_TURN\"}]}' \\\n  --check-header x-openhands-serverconversation-id eq \"$PCID\" > \"$F30/paused-turn.json\" || true\ncontrol-agent-server conversation wait \"$PCID\" --until finished,error --timeout 60\ncontrol-agent-server api GET \"/api/conversations/$PCID\" --check execution_status eq finished --quiet\ncontrol-agent-server api GET \"/api/conversations/$PCID/events/search\" --query source=user --query body=QA_F30_PAUSED_TURN \\\n  --check items len-eq 1 --save F30.chat-reuse-paused/user-message\ncontrol-agent-server api GET \"/api/conversations/$PCID/agent_final_response\" --check response eq QA_F30_PAUSED_OK --quiet\ncontrol-agent-server sink read --name qa-f30-paused --expect-min 2 --expect-max 2\ncontrol-agent-server assert --json \"$F30/paused-turn.json\" --check status eq 200 \\\n  --check response.body.choices.0.message.content eq QA_F30_PAUSED_OK --check checks.0.ok eq true  # bug: value.status eq 409 && value.response.body.detail contains 'ended with status: paused'\n",
+  "exit_code": 1,
+  "elapsed_ms": 5020,
+  "failed_line": 17,
+  "failed_command": "control-agent-server assert --json \"$F30/paused-turn.json\" --check status eq 200 --check response.body.choices.0.message.content eq QA_F30_PAUSED_OK --check checks.0.ok eq true",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "value": {
+      "ok": false,
+      "status": 409,
+      "request": {
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "query": [],
+        "auth": "bearer",
+        "body": {
+          "model": "openhands_deepseek-flash",
+          "messages": [
+            {
+              "role": "user",
+              "content": "QA_F30_PAUSED_TURN"
+            }
+          ]
+        },
+        "files": []
+      },
+      "response": {
+        "status": 409,
+        "headers": {
+          "content-length": "48",
+          "content-type": "application/json"
+        },
+        "body": {
+          "detail": "Agent run ended with status: paused"
+        },
+        "truncated": false
+      },
+      "elapsed_ms": 91,
+      "checks": [
+        {
+          "check": "header x-openhands-serverconversation-id eq eec55304-5ff4-445f-9881-271dcda38c28",
+          "ok": false,
+          "actual": "null"
+        }
+      ],
+      "hint": "expected <400, got 409"
+    },
+    "checks": [
+      {
+        "check": "status eq 200",
+        "ok": false,
+        "actual": "409"
+      },
+      {
+        "check": "response.body.choices.0.message.content eq QA_F30_PAUSED_OK",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "checks.0.ok eq true",
+        "ok": false,
+        "actual": "false"
+      }
+    ],
+    "hint": "failed check: status eq 200; response.body.choices.0.message.content eq QA_F30_PAUSED_OK; checks.0.ok eq true"
+  },
+  "stdout": "{\n  \"id\": \"eec55304-5ff4-445f-9881-271dcda38c28\",\n  \"ok\": true,\n  \"status\": \"running\",\n  \"transitions\": [\n    \"running\"\n  ],\n  \"waited_ms\": 55\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/eec55304-5ff4-445f-9881-271dcda38c28/interrupt\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 77\n}\n{\n  \"id\": \"eec55304-5ff4-445f-9881-271dcda38c28\",\n  \"ok\": true,\n  \"status\": \"paused\",\n  \"transitions\": [\n    \"paused\"\n  ],\n  \"waited_ms\": 76\n}\n{\n  \"id\": \"eec55304-5ff4-445f-9881-271dcda38c28\",\n  \"ok\": true,\n  \"status\": \"finished\",\n  \"transitions\": [\n    \"finished\"\n  ],\n  \"waited_ms\": 61\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/eec55304-5ff4-445f-9881-271dcda38c28\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6266\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 73,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/eec55304-5ff4-445f-9881-271dcda38c28/events/search\",\n    \"query\": [\n      [\n        \"source\",\n        \"user\"\n      ],\n      [\n        \"body\",\n        \"QA_F30_PAUSED_TURN\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"379\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"items\": [\n        {\n          \"id\": \"8a5fb683-483d-42f0-b1fa-3b60f970e62f\",\n          \"timestamp\": \"2026-11-14T10:02:37.613867\",\n          \"source\": \"user\",\n          \"parent_id\": \"858cb9b1-e866-4b4f-83a0-8d3e6fa83499\",\n          \"llm_message\": {\n            \"role\": \"user\",\n            \"content\": [\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"QA_F30_PAUSED_TURN\"\n              }\n            ],\n            \"thinking_blocks\": []\n          },\n          \"activated_skills\": [],\n          \"extended_content\": [],\n          \"kind\": \"MessageEvent\"\n        }\n      ],\n      \"next_page_id\": null\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 51,\n  \"checks\": [\n    {\n      \"check\": \"items len-eq 1\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"id\\\": \\\"8a5fb683-483d-42f0-b1fa-3b60f970e62f\\\", \\\"timestamp\\\": \\\"2026-11-14T10:02:37.613867\\\", \\\"source\\\": \\\"user\\\", \\\"parent_id\\\": \\\"858cb9b1-e866-4b4f-83a0-8d3e6fa83499\\\", \\\"llm_message\\\": {\\\"role\\\": \\\"user\\\", \\\"conte\\u2026\"\n    }\n  ],\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-100009-5304-map-f30/evidence/F30.chat-reuse-paused/user-message.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/eec55304-5ff4-445f-9881-271dcda38c28/agent_final_response\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"31\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 97,\n  \"checks\": [\n    {\n      \"check\": \"response eq QA_F30_PAUSED_OK\",\n      \"ok\": true,\n      \"actual\": \"QA_F30_PAUSED_OK\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"requests\": 2,\n  \"paths\": {\n    \"/v1/chat/completions\": 2\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-14T10:02:35Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/chat/completions\\\", \\\"call\\\": 0, \\\"step\\\": {\\\"hang\\\": 300.0}, \\\"body\\\": {\\\"messages\\\": [{\\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<SOUL>\\\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\\\n</SOUL>\\\\n\\\\n<ROLE>\\\\n* Your primary role is to assist users by executing commands, modifying code, and solving techni\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-14T10:02:37Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/chat/completions\\\", \\\"call\\\": 1, \\\"step\\\": {\\\"reply\\\": \\\"QA_F30_PAUSED_OK\\\"}, \\\"body\\\": {\\\"messages\\\": [{\\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<SOUL>\\\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\\\n</SOUL>\\\\n\\\\n<ROLE>\\\\n* Your primary role is to assist users by executing commands, modifying code, and \\u2026\"\n  ]\n}\n{\n  \"ok\": false,\n  \"value\": {\n    \"ok\": false,\n    \"status\": 409,\n    \"request\": {\n      \"method\": \"POST\",\n      \"path\": \"/v1/chat/completions\",\n      \"query\": [],\n      \"auth\": \"bearer\",\n      \"body\": {\n        \"model\": \"openhands_deepseek-flash\",\n        \"messages\": [\n          {\n            \"role\": \"user\",\n            \"content\": \"QA_F30_PAUSED_TURN\"\n          }\n        ]\n      },\n      \"files\": []\n    },\n    \"response\": {\n      \"status\": 409,\n      \"headers\": {\n        \"content-length\": \"48\",\n        \"content-type\": \"application/json\"\n      },\n      \"body\": {\n        \"detail\": \"Agent run ended with status: paused\"\n      },\n      \"truncated\": false\n    },\n    \"elapsed_ms\": 91,\n    \"checks\": [\n      {\n        \"check\": \"header x-openhands-serverconversation-id eq eec55304-5ff4-445f-9881-271dcda38c28\",\n        \"ok\": false,\n        \"actual\": \"null\"\n      }\n    ],\n    \"hint\": \"expected <400, got 409\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"status eq 200\",\n      \"ok\": false,\n      \"actual\": \"409\"\n    },\n    {\n      \"check\": \"response.body.choices.0.message.content eq QA_F30_PAUSED_OK\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"checks.0.ok eq true\",\n      \"ok\": false,\n      \"actual\": \"false\"\n    }\n  ],\n  \"hint\": \"failed check: status eq 200; response.body.choices.0.message.content eq QA_F30_PAUSED_OK; checks.0.ok eq true\"\n}\n",
+  "stderr": ""
+}

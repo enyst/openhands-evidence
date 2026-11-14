@@ -1,0 +1,49 @@
+{
+  "file": "F31-persistence-and-limits.md",
+  "bullet": "Zombie owner takeover (`F31.lease-zombie-owner-takeover`), known bug #6826.",
+  "ids": [
+    "F31.lease-zombie-owner-takeover"
+  ],
+  "line": 192,
+  "script": "ZLOG=\"$AGENT_SERVER_VERIFY_RUN/fixtures/qa-f31-zombie-parent.log\"\ncontrol-agent-server helper start --name qa-f31-zombie-parent --log \"$ZLOG\" -- python3 -c \\\n  'import ctypes, subprocess, sys, time; ctypes.CDLL(None).prctl(36, 1, 0, 0, 0); subprocess.run(sys.argv[1:], check=True); time.sleep(900)' \\\n  control-agent-server launch --new --name f31-zombie --print-run\nfor i in $(seq 1 240); do test -s \"$ZLOG\" && break; sleep 0.5; done\nZ=$(head -n 1 \"$ZLOG\")\ntest -f \"$Z/run.json\"\nstop_zombie_run() {\n  control-agent-server stop --run \"$Z\" >/dev/null 2>&1 || true\n  control-agent-server helper stop qa-f31-zombie-parent >/dev/null 2>&1 || true\n}\ntrap stop_zombie_run EXIT\nZPID=$(jq -r .pid \"$Z/run.json\")\nZC=$(control-agent-server conversation start --run \"$Z\" --tools none --no-autotitle --prompt 'qa-f31-zombie-marker' --no-run --print-id)\nZN=$(control-agent-server api GET \"/api/conversations/$ZC/events/count\" --run \"$Z\" --expect 200 --field .)\ncontrol-agent-server state cat owner_lease.json --run \"$Z\" --conversation \"$ZC\" --check owner_pid eq \"$ZPID\" --check generation eq 1\ncontrol-agent-server restart --hard --run \"$Z\"\ntest \"$(ps -o state= -p \"$ZPID\")\" = Z\nZPID2=$(jq -r .pid \"$Z/run.json\")\ntest \"$ZPID2\" != \"$ZPID\"\ncontrol-agent-server state cat owner_lease.json --run \"$Z\" --conversation \"$ZC\" --check owner_pid eq \"$ZPID\" --check generation eq 1 \\\n  --check expires_at gt \"$(date +%s)\"\ncontrol-agent-server api GET \"/api/conversations/$ZC\" --run \"$Z\" --expect 200 --check id eq \"$ZC\" --quiet\ncontrol-agent-server api GET \"/api/conversations/$ZC/events/count\" --run \"$Z\" --expect 200 --check . eq \"$ZN\" --save F31.lease-zombie-owner-takeover/first-load  # bug: status eq 404 && response.body.detail contains 'Conversation not found'\ncontrol-agent-server state cat owner_lease.json --run \"$Z\" --conversation \"$ZC\" --check owner_pid eq \"$ZPID2\" --check generation eq 2\ncontrol-agent-server stop --run \"$Z\"\ncontrol-agent-server helper stop qa-f31-zombie-parent\ntrap - EXIT\n",
+  "exit_code": 1,
+  "elapsed_ms": 19312,
+  "failed_line": 24,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$ZC/events/count\" --run \"$Z\" --expect 200 --check . eq \"$ZN\" --save F31.lease-zombie-owner-takeover/first-load",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/b1784329-293e-4631-8905-77a36b363b05/events/count",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "73",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Conversation not found: b1784329-293e-4631-8905-77a36b363b05"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 67,
+    "checks": [
+      {
+        "check": ". eq 3",
+        "ok": false,
+        "actual": "{\"detail\": \"Conversation not found: b1784329-293e-4631-8905-77a36b363b05\"}"
+      }
+    ],
+    "saved": "/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-100717-2cf8-f31-zombie/evidence/F31.lease-zombie-owner-takeover/first-load.json",
+    "hint": "expected 200, got 404"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"helper\": \"qa-f31-zombie-parent\",\n  \"pid\": 17361,\n  \"log\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-100632-6e8d-map-f31/fixtures/qa-f31-zombie-parent.log\"\n}\n{\n  \"ok\": true,\n  \"path\": \"owner_lease.json\",\n  \"bytes\": 147,\n  \"mode\": \"0o644\",\n  \"content\": {\n    \"owner_instance_id\": \"b7a352ebffdf44a5a666d65a500de958\",\n    \"generation\": 1,\n    \"expires_at\": 1794650890.219901,\n    \"owner_host\": \"vm\",\n    \"owner_pid\": 17370\n  },\n  \"checks\": [\n    {\n      \"check\": \"owner_pid eq 17370\",\n      \"ok\": true,\n      \"actual\": \"17370\"\n    },\n    {\n      \"check\": \"generation eq 1\",\n      \"ok\": true,\n      \"actual\": \"1\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"run\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-100717-2cf8-f31-zombie\",\n  \"url\": \"http://127.0.0.1:38949\",\n  \"rotated_key\": false,\n  \"hard\": true,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6868,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": true,\n  \"path\": \"owner_lease.json\",\n  \"bytes\": 147,\n  \"mode\": \"0o644\",\n  \"content\": {\n    \"owner_instance_id\": \"b7a352ebffdf44a5a666d65a500de958\",\n    \"generation\": 1,\n    \"expires_at\": 1794650890.219901,\n    \"owner_host\": \"vm\",\n    \"owner_pid\": 17370\n  },\n  \"checks\": [\n    {\n      \"check\": \"owner_pid eq 17370\",\n      \"ok\": true,\n      \"actual\": \"17370\"\n    },\n    {\n      \"check\": \"generation eq 1\",\n      \"ok\": true,\n      \"actual\": \"1\"\n    },\n    {\n      \"check\": \"expires_at gt 1794650853\",\n      \"ok\": true,\n      \"actual\": \"1794650890.219901\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/b1784329-293e-4631-8905-77a36b363b05\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"5876\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 72,\n  \"checks\": [\n    {\n      \"check\": \"id eq b1784329-293e-4631-8905-77a36b363b05\",\n      \"ok\": true,\n      \"actual\": \"b1784329-293e-4631-8905-77a36b363b05\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/b1784329-293e-4631-8905-77a36b363b05/events/count\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"73\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Conversation not found: b1784329-293e-4631-8905-77a36b363b05\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \". eq 3\",\n      \"ok\": false,\n      \"actual\": \"{\\\"detail\\\": \\\"Conversation not found: b1784329-293e-4631-8905-77a36b363b05\\\"}\"\n    }\n  ],\n  \"saved\": \"/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/verify-runs/agent-server/20261114-100717-2cf8-f31-zombie/evidence/F31.lease-zombie-owner-takeover/first-load.json\",\n  \"hint\": \"expected 200, got 404\"\n}\n",
+  "stderr": ""
+}

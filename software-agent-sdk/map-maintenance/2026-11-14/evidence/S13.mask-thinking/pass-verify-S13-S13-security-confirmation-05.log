@@ -1,0 +1,154 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S13/secrets_run --arg thinking \
+  --check thinking.run.status eq finished --check thinking.run.agent_messages eq 2 \
+  --check thinking.run.reasoning_only eq "first I recall <secret-hidden>" \
+  --check thinking.run.text eq "The token is <secret-hidden>." \
+  --check thinking.run.reasoning_content eq "I will quote <secret-hidden>" \
+  --check thinking.run.thinking.0 eq "The user wants <secret-hidden> repeated" \
+  --check thinking.run.signatures.0 missing --check thinking.run.redacted_data.0 eq opaque-s13 \
+  --check thinking.run.persisted_leaks eq false --check thinking.run.persisted_masked_thinking eq true \
+  --check thinking.run.persisted_masked_reasoning eq true \
+  --check thinking.arun.status eq finished --check thinking.arun.reasoning_only eq "first I recall <secret-hidden>" \
+  --check thinking.arun.reasoning_content eq "I will quote <secret-hidden>" \
+  --check thinking.arun.thinking.0 eq "The user wants <secret-hidden> repeated" \
+  --check thinking.arun.signatures.0 missing --check thinking.arun.persisted_leaks eq false \
+  --check thinking.arun.persisted_masked_thinking eq true
+{
+  "ok": true,
+  "thinking": {
+    "run": {
+      "status": "finished",
+      "agent_messages": 2,
+      "reasoning_only": "first I recall <secret-hidden>",
+      "text": "The token is <secret-hidden>.",
+      "reasoning_content": "I will quote <secret-hidden>",
+      "thinking": [
+        "The user wants <secret-hidden> repeated"
+      ],
+      "signatures": [
+        null
+      ],
+      "redacted_data": [
+        "opaque-s13"
+      ],
+      "persisted_leaks": false,
+      "persisted_masked_thinking": true,
+      "persisted_masked_reasoning": true
+    },
+    "arun": {
+      "status": "finished",
+      "agent_messages": 2,
+      "reasoning_only": "first I recall <secret-hidden>",
+      "text": "The token is <secret-hidden>.",
+      "reasoning_content": "I will quote <secret-hidden>",
+      "thinking": [
+        "The user wants <secret-hidden> repeated"
+      ],
+      "signatures": [
+        null
+      ],
+      "redacted_data": [
+        "opaque-s13"
+      ],
+      "persisted_leaks": false,
+      "persisted_masked_thinking": true,
+      "persisted_masked_reasoning": true
+    }
+  },
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "thinking.run.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "thinking.run.agent_messages eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "thinking.run.reasoning_only eq first I recall <secret-hidden>",
+      "ok": true,
+      "actual": "first I recall <secret-hidden>"
+    },
+    {
+      "check": "thinking.run.text eq The token is <secret-hidden>.",
+      "ok": true,
+      "actual": "The token is <secret-hidden>."
+    },
+    {
+      "check": "thinking.run.reasoning_content eq I will quote <secret-hidden>",
+      "ok": true,
+      "actual": "I will quote <secret-hidden>"
+    },
+    {
+      "check": "thinking.run.thinking.0 eq The user wants <secret-hidden> repeated",
+      "ok": true,
+      "actual": "The user wants <secret-hidden> repeated"
+    },
+    {
+      "check": "thinking.run.signatures.0 missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "thinking.run.redacted_data.0 eq opaque-s13",
+      "ok": true,
+      "actual": "opaque-s13"
+    },
+    {
+      "check": "thinking.run.persisted_leaks eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "thinking.run.persisted_masked_thinking eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "thinking.run.persisted_masked_reasoning eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "thinking.arun.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "thinking.arun.reasoning_only eq first I recall <secret-hidden>",
+      "ok": true,
+      "actual": "first I recall <secret-hidden>"
+    },
+    {
+      "check": "thinking.arun.reasoning_content eq I will quote <secret-hidden>",
+      "ok": true,
+      "actual": "I will quote <secret-hidden>"
+    },
+    {
+      "check": "thinking.arun.thinking.0 eq The user wants <secret-hidden> repeated",
+      "ok": true,
+      "actual": "The user wants <secret-hidden> repeated"
+    },
+    {
+      "check": "thinking.arun.signatures.0 missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "thinking.arun.persisted_leaks eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "thinking.arun.persisted_masked_thinking eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 5s]
