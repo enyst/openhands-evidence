@@ -1,0 +1,16 @@
+# checkout: 3c66af1d14d0a7fbe74b8dc4218412ec7a877b79
+$ control-sdk exec -- python repro_default.py
+{
+  "exit": 0,
+  "seconds": 125.2,
+  "result": {
+    "num_retries": 5,
+    "error": "LLMServiceUnavailableError",
+    "retries": 4,
+    "requests_sent": 0,
+    "seconds": 120.3
+  },
+  "stdout_tail": "{\"num_retries\": 5, \"error\": \"LLMServiceUnavailableError\", \"retries\": 4, \"requests_sent\": 0, \"seconds\": 120.3}\n",
+  "stderr_tail": " enabling vision alone                   \n                             cannot fix adapter-level image                     \n                             loss.. Attempt #3 | You can                        \n                             customize retry values in the                      \n                             configuration.                                     \n[11/14/26 09:25:13] ERROR    litellm.InternalServerError:     retry_mixin.py:186\n                             InternalServerError:                               \n                             DeepseekException - The                            \n                             installed LiteLLM adapter                          \n                             discarded image content before                     \n                             sending the request. No request                    \n                             was sent. Use a compatible                         \n                             adapter or an explicitly                           \n                             configured OpenAI-compatible                       \n                             transport; enabling vision alone                   \n                             cannot fix adapter-level image                     \n                             loss.. Attempt #4 | You can                        \n                             customize retry values in the                      \n                             configuration.                                     \n",
+  "ok": true
+}

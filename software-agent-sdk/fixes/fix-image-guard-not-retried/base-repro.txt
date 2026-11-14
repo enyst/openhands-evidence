@@ -1,0 +1,109 @@
+# checkout: fb75ae907585c1634a85fd5168a795dd48eb4d65 (BASE)
+$ control-sdk exec -- python repro.py
+{
+  "exit": 0,
+  "seconds": 10.2,
+  "result": {
+    "rows": [
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "user",
+        "api": "completion",
+        "vision_is_active": true,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.18
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "user",
+        "api": "acompletion",
+        "vision_is_active": true,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.03
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "tool",
+        "api": "completion",
+        "vision_is_active": true,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.01
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "tool",
+        "api": "acompletion",
+        "vision_is_active": true,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.03
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "user",
+        "api": "completion",
+        "vision_is_active": false,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.01
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "user",
+        "api": "acompletion",
+        "vision_is_active": false,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.02
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "tool",
+        "api": "completion",
+        "vision_is_active": false,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.01
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "tool",
+        "api": "acompletion",
+        "vision_is_active": false,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.02
+      }
+    ]
+  },
+  "stdout_tail": "del\": \"deepseek/deepseek-v4.1-flash\", \"image_in\": \"user\", \"api\": \"acompletion\", \"vision_is_active\": true, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.03}, {\"model\": \"deepseek/deepseek-v4.1-flash\", \"image_in\": \"tool\", \"api\": \"completion\", \"vision_is_active\": true, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.01}, {\"model\": \"deepseek/deepseek-v4.1-flash\", \"image_in\": \"tool\", \"api\": \"acompletion\", \"vision_is_active\": true, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.03}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"user\", \"api\": \"completion\", \"vision_is_active\": false, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.01}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"user\", \"api\": \"acompletion\", \"vision_is_active\": false, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.02}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"tool\", \"api\": \"completion\", \"vision_is_active\": false, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.01}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"tool\", \"api\": \"acompletion\", \"vision_is_active\": false, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.02}]}\n",
+  "stderr_tail": "/tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/base/openhands-sdk/openhands/sdk/llm/utils/telemetry.py:431: UserWarning: Cost calculation failed: This model isn't mapped yet. model=deepseek-v4.1-flash, custom_llm_provider=deepseek. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json.\n  warnings.warn(f\"Cost calculation failed: {e}\")\n",
+  "ok": true
+}

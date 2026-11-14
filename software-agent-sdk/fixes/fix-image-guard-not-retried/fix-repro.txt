@@ -1,0 +1,124 @@
+# checkout: fix worktree, branch claude/fix-image-guard-not-retried on 3c66af1d14d0a7fbe74b8dc4218412ec7a877b79 + working tree
+$ control-sdk exec -- python repro.py
+{
+  "exit": 0,
+  "seconds": 8.6,
+  "result": {
+    "rows": [
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "user",
+        "api": "completion",
+        "vision_is_active": true,
+        "error": "LLMBadRequestError: The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a c",
+        "cause": "InternalServerError",
+        "retries": 0,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.24
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "user",
+        "api": "acompletion",
+        "vision_is_active": true,
+        "error": "LLMBadRequestError: The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a c",
+        "cause": "InternalServerError",
+        "retries": 0,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.02
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "tool",
+        "api": "completion",
+        "vision_is_active": true,
+        "error": "LLMBadRequestError: The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a c",
+        "cause": "InternalServerError",
+        "retries": 0,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.02
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "tool",
+        "api": "acompletion",
+        "vision_is_active": true,
+        "error": "LLMBadRequestError: The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a c",
+        "cause": "InternalServerError",
+        "retries": 0,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.01
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "user",
+        "api": "completion",
+        "vision_is_active": false,
+        "error": "LLMBadRequestError: Image-bearing request cannot be sent to 'deepseek/deepseek-chat': vision is disabled or unsupported. Configure",
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.0
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "user",
+        "api": "acompletion",
+        "vision_is_active": false,
+        "error": "LLMBadRequestError: Image-bearing request cannot be sent to 'deepseek/deepseek-chat': vision is disabled or unsupported. Configure",
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.0
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "tool",
+        "api": "completion",
+        "vision_is_active": false,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.01
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "tool",
+        "api": "acompletion",
+        "vision_is_active": false,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.02
+      }
+    ]
+  },
+  "stdout_tail": "ull, \"seconds\": 0.02}, {\"model\": \"deepseek/deepseek-v4.1-flash\", \"image_in\": \"tool\", \"api\": \"acompletion\", \"vision_is_active\": true, \"error\": \"LLMBadRequestError: The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a c\", \"cause\": \"InternalServerError\", \"retries\": 0, \"requests_sent\": 0, \"images_in_sent_body\": null, \"seconds\": 0.01}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"user\", \"api\": \"completion\", \"vision_is_active\": false, \"error\": \"LLMBadRequestError: Image-bearing request cannot be sent to 'deepseek/deepseek-chat': vision is disabled or unsupported. Configure\", \"cause\": null, \"retries\": 0, \"requests_sent\": 0, \"images_in_sent_body\": null, \"seconds\": 0.0}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"user\", \"api\": \"acompletion\", \"vision_is_active\": false, \"error\": \"LLMBadRequestError: Image-bearing request cannot be sent to 'deepseek/deepseek-chat': vision is disabled or unsupported. Configure\", \"cause\": null, \"retries\": 0, \"requests_sent\": 0, \"images_in_sent_body\": null, \"seconds\": 0.0}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"tool\", \"api\": \"completion\", \"vision_is_active\": false, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.01}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"tool\", \"api\": \"acompletion\", \"vision_is_active\": false, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.02}]}\n",
+  "stderr_tail": "",
+  "ok": true
+}
+$ control-sdk exec -- python repro_default.py
+{
+  "exit": 0,
+  "seconds": 5.0,
+  "result": {
+    "num_retries": 5,
+    "error": "LLMBadRequestError",
+    "retries": 0,
+    "requests_sent": 0,
+    "seconds": 0.3
+  },
+  "stdout_tail": "{\"num_retries\": 5, \"error\": \"LLMBadRequestError\", \"retries\": 0, \"requests_sent\": 0, \"seconds\": 0.3}\n",
+  "stderr_tail": "",
+  "ok": true
+}

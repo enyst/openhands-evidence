@@ -1,0 +1,109 @@
+# checkout: 3c66af1d14d0a7fbe74b8dc4218412ec7a877b79
+$ control-sdk exec -- python repro.py
+{
+  "exit": 0,
+  "seconds": 9.4,
+  "result": {
+    "rows": [
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "user",
+        "api": "completion",
+        "vision_is_active": true,
+        "error": "LLMServiceUnavailableError: litellm.InternalServerError: InternalServerError: DeepseekException - The installed LiteLLM adapter discarded ",
+        "cause": "InternalServerError",
+        "retries": 2,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.3
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "user",
+        "api": "acompletion",
+        "vision_is_active": true,
+        "error": "LLMServiceUnavailableError: litellm.InternalServerError: InternalServerError: DeepseekException - The installed LiteLLM adapter discarded ",
+        "cause": "InternalServerError",
+        "retries": 2,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.03
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "tool",
+        "api": "completion",
+        "vision_is_active": true,
+        "error": "LLMServiceUnavailableError: litellm.InternalServerError: InternalServerError: DeepseekException - The installed LiteLLM adapter discarded ",
+        "cause": "InternalServerError",
+        "retries": 2,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.05
+      },
+      {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "image_in": "tool",
+        "api": "acompletion",
+        "vision_is_active": true,
+        "error": "LLMServiceUnavailableError: litellm.InternalServerError: InternalServerError: DeepseekException - The installed LiteLLM adapter discarded ",
+        "cause": "InternalServerError",
+        "retries": 2,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.05
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "user",
+        "api": "completion",
+        "vision_is_active": false,
+        "error": "LLMBadRequestError: Image-bearing request cannot be sent to 'deepseek/deepseek-chat': vision is disabled or unsupported. Configure",
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.0
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "user",
+        "api": "acompletion",
+        "vision_is_active": false,
+        "error": "LLMBadRequestError: Image-bearing request cannot be sent to 'deepseek/deepseek-chat': vision is disabled or unsupported. Configure",
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 0,
+        "images_in_sent_body": null,
+        "seconds": 0.0
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "tool",
+        "api": "completion",
+        "vision_is_active": false,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.02
+      },
+      {
+        "model": "deepseek/deepseek-chat",
+        "image_in": "tool",
+        "api": "acompletion",
+        "vision_is_active": false,
+        "error": null,
+        "cause": null,
+        "retries": 0,
+        "requests_sent": 1,
+        "images_in_sent_body": 0,
+        "seconds": 0.01
+      }
+    ]
+  },
+  "stdout_tail": "conds\": 0.05}, {\"model\": \"deepseek/deepseek-v4.1-flash\", \"image_in\": \"tool\", \"api\": \"acompletion\", \"vision_is_active\": true, \"error\": \"LLMServiceUnavailableError: litellm.InternalServerError: InternalServerError: DeepseekException - The installed LiteLLM adapter discarded \", \"cause\": \"InternalServerError\", \"retries\": 2, \"requests_sent\": 0, \"images_in_sent_body\": null, \"seconds\": 0.05}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"user\", \"api\": \"completion\", \"vision_is_active\": false, \"error\": \"LLMBadRequestError: Image-bearing request cannot be sent to 'deepseek/deepseek-chat': vision is disabled or unsupported. Configure\", \"cause\": null, \"retries\": 0, \"requests_sent\": 0, \"images_in_sent_body\": null, \"seconds\": 0.0}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"user\", \"api\": \"acompletion\", \"vision_is_active\": false, \"error\": \"LLMBadRequestError: Image-bearing request cannot be sent to 'deepseek/deepseek-chat': vision is disabled or unsupported. Configure\", \"cause\": null, \"retries\": 0, \"requests_sent\": 0, \"images_in_sent_body\": null, \"seconds\": 0.0}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"tool\", \"api\": \"completion\", \"vision_is_active\": false, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.02}, {\"model\": \"deepseek/deepseek-chat\", \"image_in\": \"tool\", \"api\": \"acompletion\", \"vision_is_active\": false, \"error\": null, \"cause\": null, \"retries\": 0, \"requests_sent\": 1, \"images_in_sent_body\": 0, \"seconds\": 0.01}]}\n",
+  "stderr_tail": " enabling vision alone                   \n                             cannot fix adapter-level image                     \n                             loss.. Attempt #1 | You can                        \n                             customize retry values in the                      \n                             configuration.                                     \n[11/14/26 09:24:09] ERROR    litellm.InternalServerError:     retry_mixin.py:186\n                             InternalServerError:                               \n                             DeepseekException - The                            \n                             installed LiteLLM adapter                          \n                             discarded image content before                     \n                             sending the request. No request                    \n                             was sent. Use a compatible                         \n                             adapter or an explicitly                           \n                             configured OpenAI-compatible                       \n                             transport; enabling vision alone                   \n                             cannot fix adapter-level image                     \n                             loss.. Attempt #2 | You can                        \n                             customize retry values in the                      \n                             configuration.                                     \n",
+  "ok": true
+}
