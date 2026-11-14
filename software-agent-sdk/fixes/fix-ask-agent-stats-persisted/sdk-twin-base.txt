@@ -1,0 +1,9 @@
+$ cd $S/base && uv run python $S/defects/ask-agent-stats/sdk_twin.py   # BASE fb75ae9
+[11/14/26 09:39:07] INFO     Loaded 0 tools from spec                base.py:585
+after run       memory {'agent': 100} disk {'agent': 100}
+after ask       memory {'agent': 100, 'ask-agent-llm': 100} disk {'agent': 100}
+[11/14/26 09:39:07] INFO     Resumed conversation                   state.py:684
+                             9a488852-69cc-4f2d-9676-66a5c9f058fc               
+                             from persistent storage                            
+after reload    memory {'agent': 100}
+VERDICT: ask usage is NOT in base_state.json / lost on reload

@@ -1,0 +1,5 @@
+$ cd $S/defects/ask-agent-stats/fix && uv run python $S/defects/ask-agent-stats/sdk_twin.py   # FIX 52a132e
+after run       memory {'agent': 100} disk {'agent': 100}
+after ask       memory {'agent': 100, 'ask-agent-llm': 100} disk {'agent': 100, 'ask-agent-llm': 100}
+after reload    memory {'agent': 100, 'ask-agent-llm': 100}
+VERDICT: ask usage is durable

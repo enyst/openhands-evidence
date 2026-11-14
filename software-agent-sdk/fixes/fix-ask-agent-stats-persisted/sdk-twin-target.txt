@@ -1,0 +1,9 @@
+$ control-sdk exec -- python $S/defects/ask-agent-stats/sdk_twin.py   # TARGET 3c66af1
+{
+  "exit": 1,
+  "seconds": 4.2,
+  "result": null,
+  "stdout_tail": "after run       memory {'agent': 100} disk {'agent': 100}\nafter ask       memory {'agent': 100, 'ask-agent-llm': 100} disk {'agent': 100}\nafter reload    memory {'agent': 100}\nVERDICT: ask usage is NOT in base_state.json / lost on reload\n",
+  "stderr_tail": "",
+  "ok": false
+}

@@ -1,0 +1,48 @@
+$ S=$S python3 $S/bin/subreap.py bash $S/defects/ask-agent-stats/repro.sh --checkout $S/base   # BASE fb75ae907585c1634a85fd5168a795dd48eb4d65
+doctor ok
+server build: fb75ae907585c1634a85fd5168a795dd48eb4d65
+
+== A. side question on a finished conversation ==
+A1 after turn 1 (finished)         REST GET stats:    default=10/5
+ask 1 -> SIDE1   (stub usage 1111/11)
+A2 after ask 1                     socket full_state on connect: default=10/5
+A2 after ask 1                     socket stats events: 0
+A2 after ask 1                     REST GET stats:    default=10/5
+A2 after ask 1                     base_state.json:   default=10/5
+-- server restarted (graceful) --
+A3 after restart                   REST GET stats:    default=10/5
+A3 after restart                   base_state.json:   default=10/5
+ask 2 -> SIDE2   (stub usage 2222/22)
+A4 after restart + ask 2           socket full_state on connect: default=10/5
+A4 after restart + ask 2           socket stats events: 1; last: ask-agent-llm=2232/27 default=2232/27
+A4 after restart + ask 2           REST GET stats:    default=10/5
+A4 after restart + ask 2           base_state.json:   default=10/5
+A5 after turn 2 (finished)         REST GET stats:    ask-agent-llm=2242/32 default=2242/32
+A5 after turn 2 (finished)         base_state.json:   ask-agent-llm=2242/32 default=2242/32
+ask 3 -> SIDE3   (stub usage 3333/33)
+A6 after ask 3                     socket full_state on connect: ask-agent-llm=2242/32 default=2242/32
+A6 after ask 3                     socket stats events: 1; last: ask-agent-llm=5575/65 default=5575/65
+A6 after ask 3                     REST GET stats:    ask-agent-llm=2242/32 default=2242/32
+A6 after ask 3                     base_state.json:   ask-agent-llm=2242/32 default=2242/32
+-- server restarted (graceful) --
+A7 after restart                   REST GET stats:    ask-agent-llm=2242/32 default=2242/32
+A7 after restart                   base_state.json:   ask-agent-llm=2242/32 default=2242/32
+
+== B. side question while a run is blocked on its model ==
+ask B -> SIDEB in 470 ms   (stub usage 4444/44); status: running
+B1 after ask, still running        socket full_state on connect: default=0/0
+B1 after ask, still running        socket stats events: 0
+B1 after ask, still running        REST GET stats:    default=0/0
+B1 after ask, still running        base_state.json:   default=0/0
+B2 after interrupt (paused)        REST GET stats:    ask-agent-llm=4444/44 default=0/0
+B2 after interrupt (paused)        base_state.json:   ask-agent-llm=4444/44 default=0/0
+
+== C. condense on a finished conversation (another socket-pushed stats source) ==
+C1 after turn 1 (finished)         REST GET stats:    condenser=0/0 default=10/5
+condense -> 200   (stub usage 5555/55)
+C2 after condense                  socket full_state on connect: condenser=0/0 default=10/5
+C2 after condense                  socket stats events: 1; last: condenser=5555/55 default=10/5
+C2 after condense                  REST GET stats:    condenser=5555/55 default=10/5
+C2 after condense                  base_state.json:   condenser=5555/55 default=10/5
+
+run stopped: /tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/defects/ask-agent-stats/agent-server/20261114-093721-abc0

@@ -1,0 +1,12 @@
+$ bash steps.sh 
+doctor ok; build 3c66af1d14d0a7fbe74b8dc4218412ec7a877b79
+socket stats event has ask-agent-llm:        PASS
+REST has ask-agent-llm prompt_tokens 1111:   FAIL
+base_state.json contains ask-agent-llm:      FAIL
+REST after restart has prompt_tokens 1111:   FAIL
+$ bash steps.sh --checkout /tmp/claude-0/-home-user/60986486-d3d3-5408-a066-abc21ac71298/scratchpad/defects/ask-agent-stats/fix
+doctor ok; build 52a132eba938f030e06f378c741232af9f634334
+socket stats event has ask-agent-llm:        PASS
+REST has ask-agent-llm prompt_tokens 1111:   PASS
+base_state.json contains ask-agent-llm:      PASS
+REST after restart has prompt_tokens 1111:   PASS
