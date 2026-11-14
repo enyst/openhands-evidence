@@ -1,0 +1,93 @@
+$ git rev-parse HEAD
+fb75ae907585c1634a85fd5168a795dd48eb4d65
+$ uv run python repro_thinking_signature.py
+{
+  "text": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "The user greets me.",
+        "signature": "sig-1"
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "thinking",
+          "thinking": "The user greets me.",
+          "signature": "sig-1"
+        },
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  },
+  "reasoning_only": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "Only thinking, no text.",
+        "signature": "sig-1"
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "thinking",
+          "thinking": "Only thinking, no text.",
+          "signature": "sig-1"
+        },
+        {
+          "type": "text",
+          "text": "[System: Empty message content sanitised to satisfy protocol]"
+        }
+      ]
+    ]
+  },
+  "secret_elsewhere": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "The user greets me.",
+        "signature": "sig-1"
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "thinking",
+          "thinking": "The user greets me.",
+          "signature": "sig-1"
+        },
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  },
+  "secret_in_thinking": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "Use the token supersecret.",
+        "signature": "sig-1"
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "thinking",
+          "thinking": "Use the token supersecret.",
+          "signature": "sig-1"
+        },
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  }
+}

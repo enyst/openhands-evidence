@@ -1,0 +1,73 @@
+$ git -C /home/user/software-agent-sdk rev-parse HEAD
+3c66af1d14d0a7fbe74b8dc4218412ec7a877b79
+$ uv run python repro_thinking_signature.py
+{
+  "text": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "The user greets me.",
+        "signature": null
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  },
+  "reasoning_only": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "Only thinking, no text.",
+        "signature": null
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "text",
+          "text": "[System: Empty message content sanitised to satisfy protocol]"
+        }
+      ]
+    ]
+  },
+  "secret_elsewhere": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "The user greets me.",
+        "signature": null
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  },
+  "secret_in_thinking": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "Use the token <secret-hidden>.",
+        "signature": null
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  }
+}

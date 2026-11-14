@@ -1,0 +1,8 @@
+    val = getattr(obj, name)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/sdk/agent/test_response_dispatch.py::test_thinking_block_untouched_by_masking_keeps_signature[no-secret-registered]
+FAILED tests/sdk/agent/test_response_dispatch.py::test_thinking_block_untouched_by_masking_keeps_signature[secret-not-in-thinking]
+FAILED tests/sdk/agent/test_response_dispatch.py::test_only_the_thinking_block_holding_a_secret_loses_its_signature
+================== 3 failed, 27 passed, 17 warnings in 0.51s ===================

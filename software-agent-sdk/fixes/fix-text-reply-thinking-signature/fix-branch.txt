@@ -1,0 +1,90 @@
+$ git rev-parse HEAD; git status --short   # fix worktree, branch claude/fix-text-reply-thinking-signature
+8b34879294f056aa74cf887baf00a3cd925988df
+$ uv run python repro_thinking_signature.py
+{
+  "text": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "The user greets me.",
+        "signature": "sig-1"
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "thinking",
+          "thinking": "The user greets me.",
+          "signature": "sig-1"
+        },
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  },
+  "reasoning_only": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "Only thinking, no text.",
+        "signature": "sig-1"
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "thinking",
+          "thinking": "Only thinking, no text.",
+          "signature": "sig-1"
+        },
+        {
+          "type": "text",
+          "text": "[System: Empty message content sanitised to satisfy protocol]"
+        }
+      ]
+    ]
+  },
+  "secret_elsewhere": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "The user greets me.",
+        "signature": "sig-1"
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "thinking",
+          "thinking": "The user greets me.",
+          "signature": "sig-1"
+        },
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  },
+  "secret_in_thinking": {
+    "stored_thinking_blocks": [
+      {
+        "thinking": "Use the token <secret-hidden>.",
+        "signature": null
+      }
+    ],
+    "requests_made": 2,
+    "assistant_turns_in_last_request": [
+      [
+        {
+          "type": "text",
+          "text": "first answer"
+        }
+      ]
+    ]
+  }
+}
+$ uv run pytest tests/sdk/agent/test_response_dispatch.py -q | tail -1
+======================= 30 passed, 17 warnings in 0.78s ========================
