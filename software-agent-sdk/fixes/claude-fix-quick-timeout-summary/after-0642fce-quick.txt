@@ -1,0 +1,21 @@
+$ control-sdk program S05/llm_failures --arg quick   # branch claude/fix-quick-timeout-summary (main 2aae48b + this fix; same code as commit 0642fce)
+{
+  "ok": true,
+  "mode": "quick",
+  "quick_timeout": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "requests": 3,
+    "errors": 1,
+    "code": "LLMTimeoutError",
+    "detail": "litellm.Timeout: LLM stream idle timeout after 0.3 seconds",
+    "classification": {
+      "kind": "transient",
+      "retryable": true,
+      "user_action": "retry",
+      "error_id": null
+    }
+  },
+  "_exit": 0,
+  "_seconds": 6.6
+}

@@ -1,0 +1,41 @@
+$ control-sdk program S05/llm_failures --arg exhausted   # main 2aae48b
+{
+  "ok": true,
+  "mode": "exhausted",
+  "hard_timeout": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "requests": 2,
+    "errors": 1,
+    "code": "LLMTimeoutError",
+    "detail": "litellm.Timeout: APITimeoutError - Request timed out. Error_str: Request timed out. The model did not return a complete response within the LLM timeout of 1s (gave up after 2 attempts, 3s in total). Try a faster model, a shorter prompt (fewer tools or MCP servers), or a higher timeout in the LLM settings.",
+    "classification": {
+      "kind": "config",
+      "retryable": false,
+      "user_action": "settings",
+      "error_id": null
+    }
+  },
+  "content_free": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "requests": 2,
+    "errors": 1,
+    "code": "LLMNoResponseError",
+    "detail": "Response choices[0] message has no content, tool calls, or reasoning. Response: ModelResponse(id='chatcmpl-2', created=1794734249, model='gpt-4o-mini', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='stop', index=0, message=Message(content='', role='assistant', tool_calls=None, function_call=None, provider_specific_fields={'refusal': None}), provider_specific_fields={})], usage=Usage(completion_tokens=20, prompt_tokens=100, total_tokens=120, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=None, cached_tokens=0, text_tokens=None, image_tokens=None, video_tokens=None)), service_tier=None)",
+    "classification": {
+      "kind": "transient",
+      "retryable": true,
+      "user_action": "retry",
+      "error_id": null
+    }
+  },
+  "single_quick_timeout": {
+    "kind": "transient",
+    "retryable": true,
+    "user_action": "retry",
+    "error_id": null
+  },
+  "_exit": 0,
+  "_seconds": 8.7
+}
