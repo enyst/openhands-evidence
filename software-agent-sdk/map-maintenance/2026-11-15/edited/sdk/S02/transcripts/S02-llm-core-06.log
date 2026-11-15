@@ -1,0 +1,161 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg timeouts \
+  --check timeout.error eq LLMTimeoutError --check timeout.seconds lt 3 \
+  --check stream_idle.error eq LLMTimeoutError --check stream_idle.seconds lt 3 \
+  --check conversation.status eq error --check conversation.error_events.0 eq LLMTimeoutError \
+  --check hard.error eq LLMTimeoutError --check hard.requests eq 2 --check hard.seconds lt 4 \
+  --check hard.names_limit eq true --check hard.names_attempts eq true --check hard.names_settings eq true \
+  --check hard_async.error eq LLMTimeoutError --check hard_async.requests eq 2 --check hard_async.hard_timeout eq true \
+  --check hard_async.names_limit eq true --check hard_async.names_attempts eq true --check hard_async.names_settings eq true \
+  --check quick.error eq LLMTimeoutError --check quick.requests eq 3
+{
+  "ok": true,
+  "mode": "timeouts",
+  "timeout": {
+    "error": "LLMTimeoutError",
+    "seconds": 1.3,
+    "requests": 1
+  },
+  "stream_idle": {
+    "error": "LLMTimeoutError",
+    "seconds": 1.2
+  },
+  "hard": {
+    "error": "LLMTimeoutError",
+    "seconds": 2.0,
+    "requests": 2,
+    "message": "litellm.Timeout: APITimeoutError - Request timed out. Error_str: Request timed out. The model did not return a complete response within the LLM timeout of 1s (gave up after 2 attempts, 2s in total). Try a faster model, a shorter prompt (fewer tools or MCP servers), or a higher timeout in the LLM settings.",
+    "names_limit": true,
+    "names_attempts": true,
+    "names_settings": true
+  },
+  "hard_async": {
+    "error": "LLMTimeoutError",
+    "seconds": 2.0,
+    "requests": 2,
+    "message": "litellm.Timeout: LLM hard timeout after 1 seconds. The model did not return a complete response within the LLM timeout of 1s (gave up after 2 attempts, 2s in total). Try a faster model, a shorter prompt (fewer tools or MCP servers), or a higher timeout in the LLM settings.",
+    "hard_timeout": true,
+    "names_limit": true,
+    "names_attempts": true,
+    "names_settings": true
+  },
+  "quick": {
+    "error": "LLMTimeoutError",
+    "seconds": 1.0,
+    "requests": 3,
+    "message": "litellm.Timeout: LLM stream idle timeout after 0.3 seconds. The model did not return a complete response within the LLM timeout of 30s (gave up after 3 attempts, 1s in total). Try a faster model, a shorter prompt (fewer tools or MCP servers), or a higher timeout in the LLM settings."
+  },
+  "conversation": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "error_events": [
+      "LLMTimeoutError"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 15.4,
+  "checks": [
+    {
+      "check": "timeout.error eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "timeout.seconds lt 3",
+      "ok": true,
+      "actual": "1.3"
+    },
+    {
+      "check": "stream_idle.error eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "stream_idle.seconds lt 3",
+      "ok": true,
+      "actual": "1.2"
+    },
+    {
+      "check": "conversation.status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "conversation.error_events.0 eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "hard.error eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "hard.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "hard.seconds lt 4",
+      "ok": true,
+      "actual": "2.0"
+    },
+    {
+      "check": "hard.names_limit eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hard.names_attempts eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hard.names_settings eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hard_async.error eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "hard_async.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "hard_async.hard_timeout eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hard_async.names_limit eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hard_async.names_attempts eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hard_async.names_settings eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "quick.error eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "quick.requests eq 3",
+      "ok": true,
+      "actual": "3"
+    }
+  ]
+}
+
+[exit 0 after 16s]

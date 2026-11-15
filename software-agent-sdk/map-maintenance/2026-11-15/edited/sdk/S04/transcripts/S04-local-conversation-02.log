@@ -1,0 +1,163 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S01/run_to_finish.json --field id)
+control-sdk conversation send "$CID" --text "Write result.txt" --run --check execution_status eq finished
+control-sdk conversation state "$CID" --check event_count eq 5 --check event_files eq 5 \
+  --check last_agent_message eq "result.txt now says done."
+control-sdk exec --expect-output event-00000- --expect-output event-00004- -- find ../conversations -name "event-*.json"
+control-sdk exec --expect-output base_state.json -- find ../conversations -name base_state.json
+control-sdk program S04/lifecycle --arg persist \
+  --check folder_is_id_hex eq true --check base_state eq true --check event_files eq 6 --check events_in_state eq 6 \
+  --check names_match eq true --check numbered_in_order eq true --check files_follow_event_ids eq true \
+  --check callback_saw_file_every_time eq true --check files_grew_one_by_one eq true --check status eq finished
+{
+  "ok": true,
+  "id": "6daea7e8-972a-4f0f-8c2b-c008a7362187",
+  "execution_status": "finished",
+  "event_count": 5,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "result.txt now says done.",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "id": "6daea7e8-972a-4f0f-8c2b-c008a7362187",
+  "execution_status": "finished",
+  "event_count": 5,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "result.txt now says done.",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "event_files": 5,
+  "checks": [
+    {
+      "check": "event_count eq 5",
+      "ok": true,
+      "actual": "5"
+    },
+    {
+      "check": "event_files eq 5",
+      "ok": true,
+      "actual": "5"
+    },
+    {
+      "check": "last_agent_message eq result.txt now says done.",
+      "ok": true,
+      "actual": "result.txt now says done."
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "../conversations/6daea7e8972a4f0f8c2bc008a7362187/events/event-00001-99e99600-a8cd-4248-887f-68b3510f3fb8.json\n../conversations/6daea7e8972a4f0f8c2bc008a7362187/events/event-00002-3b335216-2d20-4149-a49c-27eef26ce2c7.json\n../conversations/6daea7e8972a4f0f8c2bc008a7362187/events/event-00000-2723c7e6-997f-4da1-9334-b0bc81f58e3d.json\n../conversations/6daea7e8972a4f0f8c2bc008a7362187/events/event-00003-b1d0c828-e4e8-4858-9d20-e420c7ce54bc.json\n../conversations/6daea7e8972a4f0f8c2bc008a7362187/events/event-00004-0d2a88f9-445b-4f1f-a184-cd15f7e1e095.json\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "../conversations/6daea7e8972a4f0f8c2bc008a7362187/base_state.json\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "ok": true,
+  "mode": "persist",
+  "folder_is_id_hex": true,
+  "base_state": true,
+  "event_files": 6,
+  "events_in_state": 6,
+  "names_match": true,
+  "numbered_in_order": true,
+  "files_follow_event_ids": true,
+  "callback_saw_file_every_time": true,
+  "files_grew_one_by_one": true,
+  "callback_events": 6,
+  "status": "finished",
+  "_exit": 0,
+  "_seconds": 5.7,
+  "checks": [
+    {
+      "check": "folder_is_id_hex eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "base_state eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "event_files eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "events_in_state eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "names_match eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "numbered_in_order eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "files_follow_event_ids eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "callback_saw_file_every_time eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "files_grew_one_by_one eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 22s]

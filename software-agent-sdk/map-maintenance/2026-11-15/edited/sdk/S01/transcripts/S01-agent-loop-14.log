@@ -1,0 +1,46 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg tool-exception \
+  --check status eq finished --check agent_errors eq 1 --check error_tool eq sleeper \
+  --check error_text contains "failed on purpose"
+{
+  "ok": true,
+  "mode": "tool-exception",
+  "status": "finished",
+  "agent_errors": 1,
+  "error_text": "Error executing tool 'sleeper': sleeper boom failed on purpose",
+  "error_tool": "sleeper",
+  "kinds": [
+    "SystemPromptEvent",
+    "MessageEvent",
+    "ActionEvent",
+    "AgentErrorEvent",
+    "ActionEvent",
+    "ObservationEvent"
+  ],
+  "_exit": 0,
+  "_seconds": 5.4,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "agent_errors eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "error_tool eq sleeper",
+      "ok": true,
+      "actual": "sleeper"
+    },
+    {
+      "check": "error_text contains failed on purpose",
+      "ok": true,
+      "actual": "Error executing tool 'sleeper': sleeper boom failed on purpose"
+    }
+  ]
+}
+
+[exit 0 after 6s]

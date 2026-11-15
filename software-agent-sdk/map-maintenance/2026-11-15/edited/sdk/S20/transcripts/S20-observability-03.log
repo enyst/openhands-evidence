@@ -1,0 +1,126 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S20/traced_conversation --arg laminar \
+  --check status eq finished --check otlp_posts ge 1 --check auth_header eq "Bearer lmnr-verify-key" \
+  --check root.found eq true --check steps eq 3 \
+  --check warnings contains "Ignoring invalid LMNR_INSTRUMENTS value 'not-an-instrument'"
+{
+  "ok": true,
+  "mode": "laminar",
+  "status": "finished",
+  "enabled": true,
+  "import_seconds": 4.01,
+  "lmnr_imported_at_start": true,
+  "lmnr_imported": true,
+  "otlp_posts": 1,
+  "auth_header": "Bearer lmnr-verify-key",
+  "warnings": [
+    "Ignoring invalid LMNR_INSTRUMENTS value 'not-an-instrument'"
+  ],
+  "summary": {
+    "count": 10,
+    "names": [
+      "FinishAction",
+      "TerminalAction",
+      "agent.step",
+      "conversation",
+      "conversation.run",
+      "conversation.send_message"
+    ],
+    "traces": 1,
+    "ancestry": {
+      "conversation.send_message": [
+        "conversation"
+      ],
+      "TerminalAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "agent.step": [
+        "conversation.run",
+        "conversation"
+      ],
+      "FinishAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "conversation.run": [
+        "conversation"
+      ],
+      "conversation": []
+    }
+  },
+  "root": {
+    "found": true,
+    "is_trace_root": true,
+    "attributes": {
+      "lmnr.association.properties.session_id": "a18b36ba-16ab-4e2f-8640-b2e2b3f0d438"
+    }
+  },
+  "root_user_id": null,
+  "root_session_id_is_conversation": true,
+  "root_attr_ticket": null,
+  "root_meta_ticket": null,
+  "root_automation_id": null,
+  "root_tag_team": null,
+  "root_tags": null,
+  "parent_trace_joined": false,
+  "root_has_parent": false,
+  "conversation_traces": 1,
+  "steps": 3,
+  "tool_spans": 4,
+  "terminal_spans": 3,
+  "tool_call_ids": [
+    "call_0_0",
+    "call_1_0",
+    "call_1_1",
+    "call_2_0"
+  ],
+  "terminal_input_is_action": true,
+  "tools_under_step": true,
+  "parallel_terminal_parents": 2,
+  "llm_spans": 0,
+  "llm_costs": [],
+  "llm_cache_read": [],
+  "llm_under_step": 0,
+  "llm_under_conversation": 0,
+  "title_operation": [],
+  "ask_operation": [],
+  "_exit": 0,
+  "_seconds": 6.8,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "otlp_posts ge 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "auth_header eq Bearer lmnr-verify-key",
+      "ok": true,
+      "actual": "Bearer lmnr-verify-key"
+    },
+    {
+      "check": "root.found eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "warnings contains Ignoring invalid LMNR_INSTRUMENTS value 'not-an-instrument'",
+      "ok": true,
+      "actual": "[\"Ignoring invalid LMNR_INSTRUMENTS value 'not-an-instrument'\"]"
+    }
+  ]
+}
+
+[exit 0 after 7s]

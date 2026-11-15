@@ -1,0 +1,162 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S20/traced_conversation --arg delegate \
+  --check status eq finished --check conversation_traces eq 2 \
+  --check link_keys contains delegate.parent_trace_id --check link_keys contains delegate.parent_span_id \
+  --check link_keys contains tool_call_id \
+  --check delegate.task_span eq true --check delegate.child_new_trace eq true --check delegate.child_is_trace_root eq true \
+  --check delegate.child_parent_trace_ok eq true --check delegate.child_tool_call_id eq call_task_1
+{
+  "ok": true,
+  "mode": "delegate",
+  "link_keys": [
+    "delegate.parent_span_id",
+    "delegate.parent_trace_id",
+    "tool_call_id"
+  ],
+  "status": "finished",
+  "enabled": true,
+  "import_seconds": 4.84,
+  "lmnr_imported_at_start": true,
+  "lmnr_imported": true,
+  "otlp_posts": 1,
+  "auth_header": null,
+  "warnings": [],
+  "summary": {
+    "count": 16,
+    "names": [
+      "FinishAction",
+      "TerminalAction",
+      "agent.step",
+      "conversation",
+      "conversation.run",
+      "conversation.send_message",
+      "task"
+    ],
+    "traces": 3,
+    "ancestry": {
+      "conversation.send_message": [
+        "conversation"
+      ],
+      "TerminalAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "agent.step": [
+        "conversation.run",
+        "conversation"
+      ],
+      "FinishAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "conversation.run": [
+        "conversation"
+      ],
+      "conversation": [],
+      "task": []
+    }
+  },
+  "root": {
+    "found": true,
+    "is_trace_root": true,
+    "attributes": {
+      "lmnr.association.properties.session_id": "2cdf19f2-8a40-41a7-a135-d0b95f9e64c4"
+    }
+  },
+  "root_user_id": null,
+  "root_session_id_is_conversation": true,
+  "root_attr_ticket": null,
+  "root_meta_ticket": null,
+  "root_automation_id": null,
+  "root_tag_team": null,
+  "root_tags": null,
+  "parent_trace_joined": false,
+  "root_has_parent": false,
+  "conversation_traces": 2,
+  "steps": 4,
+  "tool_spans": 5,
+  "terminal_spans": 3,
+  "tool_call_ids": [
+    "call_0_0",
+    "call_0_0",
+    "call_1_0",
+    "call_1_1",
+    "call_2_0"
+  ],
+  "terminal_input_is_action": true,
+  "tools_under_step": true,
+  "parallel_terminal_parents": 2,
+  "llm_spans": 0,
+  "llm_costs": [],
+  "llm_cache_read": [],
+  "llm_under_step": 0,
+  "llm_under_conversation": 0,
+  "title_operation": [],
+  "ask_operation": [],
+  "delegate": {
+    "task_span": true,
+    "child_root_found": true,
+    "child_new_trace": true,
+    "child_is_trace_root": true,
+    "child_parent_trace_ok": true,
+    "child_tool_call_id": "call_task_1"
+  },
+  "_exit": 0,
+  "_seconds": 8.2,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "conversation_traces eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "link_keys contains delegate.parent_trace_id",
+      "ok": true,
+      "actual": "[\"delegate.parent_span_id\", \"delegate.parent_trace_id\", \"tool_call_id\"]"
+    },
+    {
+      "check": "link_keys contains delegate.parent_span_id",
+      "ok": true,
+      "actual": "[\"delegate.parent_span_id\", \"delegate.parent_trace_id\", \"tool_call_id\"]"
+    },
+    {
+      "check": "link_keys contains tool_call_id",
+      "ok": true,
+      "actual": "[\"delegate.parent_span_id\", \"delegate.parent_trace_id\", \"tool_call_id\"]"
+    },
+    {
+      "check": "delegate.task_span eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "delegate.child_new_trace eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "delegate.child_is_trace_root eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "delegate.child_parent_trace_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "delegate.child_tool_call_id eq call_task_1",
+      "ok": true,
+      "actual": "call_task_1"
+    }
+  ]
+}
+
+[exit 0 after 8s]

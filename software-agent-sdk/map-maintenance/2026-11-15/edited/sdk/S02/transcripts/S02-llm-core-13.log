@@ -1,0 +1,80 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg errors \
+  --check mapped.context_window eq LLMContextWindowExceedError \
+  --check mapped.malformed_history eq LLMMalformedConversationHistoryError \
+  --check mapped.auth_401_incorrect_key eq LLMAuthenticationError --check mapped.auth_401_invalid_key eq LLMAuthenticationError \
+  --check mapped.rate_limit eq LLMRateLimitError --check mapped.service_unavailable eq LLMServiceUnavailableError \
+  --check mapped.bad_request eq LLMBadRequestError --check mapped.content_policy eq LLMContentPolicyViolationError \
+  --check mapped.timeout eq LLMTimeoutError --check mapped.connection_refused eq LLMServiceUnavailableError
+{
+  "ok": true,
+  "mode": "errors",
+  "mapped": {
+    "context_window": "LLMContextWindowExceedError",
+    "malformed_history": "LLMMalformedConversationHistoryError",
+    "auth_401_incorrect_key": "LLMAuthenticationError",
+    "auth_401_invalid_key": "LLMAuthenticationError",
+    "rate_limit": "LLMRateLimitError",
+    "service_unavailable": "LLMServiceUnavailableError",
+    "bad_request": "LLMBadRequestError",
+    "content_policy": "LLMContentPolicyViolationError",
+    "timeout": "LLMTimeoutError",
+    "connection_refused": "LLMServiceUnavailableError"
+  },
+  "_exit": 0,
+  "_seconds": 11.3,
+  "checks": [
+    {
+      "check": "mapped.context_window eq LLMContextWindowExceedError",
+      "ok": true,
+      "actual": "LLMContextWindowExceedError"
+    },
+    {
+      "check": "mapped.malformed_history eq LLMMalformedConversationHistoryError",
+      "ok": true,
+      "actual": "LLMMalformedConversationHistoryError"
+    },
+    {
+      "check": "mapped.auth_401_incorrect_key eq LLMAuthenticationError",
+      "ok": true,
+      "actual": "LLMAuthenticationError"
+    },
+    {
+      "check": "mapped.auth_401_invalid_key eq LLMAuthenticationError",
+      "ok": true,
+      "actual": "LLMAuthenticationError"
+    },
+    {
+      "check": "mapped.rate_limit eq LLMRateLimitError",
+      "ok": true,
+      "actual": "LLMRateLimitError"
+    },
+    {
+      "check": "mapped.service_unavailable eq LLMServiceUnavailableError",
+      "ok": true,
+      "actual": "LLMServiceUnavailableError"
+    },
+    {
+      "check": "mapped.bad_request eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "mapped.content_policy eq LLMContentPolicyViolationError",
+      "ok": true,
+      "actual": "LLMContentPolicyViolationError"
+    },
+    {
+      "check": "mapped.timeout eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "mapped.connection_refused eq LLMServiceUnavailableError",
+      "ok": true,
+      "actual": "LLMServiceUnavailableError"
+    }
+  ]
+}
+
+[exit 0 after 11s]

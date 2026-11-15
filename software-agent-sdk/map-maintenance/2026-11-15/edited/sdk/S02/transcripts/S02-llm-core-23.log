@@ -1,0 +1,99 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S02/live_llm \
+  --check completion_text ne "" --check streamed_text ne "" --check stream_chunks gt 1 \
+  --check generate_text ne "" --check calls_recorded eq 2 --check prompt_tokens gt 0 --check latencies eq 2
+CID=$(control-sdk conversation new --field id)
+control-sdk conversation send "$CID" --run \
+  --text "Use the terminal to run: echo live-ok > live.txt. Then finish." \
+  --check execution_status eq finished
+control-sdk exec --expect-output live-ok -- cat live.txt
+{
+  "ok": true,
+  "model": "deepseek/deepseek-flash",
+  "uses_responses_api": false,
+  "completion_text": "Blue",
+  "streamed_text": "Blue",
+  "stream_chunks": 32,
+  "generate_text": "Blue",
+  "calls_recorded": 2,
+  "prompt_tokens": 90,
+  "completion_tokens": 49,
+  "accumulated_cost": 4.29e-05,
+  "latencies": 2,
+  "_exit": 0,
+  "_seconds": 8.9,
+  "checks": [
+    {
+      "check": "completion_text ne ",
+      "ok": true,
+      "actual": "Blue"
+    },
+    {
+      "check": "streamed_text ne ",
+      "ok": true,
+      "actual": "Blue"
+    },
+    {
+      "check": "stream_chunks gt 1",
+      "ok": true,
+      "actual": "32"
+    },
+    {
+      "check": "generate_text ne ",
+      "ok": true,
+      "actual": "Blue"
+    },
+    {
+      "check": "calls_recorded eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "prompt_tokens gt 0",
+      "ok": true,
+      "actual": "90"
+    },
+    {
+      "check": "latencies eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+{
+  "ok": true,
+  "id": "e3bf1d81-40ee-41e8-99d4-388ff384a6fb",
+  "execution_status": "finished",
+  "event_count": 6,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "Ran `echo live-ok > live.txt` in the workspace and verified the output with `cat live.txt`, which printed `live-ok`. Command exited 0.",
+  "accumulated_cost": 0.000421242,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": null,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "live-ok\n",
+  "stderr_tail": "",
+  "ok": true
+}
+
+[exit 0 after 24s]

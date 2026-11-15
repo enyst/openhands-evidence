@@ -1,0 +1,38 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg locks \
+  --check same_key_overlap eq false --check different_keys_overlap eq true \
+  --check undeclared_overlap eq false --check declared_no_keys_overlap eq true
+{
+  "ok": true,
+  "mode": "locks",
+  "same_key_overlap": false,
+  "different_keys_overlap": true,
+  "undeclared_overlap": false,
+  "declared_no_keys_overlap": true,
+  "_exit": 0,
+  "_seconds": 8.3,
+  "checks": [
+    {
+      "check": "same_key_overlap eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "different_keys_overlap eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "undeclared_overlap eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "declared_no_keys_overlap eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 9s]

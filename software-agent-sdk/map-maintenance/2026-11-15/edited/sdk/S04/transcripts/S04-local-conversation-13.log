@@ -1,0 +1,53 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/control --arg async-callback \
+  --check status eq finished --check run_thread_is_main eq false \
+  --check received eq 6 --check events_in_state eq 6 --check callbacks_on_main_thread eq true
+{
+  "ok": true,
+  "mode": "async-callback",
+  "events_in_state": 6,
+  "run_thread_is_main": false,
+  "status": "finished",
+  "received": 6,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "callback_threads": [
+    "MainThread"
+  ],
+  "callbacks_on_main_thread": true,
+  "_exit": 0,
+  "_seconds": 6.2,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "run_thread_is_main eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "received eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "events_in_state eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "callbacks_on_main_thread eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 6s]

@@ -1,0 +1,120 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+CID=$(control-sdk conversation new --field id)
+control-sdk conversation send "$CID" --run \
+  --text "Create notes.txt containing the lines alpha and beta using the terminal, show it with cat, then finish." \
+  --check execution_status eq finished
+control-sdk exec --expect-output alpha --expect-output beta -- cat notes.txt
+control-sdk program S05/reload_events --arg "$CID" \
+  --check roundtrip_equal eq true --check reopened_same_log eq true --check unmatched_actions eq 0 \
+  --check responses_item_types contains function_call
+{
+  "ok": true,
+  "id": "6d37e9b7-42ff-42c3-beff-b4a67e07ebf2",
+  "execution_status": "finished",
+  "event_count": 6,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "Done. Created `notes.txt` in the workspace containing:\n\n```\nalpha\nbeta\n```\n\n`cat notes.txt` output confirmed both lines.",
+  "accumulated_cost": 0.000411342,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": null,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "alpha\nbeta\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "ok": true,
+  "event_files": 6,
+  "file_names_ok": true,
+  "roundtrip_equal": true,
+  "kinds": [
+    "SystemPromptEvent",
+    "MessageEvent",
+    "ActionEvent",
+    "ObservationEvent",
+    "ActionEvent",
+    "ObservationEvent"
+  ],
+  "reopened_same_log": true,
+  "path_to_root": 6,
+  "iteration_cached": true,
+  "frozen": true,
+  "extra_forbidden": true,
+  "root_id_rejected": true,
+  "message_roles": [
+    "system",
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool"
+  ],
+  "action_events": 2,
+  "llm_responses_with_actions": 2,
+  "assistant_messages_with_tool_calls": 2,
+  "chat_roles": [
+    "system",
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool"
+  ],
+  "responses_instructions": true,
+  "responses_item_types": [
+    "function_call",
+    "function_call_output",
+    "message"
+  ],
+  "unmatched_actions": 0,
+  "transcript_mentions_command": true,
+  "visualize_empty_kinds": [
+    "ObservationEvent"
+  ],
+  "_exit": 0,
+  "_seconds": 4.8,
+  "checks": [
+    {
+      "check": "roundtrip_equal eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reopened_same_log eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "unmatched_actions eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "responses_item_types contains function_call",
+      "ok": true,
+      "actual": "[\"function_call\", \"function_call_output\", \"message\"]"
+    }
+  ]
+}
+
+[exit 0 after 19s]

@@ -1,0 +1,68 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg resume \
+  --check events_reloaded eq 3 --check status_after_load eq finished \
+  --check second_request_has_first_turn eq true --check second_request_has_first_reply eq true \
+  --check system_prompts_sent eq 1 --check replies.1 eq "The code word was PLUM." \
+  --check status eq finished --check events_after eq 5
+{
+  "ok": true,
+  "mode": "resume",
+  "events_before": 3,
+  "events_reloaded": 3,
+  "status_after_load": "finished",
+  "second_request_has_first_turn": true,
+  "second_request_has_first_reply": true,
+  "system_prompts_sent": 1,
+  "replies": [
+    "Noted.",
+    "The code word was PLUM."
+  ],
+  "status": "finished",
+  "events_after": 5,
+  "_exit": 0,
+  "_seconds": 7.1,
+  "checks": [
+    {
+      "check": "events_reloaded eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "status_after_load eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "second_request_has_first_turn eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "second_request_has_first_reply eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "system_prompts_sent eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "replies.1 eq The code word was PLUM.",
+      "ok": true,
+      "actual": "The code word was PLUM."
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "events_after eq 5",
+      "ok": true,
+      "actual": "5"
+    }
+  ]
+}
+
+[exit 0 after 7s]

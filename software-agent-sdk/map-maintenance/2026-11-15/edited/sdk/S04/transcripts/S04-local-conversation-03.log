@@ -1,0 +1,102 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg corrupt \
+  --check events_before eq 6 --check intact.events eq 6 \
+  --check empty_middle.error missing --check empty_middle.events eq 6 --check empty_last.error missing --check empty_last.events eq 6 \
+  --check invalid_json_middle.error missing --check invalid_json_middle.events eq 6 \
+  --check missing_middle.error missing --check missing_middle.events eq 5 \
+  --check missing_last.error missing --check missing_last.events eq 5
+{
+  "ok": true,
+  "mode": "corrupt",
+  "events_before": 6,
+  "intact": {
+    "events": 6,
+    "error": null
+  },
+  "empty_middle": {
+    "events": 6,
+    "error": null
+  },
+  "empty_last": {
+    "events": 6,
+    "error": null
+  },
+  "invalid_json_middle": {
+    "events": 6,
+    "error": null
+  },
+  "missing_middle": {
+    "events": 5,
+    "error": null
+  },
+  "missing_last": {
+    "events": 5,
+    "error": null
+  },
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "events_before eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "intact.events eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "empty_middle.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "empty_middle.events eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "empty_last.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "empty_last.events eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "invalid_json_middle.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "invalid_json_middle.events eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "missing_middle.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "missing_middle.events eq 5",
+      "ok": true,
+      "actual": "5"
+    },
+    {
+      "check": "missing_last.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "missing_last.events eq 5",
+      "ok": true,
+      "actual": "5"
+    }
+  ]
+}
+
+[exit 0 after 6s]

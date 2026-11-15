@@ -1,0 +1,185 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S20/traced_conversation --arg live \
+  --check status eq finished --check root.found eq true --check llm_spans ge 1 --check terminal_spans ge 1 \
+  --check tools_under_step eq true \
+  --check content.spans_with_input ge 1 --check content.spans_with_output ge 1 \
+  --check content.spans_with_token_totals ge 1 --check content.first_input_roles.0 eq system
+{
+  "ok": true,
+  "mode": "live",
+  "status": "finished",
+  "enabled": true,
+  "import_seconds": 5.05,
+  "lmnr_imported_at_start": true,
+  "lmnr_imported": true,
+  "otlp_posts": 2,
+  "auth_header": null,
+  "warnings": [],
+  "summary": {
+    "count": 11,
+    "names": [
+      "FinishAction",
+      "TerminalAction",
+      "agent.step",
+      "conversation",
+      "conversation.run",
+      "conversation.send_message",
+      "litellm.completion",
+      "llm.deepseek/deepseek-flash"
+    ],
+    "traces": 1,
+    "ancestry": {
+      "conversation.send_message": [
+        "conversation"
+      ],
+      "litellm.completion": [
+        "llm.deepseek/deepseek-flash",
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "llm.deepseek/deepseek-flash": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "TerminalAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "agent.step": [
+        "conversation.run",
+        "conversation"
+      ],
+      "FinishAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation"
+      ],
+      "conversation.run": [
+        "conversation"
+      ],
+      "conversation": []
+    }
+  },
+  "root": {
+    "found": true,
+    "is_trace_root": true,
+    "attributes": {
+      "lmnr.association.properties.session_id": "1df1ad52-9c69-4a51-8723-0d3e0a05fe2d"
+    }
+  },
+  "root_user_id": null,
+  "root_session_id_is_conversation": true,
+  "root_attr_ticket": null,
+  "root_meta_ticket": null,
+  "root_automation_id": null,
+  "root_tag_team": null,
+  "root_tags": null,
+  "parent_trace_joined": false,
+  "root_has_parent": false,
+  "conversation_traces": 1,
+  "steps": 2,
+  "tool_spans": 2,
+  "terminal_spans": 1,
+  "tool_call_ids": [
+    "call_00_ET_lY0GjfIBeDGN1PwnahIz0596",
+    "call_00_nWmJh7l7NX10BV0xtfhA7434"
+  ],
+  "terminal_input_is_action": true,
+  "tools_under_step": true,
+  "parallel_terminal_parents": 1,
+  "llm_spans": 2,
+  "llm_costs": [
+    9.145799999999999e-05,
+    9.1674e-05
+  ],
+  "llm_cache_read": [
+    4608,
+    4736
+  ],
+  "llm_under_step": 2,
+  "llm_under_conversation": 2,
+  "title_operation": [],
+  "ask_operation": [],
+  "content": {
+    "completion_logging": false,
+    "spans_with_input": 2,
+    "spans_with_output": 2,
+    "first_input_roles": [
+      "system",
+      "user"
+    ],
+    "input_has_user_text": false,
+    "output_has_text": false,
+    "output_has_tool_call": true,
+    "laminar_copy_matches": true,
+    "input_tokens": [
+      4743,
+      4943
+    ],
+    "output_tokens": [
+      77,
+      96
+    ],
+    "spans_with_token_totals": 2,
+    "reasoning_in_llm_spans": false,
+    "reasoning_elsewhere": [],
+    "credential_elsewhere": [],
+    "credential_in_llm_spans": false,
+    "credential_redacted": false,
+    "api_key_in_any_span": false
+  },
+  "_exit": 0,
+  "_seconds": 11.0,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "root.found eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "llm_spans ge 1",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "terminal_spans ge 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "tools_under_step eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "content.spans_with_input ge 1",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "content.spans_with_output ge 1",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "content.spans_with_token_totals ge 1",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "content.first_input_roles.0 eq system",
+      "ok": true,
+      "actual": "system"
+    }
+  ]
+}
+
+[exit 0 after 11s]

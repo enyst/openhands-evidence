@@ -1,0 +1,163 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg content-free \
+  --check empty_then_answer.status eq finished --check empty_then_answer.requests eq 3 \
+  --check empty_then_answer.temperatures.1 eq 1.0 --check empty_then_answer.nudges eq 0 \
+  --check empty_then_answer.agent_messages len-eq 1 --check empty_then_answer.agent_messages.0 eq "The answer is ready." \
+  --check reasoning_only.status eq finished --check reasoning_only.requests eq 2 --check reasoning_only.nudges eq 1 \
+  --check exhausted.status eq error --check exhausted.raised eq ConversationRunError --check exhausted.requests eq 2 \
+  --check exhausted.nudges eq 0 --check exhausted.agent_messages len-eq 0 \
+  --check exhausted.error_codes len-eq 1 --check exhausted.error_codes.0 eq LLMNoResponseError \
+  --check exhausted.error_classifications.0.kind eq transient --check exhausted.error_classifications.0.retryable eq true
+{
+  "ok": true,
+  "mode": "content-free",
+  "empty_then_answer": {
+    "status": "finished",
+    "raised": null,
+    "requests": 3,
+    "temperatures": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "nudges": 0,
+    "agent_messages": [
+      "The answer is ready."
+    ],
+    "error_codes": [],
+    "error_classifications": []
+  },
+  "reasoning_only": {
+    "status": "finished",
+    "raised": null,
+    "requests": 2,
+    "temperatures": [
+      0.0,
+      0.0
+    ],
+    "nudges": 1,
+    "agent_messages": [
+      ""
+    ],
+    "error_codes": [],
+    "error_classifications": []
+  },
+  "exhausted": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "requests": 2,
+    "temperatures": [
+      0.0,
+      1.0
+    ],
+    "nudges": 0,
+    "agent_messages": [],
+    "error_codes": [
+      "LLMNoResponseError"
+    ],
+    "error_classifications": [
+      {
+        "kind": "transient",
+        "retryable": true,
+        "user_action": "retry",
+        "error_id": null
+      }
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 6.8,
+  "checks": [
+    {
+      "check": "empty_then_answer.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "empty_then_answer.requests eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "empty_then_answer.temperatures.1 eq 1.0",
+      "ok": true,
+      "actual": "1.0"
+    },
+    {
+      "check": "empty_then_answer.nudges eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "empty_then_answer.agent_messages len-eq 1",
+      "ok": true,
+      "actual": "[\"The answer is ready.\"]"
+    },
+    {
+      "check": "empty_then_answer.agent_messages.0 eq The answer is ready.",
+      "ok": true,
+      "actual": "The answer is ready."
+    },
+    {
+      "check": "reasoning_only.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "reasoning_only.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "reasoning_only.nudges eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "exhausted.status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "exhausted.raised eq ConversationRunError",
+      "ok": true,
+      "actual": "ConversationRunError"
+    },
+    {
+      "check": "exhausted.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "exhausted.nudges eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "exhausted.agent_messages len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "exhausted.error_codes len-eq 1",
+      "ok": true,
+      "actual": "[\"LLMNoResponseError\"]"
+    },
+    {
+      "check": "exhausted.error_codes.0 eq LLMNoResponseError",
+      "ok": true,
+      "actual": "LLMNoResponseError"
+    },
+    {
+      "check": "exhausted.error_classifications.0.kind eq transient",
+      "ok": true,
+      "actual": "transient"
+    },
+    {
+      "check": "exhausted.error_classifications.0.retryable eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 7s]

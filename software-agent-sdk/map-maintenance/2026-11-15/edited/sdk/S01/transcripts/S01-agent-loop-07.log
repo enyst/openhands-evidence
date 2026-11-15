@@ -1,0 +1,66 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg budget \
+  --check over_budget.status eq error --check over_budget.codes.0 eq MaxBudgetReached \
+  --check over_budget.llm_calls eq 2 --check over_budget.cost eq 0.28 \
+  --check finish_over_budget.status eq finished --check finish_over_budget.codes len-eq 0 \
+  --check factory_accepts_budget eq true
+{
+  "ok": true,
+  "mode": "budget",
+  "factory_accepts_budget": true,
+  "over_budget": {
+    "status": "error",
+    "codes": [
+      "MaxBudgetReached"
+    ],
+    "llm_calls": 2,
+    "cost": 0.28
+  },
+  "finish_over_budget": {
+    "status": "finished",
+    "codes": [],
+    "llm_calls": 1,
+    "cost": 0.14
+  },
+  "_exit": 0,
+  "_seconds": 7.7,
+  "checks": [
+    {
+      "check": "over_budget.status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "over_budget.codes.0 eq MaxBudgetReached",
+      "ok": true,
+      "actual": "MaxBudgetReached"
+    },
+    {
+      "check": "over_budget.llm_calls eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "over_budget.cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "finish_over_budget.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "finish_over_budget.codes len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "factory_accepts_budget eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 8s]

@@ -1,0 +1,53 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg async \
+  --check lock_wait_seconds lt 0.5 --check status_mid_call eq running --check status eq finished \
+  --check actions.0 eq terminal --check actions.1 eq finish --check user_messages eq 2
+{
+  "ok": true,
+  "mode": "async",
+  "lock_wait_seconds": 0.0,
+  "status_mid_call": "running",
+  "events_mid_call": 2,
+  "status": "finished",
+  "actions": [
+    "terminal",
+    "finish"
+  ],
+  "user_messages": 2,
+  "_exit": 0,
+  "_seconds": 9.7,
+  "checks": [
+    {
+      "check": "lock_wait_seconds lt 0.5",
+      "ok": true,
+      "actual": "0.0"
+    },
+    {
+      "check": "status_mid_call eq running",
+      "ok": true,
+      "actual": "running"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "actions.0 eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    },
+    {
+      "check": "actions.1 eq finish",
+      "ok": true,
+      "actual": "finish"
+    },
+    {
+      "check": "user_messages eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 10s]

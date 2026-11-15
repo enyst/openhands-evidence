@@ -1,0 +1,219 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S20/retry_log \
+  --check transient.lines eq 1 --check transient.levels.0 eq WARNING \
+  --check transient.fields.0.exception_type eq litellm.exceptions.ServiceUnavailableError \
+  --check transient.fields.0.status_code eq 503 --check transient.fields.0.attempt eq 1 \
+  --check transient.fields.0.max_attempts eq 3 --check transient.fields.0.retry_eligible eq True \
+  --check transient.fields.0.will_retry eq True \
+  --check non_retryable.lines eq 1 --check non_retryable.fields.0.exception_type eq litellm.exceptions.BadRequestError \
+  --check non_retryable.fields.0.retry_eligible eq False --check non_retryable.fields.0.will_retry eq False \
+  --check exhausted.lines eq 2 --check exhausted.fields.0.will_retry eq True \
+  --check exhausted.fields.1.attempt eq 2 --check exhausted.fields.1.retry_eligible eq True --check exhausted.fields.1.will_retry eq False \
+  --check malformed_2xx.error missing --check malformed_2xx.fields.0.exception_type eq litellm.exceptions.APIError \
+  --check malformed_2xx.fields.0.status_code eq 200 --check malformed_2xx.fields.0.will_retry eq True \
+  --check marker_in_any_log eq false
+{
+  "ok": true,
+  "transient": {
+    "error": null,
+    "requests": 2,
+    "lines": 1,
+    "levels": [
+      "WARNING"
+    ],
+    "fields": [
+      {
+        "exception_type": "litellm.exceptions.ServiceUnavailableError",
+        "status_code": "503",
+        "attempt": "1",
+        "max_attempts": "3",
+        "retry_eligible": "True",
+        "will_retry": "True"
+      }
+    ],
+    "marker_in_logs": false
+  },
+  "non_retryable": {
+    "error": "LLMBadRequestError",
+    "requests": 1,
+    "lines": 1,
+    "levels": [
+      "WARNING"
+    ],
+    "fields": [
+      {
+        "exception_type": "litellm.exceptions.BadRequestError",
+        "status_code": "400",
+        "attempt": "1",
+        "max_attempts": "3",
+        "retry_eligible": "False",
+        "will_retry": "False"
+      }
+    ],
+    "marker_in_logs": false
+  },
+  "exhausted": {
+    "error": "LLMRateLimitError",
+    "requests": 2,
+    "lines": 2,
+    "levels": [
+      "WARNING",
+      "WARNING"
+    ],
+    "fields": [
+      {
+        "exception_type": "litellm.exceptions.RateLimitError",
+        "status_code": "429",
+        "attempt": "1",
+        "max_attempts": "2",
+        "retry_eligible": "True",
+        "will_retry": "True"
+      },
+      {
+        "exception_type": "litellm.exceptions.RateLimitError",
+        "status_code": "429",
+        "attempt": "2",
+        "max_attempts": "2",
+        "retry_eligible": "True",
+        "will_retry": "False"
+      }
+    ],
+    "marker_in_logs": false
+  },
+  "malformed_2xx": {
+    "error": null,
+    "requests": 2,
+    "lines": 1,
+    "levels": [
+      "WARNING"
+    ],
+    "fields": [
+      {
+        "exception_type": "litellm.exceptions.APIError",
+        "status_code": "200",
+        "attempt": "1",
+        "max_attempts": "3",
+        "retry_eligible": "True",
+        "will_retry": "True"
+      }
+    ],
+    "marker_in_logs": false
+  },
+  "marker_in_any_log": false,
+  "_exit": 0,
+  "_seconds": 7.1,
+  "checks": [
+    {
+      "check": "transient.lines eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "transient.levels.0 eq WARNING",
+      "ok": true,
+      "actual": "WARNING"
+    },
+    {
+      "check": "transient.fields.0.exception_type eq litellm.exceptions.ServiceUnavailableError",
+      "ok": true,
+      "actual": "litellm.exceptions.ServiceUnavailableError"
+    },
+    {
+      "check": "transient.fields.0.status_code eq 503",
+      "ok": true,
+      "actual": "503"
+    },
+    {
+      "check": "transient.fields.0.attempt eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "transient.fields.0.max_attempts eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "transient.fields.0.retry_eligible eq True",
+      "ok": true,
+      "actual": "True"
+    },
+    {
+      "check": "transient.fields.0.will_retry eq True",
+      "ok": true,
+      "actual": "True"
+    },
+    {
+      "check": "non_retryable.lines eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "non_retryable.fields.0.exception_type eq litellm.exceptions.BadRequestError",
+      "ok": true,
+      "actual": "litellm.exceptions.BadRequestError"
+    },
+    {
+      "check": "non_retryable.fields.0.retry_eligible eq False",
+      "ok": true,
+      "actual": "False"
+    },
+    {
+      "check": "non_retryable.fields.0.will_retry eq False",
+      "ok": true,
+      "actual": "False"
+    },
+    {
+      "check": "exhausted.lines eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "exhausted.fields.0.will_retry eq True",
+      "ok": true,
+      "actual": "True"
+    },
+    {
+      "check": "exhausted.fields.1.attempt eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "exhausted.fields.1.retry_eligible eq True",
+      "ok": true,
+      "actual": "True"
+    },
+    {
+      "check": "exhausted.fields.1.will_retry eq False",
+      "ok": true,
+      "actual": "False"
+    },
+    {
+      "check": "malformed_2xx.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "malformed_2xx.fields.0.exception_type eq litellm.exceptions.APIError",
+      "ok": true,
+      "actual": "litellm.exceptions.APIError"
+    },
+    {
+      "check": "malformed_2xx.fields.0.status_code eq 200",
+      "ok": true,
+      "actual": "200"
+    },
+    {
+      "check": "malformed_2xx.fields.0.will_retry eq True",
+      "ok": true,
+      "actual": "True"
+    },
+    {
+      "check": "marker_in_any_log eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 7s]

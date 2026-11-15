@@ -1,0 +1,174 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S01/step_errors.json --field id)
+control-sdk conversation send "$CID" --text "Plan the work" --run \
+  --check execution_status eq finished --check last_agent_message eq "survived every error"
+control-sdk conversation events "$CID" --kind AgentErrorEvent \
+  --check count eq 2 --check events.0.error contains "Tool 'no_such_tool' not found" \
+  --check events.1.error contains "Error validating tool 'terminal'"
+control-sdk conversation events "$CID" --kind ObservationEvent \
+  --check events.0.tool eq task_tracker --check events.0.is_error eq false --check events.0.text contains "1 item"
+control-sdk conversation events "$CID" --kind MessageEvent --source user \
+  --check events.1.text contains "blocked by the model's content filter"
+[11/15/26 09:18:05] ERROR    Tool 'no_such_tool' not found.        agent.py:1458
+                             Available: ['terminal',                            
+                             'file_editor', 'task_tracker',                     
+                             'finish']                                          
+[11/15/26 09:18:05] WARNING  LLM output blocked by content filter:  agent.py:875
+                             Output blocked by content filtering                
+                             policy                                             
+{
+  "ok": true,
+  "id": "a92ab032-0155-4e6a-9fb2-78046b79b9b8",
+  "execution_status": "finished",
+  "event_count": 11,
+  "kinds": [
+    "ActionEvent",
+    "AgentErrorEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "survived every error",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq survived every error",
+      "ok": true,
+      "actual": "survived every error"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 2,
+  "kinds": [
+    "AgentErrorEvent",
+    "AgentErrorEvent"
+  ],
+  "events": [
+    {
+      "index": 3,
+      "kind": "AgentErrorEvent",
+      "source": "agent",
+      "id": "c792b35d-14e6-4b4b-a70a-4389f9eff4fa",
+      "failure_kind": "agent_action",
+      "error": "Tool 'no_such_tool' not found. Available: ['terminal', 'file_editor', 'task_tracker', 'finish']"
+    },
+    {
+      "index": 5,
+      "kind": "AgentErrorEvent",
+      "source": "agent",
+      "id": "eb9e623b-bb34-46a0-b186-9a70dbd6d633",
+      "failure_kind": "agent_action",
+      "error": "Error validating tool 'terminal': 2 validation errors for TerminalAction\ncommand\n  Field required [type=missing, input_value={'bogus': 1}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nbogus\n  Extra inputs are not permitted [type=extra_forbidden, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra\u2026"
+    }
+  ],
+  "checks": [
+    {
+      "check": "count eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "events.0.error contains Tool 'no_such_tool' not found",
+      "ok": true,
+      "actual": "Tool 'no_such_tool' not found. Available: ['terminal', 'file_editor', 'task_tracker', 'finish']"
+    },
+    {
+      "check": "events.1.error contains Error validating tool 'terminal'",
+      "ok": true,
+      "actual": "Error validating tool 'terminal': 2 validation errors for TerminalAction\ncommand\n  Field required [type=missing, input_value={'bogus': 1}, input_type=dict]\n    For further information visit https://er"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 2,
+  "kinds": [
+    "ObservationEvent",
+    "ObservationEvent"
+  ],
+  "events": [
+    {
+      "index": 7,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "6c7f13a1-7bd2-49f7-bf91-ad090d46d109",
+      "tool": "task_tracker",
+      "text": "Task list has been updated with 1 item(s).",
+      "is_error": false
+    },
+    {
+      "index": 10,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "75a6af21-2acf-4943-8cb4-246c5d8690fc",
+      "tool": "finish",
+      "text": "survived every error",
+      "is_error": false
+    }
+  ],
+  "checks": [
+    {
+      "check": "events.0.tool eq task_tracker",
+      "ok": true,
+      "actual": "task_tracker"
+    },
+    {
+      "check": "events.0.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "events.0.text contains 1 item",
+      "ok": true,
+      "actual": "Task list has been updated with 1 item(s)."
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 2,
+  "kinds": [
+    "MessageEvent",
+    "MessageEvent"
+  ],
+  "events": [
+    {
+      "index": 1,
+      "kind": "MessageEvent",
+      "source": "user",
+      "id": "80fb1473-0f5c-49fd-abe4-6f4679eaac06",
+      "role": "user",
+      "text": "Plan the work"
+    },
+    {
+      "index": 8,
+      "kind": "MessageEvent",
+      "source": "user",
+      "id": "913d85c2-57a3-4aac-8248-e312571a339a",
+      "role": "user",
+      "text": "Your previous response was blocked by the model's content filter. Please continue, rephrasing to avoid the flagged content."
+    }
+  ],
+  "checks": [
+    {
+      "check": "events.1.text contains blocked by the model's content filter",
+      "ok": true,
+      "actual": "Your previous response was blocked by the model's content filter. Please continue, rephrasing to avoid the flagged content."
+    }
+  ]
+}
+
+[exit 0 after 26s]

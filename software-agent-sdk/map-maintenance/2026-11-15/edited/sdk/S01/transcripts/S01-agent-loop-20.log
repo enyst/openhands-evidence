@@ -1,0 +1,54 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg context-overflow \
+  --check with_condenser.status eq finished --check with_condenser.condensation_requests eq 1 \
+  --check without_condenser.status eq error --check without_condenser.raised eq ConversationRunError \
+  --check without_condenser.codes.0 eq LLMContextWindowExceedError
+{
+  "ok": true,
+  "mode": "context-overflow",
+  "with_condenser": {
+    "status": "finished",
+    "raised": null,
+    "condensation_requests": 1,
+    "codes": []
+  },
+  "without_condenser": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "condensation_requests": 0,
+    "codes": [
+      "LLMContextWindowExceedError"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 5.1,
+  "checks": [
+    {
+      "check": "with_condenser.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "with_condenser.condensation_requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "without_condenser.status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "without_condenser.raised eq ConversationRunError",
+      "ok": true,
+      "actual": "ConversationRunError"
+    },
+    {
+      "check": "without_condenser.codes.0 eq LLMContextWindowExceedError",
+      "ok": true,
+      "actual": "LLMContextWindowExceedError"
+    }
+  ]
+}
+
+[exit 0 after 5s]

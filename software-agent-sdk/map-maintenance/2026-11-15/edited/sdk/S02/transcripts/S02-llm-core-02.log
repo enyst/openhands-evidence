@@ -1,0 +1,119 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/provider_run --arg responses \
+  --check execution_status eq finished --check paths.0 eq /v1/responses --check uses_responses_api eq true \
+  --check reasoning_sent.effort eq low --check reasoning_sent.summary eq auto \
+  --check include contains reasoning.encrypted_content --check first_body_keys contains prompt_cache_key \
+  --check action_reasoning_summary.0 eq "plan the echo" --check action_encrypted eq ENC-1 \
+  --check replayed_reasoning eq 1 --check replayed_encrypted.0 eq ENC-1
+{
+  "ok": true,
+  "mode": "responses",
+  "execution_status": "finished",
+  "requests": 2,
+  "paths": [
+    "/v1/responses"
+  ],
+  "actions": [
+    "terminal",
+    "finish"
+  ],
+  "observation_text": "provider-run\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/sdk-verify/S02/work/S02-llm-core-02/block1/r",
+  "uses_responses_api": true,
+  "request_tools": [
+    "finish",
+    "terminal"
+  ],
+  "first_body_keys": [
+    "include",
+    "input",
+    "instructions",
+    "max_output_tokens",
+    "model",
+    "prompt_cache_key",
+    "reasoning",
+    "store",
+    "tool_choice",
+    "tools"
+  ],
+  "accumulated_cost": 5.4e-05,
+  "costs": 2,
+  "token_usages": 2,
+  "response_latencies": 2,
+  "prompt_tokens": 200,
+  "reasoning_sent": {
+    "effort": "low",
+    "summary": "auto"
+  },
+  "include": [
+    "reasoning.encrypted_content"
+  ],
+  "replayed_reasoning": 1,
+  "replayed_encrypted": [
+    "ENC-1"
+  ],
+  "action_reasoning_summary": [
+    "plan the echo"
+  ],
+  "action_encrypted": "ENC-1",
+  "_exit": 0,
+  "_seconds": 6.3,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "paths.0 eq /v1/responses",
+      "ok": true,
+      "actual": "/v1/responses"
+    },
+    {
+      "check": "uses_responses_api eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reasoning_sent.effort eq low",
+      "ok": true,
+      "actual": "low"
+    },
+    {
+      "check": "reasoning_sent.summary eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "include contains reasoning.encrypted_content",
+      "ok": true,
+      "actual": "[\"reasoning.encrypted_content\"]"
+    },
+    {
+      "check": "first_body_keys contains prompt_cache_key",
+      "ok": true,
+      "actual": "[\"include\", \"input\", \"instructions\", \"max_output_tokens\", \"model\", \"prompt_cache_key\", \"reasoning\", \"store\", \"tool_choice\", \"tools\"]"
+    },
+    {
+      "check": "action_reasoning_summary.0 eq plan the echo",
+      "ok": true,
+      "actual": "plan the echo"
+    },
+    {
+      "check": "action_encrypted eq ENC-1",
+      "ok": true,
+      "actual": "ENC-1"
+    },
+    {
+      "check": "replayed_reasoning eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "replayed_encrypted.0 eq ENC-1",
+      "ok": true,
+      "actual": "ENC-1"
+    }
+  ]
+}
+
+[exit 0 after 7s]

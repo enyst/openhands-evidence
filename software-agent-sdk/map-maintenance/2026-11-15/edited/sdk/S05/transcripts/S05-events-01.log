@@ -1,0 +1,259 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S05/write_and_read.json --field id)
+control-sdk conversation send "$CID" --text "Write notes.txt with two lines, then read it back" --run \
+  --check execution_status eq finished --check last_agent_message eq "notes.txt has two lines"
+control-sdk conversation events "$CID" --kind ActionEvent --check count eq 4
+control-sdk program S05/reload_events --arg "$CID" \
+  --check event_files eq 10 --check file_names_ok eq true --check roundtrip_equal eq true \
+  --check reopened_same_log eq true --check path_to_root eq 10 --check iteration_cached eq true \
+  --check frozen eq true --check extra_forbidden eq true --check root_id_rejected eq true \
+  --check action_events eq 4 --check assistant_messages_with_tool_calls eq 3 \
+  --check chat_roles.0 eq system --check responses_instructions eq true \
+  --check responses_item_types contains function_call_output \
+  --check unmatched_actions eq 0 --check transcript_mentions_command eq true
+{
+  "ok": true,
+  "id": "124cad25-0b5b-4b7d-b081-79a5fd65b1fd",
+  "execution_status": "finished",
+  "event_count": 10,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "notes.txt has two lines",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq notes.txt has two lines",
+      "ok": true,
+      "actual": "notes.txt has two lines"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 4,
+  "kinds": [
+    "ActionEvent",
+    "ActionEvent",
+    "ActionEvent",
+    "ActionEvent"
+  ],
+  "events": [
+    {
+      "index": 2,
+      "kind": "ActionEvent",
+      "source": "agent",
+      "id": "81a4aafe-c0fa-4a37-8c2e-288e2d6fa41f",
+      "tool": "terminal",
+      "action": {
+        "command": "printf 'alpha\\nbeta\\n' > notes.txt && wc -l notes.txt",
+        "is_input": false,
+        "reset": false,
+        "kind": "TerminalAction"
+      }
+    },
+    {
+      "index": 4,
+      "kind": "ActionEvent",
+      "source": "agent",
+      "id": "63fd6253-1b39-478c-91ae-c2f4aebcbb0b",
+      "tool": "file_editor",
+      "action": {
+        "command": "view",
+        "path": "notes.txt",
+        "kind": "FileEditorAction"
+      }
+    },
+    {
+      "index": 5,
+      "kind": "ActionEvent",
+      "source": "agent",
+      "id": "6d78d0d2-5ab5-4055-95a8-e54b6429bd34",
+      "tool": "terminal",
+      "action": {
+        "command": "cat notes.txt",
+        "is_input": false,
+        "reset": false,
+        "kind": "TerminalAction"
+      }
+    },
+    {
+      "index": 8,
+      "kind": "ActionEvent",
+      "source": "agent",
+      "id": "90bdc8ed-6bb8-42e8-879a-15a3ad175c82",
+      "tool": "finish",
+      "action": {
+        "message": "notes.txt has two lines",
+        "kind": "FinishAction"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "check": "count eq 4",
+      "ok": true,
+      "actual": "4"
+    }
+  ]
+}
+{
+  "ok": true,
+  "event_files": 10,
+  "file_names_ok": true,
+  "roundtrip_equal": true,
+  "kinds": [
+    "SystemPromptEvent",
+    "MessageEvent",
+    "ActionEvent",
+    "ObservationEvent",
+    "ActionEvent",
+    "ActionEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ActionEvent",
+    "ObservationEvent"
+  ],
+  "reopened_same_log": true,
+  "path_to_root": 10,
+  "iteration_cached": true,
+  "frozen": true,
+  "extra_forbidden": true,
+  "root_id_rejected": true,
+  "message_roles": [
+    "system",
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "tool",
+    "assistant",
+    "tool"
+  ],
+  "action_events": 4,
+  "llm_responses_with_actions": 3,
+  "assistant_messages_with_tool_calls": 3,
+  "chat_roles": [
+    "system",
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "tool",
+    "assistant",
+    "tool"
+  ],
+  "responses_instructions": true,
+  "responses_item_types": [
+    "function_call",
+    "function_call_output",
+    "message"
+  ],
+  "unmatched_actions": 0,
+  "transcript_mentions_command": true,
+  "visualize_empty_kinds": [
+    "ObservationEvent"
+  ],
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "event_files eq 10",
+      "ok": true,
+      "actual": "10"
+    },
+    {
+      "check": "file_names_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "roundtrip_equal eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reopened_same_log eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "path_to_root eq 10",
+      "ok": true,
+      "actual": "10"
+    },
+    {
+      "check": "iteration_cached eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "frozen eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "extra_forbidden eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "root_id_rejected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "action_events eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "assistant_messages_with_tool_calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "chat_roles.0 eq system",
+      "ok": true,
+      "actual": "system"
+    },
+    {
+      "check": "responses_instructions eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "responses_item_types contains function_call_output",
+      "ok": true,
+      "actual": "[\"function_call\", \"function_call_output\", \"message\"]"
+    },
+    {
+      "check": "unmatched_actions eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "transcript_mentions_command eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 20s]

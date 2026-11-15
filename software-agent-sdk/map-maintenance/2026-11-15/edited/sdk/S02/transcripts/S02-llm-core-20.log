@@ -1,0 +1,114 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg log-alias \
+  --check default.to_file eq false --check default.dump_alias eq false \
+  --check new_name.to_file eq true --check new_name.dump_alias eq true --check new_name.warnings len-eq 0 \
+  --check alias.error missing --check alias.to_file eq true --check alias.dump_to_file eq true --check alias.dump_alias eq true \
+  --check both_equal.to_file eq true \
+  --check conflict.is_value_error eq true --check conflict.message contains "Conflicting values for log_completions"
+{
+  "ok": true,
+  "mode": "log-alias",
+  "default": {
+    "error": null,
+    "to_file": false,
+    "dump_to_file": false,
+    "dump_alias": false,
+    "warnings": [],
+    "warning_text": null
+  },
+  "new_name": {
+    "error": null,
+    "to_file": true,
+    "dump_to_file": true,
+    "dump_alias": true,
+    "warnings": [],
+    "warning_text": null
+  },
+  "alias": {
+    "error": null,
+    "to_file": true,
+    "dump_to_file": true,
+    "dump_alias": true,
+    "warnings": [],
+    "warning_text": null
+  },
+  "both_equal": {
+    "error": null,
+    "to_file": true,
+    "dump_to_file": true,
+    "dump_alias": true,
+    "warnings": [],
+    "warning_text": null
+  },
+  "conflict": {
+    "error": "ValidationError",
+    "is_value_error": true,
+    "message": "1 validation error for LLM\n  Value error, Conflicting values for log_completions (deprecated) and log_completions_to_file: pass only log_completions_to_file. [type=value_error, input_value={'model': 'openai/gpt-4o-...letions_to_file': False}, input_type=dict]\n    For further information visit https:"
+  },
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "default.to_file eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "default.dump_alias eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "new_name.to_file eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "new_name.dump_alias eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "new_name.warnings len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "alias.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "alias.to_file eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "alias.dump_to_file eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "alias.dump_alias eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "both_equal.to_file eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "conflict.is_value_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "conflict.message contains Conflicting values for log_completions",
+      "ok": true,
+      "actual": "1 validation error for LLM\n  Value error, Conflicting values for log_completions (deprecated) and log_completions_to_file: pass only log_completions_to_file. [type=value_error, input_value={'model': '"
+    }
+  ]
+}
+
+[exit 0 after 5s]

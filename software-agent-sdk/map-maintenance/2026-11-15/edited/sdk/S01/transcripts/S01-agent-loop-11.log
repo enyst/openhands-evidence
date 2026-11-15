@@ -1,0 +1,82 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S01/repeat_error.json --field id)
+control-sdk conversation send "$CID" --text "Do it" --run \
+  --check execution_status eq finished --check last_agent_message eq "switched approach"
+control-sdk conversation events "$CID" --kind MessageEvent --source environment \
+  --check count eq 1 --check events.0.text contains "3 times in a row"
+[11/15/26 09:20:07] ERROR    Tool 'no_such_tool' not found.        agent.py:1458
+                             Available: ['terminal',                            
+                             'file_editor', 'task_tracker',                     
+                             'finish']                                          
+[11/15/26 09:20:07] ERROR    Tool 'no_such_tool' not found.        agent.py:1458
+                             Available: ['terminal',                            
+                             'file_editor', 'task_tracker',                     
+                             'finish']                                          
+[11/15/26 09:20:07] ERROR    Tool 'no_such_tool' not found.        agent.py:1458
+                             Available: ['terminal',                            
+                             'file_editor', 'task_tracker',                     
+                             'finish']                                          
+{
+  "ok": true,
+  "id": "660a92e5-f33e-45c3-909f-36f43ff3e974",
+  "execution_status": "finished",
+  "event_count": 11,
+  "kinds": [
+    "ActionEvent",
+    "AgentErrorEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "switched approach",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq switched approach",
+      "ok": true,
+      "actual": "switched approach"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 1,
+  "kinds": [
+    "MessageEvent"
+  ],
+  "events": [
+    {
+      "index": 8,
+      "kind": "MessageEvent",
+      "source": "environment",
+      "id": "3d3e787c-6acd-40be-936e-f81ffe5b38c1",
+      "role": "user",
+      "text": "You've called `no_such_tool` with the same arguments 3 times in a row and gotten the same error each time: Tool 'no_such_tool' not found. Available: ['terminal', 'file_editor', 'task_tracker', 'finish']. Repeating the exact same call again will not work \u2014 review the error message and either correct the arguments or try a different approach."
+    }
+  ],
+  "checks": [
+    {
+      "check": "count eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "events.0.text contains 3 times in a row",
+      "ok": true,
+      "actual": "You've called `no_such_tool` with the same arguments 3 times in a row and gotten the same error each time: Tool 'no_such_tool' not found. Available: ['terminal', 'file_editor', 'task_tracker', 'finish"
+    }
+  ]
+}
+
+[exit 0 after 16s]

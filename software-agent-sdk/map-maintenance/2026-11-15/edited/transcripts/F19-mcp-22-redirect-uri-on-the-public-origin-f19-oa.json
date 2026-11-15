@@ -1,0 +1,17 @@
+{
+  "file": "F19-mcp.md",
+  "bullet": "Redirect URI on the public origin (`F19.oauth-public-redirect`).",
+  "ids": [
+    "F19.oauth-public-redirect"
+  ],
+  "line": 645,
+  "script": "PSTART=$(jq -nc --argjson s \"$OAUTH_SRV\" '{server: $s, timeout: 5}')\nLAU=$(control-agent-server api POST /api/mcp/oauth/start --json \"$PSTART\" --expect 200 --check ok eq true --field authorization_url)\n\"$PY\" -c \"$QS_OF\" \"$LAU\" | control-agent-server assert --check redirect_uri matches '^http://localhost:[0-9]+/callback$'\nstop_public() {\n  control-agent-server stop --run \"$PUB\" >/dev/null\n}\nPUB=$(control-agent-server launch --new --name f19-public --env OH_WEB_URL=https://qa-f19.example/qa-f19 --print-run)\ntrap stop_public EXIT\ncontrol-agent-server config --run \"$PUB\" | jq -e '.server_env.OH_WEB_URL == \"https://qa-f19.example/qa-f19\"'\nPAU=$(control-agent-server api POST /api/mcp/oauth/start --run \"$PUB\" --json \"$PSTART\" --expect 200 --check ok eq true \\\n  --check authorization_url matches \"^http://127.0.0.1:$OAUTH_PORT/authorize\\\\?\" --save F19.oauth-public-redirect/start --field authorization_url)\n\"$PY\" -c \"$QS_OF\" \"$PAU\" | control-agent-server assert --check redirect_uri eq https://qa-f19.example/qa-f19/api/mcp/oauth/redirect\ncontrol-agent-server stop --run \"$PUB\"\ntrap - EXIT\n",
+  "exit_code": 0,
+  "elapsed_ms": 9051,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"value\": {\n    \"response_type\": \"code\",\n    \"client_id\": \"09c23536-d13a-48df-9a49-126dc7275ed6\",\n    \"redirect_uri\": \"http://localhost:60655/callback\",\n    \"state\": \"Do58msSLtwzDzVGY0uLdk-B7jy-qbBJkFcGoxeKWEZI\",\n    \"code_challenge\": \"5rggpbfCriPtyxQ9GYUfDCmwqeJfcEVCfuqsp6M7MkI\",\n    \"code_challenge_method\": \"S256\",\n    \"resource\": \"http://127.0.0.1:55625/mcp\",\n    \"scope\": \"mail.read\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"redirect_uri matches ^http://localhost:[0-9]+/callback$\",\n      \"ok\": true,\n      \"actual\": \"http://localhost:60655/callback\"\n    }\n  ]\n}\ntrue\n{\n  \"ok\": true,\n  \"value\": {\n    \"response_type\": \"code\",\n    \"client_id\": \"41e2723f-c647-4fd7-b621-5d8470124045\",\n    \"redirect_uri\": \"https://qa-f19.example/qa-f19/api/mcp/oauth/redirect\",\n    \"state\": \"h6GkuAyPMF7gckU8hwB08uiej9JPsLup9DqRBPx3qlc\",\n    \"code_challenge\": \"NZTrUSzVHwzP3wP6w2ZK-vdWaeZxzY8ybX1V054RKMs\",\n    \"code_challenge_method\": \"S256\",\n    \"resource\": \"http://127.0.0.1:55625/mcp\",\n    \"scope\": \"mail.read\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"redirect_uri eq https://qa-f19.example/qa-f19/api/mcp/oauth/redirect\",\n      \"ok\": true,\n      \"actual\": \"https://qa-f19.example/qa-f19/api/mcp/oauth/redirect\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"run\": \"/tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/agent-server-verify/20261115-091831-a7f5-f19-public\",\n  \"helpers\": [],\n  \"server\": \"terminated\",\n  \"port_closed\": true,\n  \"orphans_reaped\": [],\n  \"evidence\": \"/tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/agent-server-verify/20261115-091831-a7f5-f19-public/evidence\",\n  \"evidence_files\": 1\n}\n",
+  "stderr": ""
+}

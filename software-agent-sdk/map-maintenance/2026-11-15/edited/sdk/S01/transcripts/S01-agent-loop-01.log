@@ -1,0 +1,157 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S01/run_to_finish.json --field id)
+control-sdk conversation send "$CID" --text "Write result.txt" --run \
+  --check execution_status eq finished --check last_agent_message eq "result.txt now says done."
+control-sdk exec --expect-output done -- cat result.txt
+control-sdk conversation run "$CID" --check execution_status eq finished --check script_left eq 0
+control-sdk conversation send "$CID" --text "One more thing" --check execution_status eq idle
+control-sdk program S01/loop --arg status \
+  --check initial eq idle --check observed contains running --check after_run eq finished \
+  --check rerun_llm_calls eq 0 --check after_rerun eq finished --check after_new_message eq idle
+{
+  "ok": true,
+  "id": "4903b845-b117-4877-8684-d9e2ca195809",
+  "execution_status": "finished",
+  "event_count": 5,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "result.txt now says done.",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq result.txt now says done.",
+      "ok": true,
+      "actual": "result.txt now says done."
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "done\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "ok": true,
+  "id": "4903b845-b117-4877-8684-d9e2ca195809",
+  "execution_status": "finished",
+  "event_count": 5,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "result.txt now says done.",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "script_left eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+{
+  "ok": true,
+  "id": "4903b845-b117-4877-8684-d9e2ca195809",
+  "execution_status": "idle",
+  "event_count": 6,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "result.txt now says done.",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq idle",
+      "ok": true,
+      "actual": "idle"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "status",
+  "initial": "idle",
+  "observed": [
+    "running"
+  ],
+  "after_run": "finished",
+  "rerun_llm_calls": 0,
+  "after_rerun": "finished",
+  "after_new_message": "idle",
+  "_exit": 0,
+  "_seconds": 6.7,
+  "checks": [
+    {
+      "check": "initial eq idle",
+      "ok": true,
+      "actual": "idle"
+    },
+    {
+      "check": "observed contains running",
+      "ok": true,
+      "actual": "[\"running\"]"
+    },
+    {
+      "check": "after_run eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "rerun_llm_calls eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "after_rerun eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "after_new_message eq idle",
+      "ok": true,
+      "actual": "idle"
+    }
+  ]
+}
+
+[exit 0 after 31s]

@@ -1,0 +1,53 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg cache-too-small \
+  --check caching_active eq true --check text eq uncached --check requests eq 2 \
+  --check cache_markers.0 eq 2 --check cache_markers.1 eq 0 --check caching_off_markers eq 0
+{
+  "ok": true,
+  "mode": "cache-too-small",
+  "caching_active": true,
+  "text": "uncached",
+  "error": null,
+  "requests": 2,
+  "cache_markers": [
+    2,
+    0
+  ],
+  "caching_off_markers": 0,
+  "_exit": 0,
+  "_seconds": 6.7,
+  "checks": [
+    {
+      "check": "caching_active eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "text eq uncached",
+      "ok": true,
+      "actual": "uncached"
+    },
+    {
+      "check": "requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "cache_markers.0 eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "cache_markers.1 eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "caching_off_markers eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 7s]

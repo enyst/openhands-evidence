@@ -1,0 +1,63 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+CID=$(control-sdk conversation new --field id)
+control-sdk conversation send "$CID" --run --text "Remember the code word PLUM. Reply with OK only." \
+  --check execution_status eq finished
+control-sdk conversation send "$CID" --run --text "What was the code word? Reply with the word only." \
+  --check execution_status eq finished --check last_agent_message contains PLUM
+{
+  "ok": true,
+  "id": "3c76acbf-102a-42c0-a4ea-4b622e192208",
+  "execution_status": "finished",
+  "event_count": 3,
+  "kinds": [
+    "MessageEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "OK",
+  "accumulated_cost": 0.00024619199999999995,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": null,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "id": "3c76acbf-102a-42c0-a4ea-4b622e192208",
+  "execution_status": "finished",
+  "event_count": 5,
+  "kinds": [
+    "MessageEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "PLUM",
+  "accumulated_cost": 0.00028885799999999996,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": null,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message contains PLUM",
+      "ok": true,
+      "actual": "PLUM"
+    }
+  ]
+}
+
+[exit 0 after 18s]

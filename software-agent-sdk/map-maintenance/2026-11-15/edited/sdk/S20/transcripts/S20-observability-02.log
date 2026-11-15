@@ -1,0 +1,152 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S20/traced_conversation --arg env \
+  --check status eq finished --check external_context eq true \
+  --check root.found eq true --check root_has_parent eq true --check parent_trace_joined eq true \
+  --check root_automation_id eq auto-9 --check summary.names contains env-span \
+  --check summary.names contains webhook-handler
+{
+  "ok": true,
+  "mode": "env",
+  "external_context": true,
+  "status": "finished",
+  "enabled": true,
+  "import_seconds": 5.03,
+  "lmnr_imported_at_start": true,
+  "lmnr_imported": true,
+  "otlp_posts": 1,
+  "auth_header": null,
+  "warnings": [],
+  "summary": {
+    "count": 12,
+    "names": [
+      "FinishAction",
+      "TerminalAction",
+      "agent.step",
+      "conversation",
+      "conversation.run",
+      "conversation.send_message",
+      "env-span",
+      "webhook-handler"
+    ],
+    "traces": 1,
+    "ancestry": {
+      "webhook-handler": [],
+      "env-span": [
+        "conversation",
+        "webhook-handler"
+      ],
+      "conversation.send_message": [
+        "conversation",
+        "webhook-handler"
+      ],
+      "TerminalAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation",
+        "webhook-handler"
+      ],
+      "agent.step": [
+        "conversation.run",
+        "conversation",
+        "webhook-handler"
+      ],
+      "FinishAction": [
+        "agent.step",
+        "conversation.run",
+        "conversation",
+        "webhook-handler"
+      ],
+      "conversation.run": [
+        "conversation",
+        "webhook-handler"
+      ],
+      "conversation": [
+        "webhook-handler"
+      ]
+    }
+  },
+  "root": {
+    "found": true,
+    "is_trace_root": false,
+    "attributes": {
+      "automation.id": "auto-9",
+      "lmnr.association.properties.session_id": "a0a170eb-fb0e-4ea9-a005-ad192fdeb1c3",
+      "lmnr.association.properties.metadata.automation.id": "auto-9"
+    }
+  },
+  "root_user_id": null,
+  "root_session_id_is_conversation": true,
+  "root_attr_ticket": null,
+  "root_meta_ticket": null,
+  "root_automation_id": "auto-9",
+  "root_tag_team": null,
+  "root_tags": null,
+  "parent_trace_joined": true,
+  "root_has_parent": true,
+  "conversation_traces": 1,
+  "steps": 3,
+  "tool_spans": 4,
+  "terminal_spans": 3,
+  "tool_call_ids": [
+    "call_0_0",
+    "call_1_0",
+    "call_1_1",
+    "call_2_0"
+  ],
+  "terminal_input_is_action": true,
+  "tools_under_step": true,
+  "parallel_terminal_parents": 2,
+  "llm_spans": 0,
+  "llm_costs": [],
+  "llm_cache_read": [],
+  "llm_under_step": 0,
+  "llm_under_conversation": 0,
+  "title_operation": [],
+  "ask_operation": [],
+  "_exit": 0,
+  "_seconds": 8.3,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "external_context eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "root.found eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "root_has_parent eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "parent_trace_joined eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "root_automation_id eq auto-9",
+      "ok": true,
+      "actual": "auto-9"
+    },
+    {
+      "check": "summary.names contains env-span",
+      "ok": true,
+      "actual": "[\"FinishAction\", \"TerminalAction\", \"agent.step\", \"conversation\", \"conversation.run\", \"conversation.send_message\", \"env-span\", \"webhook-handler\"]"
+    },
+    {
+      "check": "summary.names contains webhook-handler",
+      "ok": true,
+      "actual": "[\"FinishAction\", \"TerminalAction\", \"agent.step\", \"conversation\", \"conversation.run\", \"conversation.send_message\", \"env-span\", \"webhook-handler\"]"
+    }
+  ]
+}
+
+[exit 0 after 8s]

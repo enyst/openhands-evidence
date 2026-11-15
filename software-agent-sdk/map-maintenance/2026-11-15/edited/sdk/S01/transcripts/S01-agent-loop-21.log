@@ -1,0 +1,61 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+CID=$(control-sdk conversation new --field id)
+control-sdk conversation send "$CID" --run \
+  --text "Using the terminal, create facts.txt containing the line 'loop ok', then finish." \
+  --check execution_status eq finished
+control-sdk exec --expect-output "loop ok" -- cat facts.txt
+control-sdk exec --model-env --expect-output "All done" -- python examples/01_standalone_sdk/01_hello_world.py
+control-sdk exec --model-env --expect-output EXAMPLE_COST -- python examples/01_standalone_sdk/28_ask_agent_example.py
+{
+  "ok": true,
+  "id": "56596778-1086-42c3-9dae-89a4f099f697",
+  "execution_status": "finished",
+  "event_count": 6,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "Created `facts.txt` in the working directory containing the single line `loop ok`, verified via `cat`.",
+  "accumulated_cost": 0.0004213919999999999,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": null,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "loop ok\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 14.7,
+  "result": null,
+  "stdout_tail": "y: Verify FACTS.txt contents\n\n$ cat FACTS.txt\n\nTokens: \u2191 input 7.46K (total 27.62K) \u2022 cache hit 94.42% (total 95.01%) \u2022  \nreasoning 0 (total 87) \u2022 \u2193 output 79 (total 636) \u2022 $ (total 0.0007)\n\nObservation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nTool: terminal\nResult:\n1. The project workspace currently contains no source code; its only file is \nfacts.txt, which holds the text \"loop ok\".\n2. The workspace is part of an automated SDK verification run (run ID \n20261115-092134-5c13f4, block1, S01-agent-loop-21).\n3. No build, dependency, or test configuration files (e.g., package.json, \npyproject.toml, requirements.txt) exist in the project.\n\n\ud83d\udcc1 Working directory: \n/tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/sdk-ver\nify/S01/work/S01-agent-loop-21/block1/runs/20261115-092134-5c13f4/workspace\n\ud83d\udc0d Python interpreter: /usr/local/bin/python\n\u2705 Exit code: 0\n\nMessage from Agent \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nI created `FACTS.txt` with three facts about the project:\n\n1. The workspace has no source code \u2014 its only file before this was `facts.txt` \ncontaining \"loop ok\".\n2. The workspace is part of an automated SDK verification run (run \n`20261115-092134-5c13f4`, block1, S01-agent-loop-21).\n3. No build, dependency, or test config files exist in the project.\n\nTokens: \u2191 input 7.75K (total 35.37K) \u2022 cache hit 95.77% (total 95.18%) \u2022  \nreasoning 0 (total 87) \u2022 \u2193 output 94 (total 730) \u2022 $ (total 0.0008)\n\nAll done!\n",
+  "stderr_tail": "[11/15/26 09:21:53] WARNING  No persistence_dir provided; falling   state.py:627\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 24.7,
+  "result": null,
+  "stdout_tail": "a software project. Its contents break down as:\n\n| Layer | Location | Role |\n|---|---|---|\n| Agent workspace | `workspace/` | Scratch area the agent operates in \u2014 effectively empty |\n| Run metadata | `run.json`, `state/*.json` | Run ID, model, tool set, iteration budget |\n| Event store | `conversations/<id>/events/` | Append-only numbered event log + lock/marker files |\n| Config/cache | `openhands/` | Jinja template cache, (empty) profiles |\n\n**What I did not complete:** I was in the middle of inspecting the run state files when the conversation moved to this question, so I never delivered a final consolidated architecture write-up. No code was written, modified, or executed beyond read-only inspection commands.\n\n============================================================\nSUMMARY OF ASK_AGENT DEMONSTRATION\n============================================================\n\nQuestions and Responses:\n\n1. Q: Summarize the activity so far in 1 sentence.\n   A: No exploration has been performed yet \u2014 the only activity so far is your initial request to explore ...\n\n2. Q: How's the progress?\n   A: Progress: exploration is complete \u2014 and it was a short trip.\n\nWhat I found in the workspace (`.../bl...\n\n3. Q: Have you finished running?\n   A: No \u2014 nothing is currently running. Every command I issued finished with exit code 0, and I left no b...\n\nFinal Question Response: ## Summary of this conversation\n\n**What I did:** I explored the workspace and its surrounding harnes...\nEXAMPLE_COST: 0.0010\n",
+  "stderr_tail": "[11/15/26 09:22:07] WARNING  No persistence_dir provided; falling   state.py:627\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n[11/15/26 09:22:10] WARNING  Property <class                          view.py:93\n                             'openhands.sdk.context.view.properties.t           \n                             ool_call_matching.ToolCallMatchingProper           \n                             ty'> enforced, 1 events dropped.                   \n[11/15/26 09:22:17] ERROR    Agent reached maximum    local_conversation.py:2489\n                             iterations limit (5).                              \n",
+  "ok": true
+}
+
+[exit 0 after 54s]

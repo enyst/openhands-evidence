@@ -1,0 +1,127 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/views --arg fork \
+  --check new_id eq true --check copied_events eq 6 --check fork_status eq idle \
+  --check title missing --check tags.team eq verify --check fork_model eq openai/gpt-4.1-mini \
+  --check source_cost eq 0.28 --check fork_cost_before_run eq 0 --check kept_metrics_cost eq 0.28 \
+  --check chosen_id_kept eq true --check fork_events_after_run eq 9 --check source_events_after_fork_run eq 6 \
+  --check fork_request_had_source_history eq true --check same_workspace eq true \
+  --check fork_on_disk eq true --check reloaded_fork_events eq 9 --check reloaded_fork_title missing
+{
+  "ok": true,
+  "mode": "fork",
+  "new_id": true,
+  "copied_events": 6,
+  "source_events": 6,
+  "fork_status": "idle",
+  "title": null,
+  "tags": {
+    "team": "verify"
+  },
+  "fork_model": "openai/gpt-4.1-mini",
+  "source_model": "openai/gpt-4o-mini",
+  "source_cost": 0.28,
+  "fork_cost_before_run": 0.0,
+  "kept_metrics_cost": 0.28,
+  "chosen_id_kept": true,
+  "fork_events_after_run": 9,
+  "source_events_after_fork_run": 6,
+  "source_status": "finished",
+  "fork_status_after_run": "finished",
+  "fork_request_had_source_history": true,
+  "same_workspace": true,
+  "fork_on_disk": true,
+  "reloaded_fork_events": 9,
+  "reloaded_fork_title": null,
+  "fork_events": 9,
+  "_exit": 0,
+  "_seconds": 7.3,
+  "checks": [
+    {
+      "check": "new_id eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "copied_events eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "fork_status eq idle",
+      "ok": true,
+      "actual": "idle"
+    },
+    {
+      "check": "title missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "tags.team eq verify",
+      "ok": true,
+      "actual": "verify"
+    },
+    {
+      "check": "fork_model eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "source_cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "fork_cost_before_run eq 0",
+      "ok": true,
+      "actual": "0.0"
+    },
+    {
+      "check": "kept_metrics_cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "chosen_id_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "fork_events_after_run eq 9",
+      "ok": true,
+      "actual": "9"
+    },
+    {
+      "check": "source_events_after_fork_run eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "fork_request_had_source_history eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "same_workspace eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "fork_on_disk eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reloaded_fork_events eq 9",
+      "ok": true,
+      "actual": "9"
+    },
+    {
+      "check": "reloaded_fork_title missing",
+      "ok": true,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 0 after 7s]

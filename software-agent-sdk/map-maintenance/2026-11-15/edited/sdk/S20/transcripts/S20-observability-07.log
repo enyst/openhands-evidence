@@ -1,0 +1,93 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S20/traced_conversation --arg off \
+  --check status eq finished --check enabled eq false --check lmnr_imported eq false \
+  --check otlp_posts eq 0 --check root.found eq false --check external_context missing --check import_seconds lt 10
+{
+  "ok": true,
+  "mode": "off",
+  "external_context": null,
+  "status": "finished",
+  "enabled": false,
+  "import_seconds": 3.74,
+  "lmnr_imported_at_start": false,
+  "lmnr_imported": false,
+  "otlp_posts": 0,
+  "auth_header": null,
+  "warnings": [],
+  "summary": {
+    "count": 0,
+    "names": [],
+    "traces": 0,
+    "ancestry": {}
+  },
+  "root": {
+    "found": false,
+    "is_trace_root": false,
+    "attributes": {}
+  },
+  "root_user_id": null,
+  "root_session_id_is_conversation": false,
+  "root_attr_ticket": null,
+  "root_meta_ticket": null,
+  "root_automation_id": null,
+  "root_tag_team": null,
+  "root_tags": null,
+  "parent_trace_joined": false,
+  "root_has_parent": false,
+  "conversation_traces": 0,
+  "steps": 0,
+  "tool_spans": 0,
+  "terminal_spans": 0,
+  "tool_call_ids": [],
+  "terminal_input_is_action": true,
+  "tools_under_step": false,
+  "parallel_terminal_parents": 0,
+  "llm_spans": 0,
+  "llm_costs": [],
+  "llm_cache_read": [],
+  "llm_under_step": 0,
+  "llm_under_conversation": 0,
+  "title_operation": [],
+  "ask_operation": [],
+  "_exit": 0,
+  "_seconds": 6.5,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "enabled eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "lmnr_imported eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "otlp_posts eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "root.found eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "external_context missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "import_seconds lt 10",
+      "ok": true,
+      "actual": "3.74"
+    }
+  ]
+}
+
+[exit 0 after 7s]

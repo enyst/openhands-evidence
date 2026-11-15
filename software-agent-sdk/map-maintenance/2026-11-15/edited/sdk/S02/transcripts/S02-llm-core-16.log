@@ -1,0 +1,144 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S01/echo_parallel_finish.json --field id)
+control-sdk conversation send "$CID" --text "Write greeting.txt" --run --check execution_status eq finished
+control-sdk program S02/format_messages --arg "$CID" \
+  --check event_files eq 10 --check chat_roles.0 eq system --check chat_has_tool_messages eq true \
+  --check chat_list_content eq true --check string_content_text_turns eq true --check string_content_image_turn eq list \
+  --check vision_image_sent eq true --check no_vision_image_sent eq false \
+  --check anthropic_cache_markers eq 2 --check openai_cache_markers eq 0 \
+  --check responses_instructions eq true --check responses_item_types contains function_call_output
+{
+  "ok": true,
+  "id": "543397a9-5fe0-45e2-bdab-fe68bbf84d54",
+  "execution_status": "finished",
+  "event_count": 10,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "greeting.txt says hello",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "event_files": 10,
+  "message_roles": [
+    "system",
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "tool",
+    "assistant",
+    "tool",
+    "user"
+  ],
+  "chat_roles": [
+    "system",
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "tool",
+    "assistant",
+    "tool",
+    "user"
+  ],
+  "chat_has_tool_messages": true,
+  "chat_list_content": true,
+  "string_content_text_turns": true,
+  "string_content_image_turn": "list",
+  "vision_image_sent": true,
+  "no_vision_image_sent": false,
+  "anthropic_cache_markers": 2,
+  "openai_cache_markers": 0,
+  "responses_instructions": true,
+  "responses_item_types": [
+    "function_call",
+    "function_call_output",
+    "message"
+  ],
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "event_files eq 10",
+      "ok": true,
+      "actual": "10"
+    },
+    {
+      "check": "chat_roles.0 eq system",
+      "ok": true,
+      "actual": "system"
+    },
+    {
+      "check": "chat_has_tool_messages eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "chat_list_content eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "string_content_text_turns eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "string_content_image_turn eq list",
+      "ok": true,
+      "actual": "list"
+    },
+    {
+      "check": "vision_image_sent eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "no_vision_image_sent eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "anthropic_cache_markers eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "openai_cache_markers eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "responses_instructions eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "responses_item_types contains function_call_output",
+      "ok": true,
+      "actual": "[\"function_call\", \"function_call_output\", \"message\"]"
+    }
+  ]
+}
+
+[exit 0 after 16s]

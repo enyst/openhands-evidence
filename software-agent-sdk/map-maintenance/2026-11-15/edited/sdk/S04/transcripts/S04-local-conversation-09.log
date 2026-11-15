@@ -1,0 +1,110 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg run-error \
+  --check plain_exception.raised eq ConversationRunError --check plain_exception.names_id eq true \
+  --check plain_exception.names_persistence_dir eq true --check plain_exception.has_issue_url eq true \
+  --check plain_exception.original eq RuntimeError --check plain_exception.error_events eq 1 \
+  --check plain_exception.codes.0 eq RuntimeError --check plain_exception.status eq error \
+  --check llm_error.raised eq ConversationRunError --check llm_error.persistence_dir missing \
+  --check llm_error.error_events eq 1 --check llm_error.codes.0 eq LLMAuthenticationError
+{
+  "ok": true,
+  "mode": "run-error",
+  "plain_exception": {
+    "raised": "ConversationRunError",
+    "names_id": true,
+    "names_persistence_dir": true,
+    "persistence_dir": "/tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/sdk-verify/S04/work/S04-local-conversation-09/block1/runs/20261115-093551-695019/lifecycle-run-error/0269bc2fbdad4184864ef87532c6dc25",
+    "has_issue_url": true,
+    "original": "RuntimeError",
+    "error_events": 1,
+    "codes": [
+      "RuntimeError"
+    ],
+    "sources": [
+      "environment"
+    ],
+    "status": "error"
+  },
+  "llm_error": {
+    "raised": "ConversationRunError",
+    "names_id": true,
+    "names_persistence_dir": false,
+    "persistence_dir": null,
+    "has_issue_url": false,
+    "original": "LLMAuthenticationError",
+    "error_events": 1,
+    "codes": [
+      "LLMAuthenticationError"
+    ],
+    "sources": [
+      "environment"
+    ],
+    "status": "error"
+  },
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "plain_exception.raised eq ConversationRunError",
+      "ok": true,
+      "actual": "ConversationRunError"
+    },
+    {
+      "check": "plain_exception.names_id eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "plain_exception.names_persistence_dir eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "plain_exception.has_issue_url eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "plain_exception.original eq RuntimeError",
+      "ok": true,
+      "actual": "RuntimeError"
+    },
+    {
+      "check": "plain_exception.error_events eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "plain_exception.codes.0 eq RuntimeError",
+      "ok": true,
+      "actual": "RuntimeError"
+    },
+    {
+      "check": "plain_exception.status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "llm_error.raised eq ConversationRunError",
+      "ok": true,
+      "actual": "ConversationRunError"
+    },
+    {
+      "check": "llm_error.persistence_dir missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "llm_error.error_events eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "llm_error.codes.0 eq LLMAuthenticationError",
+      "ok": true,
+      "actual": "LLMAuthenticationError"
+    }
+  ]
+}
+
+[exit 0 after 5s]

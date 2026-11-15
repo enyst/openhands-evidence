@@ -1,0 +1,348 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S20/logging_setup \
+  --check default.handlers contains RichHandler --check default.console_has_info eq true --check default.console_json_records eq 0 \
+  --check default.propagate eq true --check default.litellm_level eq ERROR --check default.openai_level eq ERROR \
+  --check default.litellm_line_shown eq false --check default.httpx_line_shown eq false \
+  --check default.rolling_buffer len-eq 2 --check default.rolling_buffer.1 eq roll-3 \
+  --check json_file.handlers contains TimedRotatingFileHandler --check json_file.console_json_records ge 5 \
+  --check json_file.rolling_snapshot_records eq 1 --check json_file.file_exists eq true \
+  --check json_file.file_has_info eq true --check json_file.file_is_json eq true \
+  --check plain_file.file_has_info eq true --check plain_file.file_is_json eq false \
+  --check ci.handlers len-eq 1 --check ci.console_json_records ge 1 --check ci.rolling_snapshot_records eq 0 \
+  --check debug.root_level eq DEBUG --check debug.console_has_debug eq true \
+  --check warning_level.console_has_info eq false --check no_auto_config.handlers len-eq 0
+{
+  "ok": true,
+  "default": {
+    "exit": 0,
+    "propagate": true,
+    "root_level": "INFO",
+    "handlers": [
+      "BoundedRichHandler"
+    ],
+    "litellm_level": "ERROR",
+    "openai_level": "ERROR",
+    "httpx_level": "INFO",
+    "libtmux_level": "INFO",
+    "rolling_buffer": [
+      "roll-2",
+      "roll-3"
+    ],
+    "console_has_info": true,
+    "console_has_debug": false,
+    "console_json_records": 0,
+    "console_json_messages": [],
+    "litellm_line_shown": false,
+    "httpx_line_shown": false,
+    "rolling_snapshot_records": 0,
+    "file_exists": false,
+    "file_has_info": false,
+    "file_is_json": false,
+    "stderr_tail": ""
+  },
+  "json_file": {
+    "exit": 0,
+    "propagate": true,
+    "root_level": "INFO",
+    "handlers": [
+      "StreamHandler",
+      "TimedRotatingFileHandler"
+    ],
+    "litellm_level": "ERROR",
+    "openai_level": "ERROR",
+    "httpx_level": "INFO",
+    "libtmux_level": "INFO",
+    "rolling_buffer": [
+      "roll-2",
+      "roll-3"
+    ],
+    "console_has_info": true,
+    "console_has_debug": false,
+    "console_json_records": 6,
+    "console_json_messages": [
+      "hello-info",
+      "roll-0",
+      "roll-1",
+      "roll-2",
+      "roll-3",
+      "HEAD\nroll-2\nroll-3"
+    ],
+    "litellm_line_shown": false,
+    "httpx_line_shown": false,
+    "rolling_snapshot_records": 1,
+    "file_exists": true,
+    "file_has_info": true,
+    "file_is_json": true,
+    "stderr_tail": ""
+  },
+  "plain_file": {
+    "exit": 0,
+    "propagate": true,
+    "root_level": "INFO",
+    "handlers": [
+      "BoundedRichHandler",
+      "TimedRotatingFileHandler"
+    ],
+    "litellm_level": "ERROR",
+    "openai_level": "ERROR",
+    "httpx_level": "INFO",
+    "libtmux_level": "INFO",
+    "rolling_buffer": [
+      "roll-2",
+      "roll-3"
+    ],
+    "console_has_info": true,
+    "console_has_debug": false,
+    "console_json_records": 0,
+    "console_json_messages": [],
+    "litellm_line_shown": false,
+    "httpx_line_shown": false,
+    "rolling_snapshot_records": 0,
+    "file_exists": true,
+    "file_has_info": true,
+    "file_is_json": false,
+    "stderr_tail": ""
+  },
+  "ci": {
+    "exit": 0,
+    "propagate": true,
+    "root_level": "INFO",
+    "handlers": [
+      "StreamHandler"
+    ],
+    "litellm_level": "ERROR",
+    "openai_level": "ERROR",
+    "httpx_level": "INFO",
+    "libtmux_level": "INFO",
+    "rolling_buffer": [
+      "roll-2",
+      "roll-3"
+    ],
+    "console_has_info": true,
+    "console_has_debug": false,
+    "console_json_records": 1,
+    "console_json_messages": [
+      "hello-info"
+    ],
+    "litellm_line_shown": false,
+    "httpx_line_shown": false,
+    "rolling_snapshot_records": 0,
+    "file_exists": false,
+    "file_has_info": false,
+    "file_is_json": false,
+    "stderr_tail": ""
+  },
+  "debug": {
+    "exit": 0,
+    "propagate": true,
+    "root_level": "DEBUG",
+    "handlers": [
+      "StreamHandler"
+    ],
+    "litellm_level": "ERROR",
+    "openai_level": "ERROR",
+    "httpx_level": "DEBUG",
+    "libtmux_level": "DEBUG",
+    "rolling_buffer": [
+      "roll-2",
+      "roll-3"
+    ],
+    "console_has_info": true,
+    "console_has_debug": true,
+    "console_json_records": 10,
+    "console_json_messages": [
+      "Observability/OTEL environment variables",
+      "Observability/OTEL environment variables",
+      "hello-info",
+      "hello-debug",
+      "roll-0",
+      "roll-1",
+      "roll-2",
+      "roll-3"
+    ],
+    "litellm_line_shown": false,
+    "httpx_line_shown": false,
+    "rolling_snapshot_records": 1,
+    "file_exists": false,
+    "file_has_info": false,
+    "file_is_json": false,
+    "stderr_tail": ""
+  },
+  "warning_level": {
+    "exit": 0,
+    "propagate": true,
+    "root_level": "WARNING",
+    "handlers": [
+      "StreamHandler"
+    ],
+    "litellm_level": "ERROR",
+    "openai_level": "ERROR",
+    "httpx_level": "WARNING",
+    "libtmux_level": "WARNING",
+    "rolling_buffer": [],
+    "console_has_info": false,
+    "console_has_debug": false,
+    "console_json_records": 0,
+    "console_json_messages": [],
+    "litellm_line_shown": false,
+    "httpx_line_shown": false,
+    "rolling_snapshot_records": 0,
+    "file_exists": false,
+    "file_has_info": false,
+    "file_is_json": false,
+    "stderr_tail": ""
+  },
+  "no_auto_config": {
+    "exit": 0,
+    "propagate": true,
+    "root_level": "WARNING",
+    "handlers": [],
+    "litellm_level": "ERROR",
+    "openai_level": "ERROR",
+    "httpx_level": "WARNING",
+    "libtmux_level": "WARNING",
+    "rolling_buffer": [],
+    "console_has_info": false,
+    "console_has_debug": false,
+    "console_json_records": 0,
+    "console_json_messages": [],
+    "litellm_line_shown": false,
+    "httpx_line_shown": false,
+    "rolling_snapshot_records": 0,
+    "file_exists": false,
+    "file_has_info": false,
+    "file_is_json": false,
+    "stderr_tail": ""
+  },
+  "_exit": 0,
+  "_seconds": 32.6,
+  "checks": [
+    {
+      "check": "default.handlers contains RichHandler",
+      "ok": true,
+      "actual": "[\"BoundedRichHandler\"]"
+    },
+    {
+      "check": "default.console_has_info eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "default.console_json_records eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "default.propagate eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "default.litellm_level eq ERROR",
+      "ok": true,
+      "actual": "ERROR"
+    },
+    {
+      "check": "default.openai_level eq ERROR",
+      "ok": true,
+      "actual": "ERROR"
+    },
+    {
+      "check": "default.litellm_line_shown eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "default.httpx_line_shown eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "default.rolling_buffer len-eq 2",
+      "ok": true,
+      "actual": "[\"roll-2\", \"roll-3\"]"
+    },
+    {
+      "check": "default.rolling_buffer.1 eq roll-3",
+      "ok": true,
+      "actual": "roll-3"
+    },
+    {
+      "check": "json_file.handlers contains TimedRotatingFileHandler",
+      "ok": true,
+      "actual": "[\"StreamHandler\", \"TimedRotatingFileHandler\"]"
+    },
+    {
+      "check": "json_file.console_json_records ge 5",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "json_file.rolling_snapshot_records eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "json_file.file_exists eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "json_file.file_has_info eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "json_file.file_is_json eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "plain_file.file_has_info eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "plain_file.file_is_json eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "ci.handlers len-eq 1",
+      "ok": true,
+      "actual": "[\"StreamHandler\"]"
+    },
+    {
+      "check": "ci.console_json_records ge 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "ci.rolling_snapshot_records eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "debug.root_level eq DEBUG",
+      "ok": true,
+      "actual": "DEBUG"
+    },
+    {
+      "check": "debug.console_has_debug eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "warning_level.console_has_info eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "no_auto_config.handlers len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    }
+  ]
+}
+
+[exit 0 after 33s]

@@ -1,0 +1,101 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S01/repeat_ls.json --field id)
+control-sdk conversation send "$CID" --text "List files" --run --check execution_status eq stuck --check script_left eq 2
+control-sdk conversation send "$CID" --text "Try something else" --check execution_status eq idle
+control-sdk conversation run "$CID" --check execution_status eq finished --check last_agent_message eq recovered
+[11/15/26 09:19:20] WARNING  Action, Observation loop      stuck_detector.py:209
+                             detected                                           
+[11/15/26 09:19:20] WARNING  Stuck pattern detected.   local_conversation.py:889
+{
+  "ok": true,
+  "id": "0ca24414-5126-428f-a27d-db31e0810fa3",
+  "execution_status": "stuck",
+  "event_count": 10,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": null,
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 2,
+  "checks": [
+    {
+      "check": "execution_status eq stuck",
+      "ok": true,
+      "actual": "stuck"
+    },
+    {
+      "check": "script_left eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+{
+  "ok": true,
+  "id": "0ca24414-5126-428f-a27d-db31e0810fa3",
+  "execution_status": "idle",
+  "event_count": 11,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": null,
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 2,
+  "checks": [
+    {
+      "check": "execution_status eq idle",
+      "ok": true,
+      "actual": "idle"
+    }
+  ]
+}
+{
+  "ok": true,
+  "id": "0ca24414-5126-428f-a27d-db31e0810fa3",
+  "execution_status": "finished",
+  "event_count": 15,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "recovered",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq recovered",
+      "ok": true,
+      "actual": "recovered"
+    }
+  ]
+}
+
+[exit 0 after 24s]

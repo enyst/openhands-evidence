@@ -1,0 +1,100 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg serialization \
+  --env LLM_MODEL=openai/gpt-4o-mini --env LLM_API_KEY=sk-env --env LLM_NUM_RETRIES=2 \
+  --env LLM_TEMPERATURE=0.25 --env LLM_NATIVE_TOOL_CALLING=false \
+  --check api_key_dumped eq "**********" --check secret_in_json eq false --check exposed_key eq true \
+  --check roundtrip_model eq openai/gpt-4o-mini --check roundtrip_temperature eq 0.2 \
+  --check copy_temperature eq 0.7 --check copy_keeps_model eq true --check copy_keeps_key eq true \
+  --check env.model eq openai/gpt-4o-mini --check env.num_retries eq 2 --check env.temperature eq 0.25 \
+  --check env.native_tool_calling eq false --check env.key_set eq true
+{
+  "ok": true,
+  "mode": "serialization",
+  "api_key_dumped": "**********",
+  "secret_in_json": false,
+  "roundtrip_model": "openai/gpt-4o-mini",
+  "roundtrip_temperature": 0.2,
+  "exposed_key": true,
+  "copy_temperature": 0.7,
+  "copy_keeps_model": true,
+  "copy_keeps_key": true,
+  "env": {
+    "model": "openai/gpt-4o-mini",
+    "num_retries": 2,
+    "temperature": 0.25,
+    "native_tool_calling": false,
+    "key_set": true,
+    "LLM_MODEL": "openai/gpt-4o-mini"
+  },
+  "_exit": 0,
+  "_seconds": 4.9,
+  "checks": [
+    {
+      "check": "api_key_dumped eq **********",
+      "ok": true,
+      "actual": "**********"
+    },
+    {
+      "check": "secret_in_json eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "exposed_key eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "roundtrip_model eq openai/gpt-4o-mini",
+      "ok": true,
+      "actual": "openai/gpt-4o-mini"
+    },
+    {
+      "check": "roundtrip_temperature eq 0.2",
+      "ok": true,
+      "actual": "0.2"
+    },
+    {
+      "check": "copy_temperature eq 0.7",
+      "ok": true,
+      "actual": "0.7"
+    },
+    {
+      "check": "copy_keeps_model eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "copy_keeps_key eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "env.model eq openai/gpt-4o-mini",
+      "ok": true,
+      "actual": "openai/gpt-4o-mini"
+    },
+    {
+      "check": "env.num_retries eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "env.temperature eq 0.25",
+      "ok": true,
+      "actual": "0.25"
+    },
+    {
+      "check": "env.native_tool_calling eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "env.key_set eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 5s]

@@ -1,0 +1,42 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg thresholds \
+  --check default.status eq finished --check default.llm_calls eq 4 \
+  --check custom.status eq stuck --check custom.llm_calls eq 2
+{
+  "ok": true,
+  "mode": "thresholds",
+  "default": {
+    "status": "finished",
+    "llm_calls": 4
+  },
+  "custom": {
+    "status": "stuck",
+    "llm_calls": 2
+  },
+  "_exit": 0,
+  "_seconds": 6.8,
+  "checks": [
+    {
+      "check": "default.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "default.llm_calls eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "custom.status eq stuck",
+      "ok": true,
+      "actual": "stuck"
+    },
+    {
+      "check": "custom.llm_calls eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 7s]

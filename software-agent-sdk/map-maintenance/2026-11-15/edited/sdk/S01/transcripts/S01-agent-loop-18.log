@@ -1,0 +1,81 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg ask-agent \
+  --check during_run.answer contains "answer from" --check during_run.status eq running \
+  --check after_run.answer contains "answer from" --check after_run.events_added eq 0 \
+  --check after_run.status_after eq finished --check no_side_question_in_events eq true \
+  --check context_error_raised eq LLMContextWindowExceedError \
+  --check run_actions.0 eq terminal --check registry contains ask-agent-llm
+{
+  "ok": true,
+  "mode": "ask-agent",
+  "during_run": {
+    "answer": "answer from 3 messages",
+    "status": "running"
+  },
+  "after_run": {
+    "answer": "answer from 7 messages",
+    "events_added": 0,
+    "status_before": "finished",
+    "status_after": "finished"
+  },
+  "no_side_question_in_events": true,
+  "context_error_raised": "LLMContextWindowExceedError",
+  "run_actions": [
+    "terminal",
+    "finish"
+  ],
+  "registry": [
+    "ask-agent-llm"
+  ],
+  "_exit": 0,
+  "_seconds": 7.3,
+  "checks": [
+    {
+      "check": "during_run.answer contains answer from",
+      "ok": true,
+      "actual": "answer from 3 messages"
+    },
+    {
+      "check": "during_run.status eq running",
+      "ok": true,
+      "actual": "running"
+    },
+    {
+      "check": "after_run.answer contains answer from",
+      "ok": true,
+      "actual": "answer from 7 messages"
+    },
+    {
+      "check": "after_run.events_added eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "after_run.status_after eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "no_side_question_in_events eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "context_error_raised eq LLMContextWindowExceedError",
+      "ok": true,
+      "actual": "LLMContextWindowExceedError"
+    },
+    {
+      "check": "run_actions.0 eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    },
+    {
+      "check": "registry contains ask-agent-llm",
+      "ok": true,
+      "actual": "[\"ask-agent-llm\"]"
+    }
+  ]
+}
+
+[exit 0 after 8s]

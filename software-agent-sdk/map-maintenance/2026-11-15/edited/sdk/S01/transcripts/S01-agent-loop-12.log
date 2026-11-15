@@ -1,0 +1,113 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg parallel \
+  --check sequential_seconds ge 4 --check parallel_seconds lt 2 --check parallel_overlap eq true \
+  --check observation_order.0 eq s0 --check observation_order.3 eq s3 \
+  --check with_failure.status eq finished --check with_failure.results.0 eq ObservationEvent:ok1 \
+  --check with_failure.results.1 eq AgentErrorEvent:sleeper --check with_failure.results.2 eq ObservationEvent:ok2 \
+  --check finish_batch.status eq finished --check finish_batch.ran len-eq 1 --check finish_batch.ran.0 eq before \
+  --check limit_zero_rejected eq true
+{
+  "ok": true,
+  "mode": "parallel",
+  "sequential_seconds": 4.01,
+  "parallel_seconds": 1.0,
+  "parallel_overlap": true,
+  "observation_order": [
+    "s0",
+    "s1",
+    "s2",
+    "s3"
+  ],
+  "with_failure": {
+    "status": "finished",
+    "results": [
+      "ObservationEvent:ok1",
+      "AgentErrorEvent:sleeper",
+      "ObservationEvent:ok2",
+      "ObservationEvent:finish"
+    ]
+  },
+  "finish_batch": {
+    "status": "finished",
+    "actions": [
+      "sleeper",
+      "finish",
+      "sleeper"
+    ],
+    "ran": [
+      "before"
+    ]
+  },
+  "limit_zero_rejected": true,
+  "_exit": 0,
+  "_seconds": 10.2,
+  "checks": [
+    {
+      "check": "sequential_seconds ge 4",
+      "ok": true,
+      "actual": "4.01"
+    },
+    {
+      "check": "parallel_seconds lt 2",
+      "ok": true,
+      "actual": "1.0"
+    },
+    {
+      "check": "parallel_overlap eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observation_order.0 eq s0",
+      "ok": true,
+      "actual": "s0"
+    },
+    {
+      "check": "observation_order.3 eq s3",
+      "ok": true,
+      "actual": "s3"
+    },
+    {
+      "check": "with_failure.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "with_failure.results.0 eq ObservationEvent:ok1",
+      "ok": true,
+      "actual": "ObservationEvent:ok1"
+    },
+    {
+      "check": "with_failure.results.1 eq AgentErrorEvent:sleeper",
+      "ok": true,
+      "actual": "AgentErrorEvent:sleeper"
+    },
+    {
+      "check": "with_failure.results.2 eq ObservationEvent:ok2",
+      "ok": true,
+      "actual": "ObservationEvent:ok2"
+    },
+    {
+      "check": "finish_batch.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "finish_batch.ran len-eq 1",
+      "ok": true,
+      "actual": "[\"before\"]"
+    },
+    {
+      "check": "finish_batch.ran.0 eq before",
+      "ok": true,
+      "actual": "before"
+    },
+    {
+      "check": "limit_zero_rejected eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 10s]

@@ -1,0 +1,47 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg message-while-running \
+  --check status_mid_run eq running --check status eq finished --check user_messages len-eq 2 \
+  --check second_call_saw contains pineapple --check llm_calls eq 2
+{
+  "ok": true,
+  "mode": "message-while-running",
+  "status_mid_run": "running",
+  "status": "finished",
+  "user_messages": [
+    "Sleep for two seconds.",
+    "Also: remember the word pineapple."
+  ],
+  "second_call_saw": "Also: remember the word pineapple.",
+  "llm_calls": 2,
+  "_exit": 0,
+  "_seconds": 8.0,
+  "checks": [
+    {
+      "check": "status_mid_run eq running",
+      "ok": true,
+      "actual": "running"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "user_messages len-eq 2",
+      "ok": true,
+      "actual": "[\"Sleep for two seconds.\", \"Also: remember the word pineapple.\"]"
+    },
+    {
+      "check": "second_call_saw contains pineapple",
+      "ok": true,
+      "actual": "Also: remember the word pineapple."
+    },
+    {
+      "check": "llm_calls eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 8s]

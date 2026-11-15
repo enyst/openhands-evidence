@@ -1,0 +1,140 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/provider_run --arg prompted \
+  --check execution_status eq finished --check actions.0 eq terminal --check actions.1 eq finish \
+  --check observation_text contains provider-run --check tools_param_sent eq false \
+  --check prompt_describes_terminal eq true --check prompt_has_call_format eq true
+control-sdk program S02/llm_calls --arg prompted \
+  --check tools_param_sent eq false --check parsed.valid.tool_calls.0.0 eq finish \
+  --check parsed.valid.tool_calls.0.1.message eq bye \
+  --check parsed.unknown_tool.error eq FunctionCallValidationError \
+  --check parsed.unknown_parameter.error eq FunctionCallValidationError
+{
+  "ok": true,
+  "mode": "prompted",
+  "execution_status": "finished",
+  "requests": 2,
+  "paths": [
+    "/v1/chat/completions"
+  ],
+  "actions": [
+    "terminal",
+    "finish"
+  ],
+  "observation_text": "provider-run\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/sdk-verify/S02/work/S02-llm-core-10/block1/r",
+  "uses_responses_api": false,
+  "request_tools": [],
+  "first_body_keys": [
+    "max_completion_tokens",
+    "messages",
+    "model",
+    "prompt_cache_key",
+    "stop"
+  ],
+  "accumulated_cost": 5.4e-05,
+  "costs": 2,
+  "token_usages": 2,
+  "response_latencies": 2,
+  "prompt_tokens": 200,
+  "tools_param_sent": false,
+  "prompt_describes_terminal": true,
+  "prompt_has_call_format": true,
+  "stop_words": [
+    "</function"
+  ],
+  "_exit": 0,
+  "_seconds": 6.7,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "actions.0 eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    },
+    {
+      "check": "actions.1 eq finish",
+      "ok": true,
+      "actual": "finish"
+    },
+    {
+      "check": "observation_text contains provider-run",
+      "ok": true,
+      "actual": "provider-run\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/sdk-verify/S02/work/S02-llm-core-10/block1/r"
+    },
+    {
+      "check": "tools_param_sent eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "prompt_describes_terminal eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "prompt_has_call_format eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "prompted",
+  "tools_param_sent": false,
+  "parsed": {
+    "valid": {
+      "error": null,
+      "tool_calls": [
+        [
+          "finish",
+          {
+            "message": "bye"
+          }
+        ]
+      ]
+    },
+    "unknown_tool": {
+      "error": "FunctionCallValidationError",
+      "tool_calls": []
+    },
+    "unknown_parameter": {
+      "error": "FunctionCallValidationError",
+      "tool_calls": []
+    }
+  },
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "tools_param_sent eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "parsed.valid.tool_calls.0.0 eq finish",
+      "ok": true,
+      "actual": "finish"
+    },
+    {
+      "check": "parsed.valid.tool_calls.0.1.message eq bye",
+      "ok": true,
+      "actual": "bye"
+    },
+    {
+      "check": "parsed.unknown_tool.error eq FunctionCallValidationError",
+      "ok": true,
+      "actual": "FunctionCallValidationError"
+    },
+    {
+      "check": "parsed.unknown_parameter.error eq FunctionCallValidationError",
+      "ok": true,
+      "actual": "FunctionCallValidationError"
+    }
+  ]
+}
+
+[exit 0 after 12s]

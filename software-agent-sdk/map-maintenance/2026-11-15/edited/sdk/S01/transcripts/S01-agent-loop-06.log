@@ -1,0 +1,101 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S01/max_iterations.json --max-iterations 2 --field id)
+control-sdk conversation send "$CID" --text "Echo three times" --run --allow-error \
+  --check execution_status eq error --check script_left eq 2
+control-sdk conversation events "$CID" --kind ConversationErrorEvent --check count eq 1 --check events.0.code eq MaxIterationsReached
+CID=$(control-sdk conversation new --script S01/finish_on_last.json --max-iterations 2 --field id)
+control-sdk conversation send "$CID" --text "Echo once" --run --check execution_status eq finished
+[11/15/26 09:18:44] ERROR    Agent reached maximum    local_conversation.py:2489
+                             iterations limit (2).                              
+{
+  "ok": true,
+  "id": "16ceafda-36c6-41c3-88dc-f6bab1f07c49",
+  "execution_status": "error",
+  "event_count": 7,
+  "kinds": [
+    "ActionEvent",
+    "ConversationErrorEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": null,
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 2,
+  "checks": [
+    {
+      "check": "execution_status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "script_left eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 1,
+  "kinds": [
+    "ConversationErrorEvent"
+  ],
+  "events": [
+    {
+      "index": 6,
+      "kind": "ConversationErrorEvent",
+      "source": "environment",
+      "id": "2acbeeee-b543-4742-9cb6-84a7248c08cf",
+      "failure_kind": "agent_action",
+      "detail": "Agent reached maximum iterations limit (2).",
+      "code": "MaxIterationsReached"
+    }
+  ],
+  "checks": [
+    {
+      "check": "count eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "events.0.code eq MaxIterationsReached",
+      "ok": true,
+      "actual": "MaxIterationsReached"
+    }
+  ]
+}
+{
+  "ok": true,
+  "id": "67780c07-2bb4-40c2-9956-a78fb73aac0e",
+  "execution_status": "finished",
+  "event_count": 6,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "finished on the last allowed step",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 27s]

@@ -1,0 +1,97 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/secret_env \
+  --check unreferenced eq "no secrets referenced here" --check static eq "token=<secret-hidden>" \
+  --check from_source eq "fn=<secret-hidden>" --check length_of_value eq 22 \
+  --check rotated eq "rotated=<secret-hidden>" --check length_after_rotation eq 25 \
+  --check constructor eq "api=<secret-hidden> src=<secret-hidden>" \
+  --check values_in_observations eq false --check values_on_disk eq false --check names_on_disk eq true \
+  --check lookups_at_each_observation.0 eq 1 --check plain_callable contains "Invalid SecretValue"
+{
+  "ok": true,
+  "lookups_at_each_observation": [
+    1,
+    1,
+    2,
+    2,
+    2,
+    2
+  ],
+  "unreferenced": "no secrets referenced here",
+  "static": "token=<secret-hidden>",
+  "from_source": "fn=<secret-hidden>",
+  "length_of_value": "22",
+  "rotated": "rotated=<secret-hidden>",
+  "length_after_rotation": "25",
+  "values_in_observations": false,
+  "values_on_disk": false,
+  "names_on_disk": true,
+  "constructor": "api=<secret-hidden> src=<secret-hidden>",
+  "constructor_value_visible": false,
+  "plain_callable": "ValueError: Invalid SecretValue",
+  "_exit": 0,
+  "_seconds": 9.1,
+  "checks": [
+    {
+      "check": "unreferenced eq no secrets referenced here",
+      "ok": true,
+      "actual": "no secrets referenced here"
+    },
+    {
+      "check": "static eq token=<secret-hidden>",
+      "ok": true,
+      "actual": "token=<secret-hidden>"
+    },
+    {
+      "check": "from_source eq fn=<secret-hidden>",
+      "ok": true,
+      "actual": "fn=<secret-hidden>"
+    },
+    {
+      "check": "length_of_value eq 22",
+      "ok": true,
+      "actual": "22"
+    },
+    {
+      "check": "rotated eq rotated=<secret-hidden>",
+      "ok": true,
+      "actual": "rotated=<secret-hidden>"
+    },
+    {
+      "check": "length_after_rotation eq 25",
+      "ok": true,
+      "actual": "25"
+    },
+    {
+      "check": "constructor eq api=<secret-hidden> src=<secret-hidden>",
+      "ok": true,
+      "actual": "api=<secret-hidden> src=<secret-hidden>"
+    },
+    {
+      "check": "values_in_observations eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "values_on_disk eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "names_on_disk eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "lookups_at_each_observation.0 eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "plain_callable contains Invalid SecretValue",
+      "ok": true,
+      "actual": "ValueError: Invalid SecretValue"
+    }
+  ]
+}
+
+[exit 0 after 9s]

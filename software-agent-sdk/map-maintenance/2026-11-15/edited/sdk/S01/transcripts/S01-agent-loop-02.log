@@ -1,0 +1,145 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S01/echo_parallel_finish.json --field id)
+control-sdk conversation send "$CID" --text "Write greeting.txt and check it" --run --check execution_status eq finished
+control-sdk conversation events "$CID" --last 6 \
+  --check kinds.0 eq ActionEvent --check kinds.1 eq ActionEvent \
+  --check kinds.2 eq ObservationEvent --check kinds.3 eq ObservationEvent \
+  --check events.0.tool eq file_editor --check events.1.tool eq terminal
+{
+  "ok": true,
+  "id": "2e45e74d-5702-4dde-be19-56e4a8a27303",
+  "execution_status": "finished",
+  "event_count": 10,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "greeting.txt says hello",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 6,
+  "kinds": [
+    "ActionEvent",
+    "ActionEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ActionEvent",
+    "ObservationEvent"
+  ],
+  "events": [
+    {
+      "index": 4,
+      "kind": "ActionEvent",
+      "source": "agent",
+      "id": "01c29408-cd76-4dde-991d-ec9bcfe56503",
+      "tool": "file_editor",
+      "action": {
+        "command": "view",
+        "path": "greeting.txt",
+        "kind": "FileEditorAction"
+      }
+    },
+    {
+      "index": 5,
+      "kind": "ActionEvent",
+      "source": "agent",
+      "id": "35321c45-3a9c-493f-9f1e-6b0fed48dfdd",
+      "tool": "terminal",
+      "action": {
+        "command": "wc -c greeting.txt",
+        "is_input": false,
+        "reset": false,
+        "kind": "TerminalAction"
+      }
+    },
+    {
+      "index": 6,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "df61446f-720c-483d-b302-2d9bdc0166bb",
+      "tool": "file_editor",
+      "text": "Invalid `path` parameter: greeting.txt. The path should be an absolute path. Maybe you meant /tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/sdk-verify/S01/work/S01-agent-loop-02/block1/runs/20261115-091739-5f8cbc/workspace/greeting.txt?",
+      "is_error": true
+    },
+    {
+      "index": 7,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "fd8555c1-3c8c-447b-91ce-4c2f1a83a6a2",
+      "tool": "terminal",
+      "text": "6 greeting.txt",
+      "is_error": false
+    },
+    {
+      "index": 8,
+      "kind": "ActionEvent",
+      "source": "agent",
+      "id": "b81ce92e-f7a5-4bb3-87f1-2b8675e8dcf9",
+      "tool": "finish",
+      "action": {
+        "message": "greeting.txt says hello",
+        "kind": "FinishAction"
+      }
+    },
+    {
+      "index": 9,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "6f6140e3-6a42-4856-ae21-400765655293",
+      "tool": "finish",
+      "text": "greeting.txt says hello",
+      "is_error": false
+    }
+  ],
+  "checks": [
+    {
+      "check": "kinds.0 eq ActionEvent",
+      "ok": true,
+      "actual": "ActionEvent"
+    },
+    {
+      "check": "kinds.1 eq ActionEvent",
+      "ok": true,
+      "actual": "ActionEvent"
+    },
+    {
+      "check": "kinds.2 eq ObservationEvent",
+      "ok": true,
+      "actual": "ObservationEvent"
+    },
+    {
+      "check": "kinds.3 eq ObservationEvent",
+      "ok": true,
+      "actual": "ObservationEvent"
+    },
+    {
+      "check": "events.0.tool eq file_editor",
+      "ok": true,
+      "actual": "file_editor"
+    },
+    {
+      "check": "events.1.tool eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    }
+  ]
+}
+
+[exit 0 after 16s]

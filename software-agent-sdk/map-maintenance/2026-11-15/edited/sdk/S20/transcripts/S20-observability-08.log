@@ -1,0 +1,238 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S20/automation_env \
+  --check context.observability_tags len-eq 3 --check context.observability_metadata.extra eq 1 \
+  --check context.observability_span_name eq automation-run --check context.observability_parent_span_context eq parent-ctx-token \
+  --check kwargs.tags.automationtrigger eq automation --check kwargs.tags.automationid eq auto-1 \
+  --check kwargs.tags.automationrunid eq run-5 --check kwargs.tags.team eq infra \
+  --check kwargs.observability_tags len-eq 2 --check kwargs.observability_span_name eq automation-run \
+  --check explicit_span_name eq explicit-span \
+  --check headers.X-OpenHands-Observability-Tags eq nightly,verify \
+  --check headers.X-OpenHands-Observability-Span-Name eq automation-run \
+  --check headers.X-OpenHands-Observability-Parent-Span-Context eq parent-ctx-token \
+  --check conversation_tags.automationname eq Nightly --check conversation_tags.team eq infra \
+  --check workspace_headers.x-openhands-observability-span-name eq automation-run \
+  --check workspace_headers.x-openhands-observability-parent-span-context eq parent-ctx-token \
+  --check workspace_headers.x-openhands-observability-metadata contains auto-1 \
+  --check callback_headers.x-openhands-observability-span-name eq automation-run \
+  --check exec_thread.value.0 eq automation-run --check exec_thread.error missing \
+  --check gate.OTEL_ENDPOINT eq True --check gate.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT eq True \
+  --check gate.OTEL_EXPORTER_OTLP_ENDPOINT eq True
+{
+  "ok": true,
+  "context": {
+    "observability_metadata": {
+      "automation.id": "auto-1",
+      "automation.name": "Nightly",
+      "automation.run_id": "run-5",
+      "automation.trigger_source": "cron",
+      "extra": 1
+    },
+    "observability_tags": [
+      "nightly",
+      "verify",
+      "mine"
+    ],
+    "observability_span_name": "automation-run",
+    "observability_parent_span_context": "parent-ctx-token"
+  },
+  "kwargs": {
+    "observability_metadata": {
+      "automation.id": "auto-1",
+      "automation.name": "Nightly",
+      "automation.run_id": "run-5",
+      "automation.trigger_source": "cron"
+    },
+    "observability_tags": [
+      "nightly",
+      "verify"
+    ],
+    "observability_span_name": "automation-run",
+    "observability_parent_span_context": "parent-ctx-token",
+    "tags": {
+      "automationtrigger": "automation",
+      "automationid": "auto-1",
+      "automationname": "Nightly",
+      "automationrunid": "run-5",
+      "team": "infra"
+    }
+  },
+  "explicit_span_name": "explicit-span",
+  "tags_from_metadata": {
+    "automationtrigger": "automation",
+    "automationid": "auto-1",
+    "automationname": "Nightly",
+    "automationrunid": "run-5"
+  },
+  "headers": {
+    "X-OpenHands-Observability-Metadata": "{\"automation.id\":\"auto-1\",\"automation.name\":\"Nightly\",\"automation.run_id\":\"run-5\",\"automation.trigger_source\":\"cron\"}",
+    "X-OpenHands-Observability-Tags": "nightly,verify",
+    "X-OpenHands-Observability-Span-Name": "automation-run",
+    "X-OpenHands-Observability-Parent-Span-Context": "parent-ctx-token"
+  },
+  "conversation_tags": {
+    "automationtrigger": "automation",
+    "automationid": "auto-1",
+    "automationname": "Nightly",
+    "automationrunid": "run-5",
+    "team": "infra"
+  },
+  "workspace_headers": {
+    "x-openhands-observability-metadata": "{\"automation.id\":\"auto-1\",\"automation.name\":\"Nightly\",\"automation.run_id\":\"run-5\",\"automation.trigger_source\":\"cron\"}",
+    "x-openhands-observability-tags": "nightly,verify,nightly",
+    "x-openhands-observability-span-name": "automation-run",
+    "x-openhands-observability-parent-span-context": "parent-ctx-token"
+  },
+  "callback_headers": {
+    "x-openhands-observability-metadata": "{\"automation.id\":\"auto-1\",\"automation.name\":\"Nightly\",\"automation.run_id\":\"run-5\",\"automation.trigger_source\":\"cron\"}",
+    "x-openhands-observability-tags": "nightly,verify,nightly",
+    "x-openhands-observability-span-name": "automation-run",
+    "x-openhands-observability-parent-span-context": "parent-ctx-token"
+  },
+  "exec_thread": {
+    "value": [
+      "automation-run",
+      [
+        "nightly",
+        "verify",
+        "nightly"
+      ]
+    ]
+  },
+  "dotenv_enables": "True",
+  "gate": {
+    "OTEL_ENDPOINT": "True",
+    "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT": "True",
+    "OTEL_EXPORTER_OTLP_ENDPOINT": "True"
+  },
+  "_exit": 0,
+  "_seconds": 33.5,
+  "checks": [
+    {
+      "check": "context.observability_tags len-eq 3",
+      "ok": true,
+      "actual": "[\"nightly\", \"verify\", \"mine\"]"
+    },
+    {
+      "check": "context.observability_metadata.extra eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "context.observability_span_name eq automation-run",
+      "ok": true,
+      "actual": "automation-run"
+    },
+    {
+      "check": "context.observability_parent_span_context eq parent-ctx-token",
+      "ok": true,
+      "actual": "parent-ctx-token"
+    },
+    {
+      "check": "kwargs.tags.automationtrigger eq automation",
+      "ok": true,
+      "actual": "automation"
+    },
+    {
+      "check": "kwargs.tags.automationid eq auto-1",
+      "ok": true,
+      "actual": "auto-1"
+    },
+    {
+      "check": "kwargs.tags.automationrunid eq run-5",
+      "ok": true,
+      "actual": "run-5"
+    },
+    {
+      "check": "kwargs.tags.team eq infra",
+      "ok": true,
+      "actual": "infra"
+    },
+    {
+      "check": "kwargs.observability_tags len-eq 2",
+      "ok": true,
+      "actual": "[\"nightly\", \"verify\"]"
+    },
+    {
+      "check": "kwargs.observability_span_name eq automation-run",
+      "ok": true,
+      "actual": "automation-run"
+    },
+    {
+      "check": "explicit_span_name eq explicit-span",
+      "ok": true,
+      "actual": "explicit-span"
+    },
+    {
+      "check": "headers.X-OpenHands-Observability-Tags eq nightly,verify",
+      "ok": true,
+      "actual": "nightly,verify"
+    },
+    {
+      "check": "headers.X-OpenHands-Observability-Span-Name eq automation-run",
+      "ok": true,
+      "actual": "automation-run"
+    },
+    {
+      "check": "headers.X-OpenHands-Observability-Parent-Span-Context eq parent-ctx-token",
+      "ok": true,
+      "actual": "parent-ctx-token"
+    },
+    {
+      "check": "conversation_tags.automationname eq Nightly",
+      "ok": true,
+      "actual": "Nightly"
+    },
+    {
+      "check": "conversation_tags.team eq infra",
+      "ok": true,
+      "actual": "infra"
+    },
+    {
+      "check": "workspace_headers.x-openhands-observability-span-name eq automation-run",
+      "ok": true,
+      "actual": "automation-run"
+    },
+    {
+      "check": "workspace_headers.x-openhands-observability-parent-span-context eq parent-ctx-token",
+      "ok": true,
+      "actual": "parent-ctx-token"
+    },
+    {
+      "check": "workspace_headers.x-openhands-observability-metadata contains auto-1",
+      "ok": true,
+      "actual": "{\"automation.id\":\"auto-1\",\"automation.name\":\"Nightly\",\"automation.run_id\":\"run-5\",\"automation.trigger_source\":\"cron\"}"
+    },
+    {
+      "check": "callback_headers.x-openhands-observability-span-name eq automation-run",
+      "ok": true,
+      "actual": "automation-run"
+    },
+    {
+      "check": "exec_thread.value.0 eq automation-run",
+      "ok": true,
+      "actual": "automation-run"
+    },
+    {
+      "check": "exec_thread.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "gate.OTEL_ENDPOINT eq True",
+      "ok": true,
+      "actual": "True"
+    },
+    {
+      "check": "gate.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT eq True",
+      "ok": true,
+      "actual": "True"
+    },
+    {
+      "check": "gate.OTEL_EXPORTER_OTLP_ENDPOINT eq True",
+      "ok": true,
+      "actual": "True"
+    }
+  ]
+}
+
+[exit 0 after 34s]
