@@ -1,0 +1,49 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/v1/chat/completions",
+    "query": [],
+    "auth": "bearer",
+    "body": {
+      "model": "openhands_qa-f30-usage",
+      "messages": [
+        {
+          "role": "user",
+          "content": "QA_F30_USAGE_2"
+        }
+      ]
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "298",
+      "content-type": "application/json",
+      "x-openhands-serverconversation-id": "f77cd9ff-fdd8-4448-b67f-ebcb4de8efdb"
+    },
+    "body": {
+      "id": "chatcmpl-62a6f3d14ffa4325af9468734da54610",
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "content": "QA_F30_U2",
+            "role": "assistant"
+          }
+        }
+      ],
+      "created": 1794731314,
+      "model": "openhands_qa-f30-usage",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 2,
+        "prompt_tokens": 3,
+        "total_tokens": 5
+      }
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 2086
+}

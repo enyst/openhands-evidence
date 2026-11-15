@@ -1,0 +1,81 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/3bb9f12c-48eb-4de1-802c-877cc8d1b4b1/events/search",
+    "query": [
+      [
+        "kind",
+        "openhands.sdk.event.conversation_state.ConversationStateUpdateEvent"
+      ],
+      [
+        "sort_order",
+        "TIMESTAMP_DESC"
+      ],
+      [
+        "limit",
+        "1"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "929",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "2405973e-5015-4af0-b1cb-ab9bb1c70151",
+          "timestamp": "2026-11-15T08:37:47.810125",
+          "source": "environment",
+          "parent_id": "2a8cfbd1-92be-4ab3-9d8f-4a8b7b623d0e",
+          "key": "stats",
+          "value": {
+            "usage_to_metrics": {
+              "default": {
+                "model_name": "openai/qa-stub",
+                "accumulated_cost": 0.0,
+                "max_budget_per_task": null,
+                "accumulated_token_usage": {
+                  "model": "openai/qa-stub",
+                  "prompt_tokens": 11,
+                  "completion_tokens": 7,
+                  "cache_read_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "reasoning_tokens": 0,
+                  "context_window": 0,
+                  "per_turn_token": 18,
+                  "response_id": ""
+                }
+              },
+              "ask-agent-llm": {
+                "model_name": "openai/qa-stub",
+                "accumulated_cost": 0.0,
+                "max_budget_per_task": null,
+                "accumulated_token_usage": {
+                  "model": "openai/qa-stub",
+                  "prompt_tokens": 5,
+                  "completion_tokens": 3,
+                  "cache_read_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "reasoning_tokens": 0,
+                  "context_window": 0,
+                  "per_turn_token": 8,
+                  "response_id": ""
+                }
+              }
+            }
+          },
+          "kind": "ConversationStateUpdateEvent"
+        }
+      ],
+      "next_page_id": "9cfd48a5-d54e-4dc4-9c06-be307ad9d40f"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 72
+}

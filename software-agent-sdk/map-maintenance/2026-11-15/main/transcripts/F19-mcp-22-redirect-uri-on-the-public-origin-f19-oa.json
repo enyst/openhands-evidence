@@ -1,0 +1,17 @@
+{
+  "file": "F19-mcp.md",
+  "bullet": "Redirect URI on the public origin (`F19.oauth-public-redirect`), known bug #6828.",
+  "ids": [
+    "F19.oauth-public-redirect"
+  ],
+  "line": 628,
+  "script": "REDIRECT_OF='import json, sys, urllib.parse as u; print(json.dumps({\"redirect_uri\": u.parse_qs(u.urlsplit(sys.argv[1]).query)[\"redirect_uri\"][0]}))'\nPSTART=$(jq -nc --argjson s \"$OAUTH_SRV\" '{server: $s, timeout: 5}')\nLAU=$(control-agent-server api POST /api/mcp/oauth/start --json \"$PSTART\" --expect 200 --check ok eq true --field authorization_url)\n\"$PY\" -c \"$REDIRECT_OF\" \"$LAU\" | control-agent-server assert --check redirect_uri matches '^http://localhost:[0-9]+/callback$'\nstop_public() {\n  control-agent-server stop --run \"$PUB\" >/dev/null\n}\nPUB=$(control-agent-server launch --new --name f19-public --env OH_WEB_URL=https://qa-f19.example/qa-f19 --print-run)\ntrap stop_public EXIT\ncontrol-agent-server config --run \"$PUB\" | jq -e '.server_env.OH_WEB_URL == \"https://qa-f19.example/qa-f19\"'\nPAU=$(control-agent-server api POST /api/mcp/oauth/start --run \"$PUB\" --json \"$PSTART\" --expect 200 --check ok eq true \\\n  --check authorization_url matches \"^http://127.0.0.1:$OAUTH_PORT/authorize\\\\?\" --save F19.oauth-public-redirect/start --field authorization_url)\n\"$PY\" -c \"$REDIRECT_OF\" \"$PAU\" | control-agent-server assert --check redirect_uri matches '^https://qa-f19\\.example/qa-f19/'  # bug: value.redirect_uri matches '^http://localhost:[0-9]+/callback$'\ncontrol-agent-server stop --run \"$PUB\"\ntrap - EXIT\n",
+  "exit_code": 0,
+  "elapsed_ms": 11237,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"value\": {\n    \"redirect_uri\": \"http://localhost:59727/callback\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"redirect_uri matches ^http://localhost:[0-9]+/callback$\",\n      \"ok\": true,\n      \"actual\": \"http://localhost:59727/callback\"\n    }\n  ]\n}\ntrue\n{\n  \"ok\": true,\n  \"value\": {\n    \"redirect_uri\": \"https://qa-f19.example/qa-f19/api/mcp/oauth/redirect\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"redirect_uri matches ^https://qa-f19\\\\.example/qa-f19/\",\n      \"ok\": true,\n      \"actual\": \"https://qa-f19.example/qa-f19/api/mcp/oauth/redirect\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"run\": \"/tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/agent-server/20261115-084833-b6f5-f19-public\",\n  \"helpers\": [],\n  \"server\": \"terminated\",\n  \"port_closed\": true,\n  \"orphans_reaped\": [],\n  \"evidence\": \"/tmp/claude-0/-home-user/69e6673c-4297-5278-94b4-b3ff6d575b6f/scratchpad/agent-server/20261115-084833-b6f5-f19-public/evidence\",\n  \"evidence_files\": 1\n}\n",
+  "stderr": ""
+}

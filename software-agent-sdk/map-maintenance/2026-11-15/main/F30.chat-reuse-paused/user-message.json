@@ -1,0 +1,53 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/8f9814d6-af9a-4813-9453-a9d0e603840e/events/search",
+    "query": [
+      [
+        "source",
+        "user"
+      ],
+      [
+        "body",
+        "QA_F30_PAUSED_TURN"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "379",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "b5c8c003-2196-4742-af8c-b9708159e7e8",
+          "timestamp": "2026-11-15T08:29:26.965717",
+          "source": "user",
+          "parent_id": "2fb56730-97ae-48e8-9b0b-cceedf698cd5",
+          "llm_message": {
+            "role": "user",
+            "content": [
+              {
+                "cache_prompt": false,
+                "type": "text",
+                "text": "QA_F30_PAUSED_TURN"
+              }
+            ],
+            "thinking_blocks": []
+          },
+          "activated_skills": [],
+          "extended_content": [],
+          "kind": "MessageEvent"
+        }
+      ],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 65
+}
