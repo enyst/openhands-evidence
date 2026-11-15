@@ -1,0 +1,23 @@
+$ git rev-parse HEAD
+2aae48b67a57fa852ebca946ac64ee8b8500e889
+$ control-sdk program S05/llm_failures --arg quick
+{
+  "ok": true,
+  "mode": "quick",
+  "quick_timeout": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "requests": 3,
+    "errors": 1,
+    "code": "LLMTimeoutError",
+    "detail": "litellm.Timeout: LLM stream idle timeout after 0.3 seconds. The model did not return a complete response within the LLM timeout of 30s (gave up after 3 attempts, 1s in total). Try a faster model, a shorter prompt (fewer tools or MCP servers), or a higher timeout in the LLM settings.",
+    "classification": {
+      "kind": "config",
+      "retryable": false,
+      "user_action": "settings",
+      "error_id": null
+    }
+  },
+  "_exit": 0,
+  "_seconds": 6.8
+}

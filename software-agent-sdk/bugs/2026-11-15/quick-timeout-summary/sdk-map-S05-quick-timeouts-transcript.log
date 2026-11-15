@@ -1,0 +1,65 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S05/llm_failures --arg quick \
+  --check quick_timeout.status eq error --check quick_timeout.requests eq 3 --check quick_timeout.errors eq 1 \
+  --check quick_timeout.code eq LLMTimeoutError \
+  --check quick_timeout.classification.kind eq transient --check quick_timeout.classification.retryable eq true \
+  --check quick_timeout.classification.user_action eq retry
+{
+  "ok": true,
+  "mode": "quick",
+  "quick_timeout": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "requests": 3,
+    "errors": 1,
+    "code": "LLMTimeoutError",
+    "detail": "litellm.Timeout: LLM stream idle timeout after 0.3 seconds. The model did not return a complete response within the LLM timeout of 30s (gave up after 3 attempts, 1s in total). Try a faster model, a shorter prompt (fewer tools or MCP servers), or a higher timeout in the LLM settings.",
+    "classification": {
+      "kind": "config",
+      "retryable": false,
+      "user_action": "settings",
+      "error_id": null
+    }
+  },
+  "_exit": 0,
+  "_seconds": 6.7,
+  "checks": [
+    {
+      "check": "quick_timeout.status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "quick_timeout.requests eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "quick_timeout.errors eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "quick_timeout.code eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "quick_timeout.classification.kind eq transient",
+      "ok": false,
+      "actual": "config"
+    },
+    {
+      "check": "quick_timeout.classification.retryable eq true",
+      "ok": false,
+      "actual": "false"
+    },
+    {
+      "check": "quick_timeout.classification.user_action eq retry",
+      "ok": false,
+      "actual": "settings"
+    }
+  ]
+}
+
+[exit 1 after 7s]
