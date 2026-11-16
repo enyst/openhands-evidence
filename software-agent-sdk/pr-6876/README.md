@@ -10,7 +10,9 @@ is fixed on the fork. The default-off requirement passes for newly created
 OpenHands conversations, but not as a global kill switch: old opted-in
 conversations retain their edit tool and Canvas still folds their edits after
 the flag is turned off. This is deliberate in the PR, not an accidental missing
-conditional. Engel must decide whether creation-time opt-in meets the requirement.
+conditional. **Engel approved this behavior on 2026-11-16:** conversations that
+received the tool keep it even when the experiment is subsequently off. The flag
+semantics are therefore no longer a review blocker.
 
 Canvas also remains dependent on its experimental-settings base PR and a release
 containing the new TypeScript client. No upstream changes were pushed, no upstream
@@ -61,7 +63,7 @@ to that worktree's `control-agent-server`; export the isolated
 `AGENT_SERVER_VERIFY_RUN`. Run both readers against the same generated conversation
 to compare. The regression unit test independently reproduces the failure.
 
-### Decision needed: creation-time flag versus strict disable
+### Approved decision: apply the flag when starting a conversation
 
 `message_edits` defaults false in the existing experimental-feature registry.
 `experimental_feature_tools()` injects the tool only when enabled. The server's
@@ -76,8 +78,9 @@ still found one edited mark and the latest correction. New off conversations
 had no tool and no edited mark. Thus **default-off opt-in passes; a strict
 "off means no folding, marks, or suppression anywhere" contract does not**.
 
-Changing this would reverse the stated design and needs a human decision, not an
-unrequested kill-switch implementation.
+Engel confirmed on 2026-11-16: "yes we keep the tool in those older convos, even
+when the experiment is off". Keep the current behavior; no kill switch is needed.
+Previously corrected messages continue to display their corrections.
 
 ### Existing accepted limitation: condensation
 
@@ -186,9 +189,9 @@ separate post-reload DOM/API checks do so.
   above pass; that is narrower than "nothing else can break."
 - Fork push alone starts no Canvas branch CI. An approved draft fork PR, fork
   issue reference and Engel's own HUMAN note are needed to exercise that workflow.
-- Engel: decide creation-time opt-in versus strict disable. After that decision
-  and remaining validation/release prerequisites, explicitly approve any upstream
-  push; fetch and compare both sides again before delivering the fix upstream.
+- The flag-semantics decision is resolved. Complete the remaining validation and
+  release prerequisites, and obtain explicit approval for any upstream push;
+  fetch and compare both sides again before delivering the fix upstream.
 
 No private conversation exports, credential files or raw runtime directories are
 published here. The original shared working trees and protected stacks were not
