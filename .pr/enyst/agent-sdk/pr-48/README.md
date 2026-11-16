@@ -4,7 +4,7 @@ AI-generated verification record on Engel Nyst's behalf, 2026-11-16.
 
 Fork PR: https://github.com/enyst/agent-sdk/pull/48
 
-Tested SDK head: [`7725ea31973dd4f13d766841596f80b981600b7e`](https://github.com/enyst/agent-sdk/commit/7725ea31973dd4f13d766841596f80b981600b7e), branch `fix/ask-user-pending-precedence`, based on upstream main `14b7007ea`. The fork's main already matched upstream at the final comparison. No upstream push was made.
+Current SDK head: [`4609a8edef439cc306fe073d61fb6fecfc350eb0`](https://github.com/enyst/agent-sdk/commit/4609a8edef439cc306fe073d61fb6fecfc350eb0), branch `fix/ask-user-pending-precedence`, based on [upstream main](https://github.com/OpenHands/software-agent-sdk/commit/14b7007ea). Product fixes, the broad suite, TypeScript checks and live Canvas evidence are from [`7725ea31973dd4f13d766841596f80b981600b7e`](https://github.com/enyst/agent-sdk/commit/7725ea31973dd4f13d766841596f80b981600b7e). The second commit changes only the hook commands in the two new test cases for portability; the focused suite and HTTP workflow were rerun on it. The fork's main already matched upstream at the final comparison. No upstream push was made.
 
 ## Before → after, and compatibility decisions
 
@@ -18,14 +18,16 @@ Primary code: [agent finalization](https://github.com/enyst/agent-sdk/blob/7725e
 
 ## Regression evidence
 
-- On merged SDK `329fe5e2f7d52ddb3576c27b8543f050f7446fc4`, eight regressions failed: sync/async Stop hooks, sync/async mixed finish/refinement, duplicate-label identity, SDK goal restart while pending, and server goal resume after either card or chat answers. See [failure list](before-regressions-summary.log) and [assertion excerpts](before-regression-failures.log).
+- On [merged SDK](https://github.com/OpenHands/software-agent-sdk/commit/329fe5e2f7d52ddb3576c27b8543f050f7446fc4), eight regressions failed: sync/async Stop hooks, sync/async mixed finish/refinement, duplicate-label identity, SDK goal restart while pending, and server goal resume after either card or chat answers. See [failure list](before-regressions-summary.log), [assertion excerpts](before-regression-failures.log), and [unanswered resume accepted](before-goal-resume-failures.log).
 - Before the blank-label fix, the whitespace-label case made one model request instead of returning an error and continuing for correction: [failure excerpt](before-blank-label-failure.log).
-- **Final head: 232 passed**, covering ask_user, SDK goal runner/controller/judge, iterative refinement, server goal loops and EventService: [log](final-regressions-service.log).
-- A real localhost Agent Server, HTTP requests, WebSocket events and RemoteConversation exercise the goal/ask/Stop-hook lifecycle. Only the LLM is scripted. The workflow failed on the merged baseline and passes on the final head: [before](before-live-http-summary.log), [after](final-live-http.log). It checks: ask leaves pending; Stop-hook marker absent; resume returns 400; a real answer allows resume; completion succeeds and the hook marker exists.
+- **Current head: 232 passed**, covering ask_user, SDK goal runner/controller/judge, iterative refinement, server goal loops and EventService: [portable-hook rerun](portable-regressions-service.log), [original product-head run](final-regressions-service.log).
+- A real localhost Agent Server, HTTP requests, WebSocket events and RemoteConversation exercise the goal/ask/Stop-hook lifecycle. Only the LLM is scripted. The workflow failed on the merged baseline and passes on the current head: [before](before-live-http-summary.log), [portable-hook rerun](portable-live-http.log), [original after](final-live-http.log). It checks: ask leaves pending; Stop-hook marker absent; resume returns 400; a real answer allows resume; completion succeeds and the hook marker exists.
 - **Broader run: 2265 passed, 1 failed, 6 deselected**: [summary](isolated-broad-summary.log). The sole failure is the untouched FIFO timeout test, which measured 244 ms against a 200 ms wall-clock upper limit: [failure](isolated-broad-failure.log). The same test also fails on the unchanged merged SDK at 246 ms: [baseline](baseline-fifo.log). This is not a wholly green broad suite; no assertion was weakened or skipped.
 - **TypeScript: 438 tests pass**, build passes: [tests](final-client-tests.log), [build](final-client-build.log). Full-client ESLint reports three errors in two unchanged integration-test files: [log](final-client-lint.log). Both files match the base byte-for-byte. The edited `events/types.ts` passes ESLint. Changed-file pre-commit checks, including Pyright, pass: [log](final-precommit.log).
 
 The initial broad attempt used the developer's HOME and accidentally loaded personal profiles/skills; that run is invalid as clean-room validation and is not published. Its seven normal-message call-shape failures were caused by an unnecessary extra argument in the initial patch, which was removed before the final head. All final EventService tests pass unchanged. A small isolated-home control on the baseline passed the affected personal-settings cases. The blank-label excerpt excludes captured personal prompt text.
+
+The first fork [Windows run](https://github.com/enyst/agent-sdk/actions/runs/43930249452/job/133520425933) found two failures in the new Stop-hook tests: their POSIX shell command did not execute in Windows `cmd.exe`, so the completion-control assertion failed. The test-only follow-up uses the existing `tests.command_utils.python_command` helper in both unit and live-server cases. Local reruns above pass; the new head's Windows CI is still pending, not claimed green. The product behavior is unchanged by that test correction.
 
 ## Canvas compatibility — real LLM, Paper theme
 
@@ -51,7 +53,7 @@ mkdir -p .amp/in/test-home
 HOME="$PWD/.amp/in/test-home" uv run --no-sync pytest tests/tools/ask_user tests/sdk/conversation/goal tests/sdk/agent/test_iterative_refinement.py tests/agent_server/test_goal_loop.py tests/agent_server/test_event_service.py
 HOME="$PWD/.amp/in/test-home" uv run --no-sync pytest tests/cross/test_remote_conversation_live_server.py -k pending_question
 HOME="$PWD/.amp/in/test-home" uv run --no-sync pytest tests/tools/ask_user tests/sdk/agent tests/sdk/conversation tests/agent_server/test_goal_loop.py tests/agent_server/test_event_service.py
-git diff HEAD^ --name-only | xargs uv run pre-commit run --files
+git diff 14b7007ea --name-only | xargs uv run pre-commit run --files
 ```
 
 From `clients/typescript`, run `npm run build`, `npm test`, `npm run lint`, and `npx eslint src/events/types.ts`. From Canvas, run `npm test -- __tests__/components/conversation-events/chat/decision-card.test.tsx src/utils/transcript-export/index.test.ts`.
