@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "id": "3bf9db54-8544-47fe-a037-b9acfd78717b",
+  "prompt": "Which conversation did you start for the qa-f36-child task? Answer in one sentence that names it for me. Do nothing else.",
+  "chars": 121,
+  "title": "F36 verified coordinator",
+  "status": "finished",
+  "model": "deepseek/deepseek-flash",
+  "workspace": "/var/folders/15/pyrd6jhs3tnd259qd39xsplm0000gn/T/openhands-verify/projects-gaps-20261116/private/home/workspace/project/20f4a86b237b4d1facc9ecc8951038b1",
+  "updatedAt": "2026-11-16T21:42:50.425942Z",
+  "waitedFor": [
+    "idle",
+    "finished",
+    "error",
+    "stuck",
+    "paused",
+    "waiting_for_confirmation"
+  ]
+}

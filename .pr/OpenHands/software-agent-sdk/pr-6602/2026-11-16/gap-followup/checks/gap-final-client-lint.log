@@ -1,0 +1,37 @@
+
+> @openhands/typescript-client@1.62.0 lint
+> eslint src/**/*.ts
+
+
+<checkout>
+  2511:49  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+<checkout>
+  18:17  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+<checkout>
+  309:14  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  310:14  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+<checkout>
+  37:55  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  43:9   warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  50:33  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  53:39  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+<checkout>
+  21:3  error  'waitFor' is defined but never used  @typescript-eslint/no-unused-vars
+
+<checkout>
+  204:13  error  'connectionCount' is never reassigned. Use 'const' instead  prefer-const
+  204:13  error  'connectionCount' is assigned a value but never used        @typescript-eslint/no-unused-vars
+
+<checkout>
+  294:14  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+<checkout>
+  23:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 13 problems (3 errors, 10 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "count": 2,
+  "texts": [
+    "Reply with the single word \"done\" and finish. Do nothing else.\n\nJust now",
+    "done\n\nJust now"
+  ]
+}

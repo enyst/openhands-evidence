@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "file": "F37-reactions.md",
+  "launch_flags": [],
+  "attempts": [
+    {
+      "ok": true,
+      "summary": {
+        "pass": 3,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "The feature flag (`F37.flag`, `F37.flag-gates`).": "pass",
+        "TypeScript client (`F37.ts-client`).": "pass"
+      },
+      "source_commit": "2a4b4e20c1d253bc56df2591e16c9166d5dd99d7"
+    },
+    {
+      "ok": true,
+      "summary": {
+        "pass": 3,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "The feature flag (`F37.flag`, `F37.flag-gates`).": "pass",
+        "TypeScript client (`F37.ts-client`).": "pass"
+      },
+      "source_commit": "2a4b4e20c1d253bc56df2591e16c9166d5dd99d7"
+    }
+  ]
+}

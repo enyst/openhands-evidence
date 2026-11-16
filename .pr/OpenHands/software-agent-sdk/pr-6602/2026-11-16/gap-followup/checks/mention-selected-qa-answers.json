@@ -1,0 +1,70 @@
+{
+  "f36-mention-unchanged": [
+    {
+      "source_commit": "b1c001fdfae17917be2c3423cc20f596fc277f34",
+      "exit_code": 1,
+      "answer_text": [
+        "I started the child conversation titled `qa-f36-child` (id `470b452a-be42-46c9-a3a7-eb4f3c4f7421`) with shared isolation."
+      ],
+      "failed_command": "grep -F \"](conversation:$CHILD_HEX)\""
+    },
+    {
+      "source_commit": "b1c001fdfae17917be2c3423cc20f596fc277f34",
+      "exit_code": 1,
+      "answer_text": [
+        "I started conversation `9868428a-e1cd-4228-a572-4da49925404a`, titled `qa-f36-child` (isolation `shared`)."
+      ],
+      "failed_command": "grep -F \"](conversation:$CHILD_HEX)\""
+    },
+    {
+      "source_commit": "b1c001fdfae17917be2c3423cc20f596fc277f34",
+      "exit_code": 1,
+      "answer_text": [
+        "I started child conversation `4aead978-0d07-4b7c-887b-a277679669f1`, titled `qa-f36-child`, with `shared` isolation."
+      ],
+      "failed_command": "grep -F \"](conversation:$CHILD_HEX)\""
+    }
+  ],
+  "f36-mention-corrected": [
+    {
+      "source_commit": "b1c001fdfae17917be2c3423cc20f596fc277f34",
+      "exit_code": 0,
+      "answer_text": [
+        "I started [qa-f36-child](conversation:6f6761af463040528a79771651929f56), conversation id `6f6761af-4630-4052-8a79-771651929f56`."
+      ],
+      "failed_command": null
+    },
+    {
+      "source_commit": "b1c001fdfae17917be2c3423cc20f596fc277f34",
+      "exit_code": 0,
+      "answer_text": [
+        "I started [qa-f36-child](conversation:6a6830404a25491f8c3716270671c8d2) (id `6a683040-4a25-491f-8c37-16270671c8d2`) for that task."
+      ],
+      "failed_command": null
+    },
+    {
+      "source_commit": "b1c001fdfae17917be2c3423cc20f596fc277f34",
+      "exit_code": 0,
+      "answer_text": [
+        "I started [qa-f36-child](conversation:fe642f708d5747c4825158ea61c20988), conversation id `fe642f708d5747c4825158ea61c20988`."
+      ],
+      "failed_command": null
+    }
+  ],
+  "f36-mention-delivery-repeat": [
+    {
+      "exit_code": 1,
+      "answer_text": [
+        "The child conversation I started for that task was [qa-f36-child](conversation:3a05a65f-d4e1-4a28-925b-609821a27520) (id `3a05a65f-d4e1-4a28-925b-609821a27520`)."
+      ],
+      "failed_command": "grep -F \"](conversation:$CHILD_HEX)\""
+    },
+    {
+      "exit_code": 1,
+      "answer_text": [
+        "I started [qa-f36-child](conversation:f49a52fa-b570-405e-8823-37dbd943561c), id `f49a52fa-b570-405e-8823-37dbd943561c`."
+      ],
+      "failed_command": "grep -F \"](conversation:$CHILD_HEX)\""
+    }
+  ]
+}

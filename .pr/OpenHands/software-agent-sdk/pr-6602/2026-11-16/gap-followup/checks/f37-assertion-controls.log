@@ -1,0 +1,4 @@
+PASS: unrelated flags and reordered list accepted
+PASS: rejects missing reactions flag
+PASS: rejects disabled reactions flag
+PASS: rejects duplicated reactions flag

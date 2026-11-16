@@ -1,0 +1,11 @@
+Format YAML files....................................................(no files to check)Skipped
+Ruff format..........................................................(no files to check)Skipped
+Ruff lint............................................................(no files to check)Skipped
+PEP8 style check (pycodestyle).......................................(no files to check)Skipped
+Type check with pyright..............................................(no files to check)Skipped
+Forbid dynamic attribute access in SDK...................................................Passed
+Route execution_status writes through ConversationState.transition...(no files to check)Skipped
+Check import dependency rules........................................(no files to check)Skipped
+Check Tool subclass registration.....................................(no files to check)Skipped
+Keep blocking store I/O off the agent-server event loop..............(no files to check)Skipped
+Keep secrets on SecretField..........................................(no files to check)Skipped

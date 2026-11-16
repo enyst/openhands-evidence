@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "file": "F36-projects.md",
+  "launch_flags": [],
+  "attempts": [
+    {
+      "ok": true,
+      "summary": {
+        "pass": 4,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Coordinator (`F36.coordinator`).": "pass",
+        "Model-backed: start and list (`F36.tool-start-and-list`).": "pass",
+        "Model-backed: mentions (`F36.mention`).": "pass"
+      },
+      "source_commit": "2a4b4e20c1d253bc56df2591e16c9166d5dd99d7"
+    },
+    {
+      "ok": true,
+      "summary": {
+        "pass": 4,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Coordinator (`F36.coordinator`).": "pass",
+        "Model-backed: start and list (`F36.tool-start-and-list`).": "pass",
+        "Model-backed: mentions (`F36.mention`).": "pass"
+      },
+      "source_commit": "2a4b4e20c1d253bc56df2591e16c9166d5dd99d7"
+    },
+    {
+      "ok": true,
+      "summary": {
+        "pass": 4,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Coordinator (`F36.coordinator`).": "pass",
+        "Model-backed: start and list (`F36.tool-start-and-list`).": "pass",
+        "Model-backed: mentions (`F36.mention`).": "pass"
+      },
+      "source_commit": "2a4b4e20c1d253bc56df2591e16c9166d5dd99d7"
+    }
+  ]
+}

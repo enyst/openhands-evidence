@@ -1,0 +1,124 @@
+{
+  "ok": true,
+  "file": "F37-reactions.md",
+  "summary": {
+    "pass": 12,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "launch_flags": [],
+  "source_commit": "2a4b4e20c1d253bc56df2591e16c9166d5dd99d7",
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2719
+    },
+    {
+      "bullet": "The feature flag (`F37.flag`, `F37.flag-gates`).",
+      "ids": [
+        "F37.flag",
+        "F37.flag-gates"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4439
+    },
+    {
+      "bullet": "React over REST (`F37.rest`).",
+      "ids": [
+        "F37.rest"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1634
+    },
+    {
+      "bullet": "Bad reactions (`F37.rest-validation`).",
+      "ids": [
+        "F37.rest-validation"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1452
+    },
+    {
+      "bullet": "Model-backed: the agent reacts (`F37.tool`).",
+      "ids": [
+        "F37.tool"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4301
+    },
+    {
+      "bullet": "Default target is the agent's answer (`F37.rest-default`).",
+      "ids": [
+        "F37.rest-default"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1149
+    },
+    {
+      "bullet": "Reacting while a tool call waits (`F37.rest-while-confirming`).",
+      "ids": [
+        "F37.rest-while-confirming"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10675
+    },
+    {
+      "bullet": "What the model sees (`F37.agent-sees-user-reactions`).",
+      "ids": [
+        "F37.agent-sees-user-reactions"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5643
+    },
+    {
+      "bullet": "Targets come from the active branch (`F37.rest-active-branch`).",
+      "ids": [
+        "F37.rest-active-branch"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2688
+    },
+    {
+      "bullet": "TypeScript client (`F37.ts-client`).",
+      "ids": [
+        "F37.ts-client"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2006
+    },
+    {
+      "bullet": "Inside a Docker runtime (`F37.runtime-env`).",
+      "ids": [
+        "F37.runtime-env"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 23604
+    },
+    {
+      "bullet": "The response is the stored event (`F37.rest-response-parent`).",
+      "ids": [
+        "F37.rest-response-parent"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2749
+    }
+  ]
+}

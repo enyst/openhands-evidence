@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "case": "compact",
+      "expected_accept": true,
+      "actual_accept": true
+    },
+    {
+      "case": "dashed",
+      "expected_accept": true,
+      "actual_accept": true
+    },
+    {
+      "case": "uppercase",
+      "expected_accept": true,
+      "actual_accept": true
+    },
+    {
+      "case": "raw id",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "case": "name only",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "case": "wrong child",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "case": "malformed extra dash",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "case": "wrong scheme",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "case": "f36-mention-unchanged",
+      "expected_child_from_tool_listing": "470b452a-be42-46c9-a3a7-eb4f3c4f7421",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "case": "f36-mention-unchanged",
+      "expected_child_from_tool_listing": "9868428a-e1cd-4228-a572-4da49925404a",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "case": "f36-mention-unchanged",
+      "expected_child_from_tool_listing": "4aead978-0d07-4b7c-887b-a277679669f1",
+      "expected_accept": false,
+      "actual_accept": false
+    },
+    {
+      "case": "f36-mention-delivery-repeat",
+      "expected_child_from_tool_listing": "3a05a65f-d4e1-4a28-925b-609821a27520",
+      "expected_accept": true,
+      "actual_accept": true
+    },
+    {
+      "case": "f36-mention-delivery-repeat",
+      "expected_child_from_tool_listing": "f49a52fa-b570-405e-8823-37dbd943561c",
+      "expected_accept": true,
+      "actual_accept": true
+    }
+  ]
+}
