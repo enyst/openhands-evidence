@@ -5,9 +5,9 @@ Engel Nyst's behalf. Every Canvas capture uses **Paper**.
 
 ## Verdict
 
-**Not ready for unconditional approval.** One reproducible SDK correctness bug
-is fixed on the fork. The default-off requirement passes for newly created
-OpenHands conversations, but not as a global kill switch: old opted-in
+**Local feature validation passes with the fork fix; release prerequisites remain.**
+One reproducible SDK correctness bug is fixed on the fork. The default-off
+requirement passes for newly created OpenHands conversations, but not as a global kill switch: old opted-in
 conversations retain their edit tool and Canvas still folds their edits after
 the flag is turned off. This is deliberate in the PR, not an accidental missing
 conditional. **Engel approved this behavior on 2026-11-16:** conversations that
@@ -92,9 +92,19 @@ not silently redesign this tradeoff or claim it is solved.
 ### Release and rollout dependency
 
 Published SDK/client versions are still 1.62.0. All feature-capable Canvas builds
-used the locally built client from the SDK PR, copied into installed dependency
-output without modifying package pins or lockfiles. This is **source testing**,
-not proof that the currently published client can build this UI.
+used the locally built client from the SDK PR, initially copied into installed
+dependency output, then independently packed with `npm pack` and installed using
+`npm install --no-save --package-lock=false`. Typecheck and production build passed
+with that tarball, as did the 99 targeted Canvas tests across five files. Vitest
+reported missing-source sourcemap warnings in the packed client. No package pins
+or lockfiles changed. This is **source and local
+package-artifact testing**, not proof that the currently published client can build
+this UI.
+
+All four Python workspace wheels were built and installed into an independent,
+non-project environment. Imports, edit-event JSON round trip, and the flag on/off
+tool-selection control passed without editable-source imports. This is a wheel
+smoke check, not a full wheel-backed browser/model run.
 
 A separate stack using the actually published Agent Server 1.62.0 showed the
 Experimental page's graceful empty state. Its frontend still used the local
@@ -122,12 +132,21 @@ here; release, pin bump and fresh CI are required before merge.
 | Fork and restart | Full API fork retained edits; restarting this isolated stack retained the fork's correction and persisted experimental setting; doctor passed. Fork creation itself was API-driven, not claimed as a UI fork workflow. |
 | Phone | 390 × 844 Paper rendering of latest edit inspected; no overlapping badge/text. |
 | Existing conversation after flag disabled | Correction and one badge remain. Confirms creation-time semantics, not strict gating. |
-| Browser diagnostics | No page errors/app errors in captured browser diagnostics. |
+| Remote SDK create/attach/fork, repeat check | Real DeepSeek successfully edited an existing conversation after disabling the flag. Clean client automatically registered the tool. Original event JSON bytes/SHA256 unchanged; edit saved in a separate event file. Fresh off conversation had no tool and no edit. |
+| Planning and delegated child | Real DeepSeek edited planning-agent finish 8181 → 9191 and child finish 6161 → 7171. The child inherited its opted-in parent's tool while the global flag was off. Paper browser rendering inspected for both. |
+| Rejection controls | Real server with scripted provider: empty string, unchanged text, user-only text, ambiguous repeated text, and stale original text each rejected; one valid control succeeded. ACP conversation creation with flag on did not inject the tool; no ACP model was run. |
+| Same-response edits | Scripted provider emitted three calls in one response. First same-target edit succeeded, second conflicted, different-target edit succeeded; retrying the rejected edit in the next response succeeded. Three edit events, one conflict observation. |
+| Paged history and reconnect | Scripted provider seeded 60 checkpoints, 439 persisted events before reconnect. Browser initially loaded one 50-event tail page; scrolling fetched nine pages total and displayed original question already folded to 6060. After deliberate server stop/offline/restart and a second edit, WebSocket resumed from sequence 438 and displayed 7070 with one badge. 451 persisted events afterward. Phone reload/backfill also retained 7070. |
+| History response timings | Nine history searches returned 200; response headers took 6–42 ms in this single local run. This is not a scale benchmark or before/after performance proof. |
+| Browser diagnostics | No JavaScript page errors. Expected connection errors occurred during intentional shutdown/offline controls. After restoring connectivity and clearing those diagnostics, phone reload/backfill produced zero page/app errors. |
+| Final health check | All service/authentication/UI checks passed, but final doctor was not fully green: the direct package-validation rebuild removed the harness's `build/verify-revision.txt` marker, so served-build identity returned 404. Source inputs were unchanged; no marker was fabricated to suppress this check. |
 | Published backend control | Agent Server 1.62.0 healthy; Experimental empty state rendered. No real-model feature support claimed there. |
 | Fork CI | Both exact mirrors and the pagination-fix head reported **No CI checks found**. This is not a pass. No workflow was manually triggered. |
 
 Selected process output is retained in [checks.txt](checks.txt). This contains
 test/build summaries only, not raw runtime state or conversation exports.
+[Additional local results](round2-results.json) retain the synthetic scenario
+assertions and nine history-search timings.
 
 SDK broad selection:
 
@@ -175,13 +194,46 @@ separate post-reload DOM/API checks do so.
 
 [Failure and finish-answer video](media/failure-and-finish.mp4).
 
+### Additional local evidence
+
+Reusable programs: [real-model remote/planning/child checks](remote-live.py),
+[exact rejection controls](failure-live.py), [same-response conflict control](batch-live.py),
+and [paged-history fixture](history-live.py). Run them with the fixed SDK Python
+through `control-agent-server exec`; export `CONTROL_AGENT_SERVER` and the selected
+isolated `AGENT_SERVER_VERIFY_RUN`. The real-model program additionally needs a
+privately provided `DEEPSEEK_API_KEY` and `CANVAS_CONVERSATIONS_DIR`. The scripted
+controls need `message_edits` enabled in the isolated server. Do not run them
+against a shared/production conversation store.
+
+The history fixture prints the SDK client's event-list length, which was 502;
+that includes nonpersisted events and is **not** the on-disk count of 439. Browser
+scrolling/reconnect is a separate step from seeding. Initial fixture attempts
+consumed scripted replies in automatic titling; explicit `set_title()` corrected
+the setup before the successful run. An initial use of `RemoteConversation` as a
+context manager was likewise corrected to explicit `close()`; neither setup error
+is counted as a product failure.
+
+| State | Inspected capture |
+| --- | --- |
+| Planning finish corrected | ![Paper planning edit](media/planning-edit.png) |
+| Inherited child tool | ![Paper child edit](media/child-edit.png) |
+| Latest history edit after reconnect | ![Paper reconnect](media/reconnected-latest-edit.png) |
+| Phone reload and history backfill | ![Paper phone reload](media/phone-reloaded.png) |
+
+[History backfill/reconnect recording](media/history-backfill.mp4), inspected:
+scrolling reveals the original question **already corrected** to 6060; the video
+does not show its unedited state. Reconnecting becomes visible, then the correction
+changes to 7070 with a single badge. The composer covers later lower messages in
+the scrolled screenshots, not the corrected target.
+
 ## Not proved / next actions
 
-- No Cloud/device-link deployment tested; all feature-capable live checks used
-  isolated local source servers and real DeepSeek. Cloud sign-in was not completed.
-- No Docker runtime, published binary, real ACP model, delegation/planning-mode
-  matrix, or large-history Canvas pagination/performance live test. Targeted unit
-  tests are not substitutes for those production paths.
+- **Cloud is out of scope by Engel's explicit direction:** no Cloud deployment is
+  used, so Cloud/device-link testing is not a prerequisite or blocker.
+- No Docker runtime (`docker` is unavailable), published binary, or real ACP
+  model run. Planning/delegation checks are specific successful cases, not an
+  exhaustive agent-mode matrix. Nine-page history was live-tested, not extreme
+  history size or production-scale performance.
 - No live reproduction of the accepted condensation/navigation window, and no
   empirical claim that unprompted editing is reliable across models or runs.
 - No exhaustive before/after equivalence proof for every unrelated flag-off
@@ -189,8 +241,8 @@ separate post-reload DOM/API checks do so.
   above pass; that is narrower than "nothing else can break."
 - Fork push alone starts no Canvas branch CI. An approved draft fork PR, fork
   issue reference and Engel's own HUMAN note are needed to exercise that workflow.
-- The flag-semantics decision is resolved. Complete the remaining validation and
-  release prerequisites, and obtain explicit approval for any upstream push;
+- The flag-semantics decision is resolved. Complete the release prerequisites
+  and obtain explicit approval for any upstream push;
   fetch and compare both sides again before delivering the fix upstream.
 
 No private conversation exports, credential files or raw runtime directories are

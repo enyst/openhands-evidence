@@ -1,0 +1,114 @@
+{
+  "remote_planning_child": [
+    {
+      "check": "create-auto-registration-and-edit-while-off",
+      "conversation_id": "01ef1082-6173-4f99-9a04-b1023b95b3bc",
+      "original_file_sha256": "0e92031dc6f929e408ad03cce765ab3ee80ebd12750480229325b2e41f5d3df8",
+      "original_file_unchanged": true,
+      "pass": true,
+      "separate_edit_file": true
+    },
+    {
+      "check": "attach-fork-new-off-control",
+      "fork_id": "cb6a98f7-ad27-4c5c-b714-86c829e852a5",
+      "off_id": "b6f58f93-9058-44e9-93ac-af3e6b695dfd",
+      "pass": true
+    },
+    {
+      "check": "child-inherits-tool-while-global-off",
+      "child_id": "aa2441df-0858-4d45-9086-a198da5a9ec3",
+      "pass": true
+    },
+    {
+      "check": "planning-agent-edits-finish",
+      "pass": true,
+      "planner_id": "86f8d806-cc87-4976-876f-afa4b4481283"
+    }
+  ],
+  "rejections": [
+    {
+      "check": "empty-unchanged-user-only-ambiguous-stale-controls",
+      "pass": true,
+      "errors": 5,
+      "successful_edits": 1,
+      "conversation_id": "d06d71da-7963-45b8-9e85-feaf6fd0712c",
+      "provider": "scripted"
+    },
+    {
+      "check": "acp-not-injected-with-flag-on",
+      "pass": true,
+      "real_acp_model_run": false
+    }
+  ],
+  "same_response": [
+    {
+      "check": "same-response-conflict-distinct-target-and-next-response-retry",
+      "pass": true,
+      "successful_edits": 3,
+      "conflict_errors": 1,
+      "conversation_id": "962ba2b9-4e0d-454e-8874-c9caaaf3e4a2",
+      "provider": "scripted"
+    }
+  ],
+  "isolated_wheel_smoke": {
+    "wheel_imports_and_event_roundtrip": true,
+    "flag_on_off": true,
+    "editable_source_used": false
+  },
+  "history_search_requests": [
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 12
+    },
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&page_id=32e5cb9e-6676-4b75-ad64-c1cb1f8266de&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 28
+    },
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&page_id=55fe31a9-a513-4adc-91e8-89de6dce778c&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 35
+    },
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&page_id=b588bda1-5659-4289-a803-deeb8a9f5252&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 10
+    },
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&page_id=99992b69-0859-4b45-9b25-1944991225f8&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 6
+    },
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&page_id=09c3bd53-5956-4704-982d-66026bc09aa0&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 42
+    },
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&page_id=7ee64bb4-992e-46b2-bc8c-6285b0e5cc22&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 33
+    },
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&page_id=d439df81-d578-4c2a-80ef-ab45e03620e3&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 25
+    },
+    {
+      "path": "/api/conversations/96d9b2de-e77e-485e-b5e1-f3b8c35505e3/events/search",
+      "query": "?limit=50&page_id=fe64d7c1-3dca-4487-8f21-fddb9ddace61&sort_order=TIMESTAMP_DESC",
+      "status": 200,
+      "responseMs": 14
+    }
+  ]
+}
