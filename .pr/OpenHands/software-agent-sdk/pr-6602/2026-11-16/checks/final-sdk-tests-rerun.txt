@@ -1,0 +1,70 @@
+<local-checkout>/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform darwin -- Python 3.13.11, pytest-9.2.0, pluggy-1.6.0
+rootdir: <local-checkout>
+configfile: pyproject.toml
+plugins: libtmux-0.62.0, cov-7.1.0, xdist-3.8.0, timeout-2.4.0, anyio-4.14.2, forked-1.7.5, asyncio-1.4.1.post1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 301 items
+
+tests/agent_server/test_parent_child_conversations.py .................. [  5%]
+.......................                                                  [ 13%]
+tests/agent_server/test_project_board.py ............................... [ 23%]
+.....................................                                    [ 36%]
+tests/agent_server/test_project_cards.py ...........                     [ 39%]
+tests/agent_server/test_project_profiles.py ....                         [ 41%]
+tests/agent_server/test_project_prompts.py .........                     [ 44%]
+tests/agent_server/test_projects_feature_flag.py .......                 [ 46%]
+tests/agent_server/test_projects_router.py ............................. [ 56%]
+....................................................................     [ 78%]
+tests/tools/project/test_project_memory_tools.py ......                  [ 80%]
+tests/tools/project/test_project_tools.py .............................. [ 90%]
+...........                                                              [ 94%]
+tests/tools/message_edit/test_message_edit.py .................          [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  <local-checkout>/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+tests/agent_server/test_parent_child_conversations.py: 17 warnings
+tests/agent_server/test_project_board.py: 3 warnings
+tests/agent_server/test_project_cards.py: 20 warnings
+tests/agent_server/test_projects_router.py: 109 warnings
+tests/tools/message_edit/test_message_edit.py: 7 warnings
+  <local-checkout>/openhands-sdk/openhands/sdk/agent/base.py:796: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+
+tests/agent_server/test_project_board.py::test_service_registers_the_subscriber_for_every_conversation
+  <local-checkout>/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'summary' on TypedDict class 'ChatCompletionReasoningItem' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_profiles.py::test_the_profiles_are_built_from_the_users_active_profile
+  <local-checkout>/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('0aa99c9b-81cd-4547-94e6-e728b498fdff'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+tests/agent_server/test_project_profiles.py::test_an_existing_profile_is_kept_as_the_user_edited_it
+  <local-checkout>/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('35af84c6-3e3d-43eb-9ec0-2efe5ade0dd0'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+tests/agent_server/test_project_profiles.py::test_a_user_on_the_standard_tool_set_keeps_it_for_workers
+  <local-checkout>/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('f7642024-c2be-40fb-b841-b4de3670f3e6'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+tests/tools/message_edit/test_message_edit.py::test_agent_records_the_edit_after_the_observation
+tests/tools/message_edit/test_message_edit.py::test_the_agent_sees_its_call_but_not_the_edit_event
+  <local-checkout>/openhands-sdk/openhands/sdk/llm/utils/telemetry.py:555: UserWarning: Cost calculation failed: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=test-model
+   Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+    warnings.warn(f"Cost calculation failed: {e}")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 301 passed, 163 warnings in 38.75s ======================

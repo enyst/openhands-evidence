@@ -1,0 +1,136 @@
+{
+  "ok": true,
+  "revision": "126049f10e260e29b0bc8d97c1caec5a02a2302a",
+  "with_llm": true,
+  "bullets": {
+    "pass": 8,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S05-events.md",
+      "bullet": 1,
+      "ids": [
+        "S05.event-base",
+        "S05.json-roundtrip",
+        "S05.to-llm-message",
+        "S05.events-to-messages",
+        "S05.openai-format",
+        "S05.unmatched-actions",
+        "S05.event-log-files",
+        "S05.event-cache",
+        "S05.event-tree",
+        "S05.visualize",
+        "S05.resume-transcript"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 2,
+      "ids": [
+        "S05.error-classification",
+        "S05.streaming-delta",
+        "S05.completion-log-event"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 3,
+      "ids": [
+        "S05.event-log-append"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 4,
+      "ids": [
+        "S05.event-log-recovery"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 5,
+      "ids": [
+        "S05.json-roundtrip",
+        "S05.events-to-messages",
+        "S05.openai-format"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 6,
+      "ids": [
+        "S05.json-roundtrip",
+        "S05.openai-format"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 7,
+      "ids": [
+        "S05.events-to-messages",
+        "S02.error-mapping"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 8,
+      "ids": [
+        "S05.system-prompt-blocks"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 9,
+      "ids": [
+        "S05.token-event"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked"
+    }
+  ]
+}

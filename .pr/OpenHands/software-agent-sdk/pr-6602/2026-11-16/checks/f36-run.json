@@ -1,0 +1,320 @@
+{
+  "ok": false,
+  "file": "F36-projects.md",
+  "summary": {
+    "pass": 33,
+    "fail": 1,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "launch_flags": [],
+  "cases": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2032
+    },
+    {
+      "bullet": "No projects yet (`F36.list-empty`).",
+      "ids": [
+        "F36.list-empty"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 684
+    },
+    {
+      "bullet": "Create a project (`F36.create`).",
+      "ids": [
+        "F36.create"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1491
+    },
+    {
+      "bullet": "Validation (`F36.validation`).",
+      "ids": [
+        "F36.validation"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1274
+    },
+    {
+      "bullet": "Unknown project (`F36.unknown-project`).",
+      "ids": [
+        "F36.unknown-project"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4648
+    },
+    {
+      "bullet": "Rename (`F36.patch`).",
+      "ids": [
+        "F36.patch"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1706
+    },
+    {
+      "bullet": "Coordinator (`F36.coordinator`).",
+      "ids": [
+        "F36.coordinator"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2498
+    },
+    {
+      "bullet": "Missing coordinator (`F36.coordinator-missing`).",
+      "ids": [
+        "F36.coordinator-missing"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 920
+    },
+    {
+      "bullet": "One project per coordinator (`F36.coordinator-unique`).",
+      "ids": [
+        "F36.coordinator-unique"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1331
+    },
+    {
+      "bullet": "Add a conversation (`F36.add-conversation`).",
+      "ids": [
+        "F36.add-conversation"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1718
+    },
+    {
+      "bullet": "Move a conversation (`F36.move-conversation`).",
+      "ids": [
+        "F36.move-conversation"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1369
+    },
+    {
+      "bullet": "Attention groups (`F36.attention`).",
+      "ids": [
+        "F36.attention"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4152
+    },
+    {
+      "bullet": "Remove a conversation (`F36.remove-conversation`).",
+      "ids": [
+        "F36.remove-conversation"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1963
+    },
+    {
+      "bullet": "Coordinator membership (`F36.remove-coordinator`).",
+      "ids": [
+        "F36.remove-coordinator"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2156
+    },
+    {
+      "bullet": "Message a conversation over REST (`F36.message-rest`).",
+      "ids": [
+        "F36.message-rest"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5457
+    },
+    {
+      "bullet": "How a turn ended (`F36.turn`).",
+      "ids": [
+        "F36.turn"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10843
+    },
+    {
+      "bullet": "Resolved (`F36.resolved`).",
+      "ids": [
+        "F36.resolved"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7135
+    },
+    {
+      "bullet": "Resolved automatically (`F36.auto-resolve`).",
+      "ids": [
+        "F36.auto-resolve"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 18397
+    },
+    {
+      "bullet": "Unfinished work stays open (`F36.needs-you`).",
+      "ids": [
+        "F36.needs-you"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11537
+    },
+    {
+      "bullet": "The worker resolves itself (`F36.self-resolve`).",
+      "ids": [
+        "F36.self-resolve"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16231
+    },
+    {
+      "bullet": "Artifacts over REST (`F36.artifacts-rest`).",
+      "ids": [
+        "F36.artifacts-rest"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4568
+    },
+    {
+      "bullet": "Model-backed: an agent saves an artifact (`F36.artifacts-tool`).",
+      "ids": [
+        "F36.artifacts-tool"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 19774
+    },
+    {
+      "bullet": "Project memory over REST (`F36.memory-rest`).",
+      "ids": [
+        "F36.memory-rest"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5266
+    },
+    {
+      "bullet": "Model-backed: an agent keeps project memory (`F36.memory-tool`).",
+      "ids": [
+        "F36.memory-tool"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11918
+    },
+    {
+      "bullet": "No approval over REST (`F36.message-refused`).",
+      "ids": [
+        "F36.message-refused"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1816
+    },
+    {
+      "bullet": "Restart (`F36.persist-restart`).",
+      "ids": [
+        "F36.persist-restart"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11911
+    },
+    {
+      "bullet": "Delete a project (`F36.delete`).",
+      "ids": [
+        "F36.delete"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3665
+    },
+    {
+      "bullet": "Model-backed: start and list (`F36.tool-start-and-list`).",
+      "ids": [
+        "F36.tool-start-and-list"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15803
+    },
+    {
+      "bullet": "Model-backed: the coordinator hears back (`F36.wake`).",
+      "ids": [
+        "F36.wake"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2322
+    },
+    {
+      "bullet": "Model-backed: read a conversation (`F36.read`).",
+      "ids": [
+        "F36.read"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6400
+    },
+    {
+      "bullet": "Model-backed: message a conversation (`F36.tool-message`).",
+      "ids": [
+        "F36.tool-message"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12063
+    },
+    {
+      "bullet": "Model-backed: mentions (`F36.mention`).",
+      "ids": [
+        "F36.mention"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 5048
+    },
+    {
+      "bullet": "Model-backed: no approval by message (`F36.tool-message-refuses-confirmation`).",
+      "ids": [
+        "F36.tool-message-refuses-confirmation"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11605
+    },
+    {
+      "bullet": "Corrupted file (`F36.corrupted-file`).",
+      "ids": [
+        "F36.corrupted-file"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3369
+    }
+  ]
+}

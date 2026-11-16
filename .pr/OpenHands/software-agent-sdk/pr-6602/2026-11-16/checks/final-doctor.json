@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "failed": [],
+  "warnings": [
+    "LLM configured: model=gpt-5.6 without an API key: `control-openhands llm preset deepseek`"
+  ],
+  "passed": [
+    "served build matches this checkout's build inputs: served=000ad8e9afe0764a run=000ad8e9afe0764a revision=01d257221c3c",
+    "checkout build inputs unchanged since launch: launch=000ad8e9afe0764a now=000ad8e9afe0764a",
+    "unauthenticated API rejected: status=401",
+    "authenticated settings readable: status=200",
+    "UI loads without page errors: markers=first-run-onboarding-screen,onboarding-modal,telemetry-consent-form pageErrors=0 testidsInDom=247 (hidden included)"
+  ]
+}

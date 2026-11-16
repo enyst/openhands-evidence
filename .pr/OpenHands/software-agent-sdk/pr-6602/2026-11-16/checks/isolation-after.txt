@@ -1,0 +1,60 @@
+<local-checkout>/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform darwin -- Python 3.13.11, pytest-9.2.0, pluggy-1.6.0
+rootdir: <local-checkout>
+configfile: pyproject.toml
+plugins: libtmux-0.62.0, cov-7.1.0, xdist-3.8.0, timeout-2.4.0, anyio-4.14.2, forked-1.7.5, asyncio-1.4.1.post1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 264 items
+
+tests/agent_server/test_parent_child_conversations.py .................. [  6%]
+.......................                                                  [ 15%]
+tests/agent_server/test_projects_router.py ............................. [ 26%]
+....................................................................     [ 52%]
+tests/agent_server/test_project_board.py ............................... [ 64%]
+.....................................                                    [ 78%]
+tests/agent_server/test_project_cards.py ......[11/16/26 19:37:14] WARNING  LLM request failed:              retry_mixin.py:236
+                             exception_type=litellm.exception                   
+                             s.AuthenticationError                              
+                             status_code=500 attempt=1                          
+                             max_attempts=5                                     
+                             retry_eligible=False                               
+                             will_retry=False                                   
+.[11/16/26 19:37:14] WARNING  Error generating conversation    title_utils.py:165
+                             title with LLM:                                    
+                             litellm.AuthenticationError:                       
+                             AuthenticationError:                               
+                             OpenAIException - The api_key                      
+                             client option must be set either                   
+                             by passing api_key to the client                   
+                             or by setting the OPENAI_API_KEY                   
+                             environment variable                               
+....                     [ 82%]
+tests/tools/project/test_project_memory_tools.py ......                  [ 84%]
+tests/tools/project/test_project_tools.py .............................. [ 95%]
+...........                                                              [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  <local-checkout>/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+tests/agent_server/test_parent_child_conversations.py: 17 warnings
+tests/agent_server/test_projects_router.py: 109 warnings
+tests/agent_server/test_project_board.py: 3 warnings
+tests/agent_server/test_project_cards.py: 20 warnings
+  <local-checkout>/openhands-sdk/openhands/sdk/agent/base.py:796: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  <local-checkout>/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'summary' on TypedDict class 'ChatCompletionReasoningItem' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 264 passed, 151 warnings in 44.97s ======================

@@ -1,0 +1,125 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./src/styles/agent-server-ui-style-scope" without a file extension (vite.config.ts:17:8). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.1.0 <local-checkout>
+
+ ❯ |jsdom| __tests__/components/conversation-events/chat/decision-card.test.tsx (15 tests | 1 failed) 1706ms
+   × renders AskUserForConversationAction outside collapsed activity and submits an answer once 1016ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |jsdom| __tests__/components/conversation-events/chat/decision-card.test.tsx > renders AskUserForConversationAction outside collapsed activity and submits an answer once
+TestingLibraryElementError: Unable to find role="region" and name "Choose where to store the data?"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col gap-1.5 my-1 py-1 text-sm w-full mt-2 mb-0 [&+article]:mt-2"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex min-w-0 items-center justify-between font-normal text-muted"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex min-w-0 items-center cursor-pointer"[39m
+          [33mdata-slot[39m=[32m"tooltip-trigger"[39m
+          [33mdata-testid[39m=[32m"generic-event-message-title"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"min-w-0 truncate"[39m
+          [36m>[39m
+            [0mASKUSER[0m
+          [36m</span>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"BUTTON$EXPAND"[39m
+            [33mclass[39m=[32m"cursor-pointer text-left"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"h-2.5 w-2.5 flex-shrink-0 fill-muted transition-transform ml-2"[39m
+              [33mviewBox[39m=[32m"0 0 10 10"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3.5 1.5 L8 5 L3.5 8.5 Z"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"flex-shrink-0"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col gap-1.5 my-1 py-1 text-sm w-full mt-2 mb-0 [&+article]:mt-2"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex min-w-0 items-center justify-between font-normal text-muted"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex min-w-0 items-center cursor-pointer"[39m
+          [33mdata-slot[39m=[32m"tooltip-trigger"[39m
+          [33mdata-testid[39m=[32m"generic-event-message-title"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"min-w-0 truncate"[39m
+          [36m>[39m
+            [0mASKUSER[0m
+          [36m</span>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"BUTTON$EXPAND"[39m
+            [33mclass[39m=[32m"cursor-pointer text-left"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"h-2.5 w-2.5 flex-shrink-0 fill-muted transition-transform ml-2"[39m
+              [33mviewBox[39m=[32m"0 0 10 10"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3.5 1.5 L8 5 L3.5 8.5 Z"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"flex-shrink-0"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ __tests__/components/conversation-events/chat/decision-card.test.tsx:259:31
+    257|       );
+    258|     renderWithProviders(<Transcript />);
+    259|     const card = await screen.findByRole("region", {
+       |                               ^
+    260|       name: question.action.question,
+    261|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 passed (15)
+   Start at  19:42:20
+   Duration  6.94s (import 48%, tests 25%, transform 16%, environment 8%, setup 3%)
+

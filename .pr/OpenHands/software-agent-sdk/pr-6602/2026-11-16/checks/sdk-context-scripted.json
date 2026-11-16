@@ -1,0 +1,250 @@
+{
+  "ok": true,
+  "revision": "ba241193bf45cf625672add8bb2e83345615bcd1",
+  "with_llm": false,
+  "bullets": {
+    "pass": 13,
+    "blocked": 6
+  },
+  "results": [
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 1,
+      "ids": [
+        "S06.context-suffixes",
+        "S06.context-skills",
+        "S06.context-secrets",
+        "S06.context-datetime"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 2,
+      "ids": [
+        "S06.system-prompt-registry",
+        "S06.system-prompt-model-specific",
+        "S06.system-prompt-custom",
+        "S06.persona-soul"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 3,
+      "ids": [
+        "S06.memory-load",
+        "S06.memory-write-path"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 4,
+      "ids": [
+        "S06.summarizing-size",
+        "S06.summary-llm-streaming",
+        "S06.view",
+        "S06.view-atomicity"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 5,
+      "ids": [
+        "S06.summarizing-tokens"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 6,
+      "ids": [
+        "S06.summarizing-reasons",
+        "S06.view",
+        "S06.noop-condenser"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 7,
+      "ids": [
+        "S06.observation-dispositions"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 8,
+      "ids": [
+        "S06.soft-vs-hard"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 9,
+      "ids": [
+        "S06.hard-reset"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 10,
+      "ids": [
+        "S06.manual-condense"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 11,
+      "ids": [
+        "S06.context-overflow-request"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 12,
+      "ids": [
+        "S06.condenser-resume"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 13,
+      "ids": [
+        "S06.pipeline-condenser",
+        "S06.noop-condenser"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 14,
+      "ids": [
+        "S06.summarizing-size",
+        "S06.manual-condense",
+        "S06.view-atomicity"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "1 model-backed block(s) skipped (no DEEPSEEK_API_KEY)"
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 15,
+      "ids": [
+        "S06.summarizing-size",
+        "S06.condenser-resume",
+        "S06.summary-llm-streaming"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "1 model-backed block(s) skipped (no DEEPSEEK_API_KEY)"
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 16,
+      "ids": [
+        "S06.memory-load",
+        "S06.memory-write-path"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "1 model-backed block(s) skipped (no DEEPSEEK_API_KEY)"
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 17,
+      "ids": [
+        "S06.context-suffixes",
+        "S06.context-skills"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "1 model-backed block(s) skipped (no DEEPSEEK_API_KEY)"
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 18,
+      "ids": [
+        "S06.summarizing-size",
+        "S06.summarizing-tokens",
+        "S06.soft-vs-hard",
+        "S06.hard-reset",
+        "S06.context-overflow-request"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "1 model-backed block(s) skipped (no DEEPSEEK_API_KEY)"
+    },
+    {
+      "family": "S06-context-condensers.md",
+      "bullet": 19,
+      "ids": [
+        "S06.view-atomicity"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked"
+    }
+  ]
+}
