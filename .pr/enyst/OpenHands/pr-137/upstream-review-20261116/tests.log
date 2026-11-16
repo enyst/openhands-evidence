@@ -1,0 +1,20 @@
+
+> @openhands/agent-canvas@1.40.0 test
+> npm run make-i18n && vitest run __tests__/components/conversation-events/chat __tests__/components/features/chat src/utils/transcript-export/index.test.ts __tests__/routes/shared-conversation.test.tsx
+
+
+> @openhands/agent-canvas@1.40.0 make-i18n
+> node scripts/make-i18n-translations.cjs
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./src/styles/agent-server-ui-style-scope" without a file extension (vite.config.ts:16:8). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.1.0 /Users/enyst/repos/canvas-decision-cards
+
+
+ Test Files  71 passed (71)
+      Tests  796 passed (796)
+   Start at  18:06:51
+   Duration  38.41s (import 54%, environment 21%, tests 10%, setup 9%, transform 5%)
+
