@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "file": "F38-conversation-mentions.md",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "launch_flags": [],
+  "cases": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2376
+    },
+    {
+      "bullet": "The feature flag (`F38.flag`, `F38.flag-gates`).",
+      "ids": [
+        "F38.flag",
+        "F38.flag-gates"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4140
+    },
+    {
+      "bullet": "Model-backed: the agent finds and links a conversation (`F38.find`).",
+      "ids": [
+        "F38.find"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5158
+    },
+    {
+      "bullet": "Model-backed: the agent reads a mentioned conversation (`F38.read`, `F38.read-only`).",
+      "ids": [
+        "F38.read",
+        "F38.read-only"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8163
+    }
+  ]
+}

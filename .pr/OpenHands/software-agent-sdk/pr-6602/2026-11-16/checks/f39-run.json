@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "file": "F39-message-edits.md",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "launch_flags": [],
+  "cases": [
+    {
+      "bullet": "The feature flag (`F39.flag-gates`).",
+      "ids": [
+        "F39.flag-gates"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2534
+    },
+    {
+      "bullet": "Model-backed: the agent edits its question (`F39.tool`).",
+      "ids": [
+        "F39.tool"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9632
+    },
+    {
+      "bullet": "What the model sees (`F39.agent-sees`, `F39.miss`).",
+      "ids": [
+        "F39.agent-sees",
+        "F39.miss"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6919
+    },
+    {
+      "bullet": "A reaction quotes the edited text (`F39.reaction-quotes-edit`).",
+      "ids": [
+        "F39.reaction-quotes-edit"
+      ],
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 986
+    }
+  ]
+}

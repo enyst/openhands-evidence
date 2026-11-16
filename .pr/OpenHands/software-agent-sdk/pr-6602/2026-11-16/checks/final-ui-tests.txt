@@ -1,0 +1,12 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./src/styles/agent-server-ui-style-scope" without a file extension (vite.config.ts:17:8). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.1.0 <canvas-checkout>
+
+
+ Test Files  5 passed (5)
+      Tests  49 passed (49)
+   Start at  19:59:24
+   Duration  5.35s (import 55%, environment 17%, transform 13%, tests 8%, setup 7%)
+

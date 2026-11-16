@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "file": "F36-projects.md",
+  "launch_flags": [],
+  "attempts": [
+    {
+      "ok": true,
+      "summary": {
+        "pass": 11,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Create a project (`F36.create`).": "pass",
+        "Unknown project (`F36.unknown-project`).": "pass",
+        "Coordinator (`F36.coordinator`).": "pass",
+        "Add a conversation (`F36.add-conversation`).": "pass",
+        "Move a conversation (`F36.move-conversation`).": "pass",
+        "Attention groups (`F36.attention`).": "pass",
+        "Model-backed: start and list (`F36.tool-start-and-list`).": "pass",
+        "Model-backed: the coordinator hears back (`F36.wake`).": "pass",
+        "Model-backed: read a conversation (`F36.read`).": "pass",
+        "Model-backed: no approval by message (`F36.tool-message-refuses-confirmation`).": "pass"
+      }
+    },
+    {
+      "ok": true,
+      "summary": {
+        "pass": 11,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Create a project (`F36.create`).": "pass",
+        "Unknown project (`F36.unknown-project`).": "pass",
+        "Coordinator (`F36.coordinator`).": "pass",
+        "Add a conversation (`F36.add-conversation`).": "pass",
+        "Move a conversation (`F36.move-conversation`).": "pass",
+        "Attention groups (`F36.attention`).": "pass",
+        "Model-backed: start and list (`F36.tool-start-and-list`).": "pass",
+        "Model-backed: the coordinator hears back (`F36.wake`).": "pass",
+        "Model-backed: read a conversation (`F36.read`).": "pass",
+        "Model-backed: no approval by message (`F36.tool-message-refuses-confirmation`).": "pass"
+      }
+    }
+  ]
+}
