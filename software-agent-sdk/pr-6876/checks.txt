@@ -1,0 +1,112 @@
+Selected executed-check output, 2026-11-16
+
+SDK final broad suite (fixed source):
+collected 1261 items / 6 deselected / 1255 selected
+============== 1255 passed, 6 deselected, 325 warnings in 45.21s ===============
+
+SDK regression before fix:
+FAILED tests/tools/conversation_mentions/test_conversation_mention_tools.py::test_read_shows_the_agents_messages_as_edited
+================= 1 failed, 15 deselected, 1 warning in 0.29s ==================
+
+SDK regression after fix:
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 56 passed, 29 warnings in 0.99s ========================
+
+SDK event-focused suite:
+======================= 192 passed, 17 warnings in 3.80s =======================
+
+TypeScript client:
+
+ Test Files  28 passed (28)
+      Tests  439 passed (439)
+   Start at  21:03:26
+   Duration  8.83s (import 55%, tests 32%, transform 12%, worker 1%)
+
+    Isolate  28 workers spawned · ~354ms startup each (spawn + environment, per file)
+             at least ~1.06s faster with isolate: false — reuses workers across files instead of one per file
+
+
+Canvas focused suite:
+
+ Test Files  5 passed (5)
+      Tests  99 passed (99)
+   Start at  20:59:57
+   Duration  12.26s (transform 40%, import 35%, environment 14%, tests 6%, setup 5%)
+
+
+Canvas typecheck:
+
+> @openhands/agent-canvas@1.40.0 typecheck
+> react-router typegen && tsc
+
+
+F39 fresh real-model runs (run paths removed):
+{
+  "ok": true,
+  "file": "F39-message-edits.md",
+  "launch_flags": [],
+  "attempts": [
+    {
+      "ok": true,
+      "summary": {
+        "pass": 4,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "The feature flag (`F39.flag-gates`).": "pass",
+        "Model-backed: the agent edits its question (`F39.tool`).": "pass",
+        "What the model sees (`F39.agent-sees`, `F39.miss`).": "pass",
+        "A reaction quotes the edited text (`F39.reaction-quotes-edit`).": "pass"
+      }
+    },
+    {
+      "ok": true,
+      "summary": {
+        "pass": 4,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "The feature flag (`F39.flag-gates`).": "pass",
+        "Model-backed: the agent edits its question (`F39.tool`).": "pass",
+        "What the model sees (`F39.agent-sees`, `F39.miss`).": "pass",
+        "A reaction quotes the edited text (`F39.reaction-quotes-edit`).": "pass"
+      }
+    }
+  ]
+}
+
+Per-file source hooks:
+Format YAML files....................................................(no files to check)Skipped
+Ruff format..............................................................................Passed
+Ruff lint................................................................................Passed
+PEP8 style check (pycodestyle)...........................................................Passed
+Type check with pyright..................................................................Passed
+Forbid dynamic attribute access in SDK...................................................Passed
+Route execution_status writes through ConversationState.transition.......................Passed
+Check import dependency rules............................................................Passed
+Check Tool subclass registration.........................................................Passed
+Keep blocking store I/O off the agent-server event loop..............(no files to check)Skipped
+Keep secrets on SecretField..............................................................Passed
+
+Per-file test hooks:
+Format YAML files....................................................(no files to check)Skipped
+Ruff format..............................................................................Passed
+Ruff lint................................................................................Passed
+PEP8 style check (pycodestyle)...........................................................Passed
+Type check with pyright..................................................................Passed
+Forbid dynamic attribute access in SDK...................................................Passed
+Route execution_status writes through ConversationState.transition...(no files to check)Skipped
+Check import dependency rules............................................................Passed
+Check Tool subclass registration.........................................................Passed
+Keep blocking store I/O off the agent-server event loop..............(no files to check)Skipped
+Keep secrets on SecretField..........................................(no files to check)Skipped
