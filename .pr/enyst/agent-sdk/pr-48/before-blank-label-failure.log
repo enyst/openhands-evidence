@@ -1,0 +1,5 @@
+=================================== FAILURES ===================================
+_________ test_an_invalid_question_does_not_end_the_turn[blank-label] __________
+tests/tools/ask_user/test_ask_user.py:212: in test_an_invalid_question_does_not_end_the_turn
+    assert len(model.requests) == 2
+E   assert 1 == 2

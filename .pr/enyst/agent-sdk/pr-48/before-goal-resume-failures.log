@@ -1,0 +1,14 @@
+WARNING  openhands.sdk.conversation.visualizer.default:default.py:335 Event type ConversationErrorEvent is not registered in EVENT_VISUALIZATION_CONFIG. Skipping visualization.
+________________ test_goal_resume_waits_for_a_real_answer[card] ________________
+tests/agent_server/test_goal_loop.py:885: in test_goal_resume_waits_for_a_real_answer
+    with pytest.raises(ValueError, match="pending_ask"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+----------------------------- Captured stderr call -----------------------------
+INFO     openhands.agent_server.event_service:event_service.py:1997 Goal loop stopped on a question for the user
+________________ test_goal_resume_waits_for_a_real_answer[chat] ________________
+tests/agent_server/test_goal_loop.py:885: in test_goal_resume_waits_for_a_real_answer
+    with pytest.raises(ValueError, match="pending_ask"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+----------------------------- Captured stderr call -----------------------------

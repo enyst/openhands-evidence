@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "url": "http://127.0.0.1:18820/conversations/e33c406b-ebdf-4947-9926-b3fdecfbd291",
+  "lines": 7,
+  "truncated": false,
+  "snapshot": "- region \"Choose a test environment?\":\n  - heading \"Choose a test environment?\" [level=3]\n  - text: Default\n  - img \"Answered\"\n  - text: Default\n  - paragraph: EU-only synthetic data\n  - status: Answered"
+}

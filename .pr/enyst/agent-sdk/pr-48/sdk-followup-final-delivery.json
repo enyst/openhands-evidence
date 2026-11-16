@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "total": 17,
+  "pages": 1,
+  "more": false,
+  "count": 2,
+  "events": [
+    {
+      "kind": "MessageEvent",
+      "source": "user",
+      "text": "[Answer to your question: \"Choose a test environment?\"] Option 2: Default EU-only synthetic data",
+      "ts": "2026-11-16T19:37:15.644668"
+    },
+    {
+      "kind": "MessageEvent",
+      "source": "agent",
+      "text": "You picked **Option 2 (Default)**, which means the **staging** environment. Your note: **EU-only synthetic data** Nothing was changed and nothing was deployed — this was a UI test only.",
+      "ts": "2026-11-16T19:37:17.523116"
+    }
+  ]
+}

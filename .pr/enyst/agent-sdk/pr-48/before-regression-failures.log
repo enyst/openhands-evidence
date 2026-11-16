@@ -1,0 +1,15 @@
+_____ test_stop_hooks_wait_for_an_answer_but_still_check_completion[sync] ______
+tests/tools/ask_user/test_ask_user.py:236: in test_stop_hooks_wait_for_an_answer_but_still_check_completion
+    assert len(model.requests) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = len([[{'content': [{'type': 'text', 'text': '<SOUL>\nYou are OpenHands agent, a helpful AI assistant that can interact wit...3', 'name': 'ask_user'}, {'content': [{'type': 'text', 'text': '[Stop hook feedback] Keep working'}], 'role': 'user'}]])
+E    +    where [[{'content': [{'type': 'text', 'text': '<SOUL>\nYou are OpenHands agent, a helpful AI assistant that can interact wit...3', 'name': 'ask_user'}, {'content': [{'type': 'text', 'text': '[Stop hook feedback] Keep working'}], 'role': 'user'}]] = <test_ask_user._Model object at 0x112391550>.requests
+________ test_a_question_takes_precedence_over_finish_refinement[sync] _________
+tests/tools/ask_user/test_ask_user.py:279: in test_a_question_takes_precedence_over_finish_refinement
+    assert find_pending_ask(conversation.state.events) is not None
+E   AssertionError: assert None is not None
+E    +  where None = find_pending_ask(<openhands.sdk.conversation.event_store.EventLog object at 0x112466350>)
+E   assert [TextContent(..."]\nDefault')] == [TextContent(... 1: Default')]
+E     
+E     At index 0 diff: TextContent(cache_prompt=False, type='text', text='[Answer to your question: "Choose an environment?"]\nDefault') != TextContent(cache_prompt=False, type='text', text='[Answer to your question: "Choose an environment?"]\nOption 1: Default')
+E     Use -v to get more diff

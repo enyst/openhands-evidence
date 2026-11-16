@@ -1,0 +1,41 @@
+<SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform darwin -- Python 3.13.11, pytest-9.2.0, pluggy-1.6.0 -- <SDK_CHECKOUT>/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: <SDK_CHECKOUT>
+configfile: pyproject.toml
+plugins: libtmux-0.62.0, cov-7.1.0, xdist-3.8.0, timeout-2.4.0, anyio-4.14.2, forked-1.7.5, asyncio-1.4.1.post1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 55 items / 54 deselected / 1 selected
+
+tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http PASSED [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  <SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http
+tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http
+tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http
+  <SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/browser_use/config.py:243: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    created_at: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
+
+tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http
+tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http
+tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http
+  <SDK_CHECKOUT>/openhands-sdk/openhands/sdk/agent/base.py:793: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+
+tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http
+  <SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'summary' on TypedDict class 'ChatCompletionReasoningItem' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 1 passed, 54 deselected, 8 warnings in 8.61s =================

@@ -1,0 +1,6 @@
+=================================== FAILURES ===================================
+____________________________ test_fifo_lock_timeout ____________________________
+tests/sdk/conversation/test_fifo_lock.py:99: in test_fifo_lock_timeout
+    assert 0.09 <= duration <= 0.2  # Should be close to timeout value
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   assert 0.24380111694335938 <= 0.2

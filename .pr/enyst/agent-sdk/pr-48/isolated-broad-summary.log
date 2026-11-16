@@ -1,0 +1,127 @@
+
+=================================== FAILURES ===================================
+____________________________ test_fifo_lock_timeout ____________________________
+tests/sdk/conversation/test_fifo_lock.py:99: in test_fifo_lock_timeout
+    assert 0.09 <= duration <= 0.2  # Should be close to timeout value
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   assert 0.24380111694335938 <= 0.2
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  <SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+tests/tools/ask_user/test_ask_user.py: 22 warnings
+tests/sdk/agent/test_agent_content_policy_violation.py: 4 warnings
+tests/sdk/agent/test_agent_context_window_condensation.py: 18 warnings
+tests/sdk/agent/test_agent_llms_are_discoverable.py: 14 warnings
+tests/sdk/agent/test_agent_step_responses_gating.py: 4 warnings
+tests/sdk/agent/test_agent_tool_init.py: 6 warnings
+tests/sdk/agent/test_astep_releases_state_lock.py: 3 warnings
+tests/sdk/agent/test_async_secret_masking.py: 6 warnings
+tests/sdk/agent/test_filter_tools_regex.py: 1 warning
+tests/sdk/agent/test_message_during_streaming_arun.py: 7 warnings
+tests/sdk/agent/test_message_while_finishing.py: 1 warning
+tests/sdk/agent/test_non_executable_action_emission.py: 1 warning
+tests/sdk/agent/test_non_multimodal_image_input.py: 9 warnings
+tests/sdk/agent/test_nonexistent_tool_handling.py: 3 warnings
+tests/sdk/agent/test_parallel_execution_integration.py: 7 warnings
+tests/sdk/agent/test_parallel_tool_span_context.py: 1 warning
+tests/sdk/agent/test_reasoning_only_responses.py: 3 warnings
+tests/sdk/agent/test_response_dispatch.py: 15 warnings
+tests/sdk/agent/test_security_analysis_event.py: 10 warnings
+tests/sdk/agent/test_security_policy_integration.py: 1 warning
+tests/sdk/agent/test_stream_identity.py: 9 warnings
+tests/sdk/agent/test_tool_call_compatibility.py: 20 warnings
+tests/sdk/agent/test_tool_call_recovery.py: 5 warnings
+tests/sdk/agent/test_tool_execution_error_handling.py: 2 warnings
+tests/sdk/agent/test_tool_span_input.py: 3 warnings
+tests/sdk/agent/test_tool_span_tool_call_id_metadata.py: 1 warning
+tests/sdk/agent/test_tool_validation_error_message.py: 4 warnings
+tests/sdk/conversation/goal/test_runner.py: 3 warnings
+tests/sdk/conversation/local/test_agent_status_transition.py: 14 warnings
+tests/sdk/conversation/local/test_auth_error_friendly_message.py: 4 warnings
+tests/sdk/conversation/local/test_call_context_isolation.py: 4 warnings
+tests/sdk/conversation/local/test_confirmation_mode.py: 6 warnings
+tests/sdk/conversation/local/test_conversation_default_callback.py: 4 warnings
+tests/sdk/conversation/local/test_conversation_pause_functionality.py: 4 warnings
+tests/sdk/conversation/local/test_conversation_send_message.py: 13 warnings
+tests/sdk/conversation/local/test_conversation_visualize_param.py: 11 warnings
+tests/sdk/conversation/local/test_empty_response_retry.py: 2 warnings
+tests/sdk/conversation/local/test_execute_tool.py: 7 warnings
+tests/sdk/conversation/local/test_llm_session_isolation.py: 18 warnings
+tests/sdk/conversation/local/test_rerun_actions.py: 10 warnings
+tests/sdk/conversation/local/test_resume_damaged_event_file.py: 4 warnings
+tests/sdk/conversation/local/test_run_exception_includes_conversation_id.py: 5 warnings
+tests/sdk/conversation/local/test_span_double_ending.py: 3 warnings
+tests/sdk/conversation/local/test_state_serialization.py: 3 warnings
+tests/sdk/conversation/local/test_status_transition_flows.py: 2 warnings
+tests/sdk/conversation/local/test_stuck_detector_nudge.py: 3 warnings
+tests/sdk/conversation/remote/test_api_key_functionality.py: 2 warnings
+tests/sdk/conversation/remote/test_remote_conversation.py: 63 warnings
+tests/sdk/conversation/remote/test_remote_fork.py: 11 warnings
+tests/sdk/conversation/remote/test_remote_navigate.py: 3 warnings
+tests/sdk/conversation/remote/test_remote_value_errors.py: 4 warnings
+tests/sdk/conversation/remote/test_run_exception_includes_conversation_id_remote.py: 1 warning
+tests/sdk/conversation/test_ask_agent.py: 18 warnings
+tests/sdk/conversation/test_condense.py: 5 warnings
+tests/sdk/conversation/test_conversation_factory.py: 4 warnings
+tests/sdk/conversation/test_conversation_secrets_constructor.py: 5 warnings
+tests/sdk/conversation/test_interrupt.py: 12 warnings
+tests/sdk/conversation/test_local_conversation_agent_plugins.py: 6 warnings
+tests/sdk/conversation/test_local_conversation_mcp.py: 16 warnings
+tests/sdk/conversation/test_local_conversation_memory.py: 4 warnings
+tests/sdk/conversation/test_local_conversation_plugins.py: 15 warnings
+tests/sdk/conversation/test_remote_conversation_state_updates.py: 10 warnings
+tests/sdk/conversation/test_repo_root_project_skills.py: 6 warnings
+tests/sdk/conversation/test_switch_model.py: 12 warnings
+tests/agent_server/test_goal_loop.py: 57 warnings
+tests/agent_server/test_event_service.py: 16 warnings
+  <SDK_CHECKOUT>/openhands-sdk/openhands/sdk/agent/base.py:793: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+
+tests/tools/ask_user/test_ask_user.py::test_asking_ends_the_turn_and_leaves_the_question_pending
+tests/sdk/agent/test_stream_context.py::test_first_delta_opens_the_slot_with_the_anchor
+  <SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'summary' on TypedDict class 'ChatCompletionReasoningItem' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/tools/ask_user/test_ask_user.py: 21 warnings
+tests/sdk/agent/test_non_executable_action_emission.py: 1 warning
+tests/sdk/agent/test_nonexistent_tool_handling.py: 3 warnings
+tests/sdk/agent/test_parallel_tool_span_context.py: 1 warning
+tests/sdk/agent/test_security_analysis_event.py: 10 warnings
+tests/sdk/agent/test_security_policy_integration.py: 1 warning
+tests/sdk/agent/test_tool_call_compatibility.py: 20 warnings
+tests/sdk/agent/test_tool_call_recovery.py: 5 warnings
+tests/sdk/agent/test_tool_execution_error_handling.py: 2 warnings
+tests/sdk/agent/test_tool_span_tool_call_id_metadata.py: 1 warning
+tests/sdk/agent/test_tool_validation_error_message.py: 4 warnings
+  <SDK_CHECKOUT>/openhands-sdk/openhands/sdk/llm/utils/telemetry.py:555: UserWarning: Cost calculation failed: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=test-model
+   Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+    warnings.warn(f"Cost calculation failed: {e}")
+
+tests/sdk/conversation/local/test_conversation_core.py::test_conversation_large_event_handling
+  /opt/homebrew/Cellar/python@3.13/3.13.11/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/popen_fork.py:67: DeprecationWarning: This process (pid=96354) is multi-threaded, use of fork() may lead to deadlocks in the child.
+    self.pid = os.fork()
+
+tests/sdk/conversation/test_generate_title.py::test_title_uses_real_http_transport[subscription]
+  <SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `ResponseAPIUsage` - serialized value may not be as expected [field_name='usage', input_value={'completion_tokens': 4, ...: 6.799999999999999e-06}, input_type=dict])
+    return self.__pydantic_serializer__.to_python(
+
+tests/sdk/conversation/test_switch_model.py::test_switch_llm_refreshes_llm_condenser_credentials
+tests/sdk/conversation/test_switch_model.py::test_switch_llm_condenser_can_generate_condensation
+  <SDK_CHECKOUT>/openhands-sdk/openhands/sdk/llm/utils/telemetry.py:555: UserWarning: Cost calculation failed: This model isn't mapped yet. model=new-model, custom_llm_provider=litellm_proxy. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json.
+    warnings.warn(f"Cost calculation failed: {e}")
+
+tests/agent_server/test_event_service.py::test_subscribe_to_events_does_not_deadlock_on_wedged_subscriber
+  <SDK_CHECKOUT>/openhands-agent-server/openhands/agent_server/pub_sub.py:-1: RuntimeWarning: coroutine 'Subscriber.close_connection' was never awaited
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_timeout - ass...
+==== 1 failed, 2265 passed, 6 deselected, 647 warnings in 126.45s (0:02:06) ====

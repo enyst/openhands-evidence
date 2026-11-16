@@ -1,0 +1,44 @@
+<SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform darwin -- Python 3.13.11, pytest-9.2.0, pluggy-1.6.0 -- <SDK_CHECKOUT>/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: <SDK_CHECKOUT>
+configfile: pyproject.toml
+plugins: libtmux-0.62.0, cov-7.1.0, xdist-3.8.0, timeout-2.4.0, anyio-4.14.2, forked-1.7.5, asyncio-1.4.1.post1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 12 items
+
+tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_basic_functionality PASSED [  8%]
+tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_context_manager PASSED [ 16%]
+tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_non_blocking PASSED [ 25%]
+tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_timeout FAILED  [ 33%]
+tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_fairness PASSED [ 41%]
+tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_error_handling PASSED [ 50%]
+tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_stress_test PASSED [ 58%]
+tests/sdk/conversation/test_fifo_lock.py::test_release_all_drops_all_reentrant_levels_and_returns_depth PASSED [ 66%]
+tests/sdk/conversation/test_fifo_lock.py::test_release_all_requires_ownership PASSED [ 75%]
+tests/sdk/conversation/test_fifo_lock.py::test_reacquire_restores_reentrancy_depth PASSED [ 83%]
+tests/sdk/conversation/test_fifo_lock.py::test_reacquire_zero_depth_is_noop PASSED [ 91%]
+tests/sdk/conversation/test_fifo_lock.py::test_release_all_then_reacquire_hands_off_to_waiter_first PASSED [100%]
+
+=================================== FAILURES ===================================
+____________________________ test_fifo_lock_timeout ____________________________
+tests/sdk/conversation/test_fifo_lock.py:99: in test_fifo_lock_timeout
+    assert 0.09 <= duration <= 0.2  # Should be close to timeout value
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   assert 0.2461857795715332 <= 0.2
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  <SDK_CHECKOUT>/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/sdk/conversation/test_fifo_lock.py::test_fifo_lock_timeout - ass...
+=================== 1 failed, 11 passed, 1 warning in 0.72s ====================

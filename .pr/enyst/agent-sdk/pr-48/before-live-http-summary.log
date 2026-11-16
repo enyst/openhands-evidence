@@ -1,0 +1,3 @@
+=========================== short test summary info ============================
+FAILED tests/cross/test_remote_conversation_live_server.py::test_pending_question_blocks_goal_resume_over_http
+================ 1 failed, 54 deselected, 8 warnings in 11.61s =================
