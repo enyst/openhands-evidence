@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/d920a8cb-fc91-423d-8167-3f86df1e92ff/mcp",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "mcp_servers": {
+        "z": {
+          "url": "http://127.0.0.1:9/sse",
+          "transport": "sse"
+        }
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "content-length": "66",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Runtime MCP additions do not support SSE transport: z"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 138
+}

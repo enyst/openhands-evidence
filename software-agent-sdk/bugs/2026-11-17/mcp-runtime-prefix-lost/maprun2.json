@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "file": "F19-mcp.md",
+  "summary": {
+    "pass": 1,
+    "fail": 0,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 134,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6359,
+      "transcript": "<scratch>/agent-server-repro-mcp/20261117-085723-e3dd-map-f19/evidence/map-run/F19-mcp-00-preconditions.json"
+    },
+    {
+      "bullet": "Added servers after a restart (`F19.conversation-mcp-add-restart`), known bug.",
+      "ids": [
+        "F19.conversation-mcp-add-restart"
+      ],
+      "line": 1167,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 16879,
+      "transcript": "<scratch>/agent-server-repro-mcp/20261117-085723-e3dd-map-f19/evidence/map-run/F19-mcp-01-added-servers-after-a-restart-f19-conver.json",
+      "failed_line": 13,
+      "failed_command": "control-agent-server conversation events \"$RCID\" --kinds ObservationEvent --contains QA_MCP_ECHO:two --expect-kind ObservationEvent --save F19.conversation-mcp-add-restart/second-call",
+      "stdout_tail": "       \"runtime_error\": null\n      }\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 88,\n  \"checks\": [\n    {\n      \"check\": \"agent.mcp_config.qa-f19-rs.command eq /home/user/sdk-map-wt/.venv/bin/python\",\n      \"ok\": true,\n      \"actual\": \"/home/user/sdk-map-wt/.venv/bin/python\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server-repro-mcp/20261117-085723-e3dd-map-f19/evidence/F19.conversation-mcp-add-restart/after-restart.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"body\": {\n    \"success\": true\n  },\n  \"wait\": {\n    \"ok\": true,\n    \"status\": \"finished\",\n    \"transitions\": [\n      \"idle\",\n      \"finished\"\n    ],\n    \"waited_ms\": 1047\n  }\n}\n{\n  \"ok\": false,\n  \"id\": \"fe3a2ae4-d18b-4771-951d-fed986791974\",\n  \"total\": 23,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 2,\n    \"ConversationStateUpdateEvent\": 12,\n    \"ActionEvent\": 4,\n    \"ObservationEvent\": 3,\n    \"AgentErrorEvent\": 1\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"<scratch>/agent-server-repro-mcp/20261117-085723-e3dd-map-f19/evidence/F19.conversation-mcp-add-restart/second-call.json\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "matching eq 0 && kinds.AgentErrorEvent ge 1"
+    }
+  ],
+  "run": "<scratch>/agent-server-repro-mcp/20261117-085723-e3dd-map-f19",
+  "launch_flags": [
+    "--webhook-sink"
+  ]
+}

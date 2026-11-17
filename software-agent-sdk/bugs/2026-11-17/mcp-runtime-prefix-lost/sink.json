@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "requests": 4,
+  "paths": {
+    "/v1/chat/completions": 4
+  },
+  "last": [
+    "{\"at\": \"2026-11-17T08:56:29Z\", \"method\": \"POST\", \"path\": \"/v1/chat/completions\", \"call\": 0, \"step\": {\"tool\": \"qa-rs_qa_echo\", \"args\": {\"text\": \"one\"}}, \"body\": {\"messages\": [{\"content\": [{\"type\": \"text\", \"text\": \"<SOUL>\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\n</SOUL>\\n\\n<ROLE>\\n* Your primary role is to assist users by executing commands,\u2026",
+    "{\"at\": \"2026-11-17T08:56:29Z\", \"method\": \"POST\", \"path\": \"/v1/chat/completions\", \"call\": 1, \"step\": {\"tool\": \"finish\", \"args\": {\"message\": \"QA_RS_ONE\"}}, \"body\": {\"messages\": [{\"content\": [{\"type\": \"text\", \"text\": \"<SOUL>\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\n</SOUL>\\n\\n<ROLE>\\n* Your primary role is to assist users by executing command\u2026",
+    "{\"at\": \"2026-11-17T08:56:46Z\", \"method\": \"POST\", \"path\": \"/v1/chat/completions\", \"call\": 2, \"step\": {\"tool\": \"qa-rs_qa_echo\", \"args\": {\"text\": \"two\"}}, \"body\": {\"messages\": [{\"content\": [{\"type\": \"text\", \"text\": \"<SOUL>\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\n</SOUL>\\n\\n<ROLE>\\n* Your primary role is to assist users by executing commands,\u2026",
+    "{\"at\": \"2026-11-17T08:56:47Z\", \"method\": \"POST\", \"path\": \"/v1/chat/completions\", \"call\": 3, \"step\": {\"tool\": \"finish\", \"args\": {\"message\": \"QA_RS_TWO\"}}, \"body\": {\"messages\": [{\"content\": [{\"type\": \"text\", \"text\": \"<SOUL>\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\n</SOUL>\\n\\n<ROLE>\\n* Your primary role is to assist users by executing command\u2026"
+  ],
+  "saved": "<scratch>/agent-server-repro-mcp/20261117-085614-639a-bugB-hand/evidence/bugB/model-requests-2.json"
+}

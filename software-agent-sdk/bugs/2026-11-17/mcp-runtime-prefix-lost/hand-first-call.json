@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "id": "c68e7382-fd40-4122-9ca1-3ed0e8f320b0",
+      "timestamp": "2026-11-17T08:56:29.692516",
+      "source": "environment",
+      "parent_id": "bfa73578-6363-419b-bc86-b1a293c02c38",
+      "tool_name": "qa-rs_qa_echo",
+      "tool_call_id": "call_qa_23207179",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "[Tool 'qa-rs_qa_echo' executed.]"
+          },
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "QA_MCP_ECHO:one"
+          }
+        ],
+        "is_error": false,
+        "tool_name": "qa-rs_qa_echo",
+        "kind": "MCPToolObservation"
+      },
+      "action_id": "bfa73578-6363-419b-bc86-b1a293c02c38",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    }
+  ]
+}

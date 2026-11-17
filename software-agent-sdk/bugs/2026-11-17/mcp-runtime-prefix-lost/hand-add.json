@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/0e34203b-d75f-4cee-8ff1-11d7cce68461/mcp",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "mcp_servers": {
+        "qa-rs": {
+          "command": "/home/user/sdk-map-wt/.venv/bin/python",
+          "args": [
+            "<scratch>/agent-server-repro-mcp/20261117-085614-639a-bugB-hand/fixtures/mcp/qa-rs.py"
+          ]
+        }
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 1892
+}

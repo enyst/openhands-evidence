@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "mode": "resume",
+  "first_texts": [
+    "[Tool 'verify_echo' executed.]echo: one",
+    "done"
+  ],
+  "persisted_mcp_config": [
+    "verify"
+  ],
+  "resumed_first_call_tools": [
+    "add",
+    "counter",
+    "die",
+    "echo",
+    "fail",
+    "finish",
+    "getenv",
+    "headers",
+    "kind_echo",
+    "nested",
+    "picture",
+    "register_extra",
+    "register_late",
+    "remove_extra",
+    "reverse",
+    "session",
+    "slow",
+    "structured"
+  ],
+  "resumed_texts": [
+    "[Tool 'verify_echo' executed.]echo: one",
+    "done",
+    "done"
+  ],
+  "resumed_second_call_ok": false,
+  "resumed_errors": [
+    "Tool 'verify_echo' not found. Available: ['finish', 'echo', 'add', 'getenv', 'reverse', 'counter', 'session', 'nested', 'kind_echo', 'fail', 'picture', 'structured', 'slow', 'headers', 'die', 'registe"
+  ],
+  "_exit": 0,
+  "_seconds": 12.9
+}

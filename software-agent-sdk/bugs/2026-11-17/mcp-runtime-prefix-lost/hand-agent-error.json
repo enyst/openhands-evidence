@@ -1,0 +1,19 @@
+{
+  "events": [
+    {
+      "id": "14b6dc3b-8b3e-4b13-8d6c-7c8037407e6e",
+      "timestamp": "2026-11-17T08:56:47.010677",
+      "source": "agent",
+      "parent_id": "a7822a2d-fe02-4d50-ad31-f3e0562ebfac",
+      "tool_name": "qa-rs_qa_echo",
+      "tool_call_id": "call_qa_b9c5d9a6",
+      "error": "Tool 'qa-rs_qa_echo' not found. Available: ['finish', 'qa_echo']",
+      "classification": {
+        "kind": "agent_action",
+        "retryable": true,
+        "user_action": "retry"
+      },
+      "kind": "AgentErrorEvent"
+    }
+  ]
+}

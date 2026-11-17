@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/d920a8cb-fc91-423d-8167-3f86df1e92ff/mcp",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "mcp_servers": {
+        "y": {
+          "command": "/nonexistent/qa-missing-bin"
+        }
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "content-length": "117",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Internal Server Error",
+      "exception": "MCP Connection Failure",
+      "error_id": "56682ca4e7434516a7ca69e49eb4eb5c"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 172
+}
