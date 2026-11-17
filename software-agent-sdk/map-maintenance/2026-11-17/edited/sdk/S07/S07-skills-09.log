@@ -1,0 +1,38 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/public --arg remote \
+  --check public_count gt 10 --check has_github eq true --check cache_clone eq true \
+  --check origin eq https://github.com/OpenHands/extensions
+{
+  "ok": true,
+  "mode": "remote",
+  "public_count": 74,
+  "has_github": true,
+  "origin": "https://github.com/OpenHands/extensions",
+  "cache_clone": true,
+  "_exit": 0,
+  "_seconds": 18.3,
+  "checks": [
+    {
+      "check": "public_count gt 10",
+      "ok": true,
+      "actual": "74"
+    },
+    {
+      "check": "has_github eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "cache_clone eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "origin eq https://github.com/OpenHands/extensions",
+      "ok": true,
+      "actual": "https://github.com/OpenHands/extensions"
+    }
+  ]
+}
+
+[exit 0 after 19s]

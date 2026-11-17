@@ -1,0 +1,17 @@
+{
+  "file": "F03-deferred-init.md",
+  "bullet": "Init env reaches bash (`F03.init-applies-env`).",
+  "ids": [
+    "F03.init-applies-env"
+  ],
+  "line": 306,
+  "script": "control-agent-server api POST /api/bash/execute_bash_command --auth none --header 'X-Session-API-Key: qa-user-key' \\\n  --json '{\"command\":\"echo PROBE=$PROBE_VAR\"}' --expect 200 --check stdout contains 'PROBE=qa-hello' --save F03.init-applies-env/env\ntest -n \"$(ls -A \"$AGENT_SERVER_VERIFY_RUN/fixtures/bash\")\"\n",
+  "exit_code": 0,
+  "elapsed_ms": 744,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/bash/execute_bash_command\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": {\n      \"command\": \"echo PROBE=$PROBE_VAR\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"217\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"id\": \"612dae046a9b4036ba1521aa37f8346a\",\n      \"timestamp\": \"2026-11-17T09:24:45.983935Z\",\n      \"command_id\": \"321b26dcdaff4ac8a5be5f60e62fe7d8\",\n      \"order\": 0,\n      \"exit_code\": 0,\n      \"stdout\": \"PROBE=qa-hello\\n\",\n      \"stderr\": null,\n      \"kind\": \"BashOutput\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 136,\n  \"checks\": [\n    {\n      \"check\": \"stdout contains PROBE=qa-hello\",\n      \"ok\": true,\n      \"actual\": \"PROBE=qa-hello\\n\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-092351-c77e-map-f03/evidence/F03.init-applies-env/env.json\"\n}\n",
+  "stderr": ""
+}

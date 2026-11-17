@@ -1,0 +1,128 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/triggers \
+  --check llm_calls eq 4 --check loaded_names eq '["inline-rules", "style", "agents", "crypto", "deploy"]' \
+  --check always_on_every_call eq true --check always_on_in_static eq false --check sys_suffix_every_call eq true \
+  --check turn1_injected eq false --check turn2_injected eq true --check turn2_reported_keyword eq true \
+  --check turn3_injected eq false --check turn4_task_injected eq true --check turn4_asks_for_inputs eq true \
+  --check user_suffix_every_turn eq true --check activated eq '["crypto", "deploy"]' \
+  --check roundtrip_equal eq true --check trigger_types eq '[null, null, null, "keyword", "task"]'
+{
+  "ok": true,
+  "llm_calls": 4,
+  "loaded_names": [
+    "inline-rules",
+    "style",
+    "agents",
+    "crypto",
+    "deploy"
+  ],
+  "always_on_every_call": true,
+  "always_on_in_static": false,
+  "sys_suffix_every_call": true,
+  "user_text": [
+    "what is a ciphertext?\nUSER-SUFFIX here.",
+    "Use a CIPHER, maybe ROT13.\n<EXTRA_INFO>\nThe following information has been included based on a keyword match for \"rot13\".\nIt may or may not be relevant to the user's request.\n\n\nCRYPTO-KNOWLEDGE: rot13 shifts by 13.\n</EXTRA_INFO>\nUSER-SUFFIX here.",
+    "rot13 again please\nUSER-SUFFIX here.",
+    "/deploy the service\n<EXTRA_INFO>\nThe following information has been included based on a keyword match for \"/deploy\".\nIt may or may not be relevant to the user's request.\n\n\nDEPLOY-STEPS: deploy to ${ENV}.\n\nIf the user didn't provide any of these variables, ask the user to provide them first before the agent can proceed with the task.\n</EXTRA_INFO>\nUSER-SUFFIX here."
+  ],
+  "turn1_injected": false,
+  "turn2_injected": true,
+  "turn2_reported_keyword": true,
+  "turn3_injected": false,
+  "turn4_task_injected": true,
+  "turn4_asks_for_inputs": true,
+  "user_suffix_every_turn": true,
+  "activated": [
+    "crypto",
+    "deploy"
+  ],
+  "roundtrip_equal": true,
+  "trigger_types": [
+    null,
+    null,
+    null,
+    "keyword",
+    "task"
+  ],
+  "_exit": 0,
+  "_seconds": 12.9,
+  "checks": [
+    {
+      "check": "llm_calls eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "loaded_names eq [\"inline-rules\", \"style\", \"agents\", \"crypto\", \"deploy\"]",
+      "ok": true,
+      "actual": "[\"inline-rules\", \"style\", \"agents\", \"crypto\", \"deploy\"]"
+    },
+    {
+      "check": "always_on_every_call eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "always_on_in_static eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "sys_suffix_every_call eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn1_injected eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "turn2_injected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn2_reported_keyword eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn3_injected eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "turn4_task_injected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn4_asks_for_inputs eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "user_suffix_every_turn eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "activated eq [\"crypto\", \"deploy\"]",
+      "ok": true,
+      "actual": "[\"crypto\", \"deploy\"]"
+    },
+    {
+      "check": "roundtrip_equal eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "trigger_types eq [null, null, null, \"keyword\", \"task\"]",
+      "ok": true,
+      "actual": "[null, null, null, \"keyword\", \"task\"]"
+    }
+  ]
+}
+
+[exit 0 after 13s]

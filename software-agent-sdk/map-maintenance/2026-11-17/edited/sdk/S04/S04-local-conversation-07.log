@@ -1,0 +1,46 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg file-store \
+  --check store_has_base_state eq true --check store_event_files eq 6 --check nothing_on_disk eq true \
+  --check reported_persistence_dir matches "lifecycle-file-store/[0-9a-f]{32}$" --check reloaded_from_store eq 6
+{
+  "ok": true,
+  "mode": "file-store",
+  "reported_persistence_dir": "<scratch>/sdk-verifier/S04/work/S04-local-conversation-07/block1/runs/20261117-103404-a986f5/lifecycle-file-store/08e7a49979444e22ab46f876c34b5027",
+  "expected_persistence_dir": "<scratch>/sdk-verifier/S04/work/S04-local-conversation-07/block1/runs/20261117-103404-a986f5/lifecycle-file-store/08e7a49979444e22ab46f876c34b5027",
+  "store_has_base_state": true,
+  "store_event_files": 6,
+  "events": 6,
+  "nothing_on_disk": true,
+  "reloaded_from_store": 6,
+  "_exit": 0,
+  "_seconds": 5.4,
+  "checks": [
+    {
+      "check": "store_has_base_state eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "store_event_files eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "nothing_on_disk eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reported_persistence_dir matches lifecycle-file-store/[0-9a-f]{32}$",
+      "ok": true,
+      "actual": "<scratch>/sdk-verifier/S04/work/S04-local-conversation-07/block1/runs/20261117-103404-a986f5/lifecycle-file-store/08e7a49979444e22ab46f87"
+    },
+    {
+      "check": "reloaded_from_store eq 6",
+      "ok": true,
+      "actual": "6"
+    }
+  ]
+}
+
+[exit 0 after 6s]

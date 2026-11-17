@@ -1,0 +1,506 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/ask_user \
+  --check ask.status eq finished --check ask.llm_calls eq 1 --check ask.tool eq ask_user \
+  --check ask.action_kind eq AskUserAction --check ask.recommended eq 1 \
+  --check ask.observations len-eq 1 --check ask.observations.0.is_error eq false \
+  --check ask.observations.0.text contains "Your turn ends here" \
+  --check ask.pending_id_is_action eq true --check ask.pending_labels.1 eq "Keep them" --check ask.pending_recommended eq 1 \
+  --check ask.pending_after_reload eq true \
+  --check answer.wrong_id eq "ValueError: That question is not waiting for an answer." \
+  --check answer.missing_option eq "ValueError: The question has 2 options; there is no option 2." \
+  --check answer.empty contains "An answer picks an option, gives text, or both." --check answer.events_after_refusals eq 0 \
+  --check answer.event_kind eq AskUserAnswerEvent --check answer.event_source eq user --check answer.event_ask_id_matches eq true \
+  --check answer.option_index eq 1 --check answer.option_label eq "Keep them" --check answer.text eq "keep them for a week" \
+  --check answer.event_parent_is_observation eq true --check answer.still_pending_before_message eq true \
+  --check answer.message_text matches '^\[Answer to your question: "Delete the old build caches\?"\]\nOption 2: Keep them\nkeep them for a week$' \
+  --check answer.pending_after_message eq false --check answer.status eq finished --check answer.llm_calls eq 2 \
+  --check answer.second_tap eq "ValueError: That question is not waiting for an answer." \
+  --check labels.message_text contains "Option 2: Default" \
+  --check chat.relayed_closes eq false --check chat.own_message_closes eq true --check chat.llm_calls eq 2 \
+  --check invalid.one_option.pending eq false --check invalid.one_option.agent_errors.0 contains "List should have at least 2 items" \
+  --check invalid.bad_recommended.agent_errors.0 contains "recommended is 5, but there are only 2 options" \
+  --check invalid.blank_label.pending eq false --check invalid.blank_label.llm_calls eq 2 \
+  --check invalid.blank_label.observations.0.is_error eq true \
+  --check invalid.blank_label.observations.0.text contains "Each option needs a nonblank label" \
+  --check invalid.two_questions.observations.0.is_error eq false --check invalid.two_questions.observations.1.is_error eq true \
+  --check invalid.two_questions.observations.1.text contains "Not shown: this response already ends the turn" \
+  --check invalid.two_questions.pending_question eq "Delete the old build caches?" --check invalid.two_questions.llm_calls eq 1 \
+  --check confirm.status eq finished --check confirm.pending eq true \
+  --check stop_hook.sync.llm_calls_after_ask eq 1 --check stop_hook.sync.pending_after_ask eq true \
+  --check stop_hook.sync.hook_ran_over_question eq false --check stop_hook.sync.hook_ran_after_answer eq true \
+  --check stop_hook.sync.llm_calls_after_answer eq 3 --check stop_hook.sync.hook_feedback_messages eq 1 \
+  --check stop_hook.async.llm_calls_after_ask eq 1 --check stop_hook.async.hook_ran_over_question eq false \
+  --check stop_hook.async.hook_ran_after_answer eq true --check stop_hook.async.llm_calls_after_answer eq 3 \
+  --check refine.status eq finished --check refine.pending eq true --check refine.llm_calls eq 1 --check refine.user_messages eq 1
+{
+  "ok": true,
+  "mode": "scripted",
+  "ask": {
+    "status": "finished",
+    "llm_calls": 1,
+    "tool": "ask_user",
+    "action_kind": "AskUserAction",
+    "question": "Delete the old build caches?",
+    "recommended": 1,
+    "observations": [
+      {
+        "tool": "ask_user",
+        "is_error": false,
+        "text": "The question is shown to the user. Your turn ends here; their answer will arrive as their next message."
+      }
+    ],
+    "pending_id_is_action": true,
+    "pending_labels": [
+      "Delete them",
+      "Keep them"
+    ],
+    "pending_recommended": 1,
+    "pending_after_reload": true
+  },
+  "answer": {
+    "wrong_id": "ValueError: That question is not waiting for an answer.",
+    "missing_option": "ValueError: The question has 2 options; there is no option 2.",
+    "empty": "ValidationError: 1 validation error for AskUserAnswerEvent\n  Value error, An answer picks an option, gives text, or both. [type=value_error, input_value={'ask_id': 'ac2a1b28-ed75...el': None, 'text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_e",
+    "events_after_refusals": 0,
+    "event_kind": "AskUserAnswerEvent",
+    "event_source": "user",
+    "event_ask_id_matches": true,
+    "option_index": 1,
+    "option_label": "Keep them",
+    "text": "keep them for a week",
+    "event_parent_is_observation": true,
+    "still_pending_before_message": true,
+    "message_text": "[Answer to your question: \"Delete the old build caches?\"]\nOption 2: Keep them\nkeep them for a week",
+    "status_before_send": "finished",
+    "pending_after_message": false,
+    "status": "finished",
+    "llm_calls": 2,
+    "second_tap": "ValueError: That question is not waiting for an answer.",
+    "kinds_tail": [
+      "ObservationEvent",
+      "AskUserAnswerEvent",
+      "MessageEvent",
+      "ActionEvent",
+      "ObservationEvent"
+    ]
+  },
+  "labels": {
+    "message_text": "[Answer to your question: \"Delete the old build caches?\"]\nOption 2: Default"
+  },
+  "chat": {
+    "relayed_closes": false,
+    "own_message_closes": true,
+    "status": "finished",
+    "llm_calls": 2
+  },
+  "invalid": {
+    "one_option": {
+      "pending": false,
+      "llm_calls": 2,
+      "status": "finished",
+      "agent_errors": [
+        "Error validating tool 'ask_user': 1 validation error for AskUserAction\noptions\n  List should have at least 2 items after validation, not 1 [type=too_short, input_value=[{'label': 'Only'}], input_type="
+      ],
+      "observations": [
+        {
+          "tool": "finish",
+          "is_error": false,
+          "text": "Asked nothing."
+        }
+      ]
+    },
+    "bad_recommended": {
+      "pending": false,
+      "llm_calls": 2,
+      "status": "finished",
+      "agent_errors": [
+        "Error validating tool 'ask_user': 1 validation error for AskUserAction\n  Value error, recommended is 5, but there are only 2 options (counted from 0). [type=value_error, input_value={'question': 'Dele"
+      ],
+      "observations": [
+        {
+          "tool": "finish",
+          "is_error": false,
+          "text": "Asked nothing."
+        }
+      ]
+    },
+    "blank_label": {
+      "pending": false,
+      "llm_calls": 2,
+      "status": "finished",
+      "agent_errors": [],
+      "observations": [
+        {
+          "tool": "ask_user",
+          "is_error": true,
+          "text": "Each option needs a nonblank label. Ask again with named options."
+        },
+        {
+          "tool": "finish",
+          "is_error": false,
+          "text": "Asked nothing."
+        }
+      ]
+    },
+    "two_questions": {
+      "observations": [
+        {
+          "tool": "ask_user",
+          "is_error": false,
+          "text": "The question is shown to the user. Your turn ends here; their answer will arrive as their next message."
+        },
+        {
+          "tool": "ask_user",
+          "is_error": true,
+          "text": "Not shown: this response already ends the turn with an earlier call. Ask one question at a time; ask this one after the user answers."
+        }
+      ],
+      "pending_question": "Delete the old build caches?",
+      "llm_calls": 1,
+      "status": "finished"
+    }
+  },
+  "confirm": {
+    "status": "finished",
+    "pending": true
+  },
+  "stop_hook": {
+    "sync": {
+      "status_after_ask": "finished",
+      "llm_calls_after_ask": 1,
+      "pending_after_ask": true,
+      "hook_ran_over_question": false,
+      "status_after_answer": "finished",
+      "llm_calls_after_answer": 3,
+      "hook_ran_after_answer": true,
+      "hook_feedback_messages": 1
+    },
+    "async": {
+      "status_after_ask": "finished",
+      "llm_calls_after_ask": 1,
+      "pending_after_ask": true,
+      "hook_ran_over_question": false,
+      "status_after_answer": "finished",
+      "llm_calls_after_answer": 3,
+      "hook_ran_after_answer": true,
+      "hook_feedback_messages": 1
+    }
+  },
+  "refine": {
+    "status": "finished",
+    "pending": true,
+    "llm_calls": 1,
+    "user_messages": 1
+  },
+  "_exit": 0,
+  "_seconds": 11.9,
+  "checks": [
+    {
+      "check": "ask.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "ask.llm_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "ask.tool eq ask_user",
+      "ok": true,
+      "actual": "ask_user"
+    },
+    {
+      "check": "ask.action_kind eq AskUserAction",
+      "ok": true,
+      "actual": "AskUserAction"
+    },
+    {
+      "check": "ask.recommended eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "ask.observations len-eq 1",
+      "ok": true,
+      "actual": "[{\"tool\": \"ask_user\", \"is_error\": false, \"text\": \"The question is shown to the user. Your turn ends here; their answer will arrive as their next message.\"}]"
+    },
+    {
+      "check": "ask.observations.0.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "ask.observations.0.text contains Your turn ends here",
+      "ok": true,
+      "actual": "The question is shown to the user. Your turn ends here; their answer will arrive as their next message."
+    },
+    {
+      "check": "ask.pending_id_is_action eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "ask.pending_labels.1 eq Keep them",
+      "ok": true,
+      "actual": "Keep them"
+    },
+    {
+      "check": "ask.pending_recommended eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "ask.pending_after_reload eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "answer.wrong_id eq ValueError: That question is not waiting for an answer.",
+      "ok": true,
+      "actual": "ValueError: That question is not waiting for an answer."
+    },
+    {
+      "check": "answer.missing_option eq ValueError: The question has 2 options; there is no option 2.",
+      "ok": true,
+      "actual": "ValueError: The question has 2 options; there is no option 2."
+    },
+    {
+      "check": "answer.empty contains An answer picks an option, gives text, or both.",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for AskUserAnswerEvent\n  Value error, An answer picks an option, gives text, or both. [type=value_error, input_value={'ask_id': 'ac2a1b28-ed75...el': None, 'text': "
+    },
+    {
+      "check": "answer.events_after_refusals eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "answer.event_kind eq AskUserAnswerEvent",
+      "ok": true,
+      "actual": "AskUserAnswerEvent"
+    },
+    {
+      "check": "answer.event_source eq user",
+      "ok": true,
+      "actual": "user"
+    },
+    {
+      "check": "answer.event_ask_id_matches eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "answer.option_index eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "answer.option_label eq Keep them",
+      "ok": true,
+      "actual": "Keep them"
+    },
+    {
+      "check": "answer.text eq keep them for a week",
+      "ok": true,
+      "actual": "keep them for a week"
+    },
+    {
+      "check": "answer.event_parent_is_observation eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "answer.still_pending_before_message eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "answer.message_text matches ^\\[Answer to your question: \"Delete the old build caches\\?\"\\]\\nOption 2: Keep them\\nkeep them for a week$",
+      "ok": true,
+      "actual": "[Answer to your question: \"Delete the old build caches?\"]\nOption 2: Keep them\nkeep them for a week"
+    },
+    {
+      "check": "answer.pending_after_message eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "answer.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "answer.llm_calls eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "answer.second_tap eq ValueError: That question is not waiting for an answer.",
+      "ok": true,
+      "actual": "ValueError: That question is not waiting for an answer."
+    },
+    {
+      "check": "labels.message_text contains Option 2: Default",
+      "ok": true,
+      "actual": "[Answer to your question: \"Delete the old build caches?\"]\nOption 2: Default"
+    },
+    {
+      "check": "chat.relayed_closes eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "chat.own_message_closes eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "chat.llm_calls eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "invalid.one_option.pending eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "invalid.one_option.agent_errors.0 contains List should have at least 2 items",
+      "ok": true,
+      "actual": "Error validating tool 'ask_user': 1 validation error for AskUserAction\noptions\n  List should have at least 2 items after validation, not 1 [type=too_short, input_value=[{'label': 'Only'}], input_type="
+    },
+    {
+      "check": "invalid.bad_recommended.agent_errors.0 contains recommended is 5, but there are only 2 options",
+      "ok": true,
+      "actual": "Error validating tool 'ask_user': 1 validation error for AskUserAction\n  Value error, recommended is 5, but there are only 2 options (counted from 0). [type=value_error, input_value={'question': 'Dele"
+    },
+    {
+      "check": "invalid.blank_label.pending eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "invalid.blank_label.llm_calls eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "invalid.blank_label.observations.0.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "invalid.blank_label.observations.0.text contains Each option needs a nonblank label",
+      "ok": true,
+      "actual": "Each option needs a nonblank label. Ask again with named options."
+    },
+    {
+      "check": "invalid.two_questions.observations.0.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "invalid.two_questions.observations.1.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "invalid.two_questions.observations.1.text contains Not shown: this response already ends the turn",
+      "ok": true,
+      "actual": "Not shown: this response already ends the turn with an earlier call. Ask one question at a time; ask this one after the user answers."
+    },
+    {
+      "check": "invalid.two_questions.pending_question eq Delete the old build caches?",
+      "ok": true,
+      "actual": "Delete the old build caches?"
+    },
+    {
+      "check": "invalid.two_questions.llm_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "confirm.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "confirm.pending eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stop_hook.sync.llm_calls_after_ask eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "stop_hook.sync.pending_after_ask eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stop_hook.sync.hook_ran_over_question eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "stop_hook.sync.hook_ran_after_answer eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stop_hook.sync.llm_calls_after_answer eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "stop_hook.sync.hook_feedback_messages eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "stop_hook.async.llm_calls_after_ask eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "stop_hook.async.hook_ran_over_question eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "stop_hook.async.hook_ran_after_answer eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stop_hook.async.llm_calls_after_answer eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "refine.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "refine.pending eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "refine.llm_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "refine.user_messages eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 0 after 12s]

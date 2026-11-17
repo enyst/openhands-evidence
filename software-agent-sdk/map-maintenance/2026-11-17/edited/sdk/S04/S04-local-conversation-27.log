@@ -1,0 +1,75 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/conversation_stats --arg after-run \
+  --check first_run.usage_ids contains agent --check first_run.usage_ids contains secondary \
+  --check first_run.agent_cost eq 0.28 --check first_run.secondary_cost eq 0.14 --check first_run.combined_cost eq 0.42 \
+  --check resumed.restored_agent_cost eq 0.28 --check resumed.agent_cost_after eq 0.42 --check resumed.status eq finished
+{
+  "ok": true,
+  "order": "after-run",
+  "first_run": {
+    "usage_ids": [
+      "agent",
+      "secondary"
+    ],
+    "agent_cost": 0.28,
+    "secondary_in_registry": true,
+    "secondary_cost": 0.14,
+    "combined_cost": 0.42,
+    "combined_prompt_tokens": 300
+  },
+  "resumed": {
+    "restored_agent_cost": 0.28,
+    "agent_cost_after": 0.42,
+    "agent_calls_after": 3,
+    "usage_ids": [
+      "agent"
+    ],
+    "status": "finished"
+  },
+  "_exit": 0,
+  "_seconds": 6.6,
+  "checks": [
+    {
+      "check": "first_run.usage_ids contains agent",
+      "ok": true,
+      "actual": "[\"agent\", \"secondary\"]"
+    },
+    {
+      "check": "first_run.usage_ids contains secondary",
+      "ok": true,
+      "actual": "[\"agent\", \"secondary\"]"
+    },
+    {
+      "check": "first_run.agent_cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "first_run.secondary_cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "first_run.combined_cost eq 0.42",
+      "ok": true,
+      "actual": "0.42"
+    },
+    {
+      "check": "resumed.restored_agent_cost eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "resumed.agent_cost_after eq 0.42",
+      "ok": true,
+      "actual": "0.42"
+    },
+    {
+      "check": "resumed.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 7s]

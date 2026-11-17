@@ -1,0 +1,17 @@
+{
+  "file": "F15-git.md",
+  "bullet": "Diff of a deleted file (`F15.diff-deleted-file`).",
+  "ids": [
+    "F15.diff-deleted-file"
+  ],
+  "line": 453,
+  "script": "cp -r \"$REPO\" \"$F/deleted\"\nrm \"$F/deleted/src/util.py\"\ncontrol-agent-server api GET /api/git/changes --query path=\"$F/deleted\" --expect 200 \\\n  --check 2.status eq DELETED --check 2.path eq src/util.py\ncontrol-agent-server api GET /api/git/diff --query path=\"$F/deleted/src/util.py\" --expect 200 \\\n  --check original eq \"$(git -C \"$REPO\" show HEAD:src/util.py)\" --check modified eq '' --save F15.diff-deleted-file/diff\n",
+  "exit_code": 0,
+  "elapsed_ms": 1969,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/git/changes\",\n    \"query\": [\n      [\n        \"path\",\n        \"<scratch>/agent-server-verifier/20261117-092520-11b2-map-f15/fixtures/qa-f15/deleted\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"121\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": [\n      {\n        \"status\": \"UPDATED\",\n        \"path\": \"README.md\"\n      },\n      {\n        \"status\": \"ADDED\",\n        \"path\": \"notes.txt\"\n      },\n      {\n        \"status\": \"DELETED\",\n        \"path\": \"src/util.py\"\n      }\n    ],\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 162,\n  \"checks\": [\n    {\n      \"check\": \"2.status eq DELETED\",\n      \"ok\": true,\n      \"actual\": \"DELETED\"\n    },\n    {\n      \"check\": \"2.path eq src/util.py\",\n      \"ok\": true,\n      \"actual\": \"src/util.py\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/git/diff\",\n    \"query\": [\n      [\n        \"path\",\n        \"<scratch>/agent-server-verifier/20261117-092520-11b2-map-f15/fixtures/qa-f15/deleted/src/util.py\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"61\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"modified\": \"\",\n      \"original\": \"def add(a, b):\\n    return a + b\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 171,\n  \"checks\": [\n    {\n      \"check\": \"original eq def add(a, b):\\n    return a + b\",\n      \"ok\": true,\n      \"actual\": \"def add(a, b):\\n    return a + b\"\n    },\n    {\n      \"check\": \"modified eq \",\n      \"ok\": true,\n      \"actual\": \"\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-092520-11b2-map-f15/evidence/F15.diff-deleted-file/diff.json\"\n}\n",
+  "stderr": ""
+}

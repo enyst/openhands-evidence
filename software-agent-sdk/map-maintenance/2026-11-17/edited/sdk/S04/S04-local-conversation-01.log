@@ -1,0 +1,91 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg factory \
+  --check path_type eq LocalConversation --check local_workspace_type eq LocalConversation \
+  --check ids_differ eq true --check id_is_uuid4 eq true --check chosen_id_kept eq true \
+  --check persisted_id exists --check remote_with_persistence_dir contains "persistence_dir should not be set"
+control-sdk program S03/switching --arg profile --check prompt_cache_key_is_conversation_id eq true
+{
+  "ok": true,
+  "mode": "factory",
+  "path_type": "LocalConversation",
+  "local_workspace_type": "LocalConversation",
+  "ids_differ": true,
+  "id_is_uuid4": true,
+  "chosen_id_kept": true,
+  "persisted_id": "1b514a09-f462-40a2-bc02-897fcf7afeb7",
+  "chosen_id": "1b514a09-f462-40a2-bc02-897fcf7afeb7",
+  "remote_with_persistence_dir": "ValueError: persistence_dir should not be set when using RemoteConversation",
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "path_type eq LocalConversation",
+      "ok": true,
+      "actual": "LocalConversation"
+    },
+    {
+      "check": "local_workspace_type eq LocalConversation",
+      "ok": true,
+      "actual": "LocalConversation"
+    },
+    {
+      "check": "ids_differ eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "id_is_uuid4 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "chosen_id_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "persisted_id exists",
+      "ok": true,
+      "actual": "1b514a09-f462-40a2-bc02-897fcf7afeb7"
+    },
+    {
+      "check": "remote_with_persistence_dir contains persistence_dir should not be set",
+      "ok": true,
+      "actual": "ValueError: persistence_dir should not be set when using RemoteConversation"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "profile",
+  "requests": {
+    "a": 1,
+    "b": 1
+  },
+  "active_model": "openai/gpt-4.1-mini",
+  "registry": [
+    "agent",
+    "profile:model-b"
+  ],
+  "stats": {
+    "agent": 0.14,
+    "profile:model-b": 0.14
+  },
+  "persisted_model": "openai/gpt-4.1-mini",
+  "missing_profile_error": "FileNotFoundError",
+  "model_after_missing": "openai/gpt-4.1-mini",
+  "prompt_cache_key_kept": true,
+  "prompt_cache_key_is_conversation_id": true,
+  "status": "finished",
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "prompt_cache_key_is_conversation_id eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 11s]

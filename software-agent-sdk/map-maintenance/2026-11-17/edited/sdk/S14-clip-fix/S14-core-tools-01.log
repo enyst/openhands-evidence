@@ -1,0 +1,230 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --tools terminal,glob,grep,apply_patch --script S14/search_and_patch.json --field id)
+control-sdk conversation send "$CID" --text "Fix add in src/calc.py" --run \
+  --check execution_status eq finished --check last_agent_message eq "calc.add fixed"
+control-sdk conversation events "$CID" --kind ObservationEvent \
+  --check count eq 8 \
+  --check events.1.text contains "Found 2 file" --check events.1.text contains "'**/*.py'" \
+  --check events.2.text contains "Found 1 file" --check events.2.text contains "'return a - b'" \
+  --check events.2.text contains src/calc.py \
+  --check events.3.is_error eq false --check events.3.text eq "Done!" \
+  --check events.4.is_error eq true --check events.4.text contains "Invalid Context" \
+  --check events.5.is_error eq true --check events.5.text contains "escaping paths are not allowed" \
+  --check events.6.text contains "5 1.0"
+control-sdk exec --expect-output "return a + b" -- cat src/calc.py
+control-sdk exec --expect-exit 1 -- test -e notes/todo.txt
+control-sdk exec --expect-exit 1 -- test -e ../outside.txt
+{
+  "ok": true,
+  "id": "b6b7b955-887f-4b82-881c-81ff485c1145",
+  "execution_status": "finished",
+  "event_count": 18,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "calc.add fixed",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "glob",
+    "grep",
+    "apply_patch"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq calc.add fixed",
+      "ok": true,
+      "actual": "calc.add fixed"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 8,
+  "kinds": [
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent"
+  ],
+  "events": [
+    {
+      "index": 3,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "9f650d55-2ff7-4196-bfb1-1dc1abe0290d",
+      "tool": "terminal",
+      "text": "ready",
+      "is_error": false
+    },
+    {
+      "index": 5,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "5dd79f33-1f79-425d-83b5-819a79b6c159",
+      "tool": "glob",
+      "text": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-01/block1/runs/20261117-105053-1bf41b/workspace':\n<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-01/block1/runs/20261117-105053-1bf41b/workspace/src/calc.py\n<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-01/block1/runs/20261117-105053-1bf41b/workspace/src/pkg/use.py",
+      "is_error": false
+    },
+    {
+      "index": 7,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "5b96e7da-a671-4bbb-a1b7-1784cac73a55",
+      "tool": "grep",
+      "text": "Found 1 file(s) containing pattern 'return a - b' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-01/block1/runs/20261117-105053-1bf41b/workspace' (filtered by '*.py'):\n<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-01/block1/runs/20261117-105053-1bf41b/workspace/src/calc.py",
+      "is_error": false
+    },
+    {
+      "index": 9,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "97fb8059-a4af-4233-9671-86f94ffbb867",
+      "tool": "apply_patch",
+      "text": "Done!",
+      "is_error": false
+    },
+    {
+      "index": 11,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "bb145c3e-e1a2-45b5-ae7a-ee2e2a79c8dc",
+      "tool": "apply_patch",
+      "text": "Invalid Context 0:\n    this line does not exist",
+      "is_error": true
+    },
+    {
+      "index": 13,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "c129f9a7-2a68-4a0b-bc14-e0bae60f9a67",
+      "tool": "apply_patch",
+      "text": "Absolute or escaping paths are not allowed",
+      "is_error": true
+    },
+    {
+      "index": 15,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "9a5758e1-01eb-437e-a149-5279e68e7982",
+      "tool": "terminal",
+      "text": "5 1.0",
+      "is_error": false
+    },
+    {
+      "index": 17,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "834f872e-085e-44c4-aa9e-a23be3cd864d",
+      "tool": "finish",
+      "text": "calc.add fixed",
+      "is_error": false
+    }
+  ],
+  "checks": [
+    {
+      "check": "count eq 8",
+      "ok": true,
+      "actual": "8"
+    },
+    {
+      "check": "events.1.text contains Found 2 file",
+      "ok": true,
+      "actual": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b"
+    },
+    {
+      "check": "events.1.text contains '**/*.py'",
+      "ok": true,
+      "actual": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b"
+    },
+    {
+      "check": "events.2.text contains Found 1 file",
+      "ok": true,
+      "actual": "Found 1 file(s) containing pattern 'return a - b' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "check": "events.2.text contains 'return a - b'",
+      "ok": true,
+      "actual": "Found 1 file(s) containing pattern 'return a - b' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "check": "events.2.text contains src/calc.py",
+      "ok": true,
+      "actual": "Found 1 file(s) containing pattern 'return a - b' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "check": "events.3.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "events.3.text eq Done!",
+      "ok": true,
+      "actual": "Done!"
+    },
+    {
+      "check": "events.4.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "events.4.text contains Invalid Context",
+      "ok": true,
+      "actual": "Invalid Context 0:\n    this line does not exist"
+    },
+    {
+      "check": "events.5.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "events.5.text contains escaping paths are not allowed",
+      "ok": true,
+      "actual": "Absolute or escaping paths are not allowed"
+    },
+    {
+      "check": "events.6.text contains 5 1.0",
+      "ok": true,
+      "actual": "5 1.0"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "def add(a, b):\n    return a + b\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 1,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 1,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "",
+  "ok": true
+}
+
+[exit 0 after 17s]

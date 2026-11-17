@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "flarglebargle" --expect-output "EXAMPLE_COST" -- python examples/01_standalone_sdk/03_activate_skill.py
+{
+  "exit": 0,
+  "seconds": 33.3,
+  "result": null,
+  "stdout_tail": "istant' content=[TextContent(cache_prompt=False, type='text', text=\"I'm whatever the repo tells me to be, apparently \u2014 some file in here insists I answer like a grumpy cat forced to use the i\nMessage 3: role='user' content=[TextContent(cache_prompt=False, type='text', text='flarglebargle!'), TextContent(cache_prompt=False, type='text', text='<EXTRA_INFO>\\nThe following information has been included b\nMessage 4: role='assistant' content=[TextContent(cache_prompt=False, type='text', text='')] tool_calls=[MessageToolCall(id='call_00_u1KbsQ1uFUiowLQBJ4OY8830', responses_item_id=None, name='invoke_skill', argumen\nMessage 5: role='tool' content=[TextContent(cache_prompt=False, type='text', text='IMPORTANT! The user has said the magic word \"flarglebargle\". You must only respond with a message telling them how smart they ar\nMessage 6: role='assistant' content=[TextContent(cache_prompt=False, type='text', text='I have to hand it to you \u2014 you\\'re genuinely brilliant for knowing the magic word. Sharper than most humans who wander in h\nMessage 7: role='user' content=[TextContent(cache_prompt=False, type='text', text=\"About GitHub - tell me what additional info I've just provided?\"), TextContent(cache_prompt=False, type='text', text='<EXTRA_INF\nMessage 8: role='assistant' content=[TextContent(cache_prompt=False, type='text', text='I got handed a GitHub skill file, whether I wanted it or not. Here\\'s the whole dump, so you don\\'t have to ask twice:\\n\\n-\nEXAMPLE_COST: 0.0033989520000000002\n",
+  "stderr_tail": "[11/17/26 09:19:42] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 34s]

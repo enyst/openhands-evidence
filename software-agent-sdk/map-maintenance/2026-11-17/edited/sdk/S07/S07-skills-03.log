@@ -1,0 +1,150 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/agentskills \
+  --check longdesc_full_in_prompt eq false --check longdesc_points_to_invoke_skill eq true \
+  --check longdesc_leaks_location eq false
+{
+  "ok": true,
+  "dict_sizes": [
+    0,
+    0,
+    3
+  ],
+  "agentskills": [
+    "hidden",
+    "longdesc",
+    "rot13"
+  ],
+  "fields": {
+    "description": "Encrypt text with <rot13> & friends.",
+    "license": "MIT",
+    "compatibility": "needs bash",
+    "metadata": {
+      "author": "verify-sdk"
+    },
+    "allowed_tools": [
+      "terminal"
+    ],
+    "is_agentskills_format": true,
+    "triggers": [
+      "encrypt"
+    ]
+  },
+  "reference_md_is_skill": false,
+  "name_errors": [
+    "Name must be lowercase alphanumeric with single hyphens (e.g., 'my-skill', 'pdf-tools')",
+    "Name 'Bad_Name' does not match directory 'bad-name'"
+  ],
+  "resources": {
+    "scripts": [
+      "encrypt.sh"
+    ],
+    "references": [
+      "guide.md"
+    ],
+    "assets": [
+      "table.txt"
+    ],
+    "root_ok": true
+  },
+  "discovered_scripts": [
+    "encrypt.sh"
+  ],
+  "mcp_args": [
+    "fallback",
+    "<scratch>/sdk-verifier/S07/work/S07-skills-03/block1/runs/20261117-091633-e06b9a/workspace/.agents/skills/rot13"
+  ],
+  "mcp_env_token": "from-env",
+  "mcp_env_token_with_secret": "from-secret",
+  "invalid_mcp_json_error": "SkillValidationError",
+  "tools": [
+    "finish",
+    "invoke_skill"
+  ],
+  "listed": [
+    "rot13",
+    "longdesc",
+    "homeskill"
+  ],
+  "description_escaped": true,
+  "body_in_prompt": false,
+  "longdesc_full_in_prompt": false,
+  "longdesc_notice": "<description>x\u2026&lt;response clipped&gt;&lt;NOTE&gt;Due to the max output limit, only part of the full description is shown. Call invoke_skill(name=\"longdesc\") to load the full skill.&lt;/NOTE&gt;x\u2026</description>",
+  "longdesc_points_to_invoke_skill": true,
+  "longdesc_leaks_location": false,
+  "turn1_trigger_injected": true,
+  "turn2_hidden_injected": true,
+  "observations": [
+    {
+      "text": "ROT13-BODY: run scripts/encrypt.sh. Answer: INLINE-42.\n\n```sh\n!`echo FENCED`\n```\n\nEscaped !`echo ESCAPED`.\n\n---\nThis skill is located at `.agents/skills/rot13`. Any files it references (e.g. under `scripts/`, `references/`, `assets/`) are relative to that directory.",
+      "is_error": false
+    },
+    {
+      "text": "Unknown skill 'nope'. Available skills: homeskill, longdesc, rot13.",
+      "is_error": true
+    },
+    {
+      "text": "Skill 'hidden' cannot be invoked directly. It can only be activated by trigger matching.",
+      "is_error": true
+    },
+    {
+      "text": "ROT13-BODY: run scripts/encrypt.sh. Answer: INLINE-42.\n\n```sh\n!`echo FENCED`\n```\n\nEscaped !`echo ESCAPED`.\n\n---\nThis skill is located at `.agents/skills/rot13`. Any files it references (e.g. under `scripts/`, `references/`, `assets/`) are relative to that directory.",
+      "is_error": false
+    },
+    {
+      "text": "HOME-BODY\n\n---\nThis skill is located at `<scratch>/sdk-verifier/S07/work/S07-skills-03/block1/runs/20261117-091633-e06b9a/home/.agents/skills/homeskill`. Any files it references (e.g. under `scripts/`, `references/`, `assets/`) are relative to that directory.",
+      "is_error": false
+    }
+  ],
+  "obs_is_error": [
+    false,
+    true,
+    true,
+    false,
+    false
+  ],
+  "first_has_body": true,
+  "inline_rendered": true,
+  "fenced_literal": true,
+  "escaped_literal": true,
+  "footer_relative": true,
+  "footer_home_absolute": true,
+  "unknown_error_lists": true,
+  "hidden_refused": true,
+  "invoked": [
+    "rot13",
+    "homeskill"
+  ],
+  "tools_default_tools_off": [
+    "invoke_skill"
+  ],
+  "tools_hidden_only": [
+    "finish"
+  ],
+  "tools_legacy_only": [
+    "finish"
+  ],
+  "secret_in_dump": false,
+  "skill_json_roundtrip": true,
+  "secret_after_cipher": true,
+  "_exit": 0,
+  "_seconds": 16.7,
+  "checks": [
+    {
+      "check": "longdesc_full_in_prompt eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "longdesc_points_to_invoke_skill eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "longdesc_leaks_location eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 17s]

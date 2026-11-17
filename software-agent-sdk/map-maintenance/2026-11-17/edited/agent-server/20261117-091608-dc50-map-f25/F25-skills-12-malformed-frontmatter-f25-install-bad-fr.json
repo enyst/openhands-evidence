@@ -1,0 +1,17 @@
+{
+  "file": "F25-skills.md",
+  "bullet": "Malformed frontmatter (`F25.install-bad-frontmatter`).",
+  "ids": [
+    "F25.install-bad-frontmatter"
+  ],
+  "line": 362,
+  "script": "control-agent-server api POST /api/skills/install --json '{\"source\": \"'\"$F/qa-f25-badyaml\"'\"}' --expect 422 \\\n  --save F25.install-bad-frontmatter/install\ntest ! -e \"$I/qa-f25-badyaml\"\n",
+  "exit_code": 0,
+  "elapsed_ms": 996,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 422,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/skills/install\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"source\": \"<scratch>/agent-server-verifier/20261117-091608-dc50-map-f25/fixtures/qa-f25/qa-f25-badyaml\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 422,\n    \"headers\": {\n      \"content-length\": \"72\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Invalid skill. Ensure the source contains a valid SKILL.md.\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 177,\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-091608-dc50-map-f25/evidence/F25.install-bad-frontmatter/install.json\"\n}\n",
+  "stderr": ""
+}

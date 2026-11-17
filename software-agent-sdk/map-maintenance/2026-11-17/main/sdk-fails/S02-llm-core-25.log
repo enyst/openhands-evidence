@@ -1,0 +1,110 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S02/api_compliance \
+  --check patterns len-eq 8 --check rejections_typed eq true \
+  --check results.unmatched_tool_use.error_type eq LLMMalformedConversationHistoryError \
+  --check results.unmatched_tool_result.error_type eq LLMMalformedConversationHistoryError \
+  --check results.duplicate_tool_call_id.error_type eq LLMMalformedConversationHistoryError \
+  --check results.parallel_wrong_order.error_type eq LLMMalformedConversationHistoryError
+{
+  "ok": true,
+  "model": "deepseek/deepseek-flash",
+  "patterns": [
+    "duplicate_tool_call_id",
+    "interleaved_assistant_message",
+    "interleaved_user_message",
+    "parallel_missing_result",
+    "parallel_wrong_order",
+    "unmatched_tool_result",
+    "unmatched_tool_use",
+    "wrong_tool_call_id"
+  ],
+  "results": {
+    "unmatched_tool_use": {
+      "response_type": "rejected",
+      "error_type": "LLMMalformedConversationHistoryError",
+      "error": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"An assistant message with 'tool_calls' must be followed by tool messages responding to each 'tool_call_id'. (insufficient tool messages following tool_calls message) (request_id: 8d2fae79-c238-4957-a039-22c9d425109a)\",\"type\":\"invalid_"
+    },
+    "unmatched_tool_result": {
+      "response_type": "rejected",
+      "error_type": "LLMBadRequestError",
+      "error": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"Messages with role 'tool' must be a response to a preceding message with 'tool_calls' (request_id: aeed17b1-ff32-4f18-bb75-422b7565882d)\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"invalid_request_error\"}}"
+    },
+    "interleaved_user_message": {
+      "response_type": "rejected",
+      "error_type": "LLMMalformedConversationHistoryError",
+      "error": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"An assistant message with 'tool_calls' must be followed by tool messages responding to each 'tool_call_id'. (insufficient tool messages following tool_calls message) (request_id: 9b47e298-3dfb-46f8-92f7-f153aaa270ac)\",\"type\":\"invalid_"
+    },
+    "interleaved_assistant_message": {
+      "response_type": "rejected",
+      "error_type": "LLMMalformedConversationHistoryError",
+      "error": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"An assistant message with 'tool_calls' must be followed by tool messages responding to each 'tool_call_id'. (insufficient tool messages following tool_calls message) (request_id: 065a1180-54ca-44ce-a13c-8b9da417d116)\",\"type\":\"invalid_"
+    },
+    "duplicate_tool_call_id": {
+      "response_type": "rejected",
+      "error_type": "LLMBadRequestError",
+      "error": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"Messages with role 'tool' must be a response to a preceding message with 'tool_calls' (request_id: 6cea5ee2-1cd4-4750-9e3f-4a74065b8053)\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"invalid_request_error\"}}"
+    },
+    "wrong_tool_call_id": {
+      "response_type": "rejected",
+      "error_type": "LLMMalformedConversationHistoryError",
+      "error": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"An assistant message with 'tool_calls' must be followed by tool messages responding to each 'tool_call_id', The following tool_call_ids did not have response messages: call_A_ls (request_id: a3dea75b-f4d8-4e71-bba9-860d594aa5ad)\",\"typ"
+    },
+    "parallel_missing_result": {
+      "response_type": "rejected",
+      "error_type": "LLMMalformedConversationHistoryError",
+      "error": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"An assistant message with 'tool_calls' must be followed by tool messages responding to each 'tool_call_id'. (insufficient tool messages following tool_calls message) (request_id: 2e14c5d3-6f54-4ea9-99e5-77bfaae22c25)\",\"type\":\"invalid_"
+    },
+    "parallel_wrong_order": {
+      "response_type": "rejected",
+      "error_type": "LLMBadRequestError",
+      "error": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"Messages with role 'tool' must be a response to a preceding message with 'tool_calls' (request_id: e13633b6-de65-4577-994e-446eb1de1975)\",\"type\":\"invalid_request_error\",\"param\":null,\"code\":\"invalid_request_error\"}}"
+    }
+  },
+  "rejected": [
+    "duplicate_tool_call_id",
+    "interleaved_assistant_message",
+    "interleaved_user_message",
+    "parallel_missing_result",
+    "parallel_wrong_order",
+    "unmatched_tool_result",
+    "unmatched_tool_use",
+    "wrong_tool_call_id"
+  ],
+  "rejections_typed": true,
+  "_exit": 0,
+  "_seconds": 14.2,
+  "checks": [
+    {
+      "check": "patterns len-eq 8",
+      "ok": true,
+      "actual": "[\"duplicate_tool_call_id\", \"interleaved_assistant_message\", \"interleaved_user_message\", \"parallel_missing_result\", \"parallel_wrong_order\", \"unmatched_tool_result\", \"unmatched_tool_use\", \"wrong_tool_ca"
+    },
+    {
+      "check": "rejections_typed eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "results.unmatched_tool_use.error_type eq LLMMalformedConversationHistoryError",
+      "ok": true,
+      "actual": "LLMMalformedConversationHistoryError"
+    },
+    {
+      "check": "results.unmatched_tool_result.error_type eq LLMMalformedConversationHistoryError",
+      "ok": false,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "results.duplicate_tool_call_id.error_type eq LLMMalformedConversationHistoryError",
+      "ok": false,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "results.parallel_wrong_order.error_type eq LLMMalformedConversationHistoryError",
+      "ok": false,
+      "actual": "LLMBadRequestError"
+    }
+  ]
+}
+
+[exit 1 after 15s]

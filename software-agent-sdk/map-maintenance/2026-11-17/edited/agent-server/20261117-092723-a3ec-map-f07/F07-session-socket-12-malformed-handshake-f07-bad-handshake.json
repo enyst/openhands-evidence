@@ -1,0 +1,17 @@
+{
+  "file": "F07-session-socket.md",
+  "bullet": "Malformed handshake (`F07.bad-handshake`).",
+  "ids": [
+    "F07.bad-handshake"
+  ],
+  "line": 281,
+  "script": "control-agent-server ws listen /sockets/session/qa-not-a-uuid --duration 3 --expect-reject 403\ncontrol-agent-server ws listen \"/sockets/session/$CID\" --query after_seq=qa --duration 3 --expect-reject 403\ncontrol-agent-server ws listen \"/sockets/session/$CID\" --query after_seq=4 --count 1 --expect-kind sync --expect-open\n",
+  "exit_code": 0,
+  "elapsed_ms": 2079,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"path\": \"/sockets/session/qa-not-a-uuid\",\n  \"opened\": false,\n  \"frames\": 0,\n  \"kinds\": {},\n  \"stopped\": \"error\",\n  \"close\": {\n    \"error\": \"InvalidStatus: server rejected WebSocket connection: HTTP 403\",\n    \"http_status\": 403\n  },\n  \"first_frames\": []\n}\n{\n  \"ok\": true,\n  \"path\": \"/sockets/session/562c8e19-ba5e-48d6-a365-32b0996214c9\",\n  \"opened\": false,\n  \"frames\": 0,\n  \"kinds\": {},\n  \"stopped\": \"error\",\n  \"close\": {\n    \"error\": \"InvalidStatus: server rejected WebSocket connection: HTTP 403\",\n    \"http_status\": 403\n  },\n  \"first_frames\": []\n}\n{\n  \"ok\": true,\n  \"path\": \"/sockets/session/562c8e19-ba5e-48d6-a365-32b0996214c9\",\n  \"opened\": true,\n  \"frames\": 1,\n  \"kinds\": {\n    \"sync\": 1\n  },\n  \"stopped\": \"count 1\",\n  \"close\": null,\n  \"first_frames\": [\n    {\n      \"kind\": \"sync\",\n      \"frame\": {\n        \"type\": \"sync\",\n        \"from_seq\": 4,\n        \"through_seq\": 4\n      }\n    }\n  ]\n}\n",
+  "stderr": ""
+}

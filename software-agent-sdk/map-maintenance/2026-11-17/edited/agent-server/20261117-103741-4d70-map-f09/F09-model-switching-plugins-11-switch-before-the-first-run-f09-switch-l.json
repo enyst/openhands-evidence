@@ -1,0 +1,46 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Switch before the first run (`F09.switch-llm-before-first-run`), known bug.",
+  "ids": [
+    "F09.switch-llm-before-first-run"
+  ],
+  "line": 340,
+  "script": "BID=$(control-agent-server conversation start --placeholder-agent --tools none --no-autotitle --print-id)\ncontrol-agent-server api POST \"/api/conversations/$BID/switch_llm\" \\\n  --json \"{\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"api_key\\\": \\\"$ENC\\\", \\\"usage_id\\\": \\\"qa-f09-early\\\", \\\"num_retries\\\": 0}}\" \\\n  --expect 200 --save F09.switch-llm-before-first-run/switch\ncontrol-agent-server conversation send \"$BID\" --text 'Reply with the single word: ok' --wait --until finished,error --timeout 240\ncontrol-agent-server api GET \"/api/conversations/$BID\" --quiet --check execution_status eq finished --check agent.llm.usage_id eq qa-f09-early\ncontrol-agent-server api GET \"/api/conversations/$BID\" --until-ok 20 --quiet \\\n  --check stats.usage_to_metrics.qa-f09-early.accumulated_token_usage.prompt_tokens gt 0 --save F09.switch-llm-before-first-run/stats  # bug: status eq 200 && checks.0.actual eq null\n",
+  "exit_code": 1,
+  "elapsed_ms": 24293,
+  "failed_line": 7,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$BID\" --until-ok 20 --quiet --check stats.usage_to_metrics.qa-f09-early.accumulated_token_usage.prompt_tokens gt 0 --save F09.switch-llm-before-first-run/stats",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/b6821561-806c-4424-9bcd-82d0ddadcdc7",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "5592",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 20111,
+    "checks": [
+      {
+        "check": "stats.usage_to_metrics.qa-f09-early.accumulated_token_usage.prompt_tokens gt 0",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "attempts": 40,
+    "saved": "<scratch>/agent-server-verifier/20261117-103741-4d70-map-f09/evidence/F09.switch-llm-before-first-run/stats.json",
+    "hint": "failed check: stats.usage_to_metrics.qa-f09-early.accumulated_token_usage.prompt_tokens gt 0"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/b6821561-806c-4424-9bcd-82d0ddadcdc7/switch_llm\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"deepseek/deepseek-flash\",\n        \"api_key\": \"<redacted:encrypted>\",\n        \"usage_id\": \"qa-f09-early\",\n        \"num_retries\": 0\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 77,\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-103741-4d70-map-f09/evidence/F09.switch-llm-before-first-run/switch.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"body\": {\n    \"success\": true\n  },\n  \"wait\": {\n    \"ok\": true,\n    \"status\": \"finished\",\n    \"transitions\": [\n      \"running\",\n      \"finished\"\n    ],\n    \"waited_ms\": 2062\n  }\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/b6821561-806c-4424-9bcd-82d0ddadcdc7\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"5592\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 74,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    },\n    {\n      \"check\": \"agent.llm.usage_id eq qa-f09-early\",\n      \"ok\": true,\n      \"actual\": \"qa-f09-early\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/b6821561-806c-4424-9bcd-82d0ddadcdc7\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"5592\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 20111,\n  \"checks\": [\n    {\n      \"check\": \"stats.usage_to_metrics.qa-f09-early.accumulated_token_usage.prompt_tokens gt 0\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"attempts\": 40,\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-103741-4d70-map-f09/evidence/F09.switch-llm-before-first-run/stats.json\",\n  \"hint\": \"failed check: stats.usage_to_metrics.qa-f09-early.accumulated_token_usage.prompt_tokens gt 0\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,38 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Lock wait does not block the server (`F23.store-busy-responsive`).",
+  "ids": [
+    "F23.store-busy-responsive"
+  ],
+  "line": 607,
+  "script": "control-agent-server api GET /alive --auth none --expect 200 --expect-max-ms 3000\nHELD=\"$F23/lock-held-2\"\nrm -f \"$HELD\"\nLISTER=\"\"\nflock -x \"$(dirname \"$CF\")/.provider-connections.lock\" sh -c \"touch '$HELD'; sleep 16\" &\nLOCKER=$!\ntrap 'wait $LISTER $LOCKER > /dev/null 2>&1 || true' EXIT\nfor i in $(seq 100); do test -e \"$HELD\" && break; sleep 0.1; done\ntest -e \"$HELD\"\nT0=$SECONDS\ncontrol-agent-server api GET /api/llm/provider-connections --timeout 60 --expect 200 --quiet --save F23.store-busy-responsive/list > /dev/null &\nLISTER=$!\nsleep 5\ncontrol-agent-server api GET /alive --auth none --expect 200 --expect-max-ms 3000 --timeout 60 --save F23.store-busy-responsive/alive\nwait \"$LISTER\"\ntest $((SECONDS - T0)) -ge 10\nwait \"$LOCKER\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 16516,
+  "failed_line": 15,
+  "failed_command": "wait \"$LISTER\"",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 400,
+    "request": {
+      "method": "GET",
+      "path": "/api/llm/provider-connections",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 400,
+      "headers": {
+        "content-length": "1011",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 15632,
+    "saved": "<scratch>/agent-server/20261117-085130-98d9-map-f23/evidence/F23.store-busy-responsive/list.json",
+    "hint": "expected 200, got 400"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/alive\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"15\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"status\": \"ok\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 69\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/alive\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"15\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"status\": \"ok\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"saved\": \"<scratch>/agent-server/20261117-085130-98d9-map-f23/evidence/F23.store-busy-responsive/alive.json\"\n}\n",
+  "stderr": ""
+}

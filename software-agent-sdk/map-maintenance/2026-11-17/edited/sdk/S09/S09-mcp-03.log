@@ -1,0 +1,82 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/conversation --arg startup \
+  --check error missing --check status eq finished --check tools contains good_echo \
+  --check texts.0 contains "echo: still here" \
+  --check only_broken_error missing --check only_broken_status eq finished \
+  --check only_broken_tools eq '["finish"]'
+{
+  "ok": true,
+  "mode": "startup",
+  "error": null,
+  "status": "finished",
+  "tools": [
+    "finish",
+    "good_add",
+    "good_counter",
+    "good_die",
+    "good_echo",
+    "good_fail",
+    "good_getenv",
+    "good_headers",
+    "good_kind_echo",
+    "good_nested",
+    "good_picture",
+    "good_register_extra",
+    "good_register_late",
+    "good_remove_extra",
+    "good_reverse",
+    "good_session",
+    "good_slow",
+    "good_structured"
+  ],
+  "texts": [
+    "[Tool 'good_echo' executed.]echo: still here",
+    "done"
+  ],
+  "only_broken_error": null,
+  "only_broken_status": "finished",
+  "only_broken_tools": [
+    "finish"
+  ],
+  "_exit": 0,
+  "_seconds": 8.4,
+  "checks": [
+    {
+      "check": "error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "tools contains good_echo",
+      "ok": true,
+      "actual": "[\"finish\", \"good_add\", \"good_counter\", \"good_die\", \"good_echo\", \"good_fail\", \"good_getenv\", \"good_headers\", \"good_kind_echo\", \"good_nested\", \"good_picture\", \"good_register_extra\", \"good_register_late\""
+    },
+    {
+      "check": "texts.0 contains echo: still here",
+      "ok": true,
+      "actual": "[Tool 'good_echo' executed.]echo: still here"
+    },
+    {
+      "check": "only_broken_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "only_broken_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "only_broken_tools eq [\"finish\"]",
+      "ok": true,
+      "actual": "[\"finish\"]"
+    }
+  ]
+}
+
+[exit 0 after 9s]

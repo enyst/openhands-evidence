@@ -1,0 +1,17 @@
+{
+  "file": "F40-ask-user.md",
+  "bullet": "Answer in the chat (`F40.chat-reply`).",
+  "ids": [
+    "F40.chat-reply"
+  ],
+  "line": 178,
+  "script": "CC=$(control-agent-server conversation start --no-autotitle --tools none --print-id)\ncontrol-agent-server conversation send \"$CC\" --wait --timeout 300 \\\n  --text 'QA_F40_CHAT I want a demo file. Ask me whether to name it qa-a.txt or qa-b.txt, then stop until I answer.'\nCASK=$(control-agent-server api GET \"/api/conversations/$CC/events/search\" --query kind=ActionEvent --check items.0.tool_name eq ask_user \\\n  --field items.0.id)\ncontrol-agent-server conversation send \"$CC\" --wait --timeout 300 --text 'QA_F40_REPLY Use qa-a.txt.'\ncontrol-agent-server api POST \"/api/conversations/$CC/ask_user/answer\" --json \"{\\\"ask_id\\\": \\\"$CASK\\\", \\\"option_index\\\": 0}\" \\\n  --expect 400 --check detail eq 'That question is not waiting for an answer.' --save F40.chat-reply/closed\ncontrol-agent-server api GET \"/api/conversations/$CC/events/search\" --query kind=AskUserAnswerEvent --check items len-eq 0\n",
+  "exit_code": 0,
+  "elapsed_ms": 10715,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"body\": {\n    \"success\": true\n  },\n  \"wait\": {\n    \"ok\": true,\n    \"status\": \"finished\",\n    \"transitions\": [\n      \"running\",\n      \"finished\"\n    ],\n    \"waited_ms\": 2123\n  }\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"body\": {\n    \"success\": true\n  },\n  \"wait\": {\n    \"ok\": true,\n    \"status\": \"finished\",\n    \"transitions\": [\n      \"running\",\n      \"finished\"\n    ],\n    \"waited_ms\": 2165\n  }\n}\n{\n  \"ok\": true,\n  \"status\": 400,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/716bdcfa-504d-4503-9072-6d8573d03676/ask_user/answer\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"ask_id\": \"2b9c8815-9df4-411a-a9e0-8625e71d46cb\",\n      \"option_index\": 0\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 400,\n    \"headers\": {\n      \"content-length\": \"56\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"That question is not waiting for an answer.\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 147,\n  \"checks\": [\n    {\n      \"check\": \"detail eq That question is not waiting for an answer.\",\n      \"ok\": true,\n      \"actual\": \"That question is not waiting for an answer.\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-091608-5350-map-f40/evidence/F40.chat-reply/closed.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/716bdcfa-504d-4503-9072-6d8573d03676/events/search\",\n    \"query\": [\n      [\n        \"kind\",\n        \"AskUserAnswerEvent\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"32\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"items\": [],\n      \"next_page_id\": null\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 164,\n  \"checks\": [\n    {\n      \"check\": \"items len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

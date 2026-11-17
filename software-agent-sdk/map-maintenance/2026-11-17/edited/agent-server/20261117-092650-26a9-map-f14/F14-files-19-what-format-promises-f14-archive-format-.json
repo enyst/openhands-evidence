@@ -1,0 +1,17 @@
+{
+  "file": "F14-files.md",
+  "bullet": "What `format` promises (`F14.archive-format-doc`).",
+  "ids": [
+    "F14.archive-format-doc"
+  ],
+  "line": 580,
+  "script": "control-agent-server api GET /openapi.json --expect 200 --quiet --raw-out \"$F/openapi.json\"\nDOC_FORMAT=$(python3 -c 'import json,sys; ps=json.load(open(sys.argv[1]))[\"paths\"][\"/api/file/archive\"][\"get\"][\"parameters\"]; print(next(p[\"description\"] for p in ps if p[\"name\"] == \"format\"))' \"$F/openapi.json\")\ntest -n \"$DOC_FORMAT\"\nDOCP=\"$F/doc-parent\"\nmkdir -p \"$DOCP\"\ncp -r \"$REPO\" \"$DOCP/proj\"\nprintf 'top\\n' > \"$DOCP/top.txt\"\ncontrol-agent-server api GET /api/file/archive --query path=\"$DOCP\" --query format=tar.gz --expect 200 \\\n  --raw-out \"$F/doc-parent.tgz\" --save F14.archive-format-doc/tar\ntar tzf \"$F/doc-parent.tgz\" > \"$F/doc-parent.list\"\ngrep -q 'proj/notes.txt$' \"$F/doc-parent.list\"\njq -n --arg doc \"$DOC_FORMAT\" --rawfile list \"$F/doc-parent.list\" '{doc_entire_directory: ($doc | contains(\"entire directory\")), tar_has_top: ($list | contains(\"top.txt\"))} | .agree = (.tar_has_top or (.doc_entire_directory | not))' \\\n  | control-agent-server assert --check agree eq true\n",
+  "exit_code": 0,
+  "elapsed_ms": 3768,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/openapi.json\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"725642\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 2252,\n  \"raw_out\": \"<scratch>/agent-server-verifier/20261117-092650-26a9-map-f14/fixtures/qa-f14/openapi.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/file/archive\",\n    \"query\": [\n      [\n        \"path\",\n        \"<scratch>/agent-server-verifier/20261117-092650-26a9-map-f14/fixtures/qa-f14/doc-parent\"\n      ],\n      [\n        \"format\",\n        \"tar.gz\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-type\": \"application/gzip\",\n      \"content-disposition\": \"attachment; filename=\\\"proj.tar.gz\\\"\",\n      \"content-length\": \"718\",\n      \"etag\": \"\\\"28d6c0a73ec077d85e6ae9b61106c3f6\\\"\"\n    },\n    \"body\": \"<718 bytes of application/gzip>\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 145,\n  \"raw_out\": \"<scratch>/agent-server-verifier/20261117-092650-26a9-map-f14/fixtures/qa-f14/doc-parent.tgz\",\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-092650-26a9-map-f14/evidence/F14.archive-format-doc/tar.json\"\n}\n{\n  \"ok\": true,\n  \"value\": {\n    \"doc_entire_directory\": false,\n    \"tar_has_top\": false,\n    \"agree\": true\n  },\n  \"checks\": [\n    {\n      \"check\": \"agree eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

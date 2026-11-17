@@ -1,0 +1,137 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/public_switch \
+  --check unset.load eq '["alpha"]' --check unset.context eq '["alpha"]' \
+  --check false.load eq '[]' --check false.context eq '[]' --check false.with_explicit eq '["explicit"]' \
+  --check off.load eq '[]' --check zero.load eq '[]' \
+  --check true.load eq '["alpha"]' --check garbage.load eq '["alpha"]' --check garbage.with_explicit eq '["alpha", "explicit"]' \
+  --check cloned_before_other_repo eq false --check other_repo_when_off eq '["gamma"]'
+{
+  "ok": true,
+  "unset": {
+    "load": [
+      "alpha"
+    ],
+    "context": [
+      "alpha"
+    ],
+    "with_explicit": [
+      "alpha",
+      "explicit"
+    ]
+  },
+  "false": {
+    "load": [],
+    "context": [],
+    "with_explicit": [
+      "explicit"
+    ]
+  },
+  "off": {
+    "load": [],
+    "context": [],
+    "with_explicit": [
+      "explicit"
+    ]
+  },
+  "zero": {
+    "load": [],
+    "context": [],
+    "with_explicit": [
+      "explicit"
+    ]
+  },
+  "true": {
+    "load": [
+      "alpha"
+    ],
+    "context": [
+      "alpha"
+    ],
+    "with_explicit": [
+      "alpha",
+      "explicit"
+    ]
+  },
+  "garbage": {
+    "load": [
+      "alpha"
+    ],
+    "context": [
+      "alpha"
+    ],
+    "with_explicit": [
+      "alpha",
+      "explicit"
+    ]
+  },
+  "cloned_before_other_repo": false,
+  "other_repo_when_off": [
+    "gamma"
+  ],
+  "_exit": 0,
+  "_seconds": 14.1,
+  "checks": [
+    {
+      "check": "unset.load eq [\"alpha\"]",
+      "ok": true,
+      "actual": "[\"alpha\"]"
+    },
+    {
+      "check": "unset.context eq [\"alpha\"]",
+      "ok": true,
+      "actual": "[\"alpha\"]"
+    },
+    {
+      "check": "false.load eq []",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "false.context eq []",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "false.with_explicit eq [\"explicit\"]",
+      "ok": true,
+      "actual": "[\"explicit\"]"
+    },
+    {
+      "check": "off.load eq []",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "zero.load eq []",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "true.load eq [\"alpha\"]",
+      "ok": true,
+      "actual": "[\"alpha\"]"
+    },
+    {
+      "check": "garbage.load eq [\"alpha\"]",
+      "ok": true,
+      "actual": "[\"alpha\"]"
+    },
+    {
+      "check": "garbage.with_explicit eq [\"alpha\", \"explicit\"]",
+      "ok": true,
+      "actual": "[\"alpha\", \"explicit\"]"
+    },
+    {
+      "check": "cloned_before_other_repo eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "other_repo_when_off eq [\"gamma\"]",
+      "ok": true,
+      "actual": "[\"gamma\"]"
+    }
+  ]
+}
+
+[exit 0 after 15s]

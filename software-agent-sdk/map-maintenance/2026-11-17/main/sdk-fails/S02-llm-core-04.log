@@ -1,0 +1,63 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg responses-stream \
+  --check final_text eq "the answer" --check final_summary.0 eq "plan the reply" --check content_text eq "the answer" \
+  --check summary_as_reasoning eq "plan the reply"
+{
+  "ok": true,
+  "mode": "responses-stream",
+  "deltas": [
+    {
+      "id": "msg_1",
+      "content": "the ",
+      "reasoning": null
+    },
+    {
+      "id": "msg_1",
+      "content": "answ",
+      "reasoning": null
+    },
+    {
+      "id": "msg_1",
+      "content": "er",
+      "reasoning": null
+    }
+  ],
+  "summary_as_reasoning": "",
+  "content_text": "the answer",
+  "chunk_ids": [
+    "msg_1"
+  ],
+  "final_text": "the answer",
+  "final_summary": [
+    "plan the reply"
+  ],
+  "responses_cache_read": 200,
+  "responses_cache_write": 0,
+  "chat_cache_write": 600,
+  "_exit": 0,
+  "_seconds": 7.3,
+  "checks": [
+    {
+      "check": "final_text eq the answer",
+      "ok": true,
+      "actual": "the answer"
+    },
+    {
+      "check": "final_summary.0 eq plan the reply",
+      "ok": true,
+      "actual": "plan the reply"
+    },
+    {
+      "check": "content_text eq the answer",
+      "ok": true,
+      "actual": "the answer"
+    },
+    {
+      "check": "summary_as_reasoning eq plan the reply",
+      "ok": false,
+      "actual": ""
+    }
+  ]
+}
+
+[exit 1 after 8s]

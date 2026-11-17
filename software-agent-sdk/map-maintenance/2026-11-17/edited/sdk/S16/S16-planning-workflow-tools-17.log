@@ -1,0 +1,36 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S16/ask_user --arg live \
+  --check execution_status eq finished --check ask_calls eq 1 --check pending eq true --check options ge 2
+{
+  "ok": true,
+  "execution_status": "finished",
+  "ask_calls": 1,
+  "pending": true,
+  "options": 2,
+  "_exit": 0,
+  "_seconds": 12.4,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "ask_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "pending eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "options ge 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 13s]

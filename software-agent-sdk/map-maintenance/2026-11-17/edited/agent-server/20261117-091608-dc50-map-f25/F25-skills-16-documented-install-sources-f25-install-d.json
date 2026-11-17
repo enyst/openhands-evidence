@@ -1,0 +1,17 @@
+{
+  "file": "F25-skills.md",
+  "bullet": "Documented install sources (`F25.install-documented-sources`).",
+  "ids": [
+    "F25.install-documented-sources"
+  ],
+  "line": 439,
+  "script": "DOC=$(control-agent-server api GET /openapi.json --auth none --field components.schemas.InstallSkillRequest.properties.source.description)\nfor SRC in github:OpenHands/extensions/skills/github https://github.com/OpenHands/extensions/tree/main/skills/github; do\n  case \"$DOC\" in\n    *\"'$SRC'\"*)\n      control-agent-server api POST /api/skills/install --json '{\"source\": \"'\"$SRC\"'\"}' --timeout 240 --expect 200 \\\n        --check name eq github --save F25.install-documented-sources/documented\n      control-agent-server api DELETE /api/skills/installed/github --expect 200\n      ;;\n  esac\ndone\n",
+  "exit_code": 0,
+  "elapsed_ms": 2920,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/skills/install\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"source\": \"github:OpenHands/extensions/skills/github\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"631\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"name\": \"github\",\n      \"version\": \"1.0.0\",\n      \"description\": \"Interact with GitHub repositories, pull requests, issues, and workflows using the GITHUB_TOKEN environment variable and GitHub CLI. Use when working with code hosted on GitHub or managing GitHub resources.\",\n      \"enabled\": true,\n      \"source\": \"github:OpenHands/extensions/skills/github\",\n      \"resolved_ref\": \"b52a1a2ec92fc0039063c1c186340417eba071fc\",\n      \"repo_path\": null,\n      \"installed_at\": \"2026-11-17T09:17:59.356092+00:00\",\n      \"install_path\": \"<scratch>/agent-server-verifier/20261117-091608-dc50-map-f25/home/.openhands/skills/installed/github\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 838,\n  \"checks\": [\n    {\n      \"check\": \"name eq github\",\n      \"ok\": true,\n      \"actual\": \"github\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-091608-dc50-map-f25/evidence/F25.install-documented-sources/documented.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"DELETE\",\n    \"path\": \"/api/skills/installed/github\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"40\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"message\": \"Skill 'github' uninstalled\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 142\n}\n",
+  "stderr": ""
+}

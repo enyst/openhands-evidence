@@ -1,0 +1,66 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/path_rules \
+  --check tool_results eq 4 --check readme_has_rule eq false --check main_has_py_rule eq true \
+  --check other_has_py_rule eq false --check guide_has_docs_rule eq true \
+  --check rules_in_system len-eq 0 --check root_rule_in_system eq true \
+  --check activated_path_rules eq '["py-rules", "agents:docs"]'
+{
+  "ok": true,
+  "tool_results": 4,
+  "readme_has_rule": false,
+  "main_has_py_rule": true,
+  "other_has_py_rule": false,
+  "guide_has_docs_rule": true,
+  "rules_in_system": [],
+  "root_rule_in_system": true,
+  "activated_path_rules": [
+    "py-rules",
+    "agents:docs"
+  ],
+  "_exit": 0,
+  "_seconds": 13.9,
+  "checks": [
+    {
+      "check": "tool_results eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "readme_has_rule eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "main_has_py_rule eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "other_has_py_rule eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "guide_has_docs_rule eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rules_in_system len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "root_rule_in_system eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "activated_path_rules eq [\"py-rules\", \"agents:docs\"]",
+      "ok": true,
+      "actual": "[\"py-rules\", \"agents:docs\"]"
+    }
+  ]
+}
+
+[exit 0 after 14s]

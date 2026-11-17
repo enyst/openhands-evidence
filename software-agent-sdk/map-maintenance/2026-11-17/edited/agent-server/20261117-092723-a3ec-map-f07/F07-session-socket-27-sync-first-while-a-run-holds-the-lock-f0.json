@@ -1,0 +1,85 @@
+{
+  "file": "F07-session-socket.md",
+  "bullet": "Sync first while a run holds the lock (`F07.sync-first-during-run`), known bug #6745.",
+  "ids": [
+    "F07.sync-first-during-run"
+  ],
+  "line": 721,
+  "script": "RUNC=$(control-agent-server conversation start --no-autotitle --prompt 'Run exactly this terminal command and nothing else: sleep 25 && echo QA_F07_LOCK' --print-id)\ncontrol-agent-server conversation wait \"$RUNC\" --until running --timeout 60\ncontrol-agent-server api GET \"/api/conversations/$RUNC/events/search\" --query kind=ActionEvent --check items len-ge 1 --until-ok 60 --quiet\ncontrol-agent-server ws listen \"/sockets/session/$RUNC\" --send '{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"QA_F07_LOCK_ROLE\"}]}' \\\n  --until-kind sync --duration 90 --expect-kind error --save \"F07.sync-first-during-run/order-$RUNC\"\ncontrol-agent-server state cat \"evidence/F07.sync-first-during-run/order-$RUNC.json\" --check frames.2.kind eq sync  # bug: checks.0.actual eq error\ncontrol-agent-server conversation wait \"$RUNC\" --until finished,idle --timeout 120\n",
+  "exit_code": 1,
+  "elapsed_ms": 29355,
+  "failed_line": 6,
+  "failed_command": "control-agent-server state cat \"evidence/F07.sync-first-during-run/order-$RUNC.json\" --check frames.2.kind eq sync",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "path": "evidence/F07.sync-first-during-run/order-a585784c-11fb-4bd8-8d1f-b5183b269132.json",
+    "bytes": 1087,
+    "mode": "0o644",
+    "content": {
+      "summary": {
+        "opened": true,
+        "frames": 2,
+        "kinds": {
+          "error": 1,
+          "sync": 1
+        },
+        "stopped": "until-kind sync",
+        "close": null
+      },
+      "frames": [
+        {
+          "direction": "opened",
+          "at": "2026-11-17T09:30:48Z"
+        },
+        {
+          "direction": "sent",
+          "at": "2026-11-17T09:30:48Z",
+          "frame": {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "QA_F07_LOCK_ROLE"
+              }
+            ]
+          }
+        },
+        {
+          "direction": "received",
+          "at": "2026-11-17T09:30:49Z",
+          "kind": "error",
+          "frame": {
+            "type": "error",
+            "code": "AssertionError",
+            "detail": "Only user messages are allowed to be sent to the agent."
+          }
+        },
+        {
+          "direction": "received",
+          "at": "2026-11-17T09:31:13Z",
+          "kind": "sync",
+          "frame": {
+            "type": "sync",
+            "through_seq": 6
+          }
+        },
+        {
+          "direction": "ended",
+          "at": "2026-11-17T09:31:13Z",
+          "stopped": "until-kind sync",
+          "close": null
+        }
+      ]
+    },
+    "checks": [
+      {
+        "check": "frames.2.kind eq sync",
+        "ok": false,
+        "actual": "error"
+      }
+    ]
+  },
+  "stdout": "{\n  \"id\": \"a585784c-11fb-4bd8-8d1f-b5183b269132\",\n  \"ok\": true,\n  \"status\": \"running\",\n  \"transitions\": [\n    \"running\"\n  ],\n  \"waited_ms\": 188\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/a585784c-11fb-4bd8-8d1f-b5183b269132/events/search\",\n    \"query\": [\n      [\n        \"kind\",\n        \"ActionEvent\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1044\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 674,\n  \"checks\": [\n    {\n      \"check\": \"items len-ge 1\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"id\\\": \\\"774e561a-ae26-41c8-92e3-f0e7979c2962\\\", \\\"timestamp\\\": \\\"2026-11-17T09:30:47.746899\\\", \\\"source\\\": \\\"agent\\\", \\\"parent_id\\\": \\\"6ec14851-e40d-40ff-94ba-0e0bcae0c803\\\", \\\"thought\\\": [{\\\"cache_prompt\\\": false, \\\"\\u2026\"\n    }\n  ],\n  \"attempts\": 2\n}\n{\n  \"ok\": true,\n  \"path\": \"/sockets/session/a585784c-11fb-4bd8-8d1f-b5183b269132\",\n  \"opened\": true,\n  \"frames\": 2,\n  \"kinds\": {\n    \"error\": 1,\n    \"sync\": 1\n  },\n  \"stopped\": \"until-kind sync\",\n  \"close\": null,\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-092723-a3ec-map-f07/evidence/F07.sync-first-during-run/order-a585784c-11fb-4bd8-8d1f-b5183b269132.json\",\n  \"first_frames\": [\n    {\n      \"kind\": \"error\",\n      \"frame\": {\n        \"type\": \"error\",\n        \"code\": \"AssertionError\",\n        \"detail\": \"Only user messages are allowed to be sent to the agent.\"\n      }\n    },\n    {\n      \"kind\": \"sync\",\n      \"frame\": {\n        \"type\": \"sync\",\n        \"through_seq\": 6\n      }\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"path\": \"evidence/F07.sync-first-during-run/order-a585784c-11fb-4bd8-8d1f-b5183b269132.json\",\n  \"bytes\": 1087,\n  \"mode\": \"0o644\",\n  \"content\": {\n    \"summary\": {\n      \"opened\": true,\n      \"frames\": 2,\n      \"kinds\": {\n        \"error\": 1,\n        \"sync\": 1\n      },\n      \"stopped\": \"until-kind sync\",\n      \"close\": null\n    },\n    \"frames\": [\n      {\n        \"direction\": \"opened\",\n        \"at\": \"2026-11-17T09:30:48Z\"\n      },\n      {\n        \"direction\": \"sent\",\n        \"at\": \"2026-11-17T09:30:48Z\",\n        \"frame\": {\n          \"role\": \"assistant\",\n          \"content\": [\n            {\n              \"type\": \"text\",\n              \"text\": \"QA_F07_LOCK_ROLE\"\n            }\n          ]\n        }\n      },\n      {\n        \"direction\": \"received\",\n        \"at\": \"2026-11-17T09:30:49Z\",\n        \"kind\": \"error\",\n        \"frame\": {\n          \"type\": \"error\",\n          \"code\": \"AssertionError\",\n          \"detail\": \"Only user messages are allowed to be sent to the agent.\"\n        }\n      },\n      {\n        \"direction\": \"received\",\n        \"at\": \"2026-11-17T09:31:13Z\",\n        \"kind\": \"sync\",\n        \"frame\": {\n          \"type\": \"sync\",\n          \"through_seq\": 6\n        }\n      },\n      {\n        \"direction\": \"ended\",\n        \"at\": \"2026-11-17T09:31:13Z\",\n        \"stopped\": \"until-kind sync\",\n        \"close\": null\n      }\n    ]\n  },\n  \"checks\": [\n    {\n      \"check\": \"frames.2.kind eq sync\",\n      \"ok\": false,\n      \"actual\": \"error\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

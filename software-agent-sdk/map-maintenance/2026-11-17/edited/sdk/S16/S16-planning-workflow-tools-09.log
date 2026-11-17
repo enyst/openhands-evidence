@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "Tom agent consultation example completed" -- python examples/01_standalone_sdk/30_tom_agent.py
+{
+  "exit": 0,
+  "seconds": 21.8,
+  "result": null,
+  "stdout_tail": ".\n5. **Hypothesize, then test.** State a falsifiable guess (\"the cache key ignores\nthe tenant ID\") and check it with a print, a debugger breakpoint, or an \nassertion \u2014 don't change code hoping it helps. Most time lost in debugging is \nfrom editing without a hypothesis.\n6. **Fix the cause, not the symptom.** Then add the minimal repro as a test so \nit can't come back.\n\nThe most common failure mode is skipping step 1 or 3 and going straight to step \n5 \u2014 reading code and making speculative edits.\n\n## What I need from you\n\n- **Symptom**: full error message / stack trace, or \"returns X, expected Y.\"\n- **How to trigger it**: the command or test that fails.\n- **Where the code is**: path or repo (it isn't in this workspace yet \u2014 you can \npoint me at a directory or paste the relevant files).\n- **Reproducibility**: always, intermittent, or only in CI/prod?\n- **Recency**: did it ever work? If so, roughly when did it break? That \ndetermines whether `git bisect` is worth it.\n\nGive me those and I'll start at step 1 with you \u2014 reproduce it, then narrow down\n\u2014 rather than guessing at fixes.\n\nTokens: \u2191 input 8.37K (total 23.27K) \u2022 cache hit 93.34% (total 84.16%) \u2022  \nreasoning 368 (total 622) \u2022 \u2193 output 885 (total 1.52K) \u2022 $ (total 0.0030)\n\n\n================================================================================\nTom agent consultation example completed!\n================================================================================\nEXAMPLE_COST: 0.003048804\nEXAMPLE_COST: 0.003048804\n",
+  "stderr_tail": "",
+  "ok": true
+}
+
+[exit 0 after 22s]

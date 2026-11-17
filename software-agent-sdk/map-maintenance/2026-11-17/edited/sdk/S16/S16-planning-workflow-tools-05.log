@@ -1,0 +1,78 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/tom \
+  --check store_root_is_env eq true \
+  --check before_processed eq 0 --check before_message contains "No valid conversations to index" \
+  --check sessions_on_disk ge 1 --check files_under_root contains "usermodeling/cleaned_sessions/" \
+  --check tom_requests ge 1 \
+  --check consult_tool eq tom_consult --check consult_is_error eq false --check consult_text contains "Tom agent's guidance"
+{
+  "ok": true,
+  "store_root": "<scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-05/block1/runs/20261117-091835-82130c/openhands",
+  "store_root_is_env": true,
+  "before_message": "No valid conversations to index",
+  "before_processed": 0,
+  "sessions_on_disk": 3,
+  "after_text": "",
+  "after_processed": null,
+  "after_error": "ValueError: Failed to validate parsed data: 3 validation errors for SessionAnalysisForLLM\nuser_modeling_summary\n  Field required [type=missing, input_value={'suggestions': 'Ask whic...'confidence_score': 0.4}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/miss",
+  "consult_tool": "tom_consult",
+  "consult_is_error": false,
+  "consult_text": "Tom agent's guidance:\n[CRITICAL] Tom agent cannot provide consultation for this user message. Do not consult ToM agent again for this message and use other actions instead.",
+  "tom_requests": 6,
+  "files_under_root": [
+    "profiles/.profiles.lock",
+    "usermodeling/cleaned_sessions/6cb592de5b3740728d8762b1b6a61c7a.json",
+    "usermodeling/cleaned_sessions/a15f4390a5f54f54839dcdd302338c15.json"
+  ],
+  "_exit": 0,
+  "_seconds": 14.8,
+  "checks": [
+    {
+      "check": "store_root_is_env eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "before_processed eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "before_message contains No valid conversations to index",
+      "ok": true,
+      "actual": "No valid conversations to index"
+    },
+    {
+      "check": "sessions_on_disk ge 1",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "files_under_root contains usermodeling/cleaned_sessions/",
+      "ok": true,
+      "actual": "[\"profiles/.profiles.lock\", \"usermodeling/cleaned_sessions/6cb592de5b3740728d8762b1b6a61c7a.json\", \"usermodeling/cleaned_sessions/a15f4390a5f54f54839dcdd302338c15.json\"]"
+    },
+    {
+      "check": "tom_requests ge 1",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "consult_tool eq tom_consult",
+      "ok": true,
+      "actual": "tom_consult"
+    },
+    {
+      "check": "consult_is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "consult_text contains Tom agent's guidance",
+      "ok": true,
+      "actual": "Tom agent's guidance:\n[CRITICAL] Tom agent cannot provide consultation for this user message. Do not consult ToM agent again for this message and use other actions instead."
+    }
+  ]
+}
+
+[exit 0 after 15s]

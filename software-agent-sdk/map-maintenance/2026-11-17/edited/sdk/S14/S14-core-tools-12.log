@@ -1,0 +1,160 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/search --arg 100 \
+  --check same_files eq true --check rg.glob_in_path.count eq 100 --check same_truncated eq true \
+  --check rg.glob_in_path.truncated eq false
+{
+  "ok": true,
+  "rg_available": true,
+  "rg": {
+    "glob_py": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace':\n<scratch>/sdk-verifier/S14/wor"
+    },
+    "glob_in_path": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f099.txt",
+        "many/f098.txt",
+        "many/f097.txt",
+        "many/f096.txt",
+        "many/f095.txt"
+      ],
+      "truncated": false,
+      "text": "Found 100 file(s) matching pattern '*.txt' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace/many':\n<scratch>/sdk-verifier/S1"
+    },
+    "grep_include": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) containing pattern 'def \\w+' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace' (filtered by '*.py'):\n/tmp/claude-0/-home-user/8bd4acb6-c4b0-56c8-b08f-a48bcae55876/scratchp"
+    },
+    "grep_many": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f099.txt",
+        "many/f098.txt",
+        "many/f097.txt",
+        "many/f096.txt",
+        "many/f095.txt"
+      ],
+      "truncated": false,
+      "text": "Found 100 file(s) containing pattern 'needle' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace/many':\n<scratch>/sdk-verifier"
+    },
+    "grep_secret": {
+      "is_error": false,
+      "count": 1,
+      "files": [
+        "creds.txt"
+      ],
+      "truncated": false,
+      "text": "Found 1 file(s) containing pattern '<secret-hidden>' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace':\n<scratch>/sdk-verifi"
+    },
+    "patch": {
+      "is_error": false,
+      "count": 0,
+      "files": [],
+      "truncated": null,
+      "text": "Done!"
+    }
+  },
+  "python": {
+    "glob_py": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace':\n<scratch>/sdk-verifier/S14/wor"
+    },
+    "glob_in_path": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f099.txt",
+        "many/f098.txt",
+        "many/f097.txt",
+        "many/f096.txt",
+        "many/f095.txt"
+      ],
+      "truncated": false,
+      "text": "Found 100 file(s) matching pattern '*.txt' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace/many':\n<scratch>/sdk-verifier/S1"
+    },
+    "grep_include": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) containing pattern 'def \\w+' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace' (filtered by '*.py'):\n/tmp/claude-0/-home-user/8bd4acb6-c4b0-56c8-b08f-a48bcae55876/scratchp"
+    },
+    "grep_many": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f099.txt",
+        "many/f098.txt",
+        "many/f097.txt",
+        "many/f096.txt",
+        "many/f095.txt"
+      ],
+      "truncated": false,
+      "text": "Found 100 file(s) containing pattern 'needle' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace/many':\n<scratch>/sdk-verifier"
+    },
+    "grep_secret": {
+      "is_error": false,
+      "count": 1,
+      "files": [
+        "creds.txt"
+      ],
+      "truncated": false,
+      "text": "Found 1 file(s) containing pattern '<secret-hidden>' in '<scratch>/sdk-verifier/S14/work/S14-core-tools-12/block1/runs/20261117-092525-bca74d/workspace':\n<scratch>/sdk-verifi"
+    }
+  },
+  "same_files": true,
+  "same_truncated": true,
+  "newest_first": true,
+  "added_file": "token sk-live-4242abcd",
+  "secret_in_observations": false,
+  "_exit": 0,
+  "_seconds": 9.5,
+  "checks": [
+    {
+      "check": "same_files eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rg.glob_in_path.count eq 100",
+      "ok": true,
+      "actual": "100"
+    },
+    {
+      "check": "same_truncated eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rg.glob_in_path.truncated eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 10s]

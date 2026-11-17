@@ -1,0 +1,142 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/views --arg fork-secrets \
+  --check fork_on_disk.api_key eq encrypted --check fork_on_disk.VERIFY_TOKEN eq encrypted \
+  --check fork_on_disk.LATER_TOKEN eq encrypted --check fork_registry_has len-eq 2 \
+  --check reloaded_api_key_is_real eq true --check reloaded_registry.VERIFY_TOKEN eq true \
+  --check reloaded_registry.LATER_TOKEN eq true --check reloaded_status eq finished \
+  --check requests eq 2 --check authorization.0 eq true --check authorization.1 eq true \
+  --check command_output.0 eq "v=<secret-hidden> l=<secret-hidden>" \
+  --check command_output.1 eq 12 --check command_output.2 eq 16 --check values_in_output eq false \
+  --check fork_on_disk_after_run.api_key eq encrypted --check no_cipher_fork_api_key eq redacted
+{
+  "ok": true,
+  "mode": "fork-secrets",
+  "source_on_disk": {
+    "api_key": "encrypted",
+    "VERIFY_TOKEN": "encrypted",
+    "LATER_TOKEN": "encrypted"
+  },
+  "fork_on_disk": {
+    "api_key": "encrypted",
+    "VERIFY_TOKEN": "encrypted",
+    "LATER_TOKEN": "encrypted"
+  },
+  "fork_registry_has": [
+    "LATER_TOKEN",
+    "VERIFY_TOKEN"
+  ],
+  "reloaded_api_key_is_real": true,
+  "reloaded_registry": {
+    "VERIFY_TOKEN": true,
+    "LATER_TOKEN": true
+  },
+  "reloaded_status": "finished",
+  "requests": 2,
+  "authorization": [
+    true,
+    true
+  ],
+  "command_output": [
+    "v=<secret-hidden> l=<secret-hidden>",
+    "12",
+    "16"
+  ],
+  "values_in_output": false,
+  "fork_on_disk_after_run": {
+    "api_key": "encrypted",
+    "VERIFY_TOKEN": "encrypted",
+    "LATER_TOKEN": "encrypted"
+  },
+  "no_cipher_fork_api_key": "redacted",
+  "_exit": 0,
+  "_seconds": 6.0,
+  "checks": [
+    {
+      "check": "fork_on_disk.api_key eq encrypted",
+      "ok": true,
+      "actual": "encrypted"
+    },
+    {
+      "check": "fork_on_disk.VERIFY_TOKEN eq encrypted",
+      "ok": true,
+      "actual": "encrypted"
+    },
+    {
+      "check": "fork_on_disk.LATER_TOKEN eq encrypted",
+      "ok": true,
+      "actual": "encrypted"
+    },
+    {
+      "check": "fork_registry_has len-eq 2",
+      "ok": true,
+      "actual": "[\"LATER_TOKEN\", \"VERIFY_TOKEN\"]"
+    },
+    {
+      "check": "reloaded_api_key_is_real eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reloaded_registry.VERIFY_TOKEN eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reloaded_registry.LATER_TOKEN eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reloaded_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "authorization.0 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "authorization.1 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "command_output.0 eq v=<secret-hidden> l=<secret-hidden>",
+      "ok": true,
+      "actual": "v=<secret-hidden> l=<secret-hidden>"
+    },
+    {
+      "check": "command_output.1 eq 12",
+      "ok": true,
+      "actual": "12"
+    },
+    {
+      "check": "command_output.2 eq 16",
+      "ok": true,
+      "actual": "16"
+    },
+    {
+      "check": "values_in_output eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "fork_on_disk_after_run.api_key eq encrypted",
+      "ok": true,
+      "actual": "encrypted"
+    },
+    {
+      "check": "no_cipher_fork_api_key eq redacted",
+      "ok": true,
+      "actual": "redacted"
+    }
+  ]
+}
+
+[exit 0 after 6s]

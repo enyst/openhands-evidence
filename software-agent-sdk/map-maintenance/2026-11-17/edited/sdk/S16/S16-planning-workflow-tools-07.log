@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "WORKFLOW COMPLETE" -- python examples/01_standalone_sdk/24_planning_agent_workflow.py
+{
+  "exit": 0,
+  "seconds": 442.3,
+  "result": null,
+  "stdout_tail": "ORKFLOW COMPLETE\n================================================================================\nProject files created in: /tmp/tmpss__c44q\n\nCreated files:\n  - requirements.txt\n  - README.md\n  - .gitignore\n  - pyproject.toml\n  - requirements-dev.txt\n  - .agents_tmp/PLAN.md\n  - tests/test_http_client.py\n  - tests/test_main.py\n  - tests/test_parser.py\n  - tests/test_storage.py\n  - tests/test_config.py\n  - tests/conftest.py\n  - tests/fixtures/sample_page.html\n  - tests/__pycache__/test_http_client.cpython-311-pytest-9.2.0.pyc\n  - tests/__pycache__/test_main.cpython-311-pytest-9.2.0.pyc\n  - tests/__pycache__/test_storage.cpython-311-pytest-9.2.0.pyc\n  - tests/__pycache__/conftest.cpython-311-pytest-9.2.0.pyc\n  - tests/__pycache__/test_parser.cpython-311-pytest-9.2.0.pyc\n  - tests/__pycache__/test_config.cpython-311-pytest-9.2.0.pyc\n  - src/news_scraper/main.py\n  - src/news_scraper/storage.py\n  - src/news_scraper/config.py\n  - src/news_scraper/__init__.py\n  - src/news_scraper/parser.py\n  - src/news_scraper/http_client.py\n  - src/news_scraper/__main__.py\n  - src/news_scraper/__pycache__/storage.cpython-311.pyc\n  - src/news_scraper/__pycache__/http_client.cpython-311.pyc\n  - src/news_scraper/__pycache__/parser.cpython-311.pyc\n  - src/news_scraper/__pycache__/main.cpython-311.pyc\n  - src/news_scraper/__pycache__/config.cpython-311.pyc\n  - src/news_scraper/__pycache__/__main__.cpython-311.pyc\n  - src/news_scraper/__pycache__/__init__.cpython-311.pyc\nEXAMPLE_COST: 0.10155656400000002\n",
+  "stderr_tail": "[11/17/26 09:19:25] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n[11/17/26 09:20:10] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 443s]

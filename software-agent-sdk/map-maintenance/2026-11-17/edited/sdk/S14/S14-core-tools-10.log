@@ -1,0 +1,402 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/file_editor \
+  --check steps.view_dir.text contains "up to 2 levels deep" --check dir_lists_second_level eq true \
+  --check dir_lists_third_level eq false --check dir_lists_hidden eq false --check dir_notes_hidden eq true \
+  --check steps.create.is_error eq false \
+  --check steps.create_again.is_error eq true --check steps.create_again.text contains "File already exists" \
+  --check steps.view_file.text contains "cat -n" --check steps.view_range.text contains "def bye" \
+  --check steps.view_range.text not-contains greet \
+  --check steps.replace.is_error eq false --check steps.replace.text contains "snippet" \
+  --check steps.replace_ambiguous.is_error eq true --check steps.replace_ambiguous.text contains "Multiple occurrences" \
+  --check steps.replace_missing.text contains "did not appear verbatim" \
+  --check steps.insert.text contains "import os" --check steps.undo.text contains "undone successfully" \
+  --check app_py contains "return 'bye'" --check app_py contains "return 'hi'" --check app_py not-contains "import os" \
+  --check steps.relative.is_error eq true --check steps.relative.text contains "should be an absolute path. Maybe you meant" \
+  --check steps.missing.is_error eq true \
+  --check steps.image.content_types contains ImageContent \
+  --check steps.pdf.is_error eq false --check steps.pdf.text contains "Quarterly Report" \
+  --check steps.binary.is_error eq true --check steps.binary.text contains "appears to be binary" \
+  --check steps.huge.is_error eq true --check steps.huge.text contains "too large" \
+  --check steps.latin.is_error eq false --check latin_still_latin1 eq true \
+  --check steps.secret.text contains "API_TOKEN=<secret-hidden>" --check secret_leaked eq false
+{
+  "ok": true,
+  "steps": {
+    "view_dir": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "Here's the files and directories up to 2 levels deep in <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace, excluding hidden items:\n<scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/\n<scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/blob.bin\n/tmp/claude-0/-home-user/8bd4acb6-c",
+      "text_len": 1984,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "create": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "File created successfully at: <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py",
+      "text_len": 198,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "create_again": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nInvalid `path` parameter: <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py. File already exists at: <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py. Cannot overwrite files using command `create`.",
+      "text_len": 475,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ]
+    },
+    "view_file": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py:\n     1\tdef greet():\n     2\t    return 'hi'\n     3\t\n     4\tdef bye():\n     5\t    return 'hi'\n",
+      "text_len": 303,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "view_range": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py:\n     4\tdef bye():\n     5\t    return 'hi'\n",
+      "text_len": 252,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "replace": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "The file <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py has been edited. Here's the result of running `cat -n` on a snippet of <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py:\n     1\tdef greet():\n     2\t    return 'hi'\n     3\t\n     4\tdef bye():\n     5\t    return 'bye'\nReview the changes and make sure they are as expected. Edit the file again if necessary.",
+      "text_len": 600,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "replace_ambiguous": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nNo replacement was performed. Multiple occurrences of old_str `return` in lines [2, 5]. Please ensure it is unique.",
+      "text_len": 154,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ]
+    },
+    "replace_missing": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nNo replacement was performed, old_str `no such text` did not appear verbatim in <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py.",
+      "text_len": 288,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ]
+    },
+    "insert": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "The file <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py has been edited. Here's the result of running `cat -n` on a snippet of the edited file:\n     1\timport os\n     2\tdef greet():\n     3\t    return 'hi'\n     4\t\n     5\tdef bye():\nReview the changes and make sure they are as expected (correct indentation, no duplicate lines, etc). Edit the file again if necessary.",
+      "text_len": 487,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "undo": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "Last edit to <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py undone successfully. Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py:\n     1\tdef greet():\n     2\t    return 'hi'\n     3\t\n     4\tdef bye():\n     5\t    return 'bye'\n",
+      "text_len": 507,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "relative": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nInvalid `path` parameter: src/app.py. The path should be an absolute path. Maybe you meant <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py?",
+      "text_len": 299,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ]
+    },
+    "missing": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nInvalid `path` parameter: <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/nope.txt. The path <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/nope.txt does not exist. Please provide a valid path.",
+      "text_len": 453,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ]
+    },
+    "image": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "Image file <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/pixel.png read successfully. Displaying image content.\n",
+      "text_len": 224,
+      "content_types": [
+        "TextContent",
+        "ImageContent"
+      ]
+    },
+    "pdf": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/doc.pdf:\n     1\t%PDF-1.4\n     2\t1 0 obj\n     3\t<< /Type /Catalog >>\n     4\tendobj\n     5\tBT (Quarterly Report) Tj ET\n     6\t%%EOF\n",
+      "text_len": 329,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "binary": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nFile validation failed for <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/blob.bin: File appears to be binary and this file type cannot be read or edited by this tool.",
+      "text_len": 317,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ]
+    },
+    "huge": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nFile validation failed for <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/huge.log: File is too large (11.0MB). Maximum allowed size is 10MB.",
+      "text_len": 291,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ]
+    },
+    "latin": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "The file <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/latin.txt has been edited. Here's the result of running `cat -n` on a snippet of <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/latin.txt:\n     1\tcaf\u00e9 = 1\n     2\tname = 'new'\nReview the changes and make sure they are as expected. Edit the file again if necessary.",
+      "text_len": 541,
+      "content_types": [
+        "TextContent"
+      ]
+    },
+    "secret": {
+      "tool": "file_editor",
+      "kind": "FileEditorObservation",
+      "is_error": false,
+      "text": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/config.env:\n     1\tAPI_TOKEN=<secret-hidden>\n",
+      "text_len": 244,
+      "content_types": [
+        "TextContent"
+      ]
+    }
+  },
+  "app_py": "def greet():\n    return 'hi'\n\ndef bye():\n    return 'bye'\n",
+  "dir_lists_second_level": true,
+  "dir_lists_third_level": false,
+  "dir_lists_hidden": false,
+  "dir_notes_hidden": true,
+  "latin_still_latin1": true,
+  "secret_leaked": false,
+  "_exit": 0,
+  "_seconds": 10.5,
+  "checks": [
+    {
+      "check": "steps.view_dir.text contains up to 2 levels deep",
+      "ok": true,
+      "actual": "Here's the files and directories up to 2 levels deep in <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713"
+    },
+    {
+      "check": "dir_lists_second_level eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "dir_lists_third_level eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "dir_lists_hidden eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "dir_notes_hidden eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.create.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.create_again.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.create_again.text contains File already exists",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nInvalid `path` parameter: <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-0"
+    },
+    {
+      "check": "steps.view_file.text contains cat -n",
+      "ok": true,
+      "actual": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/s"
+    },
+    {
+      "check": "steps.view_range.text contains def bye",
+      "ok": true,
+      "actual": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/s"
+    },
+    {
+      "check": "steps.view_range.text not-contains greet",
+      "ok": true,
+      "actual": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/s"
+    },
+    {
+      "check": "steps.replace.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.replace.text contains snippet",
+      "ok": true,
+      "actual": "The file <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py has been edited. Here'"
+    },
+    {
+      "check": "steps.replace_ambiguous.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.replace_ambiguous.text contains Multiple occurrences",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nNo replacement was performed. Multiple occurrences of old_str `return` in lines [2, 5]. Please ensure it is unique."
+    },
+    {
+      "check": "steps.replace_missing.text contains did not appear verbatim",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nNo replacement was performed, old_str `no such text` did not appear verbatim in <scratch>/sdk-veri"
+    },
+    {
+      "check": "steps.insert.text contains import os",
+      "ok": true,
+      "actual": "The file <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py has been edited. Here'"
+    },
+    {
+      "check": "steps.undo.text contains undone successfully",
+      "ok": true,
+      "actual": "Last edit to <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/src/app.py undone successfull"
+    },
+    {
+      "check": "app_py contains return 'bye'",
+      "ok": true,
+      "actual": "def greet():\n    return 'hi'\n\ndef bye():\n    return 'bye'\n"
+    },
+    {
+      "check": "app_py contains return 'hi'",
+      "ok": true,
+      "actual": "def greet():\n    return 'hi'\n\ndef bye():\n    return 'bye'\n"
+    },
+    {
+      "check": "app_py not-contains import os",
+      "ok": true,
+      "actual": "def greet():\n    return 'hi'\n\ndef bye():\n    return 'bye'\n"
+    },
+    {
+      "check": "steps.relative.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.relative.text contains should be an absolute path. Maybe you meant",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nInvalid `path` parameter: src/app.py. The path should be an absolute path. Maybe you meant /tmp/claude-0/-home-user/8bd4acb6-c4b0-56c8-b08f-a48bcae55876/scratchp"
+    },
+    {
+      "check": "steps.missing.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.image.content_types contains ImageContent",
+      "ok": true,
+      "actual": "[\"TextContent\", \"ImageContent\"]"
+    },
+    {
+      "check": "steps.pdf.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.pdf.text contains Quarterly Report",
+      "ok": true,
+      "actual": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/d"
+    },
+    {
+      "check": "steps.binary.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.binary.text contains appears to be binary",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nFile validation failed for <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-"
+    },
+    {
+      "check": "steps.huge.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.huge.text contains too large",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nFile validation failed for <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-"
+    },
+    {
+      "check": "steps.latin.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "latin_still_latin1 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.secret.text contains API_TOKEN=<secret-hidden>",
+      "ok": true,
+      "actual": "Here's the result of running `cat -n` on <scratch>/sdk-verifier/S14/work/S14-core-tools-10/block1/runs/20261117-092503-713236/workspace/c"
+    },
+    {
+      "check": "secret_leaked eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 11s]

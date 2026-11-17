@@ -1,0 +1,23 @@
+{
+  "file": "F24-openai-subscription.md",
+  "bullet": "Offline-safe routes (`F24.offline-safe`).",
+  "ids": [
+    "F24.offline-safe"
+  ],
+  "line": 414,
+  "script": "OFF=$(control-agent-server launch --new --name f24-offline --env HTTPS_PROXY=http://127.0.0.1:9 --env https_proxy=http://127.0.0.1:9 --print-run)\ntrap 'control-agent-server stop --run \"$OFF\" >/dev/null' EXIT\nif control-agent-server api POST /api/llm/subscription/openai/device/start --run \"$OFF\" --expect 200 --quiet; then false; fi\ncontrol-agent-server api GET /api/llm/subscription/openai/models --run \"$OFF\" --expect 200 --check models eq \"$EXPECTED_MODELS\"\ncontrol-agent-server api GET /api/llm/subscription/openai/status --run \"$OFF\" --expect 200 --check connected eq false \\\n  --save F24.offline-safe/status-no-login\ncontrol-agent-server api POST /api/llm/subscription/openai/device/poll --run \"$OFF\" --json '{\"device_code\": \"qa-f24-unknown\"}' --expect 404\nbash \"$F24/write-login.sh\" \"$OFF\" 3600000 >/dev/null\ncontrol-agent-server api GET /api/llm/subscription/openai/status --run \"$OFF\" --expect 200 --check connected eq true\ncontrol-agent-server api POST /api/llm/subscription/openai/logout --run \"$OFF\" --expect 200 --check connected eq false \\\n  --save F24.offline-safe/logout\ncontrol-agent-server state ls --run \"$OFF\" 'home/.openhands/auth/*' --expect-count 0\n",
+  "exit_code": 3,
+  "elapsed_ms": 2134,
+  "failed_line": 1,
+  "failed_command": "OFF=$(control-agent-server launch --new --name f24-offline --env HTTPS_PROXY=http://127.0.0.1:9 --env https_proxy=http://127.0.0.1:9 --print-run)",
+  "failed_status": 3,
+  "observation": {
+    "ok": false,
+    "exit": 3,
+    "error": "Server exited with code 1 during startup.",
+    "hint": "Read the log: `control-agent-server logs --tail 80` (a port another process took first shows as `address already in use`).",
+    "log": "<scratch>/agent-server/20261117-090214-16ad-f24-offline/private/server.log"
+  },
+  "stdout": "",
+  "stderr": ""
+}

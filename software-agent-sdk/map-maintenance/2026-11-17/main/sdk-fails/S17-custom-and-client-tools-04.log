@@ -1,0 +1,85 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S17/schema_constraints \
+  --check pydantic.order_id_pattern eq '^ORD-[0-9]{6}$' --check pydantic.currency_const eq USD \
+  --check pydantic.additional_properties eq false \
+  --check openai.order_id_pattern eq '^ORD-[0-9]{6}$' --check openai.currency_const eq USD \
+  --check openai.additional_properties eq false \
+  --check responses.order_id_pattern eq '^ORD-[0-9]{6}$' --check responses.currency_const eq USD \
+  --check responses.additional_properties eq false
+{
+  "ok": true,
+  "pydantic": {
+    "order_id_pattern": "^ORD-[0-9]{6}$",
+    "currency_const": "USD",
+    "additional_properties": false
+  },
+  "openai": {
+    "order_id_pattern": null,
+    "currency_const": null,
+    "additional_properties": null
+  },
+  "responses": {
+    "order_id_pattern": null,
+    "currency_const": null,
+    "additional_properties": null
+  },
+  "openai_order_id": {
+    "type": "string",
+    "description": "Order id"
+  },
+  "openai_currency": {
+    "type": "string",
+    "description": "Currency"
+  },
+  "_exit": 0,
+  "_seconds": 4.8,
+  "checks": [
+    {
+      "check": "pydantic.order_id_pattern eq ^ORD-[0-9]{6}$",
+      "ok": true,
+      "actual": "^ORD-[0-9]{6}$"
+    },
+    {
+      "check": "pydantic.currency_const eq USD",
+      "ok": true,
+      "actual": "USD"
+    },
+    {
+      "check": "pydantic.additional_properties eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "openai.order_id_pattern eq ^ORD-[0-9]{6}$",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "openai.currency_const eq USD",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "openai.additional_properties eq false",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "responses.order_id_pattern eq ^ORD-[0-9]{6}$",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "responses.currency_const eq USD",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "responses.additional_properties eq false",
+      "ok": false,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 1 after 5s]

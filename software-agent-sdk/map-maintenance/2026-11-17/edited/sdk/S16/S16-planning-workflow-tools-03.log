@@ -1,0 +1,94 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/planning --arg legacy \
+  --check plan_location matches "/workspace/PLAN.md$" --check legacy_kept eq true --check default_plan_created eq false
+control-sdk program S16/planning --arg absolute \
+  --check spec_params.plan_path matches "/plans/deep/PLAN.md$" \
+  --check plan_location matches "/plans/deep/PLAN.md$" --check absolute_created eq true --check default_plan_created eq false
+control-sdk program S16/planning --arg relative \
+  --check spec_params.plan_path eq plans/PLAN.md --check error contains "plan_path must be an absolute path"
+{
+  "ok": true,
+  "mode": "legacy",
+  "spec_params": {},
+  "plan_location": "<scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-03/block1/runs/20261117-091731-62ce08/workspace/PLAN.md",
+  "default_plan_created": false,
+  "legacy_kept": true,
+  "_exit": 0,
+  "_seconds": 12.9,
+  "checks": [
+    {
+      "check": "plan_location matches /workspace/PLAN.md$",
+      "ok": true,
+      "actual": "<scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-03/block1/runs/20261117-091731-62ce08/workspace/PLAN.md"
+    },
+    {
+      "check": "legacy_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "default_plan_created eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "absolute",
+  "spec_params": {
+    "plan_path": "<scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-03/block1/runs/20261117-091731-62ce08/plans/deep/PLAN.md"
+  },
+  "plan_location": "<scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-03/block1/runs/20261117-091731-62ce08/plans/deep/PLAN.md",
+  "default_plan_created": false,
+  "legacy_kept": true,
+  "absolute_created": true,
+  "_exit": 0,
+  "_seconds": 9.9,
+  "checks": [
+    {
+      "check": "spec_params.plan_path matches /plans/deep/PLAN.md$",
+      "ok": true,
+      "actual": "<scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-03/block1/runs/20261117-091731-62ce08/plans/deep/PLAN.md"
+    },
+    {
+      "check": "plan_location matches /plans/deep/PLAN.md$",
+      "ok": true,
+      "actual": "<scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-03/block1/runs/20261117-091731-62ce08/plans/deep/PLAN.md"
+    },
+    {
+      "check": "absolute_created eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "default_plan_created eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "relative",
+  "spec_params": {
+    "plan_path": "plans/PLAN.md"
+  },
+  "error": "ValueError: plan_path must be an absolute path, got: plans/PLAN.md",
+  "_exit": 0,
+  "_seconds": 9.0,
+  "checks": [
+    {
+      "check": "spec_params.plan_path eq plans/PLAN.md",
+      "ok": true,
+      "actual": "plans/PLAN.md"
+    },
+    {
+      "check": "error contains plan_path must be an absolute path",
+      "ok": true,
+      "actual": "ValueError: plan_path must be an absolute path, got: plans/PLAN.md"
+    }
+  ]
+}
+
+[exit 0 after 33s]

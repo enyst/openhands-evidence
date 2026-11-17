@@ -1,0 +1,50 @@
+{
+  "file": "F19-mcp.md",
+  "bullet": "A server that cannot start (`F19.conversation-mcp-add-start-failure`), known bug #6926.",
+  "ids": [
+    "F19.conversation-mcp-add-start-failure"
+  ],
+  "line": 1156,
+  "script": "SF_AGENT='{\"llm\": {\"model\": \"openai/qa-offline\", \"api_key\": \"qa-offline-key\", \"base_url\": \"http://127.0.0.1:9/v1\", \"num_retries\": 0}, \"tools\": []}'\nFCID=$(control-agent-server conversation start --body-json \"$(jq -nc --argjson a \"$SF_AGENT\" '{agent: $a}')\" --no-autotitle --prompt 'Never run.' --no-run --print-id)\ncontrol-agent-server api POST \"/api/conversations/$FCID/mcp\" --json '{\"mcp_servers\":{\"qa-f19-dies\":{\"command\":\"/bin/true\"}}}' --expect 400 --save F19.conversation-mcp-add-start-failure/add # bug: status eq 500 && response.body.exception eq 'Connection closed'\n",
+  "exit_code": 1,
+  "elapsed_ms": 1946,
+  "failed_line": 3,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$FCID/mcp\" --json '{\"mcp_servers\":{\"qa-f19-dies\":{\"command\":\"/bin/true\"}}}' --expect 400 --save F19.conversation-mcp-add-start-failure/add",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 500,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations/adc3b09a-6c8a-4a0b-91f2-1a4e7be51822/mcp",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "mcp_servers": {
+          "qa-f19-dies": {
+            "command": "/bin/true"
+          }
+        }
+      },
+      "files": []
+    },
+    "response": {
+      "status": 500,
+      "headers": {
+        "content-length": "112",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Internal Server Error",
+        "exception": "Connection closed",
+        "error_id": "40936d85ff5d4074bf895182c8407e6d"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 196,
+    "saved": "<scratch>/agent-server-verifier/20261117-091608-5142-map-f19/evidence/F19.conversation-mcp-add-start-failure/add.json",
+    "hint": "expected 400, got 500"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 500,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/adc3b09a-6c8a-4a0b-91f2-1a4e7be51822/mcp\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"mcp_servers\": {\n        \"qa-f19-dies\": {\n          \"command\": \"/bin/true\"\n        }\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 500,\n    \"headers\": {\n      \"content-length\": \"112\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Internal Server Error\",\n      \"exception\": \"Connection closed\",\n      \"error_id\": \"40936d85ff5d4074bf895182c8407e6d\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 196,\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-091608-5142-map-f19/evidence/F19.conversation-mcp-add-start-failure/add.json\",\n  \"hint\": \"expected 400, got 500\"\n}\n",
+  "stderr": ""
+}

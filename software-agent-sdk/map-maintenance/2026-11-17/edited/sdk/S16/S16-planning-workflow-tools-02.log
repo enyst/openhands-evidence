@@ -1,0 +1,205 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/planning --arg default \
+  --check planner_specs eq '["glob", "grep", "planning_file_editor"]' \
+  --check planner_tools eq '["finish", "glob", "grep", "planning_file_editor"]' \
+  --check planner_results.0.text contains "app/main.py" --check planner_results.1.text contains "app/main.py" \
+  --check plan_headers eq '["# 1. OBJECTIVE", "# 2. CONTEXT SUMMARY", "# 3. APPROACH OVERVIEW", "# 4. IMPLEMENTATION STEPS", "# 5. TESTING AND VALIDATION"]' \
+  --check headers_match_preset eq true \
+  --check planner_results.3.is_error eq true --check planner_results.3.text contains "Operation 'create' is not allowed" \
+  --check planner_results.4.is_error eq true --check planner_results.4.text contains "Operation 'str_replace' is not allowed" \
+  --check planner_results.5.is_error eq false \
+  --check main_untouched eq true --check new_file_absent eq true --check plan_has_objective_text eq true \
+  --check description_names_plan eq true --check prompt_has_plan_structure eq true \
+  --check condenser eq LLMSummarizingCondenser --check condenser_max_size eq 100 \
+  --check condenser_keep_first eq 6 --check condenser_usage_id eq planning_condenser \
+  --check executor_saw_plan eq true --check executor_output contains hello \
+  --check main_after contains "return 'hello'"
+{
+  "ok": true,
+  "mode": "default",
+  "planner_status": "finished",
+  "planner_specs": [
+    "glob",
+    "grep",
+    "planning_file_editor"
+  ],
+  "planner_tools": [
+    "finish",
+    "glob",
+    "grep",
+    "planning_file_editor"
+  ],
+  "planner_results": [
+    {
+      "tool": "grep",
+      "is_error": false,
+      "text": "Found 1 file(s) containing pattern 'TODO' in '<ws>':\n<ws>/app/main.py"
+    },
+    {
+      "tool": "glob",
+      "is_error": false,
+      "text": "Found 1 file(s) matching pattern '**/*.py' in '<ws>':\n<ws>/app/main.py"
+    },
+    {
+      "tool": "planning_file_editor",
+      "is_error": false,
+      "text": "Here's the result of running `cat -n` on <ws>/.agents_tmp/PLAN.md:\n     1\t# 1. OBJECTIVE\n     2\t\n     3\t# 2. CONTEXT SUMMARY\n     4\t\n     5\t# 3. APPROACH OVERVIEW\n     6\t\n     7\t# 4. IMPLEMENTATION STEPS\n     8\t\n     9\t# 5. TESTING AND VALIDATION\n"
+    },
+    {
+      "tool": "planning_file_editor",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nOperation 'create' is not allowed on file '<ws>/app/new.py'. Only the following files can be edited: ['<ws>/.agents_tmp/PLAN.md']"
+    },
+    {
+      "tool": "planning_file_editor",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nOperation 'str_replace' is not allowed on file '<ws>/app/main.py'. Only the following files can be edited: ['<ws>/.agents_tmp/PLAN.md']"
+    },
+    {
+      "tool": "planning_file_editor",
+      "is_error": false,
+      "text": "The file <ws>/.agents_tmp/PLAN.md has been edited. Here's the result of running `cat -n` on a snippet of <ws>/.agents_tmp/PLAN.md:\n     1\t# 1. OBJECTIVE\n     2\tMake handler() return 'hello'.\n     3\t\n     4\t# 2. CONTEXT SUMMARY\n     5\t\n     6\t# 3. APPROACH OVERVIEW\nReview the changes and make sure th"
+    }
+  ],
+  "plan_headers": [
+    "# 1. OBJECTIVE",
+    "# 2. CONTEXT SUMMARY",
+    "# 3. APPROACH OVERVIEW",
+    "# 4. IMPLEMENTATION STEPS",
+    "# 5. TESTING AND VALIDATION"
+  ],
+  "plan_has_objective_text": true,
+  "main_untouched": true,
+  "new_file_absent": true,
+  "description_names_plan": true,
+  "prompt_has_plan_structure": true,
+  "condenser": "LLMSummarizingCondenser",
+  "condenser_max_size": 100,
+  "condenser_keep_first": 6,
+  "condenser_usage_id": "planning_condenser",
+  "headers_match_preset": true,
+  "executor_saw_plan": true,
+  "executor_output": "hello\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-0",
+  "main_after": "def handler():\n    return 'hello'\n",
+  "_exit": 0,
+  "_seconds": 13.2,
+  "checks": [
+    {
+      "check": "planner_specs eq [\"glob\", \"grep\", \"planning_file_editor\"]",
+      "ok": true,
+      "actual": "[\"glob\", \"grep\", \"planning_file_editor\"]"
+    },
+    {
+      "check": "planner_tools eq [\"finish\", \"glob\", \"grep\", \"planning_file_editor\"]",
+      "ok": true,
+      "actual": "[\"finish\", \"glob\", \"grep\", \"planning_file_editor\"]"
+    },
+    {
+      "check": "planner_results.0.text contains app/main.py",
+      "ok": true,
+      "actual": "Found 1 file(s) containing pattern 'TODO' in '<ws>':\n<ws>/app/main.py"
+    },
+    {
+      "check": "planner_results.1.text contains app/main.py",
+      "ok": true,
+      "actual": "Found 1 file(s) matching pattern '**/*.py' in '<ws>':\n<ws>/app/main.py"
+    },
+    {
+      "check": "plan_headers eq [\"# 1. OBJECTIVE\", \"# 2. CONTEXT SUMMARY\", \"# 3. APPROACH OVERVIEW\", \"# 4. IMPLEMENTATION STEPS\", \"# 5. TESTING AND VALIDATION\"]",
+      "ok": true,
+      "actual": "[\"# 1. OBJECTIVE\", \"# 2. CONTEXT SUMMARY\", \"# 3. APPROACH OVERVIEW\", \"# 4. IMPLEMENTATION STEPS\", \"# 5. TESTING AND VALIDATION\"]"
+    },
+    {
+      "check": "headers_match_preset eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "planner_results.3.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "planner_results.3.text contains Operation 'create' is not allowed",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nOperation 'create' is not allowed on file '<ws>/app/new.py'. Only the following files can be edited: ['<ws>/.agents_tmp/PLAN.md']"
+    },
+    {
+      "check": "planner_results.4.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "planner_results.4.text contains Operation 'str_replace' is not allowed",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nOperation 'str_replace' is not allowed on file '<ws>/app/main.py'. Only the following files can be edited: ['<ws>/.agents_tmp/PLAN.md']"
+    },
+    {
+      "check": "planner_results.5.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "main_untouched eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "new_file_absent eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "plan_has_objective_text eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "description_names_plan eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "prompt_has_plan_structure eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "condenser eq LLMSummarizingCondenser",
+      "ok": true,
+      "actual": "LLMSummarizingCondenser"
+    },
+    {
+      "check": "condenser_max_size eq 100",
+      "ok": true,
+      "actual": "100"
+    },
+    {
+      "check": "condenser_keep_first eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "condenser_usage_id eq planning_condenser",
+      "ok": true,
+      "actual": "planning_condenser"
+    },
+    {
+      "check": "executor_saw_plan eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "executor_output contains hello",
+      "ok": true,
+      "actual": "hello\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk-verifier/S16/work/S16-planning-workflow-tools-0"
+    },
+    {
+      "check": "main_after contains return 'hello'",
+      "ok": true,
+      "actual": "def handler():\n    return 'hello'\n"
+    }
+  ]
+}
+
+[exit 0 after 14s]

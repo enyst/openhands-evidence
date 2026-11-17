@@ -1,0 +1,43 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S16/message_edits --arg live \
+  --check execution_status eq finished --check edit_calls ge 1 --check edits ge 1 \
+  --check edits_target_agent_messages eq true --check edited_text_has_strike eq true
+{
+  "ok": true,
+  "execution_status": "finished",
+  "edit_calls": 1,
+  "edits": 1,
+  "edits_target_agent_messages": true,
+  "edited_text_has_strike": true,
+  "_exit": 0,
+  "_seconds": 16.3,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "edit_calls ge 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "edits ge 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "edits_target_agent_messages eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "edited_text_has_strike eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 17s]

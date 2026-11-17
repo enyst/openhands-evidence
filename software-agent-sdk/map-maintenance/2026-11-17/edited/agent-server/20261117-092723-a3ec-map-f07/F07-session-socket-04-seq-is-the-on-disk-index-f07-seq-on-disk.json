@@ -1,0 +1,17 @@
+{
+  "file": "F07-session-socket.md",
+  "bullet": "Seq is the on-disk index (`F07.seq-on-disk`).",
+  "ids": [
+    "F07.seq-on-disk"
+  ],
+  "line": 160,
+  "script": "control-agent-server state cat \"server/workspace/conversations/${CID//-/}/events/event-00001-$E1.json\" --check id eq \"$E1\" --contains QA_F07_ONE\ncontrol-agent-server state cat \"server/workspace/conversations/${CID//-/}/events/event-00003-$E3.json\" --check id eq \"$E3\" --contains QA_F07_TWO\n",
+  "exit_code": 0,
+  "elapsed_ms": 1643,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"path\": \"server/workspace/conversations/562c8e19ba5e48d6a36532b0996214c9/events/event-00001-eea53d88-6c76-4a87-a262-bf41919d2be7.json\",\n  \"bytes\": 339,\n  \"mode\": \"0o600\",\n  \"content\": {\n    \"id\": \"eea53d88-6c76-4a87-a262-bf41919d2be7\",\n    \"timestamp\": \"2026-11-17T09:27:46.450591\",\n    \"source\": \"user\",\n    \"parent_id\": \"9c72a054-d212-4771-9f18-f47cdb8e13b8\",\n    \"llm_message\": {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"cache_prompt\": false,\n          \"type\": \"text\",\n          \"text\": \"QA_F07_ONE\"\n        }\n      ],\n      \"thinking_blocks\": []\n    },\n    \"activated_skills\": [],\n    \"extended_content\": [],\n    \"kind\": \"MessageEvent\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"id eq eea53d88-6c76-4a87-a262-bf41919d2be7\",\n      \"ok\": true,\n      \"actual\": \"eea53d88-6c76-4a87-a262-bf41919d2be7\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"path\": \"server/workspace/conversations/562c8e19ba5e48d6a36532b0996214c9/events/event-00003-522a5025-5946-4cb9-826f-9a36effb7b0f.json\",\n  \"bytes\": 339,\n  \"mode\": \"0o600\",\n  \"content\": {\n    \"id\": \"522a5025-5946-4cb9-826f-9a36effb7b0f\",\n    \"timestamp\": \"2026-11-17T09:27:47.471201\",\n    \"source\": \"user\",\n    \"parent_id\": \"eea53d88-6c76-4a87-a262-bf41919d2be7\",\n    \"llm_message\": {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"cache_prompt\": false,\n          \"type\": \"text\",\n          \"text\": \"QA_F07_TWO\"\n        }\n      ],\n      \"thinking_blocks\": []\n    },\n    \"activated_skills\": [],\n    \"extended_content\": [],\n    \"kind\": \"MessageEvent\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"id eq 522a5025-5946-4cb9-826f-9a36effb7b0f\",\n      \"ok\": true,\n      \"actual\": \"522a5025-5946-4cb9-826f-9a36effb7b0f\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

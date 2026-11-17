@@ -1,0 +1,21 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --expect-output "greeting-helper" -- python examples/05_skills_and_plugins/04_mixed_marketplace_skills/main.py
+control-sdk exec --expect-output "greeting-helper" -- python examples/05_skills_and_plugins/04_mixed_marketplace_skills/main.py --install
+{
+  "exit": 0,
+  "seconds": 9.6,
+  "result": null,
+  "stdout_tail": "================================================================================\nMarketplace Information\n================================================================================\n\nMarketplace directory: /home/user/sdk-map-wt/examples/05_skills_and_plugins/04_mixed_marketplace_skills\nName: mixed-skills-marketplace\nDescription: Example marketplace with both local and remote skills\nSkills defined: 2\n\nSkills:\n  - greeting-helper (local)\n    Source: ./skills/greeting-helper\n    Description: A local skill that helps generate creative greetings\n  - github (remote)\n    Source: https://github.com/OpenHands/extensions/blob/main/skills/github\n    Description: GitHub best practices from the OpenHands extensions repository\n\n--------------------------------------------------------------------------------\nUsage:\n  python main.py --install        # Install all skills\n  python main.py --install --force # Force reinstall\n  python main.py --list           # List installed skills\nEXAMPLE_COST: 0\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 12.3,
+  "result": null,
+  "stdout_tail": "================================================================================\nInstalling Skills from Marketplace\n================================================================================\n\nMarketplace directory: /home/user/sdk-map-wt/examples/05_skills_and_plugins/04_mixed_marketplace_skills\n\n\nInstalled 2 skills:\n  - greeting-helper\n  - github\n\n================================================================================\nAll Installed Skills\n================================================================================\n  - greeting-helper: No description...\n  - github: Interact with GitHub repositories, pull requests, ...\nEXAMPLE_COST: 0\n",
+  "stderr_tail": "",
+  "ok": true
+}
+
+[exit 0 after 22s]

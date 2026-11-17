@@ -1,0 +1,49 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Delete guard (`F23.delete-guard`).",
+  "ids": [
+    "F23.delete-guard"
+  ],
+  "line": 641,
+  "script": "control-agent-server api DELETE \"/api/llm/provider-connections/$CONN\" --expect 409 --save F23.delete-guard/profile-and-settings \\\n  --check detail eq 'Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked and referenced by the active agent settings. Update those references before deleting it.'\ncontrol-agent-server api POST /api/profiles/deepseek-flash/activate --expect 200\ncontrol-agent-server api DELETE \"/api/llm/provider-connections/$CONN\" --expect 409 --save F23.delete-guard/profile \\\n  --check detail eq 'Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked. Update those references before deleting it.'\ncontrol-agent-server api POST /api/profiles/qa-f23-linked/activate --expect 200\ncontrol-agent-server api DELETE /api/profiles/qa-f23-linked --expect 200\ncontrol-agent-server api DELETE \"/api/llm/provider-connections/$CONN\" --expect 409 --save F23.delete-guard/settings \\\n  --check detail eq 'Provider connection cannot be deleted while it is referenced by the active agent settings. Update those references before deleting it.'\ncontrol-agent-server api GET /api/llm/provider-connections --check . len-eq 2 --check 0.id eq \"$CONN\" --check 0.api_key_set eq true\ncontrol-agent-server api POST /api/profiles/deepseek-flash/activate --expect 200\ncontrol-agent-server api GET /api/settings --check active_profile eq deepseek-flash --check agent_settings.llm.provider_connection_id eq null\n",
+  "exit_code": 1,
+  "elapsed_ms": 486,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api DELETE \"/api/llm/provider-connections/$CONN\" --expect 409 --save F23.delete-guard/profile-and-settings --check detail eq 'Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked and referenced by the active agent settings. Update those references before deleting it.'",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 400,
+    "request": {
+      "method": "DELETE",
+      "path": "/api/llm/provider-connections/7806549467f847b79cc4c11850162af7",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 400,
+      "headers": {
+        "content-length": "1011",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "2 validation errors for PersistedProviderConnections\nconnections.0.api_key\n  Value error, The secret is encrypted but no configured key can decrypt it. It was saved under a key that is neither OH_SECRET_KEY nor in OH_PREVIOUS_SECRET_KEYS: restore that key as OH_SECRET_KEY, or add it to OH_PREVIOUS_SECRET_KEYS to rotate to the current key. [type=value_error, input_value='gAAAAABq_BX3Nwjt2DCI3dSP...7mqXtfSaXiEFtXWTlXb3faL', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error\nconnections.1.api_key\n  Value error, The secret is encrypted but no configured key can decrypt it. It was saved under a key that is neither OH_SECRET_KEY nor in OH_PREVIOUS_SECRET_KEYS: restore that key as OH_SECRET_KEY, or add it to OH_PREVIOUS_SECRET_KEYS to rotate to the current key. [type=value_error, input_value='gAAAAABq_BX31JownxGWo--y...eBCqy7RU6SfZQZlofobDVY=', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 130,
+    "checks": [
+      {
+        "check": "detail eq Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked and referenced by the active agent settings. Update those references before deleting it.",
+        "ok": false,
+        "actual": "2 validation errors for PersistedProviderConnections\nconnections.0.api_key\n  Value error, The secret is encrypted but no configured key can decrypt it. It was saved under a key that is neither OH_SECR\u2026"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261117-085130-98d9-map-f23/evidence/F23.delete-guard/profile-and-settings.json",
+    "hint": "expected 409, got 400"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 400,\n  \"request\": {\n    \"method\": \"DELETE\",\n    \"path\": \"/api/llm/provider-connections/7806549467f847b79cc4c11850162af7\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 400,\n    \"headers\": {\n      \"content-length\": \"1011\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"2 validation errors for PersistedProviderConnections\\nconnections.0.api_key\\n  Value error, The secret is encrypted but no configured key can decrypt it. It was saved under a key that is neither OH_SECRET_KEY nor in OH_PREVIOUS_SECRET_KEYS: restore that key as OH_SECRET_KEY, or add it to OH_PREVIOUS_SECRET_KEYS to rotate to the current key. [type=value_error, input_value='gAAAAABq_BX3Nwjt2DCI3dSP...7mqXtfSaXiEFtXWTlXb3faL', input_type=str]\\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error\\nconnections.1.api_key\\n  Value error, The secret is encrypted but no configured key can decrypt it. It was saved under a key that is neither OH_SECRET_KEY nor in OH_PREVIOUS_SECRET_KEYS: restore that key as OH_SECRET_KEY, or add it to OH_PREVIOUS_SECRET_KEYS to rotate to the current key. [type=value_error, input_value='gAAAAABq_BX31JownxGWo--y...eBCqy7RU6SfZQZlofobDVY=', input_type=str]\\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 130,\n  \"checks\": [\n    {\n      \"check\": \"detail eq Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked and referenced by the active agent settings. Update those references before deleting it.\",\n      \"ok\": false,\n      \"actual\": \"2 validation errors for PersistedProviderConnections\\nconnections.0.api_key\\n  Value error, The secret is encrypted but no configured key can decrypt it. It was saved under a key that is neither OH_SECR\\u2026\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261117-085130-98d9-map-f23/evidence/F23.delete-guard/profile-and-settings.json\",\n  \"hint\": \"expected 409, got 400\"\n}\n",
+  "stderr": ""
+}

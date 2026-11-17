@@ -1,0 +1,48 @@
+{
+  "file": "F34-typescript-client.md",
+  "bullet": "Binary download through RemoteWorkspace (`F34.workspace-binary-download`), known bug.",
+  "ids": [
+    "F34.workspace-binary-download"
+  ],
+  "line": 409,
+  "script": "printf '\\377\\000\\200\\376A' > \"$F34/files/qa-f34-bin.dat\"\ntest \"$(od -An -tx1 \"$F34/files/qa-f34-bin.dat\" | tr -d ' \\n')\" = ff0080fe41\ncat > \"$F34/binary.mjs\" <<'JS'\nimport { writeFileSync } from 'node:fs';\nimport { m, c, host, apiKey, F34, assert } from './lib.mjs';\nconst path = `${F34}/files/qa-f34-bin.dat`;\nassert.deepEqual([...new Uint8Array(await new c.FileClient({ host, apiKey }).downloadFile(path))], [255, 0, 128, 254, 65]);\nconst workspace = new m.RemoteWorkspace({ host, apiKey, workingDir: `${F34}/files` });\nconst blob = [...new Uint8Array(await (await workspace.downloadAsBlob(path)).arrayBuffer())];\nconst { file_size: fileSize } = await workspace.fileDownload(path);\nwriteFileSync(`${F34}/binary.json`, JSON.stringify({ blob, file_size: fileSize }));\nconsole.log('QA_F34_BINARY_READ');\nJS\ncontrol-agent-server exec --timeout 60 --expect-output QA_F34_BINARY_READ --save F34.workspace-binary-download/program -- node \"$F34/binary.mjs\"\ncat \"$F34/binary.json\"\ncontrol-agent-server assert --json \"$F34/binary.json\" --check blob eq '[255, 0, 128, 254, 65]' --check file_size eq 5  # bug: value.file_size eq 11 && value.blob eq '[239, 191, 189, 0, 239, 191, 189, 239, 191, 189, 65]'\n",
+  "exit_code": 1,
+  "elapsed_ms": 1836,
+  "failed_line": 16,
+  "failed_command": "control-agent-server assert --json \"$F34/binary.json\" --check blob eq '[255, 0, 128, 254, 65]' --check file_size eq 5",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "value": {
+      "blob": [
+        239,
+        191,
+        189,
+        0,
+        239,
+        191,
+        189,
+        239,
+        191,
+        189,
+        65
+      ],
+      "file_size": 11
+    },
+    "checks": [
+      {
+        "check": "blob eq [255, 0, 128, 254, 65]",
+        "ok": false,
+        "actual": "[239, 191, 189, 0, 239, 191, 189, 239, 191, 189, 65]"
+      },
+      {
+        "check": "file_size eq 5",
+        "ok": false,
+        "actual": "11"
+      }
+    ],
+    "hint": "failed check: blob eq [255, 0, 128, 254, 65]; file_size eq 5"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 1156,\n  \"stdout_tail\": \"QA_F34_BINARY_READ\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-103406-7b00-map-f34/evidence/F34.workspace-binary-download/program.json\"\n}\n{\"blob\":[239,191,189,0,239,191,189,239,191,189,65],\"file_size\":11}{\n  \"ok\": false,\n  \"value\": {\n    \"blob\": [\n      239,\n      191,\n      189,\n      0,\n      239,\n      191,\n      189,\n      239,\n      191,\n      189,\n      65\n    ],\n    \"file_size\": 11\n  },\n  \"checks\": [\n    {\n      \"check\": \"blob eq [255, 0, 128, 254, 65]\",\n      \"ok\": false,\n      \"actual\": \"[239, 191, 189, 0, 239, 191, 189, 239, 191, 189, 65]\"\n    },\n    {\n      \"check\": \"file_size eq 5\",\n      \"ok\": false,\n      \"actual\": \"11\"\n    }\n  ],\n  \"hint\": \"failed check: blob eq [255, 0, 128, 254, 65]; file_size eq 5\"\n}\n",
+  "stderr": ""
+}

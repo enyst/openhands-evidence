@@ -1,0 +1,253 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/reactions \
+  --check status_turn1 eq finished --check status_after_user_react eq finished --check status_turn2 eq finished \
+  --check reactions len-eq 4 --check event_before_first_reaction eq ObservationEvent \
+  --check reactions.0.source eq agent --check reactions.0.emoji eq eyes --check reactions.0.on_first_message eq true \
+  --check reactions.1.emoji eq eyes --check reactions.1.removed eq true --check reactions.1.on_first_message eq true \
+  --check reactions.2.emoji eq white_check_mark --check reactions.2.on_first_message eq true \
+  --check reactions.3.source eq user --check reactions.3.emoji eq heart --check reactions.3.on_first_finish eq true \
+  --check reactions.3.text_ending eq "The build is green." \
+  --check observations.0.text eq "Reacted :eyes:." --check observations.1.text eq "Removed :eyes:." \
+  --check agent_errors len-eq 1 --check agent_errors.0 contains "Error validating tool 'react'" \
+  --check bad_user_emoji contains "Unknown emoji 'rocket'" --check user_reaction_target_is_finish eq true \
+  --check agent_reaction_preceded_by len-eq 3 --check agent_reaction_preceded_by.0 eq ObservationEvent \
+  --check agent_reaction_preceded_by.1 eq ObservationEvent --check agent_reaction_preceded_by.2 eq ObservationEvent \
+  --check turn2_sees_user_heart eq true --check turn2_user_reaction_lines eq 1 --check turn2_sees_own_reaction_line eq false
+{
+  "ok": true,
+  "status_turn1": "finished",
+  "status_after_user_react": "finished",
+  "status_turn2": "finished",
+  "reactions": [
+    {
+      "source": "agent",
+      "emoji": "eyes",
+      "removed": false,
+      "on_first_message": true,
+      "on_first_finish": false,
+      "text_ending": null
+    },
+    {
+      "source": "agent",
+      "emoji": "eyes",
+      "removed": true,
+      "on_first_message": true,
+      "on_first_finish": false,
+      "text_ending": null
+    },
+    {
+      "source": "agent",
+      "emoji": "white_check_mark",
+      "removed": false,
+      "on_first_message": true,
+      "on_first_finish": false,
+      "text_ending": null
+    },
+    {
+      "source": "user",
+      "emoji": "heart",
+      "removed": false,
+      "on_first_message": false,
+      "on_first_finish": true,
+      "text_ending": "The build is green."
+    }
+  ],
+  "agent_reaction_preceded_by": [
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent"
+  ],
+  "event_before_first_reaction": "ObservationEvent",
+  "observations": [
+    {
+      "tool": "react",
+      "is_error": false,
+      "text": "Reacted :eyes:."
+    },
+    {
+      "tool": "unreact",
+      "is_error": false,
+      "text": "Removed :eyes:."
+    },
+    {
+      "tool": "react",
+      "is_error": false,
+      "text": "Reacted :white_check_mark:."
+    },
+    {
+      "tool": "finish",
+      "is_error": false,
+      "text": "The build is green."
+    },
+    {
+      "tool": "finish",
+      "is_error": false,
+      "text": "You're welcome."
+    }
+  ],
+  "agent_errors": [
+    "Error validating tool 'react': 1 validation error for ReactAction\nemoji\n  Input should be 'eyes', '+1', 'white_check_mark', 'tada', 'thinking_face' or 'heart' [type=literal_error, input_value='rocket'"
+  ],
+  "bad_user_emoji": "Unknown emoji 'rocket'; use one of: eyes, +1, white_check_mark, tada, thinking_face, heart.",
+  "user_reaction_target_is_finish": true,
+  "turn2_sees_user_heart": true,
+  "turn2_user_reaction_lines": 1,
+  "turn2_sees_own_reaction_line": false,
+  "llm_calls": 6,
+  "_exit": 0,
+  "_seconds": 9.3,
+  "checks": [
+    {
+      "check": "status_turn1 eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "status_after_user_react eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "status_turn2 eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "reactions len-eq 4",
+      "ok": true,
+      "actual": "[{\"source\": \"agent\", \"emoji\": \"eyes\", \"removed\": false, \"on_first_message\": true, \"on_first_finish\": false, \"text_ending\": null}, {\"source\": \"agent\", \"emoji\": \"eyes\", \"removed\": true, \"on_first_messag"
+    },
+    {
+      "check": "event_before_first_reaction eq ObservationEvent",
+      "ok": true,
+      "actual": "ObservationEvent"
+    },
+    {
+      "check": "reactions.0.source eq agent",
+      "ok": true,
+      "actual": "agent"
+    },
+    {
+      "check": "reactions.0.emoji eq eyes",
+      "ok": true,
+      "actual": "eyes"
+    },
+    {
+      "check": "reactions.0.on_first_message eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reactions.1.emoji eq eyes",
+      "ok": true,
+      "actual": "eyes"
+    },
+    {
+      "check": "reactions.1.removed eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reactions.1.on_first_message eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reactions.2.emoji eq white_check_mark",
+      "ok": true,
+      "actual": "white_check_mark"
+    },
+    {
+      "check": "reactions.2.on_first_message eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reactions.3.source eq user",
+      "ok": true,
+      "actual": "user"
+    },
+    {
+      "check": "reactions.3.emoji eq heart",
+      "ok": true,
+      "actual": "heart"
+    },
+    {
+      "check": "reactions.3.on_first_finish eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reactions.3.text_ending eq The build is green.",
+      "ok": true,
+      "actual": "The build is green."
+    },
+    {
+      "check": "observations.0.text eq Reacted :eyes:.",
+      "ok": true,
+      "actual": "Reacted :eyes:."
+    },
+    {
+      "check": "observations.1.text eq Removed :eyes:.",
+      "ok": true,
+      "actual": "Removed :eyes:."
+    },
+    {
+      "check": "agent_errors len-eq 1",
+      "ok": true,
+      "actual": "[\"Error validating tool 'react': 1 validation error for ReactAction\\nemoji\\n  Input should be 'eyes', '+1', 'white_check_mark', 'tada', 'thinking_face' or 'heart' [type=literal_error, input_value='roc"
+    },
+    {
+      "check": "agent_errors.0 contains Error validating tool 'react'",
+      "ok": true,
+      "actual": "Error validating tool 'react': 1 validation error for ReactAction\nemoji\n  Input should be 'eyes', '+1', 'white_check_mark', 'tada', 'thinking_face' or 'heart' [type=literal_error, input_value='rocket'"
+    },
+    {
+      "check": "bad_user_emoji contains Unknown emoji 'rocket'",
+      "ok": true,
+      "actual": "Unknown emoji 'rocket'; use one of: eyes, +1, white_check_mark, tada, thinking_face, heart."
+    },
+    {
+      "check": "user_reaction_target_is_finish eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "agent_reaction_preceded_by len-eq 3",
+      "ok": true,
+      "actual": "[\"ObservationEvent\", \"ObservationEvent\", \"ObservationEvent\"]"
+    },
+    {
+      "check": "agent_reaction_preceded_by.0 eq ObservationEvent",
+      "ok": true,
+      "actual": "ObservationEvent"
+    },
+    {
+      "check": "agent_reaction_preceded_by.1 eq ObservationEvent",
+      "ok": true,
+      "actual": "ObservationEvent"
+    },
+    {
+      "check": "agent_reaction_preceded_by.2 eq ObservationEvent",
+      "ok": true,
+      "actual": "ObservationEvent"
+    },
+    {
+      "check": "turn2_sees_user_heart eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn2_user_reaction_lines eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "turn2_sees_own_reaction_line eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 10s]

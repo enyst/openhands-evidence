@@ -1,0 +1,466 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/presets --arg default \
+  --check status eq finished --check errors len-eq 0 --check hello contains hello \
+  --check agent_tool_specs eq '["terminal", "file_editor", "task_tracker"]' \
+  --check tools_map not-contains think --check condenser eq LLMSummarizingCondenser \
+  --check condenser_usage_id eq condenser \
+  --check default_tools eq '["terminal", "file_editor", "task_tracker", "browser_tool_set"]' \
+  --check default_tools_no_browser_subagents eq '["terminal", "file_editor", "task_tracker", "task_tool_set"]' \
+  --check sdk_default_tool_specs eq '["terminal", "file_editor", "task_tracker"]' \
+  --check gpt5_tools eq '["terminal", "apply_patch", "task_tracker"]' \
+  --check gemini_tools eq '["terminal", "read_file", "write_file", "edit", "list_directory", "task_tracker"]'
+control-sdk program S14/presets --arg structured \
+  --check status eq finished --check agent_tool_specs contains FinishTool --check finish_schema eq Outcome \
+  --check errors.0 contains "outcome_summary" --check parsed_type eq Outcome \
+  --check parsed.outcome_summary eq "wrote nothing" --check parsed.success eq true
+control-sdk program S14/presets --arg gpt5 \
+  --check status eq finished --check errors len-eq 0 --check demo eq "patched in" \
+  --check tools_map contains apply_patch --check tools_map not-contains file_editor \
+  --check condenser_max_size eq 80
+control-sdk program S14/presets --arg gemini \
+  --check status eq finished --check tools_map not-contains file_editor \
+  --check results.1.text contains "showing lines 6-8 of 21" \
+  --check results.2.text contains "2 replacement" \
+  --check errors len-eq 1 --check errors.0 contains "Expected 5 occurrences but found 1" \
+  --check facts contains "LINE TWO" --check facts contains "LINE THREE" --check facts contains "ALPHA beta ALPHA" \
+  --check results.6.tool eq list_directory --check results.6.is_error eq false
+{
+  "ok": true,
+  "mode": "default",
+  "status": "finished",
+  "agent_tool_specs": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "tools_map": [
+    "file_editor",
+    "finish",
+    "task_tracker",
+    "terminal"
+  ],
+  "condenser": "LLMSummarizingCondenser",
+  "condenser_max_size": 80,
+  "condenser_usage_id": "condenser",
+  "results": [
+    {
+      "tool": "task_tracker",
+      "is_error": false,
+      "text": "Task list has been updated with 1 item(s)."
+    },
+    {
+      "tool": "file_editor",
+      "is_error": false,
+      "text": "File created successfully at: <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace/hello.txt"
+    },
+    {
+      "tool": "terminal",
+      "is_error": false,
+      "text": "hello\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    {
+      "tool": "finish",
+      "is_error": false,
+      "text": "done"
+    }
+  ],
+  "errors": [],
+  "files": [
+    "hello.txt"
+  ],
+  "default_tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker",
+    "browser_tool_set"
+  ],
+  "default_tools_no_browser_subagents": [
+    "terminal",
+    "file_editor",
+    "task_tracker",
+    "task_tool_set"
+  ],
+  "sdk_default_tool_specs": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "gpt5_tools": [
+    "terminal",
+    "apply_patch",
+    "task_tracker"
+  ],
+  "gemini_tools": [
+    "terminal",
+    "read_file",
+    "write_file",
+    "edit",
+    "list_directory",
+    "task_tracker"
+  ],
+  "hello": "hello\n",
+  "_exit": 0,
+  "_seconds": 5.7,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "errors len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "hello contains hello",
+      "ok": true,
+      "actual": "hello\n"
+    },
+    {
+      "check": "agent_tool_specs eq [\"terminal\", \"file_editor\", \"task_tracker\"]",
+      "ok": true,
+      "actual": "[\"terminal\", \"file_editor\", \"task_tracker\"]"
+    },
+    {
+      "check": "tools_map not-contains think",
+      "ok": true,
+      "actual": "[\"file_editor\", \"finish\", \"task_tracker\", \"terminal\"]"
+    },
+    {
+      "check": "condenser eq LLMSummarizingCondenser",
+      "ok": true,
+      "actual": "LLMSummarizingCondenser"
+    },
+    {
+      "check": "condenser_usage_id eq condenser",
+      "ok": true,
+      "actual": "condenser"
+    },
+    {
+      "check": "default_tools eq [\"terminal\", \"file_editor\", \"task_tracker\", \"browser_tool_set\"]",
+      "ok": true,
+      "actual": "[\"terminal\", \"file_editor\", \"task_tracker\", \"browser_tool_set\"]"
+    },
+    {
+      "check": "default_tools_no_browser_subagents eq [\"terminal\", \"file_editor\", \"task_tracker\", \"task_tool_set\"]",
+      "ok": true,
+      "actual": "[\"terminal\", \"file_editor\", \"task_tracker\", \"task_tool_set\"]"
+    },
+    {
+      "check": "sdk_default_tool_specs eq [\"terminal\", \"file_editor\", \"task_tracker\"]",
+      "ok": true,
+      "actual": "[\"terminal\", \"file_editor\", \"task_tracker\"]"
+    },
+    {
+      "check": "gpt5_tools eq [\"terminal\", \"apply_patch\", \"task_tracker\"]",
+      "ok": true,
+      "actual": "[\"terminal\", \"apply_patch\", \"task_tracker\"]"
+    },
+    {
+      "check": "gemini_tools eq [\"terminal\", \"read_file\", \"write_file\", \"edit\", \"list_directory\", \"task_tracker\"]",
+      "ok": true,
+      "actual": "[\"terminal\", \"read_file\", \"write_file\", \"edit\", \"list_directory\", \"task_tracker\"]"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "structured",
+  "status": "finished",
+  "agent_tool_specs": [
+    "terminal",
+    "file_editor",
+    "task_tracker",
+    "FinishTool"
+  ],
+  "tools_map": [
+    "file_editor",
+    "finish",
+    "task_tracker",
+    "terminal"
+  ],
+  "condenser": "LLMSummarizingCondenser",
+  "condenser_max_size": 80,
+  "condenser_usage_id": "condenser",
+  "results": [
+    {
+      "tool": "finish",
+      "is_error": true,
+      "text": "Error validating tool 'finish': 1 validation error for Outcome\noutcome_summary\n  Field required [type=missing, input_value={'success': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing. Parameters provided: ['message', 'success']"
+    },
+    {
+      "tool": "finish",
+      "is_error": false,
+      "text": "all good"
+    }
+  ],
+  "errors": [
+    "Error validating tool 'finish': 1 validation error for Outcome\noutcome_summary\n  Field required [type=missing, input_value={'success': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing. Parameters provided: ['message', 'success']"
+  ],
+  "files": [
+    "hello.txt"
+  ],
+  "finish_action": {
+    "message": "all good",
+    "kind": "FinishAction"
+  },
+  "parsed_type": "Outcome",
+  "parsed": {
+    "success": true,
+    "outcome_summary": "wrote nothing"
+  },
+  "finish_schema": "Outcome",
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "agent_tool_specs contains FinishTool",
+      "ok": true,
+      "actual": "[\"terminal\", \"file_editor\", \"task_tracker\", \"FinishTool\"]"
+    },
+    {
+      "check": "finish_schema eq Outcome",
+      "ok": true,
+      "actual": "Outcome"
+    },
+    {
+      "check": "errors.0 contains outcome_summary",
+      "ok": true,
+      "actual": "Error validating tool 'finish': 1 validation error for Outcome\noutcome_summary\n  Field required [type=missing, input_value={'success': True}, input_type=dict]\n    For further information visit https:/"
+    },
+    {
+      "check": "parsed_type eq Outcome",
+      "ok": true,
+      "actual": "Outcome"
+    },
+    {
+      "check": "parsed.outcome_summary eq wrote nothing",
+      "ok": true,
+      "actual": "wrote nothing"
+    },
+    {
+      "check": "parsed.success eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "gpt5",
+  "status": "finished",
+  "agent_tool_specs": [
+    "terminal",
+    "apply_patch",
+    "task_tracker"
+  ],
+  "tools_map": [
+    "apply_patch",
+    "finish",
+    "task_tracker",
+    "terminal"
+  ],
+  "condenser": "LLMSummarizingCondenser",
+  "condenser_max_size": 80,
+  "condenser_usage_id": "condenser",
+  "results": [
+    {
+      "tool": "apply_patch",
+      "is_error": false,
+      "text": "Done!"
+    },
+    {
+      "tool": "terminal",
+      "is_error": false,
+      "text": "patched in\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    {
+      "tool": "finish",
+      "is_error": false,
+      "text": "done"
+    }
+  ],
+  "errors": [],
+  "files": [
+    "GPT5_DEMO.txt",
+    "hello.txt"
+  ],
+  "demo": "patched in",
+  "_exit": 0,
+  "_seconds": 5.8,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "errors len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "demo eq patched in",
+      "ok": true,
+      "actual": "patched in"
+    },
+    {
+      "check": "tools_map contains apply_patch",
+      "ok": true,
+      "actual": "[\"apply_patch\", \"finish\", \"task_tracker\", \"terminal\"]"
+    },
+    {
+      "check": "tools_map not-contains file_editor",
+      "ok": true,
+      "actual": "[\"apply_patch\", \"finish\", \"task_tracker\", \"terminal\"]"
+    },
+    {
+      "check": "condenser_max_size eq 80",
+      "ok": true,
+      "actual": "80"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "gemini",
+  "status": "finished",
+  "agent_tool_specs": [
+    "terminal",
+    "read_file",
+    "write_file",
+    "edit",
+    "list_directory",
+    "task_tracker"
+  ],
+  "tools_map": [
+    "edit",
+    "finish",
+    "list_directory",
+    "read_file",
+    "task_tracker",
+    "terminal",
+    "write_file"
+  ],
+  "condenser": "LLMSummarizingCondenser",
+  "condenser_max_size": 80,
+  "condenser_usage_id": "condenser",
+  "results": [
+    {
+      "tool": "write_file",
+      "is_error": false,
+      "text": "Created file: <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace/FACTS.txt"
+    },
+    {
+      "tool": "read_file",
+      "is_error": false,
+      "text": "Read file: <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace/FACTS.txt (showing lines 6-8 of 21) To read more, use: read_file(file_path='FACTS.txt', offset=8, limit=3)\n\n     6  line 6\n     7  line 7\n     8  line 8\n"
+    },
+    {
+      "tool": "edit",
+      "is_error": false,
+      "text": "Successfully edited <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace/FACTS.txt (2 replacement(s))"
+    },
+    {
+      "tool": "edit",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nError: Expected 5 occurrences but found 1 in <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace/FACTS.txt."
+    },
+    {
+      "tool": "edit",
+      "is_error": false,
+      "text": "Successfully edited <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace/FACTS.txt (1 replacement(s))"
+    },
+    {
+      "tool": "edit",
+      "is_error": false,
+      "text": "Successfully edited <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace/FACTS.txt (1 replacement(s))"
+    },
+    {
+      "tool": "list_directory",
+      "is_error": false,
+      "text": "Listed directory: <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399/workspace (3 entries)"
+    },
+    {
+      "tool": "finish",
+      "is_error": false,
+      "text": "done"
+    }
+  ],
+  "errors": [
+    "[An error occurred during execution.]\n\nError: Expected 5 occurrences but found 1 in <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/runs/20261117-105210-816399"
+  ],
+  "files": [
+    "FACTS.txt",
+    "GPT5_DEMO.txt",
+    "hello.txt"
+  ],
+  "facts": "line 1\nLINE TWO\nLINE THREE\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nALPHA beta ALPHA\n",
+  "_exit": 0,
+  "_seconds": 5.7,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "tools_map not-contains file_editor",
+      "ok": true,
+      "actual": "[\"edit\", \"finish\", \"list_directory\", \"read_file\", \"task_tracker\", \"terminal\", \"write_file\"]"
+    },
+    {
+      "check": "results.1.text contains showing lines 6-8 of 21",
+      "ok": true,
+      "actual": "Read file: <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-13/block1/"
+    },
+    {
+      "check": "results.2.text contains 2 replacement",
+      "ok": true,
+      "actual": "Successfully edited <scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-1"
+    },
+    {
+      "check": "errors len-eq 1",
+      "ok": true,
+      "actual": "[\"[An error occurred during execution.]\\n\\nError: Expected 5 occurrences but found 1 in <scratch>/sdk-coordinator-long-path-check-for-the"
+    },
+    {
+      "check": "errors.0 contains Expected 5 occurrences but found 1",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nError: Expected 5 occurrences but found 1 in <scratch>/sdk-coordinator-long-path-check-for-the-cli"
+    },
+    {
+      "check": "facts contains LINE TWO",
+      "ok": true,
+      "actual": "line 1\nLINE TWO\nLINE THREE\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nALPHA beta ALPHA\n"
+    },
+    {
+      "check": "facts contains LINE THREE",
+      "ok": true,
+      "actual": "line 1\nLINE TWO\nLINE THREE\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nALPHA beta ALPHA\n"
+    },
+    {
+      "check": "facts contains ALPHA beta ALPHA",
+      "ok": true,
+      "actual": "line 1\nLINE TWO\nLINE THREE\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nALPHA beta ALPHA\n"
+    },
+    {
+      "check": "results.6.tool eq list_directory",
+      "ok": true,
+      "actual": "list_directory"
+    },
+    {
+      "check": "results.6.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 23s]

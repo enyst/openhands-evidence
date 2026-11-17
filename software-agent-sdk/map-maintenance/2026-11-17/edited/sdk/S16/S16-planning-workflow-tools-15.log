@@ -1,0 +1,152 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/conversation_mentions \
+  --check scheme eq "conversation:" \
+  --check links.plain eq "[Fix the export button](conversation:12345678123456781234567812345678)" \
+  --check links.dashed_str eq "[Fix](conversation:12345678123456781234567812345678)" \
+  --check links.hostile eq "[a evil b c d next](conversation:12345678123456781234567812345678)" \
+  --check links.blank eq "[untitled conversation](conversation:12345678123456781234567812345678)" \
+  --check links.long_len eq 129 \
+  --check execution_status eq finished \
+  --check observations.0.tool eq find_conversations --check observations.0.is_error eq true \
+  --check observations.0.text contains "Could not list conversations:" \
+  --check observations.1.is_error eq true --check observations.1.text contains "Could not read conversation 12345678123456781234567812345678:" \
+  --check observations.2.is_error eq true --check observations.2.text contains "is not a conversation mention or id" \
+  --check read_only.find_conversations eq true --check read_only.read_conversation eq true \
+  --check system_prompt_has_guidance eq true \
+  --check params_error contains "does not accept parameters"
+{
+  "ok": true,
+  "scheme": "conversation:",
+  "links": {
+    "plain": "[Fix the export button](conversation:12345678123456781234567812345678)",
+    "dashed_str": "[Fix](conversation:12345678123456781234567812345678)",
+    "hostile": "[a evil b c d next](conversation:12345678123456781234567812345678)",
+    "blank": "[untitled conversation](conversation:12345678123456781234567812345678)",
+    "long_len": 129
+  },
+  "execution_status": "finished",
+  "observations": [
+    {
+      "tool": "find_conversations",
+      "is_error": true,
+      "text": "Could not list conversations: ConnectError: [Errno 111] Connection refused"
+    },
+    {
+      "tool": "read_conversation",
+      "is_error": true,
+      "text": "Could not read conversation 12345678123456781234567812345678: ConnectError: [Errno 111] Connection refused"
+    },
+    {
+      "tool": "read_conversation",
+      "is_error": true,
+      "text": "'the export one' is not a conversation mention or id."
+    },
+    {
+      "tool": "finish",
+      "is_error": false,
+      "text": "done"
+    }
+  ],
+  "read_only": {
+    "find_conversations": true,
+    "read_conversation": true
+  },
+  "system_prompt_has_guidance": true,
+  "params_error": "ValueError: FindConversationsTool does not accept parameters: ['limit']",
+  "_exit": 0,
+  "_seconds": 11.1,
+  "checks": [
+    {
+      "check": "scheme eq conversation:",
+      "ok": true,
+      "actual": "conversation:"
+    },
+    {
+      "check": "links.plain eq [Fix the export button](conversation:12345678123456781234567812345678)",
+      "ok": true,
+      "actual": "[Fix the export button](conversation:12345678123456781234567812345678)"
+    },
+    {
+      "check": "links.dashed_str eq [Fix](conversation:12345678123456781234567812345678)",
+      "ok": true,
+      "actual": "[Fix](conversation:12345678123456781234567812345678)"
+    },
+    {
+      "check": "links.hostile eq [a evil b c d next](conversation:12345678123456781234567812345678)",
+      "ok": true,
+      "actual": "[a evil b c d next](conversation:12345678123456781234567812345678)"
+    },
+    {
+      "check": "links.blank eq [untitled conversation](conversation:12345678123456781234567812345678)",
+      "ok": true,
+      "actual": "[untitled conversation](conversation:12345678123456781234567812345678)"
+    },
+    {
+      "check": "links.long_len eq 129",
+      "ok": true,
+      "actual": "129"
+    },
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "observations.0.tool eq find_conversations",
+      "ok": true,
+      "actual": "find_conversations"
+    },
+    {
+      "check": "observations.0.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.0.text contains Could not list conversations:",
+      "ok": true,
+      "actual": "Could not list conversations: ConnectError: [Errno 111] Connection refused"
+    },
+    {
+      "check": "observations.1.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.1.text contains Could not read conversation 12345678123456781234567812345678:",
+      "ok": true,
+      "actual": "Could not read conversation 12345678123456781234567812345678: ConnectError: [Errno 111] Connection refused"
+    },
+    {
+      "check": "observations.2.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.2.text contains is not a conversation mention or id",
+      "ok": true,
+      "actual": "'the export one' is not a conversation mention or id."
+    },
+    {
+      "check": "read_only.find_conversations eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "read_only.read_conversation eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "system_prompt_has_guidance eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "params_error contains does not accept parameters",
+      "ok": true,
+      "actual": "ValueError: FindConversationsTool does not accept parameters: ['limit']"
+    }
+  ]
+}
+
+[exit 0 after 12s]

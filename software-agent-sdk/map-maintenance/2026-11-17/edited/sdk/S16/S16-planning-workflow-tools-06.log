@@ -1,0 +1,290 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/workflow --timeout 300 \
+  --check status eq finished --check tools_map eq '["finish", "workflow"]' \
+  --check steps.fan_out.status eq completed \
+  --check steps.fan_out.text contains "'one': 'report: all good'" \
+  --check steps.fan_out.text contains "'many': ['report: all good', 'report: all good', 'report: all good']" \
+  --check steps.fan_out.text contains "'flat': [1, 2, 3, 4]" \
+  --check steps.fan_out.text contains "'piped': [-10, None, 10]" \
+  --check steps.fan_out.text contains "'reduced': 'report: all good'" \
+  --check steps.caught.is_error eq false --check steps.caught.text contains "caught 2" --check steps.caught.text contains "single: Conversation run failed" \
+  --check steps.uncaught.is_error eq true --check steps.uncaught.text contains "map_agents: one or more sub-agents failed" \
+  --check steps.uncaught.text contains "[1] [item 1]" --check steps.uncaught.text contains "[2] [item 2]" \
+  --check steps.import.text eq "Workflow scripts may not import modules" \
+  --check steps.private.text contains "may not access private wf attributes" \
+  --check steps.close.text contains "call wf.close" \
+  --check steps.open_call.text contains "may not call" \
+  --check steps.no_main.text contains "Workflow script must define exactly one async main" \
+  --check steps.huge.is_error eq false --check steps.huge.text_len eq 688890 \
+  --check steps.reduce_huge.text eq "report: all good" \
+  --check reducer_prompt_seen eq true --check reducer_prompt_truncated eq true \
+  --check steps.serial.seconds ge 4 --check steps.parallel.seconds lt 2.5 \
+  --check run_after_close contains "WorkflowContext is already closed" \
+  --check no_conversation_error eq true --check no_conversation_text contains "requires a local conversation"
+{
+  "ok": true,
+  "status": "finished",
+  "tools_map": [
+    "finish",
+    "workflow"
+  ],
+  "steps": {
+    "fan_out": {
+      "is_error": false,
+      "status": "completed",
+      "text": "{'one': 'report: all good', 'many': ['report: all good', 'report: all good', 'report: all good'], 'flat': [1, 2, 3, 4], 'piped': [-10, None, 10], 'reduced': 'report: all good'}",
+      "text_len": 176,
+      "llm_text_len": 176,
+      "seconds": 0.34
+    },
+    "caught": {
+      "is_error": false,
+      "status": "completed",
+      "text": "caught 2; single: Conversation run failed for id=25fda0fb-",
+      "text_len": 58,
+      "llm_text_len": 58,
+      "seconds": 0.19
+    },
+    "uncaught": {
+      "is_error": true,
+      "status": "error",
+      "text": "map_agents: one or more sub-agents failed:\n  [1] [item 1] Conversation run failed for id=4885da44-8fd5-4f0a-983f-a02d22e80b1b: sub-agent model refused\n\nConversation logs are stored at: <run>/conversations/08890fd244d54ac6bb5d2b2ab887a69a/subagents/4885da448fd54f0a983fa02d22e80b1b\n\nTo help debug this issue, please file a bug report at:\n  https://github.com/OpenHands/software-agent-sdk/issues/new\nand attach the conversation logs from the directory above.\n  [2] [item 2] Conversation run failed for id=181cd88e-7ee8-4882-99f3-cf0f66e2e15c: sub-agent model refused\n\nConversation logs are stored at: <",
+      "text_len": 1180,
+      "llm_text_len": 1219,
+      "seconds": 0.57
+    },
+    "import": {
+      "is_error": true,
+      "status": "error",
+      "text": "Workflow scripts may not import modules",
+      "text_len": 39,
+      "llm_text_len": 78,
+      "seconds": 0.21
+    },
+    "private": {
+      "is_error": true,
+      "status": "error",
+      "text": "Workflow scripts may not access private wf attributes or call wf.close()",
+      "text_len": 72,
+      "llm_text_len": 111,
+      "seconds": 0.21
+    },
+    "close": {
+      "is_error": true,
+      "status": "error",
+      "text": "Workflow scripts may not access private wf attributes or call wf.close()",
+      "text_len": 72,
+      "llm_text_len": 111,
+      "seconds": 0.16
+    },
+    "open_call": {
+      "is_error": true,
+      "status": "error",
+      "text": "Workflow scripts may not call `open`",
+      "text_len": 36,
+      "llm_text_len": 75,
+      "seconds": 0.24
+    },
+    "no_main": {
+      "is_error": true,
+      "status": "error",
+      "text": "Workflow script must define exactly one async main(wf)",
+      "text_len": 54,
+      "llm_text_len": 93,
+      "seconds": 0.23
+    },
+    "huge": {
+      "is_error": false,
+      "status": "completed",
+      "text": "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141,",
+      "text_len": 688890,
+      "llm_text_len": 688890,
+      "seconds": 0.02
+    },
+    "reduce_huge": {
+      "is_error": false,
+      "status": "completed",
+      "text": "report: all good",
+      "text_len": 16,
+      "llm_text_len": 16,
+      "seconds": 0.11
+    },
+    "serial": {
+      "is_error": false,
+      "status": "completed",
+      "text": "['slept', 'slept', 'slept', 'slept']",
+      "text_len": 36,
+      "llm_text_len": 36,
+      "seconds": 4.46
+    },
+    "parallel": {
+      "is_error": false,
+      "status": "completed",
+      "text": "['slept', 'slept', 'slept', 'slept']",
+      "text_len": 36,
+      "llm_text_len": 36,
+      "seconds": 1.12
+    }
+  },
+  "reducer_prompt_truncated": true,
+  "reducer_prompt_seen": true,
+  "run_after_close": "WorkflowScriptError: WorkflowContext is already closed",
+  "no_conversation_error": true,
+  "no_conversation_text": "Workflow tool requires a local conversation context.",
+  "_exit": 0,
+  "_seconds": 21.9,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "tools_map eq [\"finish\", \"workflow\"]",
+      "ok": true,
+      "actual": "[\"finish\", \"workflow\"]"
+    },
+    {
+      "check": "steps.fan_out.status eq completed",
+      "ok": true,
+      "actual": "completed"
+    },
+    {
+      "check": "steps.fan_out.text contains 'one': 'report: all good'",
+      "ok": true,
+      "actual": "{'one': 'report: all good', 'many': ['report: all good', 'report: all good', 'report: all good'], 'flat': [1, 2, 3, 4], 'piped': [-10, None, 10], 'reduced': 'report: all good'}"
+    },
+    {
+      "check": "steps.fan_out.text contains 'many': ['report: all good', 'report: all good', 'report: all good']",
+      "ok": true,
+      "actual": "{'one': 'report: all good', 'many': ['report: all good', 'report: all good', 'report: all good'], 'flat': [1, 2, 3, 4], 'piped': [-10, None, 10], 'reduced': 'report: all good'}"
+    },
+    {
+      "check": "steps.fan_out.text contains 'flat': [1, 2, 3, 4]",
+      "ok": true,
+      "actual": "{'one': 'report: all good', 'many': ['report: all good', 'report: all good', 'report: all good'], 'flat': [1, 2, 3, 4], 'piped': [-10, None, 10], 'reduced': 'report: all good'}"
+    },
+    {
+      "check": "steps.fan_out.text contains 'piped': [-10, None, 10]",
+      "ok": true,
+      "actual": "{'one': 'report: all good', 'many': ['report: all good', 'report: all good', 'report: all good'], 'flat': [1, 2, 3, 4], 'piped': [-10, None, 10], 'reduced': 'report: all good'}"
+    },
+    {
+      "check": "steps.fan_out.text contains 'reduced': 'report: all good'",
+      "ok": true,
+      "actual": "{'one': 'report: all good', 'many': ['report: all good', 'report: all good', 'report: all good'], 'flat': [1, 2, 3, 4], 'piped': [-10, None, 10], 'reduced': 'report: all good'}"
+    },
+    {
+      "check": "steps.caught.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.caught.text contains caught 2",
+      "ok": true,
+      "actual": "caught 2; single: Conversation run failed for id=25fda0fb-"
+    },
+    {
+      "check": "steps.caught.text contains single: Conversation run failed",
+      "ok": true,
+      "actual": "caught 2; single: Conversation run failed for id=25fda0fb-"
+    },
+    {
+      "check": "steps.uncaught.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.uncaught.text contains map_agents: one or more sub-agents failed",
+      "ok": true,
+      "actual": "map_agents: one or more sub-agents failed:\n  [1] [item 1] Conversation run failed for id=4885da44-8fd5-4f0a-983f-a02d22e80b1b: sub-agent model refused\n\nConversation logs are stored at: <run>/conversat"
+    },
+    {
+      "check": "steps.uncaught.text contains [1] [item 1]",
+      "ok": true,
+      "actual": "map_agents: one or more sub-agents failed:\n  [1] [item 1] Conversation run failed for id=4885da44-8fd5-4f0a-983f-a02d22e80b1b: sub-agent model refused\n\nConversation logs are stored at: <run>/conversat"
+    },
+    {
+      "check": "steps.uncaught.text contains [2] [item 2]",
+      "ok": true,
+      "actual": "map_agents: one or more sub-agents failed:\n  [1] [item 1] Conversation run failed for id=4885da44-8fd5-4f0a-983f-a02d22e80b1b: sub-agent model refused\n\nConversation logs are stored at: <run>/conversat"
+    },
+    {
+      "check": "steps.import.text eq Workflow scripts may not import modules",
+      "ok": true,
+      "actual": "Workflow scripts may not import modules"
+    },
+    {
+      "check": "steps.private.text contains may not access private wf attributes",
+      "ok": true,
+      "actual": "Workflow scripts may not access private wf attributes or call wf.close()"
+    },
+    {
+      "check": "steps.close.text contains call wf.close",
+      "ok": true,
+      "actual": "Workflow scripts may not access private wf attributes or call wf.close()"
+    },
+    {
+      "check": "steps.open_call.text contains may not call",
+      "ok": true,
+      "actual": "Workflow scripts may not call `open`"
+    },
+    {
+      "check": "steps.no_main.text contains Workflow script must define exactly one async main",
+      "ok": true,
+      "actual": "Workflow script must define exactly one async main(wf)"
+    },
+    {
+      "check": "steps.huge.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.huge.text_len eq 688890",
+      "ok": true,
+      "actual": "688890"
+    },
+    {
+      "check": "steps.reduce_huge.text eq report: all good",
+      "ok": true,
+      "actual": "report: all good"
+    },
+    {
+      "check": "reducer_prompt_seen eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reducer_prompt_truncated eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.serial.seconds ge 4",
+      "ok": true,
+      "actual": "4.46"
+    },
+    {
+      "check": "steps.parallel.seconds lt 2.5",
+      "ok": true,
+      "actual": "1.12"
+    },
+    {
+      "check": "run_after_close contains WorkflowContext is already closed",
+      "ok": true,
+      "actual": "WorkflowScriptError: WorkflowContext is already closed"
+    },
+    {
+      "check": "no_conversation_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "no_conversation_text contains requires a local conversation",
+      "ok": true,
+      "actual": "Workflow tool requires a local conversation context."
+    }
+  ]
+}
+
+[exit 0 after 22s]

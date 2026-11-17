@@ -1,0 +1,39 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec -- git init -q .
+control-sdk exec --model-env -- python examples/04_llm_specific_tools/01_gpt5_apply_patch_preset.py
+control-sdk exec --expect-output GPT5 -- ls
+control-sdk exec --model-env -- python examples/04_llm_specific_tools/02_gemini_file_tools.py
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 29.7,
+  "result": null,
+  "stdout_tail": " is a freshly initialized git repository with no commits, remote,\nor source files.\nIt currently serves as an empty workspace scaffold rather than a functioning \ncodebase.\n```\n\n**One thing worth flagging:** the task asked me to describe \"this repository,\" \nbut the repository is genuinely empty. Before writing anything I checked:\n\n- `git log` \u2192 no commits yet (`master` has no history)\n- `git remote -v` \u2192 no remote configured\n- `git ls-tree -r HEAD` \u2192 invalid object, nothing tracked\n- `find . -path ./.git -prune -o -type f -print` \u2192 zero files outside `.git`\n- Parent directories \u2192 only harness scaffolding (`run.json`, `state/`, \n`conversations/`), no project code\n\nSo there was no language, purpose, or codebase to describe. Rather than invent a\nplausible-sounding description (e.g. claiming it's a Python SDK or similar), I \ndescribed the actual observable state \u2014 an empty, freshly initialized repo. That\nkeeps the file factually accurate instead of misleading.\n\nIf this file is meant to describe a repo that should have content, the likely \nissue is that the checkout is missing or the wrong workspace directory is in \nplay. Point me at the real repo (or populate this one) and I'll rewrite the two \nlines to describe it properly.\n\nThe file is currently untracked \u2014 I did not commit it, since you didn't ask me \nto.\n\nTokens: \u2191 input 11.89K (total 93.42K) \u2022 cache hit 96.90% (total 96.04%) \u2022  \nreasoning 0 (total 880) \u2022 \u2193 output 324 (total 2.31K) \u2022 $ (total 0.0022)\n\nEXAMPLE_COST: 0.002208234\n",
+  "stderr_tail": "[11/17/26 10:52:52] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n[11/17/26 10:52:53] WARNING  Running as root - disabling Chromium    impl.py:514\n                             sandbox (required for root). This                  \n                             reduces security isolation.                        \n",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "GPT5_DEMO.txt\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 25.4,
+  "result": null,
+  "stdout_tail": "ple, direct request. Risk is low-ish \nbut it's a delete of a file I created in this session. I'll do it.\n\nShould I commit anything? No. Just delete.\n\nLet me delete and verify.\n\n$ rm -v FACTS.txt && echo \"---\" && ls -la\n\nTokens: \u2191 input 9.96K (total 91.07K) \u2022 cache hit 97.72% (total 93.32%) \u2022  \nreasoning 54 (total 173) \u2022 \u2193 output 146 (total 1.45K) \u2022 $ (total 0.0020)\n\nObservation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nTool: terminal\nResult:\nremoved 'FACTS.txt'\n---\ntotal 20\ndrwxr-xr-x 4 root root 4096 Nov 17 10:53 .\ndrwxr-xr-x 7 root root 4096 Nov 17 10:52 ..\ndrwxr-xr-x 7 root root 4096 Nov 17 10:53 .git\n-rw-r--r-- 1 root root  185 Nov 17 10:53 GPT5_DEMO.txt\ndrwxr-xr-x 3 root root 4096 Nov 17 10:53 logs\n\n\ud83d\udcc1 Working directory: \n<scratch>/sdk-coo\nrdinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/w\nork/S14-core-tools-15/block1/runs/20261117-105248-936876/workspace\n\ud83d\udc0d Python interpreter: /usr/local/bin/python\n\u2705 Exit code: 0\n\nMessage from Agent \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\n`FACTS.txt` is deleted. The directory listing confirms it's gone \u2014 the workspace\nis back to its original state with just `.git/`, `GPT5_DEMO.txt`, and `logs/`. \nNo other files were touched.\n\nTokens: \u2191 input 10.31K (total 101.38K) \u2022 cache hit 95.62% (total 93.56%) \u2022  \nreasoning 0 (total 173) \u2022 \u2193 output 51 (total 1.5K) \u2022 $ (total 0.0022)\n\nEXAMPLE_COST: 0.002162244\n",
+  "stderr_tail": "[11/17/26 10:53:23] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 55s]

@@ -1,0 +1,28 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/conversation --arg filter --check error missing --check tools eq '["counter", "echo", "finish"]'
+{
+  "ok": true,
+  "mode": "filter",
+  "error": null,
+  "tools": [
+    "counter",
+    "echo",
+    "finish"
+  ],
+  "_exit": 0,
+  "_seconds": 6.9,
+  "checks": [
+    {
+      "check": "error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "tools eq [\"counter\", \"echo\", \"finish\"]",
+      "ok": true,
+      "actual": "[\"counter\", \"echo\", \"finish\"]"
+    }
+  ]
+}
+
+[exit 0 after 7s]

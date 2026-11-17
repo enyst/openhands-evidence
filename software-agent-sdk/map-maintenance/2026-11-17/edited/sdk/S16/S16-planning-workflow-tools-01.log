@@ -1,0 +1,234 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --tools task_tracker --script S16/task_tracker.json --field id)
+control-sdk conversation send "$CID" --text "Plan the parser work." --run \
+  --check execution_status eq finished --check last_agent_message eq "Planned three tasks."
+control-sdk conversation send "$CID" --text "The parser is done, update the list." --run \
+  --check execution_status eq finished --check last_agent_message eq "Parser done, tests in progress."
+control-sdk conversation events "$CID" --kind ObservationEvent \
+  --check events.0.text contains "No task list found" \
+  --check events.1.text contains "updated with 3 item" \
+  --check events.3.text contains "# Task List" --check events.3.text contains "Read the spec" \
+  --check events.3.text contains "docs/spec.md" --check events.3.text contains "Add tests"
+control-sdk conversation events "$CID" --kind AgentErrorEvent \
+  --check count eq 1 --check events.0.error contains "Input should be 'todo', 'in_progress' or 'done'"
+HEX=$(echo "$CID" | tr -d -)
+control-sdk exec --expect-output '"status": "in_progress"' -- cat "$SDK_VERIFY_RUN/conversations/$HEX/TASKS.json"
+control-sdk exec --expect-output 2 -- grep -c '"status": "done"' "$SDK_VERIFY_RUN/conversations/$HEX/TASKS.json"
+{
+  "ok": true,
+  "id": "9f9e3b8f-a3d7-4dbd-b699-75b4ce559e2c",
+  "execution_status": "finished",
+  "event_count": 8,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "Planned three tasks.",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "task_tracker"
+  ],
+  "script_left": 4,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq Planned three tasks.",
+      "ok": true,
+      "actual": "Planned three tasks."
+    }
+  ]
+}
+{
+  "ok": true,
+  "id": "9f9e3b8f-a3d7-4dbd-b699-75b4ce559e2c",
+  "execution_status": "finished",
+  "event_count": 17,
+  "kinds": [
+    "ActionEvent",
+    "AgentErrorEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "Parser done, tests in progress.",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq Parser done, tests in progress.",
+      "ok": true,
+      "actual": "Parser done, tests in progress."
+    }
+  ]
+}
+[11/17/26 09:17:00] WARNING  Property <class                          view.py:93
+                             'openhands.sdk.context.view.properties.o           
+                             bservation_uniqueness.ObservationUniquen           
+                             essProperty'> enforced, 3 events                   
+                             dropped.                                           
+{
+  "ok": true,
+  "count": 6,
+  "kinds": [
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent"
+  ],
+  "events": [
+    {
+      "index": 3,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "43b6b8da-7fa1-4d52-89b7-a9748b5311e8",
+      "tool": "task_tracker",
+      "text": "No task list found. Use the \"plan\" command to create one.",
+      "is_error": false
+    },
+    {
+      "index": 5,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "6b75b7dc-ce84-43d1-8348-b335ce40f556",
+      "tool": "task_tracker",
+      "text": "Task list has been updated with 3 item(s).",
+      "is_error": false
+    },
+    {
+      "index": 7,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "2e50742f-235a-40e0-b882-3569fe7c6672",
+      "tool": "finish",
+      "text": "Planned three tasks.",
+      "is_error": false
+    },
+    {
+      "index": 10,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "44c7c3e5-2599-4dff-9600-73ac99cc7b9b",
+      "tool": "task_tracker",
+      "text": "# Task List\n\n1. \u2705 Read the spec\n   docs/spec.md\n\n2. \ud83d\udd04 Write the parser\n\n3. \u23f3 Add tests\n   cover the edge cases",
+      "is_error": false
+    },
+    {
+      "index": 12,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "36c7a985-8355-4eb5-82c9-1b702ecf25e8",
+      "tool": "task_tracker",
+      "text": "Task list has been updated with 3 item(s).",
+      "is_error": false
+    },
+    {
+      "index": 16,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "20f442eb-2ec8-4ee4-a623-b8beeafd0121",
+      "tool": "finish",
+      "text": "Parser done, tests in progress.",
+      "is_error": false
+    }
+  ],
+  "checks": [
+    {
+      "check": "events.0.text contains No task list found",
+      "ok": true,
+      "actual": "No task list found. Use the \"plan\" command to create one."
+    },
+    {
+      "check": "events.1.text contains updated with 3 item",
+      "ok": true,
+      "actual": "Task list has been updated with 3 item(s)."
+    },
+    {
+      "check": "events.3.text contains # Task List",
+      "ok": true,
+      "actual": "# Task List\n\n1. \u2705 Read the spec\n   docs/spec.md\n\n2. \ud83d\udd04 Write the parser\n\n3. \u23f3 Add tests\n   cover the edge cases"
+    },
+    {
+      "check": "events.3.text contains Read the spec",
+      "ok": true,
+      "actual": "# Task List\n\n1. \u2705 Read the spec\n   docs/spec.md\n\n2. \ud83d\udd04 Write the parser\n\n3. \u23f3 Add tests\n   cover the edge cases"
+    },
+    {
+      "check": "events.3.text contains docs/spec.md",
+      "ok": true,
+      "actual": "# Task List\n\n1. \u2705 Read the spec\n   docs/spec.md\n\n2. \ud83d\udd04 Write the parser\n\n3. \u23f3 Add tests\n   cover the edge cases"
+    },
+    {
+      "check": "events.3.text contains Add tests",
+      "ok": true,
+      "actual": "# Task List\n\n1. \u2705 Read the spec\n   docs/spec.md\n\n2. \ud83d\udd04 Write the parser\n\n3. \u23f3 Add tests\n   cover the edge cases"
+    }
+  ]
+}
+[11/17/26 09:17:14] WARNING  Property <class                          view.py:93
+                             'openhands.sdk.context.view.properties.o           
+                             bservation_uniqueness.ObservationUniquen           
+                             essProperty'> enforced, 3 events                   
+                             dropped.                                           
+{
+  "ok": true,
+  "count": 1,
+  "kinds": [
+    "AgentErrorEvent"
+  ],
+  "events": [
+    {
+      "index": 14,
+      "kind": "AgentErrorEvent",
+      "source": "agent",
+      "id": "cba56373-314a-4231-907c-a3243fdb974b",
+      "failure_kind": "agent_action",
+      "error": "Error validating tool 'task_tracker': 1 validation error for TaskTrackerAction\ntask_list.0.status\n  Input should be 'todo', 'in_progress' or 'done' [type=literal_error, input_value='finished', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/literal_error. Parameters provided: ['command', 'task_list']"
+    }
+  ],
+  "checks": [
+    {
+      "check": "count eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "events.0.error contains Input should be 'todo', 'in_progress' or 'done'",
+      "ok": true,
+      "actual": "Error validating tool 'task_tracker': 1 validation error for TaskTrackerAction\ntask_list.0.status\n  Input should be 'todo', 'in_progress' or 'done' [type=literal_error, input_value='finished', input_t"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "[\n  {\n    \"title\": \"Read the spec\",\n    \"notes\": \"docs/spec.md\",\n    \"status\": \"done\"\n  },\n  {\n    \"title\": \"Write the parser\",\n    \"notes\": \"\",\n    \"status\": \"done\"\n  },\n  {\n    \"title\": \"Add tests\",\n    \"notes\": \"cover the edge cases\",\n    \"status\": \"in_progress\"\n  }\n]",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "2\n",
+  "stderr_tail": "",
+  "ok": true
+}
+
+[exit 0 after 73s]

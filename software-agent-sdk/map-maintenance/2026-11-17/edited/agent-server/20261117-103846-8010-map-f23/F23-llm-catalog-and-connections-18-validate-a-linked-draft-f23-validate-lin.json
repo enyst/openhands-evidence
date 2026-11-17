@@ -1,0 +1,17 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Validate a linked draft (`F23.validate-linked-draft`).",
+  "ids": [
+    "F23.validate-linked-draft"
+  ],
+  "line": 504,
+  "script": "printf '{\"llm\": {\"model\": \"deepseek/deepseek-flash\", \"api_key\": \"%s\", \"num_retries\": 0}}' \"$DEEPSEEK_API_KEY\" \\\n  | control-agent-server api POST /api/profiles/qa-f23-draft/validate --stdin --timeout 120 --expect 200 --check valid eq true\ncontrol-agent-server api POST /api/profiles/qa-f23-draft/validate --timeout 120 --expect 200 \\\n  --json \"{\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"provider_connection_id\\\": \\\"$CONN\\\", \\\"num_retries\\\": 0}}\" \\\n  --save F23.validate-linked-draft/linked --check valid eq true --check error eq null\n",
+  "exit_code": 0,
+  "elapsed_ms": 2420,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/profiles/qa-f23-draft/validate\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"deepseek/deepseek-flash\",\n        \"api_key\": \"<redacted:DEEPSEEK_API_KEY>\",\n        \"num_retries\": 0\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"27\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"valid\": true,\n      \"error\": null\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 737,\n  \"checks\": [\n    {\n      \"check\": \"valid eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/profiles/qa-f23-draft/validate\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"deepseek/deepseek-flash\",\n        \"provider_connection_id\": \"5cda7c96f0f24f3c9b49ae13a1818cb7\",\n        \"num_retries\": 0\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"27\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"valid\": true,\n      \"error\": null\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 869,\n  \"checks\": [\n    {\n      \"check\": \"valid eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"error eq null\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-103846-8010-map-f23/evidence/F23.validate-linked-draft/linked.json\"\n}\n",
+  "stderr": ""
+}

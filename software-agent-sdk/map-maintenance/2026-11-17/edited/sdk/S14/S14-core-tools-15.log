@@ -1,0 +1,39 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec -- git init -q .
+control-sdk exec --model-env -- python examples/04_llm_specific_tools/01_gpt5_apply_patch_preset.py
+control-sdk exec --expect-output GPT5 -- ls
+control-sdk exec --model-env -- python examples/04_llm_specific_tools/02_gemini_file_tools.py
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 25.6,
+  "result": null,
+  "stdout_tail": "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nSummary: finish: {\"message\": \"Created `GPT5_DEMO.txt` at the repo root with two \nshort lines:\\n\\n```\\nA freshly initialized, empty Git repository used as an \nagent workspace.\\nIt contains no source files, commits, or remote configuration \nyet.\\n```\\n\\nNote on accuracy: the repository turned out to be **empty** \\u2014 \n`git init` had been run, but there were no commits, no files, no \n`README.md`/`AGENTS.md`, and no remote configured. So rather than inventing a \ndescription of nonexistent code, I described the repository's actual state. If \nthis workspace is later populated with real code, both lines should be updated \n(or replaced) to describe that project.\"}\n\nFinish with message:\nCreated `GPT5_DEMO.txt` at the repo root with two short lines:\n\n```\nA freshly initialized, empty Git repository used as an agent workspace.\nIt contains no source files, commits, or remote configuration yet.\n```\n\nNote on accuracy: the repository turned out to be **empty** \u2014 `git init` had \nbeen run, but there were no commits, no files, no `README.md`/`AGENTS.md`, and \nno remote configured. So rather than inventing a description of nonexistent \ncode, I described the repository's actual state. If this workspace is later \npopulated with real code, both lines should be updated (or replaced) to describe\nthat project.\n\nTokens: \u2191 input 11K (total 59.67K) \u2022 cache hit 94.29% (total 95.46%) \u2022  \nreasoning 0 (total 514) \u2022 \u2193 output 173 (total 1.56K) \u2022 $ (total 0.0030)\n\nEXAMPLE_COST: 0.0030210599999999995\n",
+  "stderr_tail": "[11/17/26 09:26:52] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n[11/17/26 09:26:54] WARNING  Running as root - disabling Chromium    impl.py:514\n                             sandbox (required for root). This                  \n                             reduces security isolation.                        \n",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "GPT5_DEMO.txt\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 24.5,
+  "result": null,
+  "stdout_tail": "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nNow delete the FACTS.txt file you just created.\n\nTokens: \u2191 input (total 53.28K) \u2022 cache hit (total 91.05%) \u2022  reasoning (total \n58) \u2022 \u2193 output (total 844) \u2022 $ (total 0.0027)\n\nAgent Action \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nSummary: Delete FACTS.txt and list directory\n\n$ rm FACTS.txt && ls -la\n\nTokens: \u2191 input 8.82K (total 62.1K) \u2022 cache hit 97.18% (total 91.92%) \u2022  \nreasoning 0 (total 58) \u2022 \u2193 output 85 (total 929) \u2022 $ (total 0.0030)\n\nObservation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nTool: terminal\nResult:\ntotal 20\ndrwxr-xr-x 4 root root 4096 Nov 17 09:27 .\ndrwxr-xr-x 7 root root 4096 Nov 17 09:26 ..\ndrwxr-xr-x 7 root root 4096 Nov 17 09:27 .git\n-rw-r--r-- 1 root root  139 Nov 17 09:27 GPT5_DEMO.txt\ndrwxr-xr-x 3 root root 4096 Nov 17 09:27 logs\n\n\ud83d\udcc1 Working directory: \n<scratch>/sdk-ver\nifier/S14/work/S14-core-tools-15/block1/runs/20261117-092645-bf36aa/workspace\n\ud83d\udc0d Python interpreter: /usr/local/bin/python\n\u2705 Exit code: 0\n\nMessage from Agent \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nDeleted. `FACTS.txt` is gone \u2014 the workspace is back to its original state: \n`.git/`, `GPT5_DEMO.txt`, and `logs/`.\n\nTokens: \u2191 input 9.15K (total 71.25K) \u2022 cache hit 95.17% (total 92.34%) \u2022  \nreasoning 0 (total 58) \u2022 \u2193 output 38 (total 967) \u2022 $ (total 0.0032)\n\nEXAMPLE_COST: 0.0031922519999999996\n",
+  "stderr_tail": "[11/17/26 09:27:17] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 51s]

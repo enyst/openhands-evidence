@@ -1,0 +1,31 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S07/live_invoke --check status eq finished --check invoked contains rot13 --check answer eq "uryyb jbeyq"
+{
+  "ok": true,
+  "status": "finished",
+  "invoked": [
+    "rot13"
+  ],
+  "answer": "uryyb jbeyq",
+  "_exit": 0,
+  "_seconds": 26.7,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "invoked contains rot13",
+      "ok": true,
+      "actual": "[\"rot13\"]"
+    },
+    {
+      "check": "answer eq uryyb jbeyq",
+      "ok": true,
+      "actual": "uryyb jbeyq"
+    }
+  ]
+}
+
+[exit 0 after 27s]

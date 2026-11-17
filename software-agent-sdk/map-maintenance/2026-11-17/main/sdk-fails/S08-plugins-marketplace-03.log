@@ -1,0 +1,161 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S08/attach --arg conversation \
+  --check observations.2 contains yek-nigulp --check observations.3 contains fallback \
+  --check observations.4 contains '${TOKEN}' --check observations.5 matches '/src/portable$' \
+  --check resolved.1.source eq '${GITP_URL}' --check resolved_has_secret_value eq false \
+  --check observations.1 contains nekot-terces --check observations.1 not-contains nekot-tsoh
+{
+  "ok": true,
+  "mode": "conversation",
+  "resolved_before": null,
+  "skills_before": [],
+  "skills_after": [
+    "amb-skill",
+    "cc-plugin-skill",
+    "cc-plugin:review",
+    "gitp-skill",
+    "portable:report",
+    "summarize"
+  ],
+  "cc_skill_body": "CC-PLUGIN-SKILL-BODY",
+  "gitp_skill_body": "GITP-V1",
+  "amb_skill_body": "PROJECT-AMB",
+  "resolved": [
+    {
+      "source": "<scratch>/sdk/main/work/S08-plugins-marketplace-03/block1/runs/20261117-091312-96a884/src/cc-plugin",
+      "resolved_ref": null,
+      "original_ref": null,
+      "repo_path": null
+    },
+    {
+      "source": "${GITP_URL}",
+      "resolved_ref": "ce10073549ef5fd2399c2f04e8b6d37791e04379",
+      "original_ref": "v1",
+      "repo_path": "plugins/gitp"
+    },
+    {
+      "source": "<scratch>/sdk/main/work/S08-plugins-marketplace-03/block1/runs/20261117-091312-96a884/src/portable",
+      "resolved_ref": null,
+      "original_ref": null,
+      "repo_path": null
+    }
+  ],
+  "git_ref_is_v1": true,
+  "resolved_has_secret_value": false,
+  "resolved_names_ambient": false,
+  "first_tools": [
+    "cc-plugin-mcp_add",
+    "cc-plugin-mcp_counter",
+    "cc-plugin-mcp_die",
+    "cc-plugin-mcp_echo",
+    "cc-plugin-mcp_fail",
+    "cc-plugin-mcp_getenv",
+    "cc-plugin-mcp_headers",
+    "cc-plugin-mcp_kind_echo",
+    "cc-plugin-mcp_nested",
+    "cc-plugin-mcp_picture",
+    "cc-plugin-mcp_register_extra",
+    "cc-plugin-mcp_register_late",
+    "cc-plugin-mcp_remove_extra",
+    "cc-plugin-mcp_reverse",
+    "cc-plugin-mcp_session",
+    "cc-plugin-mcp_slow",
+    "cc-plugin-mcp_structured",
+    "finish",
+    "invoke_skill",
+    "terminal",
+    "tools_add",
+    "tools_counter",
+    "tools_die",
+    "tools_echo",
+    "tools_fail",
+    "tools_getenv",
+    "tools_headers",
+    "tools_kind_echo",
+    "tools_nested",
+    "tools_picture",
+    "tools_register_extra",
+    "tools_register_late",
+    "tools_remove_extra",
+    "tools_reverse",
+    "tools_session",
+    "tools_slow",
+    "tools_structured"
+  ],
+  "command_injected": true,
+  "observations": [
+    "hi",
+    "[Tool 'cc-plugin-mcp_getenv' executed.]nekot-tsoh",
+    "[Tool 'cc-plugin-mcp_getenv' executed.]yek-nigulp",
+    "[Tool 'cc-plugin-mcp_getenv' executed.]fallback",
+    "[Tool 'tools_getenv' executed.]${TOKEN}",
+    "c8-b08f-a48bcae55876/scratchpad/sdk/main/work/S08-plugins-marketplace-03/block1/runs/20261117-091312-96a884/src/portable",
+    "done"
+  ],
+  "registered_agents": [
+    "cc-plugin-helper",
+    "portable-helper"
+  ],
+  "hook_log": [
+    "explicit",
+    "plugin-cc-plugin",
+    "explicit",
+    "plugin-cc-plugin",
+    "explicit",
+    "plugin-cc-plugin",
+    "explicit",
+    "plugin-cc-plugin",
+    "explicit",
+    "plugin-cc-plugin",
+    "explicit",
+    "plugin-cc-plugin",
+    "explicit",
+    "plugin-cc-plugin"
+  ],
+  "_exit": 0,
+  "_seconds": 8.5,
+  "checks": [
+    {
+      "check": "observations.2 contains yek-nigulp",
+      "ok": true,
+      "actual": "[Tool 'cc-plugin-mcp_getenv' executed.]yek-nigulp"
+    },
+    {
+      "check": "observations.3 contains fallback",
+      "ok": true,
+      "actual": "[Tool 'cc-plugin-mcp_getenv' executed.]fallback"
+    },
+    {
+      "check": "observations.4 contains ${TOKEN}",
+      "ok": true,
+      "actual": "[Tool 'tools_getenv' executed.]${TOKEN}"
+    },
+    {
+      "check": "observations.5 matches /src/portable$",
+      "ok": true,
+      "actual": "c8-b08f-a48bcae55876/scratchpad/sdk/main/work/S08-plugins-marketplace-03/block1/runs/20261117-091312-96a884/src/portable"
+    },
+    {
+      "check": "resolved.1.source eq ${GITP_URL}",
+      "ok": true,
+      "actual": "${GITP_URL}"
+    },
+    {
+      "check": "resolved_has_secret_value eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "observations.1 contains nekot-terces",
+      "ok": false,
+      "actual": "[Tool 'cc-plugin-mcp_getenv' executed.]nekot-tsoh"
+    },
+    {
+      "check": "observations.1 not-contains nekot-tsoh",
+      "ok": false,
+      "actual": "[Tool 'cc-plugin-mcp_getenv' executed.]nekot-tsoh"
+    }
+  ]
+}
+
+[exit 1 after 9s]

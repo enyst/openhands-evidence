@@ -1,0 +1,120 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/oracle --arg answer \
+  --check status eq finished --check is_error eq false --check text eq "Use one typed setting." \
+  --check agent_model eq test-model --check usage_ids eq '["oracle:oracle"]' \
+  --check oracle_requests eq 1 --check oracle_saw_question eq true --check oracle_saw_context eq true \
+  --check oracle_got_tools eq false --check description_mentions_second_opinion eq true
+control-sdk program S16/oracle --arg empty \
+  --check is_error eq true --check text contains "The Oracle did not return a response."
+control-sdk program S16/oracle --arg missing \
+  --check is_error eq true --check text contains "no profile named 'oracle' was found. Save one to enable it." \
+  --check oracle_requests eq 0 \
+  --check no_conversation_is_error eq true --check no_conversation_text contains "without an active conversation"
+control-sdk program S16/oracle --arg params \
+  --check error contains "AskOracleTool does not accept parameters"
+{
+  "ok": true,
+  "mode": "answer",
+  "status": "finished",
+  "is_error": false,
+  "text": "Use one typed setting.",
+  "agent_model": "test-model",
+  "usage_ids": [
+    "oracle:oracle"
+  ],
+  "oracle_requests": 1,
+  "oracle_saw_question": true,
+  "oracle_saw_context": true,
+  "oracle_got_tools": false,
+  "description_mentions_second_opinion": true,
+  "no_conversation_is_error": true,
+  "no_conversation_text": "Cannot ask the Oracle without an active conversation.",
+  "_exit": 0,
+  "_seconds": 6.7,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "text eq Use one typed setting.",
+      "ok": true,
+      "actual": "Use one typed setting."
+    },
+    {
+      "check": "agent_model eq test-model",
+      "ok": true,
+      "actual": "test-model"
+    },
+    {
+      "check": "usage_ids eq [\"oracle:oracle\"]",
+      "ok": true,
+      "actual": "[\"oracle:oracle\"]"
+    },
+    {
+      "check": "oracle_requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "oracle_saw_question eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "oracle_saw_context eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "oracle_got_tools eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "description_mentions_second_opinion eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "empty",
+  "status": "finished",
+  "is_error": true,
+  "text": "[An error occurred during execution.]\n\nThe Oracle encountered an error and did not return a response: LLMNoResponseError: Response choices[0] message has no content, tool calls, or reasoning. Response: ModelResponse(id='chatcmpl-1', created=1794908555, model='oracle-model', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='stop', index=0, message=Message(content=''",
+  "agent_model": "test-model",
+  "usage_ids": [
+    "oracle:oracle"
+  ],
+  "oracle_requests": 1,
+  "oracle_saw_question": true,
+  "oracle_saw_context": true,
+  "oracle_got_tools": false,
+  "description_mentions_second_opinion": true,
+  "no_conversation_is_error": true,
+  "no_conversation_text": "Cannot ask the Oracle without an active conversation.",
+  "_exit": 0,
+  "_seconds": 7.2,
+  "checks": [
+    {
+      "check": "is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "text contains The Oracle did not return a response.",
+      "ok": false,
+      "actual": "[An error occurred during execution.]\n\nThe Oracle encountered an error and did not return a response: LLMNoResponseError: Response choices[0] message has no content, tool calls, or reasoning. Response"
+    }
+  ]
+}
+
+[exit 1 after 14s]

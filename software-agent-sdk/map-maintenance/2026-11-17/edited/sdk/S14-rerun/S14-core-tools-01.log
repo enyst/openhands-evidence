@@ -1,0 +1,206 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --tools terminal,glob,grep,apply_patch --script S14/search_and_patch.json --field id)
+control-sdk conversation send "$CID" --text "Fix add in src/calc.py" --run \
+  --check execution_status eq finished --check last_agent_message eq "calc.add fixed"
+control-sdk conversation events "$CID" --kind ObservationEvent \
+  --check count eq 8 \
+  --check events.1.text contains "Found 2 file" --check events.1.text contains "'**/*.py'" \
+  --check events.2.text contains "Found 1 file" --check events.2.text contains "'return a - b'" \
+  --check events.2.text contains src/calc.py \
+  --check events.3.is_error eq false --check events.3.text eq "Done!" \
+  --check events.4.is_error eq true --check events.4.text contains "Invalid Context" \
+  --check events.5.is_error eq true --check events.5.text contains "escaping paths are not allowed" \
+  --check events.6.text contains "5 1.0"
+control-sdk exec --expect-output "return a + b" -- cat src/calc.py
+control-sdk exec --expect-exit 1 -- test -e notes/todo.txt
+control-sdk exec --expect-exit 1 -- test -e ../outside.txt
+{
+  "ok": true,
+  "id": "be587f5f-79ec-43c5-a4b1-b327b3acae87",
+  "execution_status": "finished",
+  "event_count": 18,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "calc.add fixed",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "glob",
+    "grep",
+    "apply_patch"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "last_agent_message eq calc.add fixed",
+      "ok": true,
+      "actual": "calc.add fixed"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 8,
+  "kinds": [
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ObservationEvent"
+  ],
+  "events": [
+    {
+      "index": 3,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "c16aaaf2-a472-4483-878a-505978f2d625",
+      "tool": "terminal",
+      "text": "ready",
+      "is_error": false
+    },
+    {
+      "index": 5,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "1f165639-4e72-4318-89db-eb10b1299c9d",
+      "tool": "glob",
+      "text": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940-c97c6a/workspace':\n<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940-c97c6a/workspace/src/calc.py\n/tmp/claude\u2026",
+      "is_error": false
+    },
+    {
+      "index": 7,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "27fa7649-5243-4132-94ca-a8d80ded261f",
+      "tool": "grep",
+      "text": "Found 1 file(s) containing pattern 'return a - b' in '<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940-c97c6a/workspace' (filtered by '*.py'):\n<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940-c97c6a/works\u2026",
+      "is_error": false
+    },
+    {
+      "index": 9,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "f7e469fe-e691-4c7c-8d55-cc90579549cb",
+      "tool": "apply_patch",
+      "text": "Done!",
+      "is_error": false
+    },
+    {
+      "index": 11,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "fc3c48da-1544-4efd-99d7-94f40b2feaf7",
+      "tool": "apply_patch",
+      "text": "Invalid Context 0:\n    this line does not exist",
+      "is_error": true
+    },
+    {
+      "index": 13,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "3775d124-1659-4d80-a199-cf7d75f441c2",
+      "tool": "apply_patch",
+      "text": "Absolute or escaping paths are not allowed",
+      "is_error": true
+    },
+    {
+      "index": 15,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "ea3d2228-5782-4183-ac5a-1eadf8c7429c",
+      "tool": "terminal",
+      "text": "5 1.0",
+      "is_error": false
+    },
+    {
+      "index": 17,
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "id": "66bd540c-d211-4a7d-b4d7-caa946927026",
+      "tool": "finish",
+      "text": "calc.add fixed",
+      "is_error": false
+    }
+  ],
+  "checks": [
+    {
+      "check": "count eq 8",
+      "ok": true,
+      "actual": "8"
+    },
+    {
+      "check": "events.1.text contains Found 2 file",
+      "ok": true,
+      "actual": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940-c97c6a"
+    },
+    {
+      "check": "events.1.text contains '**/*.py'",
+      "ok": true,
+      "actual": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940-c97c6a"
+    },
+    {
+      "check": "events.2.text contains Found 1 file",
+      "ok": true,
+      "actual": "Found 1 file(s) containing pattern 'return a - b' in '<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940"
+    },
+    {
+      "check": "events.2.text contains 'return a - b'",
+      "ok": true,
+      "actual": "Found 1 file(s) containing pattern 'return a - b' in '<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940"
+    },
+    {
+      "check": "events.2.text contains src/calc.py",
+      "ok": false,
+      "actual": "Found 1 file(s) containing pattern 'return a - b' in '<scratch>/sdk-verifier/S14-rerun/work/S14-core-tools-01/block1/runs/20261117-092940"
+    },
+    {
+      "check": "events.3.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "events.3.text eq Done!",
+      "ok": true,
+      "actual": "Done!"
+    },
+    {
+      "check": "events.4.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "events.4.text contains Invalid Context",
+      "ok": true,
+      "actual": "Invalid Context 0:\n    this line does not exist"
+    },
+    {
+      "check": "events.5.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "events.5.text contains escaping paths are not allowed",
+      "ok": true,
+      "actual": "Absolute or escaping paths are not allowed"
+    },
+    {
+      "check": "events.6.text contains 5 1.0",
+      "ok": true,
+      "actual": "5 1.0"
+    }
+  ]
+}
+
+[exit 1 after 29s]

@@ -1,0 +1,226 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/search --arg 150 \
+  --check rg_available eq true --check same_files eq true --check same_truncated eq true \
+  --check rg.glob_py.count eq 2 --check newest_first eq true \
+  --check rg.glob_in_path.count eq 100 --check rg.glob_in_path.truncated eq true \
+  --check rg.grep_include.files len-eq 2 --check rg.grep_include.text contains "filtered by '*.py'" \
+  --check rg.grep_many.truncated eq true --check python.grep_many.truncated eq true \
+  --check rg.grep_secret.files.0 eq creds.txt --check rg.grep_secret.text contains "<secret-hidden>" \
+  --check rg.patch.is_error eq false --check added_file contains sk-live-4242abcd \
+  --check secret_in_observations eq false
+{
+  "ok": true,
+  "rg_available": true,
+  "rg": {
+    "glob_py": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace':\n/tmp/claude-0/-home-user"
+    },
+    "glob_in_path": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f149.txt",
+        "many/f148.txt",
+        "many/f147.txt",
+        "many/f146.txt",
+        "many/f145.txt"
+      ],
+      "truncated": true,
+      "text": "Found 100 file(s) matching pattern '*.txt' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace/many':\n/tmp/claude-0/-home"
+    },
+    "grep_include": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) containing pattern 'def \\w+' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace' (filtered by '*.py'):\n/"
+    },
+    "grep_many": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f149.txt",
+        "many/f148.txt",
+        "many/f147.txt",
+        "many/f146.txt",
+        "many/f145.txt"
+      ],
+      "truncated": true,
+      "text": "Found 100 file(s) containing pattern 'needle' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace/many':\n/tmp/claude-0/-h"
+    },
+    "grep_secret": {
+      "is_error": false,
+      "count": 1,
+      "files": [
+        "creds.txt"
+      ],
+      "truncated": false,
+      "text": "Found 1 file(s) containing pattern '<secret-hidden>' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace':\n/tmp/claude-0/"
+    },
+    "patch": {
+      "is_error": false,
+      "count": 0,
+      "files": [],
+      "truncated": null,
+      "text": "Done!"
+    }
+  },
+  "python": {
+    "glob_py": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) matching pattern '**/*.py' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace':\n/tmp/claude-0/-home-user"
+    },
+    "glob_in_path": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f149.txt",
+        "many/f148.txt",
+        "many/f147.txt",
+        "many/f146.txt",
+        "many/f145.txt"
+      ],
+      "truncated": true,
+      "text": "Found 100 file(s) matching pattern '*.txt' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace/many':\n/tmp/claude-0/-home"
+    },
+    "grep_include": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) containing pattern 'def \\w+' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace' (filtered by '*.py'):\n/"
+    },
+    "grep_many": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f149.txt",
+        "many/f148.txt",
+        "many/f147.txt",
+        "many/f146.txt",
+        "many/f145.txt"
+      ],
+      "truncated": true,
+      "text": "Found 100 file(s) containing pattern 'needle' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace/many':\n/tmp/claude-0/-h"
+    },
+    "grep_secret": {
+      "is_error": false,
+      "count": 1,
+      "files": [
+        "creds.txt"
+      ],
+      "truncated": false,
+      "text": "Found 1 file(s) containing pattern '<secret-hidden>' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s14b1-all/work/S14-core-tools-11/block1/runs/20261117-105159-24e4da/workspace':\n/tmp/claude-0/"
+    }
+  },
+  "same_files": true,
+  "same_truncated": true,
+  "newest_first": true,
+  "added_file": "token sk-live-4242abcd",
+  "secret_in_observations": false,
+  "_exit": 0,
+  "_seconds": 5.1,
+  "checks": [
+    {
+      "check": "rg_available eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "same_files eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "same_truncated eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rg.glob_py.count eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "newest_first eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rg.glob_in_path.count eq 100",
+      "ok": true,
+      "actual": "100"
+    },
+    {
+      "check": "rg.glob_in_path.truncated eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rg.grep_include.files len-eq 2",
+      "ok": true,
+      "actual": "[\"src/pkg/new.py\", \"src/old.py\"]"
+    },
+    {
+      "check": "rg.grep_include.text contains filtered by '*.py'",
+      "ok": true,
+      "actual": "Found 2 file(s) containing pattern 'def \\w+' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxxxxxxx/s1"
+    },
+    {
+      "check": "rg.grep_many.truncated eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "python.grep_many.truncated eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rg.grep_secret.files.0 eq creds.txt",
+      "ok": true,
+      "actual": "creds.txt"
+    },
+    {
+      "check": "rg.grep_secret.text contains <secret-hidden>",
+      "ok": true,
+      "actual": "Found 1 file(s) containing pattern '<secret-hidden>' in '<scratch>/sdk-coordinator-long-path-check-for-the-clip-limit-xxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "check": "rg.patch.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "added_file contains sk-live-4242abcd",
+      "ok": true,
+      "actual": "token sk-live-4242abcd"
+    },
+    {
+      "check": "secret_in_observations eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 5s]

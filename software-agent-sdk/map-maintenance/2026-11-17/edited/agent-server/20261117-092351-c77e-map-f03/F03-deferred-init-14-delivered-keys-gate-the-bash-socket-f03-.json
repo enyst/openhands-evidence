@@ -1,0 +1,17 @@
+{
+  "file": "F03-deferred-init.md",
+  "bullet": "Delivered keys gate the bash socket (`F03.init-keys-gate-bash-socket`).",
+  "ids": [
+    "F03.init-keys-gate-bash-socket"
+  ],
+  "line": 326,
+  "script": "SOCK_PROBE=\"$AGENT_SERVER_VERIFY_RUN/fixtures/qa-f03-ws-after-init.txt\"\nrm -f \"$SOCK_PROBE\"\ncontrol-agent-server ws listen /sockets/bash-events --auth none \\\n  --send \"{\\\"command\\\": \\\"echo no-key > $SOCK_PROBE\\\"}\" --duration 5 --expect-close 4001 --save F03.init-keys-gate-bash-socket/no-key\ntest ! -f \"$SOCK_PROBE\"\ncontrol-agent-server ws listen /sockets/bash-events --auth key --key qa-user-key \\\n  --send \"{\\\"command\\\": \\\"echo with-key > $SOCK_PROBE\\\"}\" --until-kind BashOutput --until exit_code=0 --duration 20 \\\n  --expect-kind BashCommand --save F03.init-keys-gate-bash-socket/with-key\ngrep -qx with-key \"$SOCK_PROBE\"\n",
+  "exit_code": 0,
+  "elapsed_ms": 954,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"path\": \"/sockets/bash-events\",\n  \"opened\": true,\n  \"frames\": 0,\n  \"kinds\": {},\n  \"stopped\": \"closed\",\n  \"close\": {\n    \"code\": 4001,\n    \"reason\": \"Authentication failed\"\n  },\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-092351-c77e-map-f03/evidence/F03.init-keys-gate-bash-socket/no-key.json\",\n  \"first_frames\": []\n}\n{\n  \"ok\": true,\n  \"path\": \"/sockets/bash-events\",\n  \"opened\": true,\n  \"frames\": 2,\n  \"kinds\": {\n    \"BashCommand\": 1,\n    \"BashOutput\": 1\n  },\n  \"stopped\": \"until-kind BashOutput\",\n  \"close\": null,\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-092351-c77e-map-f03/evidence/F03.init-keys-gate-bash-socket/with-key.json\",\n  \"first_frames\": [\n    {\n      \"kind\": \"BashCommand\",\n      \"frame\": {\n        \"command\": \"echo with-key > <scratch>/agent-server-verifier/20261117-092351-c77e-map-f03/fixtures/qa-f03-ws-after-init.txt\",\n        \"cwd\": null,\n        \"timeout\": 300,\n        \"id\": \"d149e2c99cd747469093755d8d9315d8\",\n        \"timestamp\": \"2026-11-17T09:24:47.655658Z\",\n        \"kind\": \"BashCommand\"\n      }\n    },\n    {\n      \"kind\": \"BashOutput\",\n      \"frame\": {\n        \"id\": \"796b008ba32a4943b8545b4b7e2857f2\",\n        \"timestamp\": \"2026-11-17T09:24:47.658216Z\",\n        \"command_id\": \"d149e2c99cd747469093755d8d9315d8\",\n        \"order\": 0,\n        \"exit_code\": 0,\n        \"stdout\": null,\n        \"stderr\": null,\n        \"kind\": \"BashOutput\"\n      }\n    }\n  ]\n}\n",
+  "stderr": ""
+}

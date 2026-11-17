@@ -1,0 +1,130 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/public --arg local \
+  --check main_default eq '["alpha", "skills/gamma"]' --check main_all eq '["alpha", "beta", "skills/gamma"]' \
+  --check main_small eq '["beta"]' --check cache_clone eq true \
+  --check main_default_again eq '["alpha", "skills/gamma"]' --check tag_v1 eq '["alpha"]'
+control-sdk exec -- mv "$SDK_VERIFY_RUN/extensions" "$SDK_VERIFY_RUN/extensions.gone"
+control-sdk program S07/public --arg offline --check repo_present eq false --check main_default eq '["alpha", "skills/gamma"]'
+control-sdk exec -- mv "$SDK_VERIFY_RUN/extensions.gone" "$SDK_VERIFY_RUN/extensions"
+control-sdk program S07/public --arg env --env EXTENSIONS_REF=v1 --check ref eq v1 --check default_ref_load eq '["alpha"]'
+{
+  "ok": true,
+  "mode": "local",
+  "main_default": [
+    "alpha",
+    "skills/gamma"
+  ],
+  "main_all": [
+    "alpha",
+    "beta",
+    "skills/gamma"
+  ],
+  "main_small": [
+    "beta"
+  ],
+  "cache_clone": true,
+  "main_default_again": [
+    "alpha",
+    "skills/gamma"
+  ],
+  "tag_v1": [
+    "alpha"
+  ],
+  "_exit": 0,
+  "_seconds": 10.3,
+  "checks": [
+    {
+      "check": "main_default eq [\"alpha\", \"skills/gamma\"]",
+      "ok": true,
+      "actual": "[\"alpha\", \"skills/gamma\"]"
+    },
+    {
+      "check": "main_all eq [\"alpha\", \"beta\", \"skills/gamma\"]",
+      "ok": true,
+      "actual": "[\"alpha\", \"beta\", \"skills/gamma\"]"
+    },
+    {
+      "check": "main_small eq [\"beta\"]",
+      "ok": true,
+      "actual": "[\"beta\"]"
+    },
+    {
+      "check": "cache_clone eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "main_default_again eq [\"alpha\", \"skills/gamma\"]",
+      "ok": true,
+      "actual": "[\"alpha\", \"skills/gamma\"]"
+    },
+    {
+      "check": "tag_v1 eq [\"alpha\"]",
+      "ok": true,
+      "actual": "[\"alpha\"]"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "ok": true,
+  "mode": "offline",
+  "repo_present": false,
+  "main_default": [
+    "alpha",
+    "skills/gamma"
+  ],
+  "_exit": 0,
+  "_seconds": 10.7,
+  "checks": [
+    {
+      "check": "repo_present eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "main_default eq [\"alpha\", \"skills/gamma\"]",
+      "ok": true,
+      "actual": "[\"alpha\", \"skills/gamma\"]"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "ok": true,
+  "mode": "env",
+  "ref": "v1",
+  "default_ref_load": [
+    "alpha"
+  ],
+  "_exit": 0,
+  "_seconds": 14.5,
+  "checks": [
+    {
+      "check": "ref eq v1",
+      "ok": true,
+      "actual": "v1"
+    },
+    {
+      "check": "default_ref_load eq [\"alpha\"]",
+      "ok": true,
+      "actual": "[\"alpha\"]"
+    }
+  ]
+}
+
+[exit 0 after 37s]

@@ -1,0 +1,69 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Create validation (`F23.conn-create-validation`).",
+  "ids": [
+    "F23.conn-create-validation"
+  ],
+  "line": 316,
+  "script": "control-agent-server api POST /api/llm/provider-connections --json '{\"display_name\": \"qa-f23-bad\"}' --expect 422 \\\n  --check detail.0.type eq missing --check detail.0.loc contains api_key --save F23.conn-create-validation/no-key\ncontrol-agent-server api POST /api/llm/provider-connections --json '{\"api_key\": \"sk-qa-f23-bad\"}' --expect 422 \\\n  --check detail.0.type eq missing --check detail.0.loc contains display_name\ncontrol-agent-server api POST /api/llm/provider-connections --json '{\"display_name\": \"qa-f23-bad\", \"api_key\": \"\"}' --expect 422 \\\n  --check detail.0.type eq too_short --check detail.0.loc contains api_key\ncontrol-agent-server api POST /api/llm/provider-connections --json '{\"display_name\": \"\", \"api_key\": \"sk-qa-f23-bad\"}' --expect 422 \\\n  --check detail.0.type eq string_too_short --check detail.0.loc contains display_name\ncontrol-agent-server api POST /api/llm/provider-connections --json '{\"display_name\": \"qa-f23-bad\", \"provider\": \"\", \"api_key\": \"sk-qa-f23-bad\"}' --expect 422 \\\n  --check detail.0.type eq string_too_short --check detail.0.loc contains provider\ncontrol-agent-server api POST /api/llm/provider-connections --expect 422 --check detail.0.type eq string_too_long \\\n  --json \"{\\\"display_name\\\": \\\"$(printf 'q%.0s' $(seq 129))\\\", \\\"api_key\\\": \\\"sk-qa-f23-bad\\\"}\"\ncontrol-agent-server api POST /api/llm/provider-connections --expect 422 --check detail.0.type eq extra_forbidden --check detail.0.loc contains extra_headers \\\n  --json '{\"display_name\": \"qa-f23-bad\", \"api_key\": \"sk-qa-f23-bad\", \"extra_headers\": {\"Authorization\": \"Bearer qa-f23\"}}' --save F23.conn-create-validation/extra\ncontrol-agent-server api POST /api/llm/provider-connections --expect 422 --check detail.0.type eq extra_forbidden --check detail.0.loc contains id \\\n  --json '{\"id\": \"qa-f23-chosen\", \"display_name\": \"qa-f23-bad\", \"api_key\": \"sk-qa-f23-bad\"}'\ncontrol-agent-server api GET /api/llm/provider-connections --check . len-eq 2 --check . not-contains qa-f23-bad\n",
+  "exit_code": 1,
+  "elapsed_ms": 2105,
+  "failed_line": 5,
+  "failed_command": "control-agent-server api POST /api/llm/provider-connections --json '{\"display_name\": \"qa-f23-bad\", \"api_key\": \"\"}' --expect 422 --check detail.0.type eq too_short --check detail.0.loc contains api_key",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 422,
+    "request": {
+      "method": "POST",
+      "path": "/api/llm/provider-connections",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "display_name": "qa-f23-bad",
+        "api_key": ""
+      },
+      "files": []
+    },
+    "response": {
+      "status": 422,
+      "headers": {
+        "content-length": "220",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body",
+              "api_key"
+            ],
+            "msg": "Value error, The secret must be a real value, not blank or redacted",
+            "input": "",
+            "ctx": {
+              "error": "The secret must be a real value, not blank or redacted"
+            }
+          }
+        ]
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 163,
+    "checks": [
+      {
+        "check": "detail.0.type eq too_short",
+        "ok": false,
+        "actual": "value_error"
+      },
+      {
+        "check": "detail.0.loc contains api_key",
+        "ok": true,
+        "actual": "[\"body\", \"api_key\"]"
+      }
+    ],
+    "hint": "failed check: detail.0.type eq too_short"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 422,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/llm/provider-connections\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"display_name\": \"qa-f23-bad\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 422,\n    \"headers\": {\n      \"content-length\": \"117\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": [\n        {\n          \"type\": \"missing\",\n          \"loc\": [\n            \"body\",\n            \"api_key\"\n          ],\n          \"msg\": \"Field required\",\n          \"input\": {\n            \"display_name\": \"qa-f23-bad\"\n          }\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 137,\n  \"checks\": [\n    {\n      \"check\": \"detail.0.type eq missing\",\n      \"ok\": true,\n      \"actual\": \"missing\"\n    },\n    {\n      \"check\": \"detail.0.loc contains api_key\",\n      \"ok\": true,\n      \"actual\": \"[\\\"body\\\", \\\"api_key\\\"]\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261117-085130-98d9-map-f23/evidence/F23.conn-create-validation/no-key.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 422,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/llm/provider-connections\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"api_key\": \"sk-qa-f23-bad\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 422,\n    \"headers\": {\n      \"content-length\": \"117\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": [\n        {\n          \"type\": \"missing\",\n          \"loc\": [\n            \"body\",\n            \"display_name\"\n          ],\n          \"msg\": \"Field required\",\n          \"input\": {\n            \"api_key\": \"<redacted>\"\n          }\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \"detail.0.type eq missing\",\n      \"ok\": true,\n      \"actual\": \"missing\"\n    },\n    {\n      \"check\": \"detail.0.loc contains display_name\",\n      \"ok\": true,\n      \"actual\": \"[\\\"body\\\", \\\"display_name\\\"]\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 422,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/llm/provider-connections\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"display_name\": \"qa-f23-bad\",\n      \"api_key\": \"\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 422,\n    \"headers\": {\n      \"content-length\": \"220\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": [\n        {\n          \"type\": \"value_error\",\n          \"loc\": [\n            \"body\",\n            \"api_key\"\n          ],\n          \"msg\": \"Value error, The secret must be a real value, not blank or redacted\",\n          \"input\": \"\",\n          \"ctx\": {\n            \"error\": \"The secret must be a real value, not blank or redacted\"\n          }\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 163,\n  \"checks\": [\n    {\n      \"check\": \"detail.0.type eq too_short\",\n      \"ok\": false,\n      \"actual\": \"value_error\"\n    },\n    {\n      \"check\": \"detail.0.loc contains api_key\",\n      \"ok\": true,\n      \"actual\": \"[\\\"body\\\", \\\"api_key\\\"]\"\n    }\n  ],\n  \"hint\": \"failed check: detail.0.type eq too_short\"\n}\n",
+  "stderr": ""
+}

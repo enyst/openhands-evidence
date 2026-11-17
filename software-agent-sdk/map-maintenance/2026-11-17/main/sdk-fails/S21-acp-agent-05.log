@@ -1,0 +1,91 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S21/npx_warm --timeout 300 \
+  --check registry eq http://127.0.0.1:9/ --check npm_cache_dirs eq '["conversations/npm-cache"]' \
+  --check tarballs_in_cache eq 0 --check home_npm_dir_created eq false \
+  --check status eq error --check seconds lt 60 \
+  --check raised_names_every_package eq true --check raised not-contains "Connection closed" \
+  --check told contains ECONNREFUSED
+{
+  "ok": true,
+  "provider": "claude-code",
+  "command": [
+    "npx",
+    "-y",
+    "--prefer-offline",
+    "@agentclientprotocol/claude-agent-acp@0.99.1"
+  ],
+  "packages": [
+    "@agentclientprotocol/claude-agent-acp@0.99.1"
+  ],
+  "registry": "http://127.0.0.1:9/",
+  "raised": "ConnectionError: Connection closed",
+  "raised_names_every_package": false,
+  "errors": [
+    {
+      "code": "ACPInitError",
+      "detail": "Connection closed"
+    }
+  ],
+  "status": "error",
+  "seconds": 0.6,
+  "warm_warnings": [
+    "ACP provider npx cache warm failed: provider=claude-code; continuing with normal startup: ACP provider cache warm failed for claude-code (exit code 1)"
+  ],
+  "told": "ConnectionError: Connection closed\nConnection closed\nACP provider npx cache warm failed: provider=claude-code; continuing with normal startup: ACP provider cache warm failed for claude-code (exit code 1)\nFailed to start ACP server: Connection closed",
+  "npm_cache_dirs": [
+    "conversations/npm-cache"
+  ],
+  "tarballs_in_cache": 0,
+  "home_npm_dir_created": false,
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "registry eq http://127.0.0.1:9/",
+      "ok": true,
+      "actual": "http://127.0.0.1:9/"
+    },
+    {
+      "check": "npm_cache_dirs eq [\"conversations/npm-cache\"]",
+      "ok": true,
+      "actual": "[\"conversations/npm-cache\"]"
+    },
+    {
+      "check": "tarballs_in_cache eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "home_npm_dir_created eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "seconds lt 60",
+      "ok": true,
+      "actual": "0.6"
+    },
+    {
+      "check": "raised_names_every_package eq true",
+      "ok": false,
+      "actual": "false"
+    },
+    {
+      "check": "raised not-contains Connection closed",
+      "ok": false,
+      "actual": "ConnectionError: Connection closed"
+    },
+    {
+      "check": "told contains ECONNREFUSED",
+      "ok": false,
+      "actual": "ConnectionError: Connection closed\nConnection closed\nACP provider npx cache warm failed: provider=claude-code; continuing with normal startup: ACP provider cache warm failed for claude-code (exit code"
+    }
+  ]
+}
+
+[exit 1 after 5s]

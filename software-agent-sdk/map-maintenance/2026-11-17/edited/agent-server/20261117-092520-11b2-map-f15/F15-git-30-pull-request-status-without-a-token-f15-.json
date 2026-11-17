@@ -1,0 +1,17 @@
+{
+  "file": "F15-git.md",
+  "bullet": "Pull-request status without a token (`F15.pr-status-token`).",
+  "ids": [
+    "F15.pr-status-token"
+  ],
+  "line": 875,
+  "script": "control-agent-server api GET /api/git/repositories/search --query provider=github --expect 200 --check missing_token eq true\ncontrol-agent-server api GET /api/git/repositories/qa/f15/pull-requests/1 --query provider=github --expect 409 \\\n  --check detail.code eq missing_provider_token --check detail.message eq 'No github token is configured' \\\n  --save F15.pr-status-token/missing\n",
+  "exit_code": 0,
+  "elapsed_ms": 1695,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/git/repositories/search\",\n    \"query\": [\n      [\n        \"provider\",\n        \"github\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"53\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"items\": [],\n      \"next_page_id\": null,\n      \"missing_token\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 143,\n  \"checks\": [\n    {\n      \"check\": \"missing_token eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 409,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/git/repositories/qa/f15/pull-requests/1\",\n    \"query\": [\n      [\n        \"provider\",\n        \"github\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 409,\n    \"headers\": {\n      \"content-length\": \"86\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": {\n        \"code\": \"missing_provider_token\",\n        \"message\": \"No github token is configured\"\n      }\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 105,\n  \"checks\": [\n    {\n      \"check\": \"detail.code eq missing_provider_token\",\n      \"ok\": true,\n      \"actual\": \"missing_provider_token\"\n    },\n    {\n      \"check\": \"detail.message eq No github token is configured\",\n      \"ok\": true,\n      \"actual\": \"No github token is configured\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server-verifier/20261117-092520-11b2-map-f15/evidence/F15.pr-status-token/missing.json\"\n}\n",
+  "stderr": ""
+}

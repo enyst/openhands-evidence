@@ -1,0 +1,15 @@
+{
+  "file": "F40-ask-user.md",
+  "bullet": "Preconditions",
+  "ids": [],
+  "line": 87,
+  "script": "control-agent-server llm preset deepseek\n",
+  "exit_code": 0,
+  "elapsed_ms": 3232,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"profiles\": [\n    {\n      \"profile\": \"deepseek-flash\",\n      \"model\": \"deepseek/deepseek-flash\",\n      \"validate\": {\n        \"status\": 200,\n        \"body\": {\n          \"valid\": true,\n          \"error\": null\n        }\n      },\n      \"saved\": 201,\n      \"activated\": 200\n    },\n    {\n      \"profile\": \"deepseek-pro\",\n      \"model\": \"deepseek/deepseek-v4-pro\",\n      \"saved\": 201\n    }\n  ]\n}\n",
+  "stderr": ""
+}

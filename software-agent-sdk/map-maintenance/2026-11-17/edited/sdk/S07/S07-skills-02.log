@@ -1,0 +1,359 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/agentskills \
+  --check dict_sizes eq '[0, 0, 3]' --check agentskills eq '["hidden", "longdesc", "rot13"]' \
+  --check fields.license eq MIT --check fields.compatibility eq "needs bash" \
+  --check fields.metadata.author eq verify-sdk --check fields.allowed_tools eq '["terminal"]' \
+  --check fields.is_agentskills_format eq true --check reference_md_is_skill eq false \
+  --check name_errors len-eq 2 \
+  --check resources.scripts eq '["encrypt.sh"]' --check resources.references eq '["guide.md"]' \
+  --check resources.assets eq '["table.txt"]' --check resources.root_ok eq true \
+  --check discovered_scripts eq '["encrypt.sh"]' \
+  --check mcp_args.0 eq fallback --check mcp_args.1 matches '/\.agents/skills/rot13$' \
+  --check mcp_env_token eq from-env --check mcp_env_token_with_secret eq from-secret \
+  --check invalid_mcp_json_error eq SkillValidationError \
+  --check secret_in_dump eq false --check secret_after_cipher eq true --check skill_json_roundtrip eq true \
+  --check tools contains invoke_skill --check listed eq '["rot13", "longdesc", "homeskill"]' \
+  --check description_escaped eq true --check body_in_prompt eq false \
+  --check turn1_trigger_injected eq true --check turn2_hidden_injected eq true \
+  --check obs_is_error eq '[false, true, true, false, false]' --check first_has_body eq true \
+  --check inline_rendered eq true --check fenced_literal eq true --check escaped_literal eq true \
+  --check footer_relative eq true --check footer_home_absolute eq true \
+  --check unknown_error_lists eq true --check hidden_refused eq true --check invoked eq '["rot13", "homeskill"]' \
+  --check tools_default_tools_off eq '["invoke_skill"]' --check tools_hidden_only not-contains invoke_skill \
+  --check tools_legacy_only not-contains invoke_skill
+{
+  "ok": true,
+  "dict_sizes": [
+    0,
+    0,
+    3
+  ],
+  "agentskills": [
+    "hidden",
+    "longdesc",
+    "rot13"
+  ],
+  "fields": {
+    "description": "Encrypt text with <rot13> & friends.",
+    "license": "MIT",
+    "compatibility": "needs bash",
+    "metadata": {
+      "author": "verify-sdk"
+    },
+    "allowed_tools": [
+      "terminal"
+    ],
+    "is_agentskills_format": true,
+    "triggers": [
+      "encrypt"
+    ]
+  },
+  "reference_md_is_skill": false,
+  "name_errors": [
+    "Name must be lowercase alphanumeric with single hyphens (e.g., 'my-skill', 'pdf-tools')",
+    "Name 'Bad_Name' does not match directory 'bad-name'"
+  ],
+  "resources": {
+    "scripts": [
+      "encrypt.sh"
+    ],
+    "references": [
+      "guide.md"
+    ],
+    "assets": [
+      "table.txt"
+    ],
+    "root_ok": true
+  },
+  "discovered_scripts": [
+    "encrypt.sh"
+  ],
+  "mcp_args": [
+    "fallback",
+    "<scratch>/sdk-verifier/S07/work/S07-skills-02/block1/runs/20261117-091618-7ea51a/workspace/.agents/skills/rot13"
+  ],
+  "mcp_env_token": "from-env",
+  "mcp_env_token_with_secret": "from-secret",
+  "invalid_mcp_json_error": "SkillValidationError",
+  "tools": [
+    "finish",
+    "invoke_skill"
+  ],
+  "listed": [
+    "rot13",
+    "longdesc",
+    "homeskill"
+  ],
+  "description_escaped": true,
+  "body_in_prompt": false,
+  "longdesc_full_in_prompt": false,
+  "longdesc_notice": "<description>x\u2026&lt;response clipped&gt;&lt;NOTE&gt;Due to the max output limit, only part of the full description is shown. Call invoke_skill(name=\"longdesc\") to load the full skill.&lt;/NOTE&gt;x\u2026</description>",
+  "longdesc_points_to_invoke_skill": true,
+  "longdesc_leaks_location": false,
+  "turn1_trigger_injected": true,
+  "turn2_hidden_injected": true,
+  "observations": [
+    {
+      "text": "ROT13-BODY: run scripts/encrypt.sh. Answer: INLINE-42.\n\n```sh\n!`echo FENCED`\n```\n\nEscaped !`echo ESCAPED`.\n\n---\nThis skill is located at `.agents/skills/rot13`. Any files it references (e.g. under `scripts/`, `references/`, `assets/`) are relative to that directory.",
+      "is_error": false
+    },
+    {
+      "text": "Unknown skill 'nope'. Available skills: homeskill, longdesc, rot13.",
+      "is_error": true
+    },
+    {
+      "text": "Skill 'hidden' cannot be invoked directly. It can only be activated by trigger matching.",
+      "is_error": true
+    },
+    {
+      "text": "ROT13-BODY: run scripts/encrypt.sh. Answer: INLINE-42.\n\n```sh\n!`echo FENCED`\n```\n\nEscaped !`echo ESCAPED`.\n\n---\nThis skill is located at `.agents/skills/rot13`. Any files it references (e.g. under `scripts/`, `references/`, `assets/`) are relative to that directory.",
+      "is_error": false
+    },
+    {
+      "text": "HOME-BODY\n\n---\nThis skill is located at `<scratch>/sdk-verifier/S07/work/S07-skills-02/block1/runs/20261117-091618-7ea51a/home/.agents/skills/homeskill`. Any files it references (e.g. under `scripts/`, `references/`, `assets/`) are relative to that directory.",
+      "is_error": false
+    }
+  ],
+  "obs_is_error": [
+    false,
+    true,
+    true,
+    false,
+    false
+  ],
+  "first_has_body": true,
+  "inline_rendered": true,
+  "fenced_literal": true,
+  "escaped_literal": true,
+  "footer_relative": true,
+  "footer_home_absolute": true,
+  "unknown_error_lists": true,
+  "hidden_refused": true,
+  "invoked": [
+    "rot13",
+    "homeskill"
+  ],
+  "tools_default_tools_off": [
+    "invoke_skill"
+  ],
+  "tools_hidden_only": [
+    "finish"
+  ],
+  "tools_legacy_only": [
+    "finish"
+  ],
+  "secret_in_dump": false,
+  "skill_json_roundtrip": true,
+  "secret_after_cipher": true,
+  "_exit": 0,
+  "_seconds": 14.1,
+  "checks": [
+    {
+      "check": "dict_sizes eq [0, 0, 3]",
+      "ok": true,
+      "actual": "[0, 0, 3]"
+    },
+    {
+      "check": "agentskills eq [\"hidden\", \"longdesc\", \"rot13\"]",
+      "ok": true,
+      "actual": "[\"hidden\", \"longdesc\", \"rot13\"]"
+    },
+    {
+      "check": "fields.license eq MIT",
+      "ok": true,
+      "actual": "MIT"
+    },
+    {
+      "check": "fields.compatibility eq needs bash",
+      "ok": true,
+      "actual": "needs bash"
+    },
+    {
+      "check": "fields.metadata.author eq verify-sdk",
+      "ok": true,
+      "actual": "verify-sdk"
+    },
+    {
+      "check": "fields.allowed_tools eq [\"terminal\"]",
+      "ok": true,
+      "actual": "[\"terminal\"]"
+    },
+    {
+      "check": "fields.is_agentskills_format eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reference_md_is_skill eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "name_errors len-eq 2",
+      "ok": true,
+      "actual": "[\"Name must be lowercase alphanumeric with single hyphens (e.g., 'my-skill', 'pdf-tools')\", \"Name 'Bad_Name' does not match directory 'bad-name'\"]"
+    },
+    {
+      "check": "resources.scripts eq [\"encrypt.sh\"]",
+      "ok": true,
+      "actual": "[\"encrypt.sh\"]"
+    },
+    {
+      "check": "resources.references eq [\"guide.md\"]",
+      "ok": true,
+      "actual": "[\"guide.md\"]"
+    },
+    {
+      "check": "resources.assets eq [\"table.txt\"]",
+      "ok": true,
+      "actual": "[\"table.txt\"]"
+    },
+    {
+      "check": "resources.root_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "discovered_scripts eq [\"encrypt.sh\"]",
+      "ok": true,
+      "actual": "[\"encrypt.sh\"]"
+    },
+    {
+      "check": "mcp_args.0 eq fallback",
+      "ok": true,
+      "actual": "fallback"
+    },
+    {
+      "check": "mcp_args.1 matches /\\.agents/skills/rot13$",
+      "ok": true,
+      "actual": "<scratch>/sdk-verifier/S07/work/S07-skills-02/block1/runs/20261117-091618-7ea51a/workspace/.agents/skills/rot13"
+    },
+    {
+      "check": "mcp_env_token eq from-env",
+      "ok": true,
+      "actual": "from-env"
+    },
+    {
+      "check": "mcp_env_token_with_secret eq from-secret",
+      "ok": true,
+      "actual": "from-secret"
+    },
+    {
+      "check": "invalid_mcp_json_error eq SkillValidationError",
+      "ok": true,
+      "actual": "SkillValidationError"
+    },
+    {
+      "check": "secret_in_dump eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "secret_after_cipher eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "skill_json_roundtrip eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "tools contains invoke_skill",
+      "ok": true,
+      "actual": "[\"finish\", \"invoke_skill\"]"
+    },
+    {
+      "check": "listed eq [\"rot13\", \"longdesc\", \"homeskill\"]",
+      "ok": true,
+      "actual": "[\"rot13\", \"longdesc\", \"homeskill\"]"
+    },
+    {
+      "check": "description_escaped eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "body_in_prompt eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "turn1_trigger_injected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn2_hidden_injected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "obs_is_error eq [false, true, true, false, false]",
+      "ok": true,
+      "actual": "[false, true, true, false, false]"
+    },
+    {
+      "check": "first_has_body eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "inline_rendered eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "fenced_literal eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "escaped_literal eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "footer_relative eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "footer_home_absolute eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "unknown_error_lists eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hidden_refused eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "invoked eq [\"rot13\", \"homeskill\"]",
+      "ok": true,
+      "actual": "[\"rot13\", \"homeskill\"]"
+    },
+    {
+      "check": "tools_default_tools_off eq [\"invoke_skill\"]",
+      "ok": true,
+      "actual": "[\"invoke_skill\"]"
+    },
+    {
+      "check": "tools_hidden_only not-contains invoke_skill",
+      "ok": true,
+      "actual": "[\"finish\"]"
+    },
+    {
+      "check": "tools_legacy_only not-contains invoke_skill",
+      "ok": true,
+      "actual": "[\"finish\"]"
+    }
+  ]
+}
+
+[exit 0 after 15s]

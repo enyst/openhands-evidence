@@ -1,0 +1,29 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Limit (`F23.conn-limit`).",
+  "ids": [
+    "F23.conn-limit"
+  ],
+  "line": 682,
+  "script": "control-agent-server exec --env QA_FILL=64 --expect-output created=64 -- bash -c 'n=0; for i in $(seq \"$QA_FILL\"); do\n  s=$(curl -sS --noproxy \"*\" -o /dev/null -w \"%{http_code}\" -H \"X-Session-API-Key: $SESSION_API_KEY\" -H \"Content-Type: application/json\" \\\n    -d \"{\\\"display_name\\\": \\\"qa-f23-fill-$i\\\", \\\"api_key\\\": \\\"sk-qa-f23-fill\\\"}\" \"$AGENT_SERVER_URL/api/llm/provider-connections\")\n  test \"$s\" = 201 || exit 1; n=$((n + 1)); done; echo \"created=$n\"'\ncontrol-agent-server api GET /api/llm/provider-connections --quiet --check . len-eq 64\ncontrol-agent-server api POST /api/llm/provider-connections --json '{\"display_name\": \"qa-f23-over\", \"api_key\": \"sk-qa-f23-over\"}' --expect 409 \\\n  --check detail eq 'Provider connection limit reached (64). Delete one before adding another.' --save F23.conn-limit/over\ncontrol-agent-server api GET /api/llm/provider-connections --quiet --check . len-eq 64 --check . not-contains qa-f23-over\nFIRST=$(control-agent-server api GET /api/llm/provider-connections --field 0.id)\ncontrol-agent-server api DELETE \"/api/llm/provider-connections/$FIRST\" --expect 200 --quiet\ncontrol-agent-server api POST /api/llm/provider-connections --json '{\"display_name\": \"qa-f23-over\", \"api_key\": \"sk-qa-f23-over\"}' --expect 201 \\\n  --save F23.conn-limit/after-delete\nIDS=$(control-agent-server api GET /api/llm/provider-connections --field . | jq -r '[.[].id] | join(\" \")')\ncontrol-agent-server exec --env \"QA_IDS=$IDS\" --expect-output deleted=64 -- bash -c 'n=0; for id in $QA_IDS; do\n  s=$(curl -sS --noproxy \"*\" -o /dev/null -w \"%{http_code}\" -X DELETE -H \"X-Session-API-Key: $SESSION_API_KEY\" \"$AGENT_SERVER_URL/api/llm/provider-connections/$id\")\n  test \"$s\" = 200 || exit 1; n=$((n + 1)); done; echo \"deleted=$n\"'\ncontrol-agent-server api GET /api/llm/provider-connections --check . len-eq 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 502,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env QA_FILL=64 --expect-output created=64 -- bash -c 'n=0; for i in $(seq \"$QA_FILL\"); do\n  s=$(curl -sS --noproxy \"*\" -o /dev/null -w \"%{http_code}\" -H \"X-Session-API-Key: $SESSION_API_KEY\" -H \"Content-Type: application/json\" \\\n    -d \"{\\\"display_name\\\": \\\"qa-f23-fill-$i\\\", \\\"api_key\\\": \\\"sk-qa-f23-fill\\\"}\" \"$AGENT_SERVER_URL/api/llm/provider-connections\")\n  test \"$s\" = 201 || exit 1; n=$((n + 1)); done; echo \"created=$n\"'",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 58,
+    "stdout_tail": "",
+    "stderr_tail": "",
+    "hint": {
+      "missing": [
+        "created=64"
+      ],
+      "unexpected": []
+    }
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 58,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"\",\n  \"hint\": {\n    \"missing\": [\n      \"created=64\"\n    ],\n    \"unexpected\": []\n  }\n}\n",
+  "stderr": ""
+}

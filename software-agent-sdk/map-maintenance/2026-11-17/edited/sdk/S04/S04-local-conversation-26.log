@@ -1,0 +1,141 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/views --arg final \
+  --check finish eq "the finish message" --check text_reply eq "a plain text answer" --check nothing len-eq 0 \
+  --check finish_then_text eq "then talked" --check text_then_finish eq "then finished"
+control-sdk program S04/views --arg title-tags \
+  --check agent_llm eq "Agent model title" --check reasoning_stripped eq "Fix login reset emails" \
+  --check explicit_llm eq "Title from the explicit LLM" \
+  --check fallback_on_error eq "Please fix the login bug that breaks password r..." \
+  --check fallback_max_length eq "Please fix the lo..." --check only_reasoning matches "^Please fix" \
+  --check no_user_message contains "No user messages found" \
+  --check tags.env eq verify --check tags_on_disk.team2 eq sdk \
+  --check bad_tags.0 contains "lowercase alphanumeric" --check bad_tags.1 contains "lowercase alphanumeric" \
+  --check bad_tags.2 contains "maximum length of 256"
+{
+  "ok": true,
+  "mode": "final",
+  "finish": "the finish message",
+  "text_reply": "a plain text answer",
+  "nothing": "",
+  "finish_then_text": "then talked",
+  "text_then_finish": "then finished",
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "finish eq the finish message",
+      "ok": true,
+      "actual": "the finish message"
+    },
+    {
+      "check": "text_reply eq a plain text answer",
+      "ok": true,
+      "actual": "a plain text answer"
+    },
+    {
+      "check": "nothing len-eq 0",
+      "ok": true,
+      "actual": ""
+    },
+    {
+      "check": "finish_then_text eq then talked",
+      "ok": true,
+      "actual": "then talked"
+    },
+    {
+      "check": "text_then_finish eq then finished",
+      "ok": true,
+      "actual": "then finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "title-tags",
+  "agent_llm": "Agent model title",
+  "reasoning_stripped": "Fix login reset emails",
+  "explicit_llm": "Title from the explicit LLM",
+  "fallback_on_error": "Please fix the login bug that breaks password r...",
+  "fallback_max_length": "Please fix the lo...",
+  "only_reasoning": "Please fix the login bug that breaks password r...",
+  "no_user_message": "ValueError: No user messages found in conversation events",
+  "tags": {
+    "env": "verify",
+    "team2": "sdk"
+  },
+  "tags_on_disk": {
+    "env": "verify",
+    "team2": "sdk"
+  },
+  "bad_tags": [
+    "ValidationError: 1 validation error for ConversationState\ntags\n  Value error, Tag key 'Env' is invalid: keys must be lowercase alphanumeric only [type=value_error, input_value={'Env': 'x'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+    "ValidationError: 1 validation error for ConversationState\ntags\n  Value error, Tag key 'team-name' is invalid: keys must be lowercase alphanumeric only [type=value_error, input_value={'team-name': 'x'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+    "ValidationError: 1 validation error for ConversationState\ntags\n  Value error, Tag value for 'ok' exceeds maximum length of 256 characters [type=value_error, input_value={'ok': 'xxxxxxxxxxxxxxxxx...xxxxxxxxxxxxxxxxxxxxxx'}, input_type=dict]\n    For further information visit https://errors.pydantic.de"
+  ],
+  "_exit": 0,
+  "_seconds": 5.4,
+  "checks": [
+    {
+      "check": "agent_llm eq Agent model title",
+      "ok": true,
+      "actual": "Agent model title"
+    },
+    {
+      "check": "reasoning_stripped eq Fix login reset emails",
+      "ok": true,
+      "actual": "Fix login reset emails"
+    },
+    {
+      "check": "explicit_llm eq Title from the explicit LLM",
+      "ok": true,
+      "actual": "Title from the explicit LLM"
+    },
+    {
+      "check": "fallback_on_error eq Please fix the login bug that breaks password r...",
+      "ok": true,
+      "actual": "Please fix the login bug that breaks password r..."
+    },
+    {
+      "check": "fallback_max_length eq Please fix the lo...",
+      "ok": true,
+      "actual": "Please fix the lo..."
+    },
+    {
+      "check": "only_reasoning matches ^Please fix",
+      "ok": true,
+      "actual": "Please fix the login bug that breaks password r..."
+    },
+    {
+      "check": "no_user_message contains No user messages found",
+      "ok": true,
+      "actual": "ValueError: No user messages found in conversation events"
+    },
+    {
+      "check": "tags.env eq verify",
+      "ok": true,
+      "actual": "verify"
+    },
+    {
+      "check": "tags_on_disk.team2 eq sdk",
+      "ok": true,
+      "actual": "sdk"
+    },
+    {
+      "check": "bad_tags.0 contains lowercase alphanumeric",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for ConversationState\ntags\n  Value error, Tag key 'Env' is invalid: keys must be lowercase alphanumeric only [type=value_error, input_value={'Env': 'x'}, input_type"
+    },
+    {
+      "check": "bad_tags.1 contains lowercase alphanumeric",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for ConversationState\ntags\n  Value error, Tag key 'team-name' is invalid: keys must be lowercase alphanumeric only [type=value_error, input_value={'team-name': 'x'}"
+    },
+    {
+      "check": "bad_tags.2 contains maximum length of 256",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for ConversationState\ntags\n  Value error, Tag value for 'ok' exceeds maximum length of 256 characters [type=value_error, input_value={'ok': 'xxxxxxxxxxxxxxxxx...xxx"
+    }
+  ]
+}
+
+[exit 0 after 11s]

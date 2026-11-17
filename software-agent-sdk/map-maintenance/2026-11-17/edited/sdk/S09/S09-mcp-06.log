@@ -1,0 +1,58 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/client --arg transports \
+  --check has_prefixed eq '["local_echo", "web_echo", "stream_echo"]' --check unprefixed_echo eq false \
+  --check echo.local contains "echo: local" --check echo.web contains "echo: web" \
+  --check echo.stream contains "echo: stream" --check single_server_names_unprefixed eq true
+{
+  "ok": true,
+  "mode": "transports",
+  "tool_count": 51,
+  "has_prefixed": [
+    "local_echo",
+    "web_echo",
+    "stream_echo"
+  ],
+  "unprefixed_echo": false,
+  "echo": {
+    "local": "[Tool 'local_echo' executed.]echo: local",
+    "web": "[Tool 'web_echo' executed.]echo: web",
+    "stream": "[Tool 'stream_echo' executed.]echo: stream"
+  },
+  "single_server_names_unprefixed": true,
+  "_exit": 0,
+  "_seconds": 11.4,
+  "checks": [
+    {
+      "check": "has_prefixed eq [\"local_echo\", \"web_echo\", \"stream_echo\"]",
+      "ok": true,
+      "actual": "[\"local_echo\", \"web_echo\", \"stream_echo\"]"
+    },
+    {
+      "check": "unprefixed_echo eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "echo.local contains echo: local",
+      "ok": true,
+      "actual": "[Tool 'local_echo' executed.]echo: local"
+    },
+    {
+      "check": "echo.web contains echo: web",
+      "ok": true,
+      "actual": "[Tool 'web_echo' executed.]echo: web"
+    },
+    {
+      "check": "echo.stream contains echo: stream",
+      "ok": true,
+      "actual": "[Tool 'stream_echo' executed.]echo: stream"
+    },
+    {
+      "check": "single_server_names_unprefixed eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 12s]

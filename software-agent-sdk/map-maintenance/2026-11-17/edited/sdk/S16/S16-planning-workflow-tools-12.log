@@ -1,0 +1,42 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S16/reactions --arg live \
+  --check execution_status eq finished --check react_calls ge 1 \
+  --check agent_reactions.0.emoji eq eyes --check agent_reactions.0.on_message eq true
+{
+  "ok": true,
+  "execution_status": "finished",
+  "agent_reactions": [
+    {
+      "emoji": "eyes",
+      "removed": false,
+      "on_message": true
+    }
+  ],
+  "react_calls": 1,
+  "_exit": 0,
+  "_seconds": 11.9,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "react_calls ge 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "agent_reactions.0.emoji eq eyes",
+      "ok": true,
+      "actual": "eyes"
+    },
+    {
+      "check": "agent_reactions.0.on_message eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 12s]

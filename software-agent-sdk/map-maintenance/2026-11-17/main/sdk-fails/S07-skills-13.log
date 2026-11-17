@@ -1,0 +1,13 @@
+$ # no model
+export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk exec --expect-output "DEMO 1: Installing local skills" -- python examples/05_skills_and_plugins/03_managing_installed_skills/main.py
+{
+  "exit": 1,
+  "seconds": 5.4,
+  "result": null,
+  "stdout_tail": "lls/example_skills/code-style-guide)\n  - rot13-encryption (enabled=False, source=/home/user/software-agent-sdk/examples/05_skills_and_plugins/01_loading_agentskills/example_skills/rot13-encryption)\nLoaded skills: ['code-style-guide']\nMetadata file:\n{\n  \"extensions\": {\n    \"code-style-guide\": {\n      \"name\": \"code-style-guide\",\n      \"version\": \"1.0.0\",\n      \"description\": \"Project coding standards and style guidelines. Always follow these conventions when writing or reviewing code.\\n\",\n      \"enabled\": true,\n      \"source\": \"/home/user/software-agent-sdk/examples/05_skills_and_plugins/01_loading_agentskills/example_skills/code-style-guide\",\n      \"requested_ref\": null,\n      \"resolved_ref\": null,\n      \"repo_path\": null,\n      \"installed_at\": \"2026-11-17T09:12:33.347313+00:00\",\n      \"install_path\": \"/tmp/tmpt4fz3zdb/installed-skills/code-style-guide\"\n    },\n    \"rot13-encryption\": {\n      \"name\": \"rot13-encryption\",\n      \"version\": \"1.0.0\",\n      \"description\": \"This skill helps encrypt and decrypt messages using ROT13 cipher. Use when the user asks to \\\"encrypt\\\" or \\\"decrypt\\\" a message.\\n\",\n      \"enabled\": false,\n      \"source\": \"/home/user/software-agent-sdk/examples/05_skills_and_plugins/01_loading_agentskills/example_skills/rot13-encryption\",\n      \"requested_ref\": null,\n      \"resolved_ref\": null,\n      \"repo_path\": null,\n      \"installed_at\": \"2026-11-17T09:12:33.349695+00:00\",\n      \"install_path\": \"/tmp/tmpt4fz3zdb/installed-skills/rot13-encryption\"\n    }\n  }\n}\n",
+  "stderr_tail": "Traceback (most recent call last):\n  File \"/home/user/software-agent-sdk/examples/05_skills_and_plugins/03_managing_installed_skills/main.py\", line 141, in <module>\n    demo_enable_disable_skill(installed_dir, skill_name=\"rot13-encryption\")\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/software-agent-sdk/examples/05_skills_and_plugins/03_managing_installed_skills/main.py\", line 105, in demo_enable_disable_skill\n    assert metadata[\"skills\"][skill_name][\"enabled\"] is False\n           ~~~~~~~~^^^^^^^^^^\nKeyError: 'skills'\n",
+  "ok": false
+}
+
+[exit 1 after 6s]

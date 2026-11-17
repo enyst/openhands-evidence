@@ -1,0 +1,66 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/control --arg cancel-token \
+  --check status eq paused --check token_cancelled eq true --check calls_started len-eq 1 --check calls_started.0 eq call-0 \
+  --check interrupt_events eq 1 --check second_token_is_new eq true --check second_token_cancelled eq false \
+  --check status_after_resume eq finished
+{
+  "ok": true,
+  "mode": "cancel-token",
+  "status": "paused",
+  "token_cancelled": true,
+  "calls_started": [
+    "call-0"
+  ],
+  "actions": 4,
+  "interrupt_events": 1,
+  "tokens_seen": 2,
+  "second_token_is_new": true,
+  "second_token_cancelled": false,
+  "status_after_resume": "finished",
+  "_exit": 0,
+  "_seconds": 7.6,
+  "checks": [
+    {
+      "check": "status eq paused",
+      "ok": true,
+      "actual": "paused"
+    },
+    {
+      "check": "token_cancelled eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "calls_started len-eq 1",
+      "ok": true,
+      "actual": "[\"call-0\"]"
+    },
+    {
+      "check": "calls_started.0 eq call-0",
+      "ok": true,
+      "actual": "call-0"
+    },
+    {
+      "check": "interrupt_events eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "second_token_is_new eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "second_token_cancelled eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "status_after_resume eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 8s]

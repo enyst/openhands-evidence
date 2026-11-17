@@ -1,0 +1,40 @@
+{
+  "file": "F19-mcp.md",
+  "bullet": "The agent uses the MCP tool (`F19.conversation-tool`).",
+  "ids": [
+    "F19.conversation-tool"
+  ],
+  "line": 943,
+  "script": "CID=$(control-agent-server conversation start --tools none --no-autotitle --no-run --print-id)\ncontrol-agent-server ws start \"/sockets/events/$CID\" --name f19-live --duration 300\ncontrol-agent-server conversation send \"$CID\" --text 'Call the MCP tool whose name ends with qa_echo, with text hi. Then finish.' --wait --until finished --timeout 240\ncontrol-agent-server conversation events \"$CID\" --kinds ObservationEvent --contains QA_MCP_ECHO:hi --expect-kind ObservationEvent --save F19.conversation-tool/observation\ncontrol-agent-server ws stop f19-live --kinds ObservationEvent --contains QA_MCP_ECHO:hi --expect-kind ObservationEvent --expect-min 1 --wait 15 --save F19.conversation-tool/ws-frames\npgrep -fx \"$MCP_CMDLINE\"\ncontrol-agent-server api DELETE \"/api/conversations/$CID\" --expect 200\nfor i in $(seq 1 20); do pgrep -fx \"$MCP_CMDLINE\" >/dev/null || break; sleep 0.5; done\nif pgrep -fx \"$MCP_CMDLINE\"; then echo 'the stdio child outlived its conversation' >&2; false; fi\n",
+  "exit_code": 1,
+  "elapsed_ms": 19557,
+  "failed_line": 9,
+  "failed_command": "false",
+  "failed_status": 1,
+  "observation": {
+    "ok": true,
+    "status": 200,
+    "request": {
+      "method": "DELETE",
+      "path": "/api/conversations/1039a803-fe26-467a-98ac-b921a148157a",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "16",
+        "content-type": "application/json"
+      },
+      "body": {
+        "success": true
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 444
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"capture\": \"f19-live\",\n  \"out\": \"<scratch>/agent-server/20261117-082812-4f49-map-f19/captures/f19-live.jsonl\",\n  \"hint\": \"`control-agent-server ws stop f19-live` (or `ws read f19-live`) after triggering the action\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"body\": {\n    \"success\": true\n  },\n  \"wait\": {\n    \"ok\": true,\n    \"status\": \"finished\",\n    \"transitions\": [\n      \"idle\",\n      \"running\",\n      \"finished\"\n    ],\n    \"waited_ms\": 4084\n  }\n}\n{\n  \"ok\": true,\n  \"id\": \"1039a803-fe26-467a-98ac-b921a148157a\",\n  \"total\": 11,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 5,\n    \"ActionEvent\": 2,\n    \"ObservationEvent\": 2\n  },\n  \"matching\": 2,\n  \"events\": [\n    {\n      \"id\": \"7e7a0916-cd4b-4e9e-b246-d4c36f8b476c\",\n      \"kind\": \"ObservationEvent\",\n      \"source\": \"environment\",\n      \"timestamp\": \"2026-11-17T08:30:34.240569\",\n      \"tool_name\": \"qa-f19_qa_echo\",\n      \"observation\": \"{\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"[Tool 'qa-f19_qa_echo' executed.]\\\"}, {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA_MCP_ECHO:hi\\\"}], \\\"is_error\\\": false, \\\"tool_name\\\": \\\"qa-f19_qa_echo\\\", \\\"kind\\\": \\\"MCPToolObservation\\\"}\"\n    },\n    {\n      \"id\": \"00c354bc-efa9-45a4-87d3-f293c491b817\",\n      \"kind\": \"ObservationEvent\",\n      \"source\": \"environment\",\n      \"timestamp\": \"2026-11-17T08:30:35.875486\",\n      \"tool_name\": \"finish\",\n      \"observation\": \"{\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"Called the `qa-f19_qa_echo` MCP tool with text \\\\\\\"hi\\\\\\\". It returned `QA_MCP_ECHO:hi`. Task complete.\\\"}], \\\"is_error\\\": false, \\\"kind\\\": \\\"FinishObservation\\\"}\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261117-082812-4f49-map-f19/evidence/F19.conversation-tool/observation.json\"\n}\n{\n  \"ok\": true,\n  \"capture\": \"f19-live\",\n  \"out\": \"<scratch>/agent-server/20261117-082812-4f49-map-f19/captures/f19-live.jsonl\",\n  \"opened\": true,\n  \"stopped\": \"stopped\",\n  \"frames\": 13,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 7,\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ActionEvent\": 2,\n    \"ObservationEvent\": 2\n  },\n  \"close\": null,\n  \"matching\": 2,\n  \"matching_kinds\": [\n    \"ObservationEvent\"\n  ],\n  \"frames_shown\": [\n    {\n      \"kind\": \"ObservationEvent\",\n      \"frame\": \"{\\\"id\\\": \\\"7e7a0916-cd4b-4e9e-b246-d4c36f8b476c\\\", \\\"timestamp\\\": \\\"2026-11-17T08:30:34.240569\\\", \\\"source\\\": \\\"environment\\\", \\\"parent_id\\\": \\\"ca9f70fd-69b6-49b2-9943-899ddc6e9023\\\", \\\"tool_name\\\": \\\"qa-f19_qa_echo\\\", \\\"tool_call_id\\\": \\\"call_00_MMLqXBBfTtHMQLnol2yi8134\\\", \\\"observation\\\": {\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"[Tool 'qa-f19_qa_echo' executed.]\\\"}, {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"te\\u2026\"\n    },\n    {\n      \"kind\": \"ObservationEvent\",\n      \"frame\": \"{\\\"id\\\": \\\"00c354bc-efa9-45a4-87d3-f293c491b817\\\", \\\"timestamp\\\": \\\"2026-11-17T08:30:35.875486\\\", \\\"source\\\": \\\"environment\\\", \\\"parent_id\\\": \\\"c303becc-7af3-48e1-94e7-3b0dd1e38fc5\\\", \\\"tool_name\\\": \\\"finish\\\", \\\"tool_call_id\\\": \\\"call_00_ET_VifOiLwLZYUgvPKwV5Mt6553\\\", \\\"observation\\\": {\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"Called the `qa-f19_qa_echo` MCP tool with text \\\\\\\"hi\\\\\\\". It returned `QA_MCP_EC\\u2026\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261117-082812-4f49-map-f19/evidence/F19.conversation-tool/ws-frames.json\"\n}\n17871\n18217\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"DELETE\",\n    \"path\": \"/api/conversations/1039a803-fe26-467a-98ac-b921a148157a\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 444\n}\n17871\n",
+  "stderr": "the stdio child outlived its conversation\n"
+}

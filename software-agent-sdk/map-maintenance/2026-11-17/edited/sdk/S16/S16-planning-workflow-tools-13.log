@@ -1,0 +1,249 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S16/message_edits \
+  --check statuses len-eq 3 --check statuses.2 eq finished \
+  --check edits len-eq 3 --check edits.0.source eq agent --check edits.0.on_question eq true --check edits.0.after eq ObservationEvent \
+  --check edits.0.text eq "~~Should I run the lookup on windy?~~ [Edit: Running it on windy.]" \
+  --check edits.1.text eq "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]" \
+  --check edits.2.on_first_finish eq true --check edits.2.after eq ObservationEvent \
+  --check observations.0.is_error eq false --check observations.0.text contains "Edited. The message now reads:" \
+  --check observations.1.is_error eq true --check observations.1.text contains "old_str is not in any of your messages" \
+  --check observations.2.is_error eq false \
+  --check observations.3.is_error eq true --check observations.3.text contains "Not edited: an earlier call in this response already edits this message" \
+  --check observations.3.text contains "[Edit: Ran it on windy.]" \
+  --check question_written eq "Should I run the lookup on windy?" \
+  --check question_reads eq "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]" \
+  --check reaction_text_ending eq "~~The build is green.~~ [Edit: one test is flaky.]" \
+  --check roundtrip_equal eq true --check reloaded_edits eq 3 \
+  --check reloaded_question_reads eq "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]" \
+  --check edit_in_view eq false --check edit_is_llm_convertible eq false \
+  --check llm_assistant_has_question eq true --check llm_assistant_has_struck_text eq false --check llm_sees_edit_results eq 3 \
+  --check converted_assistant_has_question eq true --check converted_has_struck_text eq false
+{
+  "ok": true,
+  "statuses": [
+    "finished",
+    "finished",
+    "finished"
+  ],
+  "edits": [
+    {
+      "source": "agent",
+      "on_question": true,
+      "on_first_finish": false,
+      "text": "~~Should I run the lookup on windy?~~ [Edit: Running it on windy.]",
+      "after": "ObservationEvent"
+    },
+    {
+      "source": "agent",
+      "on_question": true,
+      "on_first_finish": false,
+      "text": "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]",
+      "after": "ObservationEvent"
+    },
+    {
+      "source": "agent",
+      "on_question": false,
+      "on_first_finish": true,
+      "text": "~~The build is green.~~ [Edit: one test is flaky.]",
+      "after": "ObservationEvent"
+    }
+  ],
+  "observations": [
+    {
+      "is_error": false,
+      "text": "Edited. The message now reads:\n~~Should I run the lookup on windy?~~ [Edit: Running it on windy.]"
+    },
+    {
+      "is_error": true,
+      "text": "old_str is not in any of your messages. Copy it exactly from the message as it reads now, including any earlier edit."
+    },
+    {
+      "is_error": false,
+      "text": "Edited. The message now reads:\n~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]"
+    },
+    {
+      "is_error": true,
+      "text": "Not edited: an earlier call in this response already edits this message, and both edits started from the same text. Edit it again in your next response, quoting it as it reads now:\n~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]"
+    },
+    {
+      "is_error": false,
+      "text": "Edited. The message now reads:\n~~The build is green.~~ [Edit: one test is flaky.]"
+    }
+  ],
+  "question_reads": "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]",
+  "question_written": "Should I run the lookup on windy?",
+  "first_finish_reads": "~~The build is green.~~ [Edit: one test is flaky.]",
+  "reaction_text_ending": "~~The build is green.~~ [Edit: one test is flaky.]",
+  "edit_in_view": false,
+  "edit_is_llm_convertible": false,
+  "llm_assistant_has_question": true,
+  "llm_assistant_has_struck_text": false,
+  "llm_sees_edit_results": 3,
+  "converted_assistant_has_question": true,
+  "converted_has_struck_text": false,
+  "roundtrip_equal": true,
+  "reloaded_edits": 3,
+  "reloaded_question_reads": "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]",
+  "llm_calls": 7,
+  "_exit": 0,
+  "_seconds": 10.1,
+  "checks": [
+    {
+      "check": "statuses len-eq 3",
+      "ok": true,
+      "actual": "[\"finished\", \"finished\", \"finished\"]"
+    },
+    {
+      "check": "statuses.2 eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "edits len-eq 3",
+      "ok": true,
+      "actual": "[{\"source\": \"agent\", \"on_question\": true, \"on_first_finish\": false, \"text\": \"~~Should I run the lookup on windy?~~ [Edit: Running it on windy.]\", \"after\": \"ObservationEvent\"}, {\"source\": \"agent\", \"on_"
+    },
+    {
+      "check": "edits.0.source eq agent",
+      "ok": true,
+      "actual": "agent"
+    },
+    {
+      "check": "edits.0.on_question eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "edits.0.after eq ObservationEvent",
+      "ok": true,
+      "actual": "ObservationEvent"
+    },
+    {
+      "check": "edits.0.text eq ~~Should I run the lookup on windy?~~ [Edit: Running it on windy.]",
+      "ok": true,
+      "actual": "~~Should I run the lookup on windy?~~ [Edit: Running it on windy.]"
+    },
+    {
+      "check": "edits.1.text eq ~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]",
+      "ok": true,
+      "actual": "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]"
+    },
+    {
+      "check": "edits.2.on_first_finish eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "edits.2.after eq ObservationEvent",
+      "ok": true,
+      "actual": "ObservationEvent"
+    },
+    {
+      "check": "observations.0.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "observations.0.text contains Edited. The message now reads:",
+      "ok": true,
+      "actual": "Edited. The message now reads:\n~~Should I run the lookup on windy?~~ [Edit: Running it on windy.]"
+    },
+    {
+      "check": "observations.1.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.1.text contains old_str is not in any of your messages",
+      "ok": true,
+      "actual": "old_str is not in any of your messages. Copy it exactly from the message as it reads now, including any earlier edit."
+    },
+    {
+      "check": "observations.2.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "observations.3.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.3.text contains Not edited: an earlier call in this response already edits this message",
+      "ok": true,
+      "actual": "Not edited: an earlier call in this response already edits this message, and both edits started from the same text. Edit it again in your next response, quoting it as it reads now:\n~~Should I run the "
+    },
+    {
+      "check": "observations.3.text contains [Edit: Ran it on windy.]",
+      "ok": true,
+      "actual": "Not edited: an earlier call in this response already edits this message, and both edits started from the same text. Edit it again in your next response, quoting it as it reads now:\n~~Should I run the "
+    },
+    {
+      "check": "question_written eq Should I run the lookup on windy?",
+      "ok": true,
+      "actual": "Should I run the lookup on windy?"
+    },
+    {
+      "check": "question_reads eq ~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]",
+      "ok": true,
+      "actual": "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]"
+    },
+    {
+      "check": "reaction_text_ending eq ~~The build is green.~~ [Edit: one test is flaky.]",
+      "ok": true,
+      "actual": "~~The build is green.~~ [Edit: one test is flaky.]"
+    },
+    {
+      "check": "roundtrip_equal eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reloaded_edits eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "reloaded_question_reads eq ~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]",
+      "ok": true,
+      "actual": "~~Should I run the lookup on windy?~~ [Edit: Ran it on windy.]"
+    },
+    {
+      "check": "edit_in_view eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "edit_is_llm_convertible eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "llm_assistant_has_question eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "llm_assistant_has_struck_text eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "llm_sees_edit_results eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "converted_assistant_has_question eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "converted_has_struck_text eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 10s]

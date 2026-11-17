@@ -1,0 +1,49 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/installed --arg remote --check after_marketplace eq '["github", "plug-one", "plug-two", "standalone"]'
+{
+  "ok": true,
+  "installed_name": "greeter",
+  "store_file": true,
+  "after_install": [
+    "greeter"
+  ],
+  "reinstall_error": "FileExistsError",
+  "enabled_after_disable": [],
+  "listed_after_disable": [
+    "greeter"
+  ],
+  "enabled_after_force_reinstall": [],
+  "enabled_after_enable": [
+    "greeter"
+  ],
+  "content_after_update": "GREETER-V2",
+  "get_installed": true,
+  "uninstall": true,
+  "uninstall_again": false,
+  "after_uninstall": [],
+  "dir_after_uninstall": false,
+  "marketplace_installed": [
+    "github",
+    "plug-one",
+    "plug-two",
+    "standalone"
+  ],
+  "after_marketplace": [
+    "github",
+    "plug-one",
+    "plug-two",
+    "standalone"
+  ],
+  "again_without_force": [],
+  "_exit": 0,
+  "_seconds": 15.8,
+  "checks": [
+    {
+      "check": "after_marketplace eq [\"github\", \"plug-one\", \"plug-two\", \"standalone\"]",
+      "ok": true,
+      "actual": "[\"github\", \"plug-one\", \"plug-two\", \"standalone\"]"
+    }
+  ]
+}
+
+[exit 0 after 16s]

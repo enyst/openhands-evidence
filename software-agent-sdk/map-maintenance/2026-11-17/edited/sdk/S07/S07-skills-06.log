@@ -1,0 +1,124 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/installed \
+  --check installed_name eq greeter --check store_file eq true --check reinstall_error eq FileExistsError \
+  --check enabled_after_disable len-eq 0 --check listed_after_disable eq '["greeter"]' \
+  --check enabled_after_force_reinstall len-eq 0 --check enabled_after_enable eq '["greeter"]' \
+  --check content_after_update eq GREETER-V2 --check get_installed eq true \
+  --check uninstall eq true --check uninstall_again eq false --check after_uninstall len-eq 0 \
+  --check dir_after_uninstall eq false \
+  --check marketplace_installed eq '["plug-one", "plug-two", "standalone"]' --check again_without_force len-eq 0
+{
+  "ok": true,
+  "installed_name": "greeter",
+  "store_file": true,
+  "after_install": [
+    "greeter"
+  ],
+  "reinstall_error": "FileExistsError",
+  "enabled_after_disable": [],
+  "listed_after_disable": [
+    "greeter"
+  ],
+  "enabled_after_force_reinstall": [],
+  "enabled_after_enable": [
+    "greeter"
+  ],
+  "content_after_update": "GREETER-V2",
+  "get_installed": true,
+  "uninstall": true,
+  "uninstall_again": false,
+  "after_uninstall": [],
+  "dir_after_uninstall": false,
+  "marketplace_installed": [
+    "plug-one",
+    "plug-two",
+    "standalone"
+  ],
+  "after_marketplace": [
+    "plug-one",
+    "plug-two",
+    "standalone"
+  ],
+  "again_without_force": [],
+  "_exit": 0,
+  "_seconds": 12.4,
+  "checks": [
+    {
+      "check": "installed_name eq greeter",
+      "ok": true,
+      "actual": "greeter"
+    },
+    {
+      "check": "store_file eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reinstall_error eq FileExistsError",
+      "ok": true,
+      "actual": "FileExistsError"
+    },
+    {
+      "check": "enabled_after_disable len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "listed_after_disable eq [\"greeter\"]",
+      "ok": true,
+      "actual": "[\"greeter\"]"
+    },
+    {
+      "check": "enabled_after_force_reinstall len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "enabled_after_enable eq [\"greeter\"]",
+      "ok": true,
+      "actual": "[\"greeter\"]"
+    },
+    {
+      "check": "content_after_update eq GREETER-V2",
+      "ok": true,
+      "actual": "GREETER-V2"
+    },
+    {
+      "check": "get_installed eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "uninstall eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "uninstall_again eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "after_uninstall len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "dir_after_uninstall eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "marketplace_installed eq [\"plug-one\", \"plug-two\", \"standalone\"]",
+      "ok": true,
+      "actual": "[\"plug-one\", \"plug-two\", \"standalone\"]"
+    },
+    {
+      "check": "again_without_force len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    }
+  ]
+}
+
+[exit 0 after 13s]

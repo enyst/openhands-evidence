@@ -1,0 +1,147 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S07/sources \
+  --check project_names eq '["agents", "claude", "dup", "layered", "only-micro", "only-oh", "shared"]' \
+  --check dup_content eq DUP-FROM-AGENTS \
+  --check user_names eq '["layered", "u-agents", "u-installed", "u-micro", "u-oh"]' \
+  --check layered_content eq PROJECT-LAYER \
+  --check merged eq '["b:primary-b", "a:primary-a", "c:secondary-c"]' \
+  --check flag_before_first_message eq '["dup", "keep"]' \
+  --check flag_after eq '["agents", "claude", "dup", "keep", "layered", "only-micro", "shared"]' \
+  --check flag_dup eq DUP-FROM-AGENTS --check flag_status eq finished \
+  --check flag_system_has_project eq true --check flag_system_has_explicit_dup eq false \
+  --check user_flag_names eq '["layered", "u-agents", "u-installed", "u-oh"]' \
+  --check user_flag_u_oh eq EXPLICIT-U-OH --check duplicate_error eq ValidationError \
+  --check no_flags_names len-eq 0
+{
+  "ok": true,
+  "project_names": [
+    "agents",
+    "claude",
+    "dup",
+    "layered",
+    "only-micro",
+    "only-oh",
+    "shared"
+  ],
+  "dup_content": "DUP-FROM-AGENTS",
+  "user_names": [
+    "layered",
+    "u-agents",
+    "u-installed",
+    "u-micro",
+    "u-oh"
+  ],
+  "layered_content": "PROJECT-LAYER",
+  "merged": [
+    "b:primary-b",
+    "a:primary-a",
+    "c:secondary-c"
+  ],
+  "flag_before_first_message": [
+    "dup",
+    "keep"
+  ],
+  "flag_after": [
+    "agents",
+    "claude",
+    "dup",
+    "keep",
+    "layered",
+    "only-micro",
+    "shared"
+  ],
+  "flag_dup": "DUP-FROM-AGENTS",
+  "flag_status": "finished",
+  "flag_system_has_project": true,
+  "flag_system_has_explicit_dup": false,
+  "user_flag_names": [
+    "layered",
+    "u-agents",
+    "u-installed",
+    "u-oh"
+  ],
+  "user_flag_u_oh": "EXPLICIT-U-OH",
+  "duplicate_error": "ValidationError",
+  "no_flags_names": [],
+  "_exit": 0,
+  "_seconds": 13.5,
+  "checks": [
+    {
+      "check": "project_names eq [\"agents\", \"claude\", \"dup\", \"layered\", \"only-micro\", \"only-oh\", \"shared\"]",
+      "ok": true,
+      "actual": "[\"agents\", \"claude\", \"dup\", \"layered\", \"only-micro\", \"only-oh\", \"shared\"]"
+    },
+    {
+      "check": "dup_content eq DUP-FROM-AGENTS",
+      "ok": true,
+      "actual": "DUP-FROM-AGENTS"
+    },
+    {
+      "check": "user_names eq [\"layered\", \"u-agents\", \"u-installed\", \"u-micro\", \"u-oh\"]",
+      "ok": true,
+      "actual": "[\"layered\", \"u-agents\", \"u-installed\", \"u-micro\", \"u-oh\"]"
+    },
+    {
+      "check": "layered_content eq PROJECT-LAYER",
+      "ok": true,
+      "actual": "PROJECT-LAYER"
+    },
+    {
+      "check": "merged eq [\"b:primary-b\", \"a:primary-a\", \"c:secondary-c\"]",
+      "ok": true,
+      "actual": "[\"b:primary-b\", \"a:primary-a\", \"c:secondary-c\"]"
+    },
+    {
+      "check": "flag_before_first_message eq [\"dup\", \"keep\"]",
+      "ok": true,
+      "actual": "[\"dup\", \"keep\"]"
+    },
+    {
+      "check": "flag_after eq [\"agents\", \"claude\", \"dup\", \"keep\", \"layered\", \"only-micro\", \"shared\"]",
+      "ok": true,
+      "actual": "[\"agents\", \"claude\", \"dup\", \"keep\", \"layered\", \"only-micro\", \"shared\"]"
+    },
+    {
+      "check": "flag_dup eq DUP-FROM-AGENTS",
+      "ok": true,
+      "actual": "DUP-FROM-AGENTS"
+    },
+    {
+      "check": "flag_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "flag_system_has_project eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "flag_system_has_explicit_dup eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "user_flag_names eq [\"layered\", \"u-agents\", \"u-installed\", \"u-oh\"]",
+      "ok": true,
+      "actual": "[\"layered\", \"u-agents\", \"u-installed\", \"u-oh\"]"
+    },
+    {
+      "check": "user_flag_u_oh eq EXPLICIT-U-OH",
+      "ok": true,
+      "actual": "EXPLICIT-U-OH"
+    },
+    {
+      "check": "duplicate_error eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "no_flags_names len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    }
+  ]
+}
+
+[exit 0 after 14s]
