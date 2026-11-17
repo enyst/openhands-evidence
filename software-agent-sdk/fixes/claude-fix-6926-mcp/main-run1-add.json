@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/17f34724-374b-46cd-84ab-88b2ac263585/mcp",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "mcp_servers": {
+        "qa-f19-dies": {
+          "command": "/bin/true"
+        }
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "content-length": "112",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Internal Server Error",
+      "exception": "Connection closed",
+      "error_id": "73b2d2f77825423da010f4cb5cdba042"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 208
+}

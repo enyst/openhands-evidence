@@ -1,0 +1,98 @@
+{
+  "exit": 0,
+  "seconds": 10.0,
+  "result": {
+    "ok": true,
+    "mode": "add",
+    "ready_tools_before": [],
+    "ready_tools_after_add": [
+      "verify_add",
+      "verify_counter",
+      "verify_die",
+      "verify_echo",
+      "verify_fail",
+      "verify_getenv",
+      "verify_headers",
+      "verify_kind_echo",
+      "verify_nested",
+      "verify_picture",
+      "verify_register_extra",
+      "verify_register_late",
+      "verify_remove_extra",
+      "verify_reverse",
+      "verify_session",
+      "verify_slow",
+      "verify_structured"
+    ],
+    "ready_mcp_config": [
+      "verify"
+    ],
+    "ready_state_mcp_config": [
+      "verify"
+    ],
+    "duplicate_error": "ValueError: MCP server already exists: ['verify']",
+    "sse_error": "ValueError: Runtime MCP additions do not support SSE transport: remote",
+    "start_failure_error": "MCPServerStartError: Could not start MCP server broken: Connection closed",
+    "disabled_error": null,
+    "mcp_config_after_refusals": [
+      "off",
+      "verify"
+    ],
+    "ready_status": "finished",
+    "ready_first_call_tools": [
+      "finish",
+      "verify_add",
+      "verify_counter",
+      "verify_die",
+      "verify_echo",
+      "verify_fail",
+      "verify_getenv",
+      "verify_headers",
+      "verify_kind_echo",
+      "verify_nested",
+      "verify_picture",
+      "verify_register_extra",
+      "verify_register_late",
+      "verify_remove_extra",
+      "verify_reverse",
+      "verify_session",
+      "verify_slow",
+      "verify_structured"
+    ],
+    "ready_texts": [
+      "[Tool 'verify_echo' executed.]echo: added",
+      "done"
+    ],
+    "early_mcp_config": [
+      "solo"
+    ],
+    "early_status": "finished",
+    "early_first_call_tools": [
+      "add",
+      "counter",
+      "die",
+      "echo",
+      "fail",
+      "finish",
+      "getenv",
+      "headers",
+      "kind_echo",
+      "nested",
+      "picture",
+      "register_extra",
+      "register_late",
+      "remove_extra",
+      "reverse",
+      "session",
+      "slow",
+      "structured"
+    ],
+    "early_texts": [
+      "[Tool 'echo' executed.]echo: early",
+      "done"
+    ]
+  },
+  "stdout_tail": "add\", \"verify_counter\", \"verify_die\", \"verify_echo\", \"verify_fail\", \"verify_getenv\", \"verify_headers\", \"verify_kind_echo\", \"verify_nested\", \"verify_picture\", \"verify_register_extra\", \"verify_register_late\", \"verify_remove_extra\", \"verify_reverse\", \"verify_session\", \"verify_slow\", \"verify_structured\"], \"ready_mcp_config\": [\"verify\"], \"ready_state_mcp_config\": [\"verify\"], \"duplicate_error\": \"ValueError: MCP server already exists: ['verify']\", \"sse_error\": \"ValueError: Runtime MCP additions do not support SSE transport: remote\", \"start_failure_error\": \"MCPServerStartError: Could not start MCP server broken: Connection closed\", \"disabled_error\": null, \"mcp_config_after_refusals\": [\"off\", \"verify\"], \"ready_status\": \"finished\", \"ready_first_call_tools\": [\"finish\", \"verify_add\", \"verify_counter\", \"verify_die\", \"verify_echo\", \"verify_fail\", \"verify_getenv\", \"verify_headers\", \"verify_kind_echo\", \"verify_nested\", \"verify_picture\", \"verify_register_extra\", \"verify_register_late\", \"verify_remove_extra\", \"verify_reverse\", \"verify_session\", \"verify_slow\", \"verify_structured\"], \"ready_texts\": [\"[Tool 'verify_echo' executed.]echo: added\", \"done\"], \"early_mcp_config\": [\"solo\"], \"early_status\": \"finished\", \"early_first_call_tools\": [\"add\", \"counter\", \"die\", \"echo\", \"fail\", \"finish\", \"getenv\", \"headers\", \"kind_echo\", \"nested\", \"picture\", \"register_extra\", \"register_late\", \"remove_extra\", \"reverse\", \"session\", \"slow\", \"structured\"], \"early_texts\": [\"[Tool 'echo' executed.]echo: early\", \"done\"]}\n",
+  "stderr_tail": "[11/17/26 09:14:24] INFO     Starting MCP server                transport.py:241\n                             'verify-server' with transport                     \n                             'stdio'                                            \nrefusing to start\n[11/17/26 09:14:26] WARNING  add_runtime_tools called before agent   base.py:837\n                             initialization; tools will not be                  \n                             registered                                         \n[11/17/26 09:14:27] INFO     Starting MCP server                transport.py:241\n                             'verify-server' with transport                     \n                             'stdio'                                            \n",
+  "ok": true
+}

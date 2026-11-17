@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/d413299c-0c90-4b00-beeb-84526c62b40c/mcp",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "mcp_servers": {
+        "qa-f19-dies": {
+          "command": "/bin/true"
+        }
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "content-length": "70",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Could not start MCP server qa-f19-dies: Connection closed"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 189
+}
