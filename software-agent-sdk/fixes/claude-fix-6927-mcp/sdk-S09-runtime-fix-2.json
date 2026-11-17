@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "mode": "resume",
+  "first_texts": [
+    "[Tool 'verify_echo' executed.]echo: one",
+    "done"
+  ],
+  "persisted_mcp_config": [
+    "verify"
+  ],
+  "resumed_first_call_tools": [
+    "finish",
+    "verify_add",
+    "verify_counter",
+    "verify_die",
+    "verify_echo",
+    "verify_fail",
+    "verify_getenv",
+    "verify_headers",
+    "verify_kind_echo",
+    "verify_nested",
+    "verify_picture",
+    "verify_register_extra",
+    "verify_register_late",
+    "verify_remove_extra",
+    "verify_reverse",
+    "verify_session",
+    "verify_slow",
+    "verify_structured"
+  ],
+  "resumed_texts": [
+    "[Tool 'verify_echo' executed.]echo: one",
+    "done",
+    "[Tool 'verify_echo' executed.]echo: two",
+    "done"
+  ],
+  "resumed_second_call_ok": true,
+  "resumed_errors": [],
+  "_exit": 0,
+  "_seconds": 22.5,
+  "checks": [
+    {
+      "check": "first_texts.0 contains echo: one",
+      "ok": true,
+      "actual": "[Tool 'verify_echo' executed.]echo: one"
+    },
+    {
+      "check": "persisted_mcp_config eq [\"verify\"]",
+      "ok": true,
+      "actual": "[\"verify\"]"
+    },
+    {
+      "check": "resumed_first_call_tools contains verify_echo",
+      "ok": true,
+      "actual": "[\"finish\", \"verify_add\", \"verify_counter\", \"verify_die\", \"verify_echo\", \"verify_fail\", \"verify_getenv\", \"verify_headers\", \"verify_kind_echo\", \"verify_nested\", \"verify_picture\", \"verify_register_extra\""
+    },
+    {
+      "check": "resumed_second_call_ok eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}

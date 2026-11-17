@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "file": "F19-mcp.md",
+  "launch_flags": [
+    "--webhook-sink",
+    "--checkout",
+    "/home/user/sdk-map-wt"
+  ],
+  "attempts": [
+    {
+      "run": "<scratch>/fix6927-as/20261117-092237-731f-map-f19",
+      "ok": true,
+      "summary": {
+        "pass": 1,
+        "fail": 0,
+        "xfail": 1,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Added servers after a restart (`F19.conversation-mcp-add-restart`), known bug #6927.": "xfail"
+      }
+    },
+    {
+      "run": "<scratch>/fix6927-as/20261117-092343-03cc-map-f19",
+      "ok": true,
+      "summary": {
+        "pass": 1,
+        "fail": 0,
+        "xfail": 1,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Added servers after a restart (`F19.conversation-mcp-add-restart`), known bug #6927.": "xfail"
+      }
+    }
+  ]
+}
