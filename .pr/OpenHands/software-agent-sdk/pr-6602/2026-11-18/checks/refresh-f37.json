@@ -1,0 +1,120 @@
+{
+  "ok": false,
+  "file": "F37-reactions.md",
+  "summary": {
+    "pass": 4,
+    "fail": 8,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "classification": "Setup-invalid: real provider returned Insufficient Balance; later dependency failures are not product regressions.",
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server llm preset deepseek"
+    },
+    {
+      "bullet": "The feature flag (`F37.flag`, `F37.flag-gates`).",
+      "ids": [
+        "F37.flag",
+        "F37.flag-gates"
+      ],
+      "status": "pass",
+      "exit_code": 0
+    },
+    {
+      "bullet": "React over REST (`F37.rest`).",
+      "ids": [
+        "F37.rest"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$RC/reactions\" --json \"{\\\"emoji\\\": \\\"heart\\\", \\\"target_event_id\\\": \\\"$RM\\\"}\" --expect 200 --check kind eq ReactionEvent --check source eq user --check emoji eq heart --check target_event_id eq \"$RM\" --check removed eq false --save F37.rest/add"
+    },
+    {
+      "bullet": "Bad reactions (`F37.rest-validation`).",
+      "ids": [
+        "F37.rest-validation"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$RC/reactions\" --json \"{\\\"emoji\\\": \\\"rocket\\\", \\\"target_event_id\\\": \\\"$RM\\\"}\" --expect 422"
+    },
+    {
+      "bullet": "Model-backed: the agent reacts (`F37.tool`).",
+      "ids": [
+        "F37.tool"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$AC/events/search\" --query kind=ReactionEvent --check items len-eq 1 --check items.0.source eq agent --check items.0.emoji eq eyes --check items.0.target_event_id eq \"$AM\" --check items.0.removed eq false --save F37.tool/reactions"
+    },
+    {
+      "bullet": "Default target is the agent's answer (`F37.rest-default`).",
+      "ids": [
+        "F37.rest-default"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "LAST_ACTION=$(control-agent-server api GET \"/api/conversations/$AC/events/search\" --query source=agent --query sort_order=TIMESTAMP_DESC --query kind=ActionEvent --field items.0.id)"
+    },
+    {
+      "bullet": "Reacting while a tool call waits (`F37.rest-while-confirming`).",
+      "ids": [
+        "F37.rest-while-confirming"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "WC=$(control-agent-server conversation start --confirmation-policy always --prompt 'Run: echo first' --wait --until waiting_for_confirmation --print-id)"
+    },
+    {
+      "bullet": "What the model sees (`F37.agent-sees-user-reactions`).",
+      "ids": [
+        "F37.agent-sees-user-reactions"
+      ],
+      "status": "pass",
+      "exit_code": 0
+    },
+    {
+      "bullet": "Targets come from the active branch (`F37.rest-active-branch`).",
+      "ids": [
+        "F37.rest-active-branch"
+      ],
+      "status": "pass",
+      "exit_code": 0
+    },
+    {
+      "bullet": "TypeScript client (`F37.ts-client`).",
+      "ids": [
+        "F37.ts-client"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "OUT=$(control-agent-server exec --env QA_F37_CID=\"$RC\" --env QA_F37_TARGET=\"$RM\" --env QA_F37_EMPTY=\"$TSC\" --timeout 120 --expect-output QA_F37_TS_OK --save F37.ts-client/program -- node \"$AGENT_SERVER_VERIFY_RUN/qa-f37-ts.mjs\")"
+    },
+    {
+      "bullet": "Inside a Docker runtime (`F37.runtime-env`).",
+      "ids": [
+        "F37.runtime-env"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$RC/reactions\" --json \"{\\\"emoji\\\": \\\"+1\\\", \\\"target_event_id\\\": \\\"$RM\\\"}\" --expect 200 --check emoji eq '+1' --save F37.runtime-env/react"
+    },
+    {
+      "bullet": "The response is the stored event (`F37.rest-response-parent`).",
+      "ids": [
+        "F37.rest-response-parent"
+      ],
+      "status": "pass",
+      "exit_code": 0
+    }
+  ],
+  "precondition_provider_output": "{\n  \"ok\": false,\n  \"via\": \"provider\",\n  \"profiles\": [\n    {\n      \"profile\": \"deepseek-flash\",\n      \"model\": \"deepseek/deepseek-flash\",\n      \"validate\": {\n        \"status\": 200,\n        \"body\": {\n          \"valid\": false,\n          \"error\": {\n            \"type\": \"LLMBadRequestError\",\n            \"message\": \"litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Insufficient Balance (request_id: dbba195f-5a16-4425-9c2c-12452f4c7ae6)\\\",\\\"type\\\":\\\"insufficient_balance_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\"\n          }\n        }\n      },\n      \"error\": \"validation failed; profile not saved\"\n    },\n    {\n      \"profile\": \"deepseek-pro\",\n      \"model\": \"deepseek/deepseek-v4-pro\",\n      \"saved\": 201\n    }\n  ]\n}\n"
+}

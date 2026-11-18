@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "value": {
+    "pdfViewerEnabled": true,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "background": "rgb(243, 231, 211)"
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "ok": false,
+  "file": "F36-projects.md",
+  "summary": {
+    "pass": 0,
+    "fail": 34,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "classification": "Setup-invalid: real provider returned Insufficient Balance; later dependency failures are not product regressions.",
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server llm preset deepseek"
+    },
+    {
+      "bullet": "No projects yet (`F36.list-empty`).",
+      "ids": [
+        "F36.list-empty"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api GET /api/projects --expect 200 --check projects len-eq 0 --save F36.list-empty/list"
+    },
+    {
+      "bullet": "Create a project (`F36.create`).",
+      "ids": [
+        "F36.create"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "P1=$(control-agent-server api POST /api/projects --json '{\"name\": \"qa-f36-one\", \"description\": \"first\"}' --expect 201 --check name eq qa-f36-one --check description eq first --check coordinator_conversation_id eq null --check id matches '^[0-9a-f]{32}$' --field id)"
+    },
+    {
+      "bullet": "Validation (`F36.validation`).",
+      "ids": [
+        "F36.validation"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST /api/projects --json '{\"name\": \"\"}' --expect 422 --save F36.validation/empty"
+    },
+    {
+      "bullet": "Unknown project (`F36.unknown-project`).",
+      "ids": [
+        "F36.unknown-project"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api GET \"/api/projects/$NOPE\" --expect 404 --check detail eq 'Project not found' --save F36.unknown-project/get"
+    },
+    {
+      "bullet": "Rename (`F36.patch`).",
+      "ids": [
+        "F36.patch"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "BEFORE=$(control-agent-server api GET \"/api/projects/$P1\" --field updated_at)"
+    },
+    {
+      "bullet": "Coordinator (`F36.coordinator`).",
+      "ids": [
+        "F36.coordinator"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "P2=$(control-agent-server api POST /api/projects --json \"{\\\"name\\\": \\\"qa-f36-two\\\", \\\"coordinator_conversation_id\\\": \\\"$CAT\\\"}\" --expect 201 --field id)"
+    },
+    {
+      "bullet": "Missing coordinator (`F36.coordinator-missing`).",
+      "ids": [
+        "F36.coordinator-missing"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST /api/projects --json '{\"name\": \"qa-f36-ghost\", \"coordinator_conversation_id\": \"00000000-0000-0000-0000-000000000001\"}' --expect 404 --check detail eq 'Conversation not found' --save F36.coordinator-missing/post"
+    },
+    {
+      "bullet": "One project per coordinator (`F36.coordinator-unique`).",
+      "ids": [
+        "F36.coordinator-unique"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST /api/projects --json \"{\\\"name\\\": \\\"qa-f36-three\\\", \\\"coordinator_conversation_id\\\": \\\"$CAT\\\"}\" --expect 409 --check detail eq 'Conversation is the coordinator of another project' --save F36.coordinator-unique/post"
+    },
+    {
+      "bullet": "The coordinator starts a member (`F36.start-member`).",
+      "ids": [
+        "F36.start-member"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "M1=$(control-agent-server api POST \"/api/conversations/$CAT/children\" --json '{\"title\": \"qa-f36-m1\", \"task\": \"Reply with the single word ok and finish. Do not use tools.\", \"isolation\": \"shared\"}' --expect 201 --check parent_conversation_id eq \"$CAT\" --save F36.start-member/start --field conversation_id)"
+    },
+    {
+      "bullet": "Clients cannot claim a project (`F36.client-tags`).",
+      "ids": [
+        "F36.client-tags"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$W1/fork\" --json \"{\\\"tags\\\": {\\\"project\\\": \\\"$P2\\\"}}\" --expect 422 --check detail eq 'Tags set by the server only: project' --save F36.client-tags/fork"
+    },
+    {
+      "bullet": "Attention groups (`F36.attention`).",
+      "ids": [
+        "F36.attention"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "ASKS=$(control-agent-server api POST \"/api/conversations/$CAT/children\" --json '{\"title\": \"qa-f36-asks\", \"task\": \"Reply with the single word ready and finish. Do not use tools.\", \"isolation\": \"shared\"}' --expect 201 --field conversation_id)"
+    },
+    {
+      "bullet": "Remove a conversation (`F36.remove-conversation`).",
+      "ids": [
+        "F36.remove-conversation"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api PATCH \"/api/conversations/$M1\" --json '{\"tags\": {\"qa\": \"f36\"}}' --expect 200"
+    },
+    {
+      "bullet": "Coordinator membership (`F36.remove-coordinator`).",
+      "ids": [
+        "F36.remove-coordinator"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api DELETE \"/api/projects/$P2/conversations/$CAT\" --expect 409 --check detail eq \"Conversation is the project's coordinator\" --save F36.remove-coordinator/delete"
+    },
+    {
+      "bullet": "Message a conversation over REST (`F36.message-rest`).",
+      "ids": [
+        "F36.message-rest"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "W2=$(control-agent-server api POST \"/api/conversations/$CAT/children\" --json '{\"title\": \"qa-f36-w2\", \"task\": \"Reply with the single word ready and finish. Do not use tools.\", \"isolation\": \"shared\"}' --expect 201 --field conversation_id)"
+    },
+    {
+      "bullet": "How a turn ended (`F36.turn`).",
+      "ids": [
+        "F36.turn"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$W2/events\" --json '{\"role\": \"user\", \"content\": [{\"type\": \"text\", \"text\": \"Ask me which colour I prefer, as one short question, then finish. Do not use tools.\"}], \"run\": true, \"refuse_pending_confirmation\": true}' --expect 200 --check run eq started"
+    },
+    {
+      "bullet": "Resolved (`F36.resolved`).",
+      "ids": [
+        "F36.resolved"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api PATCH \"/api/conversations/$W2\" --json \"{\\\"tags\\\": {\\\"project\\\": \\\"qa-f36-elsewhere\\\", \\\"turn\\\": \\\"asking\\\", \\\"resolved\\\": \\\"user\\\"}}\" --expect 200"
+    },
+    {
+      "bullet": "Resolved automatically (`F36.auto-resolve`).",
+      "ids": [
+        "F36.auto-resolve"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "A1=$(control-agent-server api POST \"/api/conversations/$CAT/children\" --json '{\"title\": \"qa-f36-answer\", \"task\": \"What is 17 times 23? Answer in one sentence and finish. Do not use tools.\", \"isolation\": \"shared\"}' --expect 201 --field conversation_id)"
+    },
+    {
+      "bullet": "Unfinished work stays open (`F36.needs-you`).",
+      "ids": [
+        "F36.needs-you"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "A3=$(control-agent-server api POST \"/api/conversations/$CAT/children\" --json '{\"title\": \"qa-f36-two-haiku\", \"task\": \"In this conversation we will write two haiku: one about rain, then one about snow. Write only the rain haiku now, and finish. Do not use tools.\", \"isolation\": \"shared\"}' --expect 201 --field conversation_id)"
+    },
+    {
+      "bullet": "The worker resolves itself (`F36.self-resolve`).",
+      "ids": [
+        "F36.self-resolve"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "SR=$(control-agent-server api POST \"/api/conversations/$CAT/children\" --json '{\"title\": \"qa-f36-self-resolve\", \"task\": \"You opened PR #12 that fixes a typo in README.md (pretend; do not use tools). Say in one sentence that it is ready for my review, and finish.\", \"isolation\": \"shared\"}' --expect 201 --field conversation_id)"
+    },
+    {
+      "bullet": "Artifacts over REST (`F36.artifacts-rest`).",
+      "ids": [
+        "F36.artifacts-rest"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST \"/api/projects/$P2/artifacts\" --file \"file=$AGENT_SERVER_VERIFY_RUN/qa-f36-notes.md\" --expect 201 --check name eq qa-f36-notes.md --check source eq user --check size eq 15 --save F36.artifacts-rest/upload"
+    },
+    {
+      "bullet": "Model-backed: an agent saves an artifact (`F36.artifacts-tool`).",
+      "ids": [
+        "F36.artifacts-tool"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "ART=$(control-agent-server api POST \"/api/conversations/$CAT/children\" --json '{\"title\": \"qa-f36-art\", \"task\": \"Create the file qa-f36-report.md in the working directory containing the line f36 report. Then save it with write_artifact, then try write_artifact with path /etc/hostname. Then use list_artifacts, and read_artifact for qa-f36-report.md with path copies/report.md, then finish.\", \"isolation\": \"shared\"}' --expect 201 --field conversation_id)"
+    },
+    {
+      "bullet": "Project memory over REST (`F36.memory-rest`).",
+      "ids": [
+        "F36.memory-rest"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api GET \"/api/projects/$P2/memory\" --expect 200 --check files len-eq 0"
+    },
+    {
+      "bullet": "Model-backed: an agent keeps project memory (`F36.memory-tool`).",
+      "ids": [
+        "F36.memory-tool"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "MEM=$(control-agent-server api POST \"/api/conversations/$CAT/children\" --json '{\"title\": \"qa-f36-mem\", \"task\": \"Read the project memory with read_project_memory, then add the line - Deploys go through staging. to MEMORY.md with update_project_memory, keeping the existing line. Then finish.\", \"isolation\": \"shared\"}' --expect 201 --field conversation_id)"
+    },
+    {
+      "bullet": "No approval over REST (`F36.message-refused`).",
+      "ids": [
+        "F36.message-refused"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$ASKS/events\" --json '{\"role\": \"user\", \"content\": [{\"type\": \"text\", \"text\": \"go ahead\"}], \"run\": true, \"refuse_pending_confirmation\": true}' --expect 409 --check detail eq 'Conversation is waiting for confirmation' --save F36.message-refused/post"
+    },
+    {
+      "bullet": "Restart (`F36.persist-restart`).",
+      "ids": [
+        "F36.persist-restart"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api GET /api/projects --check projects len-eq 2 --check projects.1.id eq \"$P2\" --save F36.persist-restart/list"
+    },
+    {
+      "bullet": "Delete a project (`F36.delete`).",
+      "ids": [
+        "F36.delete"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api PATCH \"/api/projects/$P1\" --json \"{\\\"coordinator_conversation_id\\\": \\\"$W1\\\"}\" --expect 200"
+    },
+    {
+      "bullet": "Model-backed: start and list (`F36.tool-start-and-list`).",
+      "ids": [
+        "F36.tool-start-and-list"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server conversation send \"$CAT\" --wait --timeout 300 --text 'Start one child conversation titled qa-f36-child with isolation shared whose task is: reply with the single word done and finish. Then call list_project_conversations once and tell me what you see. Do nothing else.'"
+    },
+    {
+      "bullet": "Model-backed: the coordinator hears back (`F36.wake`).",
+      "ids": [
+        "F36.wake"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server conversation events \"$CAT\" --kinds MessageEvent --contains \"conversation:$CHILD_HEX), a conversation in your project\" --expect-count 1 --save F36.wake/update"
+    },
+    {
+      "bullet": "Model-backed: read a conversation (`F36.read`).",
+      "ids": [
+        "F36.read"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server api GET \"/api/projects/$P2/conversations/$CHILD/messages\" --expect 200 --check messages.0.source eq user --check messages.0.sender matches '^conversation:' --save F36.read/rest"
+    },
+    {
+      "bullet": "Model-backed: message a conversation (`F36.tool-message`).",
+      "ids": [
+        "F36.tool-message"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server conversation send \"$CAT\" --wait --timeout 300 --text 'Use message_project_conversation to ask the qa-f36-child conversation to reply with the single word again. Do nothing else.'"
+    },
+    {
+      "bullet": "Model-backed: mentions (`F36.mention`).",
+      "ids": [
+        "F36.mention"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server conversation events \"$CAT\" --kinds SystemPromptEvent --contains 'Name a conversation as a mention' --expect-count 1 --save F36.mention/guidance"
+    },
+    {
+      "bullet": "Model-backed: no approval by message (`F36.tool-message-refuses-confirmation`).",
+      "ids": [
+        "F36.tool-message-refuses-confirmation"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "control-agent-server conversation send \"$CAT\" --wait --timeout 300 --text 'Use message_project_conversation to tell the qa-f36-asks conversation: go ahead. Then stop.'"
+    },
+    {
+      "bullet": "Corrupted file (`F36.corrupted-file`).",
+      "ids": [
+        "F36.corrupted-file"
+      ],
+      "status": "fail",
+      "exit_code": 1,
+      "failed_command": "printf '{not json' > \"$PJ_FILE\""
+    }
+  ],
+  "precondition_provider_output": "{\n  \"ok\": false,\n  \"via\": \"provider\",\n  \"profiles\": [\n    {\n      \"profile\": \"deepseek-flash\",\n      \"model\": \"deepseek/deepseek-flash\",\n      \"validate\": {\n        \"status\": 200,\n        \"body\": {\n          \"valid\": false,\n          \"error\": {\n            \"type\": \"LLMBadRequestError\",\n            \"message\": \"litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Insufficient Balance (request_id: daead36a-567c-42d9-9d03-6162e3e5ca6b)\\\",\\\"type\\\":\\\"insufficient_balance_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\"\n          }\n        }\n      },\n      \"error\": \"validation failed; profile not saved\"\n    },\n    {\n      \"profile\": \"deepseek-pro\",\n      \"model\": \"deepseek/deepseek-v4-pro\",\n      \"saved\": 201\n    }\n  ]\n}\n"
+}

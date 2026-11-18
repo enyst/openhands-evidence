@@ -1,0 +1,79 @@
+$SDK/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform darwin -- Python 3.13.11, pytest-9.2.0, pluggy-1.6.0
+rootdir: $SDK
+configfile: pyproject.toml
+plugins: libtmux-0.62.0, cov-7.1.0, xdist-3.8.0, timeout-2.4.0, anyio-4.14.2, forked-1.7.5, asyncio-1.4.1.post1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 376 items
+
+tests/agent_server/test_projects_feature_flag.py .......                 [  1%]
+tests/agent_server/test_project_board.py ...................[11/18/26 20:57:59] WARNING  Error generating conversation    title_utils.py:165
+                             title with LLM:                                    
+                             litellm.AuthenticationError:                       
+                             AuthenticationError:                               
+                             OpenAIException - The api_key                      
+                             client option must be set either                   
+                             by passing api_key to the client                   
+                             or by setting the OPENAI_API_KEY                   
+                             environment variable                               
+............ [ 10%]
+.........................                                                [ 16%]
+tests/agent_server/test_projects_router.py ............................. [ 24%]
+...................................................................      [ 42%]
+tests/agent_server/test_project_profiles.py ....                         [ 43%]
+tests/agent_server/test_project_prompts.py ......                        [ 44%]
+tests/agent_server/test_project_cards.py .............                   [ 48%]
+tests/agent_server/test_reactions_router.py .....                        [ 49%]
+tests/agent_server/test_event_service.py ............................... [ 57%]
+........................................................................ [ 77%]
+.......................................                                  [ 87%]
+tests/tools/project/test_project_memory_tools.py ......                  [ 89%]
+tests/tools/project/test_project_tools.py .............................. [ 97%]
+...........                                                              [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  $SDK/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+tests/agent_server/test_project_board.py: 4 warnings
+tests/agent_server/test_projects_router.py: 108 warnings
+tests/agent_server/test_project_cards.py: 26 warnings
+tests/agent_server/test_reactions_router.py: 5 warnings
+tests/agent_server/test_event_service.py: 17 warnings
+  $SDK/openhands-sdk/openhands/sdk/agent/base.py:796: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+  $SDK/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'summary' on TypedDict class 'ChatCompletionReasoningItem' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_profiles.py::test_the_profiles_are_built_from_the_users_active_profile
+  $SDK/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('b8dd3ac8-2347-4f2f-8ce9-3c91eaa6a149'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+tests/agent_server/test_project_profiles.py::test_an_existing_profile_is_kept_as_the_user_edited_it
+  $SDK/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('aea1304a-cc41-41f0-ae65-8ee58ea0b420'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+tests/agent_server/test_project_profiles.py::test_a_user_on_the_standard_tool_set_keeps_it_for_workers
+  $SDK/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('91b883db-2efe-49c0-a59b-56e1134090a1'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+tests/agent_server/test_event_service.py::test_subscribe_to_events_does_not_deadlock_on_wedged_subscriber
+  $SDK/openhands-agent-server/openhands/agent_server/pub_sub.py:-1: RuntimeWarning: coroutine 'Subscriber.close_connection' was never awaited
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 376 passed, 166 warnings in 45.41s ======================

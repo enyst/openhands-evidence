@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "url": "http://127.0.0.1:22440/projects/375aa52116fd42fcba72e8866d0df323",
+  "lines": 7,
+  "truncated": false,
+  "snapshot": "- region \"Memory · 1\":\n  - heading \"Memory · 1\" [level=2]\n  - list:\n    - listitem:\n      - button \"MEMORY.md\" [expanded]\n      - text: 45s\n  - text: \"UI refresh control: MAPLE-73\""
+}

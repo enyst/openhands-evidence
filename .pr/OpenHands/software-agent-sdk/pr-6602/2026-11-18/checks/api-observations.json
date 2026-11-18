@@ -1,0 +1,487 @@
+[
+  {
+    "capture": "refresh-api-add-member.json",
+    "ok": false,
+    "method": "PUT",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f",
+    "status": 405,
+    "checks": [],
+    "hint": "expected 200, got 405",
+    "elapsed_ms": 80
+  },
+  {
+    "capture": "refresh-api-coordinator.json",
+    "ok": true,
+    "method": "PATCH",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7",
+    "status": 200,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 83
+  },
+  {
+    "capture": "refresh-api-disabled.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7",
+    "status": 404,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 79
+  },
+  {
+    "capture": "refresh-api-members-latest.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/conversations",
+    "status": 200,
+    "checks": [
+      {
+        "check": "coordinator.conversation_id eq 1a36f520dada4d8cb9651eb24bc5a55f",
+        "ok": true,
+        "actual": "1a36f520dada4d8cb9651eb24bc5a55f"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 34
+  },
+  {
+    "capture": "refresh-api-members.json",
+    "ok": false,
+    "method": "GET",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/conversations",
+    "status": 200,
+    "checks": [
+      {
+        "check": "conversations len-eq 1",
+        "ok": false,
+        "actual": "[]"
+      }
+    ],
+    "hint": "failed check: conversations len-eq 1",
+    "elapsed_ms": 44
+  },
+  {
+    "capture": "refresh-api-restored.json",
+    "ok": false,
+    "method": "GET",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/conversations",
+    "status": 200,
+    "checks": [
+      {
+        "check": "conversations len-eq 1",
+        "ok": false,
+        "actual": "[]"
+      }
+    ],
+    "hint": "failed check: conversations len-eq 1",
+    "elapsed_ms": 78
+  },
+  {
+    "capture": "refresh-batch-events.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events/batch",
+    "status": 200,
+    "checks": [
+      {
+        "check": "0.id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+        "ok": true,
+        "actual": "9d2c272e-9e11-4bf9-b4aa-552ed748c6e3"
+      },
+      {
+        "check": "1 eq null",
+        "ok": true,
+        "actual": "null"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 50
+  },
+  {
+    "capture": "refresh-bounded-events.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events/search",
+    "status": 200,
+    "checks": [
+      {
+        "check": "items len-eq 1",
+        "ok": true,
+        "actual": "[{\"id\": \"7a15ff14-88da-4b37-8217-7eed2da4f06b\", \"timestamp\": \"2026-11-18T20:50:42.498280\", \"source\": \"agent\", \"system_prompt\": {\"cache_prompt\": false, \"type\": \"text\", \"text\": \"<SOUL>\\nYou are OpenHand\u2026"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 36
+  },
+  {
+    "capture": "refresh-coordinator-remove-refused.json",
+    "ok": true,
+    "method": "DELETE",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f",
+    "status": 409,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 43
+  },
+  {
+    "capture": "refresh-events-list.json",
+    "ok": false,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events",
+    "status": 422,
+    "checks": [],
+    "hint": "expected <400, got 422",
+    "elapsed_ms": 54
+  },
+  {
+    "capture": "refresh-exact-event-batch.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events/batch",
+    "status": 200,
+    "checks": [
+      {
+        "check": "0.id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+        "ok": true,
+        "actual": "9d2c272e-9e11-4bf9-b4aa-552ed748c6e3"
+      },
+      {
+        "check": "1 eq null",
+        "ok": true,
+        "actual": "null"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 31
+  },
+  {
+    "capture": "refresh-exact-event-bounded.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events/search",
+    "status": 200,
+    "checks": [
+      {
+        "check": "items len-eq 1",
+        "ok": true,
+        "actual": "[{\"id\": \"7a15ff14-88da-4b37-8217-7eed2da4f06b\", \"timestamp\": \"2026-11-18T20:50:42.498280\", \"source\": \"agent\", \"system_prompt\": {\"cache_prompt\": false, \"type\": \"text\", \"text\": \"<SOUL>\\nYou are OpenHand\u2026"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 32
+  },
+  {
+    "capture": "refresh-exact-event-get.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events/9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+    "status": 200,
+    "checks": [
+      {
+        "check": "id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+        "ok": true,
+        "actual": "9d2c272e-9e11-4bf9-b4aa-552ed748c6e3"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 31
+  },
+  {
+    "capture": "refresh-exact-idle.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f",
+    "status": 200,
+    "checks": [
+      {
+        "check": "execution_status eq idle",
+        "ok": true,
+        "actual": "idle"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 36
+  },
+  {
+    "capture": "refresh-exact-reaction-add.json",
+    "ok": false,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/reactions",
+    "status": 200,
+    "checks": [
+      {
+        "check": "parent_id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+        "ok": false,
+        "actual": "6a6e6a97-2493-4c5a-909c-80dd0076ad4b"
+      },
+      {
+        "check": "source eq user",
+        "ok": true,
+        "actual": "user"
+      }
+    ],
+    "hint": "failed check: parent_id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+    "elapsed_ms": 65
+  },
+  {
+    "capture": "refresh-exact-reaction-invalid.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/reactions",
+    "status": 422,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 35
+  },
+  {
+    "capture": "refresh-exact-reaction-missing.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/reactions",
+    "status": 400,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 33
+  },
+  {
+    "capture": "refresh-exact-reaction-off.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/reactions",
+    "status": 409,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 33
+  },
+  {
+    "capture": "refresh-exact-reaction-remove.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/reactions",
+    "status": 200,
+    "checks": [
+      {
+        "check": "removed eq true",
+        "ok": true,
+        "actual": "true"
+      },
+      {
+        "check": "target_event_id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+        "ok": true,
+        "actual": "9d2c272e-9e11-4bf9-b4aa-552ed748c6e3"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 34
+  },
+  {
+    "capture": "refresh-exact-reaction-target.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events/87cd1494-6e6d-44a5-9543-e068efd3ce9a",
+    "status": 200,
+    "checks": [
+      {
+        "check": "target_event_id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+        "ok": true,
+        "actual": "9d2c272e-9e11-4bf9-b4aa-552ed748c6e3"
+      },
+      {
+        "check": "emoji eq heart",
+        "ok": true,
+        "actual": "heart"
+      },
+      {
+        "check": "removed eq false",
+        "ok": true,
+        "actual": "false"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 52
+  },
+  {
+    "capture": "refresh-existing-off.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7",
+    "status": 404,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 33
+  },
+  {
+    "capture": "refresh-get-event.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events/9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+    "status": 200,
+    "checks": [
+      {
+        "check": "id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+        "ok": true,
+        "actual": "9d2c272e-9e11-4bf9-b4aa-552ed748c6e3"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 35
+  },
+  {
+    "capture": "refresh-memory-conflict.json",
+    "ok": true,
+    "method": "PUT",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/memory/MEMORY.md",
+    "status": 409,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 37
+  },
+  {
+    "capture": "refresh-memory-create.json",
+    "ok": true,
+    "method": "PUT",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/memory/MEMORY.md",
+    "status": 200,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 36
+  },
+  {
+    "capture": "refresh-memory-restored.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/memory/MEMORY.md",
+    "status": 200,
+    "checks": [
+      {
+        "check": "content eq Refresh control MAPLE-73",
+        "ok": true,
+        "actual": "Refresh control MAPLE-73"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 39
+  },
+  {
+    "capture": "refresh-off-idle.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f",
+    "status": 200,
+    "checks": [
+      {
+        "check": "execution_status eq idle",
+        "ok": true,
+        "actual": "idle"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 46
+  },
+  {
+    "capture": "refresh-off-tools.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f",
+    "status": 200,
+    "checks": [
+      {
+        "check": "agent.tools len-eq 1",
+        "ok": true,
+        "actual": "[{\"name\": \"terminal\", \"params\": {}}]"
+      },
+      {
+        "check": "agent.tools.0.name eq terminal",
+        "ok": true,
+        "actual": "terminal"
+      },
+      {
+        "check": "tags not-contains project",
+        "ok": true,
+        "actual": "{}"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 35
+  },
+  {
+    "capture": "refresh-reaction-add.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/reactions",
+    "status": 200,
+    "checks": [
+      {
+        "check": "source eq user",
+        "ok": true,
+        "actual": "user"
+      },
+      {
+        "check": "parent_id eq 9d2c272e-9e11-4bf9-b4aa-552ed748c6e3",
+        "ok": true,
+        "actual": "9d2c272e-9e11-4bf9-b4aa-552ed748c6e3"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 43
+  },
+  {
+    "capture": "refresh-reaction-remove.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/reactions",
+    "status": 200,
+    "checks": [
+      {
+        "check": "removed eq true",
+        "ok": true,
+        "actual": "true"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 46
+  },
+  {
+    "capture": "refresh-reaction-search.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/events/search",
+    "status": 200,
+    "checks": [
+      {
+        "check": "items len-eq 2",
+        "ok": true,
+        "actual": "[{\"id\": \"8fbf4d81-ace3-4042-9123-877676ba1409\", \"timestamp\": \"2026-11-18T20:50:43.047118\", \"source\": \"user\", \"parent_id\": \"9d2c272e-9e11-4bf9-b4aa-552ed748c6e3\", \"target_event_id\": \"9d2c272e-9e11-4bf9\u2026"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 45
+  },
+  {
+    "capture": "refresh-reactions-off.json",
+    "ok": true,
+    "method": "POST",
+    "path": "/api/conversations/1a36f520-dada-4d8c-b965-1eb24bc5a55f/reactions",
+    "status": 409,
+    "checks": [],
+    "hint": null,
+    "elapsed_ms": 48
+  },
+  {
+    "capture": "refresh-restored-latest.json",
+    "ok": true,
+    "method": "GET",
+    "path": "/api/projects/ed83e39ffaf84aa18d07db2b28762bd7/conversations",
+    "status": 200,
+    "checks": [
+      {
+        "check": "coordinator.conversation_id eq 1a36f520dada4d8cb9651eb24bc5a55f",
+        "ok": true,
+        "actual": "1a36f520dada4d8cb9651eb24bc5a55f"
+      }
+    ],
+    "hint": null,
+    "elapsed_ms": 40
+  }
+]

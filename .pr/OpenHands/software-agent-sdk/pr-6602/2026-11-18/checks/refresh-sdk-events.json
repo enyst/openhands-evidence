@@ -1,0 +1,151 @@
+{
+  "ok": true,
+  "revision": "05a8f915e85e8f1617335e057405873ece833d27",
+  "with_llm": false,
+  "bullets": {
+    "pass": 7,
+    "blocked": 4
+  },
+  "results": [
+    {
+      "family": "S05-events.md",
+      "bullet": 1,
+      "ids": [
+        "S05.event-base",
+        "S05.json-roundtrip",
+        "S05.to-llm-message",
+        "S05.events-to-messages",
+        "S05.openai-format",
+        "S05.unmatched-actions",
+        "S05.event-log-files",
+        "S05.event-cache",
+        "S05.event-tree",
+        "S05.visualize",
+        "S05.resume-transcript"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 2,
+      "ids": [
+        "S05.error-classification",
+        "S05.streaming-delta",
+        "S05.completion-log-event"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 3,
+      "ids": [
+        "S05.error-classification"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 4,
+      "ids": [
+        "S05.error-classification"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 5,
+      "ids": [
+        "S05.event-log-append"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 6,
+      "ids": [
+        "S05.event-log-recovery"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 7,
+      "ids": [
+        "S05.json-roundtrip",
+        "S05.events-to-messages",
+        "S05.openai-format"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "1 model-backed block(s) skipped (no DEEPSEEK_API_KEY)"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 8,
+      "ids": [
+        "S05.json-roundtrip",
+        "S05.openai-format"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "1 model-backed block(s) skipped (no DEEPSEEK_API_KEY)"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 9,
+      "ids": [
+        "S05.events-to-messages",
+        "S02.error-mapping"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "1 model-backed block(s) skipped (no DEEPSEEK_API_KEY)"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 10,
+      "ids": [
+        "S05.system-prompt-blocks"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": ""
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 11,
+      "ids": [
+        "S05.token-event"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked"
+    }
+  ]
+}

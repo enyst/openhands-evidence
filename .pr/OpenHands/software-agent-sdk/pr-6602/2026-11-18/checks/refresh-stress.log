@@ -1,0 +1,48 @@
+$SDK/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform darwin -- Python 3.13.11, pytest-9.2.0, pluggy-1.6.0
+rootdir: $SDK
+configfile: pyproject.toml
+plugins: libtmux-0.62.0, cov-7.1.0, xdist-3.8.0, timeout-2.4.0, anyio-4.14.2, forked-1.7.5, asyncio-1.4.1.post1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 13 items
+
+tests/agent_server/stress/test_concurrent_conversations.py .             [  7%]
+tests/agent_server/stress/test_conversation_listing.py .                 [ 15%]
+tests/agent_server/stress/test_event_loop_responsiveness.py ..           [ 30%]
+tests/agent_server/stress/test_high_volume_bash_output.py .              [ 38%]
+tests/agent_server/stress/test_lease_contention.py .                     [ 46%]
+tests/agent_server/stress/test_long_running_command.py ..                [ 61%]
+tests/agent_server/stress/test_parallel_subagents.py .                   [ 69%]
+tests/agent_server/stress/test_slow_webhook.py ..                        [ 84%]
+tests/agent_server/stress/test_slow_websocket_consumer.py .              [ 92%]
+tests/agent_server/stress/test_websocket_reconnect_storm.py .            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  $SDK/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+tests/agent_server/stress/test_concurrent_conversations.py: 34 warnings
+tests/agent_server/stress/test_conversation_listing.py: 2000 warnings
+tests/agent_server/stress/test_event_loop_responsiveness.py: 100 warnings
+tests/agent_server/stress/test_lease_contention.py: 1 warning
+tests/agent_server/stress/test_parallel_subagents.py: 13 warnings
+tests/agent_server/stress/test_slow_webhook.py: 5 warnings
+tests/agent_server/stress/test_slow_websocket_consumer.py: 1 warning
+tests/agent_server/stress/test_websocket_reconnect_storm.py: 1 warning
+  $SDK/openhands-sdk/openhands/sdk/agent/base.py:796: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+
+tests/agent_server/stress/test_concurrent_conversations.py::test_concurrent_conversations_isolated_and_fast
+  $SDK/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'summary' on TypedDict class 'ChatCompletionReasoningItem' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================ 13 passed, 2157 warnings in 100.04s (0:01:40) =================

@@ -1,0 +1,86 @@
+
+> @openhands/agent-canvas@1.42.0 typecheck
+> react-router typegen && tsc
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./src/styles/agent-server-ui-style-scope" without a file extension (vite.config.ts:17:8). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./src/styles/agent-server-ui-style-scope" without a file extension (vite.config.ts:17:8). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+__tests__/components/conversation-events/chat/decision-card.test.tsx(207,42): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"answerAskUser"' is not assignable to parameter of type 'never'.
+__tests__/components/conversation-events/chat/decision-card.test.tsx(248,52): error TS2339: Property 'answerAskUser' does not exist on type 'ConversationClient'.
+__tests__/components/conversation-events/chat/decision-card.test.tsx(251,44): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"answerAskUser"' is not assignable to parameter of type 'never'.
+__tests__/components/conversation-events/chat/decision-card.test.tsx(254,11): error TS2322: Type 'Promise<unknown>' is not assignable to type 'string'.
+__tests__/components/conversation-events/chat/decision-card.test.tsx(293,42): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"answerAskUser"' is not assignable to parameter of type 'never'.
+__tests__/components/conversation-events/chat/decision-card.test.tsx(399,57): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"answerAskUser"' is not assignable to parameter of type 'never'.
+__tests__/components/conversation-events/chat/decision-card.test.tsx(476,57): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"answerAskUser"' is not assignable to parameter of type 'never'.
+__tests__/components/features/chat/message-edits.test.tsx(3,15): error TS2724: '"@openhands/typescript-client"' has no exported member named 'MessageEditEvent'. Did you mean 'MessageEvent'?
+__tests__/components/features/chat/message-reactions.test.tsx(5,8): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'ReactionEmoji'. Did you mean to use 'import ReactionEmoji from "@openhands/typescript-client"' instead?
+__tests__/components/features/chat/message-reactions.test.tsx(6,8): error TS2724: '"@openhands/typescript-client"' has no exported member named 'ReactionEvent'. Did you mean 'ActionEvent'?
+__tests__/components/features/chat/message-reactions.test.tsx(100,40): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"listExperimentalFeatures"' is not assignable to parameter of type 'never'.
+__tests__/components/features/chat/message-reactions.test.tsx(101,26): error TS2345: Argument of type '{ key: string; label: string; description: string; default: boolean; enabled: boolean; }[]' is not assignable to parameter of type 'string'.
+__tests__/components/features/chat/message-reactions.test.tsx(450,58): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"react"' is not assignable to parameter of type 'never'.
+__tests__/components/features/chat/message-reactions.test.tsx(455,9): error TS2322: Type 'Promise<ReactionEvent>' is not assignable to type 'string'.
+__tests__/components/features/chat/message-reactions.test.tsx(505,44): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"react"' is not assignable to parameter of type 'never'.
+__tests__/components/features/chat/message-reactions.test.tsx(545,44): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"react"' is not assignable to parameter of type 'never'.
+__tests__/components/features/chat/message-reactions.test.tsx(549,11): error TS2322: Type 'Promise<ReactionEvent>' is not assignable to type 'string'.
+__tests__/components/features/chat/message-reactions.test.tsx(576,44): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"react"' is not assignable to parameter of type 'never'.
+__tests__/components/features/chat/message-reactions.test.tsx(579,11): error TS2322: Type 'Promise<ReactionEvent>' is not assignable to type 'string'.
+__tests__/hooks/mutation/use-fork-conversation.test.tsx(331,24): error TS2339: Property 'CONVERSATION$BRANCH_MISSING_SOURCE' does not exist on type 'typeof I18nKey'.
+__tests__/routes/experimental-settings.test.tsx(107,53): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '"listExperimentalFeatures"' is not assignable to parameter of type 'never'.
+src/api/conversation-reactions-service/conversation-reactions-service.api.ts(3,3): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'ReactionEmoji'. Did you mean to use 'import ReactionEmoji from "@openhands/typescript-client"' instead?
+src/api/conversation-reactions-service/conversation-reactions-service.api.ts(4,3): error TS2724: '"@openhands/typescript-client"' has no exported member named 'ReactionEvent'. Did you mean 'ActionEvent'?
+src/api/conversation-reactions-service/conversation-reactions-service.api.ts(21,66): error TS2339: Property 'react' does not exist on type 'ConversationClient'.
+src/api/conversation-service/agent-server-conversation-service.api.ts(565,7): error TS2339: Property 'answerAskUser' does not exist on type 'ConversationClient'.
+src/api/experimental-features-service/experimental-features-service.api.ts(3,8): error TS2305: Module '"@openhands/typescript-client/clients"' has no exported member 'ExperimentalFeature'.
+src/api/experimental-features-service/experimental-features-service.api.ts(29,36): error TS2339: Property 'listExperimentalFeatures' does not exist on type 'SettingsClient'.
+src/api/experimental-features-service/experimental-features-service.api.ts(41,29): error TS2339: Property 'updateExperimentalFeature' does not exist on type 'SettingsClient'.
+src/components/conversation-events/chat/event-message-components/decision-card.tsx(2,21): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'isAskUserAnswerEvent'. Did you mean to use 'import isAskUserAnswerEvent from "@openhands/typescript-client"' instead?
+src/components/conversation-events/chat/event-message-components/decision-card.tsx(156,34): error TS7006: Parameter 'option' implicitly has an 'any' type.
+src/components/conversation-events/chat/event-message-components/decision-card.tsx(156,42): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/components/conversation-events/chat/event-message-components/decision-card.tsx(204,32): error TS7006: Parameter 'option' implicitly has an 'any' type.
+src/components/conversation-events/chat/event-message-components/decision-card.tsx(204,40): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/components/conversation-events/chat/messages.tsx(469,30): error TS2339: Property 'isFromPlanningAgent' does not exist on type 'ObservationEvent<any>'.
+src/components/features/chat/message-reactions.tsx(4,15): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'ReactionEmoji'. Did you mean to use 'import ReactionEmoji from "@openhands/typescript-client"' instead?
+src/components/features/chat/message-reactions.tsx(204,26): error TS18048: 'change' is possibly 'undefined'.
+src/components/features/chat/message-reactions.tsx(213,50): error TS18048: 'change' is possibly 'undefined'.
+src/components/features/chat/tool-visualizers/search/search.tsx(59,31): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/hooks/mutation/use-fork-conversation.ts(114,40): error TS2339: Property 'CONVERSATION$BRANCH_MISSING_SOURCE' does not exist on type 'typeof I18nKey'.
+src/hooks/mutation/use-fork-conversation.ts(178,26): error TS2551: Property 'CONVERSATION$BRANCHED' does not exist on type 'typeof I18nKey'. Did you mean 'CONVERSATION$BRANCH'?
+src/hooks/mutation/use-update-experimental-feature.ts(6,15): error TS2305: Module '"@openhands/typescript-client/clients"' has no exported member 'ExperimentalFeature'.
+src/hooks/query/use-experimental-features.ts(3,15): error TS2305: Module '"@openhands/typescript-client/clients"' has no exported member 'ExperimentalFeature'.
+src/types/agent-server/core/base/action.ts(1,15): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'AskUserAction'. Did you mean to use 'import AskUserAction from "@openhands/typescript-client"' instead?
+src/types/agent-server/core/base/observation.ts(1,15): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'AskUserObservation'. Did you mean to use 'import AskUserObservation from "@openhands/typescript-client"' instead?
+src/types/agent-server/core/openhands-event.ts(2,3): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'AskUserAnswerEvent'. Did you mean to use 'import AskUserAnswerEvent from "@openhands/typescript-client"' instead?
+src/types/agent-server/core/openhands-event.ts(3,3): error TS2724: '"@openhands/typescript-client"' has no exported member named 'MessageEditEvent'. Did you mean 'MessageEvent'?
+src/types/agent-server/core/openhands-event.ts(4,3): error TS2724: '"@openhands/typescript-client"' has no exported member named 'ReactionEvent'. Did you mean 'ActionEvent'?
+src/utils/decision-closures.ts(1,10): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'isAskUserAnswerEvent'. Did you mean to use 'import isAskUserAnswerEvent from "@openhands/typescript-client"' instead?
+src/utils/transcript-export/index.test.ts(3,3): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'AskUserAction'. Did you mean to use 'import AskUserAction from "@openhands/typescript-client"' instead?
+src/utils/transcript-export/index.test.ts(4,3): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'AskUserAnswerEvent'. Did you mean to use 'import AskUserAnswerEvent from "@openhands/typescript-client"' instead?
+src/utils/transcript-export/index.test.ts(5,3): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'AskUserObservation'. Did you mean to use 'import AskUserObservation from "@openhands/typescript-client"' instead?
+src/utils/transcript-export/index.ts(1,10): error TS2614: Module '"@openhands/typescript-client"' has no exported member 'isAskUserAnswerEvent'. Did you mean to use 'import isAskUserAnswerEvent from "@openhands/typescript-client"' instead?
+src/utils/transcript-export/index.ts(497,31): error TS7006: Parameter 'option' implicitly has an 'any' type.
+src/utils/transcript-export/index.ts(497,39): error TS7006: Parameter 'index' implicitly has an 'any' type.

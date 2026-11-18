@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "value": {
+    "pdfViewerEnabled": false,
+    "plugins": [],
+    "frames": [
+      {
+        "title": "project-proof.pdf",
+        "src": "blob:http://127.0.0.1:22440/8ff968e1-d3a4-4e2b-b5dd-44f6c1456eb4",
+        "rect": {
+          "width": 1038,
+          "height": 510
+        },
+        "html": ""
+      }
+    ]
+  }
+}

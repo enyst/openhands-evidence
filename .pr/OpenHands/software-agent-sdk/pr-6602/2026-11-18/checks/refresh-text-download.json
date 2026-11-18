@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "downloads": [
+    {
+      "ts": "2026-11-18T19:53:21.959Z",
+      "kind": "download",
+      "page": "http://127.0.0.1:22440/projects/375aa52116fd42fcba72e8866d0df323",
+      "appOrigin": true,
+      "path": "<private-run-path>",
+      "inspect": {
+        "bytes": 57,
+        "head": "Projects source refresh, November 18. Control total: 391."
+      }
+    }
+  ]
+}

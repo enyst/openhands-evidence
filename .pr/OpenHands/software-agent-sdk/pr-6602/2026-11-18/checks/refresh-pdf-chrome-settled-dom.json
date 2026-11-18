@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "value": {
+    "pdfViewerEnabled": true,
+    "frames": [
+      {
+        "title": "project-proof.pdf",
+        "w": 345,
+        "h": 510,
+        "html": "\n    \n  \n\n"
+      }
+    ],
+    "viewport": 390,
+    "scroll": 390
+  }
+}

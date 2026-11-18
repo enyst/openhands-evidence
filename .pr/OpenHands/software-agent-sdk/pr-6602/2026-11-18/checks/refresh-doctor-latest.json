@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "run": "<private-run-path>",
+  "baseUrl": "http://127.0.0.1:22440",
+  "failed": [],
+  "warnings": [],
+  "passed": [
+    "launcher process group alive: /opt/homebrew/Cellar/node@24/24.22.1/bin/node $CANVAS/bin/agent-canvas.mjs --por",
+    "launcher is this run's agent-canvas: /opt/homebrew/Cellar/node@24/24.22.1/bin/node $CANVAS/bin/agent-canvas.mjs --por",
+    "port ingress:22440 listening: open",
+    "port agentServer:22441 listening: open",
+    "port automation:22442 listening: open",
+    "port frontend:22443 listening: open",
+    "served build matches this checkout's build inputs: served=d7bfaa4f19222d7f run=d7bfaa4f19222d7f revision=19a775389917",
+    "checkout build inputs unchanged since launch: launch=d7bfaa4f19222d7f now=d7bfaa4f19222d7f",
+    "unauthenticated API rejected: status=401",
+    "authenticated settings readable: status=200",
+    "LLM configured: model=deepseek/deepseek-flash",
+    "agent-server reachable: version=1.62.0",
+    "agent-server matches pin: server=1.62.0, chosen by OH_AGENT_SERVER_LOCAL_PATH (default pin 1.62.0)",
+    "agent-server meets the UI minimum: server=1.62.0 minimum=1.59.0",
+    "automation healthy: status=200",
+    "UI loads without page errors: markers=home-chat-launcher pageErrors=0 testidsInDom=102 (hidden included)"
+  ]
+}
