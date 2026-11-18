@@ -1,0 +1,2 @@
+{"memory_in_rendered_dynamic_context": true, "project_tag": null, "project_tools": [], "prompt_preset": "project_coordinator", "scenario": "child_after_projects_disabled"}
+{"error": "NotImplementedError: ACPAgent does not support custom tools; the ACP server manages its own tools", "native_project_tools": 9, "scenario": "acp_coordinator_first_run"}

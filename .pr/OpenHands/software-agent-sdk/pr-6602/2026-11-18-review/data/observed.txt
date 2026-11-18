@@ -1,0 +1,10 @@
+List projects while disabled -> HTTP 404
+Create ordinary conversation with project=billing -> HTTP 422
+Create same conversation without tag -> HTTP 201
+Attach existing conversation as coordinator -> HTTP 201
+Delete project -> HTTP 200
+Start a child from surviving coordinator -> HTTP 409
+Create second project without worker profile -> HTTP 201
+Change coordinator and worker profile while coordinator disappears -> HTTP 404
+Read project after failed PATCH -> HTTP 200
+Failed PATCH left coordinator unset and persisted new worker profile

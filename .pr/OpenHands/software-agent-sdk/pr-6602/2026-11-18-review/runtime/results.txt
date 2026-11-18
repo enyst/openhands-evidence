@@ -1,0 +1,3 @@
+OBSERVED {"case": "stale_card", "new_question": "Which color?", "saved_answer": "Postgres", "saved_against_new_question": true}
+OBSERVED {"case": "branch_replay", "reply_on_active_branch": false, "updates_delivered": 1, "saved_in_coordinator": "Abandoned result"}
+2 passed, 10 warnings in 1.08s
