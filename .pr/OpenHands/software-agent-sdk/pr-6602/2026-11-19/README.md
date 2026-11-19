@@ -73,6 +73,8 @@ Upstream moved to `f4677a7c1` (stress tests and the verify skill only); the fork
 - Fix [`0e01f4261`](https://github.com/enyst/agent-sdk/commit/0e01f42619adc44242dcc235870ceb82a250a211) on `enyst/agent-sdk:fix/projects-memory-off-20261119`: only a 404 for the file itself means missing. Regression case added to `test_tools_say_so_when_projects_was_turned_off` (fails before, passes after; 52/52 project tool tests).
 - After the fix, same server and coordinator, Projects off: both tools say Projects is off and the model tells the user. [`checks/coordinator-off-memory-after-fix.json`](checks/coordinator-off-memory-after-fix.json)
 - Control, Projects on: the same calls return `OFFON-MARKER-91` and the board, which now lists the child started while off. [`checks/coordinator-on-memory-control.json`](checks/coordinator-on-memory-control.json)
+- enyst decided the off-state child keeps its `project` tag, so the board recognizes it again when Projects is back on (already pinned by `test_with_projects_off_a_members_child_is_an_ordinary_child`). The stale F36 map text was corrected; `map check` ok, 1,078 IDs.
+- Upstream then moved to `2155efb73` (main merge, tool description edits). Both commits were rebased onto it (97 project tests pass, map check ok) and, with enyst's approval, pushed to the PR branch as a fast-forward: [`2155efb73..f76a77843`](https://github.com/OpenHands/software-agent-sdk/compare/2155efb73...f76a778430ed81901a8ca362ce9cb815ac551329) (`56799f912` memory fix, `f76a77843` map). The real-model off/on runs above were on `44c827af0`/`f4677a7c1` plus the fix, not on `2155efb73`.
 
 ## Not proven on this head
 
