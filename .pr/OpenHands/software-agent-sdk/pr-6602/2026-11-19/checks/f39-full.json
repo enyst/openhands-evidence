@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "file": "F39-message-edits.md",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "The feature flag (`F39.flag-gates`).",
+      "ids": [
+        "F39.flag-gates"
+      ],
+      "line": 59,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1586,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Model-backed: the agent edits its question (`F39.tool`).",
+      "ids": [
+        "F39.tool"
+      ],
+      "line": 72,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16089,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "What the model sees (`F39.agent-sees`, `F39.miss`).",
+      "ids": [
+        "F39.agent-sees",
+        "F39.miss"
+      ],
+      "line": 94,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5182,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "A reaction quotes the edited text (`F39.reaction-quotes-edit`).",
+      "ids": [
+        "F39.reaction-quotes-edit"
+      ],
+      "line": 124,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 642,
+      "transcript": "$TMP_RUN"
+    }
+  ],
+  "run": "$TMP_RUN",
+  "launch_flags": []
+}

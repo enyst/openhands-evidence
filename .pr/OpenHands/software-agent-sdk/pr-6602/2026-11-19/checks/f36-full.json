@@ -1,0 +1,409 @@
+{
+  "ok": false,
+  "file": "F36-projects.md",
+  "summary": {
+    "pass": 29,
+    "fail": 5,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 168,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6635,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "No projects yet (`F36.list-empty`).",
+      "ids": [
+        "F36.list-empty"
+      ],
+      "line": 193,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 365,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Create a project (`F36.create`).",
+      "ids": [
+        "F36.create"
+      ],
+      "line": 199,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 799,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Validation (`F36.validation`).",
+      "ids": [
+        "F36.validation"
+      ],
+      "line": 209,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 631,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Unknown project (`F36.unknown-project`).",
+      "ids": [
+        "F36.unknown-project"
+      ],
+      "line": 217,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1838,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Rename (`F36.patch`).",
+      "ids": [
+        "F36.patch"
+      ],
+      "line": 229,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 823,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Coordinator (`F36.coordinator`).",
+      "ids": [
+        "F36.coordinator"
+      ],
+      "line": 240,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2024,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Missing coordinator (`F36.coordinator-missing`).",
+      "ids": [
+        "F36.coordinator-missing"
+      ],
+      "line": 259,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 412,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "One project per coordinator (`F36.coordinator-unique`).",
+      "ids": [
+        "F36.coordinator-unique"
+      ],
+      "line": 268,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 633,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "The coordinator starts a member (`F36.start-member`).",
+      "ids": [
+        "F36.start-member"
+      ],
+      "line": 277,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4557,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Clients cannot claim a project (`F36.client-tags`).",
+      "ids": [
+        "F36.client-tags"
+      ],
+      "line": 294,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1097,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Attention groups (`F36.attention`).",
+      "ids": [
+        "F36.attention"
+      ],
+      "line": 306,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5609,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Remove a conversation (`F36.remove-conversation`).",
+      "ids": [
+        "F36.remove-conversation"
+      ],
+      "line": 328,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1004,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Coordinator membership (`F36.remove-coordinator`).",
+      "ids": [
+        "F36.remove-coordinator"
+      ],
+      "line": 340,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 987,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Message a conversation over REST (`F36.message-rest`).",
+      "ids": [
+        "F36.message-rest"
+      ],
+      "line": 354,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9284,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "How a turn ended (`F36.turn`).",
+      "ids": [
+        "F36.turn"
+      ],
+      "line": 375,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 31748,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Resolved (`F36.resolved`).",
+      "ids": [
+        "F36.resolved"
+      ],
+      "line": 403,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3801,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Resolved automatically (`F36.auto-resolve`).",
+      "ids": [
+        "F36.auto-resolve"
+      ],
+      "line": 423,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15440,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Unfinished work stays open (`F36.needs-you`).",
+      "ids": [
+        "F36.needs-you"
+      ],
+      "line": 455,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12761,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "The worker resolves itself (`F36.self-resolve`).",
+      "ids": [
+        "F36.self-resolve"
+      ],
+      "line": 471,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7028,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Artifacts over REST (`F36.artifacts-rest`).",
+      "ids": [
+        "F36.artifacts-rest"
+      ],
+      "line": 490,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1255,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Model-backed: an agent saves an artifact (`F36.artifacts-tool`).",
+      "ids": [
+        "F36.artifacts-tool"
+      ],
+      "line": 504,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16902,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Project memory over REST (`F36.memory-rest`).",
+      "ids": [
+        "F36.memory-rest"
+      ],
+      "line": 522,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1927,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Model-backed: an agent keeps project memory (`F36.memory-tool`).",
+      "ids": [
+        "F36.memory-tool"
+      ],
+      "line": 539,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6640,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "No approval over REST (`F36.message-refused`).",
+      "ids": [
+        "F36.message-refused"
+      ],
+      "line": 560,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 627,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Restart (`F36.persist-restart`).",
+      "ids": [
+        "F36.persist-restart"
+      ],
+      "line": 569,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9390,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Delete a project (`F36.delete`).",
+      "ids": [
+        "F36.delete"
+      ],
+      "line": 577,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1395,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Model-backed: start and list (`F36.tool-start-and-list`).",
+      "ids": [
+        "F36.tool-start-and-list"
+      ],
+      "line": 588,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 5835,
+      "transcript": "$TMP_RUN",
+      "failed_line": 3,
+      "failed_command": "control-agent-server conversation events \"$CAT\" --kinds ObservationEvent --contains qa-f36-child --expect-min 2 --save F36.tool-start-and-list/events",
+      "stdout_tail": "4d72-9ed9-9b01be75b4d8\",\n  \"total\": 132,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 73,\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 30,\n    \"ActionEvent\": 14,\n    \"ObservationEvent\": 14\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"83eb0d40-ef19-4242-8532-5638964714b2\",\n      \"kind\": \"ActionEvent\",\n      \"source\": \"agent\",\n      \"timestamp\": \"2026-11-19T01:27:25.340768\",\n      \"tool_name\": \"finish\",\n      \"action\": \"{\\\"message\\\": \\\"Two things need you:\\\\n\\\\n1. [qa-f36-handoff](conversation:dc76375bf4204078a97ae3eb22d0e269) is waiting on your pick between two names for your new cat:\\\\n   - **Miso** \\\\u2014 warm, soft, and a little savory, like a cat who curls up exactly where the sun lands.\\\\n   - **Juniper** \\\\u2014 cri\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"id\": \"1caffe71-fe67-4d72-9ed9-9b01be75b4d8\",\n  \"total\": 132,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 73,\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 30,\n    \"ActionEvent\": 14,\n    \"ObservationEvent\": 14\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"$TMP_RUN"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Model-backed: the coordinator hears back (`F36.wake`).",
+      "ids": [
+        "F36.wake"
+      ],
+      "line": 607,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 138199,
+      "transcript": "$TMP_RUN",
+      "failed_line": 6,
+      "failed_command": "control-agent-server conversation events \"$CAT\" --kinds MessageEvent --contains \"conversation:$CHILD_HEX), a conversation in your project\" --expect-count 1 --save F36.wake/update",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"id\": \"1caffe71-fe67-4d72-9ed9-9b01be75b4d8\",\n  \"total\": 134,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 75,\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 30,\n    \"ActionEvent\": 14,\n    \"ObservationEvent\": 14\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"$TMP_RUN"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Model-backed: read a conversation (`F36.read`).",
+      "ids": [
+        "F36.read"
+      ],
+      "line": 623,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 225,
+      "transcript": "$TMP_RUN",
+      "failed_line": 1,
+      "failed_command": "control-agent-server api GET \"/api/projects/$P2/conversations/$CHILD/messages\" --expect 200 --check messages.0.source eq user --check messages.0.sender matches '^conversation:' --save F36.read/rest",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/projects/b565a410d53c4504a0801f1d6ae440d7/conversations//messages\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 32,\n  \"checks\": [\n    {\n      \"check\": \"messages.0.source eq user\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"messages.0.sender matches ^conversation:\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"$TMP_RUN",\n  \"hint\": \"expected 200, got 404\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Model-backed: message a conversation (`F36.tool-message`).",
+      "ids": [
+        "F36.tool-message"
+      ],
+      "line": 633,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 27125,
+      "transcript": "$TMP_RUN",
+      "failed_line": 2,
+      "failed_command": "control-agent-server conversation events \"$CAT\" --kinds ObservationEvent --contains 'Message saved to conversation' --expect-min 1 --save F36.tool-message/events",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"body\": {\n    \"success\": true,\n    \"run\": \"started\"\n  },\n  \"wait\": {\n    \"ok\": true,\n    \"status\": \"finished\",\n    \"transitions\": [\n      \"running\",\n      \"finished\"\n    ],\n    \"waited_ms\": 26578\n  }\n}\n{\n  \"ok\": false,\n  \"id\": \"1caffe71-fe67-4d72-9ed9-9b01be75b4d8\",\n  \"total\": 148,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 84,\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 31,\n    \"ActionEvent\": 16,\n    \"ObservationEvent\": 16\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"$TMP_RUN"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Model-backed: mentions (`F36.mention`).",
+      "ids": [
+        "F36.mention"
+      ],
+      "line": 647,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 434,
+      "transcript": "$TMP_RUN",
+      "failed_line": 4,
+      "failed_command": "control-agent-server conversation events \"$CAT\" --kinds ObservationEvent --contains \"[qa-f36-child](conversation:$CHILD_HEX)\" --expect-min 1 --save F36.mention/list",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"id\": \"1caffe71-fe67-4d72-9ed9-9b01be75b4d8\",\n  \"total\": 148,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 84,\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 31,\n    \"ActionEvent\": 16,\n    \"ObservationEvent\": 16\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"0da07f15-1220-4d35-85b9-d6dca91d1435\",\n      \"kind\": \"SystemPromptEvent\",\n      \"source\": \"agent\",\n      \"timestamp\": \"2026-11-19T01:26:19.611389\"\n    }\n  ],\n  \"saved\": \"$TMP_RUN"\n}\n{\n  \"ok\": false,\n  \"id\": \"1caffe71-fe67-4d72-9ed9-9b01be75b4d8\",\n  \"total\": 148,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 84,\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 31,\n    \"ActionEvent\": 16,\n    \"ObservationEvent\": 16\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"$TMP_RUN"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Model-backed: no approval by message (`F36.tool-message-refuses-confirmation`).",
+      "ids": [
+        "F36.tool-message-refuses-confirmation"
+      ],
+      "line": 665,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16302,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Corrupted file (`F36.corrupted-file`).",
+      "ids": [
+        "F36.corrupted-file"
+      ],
+      "line": 677,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1140,
+      "transcript": "$TMP_RUN"
+    }
+  ],
+  "run": "$TMP_RUN",
+  "launch_flags": []
+}

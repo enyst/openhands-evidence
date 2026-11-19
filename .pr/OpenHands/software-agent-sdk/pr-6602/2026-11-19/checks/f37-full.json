@@ -1,0 +1,148 @@
+{
+  "ok": true,
+  "file": "F37-reactions.md",
+  "summary": {
+    "pass": 12,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 81,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9738,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "The feature flag (`F37.flag`, `F37.flag-gates`).",
+      "ids": [
+        "F37.flag",
+        "F37.flag-gates"
+      ],
+      "line": 96,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3431,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "React over REST (`F37.rest`).",
+      "ids": [
+        "F37.rest"
+      ],
+      "line": 119,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 803,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Bad reactions (`F37.rest-validation`).",
+      "ids": [
+        "F37.rest-validation"
+      ],
+      "line": 131,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 805,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Model-backed: the agent reacts (`F37.tool`).",
+      "ids": [
+        "F37.tool"
+      ],
+      "line": 141,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6763,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Default target is the agent's answer (`F37.rest-default`).",
+      "ids": [
+        "F37.rest-default"
+      ],
+      "line": 157,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 625,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Reacting while a tool call waits (`F37.rest-while-confirming`).",
+      "ids": [
+        "F37.rest-while-confirming"
+      ],
+      "line": 172,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11392,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "What the model sees (`F37.agent-sees-user-reactions`).",
+      "ids": [
+        "F37.agent-sees-user-reactions"
+      ],
+      "line": 198,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4220,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Targets come from the active branch (`F37.rest-active-branch`).",
+      "ids": [
+        "F37.rest-active-branch"
+      ],
+      "line": 230,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1604,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "TypeScript client (`F37.ts-client`).",
+      "ids": [
+        "F37.ts-client"
+      ],
+      "line": 251,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1939,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "Inside a Docker runtime (`F37.runtime-env`).",
+      "ids": [
+        "F37.runtime-env"
+      ],
+      "line": 296,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 43526,
+      "transcript": "$TMP_RUN"
+    },
+    {
+      "bullet": "The response is the stored event (`F37.rest-response-parent`).",
+      "ids": [
+        "F37.rest-response-parent"
+      ],
+      "line": 318,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2546,
+      "transcript": "$TMP_RUN"
+    }
+  ],
+  "run": "$TMP_RUN",
+  "launch_flags": []
+}

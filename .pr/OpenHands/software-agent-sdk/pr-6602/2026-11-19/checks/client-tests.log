@@ -1,0 +1,16 @@
+
+> @openhands/typescript-client@1.62.0 test
+> vitest run --config vitest.config.ts
+
+
+ RUN  v5.1.0 $SDK/clients/typescript
+
+
+ Test Files  29 passed (29)
+      Tests  449 passed (449)
+   Start at  01:22:31
+   Duration  3.02s (import 46%, tests 30%, transform 23%, worker 1%)
+
+    Isolate  29 workers spawned · ~109ms startup each (spawn + environment, per file)
+             at least ~343ms faster with isolate: false — reuses workers across files instead of one per file
+

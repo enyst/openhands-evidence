@@ -1,0 +1,73 @@
+{
+  "ok": true,
+  "file": "F36-projects.md",
+  "launch_flags": [],
+  "attempts": [
+    {
+      "run": "$TMP_RUN",
+      "ok": true,
+      "summary": {
+        "pass": 7,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Coordinator (`F36.coordinator`).": "pass",
+        "Model-backed: start and list (`F36.tool-start-and-list`).": "pass",
+        "Model-backed: the coordinator hears back (`F36.wake`).": "pass",
+        "Model-backed: read a conversation (`F36.read`).": "pass",
+        "Model-backed: message a conversation (`F36.tool-message`).": "pass",
+        "Model-backed: mentions (`F36.mention`).": "pass"
+      }
+    },
+    {
+      "run": "$TMP_RUN",
+      "ok": true,
+      "summary": {
+        "pass": 7,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Coordinator (`F36.coordinator`).": "pass",
+        "Model-backed: start and list (`F36.tool-start-and-list`).": "pass",
+        "Model-backed: the coordinator hears back (`F36.wake`).": "pass",
+        "Model-backed: read a conversation (`F36.read`).": "pass",
+        "Model-backed: message a conversation (`F36.tool-message`).": "pass",
+        "Model-backed: mentions (`F36.mention`).": "pass"
+      }
+    },
+    {
+      "run": "$TMP_RUN",
+      "ok": true,
+      "summary": {
+        "pass": 7,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Coordinator (`F36.coordinator`).": "pass",
+        "Model-backed: start and list (`F36.tool-start-and-list`).": "pass",
+        "Model-backed: the coordinator hears back (`F36.wake`).": "pass",
+        "Model-backed: read a conversation (`F36.read`).": "pass",
+        "Model-backed: message a conversation (`F36.tool-message`).": "pass",
+        "Model-backed: mentions (`F36.mention`).": "pass"
+      }
+    }
+  ]
+}

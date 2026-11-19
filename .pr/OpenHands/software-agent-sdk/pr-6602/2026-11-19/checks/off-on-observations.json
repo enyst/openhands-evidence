@@ -1,0 +1,49 @@
+{
+  "sdk_commit": "44c827af07bbed8b0989f56a8d5b66007104efc7",
+  "canvas_commit": "19a775389917519c32ff5e1958c211cd7fb1d427",
+  "model": "litellm_proxy/deepseek-v4.1-flash via the All Hands LLM proxy (validated 200)",
+  "note": "Values observed by the commands in the README; no raw conversation exports or credentials.",
+  "api_flag_off_fresh_server": {
+    "experimental_flags_default": {"conversation_reactions": false, "ask_user": false, "conversation_mentions": false, "message_edits": false, "projects": false},
+    "GET /api/projects": 404,
+    "POST /api/projects": 404,
+    "openapi_project_paths": [],
+    "ordinary_real_model_conversation": {"status": "finished", "tags": {}, "hello_txt_observations": 3},
+    "conversation_requesting_all_project_tools_and_coordinator_prompt": {
+      "tools_in_system_prompt_event": ["file_editor", "finish", "start_child_conversation", "terminal"],
+      "coordinator_guidance_in_prompt": false,
+      "model_listed_its_tools_as": "terminal, file_editor, start_child_conversation, finish"
+    }
+  },
+  "api_coordinator_created_on_then_flag_off": {
+    "project_route_while_off": 404,
+    "coordinator_kept_its_tools_and_started_a_child": true,
+    "child_tools": ["file_editor", "finish", "start_child_conversation", "terminal"],
+    "child_worker_guidance_present": false,
+    "child_tags": {"project": "<the coordinator's project id>"},
+    "Update_from_messages_reaching_coordinator_after_child_finished": 0,
+    "after_flag_on_again": {"project_kept": true, "memory_marker_kept": true, "off_state_child_listed_as_member": true}
+  },
+  "canvas_flag_off_fresh_stack": {
+    "sidebar_projects_link": false,
+    "projects_route": "explanatory off notice, link to Experimental settings",
+    "ordinary_ui_chat": {"status": "finished", "tags": {"clientsource": "agentcanvas"}, "project_tools": "none", "model_reply": "done"}
+  },
+  "canvas_flag_on": {
+    "enabled_through_ui": ["projects", "ask_user", "conversation_mentions", "conversation_reactions"],
+    "sidebar_projects_link": true,
+    "empty_name_create_disabled": true,
+    "created_project": {"name": "Projects proof 19 November", "has_coordinator": true, "browser_page_errors": 0},
+    "two_real_model_workers": {"Worker alpha": {"artifact": "alpha.txt", "content": "851", "expected": "23*37=851", "saved_by": "Worker alpha"}, "Worker beta": {"artifact": "beta.txt", "content": "1763", "expected": "41*43=1763", "saved_by": "Worker beta"}, "both_parent": "coordinator", "board_group": "resolved (automatic)"},
+    "coordinator_update_messages": 2,
+    "memory": {"file": "MEMORY.md", "contains_marker_CEDAR-19": true},
+    "mention": {"reply_link": "[Worker beta](conversation:ee2704e9aa7f4cdcb612757c1a5d6e78)", "click_navigated_to": "/conversations/ee2704e9aa7f4cdcb612757c1a5d6e78", "page_errors": 0}
+  },
+  "canvas_populated_off_then_on_then_restart": {
+    "GET /api/projects_while_off": 404,
+    "project_url_while_off": "off notice, no board",
+    "sidebar_projects_link_while_off": false,
+    "after_on_and_stack_restart": {"members": [["Worker beta", "resolved"], ["Worker alpha", "resolved"]], "beta_txt": "1763", "memory_marker": true}
+  },
+  "theme": "Paper (localStorage openhands-color-theme=paper, chosen in Settings > Application > Color Theme)"
+}
