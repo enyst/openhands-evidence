@@ -1,0 +1,150 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/switching --arg tool \
+  --check status eq finished --check active_model eq openai/gpt-4.1-mini \
+  --check requests.a eq 2 --check requests.b eq 1 --check tools_sent contains switch_llm \
+  --check description_lists_profile eq true \
+  --check observations.0.error eq true --check observations.0.text contains "'missing-profile' was not found" \
+  --check observations.1.error eq false --check observations.2.text eq "finished on B"
+control-sdk program S03/switching --arg tool-async \
+  --check status eq finished --check active_model eq openai/gpt-4.1-mini --check requests.b eq 1
+{
+  "ok": true,
+  "mode": "tool",
+  "status": "finished",
+  "active_model": "openai/gpt-4.1-mini",
+  "requests": {
+    "a": 2,
+    "b": 1
+  },
+  "tools_sent": [
+    "finish",
+    "switch_llm",
+    "terminal"
+  ],
+  "description_lists_profile": true,
+  "observations": [
+    {
+      "tool": "switch_llm",
+      "error": true,
+      "text": "[An error occurred during execution.]\nLLM profile 'missing-profile' was not found."
+    },
+    {
+      "tool": "switch_llm",
+      "error": false,
+      "text": "Switched LLM profile to 'model-b' with active model 'openai/gpt-4.1-mini'. Reason: better fit Future agent steps will use this profile."
+    },
+    {
+      "tool": "finish",
+      "error": false,
+      "text": "finished on B"
+    }
+  ],
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "active_model eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "requests.a eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "requests.b eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "tools_sent contains switch_llm",
+      "ok": true,
+      "actual": "[\"finish\", \"switch_llm\", \"terminal\"]"
+    },
+    {
+      "check": "description_lists_profile eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.0.error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.0.text contains 'missing-profile' was not found",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\nLLM profile 'missing-profile' was not found."
+    },
+    {
+      "check": "observations.1.error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "observations.2.text eq finished on B",
+      "ok": true,
+      "actual": "finished on B"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "tool-async",
+  "status": "finished",
+  "active_model": "openai/gpt-4.1-mini",
+  "requests": {
+    "a": 2,
+    "b": 1
+  },
+  "tools_sent": [
+    "finish",
+    "switch_llm",
+    "terminal"
+  ],
+  "description_lists_profile": true,
+  "observations": [
+    {
+      "tool": "switch_llm",
+      "error": true,
+      "text": "[An error occurred during execution.]\nLLM profile 'missing-profile' was not found."
+    },
+    {
+      "tool": "switch_llm",
+      "error": false,
+      "text": "Switched LLM profile to 'model-b' with active model 'openai/gpt-4.1-mini'. Reason: better fit Future agent steps will use this profile."
+    },
+    {
+      "tool": "finish",
+      "error": false,
+      "text": "finished on B"
+    }
+  ],
+  "_exit": 0,
+  "_seconds": 6.3,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "active_model eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "requests.b eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 0 after 13s]

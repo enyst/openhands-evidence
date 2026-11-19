@@ -1,0 +1,51 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Switch to a saved profile (`F09.switch-profile`).",
+  "ids": [
+    "F09.switch-profile"
+  ],
+  "line": 250,
+  "script": "control-agent-server api POST \"/api/conversations/$RID/switch_profile\" --json '{\"profile_name\": \"deepseek-pro\"}' \\\n  --expect 200 --check success eq true --save F09.switch-profile/switch\ncontrol-agent-server api GET \"/api/conversations/$RID\" --quiet --check agent.llm.model eq deepseek/deepseek-v4-pro \\\n  --check agent.llm.usage_id eq profile:deepseek-pro --check agent.llm.api_key missing --save F09.switch-profile/get\ncontrol-agent-server state cat \"server/workspace/conversations/${RID//-/}/base_state.json\" --max-chars 200 \\\n  --check agent.llm.model eq deepseek/deepseek-v4-pro --check agent.llm.usage_id eq profile:deepseek-pro\ncontrol-agent-server conversation send \"$RID\" --text 'Reply with the single word: ok' --wait --until finished,error --timeout 240\ncontrol-agent-server api GET \"/api/conversations/$RID\" --until-ok 60 --quiet --check execution_status eq finished \\\n  --check 'stats.usage_to_metrics.profile:deepseek-pro.model_name' eq deepseek/deepseek-v4-pro \\\n  --check 'stats.usage_to_metrics.profile:deepseek-pro.accumulated_token_usage.prompt_tokens' gt 0 --save F09.switch-profile/stats\nPRO1=$(control-agent-server api GET \"/api/conversations/$RID\" --field 'stats.usage_to_metrics.profile:deepseek-pro.accumulated_token_usage.prompt_tokens')\n",
+  "exit_code": 1,
+  "elapsed_ms": 435,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$RID/switch_profile\" --json '{\"profile_name\": \"deepseek-pro\"}' --expect 200 --check success eq true --save F09.switch-profile/switch",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//switch_profile",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "profile_name": "deepseek-pro"
+      },
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 71,
+    "checks": [
+      {
+        "check": "success eq true",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-082330-b8e9-map-f09/evidence/F09.switch-profile/switch.json",
+    "hint": "expected 200, got 404"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//switch_profile\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"profile_name\": \"deepseek-pro\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 71,\n  \"checks\": [\n    {\n      \"check\": \"success eq true\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-082330-b8e9-map-f09/evidence/F09.switch-profile/switch.json\",\n  \"hint\": \"expected 200, got 404\"\n}\n",
+  "stderr": ""
+}

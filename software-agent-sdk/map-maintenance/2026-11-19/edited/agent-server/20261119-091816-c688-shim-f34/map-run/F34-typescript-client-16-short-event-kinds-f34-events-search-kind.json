@@ -1,0 +1,17 @@
+{
+  "file": "F34-typescript-client.md",
+  "bullet": "Short event kinds (`F34.events-search-kind`).",
+  "ids": [
+    "F34.events-search-kind"
+  ],
+  "line": 824,
+  "script": "cat > \"$F34/kind.mjs\" <<'JS'\nimport { writeFileSync } from 'node:fs';\nimport { m, host, apiKey, F34, assert } from './lib.mjs';\nconst events = new m.RemoteEventsList({ baseUrl: host, apiKey }, process.argv[2]);\nconst qualified = 'openhands.sdk.event.llm_convertible.message.MessageEvent';\nconst full = await events.search({ kind: qualified });\nassert.deepEqual(full.items.map((e) => [e.kind, e.source]), [['MessageEvent', 'user']]);\nassert.equal(await events.count({ kind: qualified }), 1);\nconst short = (await events.search({ kind: 'MessageEvent' })).items.map((e) => e.id);\nwriteFileSync(`${F34}/kind.json`, JSON.stringify({ full: full.items.map((e) => e.id), short,\n  short_count: await events.count({ kind: 'MessageEvent' }) }));\nconsole.log('QA_F34_KIND_READ');\nJS\ncontrol-agent-server exec --timeout 60 --expect-output QA_F34_KIND_READ --save F34.events-search-kind/program -- node \"$F34/kind.mjs\" \"$SCID\"\ncat \"$F34/kind.json\"\ncontrol-agent-server assert --json \"$F34/kind.json\" --check short len-eq 1 --check short.0 eq \"$(jq -r '.full[0]' \"$F34/kind.json\")\" --check short_count eq 1\n",
+  "exit_code": 0,
+  "elapsed_ms": 1311,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 721,\n  \"stdout_tail\": \"QA_F34_KIND_READ\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/evidence/F34.events-search-kind/program.json\"\n}\n{\"full\":[\"1da30e1e-a188-494d-96c7-84aafb7e11ca\"],\"short\":[\"1da30e1e-a188-494d-96c7-84aafb7e11ca\"],\"short_count\":1}{\n  \"ok\": true,\n  \"value\": {\n    \"full\": [\n      \"1da30e1e-a188-494d-96c7-84aafb7e11ca\"\n    ],\n    \"short\": [\n      \"1da30e1e-a188-494d-96c7-84aafb7e11ca\"\n    ],\n    \"short_count\": 1\n  },\n  \"checks\": [\n    {\n      \"check\": \"short len-eq 1\",\n      \"ok\": true,\n      \"actual\": \"[\\\"1da30e1e-a188-494d-96c7-84aafb7e11ca\\\"]\"\n    },\n    {\n      \"check\": \"short.0 eq 1da30e1e-a188-494d-96c7-84aafb7e11ca\",\n      \"ok\": true,\n      \"actual\": \"1da30e1e-a188-494d-96c7-84aafb7e11ca\"\n    },\n    {\n      \"check\": \"short_count eq 1\",\n      \"ok\": true,\n      \"actual\": \"1\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

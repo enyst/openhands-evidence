@@ -1,0 +1,53 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Run limit on a continued conversation (`F30.chat-reuse-run-limit-429`).",
+  "ids": [
+    "F30.chat-reuse-run-limit-429"
+  ],
+  "line": 870,
+  "script": "trap 'control-agent-server api DELETE \"/api/conversations/$HOLD2\" >/dev/null || true; control-agent-server restart --reset-config >/dev/null || true' EXIT\ncontrol-agent-server restart --config-json '{\"max_concurrent_runs\": 1}'\nHANG2=$(control-agent-server fixture llm-stub --name qa-f30-hang2 --step hang:300 --print-path)\nHOLD2=$(control-agent-server conversation start --tools none --no-autotitle --prompt QA_F30_HOLD_2 --print-id \\\n  --llm-json \"{\\\"model\\\": \\\"openai/qa-stub\\\", \\\"base_url\\\": \\\"$HANG2/v1\\\", \\\"api_key\\\": \\\"qa-f30-stub\\\", \\\"num_retries\\\": 0}\")\ncontrol-agent-server conversation wait \"$HOLD2\" --until running --timeout 30\ncontrol-agent-server sink read --name qa-f30-hang2 --expect-min 1\nREUSE='{\"model\": \"openhands_deepseek-flash\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_429_REUSE: reply with one short word and use no tools.\"}]}'\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_SECOND \\\n  --check items len-eq 1 --quiet\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_429_REUSE \\\n  --check items len-eq 0 --quiet\ncontrol-agent-server api POST /v1/chat/completions --auth bearer --header \"X-OpenHands-ServerConversation-ID: $CID\" --json \"$REUSE\" \\\n  --expect 429 --check-header x-openhands-serverconversation-id missing --expect-max-ms 10000 --save F30.chat-reuse-run-limit-429/first-try\ncontrol-agent-server api POST /v1/chat/completions --auth bearer --header \"X-OpenHands-ServerConversation-ID: $CID\" --json \"$REUSE\" \\\n  --expect 429 --expect-max-ms 10000 --save F30.chat-reuse-run-limit-429/retry\ncontrol-agent-server api GET \"/api/conversations/$HOLD2\" --check execution_status eq running --quiet\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_429_REUSE \\\n  --check items len-eq 0 --save F30.chat-reuse-run-limit-429/user-messages\n",
+  "exit_code": 1,
+  "elapsed_ms": 19340,
+  "failed_line": 9,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_SECOND --check items len-eq 1 --quiet",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations//events/search",
+      "query": [
+        [
+          "source",
+          "user"
+        ],
+        [
+          "body",
+          "QA_F30_SECOND"
+        ]
+      ],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 61,
+    "checks": [
+      {
+        "check": "items len-eq 1",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "hint": "expected <400, got 404"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-102409-8011-map-f30\",\n  \"url\": \"http://127.0.0.1:53929\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6081,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"id\": \"6b04d033-cbd0-43c8-873a-f77f613a0ec5\",\n  \"ok\": true,\n  \"status\": \"running\",\n  \"transitions\": [\n    \"running\"\n  ],\n  \"waited_ms\": 210\n}\n{\n  \"ok\": true,\n  \"requests\": 1,\n  \"paths\": {\n    \"/v1/chat/completions\": 1\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-19T10:27:25Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/chat/completions\\\", \\\"call\\\": 0, \\\"step\\\": {\\\"hang\\\": 300.0}, \\\"body\\\": {\\\"messages\\\": [{\\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<SOUL>\\\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\\\n</SOUL>\\\\n\\\\n<ROLE>\\\\n* Your primary role is to assist users by executing commands, modifying code, and solving techni\\u2026\"\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations//events/search\",\n    \"query\": [\n      [\n        \"source\",\n        \"user\"\n      ],\n      [\n        \"body\",\n        \"QA_F30_SECOND\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"items len-eq 1\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"hint\": \"expected <400, got 404\"\n}\n",
+  "stderr": ""
+}

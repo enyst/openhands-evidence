@@ -1,0 +1,41 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Ask, generate and set a title (`F33.conversation-ask-title`).",
+  "ids": [
+    "F33.conversation-ask-title"
+  ],
+  "line": 1164,
+  "script": "STATE=openhands.sdk.event.conversation_state.ConversationStateUpdateEvent\nE0=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)\nS0=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --query kind=$STATE --field .)\ncontrol-agent-server exec --env PYTHONPATH=\"$F33\" --env CID=\"$CID\" --save F33.conversation-ask-title/probe -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\nimport f33\nfrom openhands.sdk import Conversation\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"run\"), conversation_id=uuid.UUID(os.environ[\"CID\"]),\n                    visualizer=None, delete_on_close=False)\nanswer = conv.ask_agent(\"Answer with one word, yes or no: did you create a file?\")\nassert isinstance(answer, str) and answer.strip(), answer\ntitle = conv.generate_title(max_length=40)\nassert isinstance(title, str) and 0 < len(title) <= 40, title\nconv.set_title(\"qa-f33 title\")\nf33.emit(\"ask\", answer=answer[:80], title=title)\nconv.close()\nPY\nE1=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)\nS1=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --query kind=$STATE --field .)\ntest \"$S1\" -gt \"$S0\"\ntest \"$((E1 - S1))\" -eq \"$((E0 - S0))\"\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query kind=$STATE --query sort_order=TIMESTAMP_DESC --query limit=1 --quiet \\\n  --check items.0.key eq stats --check items.0.value.usage_to_metrics.ask-agent-llm.accumulated_token_usage.completion_tokens ge 1 \\\n  --save F33.conversation-ask-title/stats-event\ncontrol-agent-server api GET \"/api/conversations/$CID\" --check title eq 'qa-f33 title' --check execution_status eq finished \\\n  --save F33.conversation-ask-title/get\n",
+  "exit_code": 1,
+  "elapsed_ms": 353,
+  "failed_line": 2,
+  "failed_command": "E0=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations//events/count",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 59,
+    "hint": "expected <400, got 404"
+  },
+  "stdout": "",
+  "stderr": ""
+}

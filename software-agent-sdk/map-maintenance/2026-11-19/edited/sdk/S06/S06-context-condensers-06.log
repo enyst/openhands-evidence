@@ -1,0 +1,96 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg reasons \
+  --check request_view_has_request eq false --check request_view_unhandled eq true \
+  --check request_reasons eq '["request"]' --check events_reasons eq '["events"]' \
+  --check request_events_tokens_reasons eq '["events", "request", "tokens"]' \
+  --check most_aggressive_wins eq true \
+  --check minimum_progress_result eq View --check minimum_progress_summary_calls eq 0 \
+  --check keep_first_too_big_error eq ValidationError --check noop_same_view eq true
+{
+  "ok": true,
+  "mode": "reasons",
+  "view_len": 28,
+  "request_view_len": 28,
+  "request_view_unhandled": true,
+  "request_view_has_request": false,
+  "request_reasons": [
+    "request"
+  ],
+  "request_forgotten": 16,
+  "events_reasons": [
+    "events"
+  ],
+  "events_forgotten": 20,
+  "request_events_reasons": [
+    "events",
+    "request"
+  ],
+  "request_events_forgotten": 20,
+  "request_events_tokens_reasons": [
+    "events",
+    "request",
+    "tokens"
+  ],
+  "request_events_tokens_forgotten": 26,
+  "most_aggressive_wins": true,
+  "minimum_progress_result": "View",
+  "minimum_progress_summary_calls": 0,
+  "keep_first_too_big_error": "ValidationError",
+  "noop_same_view": true,
+  "_exit": 0,
+  "_seconds": 7.1,
+  "checks": [
+    {
+      "check": "request_view_has_request eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "request_view_unhandled eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "request_reasons eq [\"request\"]",
+      "ok": true,
+      "actual": "[\"request\"]"
+    },
+    {
+      "check": "events_reasons eq [\"events\"]",
+      "ok": true,
+      "actual": "[\"events\"]"
+    },
+    {
+      "check": "request_events_tokens_reasons eq [\"events\", \"request\", \"tokens\"]",
+      "ok": true,
+      "actual": "[\"events\", \"request\", \"tokens\"]"
+    },
+    {
+      "check": "most_aggressive_wins eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "minimum_progress_result eq View",
+      "ok": true,
+      "actual": "View"
+    },
+    {
+      "check": "minimum_progress_summary_calls eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "keep_first_too_big_error eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "noop_same_view eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 7s]

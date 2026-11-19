@@ -1,0 +1,118 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/task_confirmation \
+  --check handler_calls len-eq 2 \
+  --check handler_calls.0.task_id eq task_00000001 --check handler_calls.0.tools.0 eq terminal --check handler_calls.0.approved eq false \
+  --check careful_file eq false --check observations.0.text eq "careful done" \
+  --check parent_waited eq waiting_for_confirmation \
+  --check handler_calls.1.task_id eq task_00000002 --check handler_calls.1.approved eq true \
+  --check inherited_file eq true --check execution_status eq finished
+{
+  "ok": true,
+  "handler_calls": [
+    {
+      "task_id": "task_00000001",
+      "tools": [
+        "terminal"
+      ],
+      "approved": false
+    },
+    {
+      "task_id": "task_00000002",
+      "tools": [
+        "terminal"
+      ],
+      "approved": true
+    }
+  ],
+  "careful_file": false,
+  "parent_waited": "waiting_for_confirmation",
+  "execution_status": "finished",
+  "inherited_file": true,
+  "observations": [
+    {
+      "task_id": "task_00000001",
+      "subagent": "careful",
+      "status": "completed",
+      "is_error": false,
+      "text": "careful done"
+    },
+    {
+      "task_id": "task_00000002",
+      "subagent": "inheritor",
+      "status": "completed",
+      "is_error": false,
+      "text": "inherited done"
+    }
+  ],
+  "auto_file": true,
+  "plain_observations": [
+    {
+      "task_id": "task_00000001",
+      "subagent": "careful",
+      "status": "completed",
+      "is_error": false,
+      "text": "auto done"
+    }
+  ],
+  "_exit": 0,
+  "_seconds": 5.7,
+  "checks": [
+    {
+      "check": "handler_calls len-eq 2",
+      "ok": true,
+      "actual": "[{\"task_id\": \"task_00000001\", \"tools\": [\"terminal\"], \"approved\": false}, {\"task_id\": \"task_00000002\", \"tools\": [\"terminal\"], \"approved\": true}]"
+    },
+    {
+      "check": "handler_calls.0.task_id eq task_00000001",
+      "ok": true,
+      "actual": "task_00000001"
+    },
+    {
+      "check": "handler_calls.0.tools.0 eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    },
+    {
+      "check": "handler_calls.0.approved eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "careful_file eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "observations.0.text eq careful done",
+      "ok": true,
+      "actual": "careful done"
+    },
+    {
+      "check": "parent_waited eq waiting_for_confirmation",
+      "ok": true,
+      "actual": "waiting_for_confirmation"
+    },
+    {
+      "check": "handler_calls.1.task_id eq task_00000002",
+      "ok": true,
+      "actual": "task_00000002"
+    },
+    {
+      "check": "handler_calls.1.approved eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "inherited_file eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 6s]

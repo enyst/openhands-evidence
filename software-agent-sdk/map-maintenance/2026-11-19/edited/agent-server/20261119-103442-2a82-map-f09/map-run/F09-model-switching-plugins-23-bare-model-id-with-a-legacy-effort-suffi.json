@@ -1,0 +1,33 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Bare model id with a legacy effort suffix (`F09.acp-model-id-bare`).",
+  "ids": [
+    "F09.acp-model-id-bare"
+  ],
+  "line": 634,
+  "script": "EID=$(control-agent-server conversation start --no-autotitle --body-json '{\"agent_settings\": {\"agent_kind\": \"acp\", \"acp_server\": \"claude-code\", \"acp_model\": \"sonnet/high\", \"acp_effort\": \"low\"}}' \\\n  --secret ANTHROPIC_API_KEY=\"$DEEPSEEK_API_KEY\" --secret ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic --secret IS_SANDBOX=1 \\\n  --prompt 'Reply with the single word: ok' --wait --until finished --timeout 300 --print-id)\nESESS=$(control-agent-server api GET \"/api/conversations/$EID\" --check execution_status eq finished --check current_model_id eq sonnet \\\n  --check agent.acp_model eq sonnet/high --check agent.acp_effort eq low --check current_effort eq low \\\n  --check available_efforts contains '\"value\": \"high\"' --check available_models contains '\"model_id\": \"sonnet\"' \\\n  --save F09.acp-model-id-bare/get --field agent_state.acp_session_id)\ntest -n \"$ESESS\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 300520,
+  "failed_line": 3,
+  "failed_command": "EID=$(control-agent-server conversation start --no-autotitle --body-json '{\"agent_settings\": {\"agent_kind\": \"acp\", \"acp_server\": \"claude-code\", \"acp_model\": \"sonnet/high\", \"acp_effort\": \"low\"}}' --secret ANTHROPIC_API_KEY=\"$DEEPSEEK_API_KEY\" --secret ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic --secret IS_SANDBOX=1 --prompt 'Reply with the single word: ok' --wait --until finished --timeout 300 --print-id)",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "id": "bb82670e-292e-4b29-806c-4373cabd937a",
+    "status": 201,
+    "execution_status": "idle",
+    "workspace": "<scratch>/agent-server/20261119-103442-2a82-map-f09/fixtures/workspaces/104218-251927",
+    "wait": {
+      "ok": false,
+      "status": "error",
+      "transitions": [
+        "idle",
+        "running",
+        "error"
+      ],
+      "hint": "still error after 300s; wanted ['finished']"
+    }
+  },
+  "stdout": "",
+  "stderr": ""
+}

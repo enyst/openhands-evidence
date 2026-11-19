@@ -1,0 +1,301 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S10/hooked_run \
+  --check execution_status eq finished \
+  --check build_kept eq true --check notes_written eq true \
+  --check rejections eq 1 --check rejection_source eq hook --check rejection_reason contains "rm -rf is blocked" \
+  --check pre_terminal_blocked.0 eq true --check pre_terminal_exit_codes.0 eq 2 --check pre_terminal_action_ids_set eq true \
+  --check pre_file_calls eq 1 \
+  --check env_event_type eq PreToolUse --check env_tool_name eq terminal \
+  --check env_project_dir_is_workspace eq true --check env_session_id_is_conversation eq true --check cwd_is_workspace eq true \
+  --check post_tools contains file_editor --check post_has_tool_response eq true --check post_file_editor_input_command eq create \
+  --check soft_fail_exit_codes.0 eq 1 --check soft_fail_blocked eq false --check soft_fail_success eq false --check soft_fail_stderr eq "soft failure" \
+  --check async_got_stdin eq PostToolUse --check async_alive_after_close eq false \
+  --check user_extended_content.0 eq "HOOK-CONTEXT: the build is green" --check llm_saw_context eq true \
+  --check stop_blocked.0 eq true --check stop_blocked.1 eq false \
+  --check stop_feedback.0 contains "Create done.txt first." --check llm_calls eq 4 \
+  --check hook_events_by_type.SessionStart eq 1 --check session_start_log_lines eq 1 \
+  --check hook_events_by_type.SessionEnd eq 1 --check session_ended_file eq true \
+  --check hook_event_fields contains hook_input --check hook_event_fields contains additional_context \
+  --check stored_hook_config_events len-eq 6
+{
+  "ok": true,
+  "execution_status": "finished",
+  "hook_events_by_type": {
+    "SessionStart": 1,
+    "UserPromptSubmit": 1,
+    "PreToolUse": 3,
+    "PostToolUse": 9,
+    "Stop": 2,
+    "SessionEnd": 1
+  },
+  "hook_event_fields": [
+    "action_id",
+    "additional_context",
+    "blocked",
+    "error",
+    "exit_code",
+    "hook_command",
+    "hook_event_type",
+    "hook_input",
+    "id",
+    "kind",
+    "message_id",
+    "parent_id",
+    "reason",
+    "source",
+    "stderr",
+    "stdout",
+    "success",
+    "timestamp",
+    "tool_name"
+  ],
+  "stored_hook_config_events": [
+    "post_tool_use",
+    "pre_tool_use",
+    "session_end",
+    "session_start",
+    "stop",
+    "user_prompt_submit"
+  ],
+  "build_kept": true,
+  "notes_written": true,
+  "rejections": 1,
+  "rejection_source": "hook",
+  "rejection_reason": "rm -rf is blocked by guard_terminal.sh",
+  "pre_terminal_blocked": [
+    true,
+    false
+  ],
+  "pre_terminal_exit_codes": [
+    2,
+    0
+  ],
+  "pre_terminal_action_ids_set": true,
+  "pre_file_calls": 1,
+  "env_event_type": "PreToolUse",
+  "env_tool_name": "terminal",
+  "env_project_dir_is_workspace": true,
+  "env_session_id_is_conversation": true,
+  "cwd_is_workspace": true,
+  "post_tools": [
+    "file_editor",
+    "finish",
+    "terminal",
+    "finish"
+  ],
+  "post_has_tool_response": true,
+  "post_file_editor_input_command": "create",
+  "soft_fail_exit_codes": [
+    1
+  ],
+  "soft_fail_blocked": false,
+  "soft_fail_success": false,
+  "soft_fail_stderr": "soft failure",
+  "async_got_stdin": "PostToolUse",
+  "async_alive_after_close": false,
+  "user_extended_content": [
+    "HOOK-CONTEXT: the build is green"
+  ],
+  "llm_saw_context": true,
+  "stop_blocked": [
+    true,
+    false
+  ],
+  "stop_feedback": [
+    "[Stop hook feedback] Create done.txt first."
+  ],
+  "llm_calls": 4,
+  "session_start_log_lines": 1,
+  "session_ended_file": true,
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "build_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "notes_written eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rejections eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "rejection_source eq hook",
+      "ok": true,
+      "actual": "hook"
+    },
+    {
+      "check": "rejection_reason contains rm -rf is blocked",
+      "ok": true,
+      "actual": "rm -rf is blocked by guard_terminal.sh"
+    },
+    {
+      "check": "pre_terminal_blocked.0 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "pre_terminal_exit_codes.0 eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "pre_terminal_action_ids_set eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "pre_file_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "env_event_type eq PreToolUse",
+      "ok": true,
+      "actual": "PreToolUse"
+    },
+    {
+      "check": "env_tool_name eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    },
+    {
+      "check": "env_project_dir_is_workspace eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "env_session_id_is_conversation eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "cwd_is_workspace eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "post_tools contains file_editor",
+      "ok": true,
+      "actual": "[\"file_editor\", \"finish\", \"terminal\", \"finish\"]"
+    },
+    {
+      "check": "post_has_tool_response eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "post_file_editor_input_command eq create",
+      "ok": true,
+      "actual": "create"
+    },
+    {
+      "check": "soft_fail_exit_codes.0 eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "soft_fail_blocked eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "soft_fail_success eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "soft_fail_stderr eq soft failure",
+      "ok": true,
+      "actual": "soft failure"
+    },
+    {
+      "check": "async_got_stdin eq PostToolUse",
+      "ok": true,
+      "actual": "PostToolUse"
+    },
+    {
+      "check": "async_alive_after_close eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "user_extended_content.0 eq HOOK-CONTEXT: the build is green",
+      "ok": true,
+      "actual": "HOOK-CONTEXT: the build is green"
+    },
+    {
+      "check": "llm_saw_context eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stop_blocked.0 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stop_blocked.1 eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "stop_feedback.0 contains Create done.txt first.",
+      "ok": true,
+      "actual": "[Stop hook feedback] Create done.txt first."
+    },
+    {
+      "check": "llm_calls eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "hook_events_by_type.SessionStart eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "session_start_log_lines eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "hook_events_by_type.SessionEnd eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "session_ended_file eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hook_event_fields contains hook_input",
+      "ok": true,
+      "actual": "[\"action_id\", \"additional_context\", \"blocked\", \"error\", \"exit_code\", \"hook_command\", \"hook_event_type\", \"hook_input\", \"id\", \"kind\", \"message_id\", \"parent_id\", \"reason\", \"source\", \"stderr\", \"stdout\", \""
+    },
+    {
+      "check": "hook_event_fields contains additional_context",
+      "ok": true,
+      "actual": "[\"action_id\", \"additional_context\", \"blocked\", \"error\", \"exit_code\", \"hook_command\", \"hook_event_type\", \"hook_input\", \"id\", \"kind\", \"message_id\", \"parent_id\", \"reason\", \"source\", \"stderr\", \"stdout\", \""
+    },
+    {
+      "check": "stored_hook_config_events len-eq 6",
+      "ok": true,
+      "actual": "[\"post_tool_use\", \"pre_tool_use\", \"session_end\", \"session_start\", \"stop\", \"user_prompt_submit\"]"
+    }
+  ]
+}
+
+[exit 0 after 6s]

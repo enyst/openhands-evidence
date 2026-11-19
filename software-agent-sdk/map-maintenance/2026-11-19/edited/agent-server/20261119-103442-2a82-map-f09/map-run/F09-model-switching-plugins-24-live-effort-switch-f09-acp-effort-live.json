@@ -1,0 +1,51 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Live effort switch (`F09.acp-effort-live`).",
+  "ids": [
+    "F09.acp-effort-live"
+  ],
+  "line": 653,
+  "script": "control-agent-server api POST \"/api/conversations/$EID/switch_acp_effort\" --json '{\"effort\": \"high\"}' --expect 200 --check success eq true --save F09.acp-effort-live/switch\ncontrol-agent-server api GET \"/api/conversations/$EID\" --quiet --check current_effort eq high --check agent.acp_effort eq high \\\n  --check agent_state.acp_current_effort eq high --check agent_state.acp_session_id eq \"$ESESS\" --check current_model_id eq sonnet --save F09.acp-effort-live/get\ncontrol-agent-server state cat \"server/workspace/conversations/${EID//-/}/base_state.json\" --max-chars 200 --check agent.acp_effort eq high --check agent_state.acp_current_effort eq high\ncontrol-agent-server conversation send \"$EID\" --text 'Reply with the single word: ok' --wait --until finished,error --timeout 300\ncontrol-agent-server api GET \"/api/conversations/$EID\" --until-ok 30 --quiet --check execution_status eq finished --check agent_state.acp_session_id eq \"$ESESS\" \\\n  --check current_effort eq high --save F09.acp-effort-live/second-turn\n",
+  "exit_code": 1,
+  "elapsed_ms": 398,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$EID/switch_acp_effort\" --json '{\"effort\": \"high\"}' --expect 200 --check success eq true --save F09.acp-effort-live/switch",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//switch_acp_effort",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "effort": "high"
+      },
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 78,
+    "checks": [
+      {
+        "check": "success eq true",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.acp-effort-live/switch.json",
+    "hint": "expected 200, got 404"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//switch_acp_effort\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"effort\": \"high\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 78,\n  \"checks\": [\n    {\n      \"check\": \"success eq true\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.acp-effort-live/switch.json\",\n  \"hint\": \"expected 200, got 404\"\n}\n",
+  "stderr": ""
+}

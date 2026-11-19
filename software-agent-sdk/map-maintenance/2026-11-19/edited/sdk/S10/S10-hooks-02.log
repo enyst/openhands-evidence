@@ -1,0 +1,90 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S10/blocked_prompt \
+  --check blocked_after_send eq 1 --check block_reason eq "asking for the secret is not allowed" \
+  --check blocked_after_reopen eq 1 --check same_message_blocked eq true --check action_block_after_reopen eq true \
+  --check run_error missing --check execution_status eq finished --check agent_messages len-eq 0 \
+  --check blocked_after_run eq 0 --check action_block_after_pop eq false \
+  --check user_prompt_hook_blocked.0 eq true --check hook_message_id_set eq true
+{
+  "ok": true,
+  "blocked_after_send": 1,
+  "block_reason": "asking for the secret is not allowed",
+  "blocked_after_reopen": 1,
+  "same_message_blocked": true,
+  "action_block_after_reopen": true,
+  "run_error": null,
+  "execution_status": "finished",
+  "agent_messages": [],
+  "blocked_after_run": 0,
+  "action_block_after_pop": false,
+  "user_prompt_hook_blocked": [
+    true
+  ],
+  "hook_message_id_set": true,
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "blocked_after_send eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "block_reason eq asking for the secret is not allowed",
+      "ok": true,
+      "actual": "asking for the secret is not allowed"
+    },
+    {
+      "check": "blocked_after_reopen eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "same_message_blocked eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "action_block_after_reopen eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "run_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "agent_messages len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "blocked_after_run eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "action_block_after_pop eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "user_prompt_hook_blocked.0 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hook_message_id_set eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 5s]

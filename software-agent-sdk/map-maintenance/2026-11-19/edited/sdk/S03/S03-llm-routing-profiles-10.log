@@ -1,0 +1,46 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/model_router --arg before-first-run \
+  --check status eq finished --check requests.base eq 0 --check requests.route eq 1 --check last_route_name eq early \
+  --check costs.profile:qa-early-route eq 0.14
+{
+  "ok": true,
+  "mode": "before-first-run",
+  "status": "finished",
+  "requests": {
+    "base": 0,
+    "route": 1
+  },
+  "last_route_name": "early",
+  "costs": {},
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "requests.base eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "requests.route eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "last_route_name eq early",
+      "ok": true,
+      "actual": "early"
+    },
+    {
+      "check": "costs.profile:qa-early-route eq 0.14",
+      "ok": false,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 1 after 6s]

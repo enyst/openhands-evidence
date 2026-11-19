@@ -1,0 +1,48 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Switch onto a registered usage id (`F09.switch-llm-registered-usage-id`).",
+  "ids": [
+    "F09.switch-llm-registered-usage-id"
+  ],
+  "line": 316,
+  "script": "PRO=$(control-agent-server api GET /api/profiles/deepseek-pro --header 'X-Expose-Secrets: encrypted' --check config.usage_id eq default --field config --unsafe-unredacted)\nFID=$(control-agent-server conversation start --placeholder-agent --tools none --no-autotitle --print-id)\ncontrol-agent-server api POST \"/api/conversations/$FID/switch_llm\" --json \"{\\\"llm\\\": $PRO}\" --expect 200\ncontrol-agent-server api GET \"/api/conversations/$FID\" --quiet --check agent.llm.model eq deepseek/deepseek-v4-pro\nKID=$(control-agent-server conversation start --placeholder-agent --tools none --no-autotitle --prompt 'Reply with the single word: ok' --no-run --print-id)\ncontrol-agent-server api GET \"/api/conversations/$KID\" --quiet --check agent.llm.usage_id eq default --check execution_status eq idle\ncontrol-agent-server api POST \"/api/conversations/$KID/switch_llm\" --json \"{\\\"llm\\\": $PRO}\" --expect 200 --save F09.switch-llm-registered-usage-id/switch\ncontrol-agent-server api GET \"/api/conversations/$KID\" --quiet --check agent.llm.model eq deepseek/deepseek-v4-pro --check agent.llm.usage_id eq default --save F09.switch-llm-registered-usage-id/get\n",
+  "exit_code": 1,
+  "elapsed_ms": 473,
+  "failed_line": 1,
+  "failed_command": "PRO=$(control-agent-server api GET /api/profiles/deepseek-pro --header 'X-Expose-Secrets: encrypted' --check config.usage_id eq default --field config --unsafe-unredacted)",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "GET",
+      "path": "/api/profiles/deepseek-pro",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "45",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Profile 'deepseek-pro' not found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 59,
+    "checks": [
+      {
+        "check": "config.usage_id eq default",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "hint": "expected <400, got 404"
+  },
+  "stdout": "",
+  "stderr": ""
+}

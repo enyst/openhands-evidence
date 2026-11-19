@@ -1,0 +1,51 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Profile switch errors (`F09.switch-profile-errors`).",
+  "ids": [
+    "F09.switch-profile-errors"
+  ],
+  "line": 314,
+  "script": "control-agent-server api POST \"/api/conversations/$CID/switch_profile\" --json '{\"profile_name\": \"qa-f09-missing\"}' \\\n  --expect 404 --check detail eq \"Profile 'qa-f09-missing' not found\" --save F09.switch-profile-errors/unknown-profile\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_profile\" --json '{\"profile_name\": \"../profiles/deepseek-pro\"}' \\\n  --expect 400 --check detail contains 'Invalid profile name' --save F09.switch-profile-errors/invalid-name\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_profile\" --json '{\"profile_name\": \"\"}' --expect 400 --check detail contains 'Invalid profile name'\nprintf '{not json' > \"$AGENT_SERVER_VERIFY_RUN/home/.openhands/profiles/qa-f09-corrupt.json\"\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_profile\" --json '{\"profile_name\": \"qa-f09-corrupt\"}' \\\n  --expect 400 --check detail contains 'Failed to load profile `qa-f09-corrupt`' --save F09.switch-profile-errors/corrupted\nrm \"$AGENT_SERVER_VERIFY_RUN/home/.openhands/profiles/qa-f09-corrupt.json\"\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_profile\" --json '{}' --expect 422 --check detail.0.loc.1 eq profile_name\ncontrol-agent-server api POST /api/conversations/00000000-0000-4000-8000-000000000000/switch_profile --json '{\"profile_name\": \"deepseek-pro\"}' --expect 404\ncontrol-agent-server api GET \"/api/conversations/$CID\" --quiet --check agent.llm.model eq openai/qa-f09-ws --check agent.llm.usage_id eq qa-f09-ws\n",
+  "exit_code": 1,
+  "elapsed_ms": 334,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$CID/switch_profile\" --json '{\"profile_name\": \"qa-f09-missing\"}' --expect 404 --check detail eq \"Profile 'qa-f09-missing' not found\" --save F09.switch-profile-errors/unknown-profile",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//switch_profile",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "profile_name": "qa-f09-missing"
+      },
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 58,
+    "checks": [
+      {
+        "check": "detail eq Profile 'qa-f09-missing' not found",
+        "ok": false,
+        "actual": "Not Found"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-profile-errors/unknown-profile.json",
+    "hint": "failed check: detail eq Profile 'qa-f09-missing' not found"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//switch_profile\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"profile_name\": \"qa-f09-missing\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 58,\n  \"checks\": [\n    {\n      \"check\": \"detail eq Profile 'qa-f09-missing' not found\",\n      \"ok\": false,\n      \"actual\": \"Not Found\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-profile-errors/unknown-profile.json\",\n  \"hint\": \"failed check: detail eq Profile 'qa-f09-missing' not found\"\n}\n",
+  "stderr": ""
+}

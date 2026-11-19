@@ -1,0 +1,53 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/client --arg auth \
+  --check none len-eq 0 --check bearer.authorization eq "Bearer bear-tok" \
+  --check apikey.x-api-key eq key-1 --check basic.authorization eq "Basic YW5uOnB3" \
+  --check custom.x-team eq blue
+{
+  "ok": true,
+  "mode": "auth",
+  "none": {},
+  "bearer": {
+    "authorization": "Bearer bear-tok"
+  },
+  "apikey": {
+    "x-api-key": "key-1"
+  },
+  "basic": {
+    "authorization": "Basic YW5uOnB3"
+  },
+  "custom": {
+    "x-team": "blue"
+  },
+  "_exit": 0,
+  "_seconds": 6.2,
+  "checks": [
+    {
+      "check": "none len-eq 0",
+      "ok": true,
+      "actual": "{}"
+    },
+    {
+      "check": "bearer.authorization eq Bearer bear-tok",
+      "ok": true,
+      "actual": "Bearer bear-tok"
+    },
+    {
+      "check": "apikey.x-api-key eq key-1",
+      "ok": true,
+      "actual": "key-1"
+    },
+    {
+      "check": "basic.authorization eq Basic YW5uOnB3",
+      "ok": true,
+      "actual": "Basic YW5uOnB3"
+    },
+    {
+      "check": "custom.x-team eq blue",
+      "ok": true,
+      "actual": "blue"
+    }
+  ]
+}
+
+[exit 0 after 6s]

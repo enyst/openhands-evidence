@@ -1,0 +1,70 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Continue after a restart (`F30.chat-reuse-after-restart`).",
+  "ids": [
+    "F30.chat-reuse-after-restart"
+  ],
+  "line": 393,
+  "script": "control-agent-server restart\nR=$(control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CID\" \\\n  --json '{\"model\": \"openhands_deepseek-flash\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_AFTER_RESTART: reply with one short word and use no tools.\"}]}' \\\n  --check choices.0.message.content len-ge 1 --save F30.chat-reuse-after-restart/third --print-header X-OpenHands-ServerConversation-ID)\ntest \"$R\" = \"$CID\"\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --check items len-eq 3 \\\n  --check items.2.llm_message.content.0.text contains QA_F30_AFTER_RESTART --quiet\nTS3=$(control-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --field items.2.timestamp)\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=agent --query \"timestamp__gte=$TS3\" \\\n  --check items len-ge 1 --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 10417,
+  "failed_line": 4,
+  "failed_command": "R=$(control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CID\" --json '{\"model\": \"openhands_deepseek-flash\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_AFTER_RESTART: reply with one short word and use no tools.\"}]}' --check choices.0.message.content len-ge 1 --save F30.chat-reuse-after-restart/third --print-header X-OpenHands-ServerConversation-ID)",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 422,
+    "request": {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "query": [],
+      "auth": "bearer",
+      "body": {
+        "model": "openhands_deepseek-flash",
+        "messages": [
+          {
+            "role": "user",
+            "content": "QA_F30_AFTER_RESTART: reply with one short word and use no tools."
+          }
+        ]
+      },
+      "files": []
+    },
+    "response": {
+      "status": 422,
+      "headers": {
+        "content-length": "204",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": [
+          {
+            "type": "uuid_parsing",
+            "loc": [
+              "header",
+              "X-OpenHands-ServerConversation-ID"
+            ],
+            "msg": "Input should be a valid UUID, invalid length: found 0",
+            "input": "",
+            "ctx": {
+              "error": "invalid length: found 0"
+            }
+          }
+        ]
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 96,
+    "checks": [
+      {
+        "check": "choices.0.message.content len-ge 1",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.chat-reuse-after-restart/third.json",
+    "hint": "expected <400, got 422"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-084456-e11a-map-f30\",\n  \"url\": \"http://127.0.0.1:44003\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 7002,\n  \"ready_path\": \"/ready\"\n}\n",
+  "stderr": ""
+}

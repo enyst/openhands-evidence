@@ -1,0 +1,17 @@
+{
+  "file": "F34-typescript-client.md",
+  "bullet": "Workspace session (`F34.workspace-session`).",
+  "ids": [
+    "F34.workspace-session"
+  ],
+  "line": 622,
+  "script": "cat > \"$F34/session.mjs\" <<'JS'\nimport { m, host, apiKey, NOPE, assert } from './lib.mjs';\nconst scid = process.argv[2];\nconst workspace = new m.RemoteWorkspace({ host, apiKey, workingDir: '/qa-f34-ignored' });\nconst base = await workspace.startWorkspaceSession(scid);\nassert.equal(base, `${host}/api/conversations/${scid}/workspace/`);\nconst file = await fetch(base + 'qa-f34-scoped.txt', { headers: { 'X-Session-API-Key': apiKey } });\nassert.equal(file.status, 200);\nassert.equal(await file.text(), 'qa-f34-scoped');\nawait workspace.deleteWorkspaceSession();\nconst scoped = new m.RemoteWorkspace({ host, apiKey, workingDir: '/x', conversationId: scid });\nawait assert.rejects(scoped.startWorkspaceSession(NOPE), /Workspace session must belong to the selected runtime/);\nassert.equal(await scoped.startWorkspaceSession(scid), base);\nawait assert.rejects(new m.RemoteWorkspace({ host, workingDir: '/x' }).startWorkspaceSession(scid), (e) => e.status === 401);\nawait assert.rejects(new m.RemoteWorkspace({ host, workingDir: '/x' }).deleteWorkspaceSession(), (e) => e.status === 401);\nconsole.log('QA_F34_SESSION_OK');\nJS\ncontrol-agent-server exec --timeout 60 --expect-output QA_F34_SESSION_OK --save F34.workspace-session/program -- node \"$F34/session.mjs\" \"$SCID\"\ncontrol-agent-server api GET \"/api/conversations/$SCID/workspace/qa-f34-scoped.txt\" --expect 200 --raw-out \"$F34/session.copy\"\ntest \"$(cat \"$F34/session.copy\")\" = qa-f34-scoped\n",
+  "exit_code": 0,
+  "elapsed_ms": 1402,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 767,\n  \"stdout_tail\": \"QA_F34_SESSION_OK\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/evidence/F34.workspace-session/program.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/03c2061e-5f3f-42b6-8957-ebb798fd6370/workspace/qa-f34-scoped.txt\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-type\": \"text/plain; charset=utf-8\",\n      \"content-length\": \"13\",\n      \"etag\": \"\\\"690d6a7ea9eb5e176cdf74dc535422bf\\\"\"\n    },\n    \"body\": \"qa-f34-scoped\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 59,\n  \"raw_out\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/fixtures/qa-f34/session.copy\"\n}\n",
+  "stderr": ""
+}

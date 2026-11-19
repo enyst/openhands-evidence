@@ -1,0 +1,31 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "Same LLM instance: True" -- python examples/01_standalone_sdk/05_use_llm_registry.py
+control-sdk exec --model-env --expect-output "EXAMPLE_COST: 0" -- python examples/01_standalone_sdk/37_llm_profile_store/main.py
+control-sdk exec --model-env --env LLM_FALLBACK_MODEL_1=deepseek/deepseek-flash --env LLM_FALLBACK_MODEL_2=deepseek/deepseek-flash \
+  --expect-output "including fallbacks" -- python examples/01_standalone_sdk/39_llm_fallback.py
+{
+  "exit": 0,
+  "seconds": 8.7,
+  "result": null,
+  "stdout_tail": "soning 0 (total 13) \u2022 \u2193 output 12 (total 106) \u2022 $ (total 0.0001)\n\n====================================================================================================\nConversation finished. Got the following LLM messages:\nMessage 0: role='system' content=[TextContent(cache_prompt=False, type='text', text='<SOUL>\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\n</SOUL>\\n\\n<ROLE>\\n\nMessage 1: role='user' content=[TextContent(cache_prompt=False, type='text', text=\"Please echo 'Hello!'\")] tool_calls=None tool_call_id=None name=None reasoning_content=None thinking_blocks=[] responses_reasonin\nMessage 2: role='assistant' content=[] tool_calls=[MessageToolCall(id='call-b2b7bbd8-5cab-4974-9935-a59f26f2cbd2', responses_item_id=None, name='terminal', arguments='{\"command\": \"echo \\'Hello!\\'\", \"security_ris\nMessage 3: role='tool' content=[TextContent(cache_prompt=False, type='text', text='Hello!\\n[The command completed with exit code 0.]\\n[Current working directory: /tmp/claude-0/-home-user/e897642a-59be-52ec-8941-\nMessage 4: role='assistant' content=[TextContent(cache_prompt=False, type='text', text='Done! The command output:\\n\\n```\\nHello!\\n```')] tool_calls=None tool_call_id=None name=None reasoning_content=None thinkin\n====================================================================================================\nLLM Registry usage IDs: ['agent']\nSame LLM instance: True\nDirect completion response: Hello\nEXAMPLE_COST: 0.00011928\n",
+  "stderr_tail": "[11/19/26 09:47:00] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 5.4,
+  "result": null,
+  "stdout_tail": "Seeded profiles: ['fast.json']\nStored profiles: ['fast.json', 'creative.json']\nLoaded fast profile. usage: fast, model: gpt-5.5, temperature: 0.0.\nLoaded creative profile. usage: creative, model: litellm_proxy/deepseek-v4.1-flash, temperature: 0.9.\nAfter deletion: ['fast.json']\nEXAMPLE_COST: 0\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 13.0,
+  "result": null,
+  "stdout_tail": "ents\n\nReasoning:\nVerify the file.\n\n$ cat HAIKU.txt\n\nTokens: \u2191 input 6.38K (total 12.24K) \u2022 cache hit 98.38% (total 91.99%) \u2022  \nreasoning 4 (total 203) \u2022 \u2193 output 86 (total 498) \u2022 $ (total 0.0004)\n\nObservation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nTool: terminal\nResult:\nStorms may bend the trees\nbut roots hold firm in the earth\ngreen returns with spring\n\n\ud83d\udcc1 Working directory: \n<scratch>/sdk/edi\nted/S03/work/S03-llm-routing-profiles-22/block1/runs/20261119-094656-f5e1ef/work\nspace\n\ud83d\udc0d Python interpreter: /usr/local/bin/python\n\u2705 Exit code: 0\n\nMessage from Agent \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nI wrote a haiku about resilience into `HAIKU.txt`:\n\n```\nStorms may bend the trees\nbut roots hold firm in the earth\ngreen returns with spring\n```\n\nIt follows the traditional 5-7-5 syllable structure, using the image of a tree \nweathering a storm to convey resilience \u2014 bending without breaking, and enduring\nuntil renewal returns.\n\nTokens: \u2191 input 6.6K (total 18.84K) \u2022 cache hit 96.98% (total 93.74%) \u2022  \nreasoning 0 (total 203) \u2022 \u2193 output 75 (total 573) \u2022 $ (total 0.0005)\n\nTotal cost (including fallbacks): $0.000480\nToken usage records: 3\n  model=litellm_proxy/deepseek-v4.1-flash  prompt=5870  completion=412\n  model=litellm_proxy/deepseek-v4.1-flash  prompt=6375  completion=86\n  model=litellm_proxy/deepseek-v4.1-flash  prompt=6599  completion=75\nEXAMPLE_COST: 0.0004800488\n",
+  "stderr_tail": "[11/19/26 09:47:14] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 27s]

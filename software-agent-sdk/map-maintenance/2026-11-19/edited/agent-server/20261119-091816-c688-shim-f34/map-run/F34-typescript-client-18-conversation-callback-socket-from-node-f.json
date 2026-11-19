@@ -1,0 +1,17 @@
+{
+  "file": "F34-typescript-client.md",
+  "bullet": "Conversation callback socket from Node (`F34.ws-callback-client`).",
+  "ids": [
+    "F34.ws-callback-client"
+  ],
+  "line": 903,
+  "script": "control-agent-server ws listen \"/sockets/events/$SCID\" --expect-kind ConversationStateUpdateEvent --duration 3 --save F34.ws-callback-client/cli\ncat > \"$F34/callback.mjs\" <<'JS'\nimport { writeFileSync } from 'node:fs';\nimport { m, host, apiKey, F34, sleep } from './lib.mjs';\nconst events = [];\nconst errors = [];\nconst conversation = new m.RemoteConversation(new m.Agent({ llm: { model: 'qa-f34/unused' } }),\n  new m.RemoteWorkspace({ host, apiKey, workingDir: '/x' }),\n  { conversationId: process.argv[2], callback: (e) => events.push(e), onError: (e) => errors.push(e.message) });\nawait conversation.start();\nawait conversation.startWebSocketClient();\nconst seen = () => events.some((e) => e.kind === 'ConversationStateUpdateEvent');\nfor (const end = Date.now() + 10000; Date.now() < end && !seen();) await sleep(100);\nawait conversation.close();\nwriteFileSync(`${F34}/callback.json`, JSON.stringify({ kinds: [...new Set(events.map((e) => e.kind))], errors: [...new Set(errors)] }));\nconsole.log('QA_F34_CALLBACK_DONE');\nJS\ncontrol-agent-server exec --timeout 60 --expect-output QA_F34_CALLBACK_DONE --save F34.ws-callback-client/program -- node \"$F34/callback.mjs\" \"$SCID\"\ncat \"$F34/callback.json\"\ncontrol-agent-server assert --json \"$F34/callback.json\" --check kinds contains ConversationStateUpdateEvent --check errors len-eq 0\n",
+  "exit_code": 0,
+  "elapsed_ms": 4472,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"path\": \"/sockets/events/03c2061e-5f3f-42b6-8957-ebb798fd6370\",\n  \"opened\": true,\n  \"frames\": 1,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 1\n  },\n  \"stopped\": \"duration\",\n  \"close\": null,\n  \"saved\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/evidence/F34.ws-callback-client/cli.json\",\n  \"first_frames\": [\n    {\n      \"kind\": \"ConversationStateUpdateEvent\",\n      \"frame\": \"{\\\"id\\\": \\\"388c0f51-8d43-4663-ae9e-e5a1c1f85d3c\\\", \\\"timestamp\\\": \\\"2026-11-19T09:19:15.871303\\\", \\\"source\\\": \\\"environment\\\", \\\"key\\\": \\\"full_state\\\", \\\"value\\\": {\\\"id\\\": \\\"03c2061e-5f3f-42b6-8957-ebb798fd6370\\\", \\\"agent\\\": {\\\"llm\\\": {\\\"model\\\": \\\"openai/qa-placeholder\\\", \\\"api_key\\\": \\\"**********\\\", \\\"auth_type\\\": \\\"api_key\\\", \\\"base_url\\\": \\\"http://127.0.0.1:9/v1\\\", \\\"openrouter_site_url\\\": \\\"https://docs.all-hands.dev/\\\", \\\"openrouter_app_\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 645,\n  \"stdout_tail\": \"QA_F34_CALLBACK_DONE\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/evidence/F34.ws-callback-client/program.json\"\n}\n{\"kinds\":[\"ConversationStateUpdateEvent\"],\"errors\":[]}{\n  \"ok\": true,\n  \"value\": {\n    \"kinds\": [\n      \"ConversationStateUpdateEvent\"\n    ],\n    \"errors\": []\n  },\n  \"checks\": [\n    {\n      \"check\": \"kinds contains ConversationStateUpdateEvent\",\n      \"ok\": true,\n      \"actual\": \"[\\\"ConversationStateUpdateEvent\\\"]\"\n    },\n    {\n      \"check\": \"errors len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

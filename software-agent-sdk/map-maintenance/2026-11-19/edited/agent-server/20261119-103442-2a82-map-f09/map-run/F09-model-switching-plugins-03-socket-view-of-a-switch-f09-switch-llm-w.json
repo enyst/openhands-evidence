@@ -1,0 +1,22 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Socket view of a switch (`F09.switch-llm-ws`).",
+  "ids": [
+    "F09.switch-llm-ws"
+  ],
+  "line": 214,
+  "script": "control-agent-server ws start \"/sockets/events/$CID\" --name qa-f09-switch --duration 120\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_llm\" \\\n  --json '{\"llm\": {\"model\": \"openai/qa-f09-ws\", \"api_key\": \"sk-qa-f09-ws\", \"base_url\": \"http://127.0.0.1:9/v1\", \"usage_id\": \"qa-f09-ws\"}}' --expect 200\ncontrol-agent-server ws read qa-f09-switch --kinds ConversationStateUpdateEvent --contains openai/qa-f09-ws --expect-min 1 --wait 20 --save F09.switch-llm-ws/frames\ncontrol-agent-server ws read qa-f09-switch --kinds ConversationStateUpdateEvent \\\n  --contains '\"key\": \"agent\", \"value\": {\"llm\": {\"model\": \"openai/qa-f09-ws\", \"api_key\": \"**********\"' --expect-min 1\ncontrol-agent-server ws read qa-f09-switch --contains 'redacted:encrypted' --expect-none\ncontrol-agent-server ws stop qa-f09-switch --contains sk-qa-f09-ws --expect-none\ncontrol-agent-server api GET \"/api/conversations/$CID\" --quiet --check agent.llm.model eq openai/qa-f09-ws --check agent.llm.usage_id eq qa-f09-ws\n",
+  "exit_code": 1,
+  "elapsed_ms": 1281,
+  "failed_line": 1,
+  "failed_command": "control-agent-server ws start \"/sockets/events/$CID\" --name qa-f09-switch --duration 120",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "capture": "qa-f09-switch",
+    "out": "<scratch>/agent-server/20261119-103442-2a82-map-f09/captures/qa-f09-switch.jsonl",
+    "hint": "`control-agent-server ws stop qa-f09-switch` (or `ws read qa-f09-switch`) after triggering the action"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"capture\": \"qa-f09-switch\",\n  \"out\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/captures/qa-f09-switch.jsonl\",\n  \"hint\": \"`control-agent-server ws stop qa-f09-switch` (or `ws read qa-f09-switch`) after triggering the action\"\n}\n",
+  "stderr": ""
+}

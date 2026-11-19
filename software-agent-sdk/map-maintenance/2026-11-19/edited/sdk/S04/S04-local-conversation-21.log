@@ -1,0 +1,85 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/views --arg branch \
+  --check parent_chain_linear eq true --check fork_from_event_events eq 3 \
+  --check fork_from_event_last_is_branch_point eq true --check fork_has_second_question eq false \
+  --check new_question_parent_is_branch_point eq true --check old_branch_still_in_log eq true \
+  --check old_branch_in_active eq false --check active_ends_with eq "answer on a new branch" \
+  --check unknown_event_error contains "Unknown event_id" --check active_after_none eq 0 --check log_after_none eq 7
+{
+  "ok": true,
+  "mode": "branch",
+  "events": 5,
+  "parent_chain_linear": true,
+  "fork_from_event_events": 3,
+  "fork_from_event_last_is_branch_point": true,
+  "fork_has_second_question": false,
+  "events_after_branch": 7,
+  "new_question_parent_is_branch_point": true,
+  "old_branch_still_in_log": true,
+  "old_branch_in_active": false,
+  "active_ends_with": "answer on a new branch",
+  "unknown_event_error": "ValueError: Unknown event_id: no-such-event",
+  "active_after_none": 0,
+  "log_after_none": 7,
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "parent_chain_linear eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "fork_from_event_events eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "fork_from_event_last_is_branch_point eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "fork_has_second_question eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "new_question_parent_is_branch_point eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "old_branch_still_in_log eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "old_branch_in_active eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "active_ends_with eq answer on a new branch",
+      "ok": true,
+      "actual": "answer on a new branch"
+    },
+    {
+      "check": "unknown_event_error contains Unknown event_id",
+      "ok": true,
+      "actual": "ValueError: Unknown event_id: no-such-event"
+    },
+    {
+      "check": "active_after_none eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "log_after_none eq 7",
+      "ok": true,
+      "actual": "7"
+    }
+  ]
+}
+
+[exit 0 after 5s]

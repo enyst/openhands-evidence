@@ -1,0 +1,17 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "TypeScript docstrings for a pre-run ACP switch (`F09.ts-client-acp-docs`).",
+  "ids": [
+    "F09.ts-client-acp-docs"
+  ],
+  "line": 787,
+  "script": "grep -n 'async switchAcpModel(' clients/typescript/src/client/conversation-client.ts\ngrep -n 'async switchAcpModel(' clients/typescript/src/conversation/remote-conversation.ts\ncontrol-agent-server assert --value \"$(cat clients/typescript/src/client/conversation-client.ts clients/typescript/src/conversation/remote-conversation.ts | grep -c 'returns 409 before the first message')\" --check . eq 0\ncontrol-agent-server assert --value \"$(cat clients/typescript/src/client/conversation-client.ts clients/typescript/src/conversation/remote-conversation.ts | grep -c 'the first session. Non-ACP conversations get 400.')\" --check . eq 2\n",
+  "exit_code": 0,
+  "elapsed_ms": 598,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "555:  async switchAcpModel(conversationId: string, model: string): Promise<void> {\n401:  async switchAcpModel(model: string): Promise<void> {\n{\n  \"ok\": true,\n  \"value\": 0,\n  \"checks\": [\n    {\n      \"check\": \". eq 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"value\": 2,\n  \"checks\": [\n    {\n      \"check\": \". eq 2\",\n      \"ok\": true,\n      \"actual\": \"2\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

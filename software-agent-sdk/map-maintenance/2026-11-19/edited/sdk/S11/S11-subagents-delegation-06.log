@@ -1,0 +1,353 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/registry \
+  --check schema.tools len-eq 2 --check schema.skills.0 eq house-style --check schema.color eq blue \
+  --check schema.max_iteration_per_run eq 7 --check schema.max_budget_per_run eq 0.5 \
+  --check schema.permission_mode eq always_confirm --check schema.condenser eq NoOpCondenser \
+  --check schema.hooks_post_tool_use eq 1 --check schema.mcp_servers.0 eq fetch \
+  --check schema.system_prompt eq "You are a careful reviewer." --check schema.examples len-eq 2 \
+  --check schema.metadata.team eq platform --check invalid_permission_mode contains "Invalid permission_mode" \
+  --check project_names len-eq 3 --check project_names not-contains deep --check project_names not-contains README \
+  --check discovered.reviewer.1 contains "Reviews code" --check discovered.shared.1 eq "project copy" \
+  --check discovered.user-only.0 eq user --check discovered.late.0 eq user \
+  --check registered_before_files len-eq 0 \
+  --check duplicate_error contains "already registered" --check unknown_error contains "Unknown agent 'nobody'" \
+  --check if_absent_returned eq false --check alpha_description eq "first alpha" \
+  --check file_registered len-eq 4 --check file_registered not-contains shared \
+  --check shared_description eq "programmatic shared" --check reviewer_from eq /.agents/agents/ \
+  --check plugin_registered len-eq 1 --check plugin_registered.0 eq plug --check plug_hooks_stop eq 1 \
+  --check factory.tools.0 eq terminal --check factory.suffix eq "You are a careful reviewer." \
+  --check factory.skills.0 eq house-style --check factory.mcp_servers.0 eq fetch \
+  --check factory.condenser eq NoOpCondenser --check factory.default_condenser eq LLMSummarizingCondenser \
+  --check factory.default_condenser_usage_id eq condenser \
+  --check unknown_tool_error contains "no_such_tool" --check unknown_skill_error contains "no-such-skill" \
+  --check profile_model eq openai/gpt-4o-mini --check inherit_same_llm eq true \
+  --check missing_profile_error contains "Profile nope not found"
+{
+  "ok": true,
+  "schema": {
+    "name": "reviewer",
+    "tools": [
+      "terminal",
+      "file_editor"
+    ],
+    "skills": [
+      "house-style"
+    ],
+    "model": "inherit",
+    "color": "blue",
+    "max_iteration_per_run": 7,
+    "max_budget_per_run": 0.5,
+    "permission_mode": "always_confirm",
+    "condenser": "NoOpCondenser",
+    "hooks_post_tool_use": 1,
+    "mcp_servers": [
+      "fetch"
+    ],
+    "system_prompt": "You are a careful reviewer.",
+    "examples": [
+      "review the diff",
+      "check style"
+    ],
+    "metadata": {
+      "team": "platform"
+    }
+  },
+  "invalid_permission_mode": "ValueError: Invalid permission_mode 'sometimes'. Must be one of: always_confirm, confirm_risky, never_confirm",
+  "project_names": [
+    "reviewer",
+    "shared",
+    "helper"
+  ],
+  "user_names": [
+    "shared",
+    "user-only",
+    "late"
+  ],
+  "discovered": {
+    "reviewer": [
+      "project",
+      "Reviews code. <example>review the diff</example> <example>check style</example>"
+    ],
+    "shared": [
+      "project",
+      "project copy"
+    ],
+    "helper": [
+      "project",
+      "helps"
+    ],
+    "user-only": [
+      "user",
+      "mine"
+    ],
+    "late": [
+      "user",
+      "persistence dir"
+    ]
+  },
+  "registered_before_files": [],
+  "duplicate_error": "ValueError: Agent 'alpha' already registered",
+  "unknown_error": "ValueError: Unknown agent 'nobody'. Available types: alpha, shared. Use register_agent() to add custom agent types.",
+  "if_absent_returned": false,
+  "alpha_description": "first alpha",
+  "file_registered": [
+    "helper",
+    "late",
+    "reviewer",
+    "user-only"
+  ],
+  "shared_description": "programmatic shared",
+  "reviewer_from": "/.agents/agents/",
+  "plugin_registered": [
+    "plug"
+  ],
+  "plug_hooks_stop": 1,
+  "factory": {
+    "tools": [
+      "terminal"
+    ],
+    "suffix": "You are a careful reviewer.",
+    "skills": [
+      "house-style"
+    ],
+    "mcp_servers": [
+      "fetch"
+    ],
+    "condenser": "NoOpCondenser",
+    "default_condenser": "LLMSummarizingCondenser",
+    "default_condenser_usage_id": "condenser"
+  },
+  "noop_is_noop": true,
+  "unknown_tool_error": "ValueError: Tool 'no_such_tool' not registeredbut was given to agent t.",
+  "unknown_skill_error": "ValueError: Skill 'no-such-skill' not found but was given to agent 's'.",
+  "profile_model": "openai/gpt-4o-mini",
+  "inherit_same_llm": true,
+  "missing_profile_error": "ValueError: Profile nope not found in profile store.\nAvailable profiles: ['fast']",
+  "terminal_tool": "terminal",
+  "_exit": 0,
+  "_seconds": 5.1,
+  "checks": [
+    {
+      "check": "schema.tools len-eq 2",
+      "ok": true,
+      "actual": "[\"terminal\", \"file_editor\"]"
+    },
+    {
+      "check": "schema.skills.0 eq house-style",
+      "ok": true,
+      "actual": "house-style"
+    },
+    {
+      "check": "schema.color eq blue",
+      "ok": true,
+      "actual": "blue"
+    },
+    {
+      "check": "schema.max_iteration_per_run eq 7",
+      "ok": true,
+      "actual": "7"
+    },
+    {
+      "check": "schema.max_budget_per_run eq 0.5",
+      "ok": true,
+      "actual": "0.5"
+    },
+    {
+      "check": "schema.permission_mode eq always_confirm",
+      "ok": true,
+      "actual": "always_confirm"
+    },
+    {
+      "check": "schema.condenser eq NoOpCondenser",
+      "ok": true,
+      "actual": "NoOpCondenser"
+    },
+    {
+      "check": "schema.hooks_post_tool_use eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "schema.mcp_servers.0 eq fetch",
+      "ok": true,
+      "actual": "fetch"
+    },
+    {
+      "check": "schema.system_prompt eq You are a careful reviewer.",
+      "ok": true,
+      "actual": "You are a careful reviewer."
+    },
+    {
+      "check": "schema.examples len-eq 2",
+      "ok": true,
+      "actual": "[\"review the diff\", \"check style\"]"
+    },
+    {
+      "check": "schema.metadata.team eq platform",
+      "ok": true,
+      "actual": "platform"
+    },
+    {
+      "check": "invalid_permission_mode contains Invalid permission_mode",
+      "ok": true,
+      "actual": "ValueError: Invalid permission_mode 'sometimes'. Must be one of: always_confirm, confirm_risky, never_confirm"
+    },
+    {
+      "check": "project_names len-eq 3",
+      "ok": true,
+      "actual": "[\"reviewer\", \"shared\", \"helper\"]"
+    },
+    {
+      "check": "project_names not-contains deep",
+      "ok": true,
+      "actual": "[\"reviewer\", \"shared\", \"helper\"]"
+    },
+    {
+      "check": "project_names not-contains README",
+      "ok": true,
+      "actual": "[\"reviewer\", \"shared\", \"helper\"]"
+    },
+    {
+      "check": "discovered.reviewer.1 contains Reviews code",
+      "ok": true,
+      "actual": "Reviews code. <example>review the diff</example> <example>check style</example>"
+    },
+    {
+      "check": "discovered.shared.1 eq project copy",
+      "ok": true,
+      "actual": "project copy"
+    },
+    {
+      "check": "discovered.user-only.0 eq user",
+      "ok": true,
+      "actual": "user"
+    },
+    {
+      "check": "discovered.late.0 eq user",
+      "ok": true,
+      "actual": "user"
+    },
+    {
+      "check": "registered_before_files len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "duplicate_error contains already registered",
+      "ok": true,
+      "actual": "ValueError: Agent 'alpha' already registered"
+    },
+    {
+      "check": "unknown_error contains Unknown agent 'nobody'",
+      "ok": true,
+      "actual": "ValueError: Unknown agent 'nobody'. Available types: alpha, shared. Use register_agent() to add custom agent types."
+    },
+    {
+      "check": "if_absent_returned eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "alpha_description eq first alpha",
+      "ok": true,
+      "actual": "first alpha"
+    },
+    {
+      "check": "file_registered len-eq 4",
+      "ok": true,
+      "actual": "[\"helper\", \"late\", \"reviewer\", \"user-only\"]"
+    },
+    {
+      "check": "file_registered not-contains shared",
+      "ok": true,
+      "actual": "[\"helper\", \"late\", \"reviewer\", \"user-only\"]"
+    },
+    {
+      "check": "shared_description eq programmatic shared",
+      "ok": true,
+      "actual": "programmatic shared"
+    },
+    {
+      "check": "reviewer_from eq /.agents/agents/",
+      "ok": true,
+      "actual": "/.agents/agents/"
+    },
+    {
+      "check": "plugin_registered len-eq 1",
+      "ok": true,
+      "actual": "[\"plug\"]"
+    },
+    {
+      "check": "plugin_registered.0 eq plug",
+      "ok": true,
+      "actual": "plug"
+    },
+    {
+      "check": "plug_hooks_stop eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "factory.tools.0 eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    },
+    {
+      "check": "factory.suffix eq You are a careful reviewer.",
+      "ok": true,
+      "actual": "You are a careful reviewer."
+    },
+    {
+      "check": "factory.skills.0 eq house-style",
+      "ok": true,
+      "actual": "house-style"
+    },
+    {
+      "check": "factory.mcp_servers.0 eq fetch",
+      "ok": true,
+      "actual": "fetch"
+    },
+    {
+      "check": "factory.condenser eq NoOpCondenser",
+      "ok": true,
+      "actual": "NoOpCondenser"
+    },
+    {
+      "check": "factory.default_condenser eq LLMSummarizingCondenser",
+      "ok": true,
+      "actual": "LLMSummarizingCondenser"
+    },
+    {
+      "check": "factory.default_condenser_usage_id eq condenser",
+      "ok": true,
+      "actual": "condenser"
+    },
+    {
+      "check": "unknown_tool_error contains no_such_tool",
+      "ok": true,
+      "actual": "ValueError: Tool 'no_such_tool' not registeredbut was given to agent t."
+    },
+    {
+      "check": "unknown_skill_error contains no-such-skill",
+      "ok": true,
+      "actual": "ValueError: Skill 'no-such-skill' not found but was given to agent 's'."
+    },
+    {
+      "check": "profile_model eq openai/gpt-4o-mini",
+      "ok": true,
+      "actual": "openai/gpt-4o-mini"
+    },
+    {
+      "check": "inherit_same_llm eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "missing_profile_error contains Profile nope not found",
+      "ok": true,
+      "actual": "ValueError: Profile nope not found in profile store.\nAvailable profiles: ['fast']"
+    }
+  ]
+}
+
+[exit 0 after 5s]

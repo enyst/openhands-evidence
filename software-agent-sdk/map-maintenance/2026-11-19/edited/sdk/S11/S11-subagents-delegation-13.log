@@ -1,0 +1,144 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/delegate \
+  --check execution_status eq finished \
+  --check observations.0.text contains "Successfully spawned 2 sub-agents" \
+  --check observations.1.text contains "Agent lodging_expert: lodging wrote lodging.txt" \
+  --check observations.1.text contains "Agent activity_planner: activities wrote activities.txt" \
+  --check files len-eq 2 \
+  --check observations.2.is_error eq true --check observations.2.text contains "maximum is 5" \
+  --check observations.3.is_error eq true --check observations.3.text contains "no_such_type" \
+  --check observations.4.text contains "sub-agents not found: p" \
+  --check usage_ids contains delegate:lodging_expert --check usage_ids contains delegate:activity_planner \
+  --check subagent_dirs eq 2 \
+  --check visualizer.lead_titles eq true --check visualizer.sub_agent_titles eq true --check visualizer.sender_titles eq true
+{
+  "ok": true,
+  "execution_status": "finished",
+  "observations": [
+    {
+      "command": "spawn",
+      "is_error": false,
+      "text": "Successfully spawned 2 sub-agents: lodging_expert (lodging), activity_planner (activities)"
+    },
+    {
+      "command": "delegate",
+      "is_error": false,
+      "text": "Completed delegation of 2 tasks\n\nResults:\n1. Agent lodging_expert: lodging wrote lodging.txt\n2. Agent activity_planner: activities wrote activities.txt"
+    },
+    {
+      "command": "spawn",
+      "is_error": true,
+      "text": "Cannot spawn 4 agents. Already have 2 agents, maximum is 5"
+    },
+    {
+      "command": "spawn",
+      "is_error": true,
+      "text": "failed to spawn agents: Unknown agent 'no_such_type'. Available types: activities, lodging. Use register_agent() to add custom agent types."
+    },
+    {
+      "command": "delegate",
+      "is_error": true,
+      "text": "sub-agents not found: p. Available agents: lodging_expert, activity_planner"
+    }
+  ],
+  "files": [
+    "activities.txt",
+    "lodging.txt"
+  ],
+  "usage_ids": [
+    "delegate:activity_planner",
+    "delegate:lodging_expert"
+  ],
+  "subagent_dirs": 2,
+  "visualizer": {
+    "lead_titles": true,
+    "sub_agent_titles": true,
+    "sender_titles": true
+  },
+  "_exit": 0,
+  "_seconds": 5.7,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "observations.0.text contains Successfully spawned 2 sub-agents",
+      "ok": true,
+      "actual": "Successfully spawned 2 sub-agents: lodging_expert (lodging), activity_planner (activities)"
+    },
+    {
+      "check": "observations.1.text contains Agent lodging_expert: lodging wrote lodging.txt",
+      "ok": true,
+      "actual": "Completed delegation of 2 tasks\n\nResults:\n1. Agent lodging_expert: lodging wrote lodging.txt\n2. Agent activity_planner: activities wrote activities.txt"
+    },
+    {
+      "check": "observations.1.text contains Agent activity_planner: activities wrote activities.txt",
+      "ok": true,
+      "actual": "Completed delegation of 2 tasks\n\nResults:\n1. Agent lodging_expert: lodging wrote lodging.txt\n2. Agent activity_planner: activities wrote activities.txt"
+    },
+    {
+      "check": "files len-eq 2",
+      "ok": true,
+      "actual": "[\"activities.txt\", \"lodging.txt\"]"
+    },
+    {
+      "check": "observations.2.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.2.text contains maximum is 5",
+      "ok": true,
+      "actual": "Cannot spawn 4 agents. Already have 2 agents, maximum is 5"
+    },
+    {
+      "check": "observations.3.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.3.text contains no_such_type",
+      "ok": true,
+      "actual": "failed to spawn agents: Unknown agent 'no_such_type'. Available types: activities, lodging. Use register_agent() to add custom agent types."
+    },
+    {
+      "check": "observations.4.text contains sub-agents not found: p",
+      "ok": true,
+      "actual": "sub-agents not found: p. Available agents: lodging_expert, activity_planner"
+    },
+    {
+      "check": "usage_ids contains delegate:lodging_expert",
+      "ok": true,
+      "actual": "[\"delegate:activity_planner\", \"delegate:lodging_expert\"]"
+    },
+    {
+      "check": "usage_ids contains delegate:activity_planner",
+      "ok": true,
+      "actual": "[\"delegate:activity_planner\", \"delegate:lodging_expert\"]"
+    },
+    {
+      "check": "subagent_dirs eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "visualizer.lead_titles eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "visualizer.sub_agent_titles eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "visualizer.sender_titles eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 6s]

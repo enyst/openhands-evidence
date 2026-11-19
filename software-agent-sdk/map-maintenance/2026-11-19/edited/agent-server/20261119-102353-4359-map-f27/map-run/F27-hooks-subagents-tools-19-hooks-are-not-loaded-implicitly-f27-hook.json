@@ -1,0 +1,17 @@
+{
+  "file": "F27-hooks-subagents-tools.md",
+  "bullet": "Hooks are not loaded implicitly (`F27.hooks-not-automatic`).",
+  "ids": [
+    "F27.hooks-not-automatic"
+  ],
+  "line": 557,
+  "script": "NCID=$(control-agent-server conversation start --workspace \"$P\" --tools terminal --no-autotitle \\\n  --prompt 'Run this exact shell command with the terminal tool: ls' --wait --timeout 300 --print-id)\ncontrol-agent-server conversation events \"$NCID\" --kinds ObservationEvent --contains AGENTS.md --expect-kind ObservationEvent\ncontrol-agent-server conversation events \"$NCID\" --kinds HookExecutionEvent --expect-count 0 --save F27.hooks-not-automatic/no-hooks\ncontrol-agent-server api GET \"/api/conversations/$NCID\" --expect 200 --check hook_config missing --quiet\n",
+  "exit_code": 0,
+  "elapsed_ms": 4942,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"id\": \"1b125beb-38aa-45ce-bff0-2b412366a51c\",\n  \"total\": 10,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 2,\n    \"ConversationStateUpdateEvent\": 5,\n    \"ActionEvent\": 1,\n    \"ObservationEvent\": 1\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"55554cc7-7b0f-420f-a22e-37ec1e1f93a1\",\n      \"kind\": \"ObservationEvent\",\n      \"source\": \"environment\",\n      \"timestamp\": \"2026-11-19T10:25:01.366933\",\n      \"tool_name\": \"terminal\",\n      \"observation\": \"{\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"AGENTS.md\\\"}], \\\"is_error\\\": false, \\\"command\\\": \\\"ls\\\", \\\"exit_code\\\": 0, \\\"timeout\\\": false, \\\"metadata\\\": {\\\"exit_code\\\": 0, \\\"pid\\\": -1, \\\"username\\\": \\\"root\\\", \\\"hostname\\\": \\\"vm\\\", \\\"working_dir\\\": \\\"/tmp/claude-0/-home-user/e897642a-59be-52ec-8941-1436d58bd1f\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"id\": \"1b125beb-38aa-45ce-bff0-2b412366a51c\",\n  \"total\": 10,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 2,\n    \"ConversationStateUpdateEvent\": 5,\n    \"ActionEvent\": 1,\n    \"ObservationEvent\": 1\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"<scratch>/agent-server/20261119-102353-4359-map-f27/evidence/F27.hooks-not-automatic/no-hooks.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/1b125beb-38aa-45ce-bff0-2b412366a51c\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6170\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 68,\n  \"checks\": [\n    {\n      \"check\": \"hook_config missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

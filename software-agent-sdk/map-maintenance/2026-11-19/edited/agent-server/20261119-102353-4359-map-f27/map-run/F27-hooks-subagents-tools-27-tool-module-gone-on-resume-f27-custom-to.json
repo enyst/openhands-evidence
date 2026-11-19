@@ -1,0 +1,53 @@
+{
+  "file": "F27-hooks-subagents-tools.md",
+  "bullet": "Tool module gone on resume (`F27.custom-tool-missing-on-resume`), known bug #6746.",
+  "ids": [
+    "F27.custom-tool-missing-on-resume"
+  ],
+  "line": 865,
+  "script": "W0=$(control-agent-server logs --grep 'Failed to import' | jq -r .total_matching)\ncontrol-agent-server restart --reset-config\ncontrol-agent-server api GET \"/api/conversations/$MCID\" --expect 200 --check tool_module_qualnames.qa_f27_echo eq qa_f27_tools --quiet\ncontrol-agent-server api POST \"/api/conversations/$MCID/events\" --json '{\"role\": \"user\", \"content\": [{\"type\": \"text\", \"text\": \"Reply with the single word ok.\"}], \"run\": false}' --expect 2xx,4xx --save F27.custom-tool-missing-on-resume/send  # bug: status eq 500 && response.body.exception contains \"ToolDefinition 'qa_f27_echo' is not registered\"\ncontrol-agent-server logs --grep 'Failed to import' --expect-min \"$((W0 + 1))\"\ncontrol-agent-server api GET \"/api/conversations/$MCID/events/search\" --expect 200 --check items len-ge 1 --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 11615,
+  "failed_line": 4,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$MCID/events\" --json '{\"role\": \"user\", \"content\": [{\"type\": \"text\", \"text\": \"Reply with the single word ok.\"}], \"run\": false}' --expect 2xx,4xx --save F27.custom-tool-missing-on-resume/send",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 500,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations/80317c06-e93c-4e90-be89-d6672a7cae44/events",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Reply with the single word ok."
+          }
+        ],
+        "run": false
+      },
+      "files": []
+    },
+    "response": {
+      "status": 500,
+      "headers": {
+        "content-length": "145",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Internal Server Error",
+        "exception": "\"ToolDefinition 'qa_f27_echo' is not registered\"",
+        "error_id": "768daa06735c42d283b8f4ea69cc2b81"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 1237,
+    "saved": "<scratch>/agent-server/20261119-102353-4359-map-f27/evidence/F27.custom-tool-missing-on-resume/send.json",
+    "hint": "expected 2xx,4xx, got 500"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-102353-4359-map-f27\",\n  \"url\": \"http://127.0.0.1:35507\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6338,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/80317c06-e93c-4e90-be89-d6672a7cae44\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6150\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 594,\n  \"checks\": [\n    {\n      \"check\": \"tool_module_qualnames.qa_f27_echo eq qa_f27_tools\",\n      \"ok\": true,\n      \"actual\": \"qa_f27_tools\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 500,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/80317c06-e93c-4e90-be89-d6672a7cae44/events\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Reply with the single word ok.\"\n        }\n      ],\n      \"run\": false\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 500,\n    \"headers\": {\n      \"content-length\": \"145\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Internal Server Error\",\n      \"exception\": \"\\\"ToolDefinition 'qa_f27_echo' is not registered\\\"\",\n      \"error_id\": \"768daa06735c42d283b8f4ea69cc2b81\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 1237,\n  \"saved\": \"<scratch>/agent-server/20261119-102353-4359-map-f27/evidence/F27.custom-tool-missing-on-resume/send.json\",\n  \"hint\": \"expected 2xx,4xx, got 500\"\n}\n",
+  "stderr": ""
+}

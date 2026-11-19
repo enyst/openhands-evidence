@@ -1,0 +1,38 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Update (`F23.conn-update`).",
+  "ids": [
+    "F23.conn-update"
+  ],
+  "line": 394,
+  "script": "CREATED=$(control-agent-server api GET /api/llm/provider-connections --field 0.created_at)\ncontrol-agent-server api PATCH \"/api/llm/provider-connections/$CONN\" --expect 200 \\\n  --json '{\"display_name\": \"qa-f23-renamed\", \"base_url\": \"http://127.0.0.1:9/v1\"}' \\\n  --check id eq \"$CONN\" --check display_name eq qa-f23-renamed --check provider eq deepseek \\\n  --check base_url eq http://127.0.0.1:9/v1 --check api_key_set eq true --check created_at eq \"$CREATED\" \\\n  --check updated_at gt \"$CREATED\" --save F23.conn-update/patch\ncontrol-agent-server api GET /api/llm/provider-connections --check 0.display_name eq qa-f23-renamed \\\n  --check 0.base_url eq http://127.0.0.1:9/v1 --check 0.api_key_set eq true --save F23.conn-update/list\ncontrol-agent-server api POST /api/profiles/qa-f23-linked/activate --expect 200\ncontrol-agent-server api GET /api/settings --header 'X-Expose-Secrets: plaintext' --max-chars 200 \\\n  --check agent_settings.llm.base_url eq http://127.0.0.1:9/v1 --check agent_settings.llm.api_key eq \"$DEEPSEEK_API_KEY\"\ncontrol-agent-server api PATCH \"/api/llm/provider-connections/$CONN\" --expect 200 --json '{\"display_name\": \"qa-f23-deepseek\", \"base_url\": null}' \\\n  --check display_name eq qa-f23-deepseek --check base_url eq null --check api_key_set eq true\ncontrol-agent-server api POST /api/profiles/qa-f23-linked/activate --expect 200\ncontrol-agent-server api GET /api/settings --header 'X-Expose-Secrets: plaintext' --max-chars 200 \\\n  --check agent_settings.llm.base_url eq null --check agent_settings.llm.api_key eq \"$DEEPSEEK_API_KEY\" --save F23.conn-update/settings-cleared\n",
+  "exit_code": 1,
+  "elapsed_ms": 353,
+  "failed_line": 1,
+  "failed_command": "CREATED=$(control-agent-server api GET /api/llm/provider-connections --field 0.created_at)",
+  "failed_status": 1,
+  "observation": {
+    "ok": true,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/llm/provider-connections",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "2",
+        "content-type": "application/json"
+      },
+      "body": [],
+      "truncated": false
+    },
+    "elapsed_ms": 63
+  },
+  "stdout": "",
+  "stderr": ""
+}

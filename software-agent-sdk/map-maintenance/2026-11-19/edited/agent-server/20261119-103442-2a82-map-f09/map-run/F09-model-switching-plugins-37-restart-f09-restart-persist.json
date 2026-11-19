@@ -1,0 +1,50 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Restart (`F09.restart-persist`).",
+  "ids": [
+    "F09.restart-persist"
+  ],
+  "line": 967,
+  "script": "control-agent-server restart\ncontrol-agent-server api GET \"/api/conversations/$CID\" --quiet --check agent.llm.model eq openai/qa-f09-ws --check agent.llm.usage_id eq qa-f09-ws --save F09.restart-persist/cid\ncontrol-agent-server api GET \"/api/conversations/$AID\" --quiet --check agent.acp_model eq opus --check current_model_id eq opus --save F09.restart-persist/aid\ncontrol-agent-server api GET \"/api/conversations/$PID\" --query include_skills=true --quiet \\\n  --check agent.agent_context.skills contains qa-f09-mkt-plugin-skill --check hook_config.user_prompt_submit len-eq 1 --save F09.restart-persist/pid\ncontrol-agent-server api GET \"/api/conversations/$RID\" --quiet --check agent.llm.model eq deepseek/deepseek-v4-pro --check agent.llm.usage_id eq profile:deepseek-pro\ncontrol-agent-server conversation send \"$RID\" --text 'Reply with the single word: ok' --wait --until finished,error --timeout 240\ncontrol-agent-server api GET \"/api/conversations/$RID\" --until-ok 60 --quiet --check execution_status eq finished \\\n  --check 'stats.usage_to_metrics.profile:deepseek-pro.accumulated_token_usage.prompt_tokens' gt \"$PRO1\" --save F09.restart-persist/rid-stats\n",
+  "exit_code": 1,
+  "elapsed_ms": 11379,
+  "failed_line": 2,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$CID\" --quiet --check agent.llm.model eq openai/qa-f09-ws --check agent.llm.usage_id eq qa-f09-ws --save F09.restart-persist/cid",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 307,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 307,
+      "headers": {
+        "content-length": "0",
+        "location": "http://127.0.0.1:38897/api/conversations"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 57,
+    "checks": [
+      {
+        "check": "agent.llm.model eq openai/qa-f09-ws",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "agent.llm.usage_id eq qa-f09-ws",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.restart-persist/cid.json",
+    "hint": "failed check: agent.llm.model eq openai/qa-f09-ws; agent.llm.usage_id eq qa-f09-ws"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09\",\n  \"url\": \"http://127.0.0.1:38897\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 9097,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:38897/api/conversations\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 57,\n  \"checks\": [\n    {\n      \"check\": \"agent.llm.model eq openai/qa-f09-ws\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"agent.llm.usage_id eq qa-f09-ws\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.restart-persist/cid.json\",\n  \"hint\": \"failed check: agent.llm.model eq openai/qa-f09-ws; agent.llm.usage_id eq qa-f09-ws\"\n}\n",
+  "stderr": ""
+}

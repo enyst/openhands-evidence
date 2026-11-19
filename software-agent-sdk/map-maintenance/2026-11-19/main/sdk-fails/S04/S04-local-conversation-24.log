@@ -1,0 +1,60 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/goal_ask --arg branch \
+  --check asked_before_navigation eq true --check pending_on_active_branch eq false \
+  --check outcome.kind eq GoalOutcome --check outcome.status eq complete \
+  --check outcome.objective_sent eq true --check outcome.agent_calls eq 2 --check outcome.judge_calls eq 1
+{
+  "ok": true,
+  "mode": "branch",
+  "pending_on_active_branch": false,
+  "asked_before_navigation": true,
+  "outcome": {
+    "kind": "GoalAsked",
+    "ask_id": "e0bc8af6-9817-4383-b913-8b4182373ed5",
+    "question": "Delete the old build caches?",
+    "agent_calls": 1,
+    "judge_calls": 0,
+    "objective_sent": false
+  },
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "asked_before_navigation eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "pending_on_active_branch eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "outcome.kind eq GoalOutcome",
+      "ok": false,
+      "actual": "GoalAsked"
+    },
+    {
+      "check": "outcome.status eq complete",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "outcome.objective_sent eq true",
+      "ok": false,
+      "actual": "false"
+    },
+    {
+      "check": "outcome.agent_calls eq 2",
+      "ok": false,
+      "actual": "1"
+    },
+    {
+      "check": "outcome.judge_calls eq 1",
+      "ok": false,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 1 after 5s]

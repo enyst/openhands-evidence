@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Wrong session key (`F33.workspace-bad-key`).",
+  "ids": [
+    "F33.workspace-bad-key"
+  ],
+  "line": 319,
+  "script": "N0=$(control-agent-server api GET /api/conversations/count --field .)\ncontrol-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.workspace-bad-key/probe -- .venv/bin/python - <<'PY'\nimport httpx\nimport f33\nfrom openhands.sdk import Conversation\n\nbad = f33.workspace(\"badkey\", key=\"qa-f33-wrong-key\")\nr = bad.execute_command(\"echo qa-f33-bad-key\", cwd=bad.working_dir)\nassert r.exit_code == -1 and \"401\" in r.stderr, r\nup = bad.file_upload(b\"qa-f33-bad\\n\", bad.working_dir + \"/qa-f33-bad.txt\")\nassert not up.success and \"401\" in up.error, up\ntry:\n    Conversation(agent=f33.agent(), workspace=bad, visualizer=None)\n    raise AssertionError(\"a conversation was created with a wrong key\")\nexcept httpx.HTTPStatusError as e:\n    assert e.response.status_code == 401, e\nf33.emit(\"badkey\", stderr=r.stderr[:120])\nPY\ncontrol-agent-server api GET /api/conversations/count --check . eq \"$N0\"\ncontrol-agent-server api GET /api/bash/bash_events/search --query kind__eq=BashCommand --query sort_order=TIMESTAMP_DESC --query limit=1 \\\n  --check items.0.command not-contains qa-f33-bad-key --save F33.workspace-bad-key/no-command\ntest ! -e \"$F33/badkey/qa-f33-bad.txt\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 1131,
+  "failed_line": 2,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.workspace-bad-key/probe -- .venv/bin/python - <<'PY'\nimport httpx\nimport f33\nfrom openhands.sdk import Conversation\n\nbad = f33.workspace(\"badkey\", key=\"qa-f33-wrong-key\")\nr = bad.execute_command(\"echo qa-f33-bad-key\", cwd=bad.working_dir)\nassert r.exit_code == -1 and \"401\" in r.stderr, r\nup = bad.file_upload(b\"qa-f33-bad\\n\", bad.working_dir + \"/qa-f33-bad.txt\")\nassert not up.success and \"401\" in up.error, up\ntry:\n    Conversation(agent",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 291,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 2, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.workspace-bad-key/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 291,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 2, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.workspace-bad-key/probe.json\"\n}\n",
+  "stderr": ""
+}

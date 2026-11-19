@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Streamed tokens (`F33.conversation-streaming`).",
+  "ids": [
+    "F33.conversation-streaming"
+  ],
+  "line": 914,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-streaming/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import StreamingDeltaEvent\n\ntokens, deltas = [], []\nconv = Conversation(agent=f33.agent(stream=True), workspace=f33.workspace(\"stream\"), visualizer=None, delete_on_close=False,\n                    token_callbacks=[tokens.append], callbacks=[lambda e: isinstance(e, StreamingDeltaEvent) and deltas.append(e)])\nconv.set_title(\"qa-f33 stream\")\nconv.send_message(\"Reply with one short sentence about the sea.\")\nconv.run(timeout=300)\nassert conv.state.execution_status.value == \"finished\", conv.state.execution_status\nassert deltas and any(d.content or d.reasoning_content for d in deltas), deltas\nf33.emit(\"stream\", cid=str(conv.id), deltas=len(deltas), tokens=len(tokens), local=f33.kinds(conv.state.events))\nconv.close()\nPY\nSTREAM=$(jq -r .cid \"$F33/stream.json\")\ncontrol-agent-server api GET \"/api/conversations/$STREAM\" --check execution_status eq finished --check agent.llm.stream eq true \\\n  --save F33.conversation-streaming/get\ncontrol-agent-server conversation events \"$STREAM\" --kinds StreamingDeltaEvent --expect-count 0 --save F33.conversation-streaming/stored\ncontrol-agent-server api GET \"/api/conversations/$STREAM\" --check stats.usage_to_metrics.qa-f33.accumulated_token_usage.completion_tokens gt 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 312,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-streaming/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import StreamingDeltaEvent\n\ntokens, deltas = [], []\nconv = Conversation(agent=f33.agent(stream=True), workspace=f33.workspace(\"stream\"), visualizer=None, delete_on_close=False,\n                    token_callbacks=[tokens.append], callbacks=[lambda e: isinstance(e, StreamingDeltaEvent) and deltas.append(e)",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 33,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 1, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-streaming/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 33,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 1, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-streaming/probe.json\"\n}\n",
+  "stderr": ""
+}

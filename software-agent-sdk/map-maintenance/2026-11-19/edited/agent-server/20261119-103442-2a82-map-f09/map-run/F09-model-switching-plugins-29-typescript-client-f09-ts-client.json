@@ -1,0 +1,30 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "TypeScript client (`F09.ts-client`).",
+  "ids": [
+    "F09.ts-client"
+  ],
+  "line": 733,
+  "script": "test -f clients/typescript/dist/clients.js || (cd clients/typescript && npm ci && npm run build)\nTID=$(control-agent-server conversation start --placeholder-agent --tools none --no-autotitle --print-id)\nAID4=$(control-agent-server conversation start --no-autotitle --body-json '{\"agent_settings\": {\"agent_kind\": \"acp\", \"acp_server\": \"claude-code\", \"acp_model\": \"sonnet\"}}' --print-id)\nF=\"$AGENT_SERVER_VERIFY_RUN/fixtures\"\ncat > \"$F/qa-f09-ts.mjs\" <<'JS'\nimport assert from 'node:assert/strict';\nimport { resolve } from 'node:path';\nimport { pathToFileURL } from 'node:url';\n\nconst dist = (name) => import(pathToFileURL(resolve('clients/typescript/dist', name)).href);\nconst { ConversationClient } = await dist('clients.js');\nconst { ConversationManager } = await dist('index.js');\nconst [tid, acp] = process.argv.slice(2);\nconst host = process.env.AGENT_SERVER_URL;\nconst apiKey = process.env.SESSION_API_KEY;\nconst client = new ConversationClient({ host, apiKey });\nconst llm = { model: 'openai/qa-f09-ts', api_key: 'sk-qa-f09-ts', base_url: 'http://127.0.0.1:9/v1', usage_id: 'qa-f09-ts' };\nawait client.switchLLM(tid, llm);\nlet info = await client.getConversation(tid);\nassert.equal(info.agent.llm.model, 'openai/qa-f09-ts');\nassert.equal(info.agent.llm.usage_id, 'qa-f09-ts');\nawait new ConversationManager({ host, apiKey }).switchProfile(tid, 'deepseek-pro');\ninfo = await client.getConversation(tid);\nassert.equal(info.agent.llm.model, 'deepseek/deepseek-v4-pro');\nassert.equal(info.agent.llm.usage_id, 'profile:deepseek-pro');\nawait client.switchProfile(tid, 'deepseek-flash');\nassert.equal((await client.getConversation(tid)).agent.llm.usage_id, 'profile:deepseek-flash');\nawait assert.rejects(client.switchProfile(tid, 'qa-f09-missing'), (e) => e.status === 404);\nawait assert.rejects(client.switchAcpModel(tid, 'opus'), (e) => e.status === 400);\nawait assert.rejects(new ConversationClient({ host }).switchLLM(tid, llm), (e) => e.status === 401);\nassert.equal((await client.getConversation(tid)).agent.llm.usage_id, 'profile:deepseek-flash');\nawait client.switchAcpModel(acp, 'opus');\ninfo = await client.getConversation(acp);\nassert.equal(info.agent.acp_model, 'opus');\nassert.equal(info.current_model_id, 'opus');\nconsole.log('TS_SWITCH_OK');\nJS\ncontrol-agent-server exec --expect-output TS_SWITCH_OK --save F09.ts-client/program -- node \"$F/qa-f09-ts.mjs\" \"$TID\" \"$AID4\"\ncontrol-agent-server api GET \"/api/conversations/$TID\" --quiet --check agent.llm.model eq deepseek/deepseek-flash --check agent.llm.usage_id eq profile:deepseek-flash\ncontrol-agent-server state cat \"server/workspace/conversations/${AID4//-/}/base_state.json\" --max-chars 200 --check agent.acp_model eq opus\n",
+  "exit_code": 1,
+  "elapsed_ms": 3001,
+  "failed_line": 38,
+  "failed_command": "control-agent-server exec --expect-output TS_SWITCH_OK --save F09.ts-client/program -- node \"$F/qa-f09-ts.mjs\" \"$TID\" \"$AID4\"",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 1907,
+    "stdout_tail": "",
+    "stderr_tail": "file:///home/user/software-agent-sdk/clients/typescript/dist/client/http-client.js:200\n                throw new HttpError(response.status, response.statusText, errorContent, `HTTP request failed (${response.status} ${response.statusText}): ${JSON.stringify(errorContent)}`);\n                      ^\n\nHttpError: HTTP request failed (404 Not Found): {\"detail\":\"Profile 'deepseek-pro' not found\"}\n    at HttpClient.request (file:///home/user/software-agent-sdk/clients/typescript/dist/client/http-client.js:200:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async ConversationManager.switchProfile (file:///home/user/software-agent-sdk/clients/typescript/dist/conversation/conversation-manager.js:243:9)\n    at async file://<scratch>/agent-server/20261119-103442-2a82-map-f09/fixtures/qa-f09-ts.mjs:17:1 {\n  status: 404,\n  statusText: 'Not Found',\n  response: { detail: \"Profile 'deepseek-pro' not found\" }\n}\n\nNode.js v22.23.5\n",
+    "hint": {
+      "missing": [
+        "TS_SWITCH_OK"
+      ],
+      "unexpected": []
+    },
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.ts-client/program.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 1907,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"file:///home/user/software-agent-sdk/clients/typescript/dist/client/http-client.js:200\\n                throw new HttpError(response.status, response.statusText, errorContent, `HTTP request failed (${response.status} ${response.statusText}): ${JSON.stringify(errorContent)}`);\\n                      ^\\n\\nHttpError: HTTP request failed (404 Not Found): {\\\"detail\\\":\\\"Profile 'deepseek-pro' not found\\\"}\\n    at HttpClient.request (file:///home/user/software-agent-sdk/clients/typescript/dist/client/http-client.js:200:23)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\\n    at async ConversationManager.switchProfile (file:///home/user/software-agent-sdk/clients/typescript/dist/conversation/conversation-manager.js:243:9)\\n    at async file://<scratch>/agent-server/20261119-103442-2a82-map-f09/fixtures/qa-f09-ts.mjs:17:1 {\\n  status: 404,\\n  statusText: 'Not Found',\\n  response: { detail: \\\"Profile 'deepseek-pro' not found\\\" }\\n}\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"TS_SWITCH_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.ts-client/program.json\"\n}\n",
+  "stderr": ""
+}

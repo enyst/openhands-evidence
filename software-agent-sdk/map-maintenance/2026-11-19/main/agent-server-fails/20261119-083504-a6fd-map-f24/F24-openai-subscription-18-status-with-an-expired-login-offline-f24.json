@@ -1,0 +1,23 @@
+{
+  "file": "F24-openai-subscription.md",
+  "bullet": "Status with an expired login offline (`F24.status-offline`).",
+  "ids": [
+    "F24.status-offline"
+  ],
+  "line": 457,
+  "script": "OFF=$(control-agent-server launch --new --name f24-offline --env HTTPS_PROXY=http://127.0.0.1:9 --env https_proxy=http://127.0.0.1:9 --print-run)\ntrap 'control-agent-server stop --run \"$OFF\" >/dev/null' EXIT\nif control-agent-server api POST /api/llm/subscription/openai/device/start --run \"$OFF\" --expect 200 --quiet; then false; fi\nEXP5=$(bash \"$F24/write-login.sh\" \"$OFF\" 3600000)\ncontrol-agent-server api GET /api/llm/subscription/openai/status --run \"$OFF\" --expect 200 --check connected eq true \\\n  --check expires_at eq \"$EXP5\"\nEXP6=$(bash \"$F24/write-login.sh\" \"$OFF\" -1000)\ncontrol-agent-server api GET /api/llm/subscription/openai/status --run \"$OFF\" --expect 200 --check connected eq false \\\n  --save F24.status-offline/status\ncontrol-agent-server state cat --run \"$OFF\" home/.openhands/auth/openai_oauth.json --check expires_at eq \"$EXP6\" \\\n  --check refresh_token eq qa-f24-refresh-token\ncontrol-agent-server logs --run \"$OFF\" --grep 'Refreshing OpenAI access token' --expect-min 1\ncontrol-agent-server logs --run \"$OFF\" --grep 'Unhandled exception on GET' --expect-none\n",
+  "exit_code": 3,
+  "elapsed_ms": 1106,
+  "failed_line": 1,
+  "failed_command": "OFF=$(control-agent-server launch --new --name f24-offline --env HTTPS_PROXY=http://127.0.0.1:9 --env https_proxy=http://127.0.0.1:9 --print-run)",
+  "failed_status": 3,
+  "observation": {
+    "ok": false,
+    "exit": 3,
+    "error": "Server exited with code 1 during startup.",
+    "hint": "Read the log: `control-agent-server logs --tail 80` (a port another process took first shows as `address already in use`).",
+    "log": "<scratch>/agent-server/20261119-083629-5a09-f24-offline/private/server.log"
+  },
+  "stdout": "",
+  "stderr": ""
+}

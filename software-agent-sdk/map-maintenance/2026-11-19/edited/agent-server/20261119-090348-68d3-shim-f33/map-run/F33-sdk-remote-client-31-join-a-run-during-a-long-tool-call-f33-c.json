@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Join a run during a long tool call (`F33.conversation-run-join-long-tool`).",
+  "ids": [
+    "F33.conversation-run-join-long-tool"
+  ],
+  "line": 1474,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-run-join-long-tool/probe -- .venv/bin/python - <<'PY'\nimport os\nimport threading\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\nfrom openhands.sdk.event import ActionEvent\n\nacted = threading.Event()\nstub = f33.agent(model=\"openai/qa-stub\", base_url=os.environ[\"LONG_STUB\"] + \"/v1\", api_key=\"qa-stub\", num_retries=0)\nconv = Conversation(agent=stub, workspace=f33.workspace(\"longtool\"), visualizer=None, delete_on_close=False,\n                    callbacks=[lambda e: isinstance(e, ActionEvent) and e.tool_name == \"terminal\" and acted.set()])\nconv.set_title(\"qa-f33 long tool\")\nconv.send_message(\"qa-f33 long tool call\")\nconv.run(blocking=False)\nassert acted.wait(60), \"no terminal ActionEvent\"\nt0 = time.monotonic()\ntry:\n    conv.run(timeout=300)\n    error = None\nexcept ConversationRunError as e:\n    error = repr(e.original_exception)\nstatus = conv.state.execution_status.value\nf33.emit(\"longtool\", cid=str(conv.id), waited=round(time.monotonic() - t0, 1), error=error, status=status,\n         joined=error is None and status == \"finished\")\nconv.close()\nPY\nLONG=$(jq -r .cid \"$F33/longtool.json\")\ncontrol-agent-server conversation wait \"$LONG\" --until finished --timeout 120\ntest \"$(cat \"$F33/longtool/qa-f33-long.txt\")\" = late\ncontrol-agent-server conversation events \"$LONG\" --kinds ActionEvent --contains '\"timeout\": 90.0' --expect-count 1\ncontrol-agent-server api GET \"/api/conversations/$LONG\" --check execution_status eq finished --save F33.conversation-run-join-long-tool/get\ncontrol-agent-server assert --json \"$F33/longtool.json\" --check joined eq true\n",
+  "exit_code": 1,
+  "elapsed_ms": 324,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-run-join-long-tool/probe -- .venv/bin/python - <<'PY'\nimport os\nimport threading\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\nfrom openhands.sdk.event import ActionEvent\n\nacted = threading.Event()\nstub = f33.agent(model=\"openai/qa-stub\", base_url=os.environ[\"LONG_STUB\"] + \"/v1\", api_key=\"qa-stub\", num_retries=0)\nconv = Conversation(agen",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 34,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-run-join-long-tool/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 34,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 4, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-run-join-long-tool/probe.json\"\n}\n",
+  "stderr": ""
+}

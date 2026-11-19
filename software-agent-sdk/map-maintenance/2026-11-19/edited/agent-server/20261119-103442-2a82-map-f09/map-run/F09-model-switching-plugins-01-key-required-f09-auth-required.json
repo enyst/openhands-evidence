@@ -1,0 +1,54 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Key required (`F09.auth-required`).",
+  "ids": [
+    "F09.auth-required"
+  ],
+  "line": 181,
+  "script": "control-agent-server api POST \"/api/conversations/$CID/switch_llm\" --auth none --json '{\"llm\": {\"model\": \"openai/qa-f09-noauth\", \"usage_id\": \"qa-f09-noauth\"}}' --expect 401 --check detail eq Unauthorized --save F09.auth-required/switch-llm\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_profile\" --auth none --json '{\"profile_name\": \"deepseek-pro\"}' --expect 401\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_acp_model\" --auth bad --json '{\"model\": \"opus\"}' --expect 401\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_acp_effort\" --auth none --json '{\"effort\": \"high\"}' --expect 401\ncontrol-agent-server api POST \"/api/conversations/$CID/load_plugin\" --auth none --json '{\"plugin_ref\": \"qa-f09-mkt-plugin@qa-f09-mkt\"}' --expect 401\ncontrol-agent-server api GET \"/api/conversations/$CID\" --check agent.llm.model eq deepseek/deepseek-flash --check agent.llm.usage_id eq default --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 360,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$CID/switch_llm\" --auth none --json '{\"llm\": {\"model\": \"openai/qa-f09-noauth\", \"usage_id\": \"qa-f09-noauth\"}}' --expect 401 --check detail eq Unauthorized --save F09.auth-required/switch-llm",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//switch_llm",
+      "query": [],
+      "auth": "none",
+      "body": {
+        "llm": {
+          "model": "openai/qa-f09-noauth",
+          "usage_id": "qa-f09-noauth"
+        }
+      },
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 59,
+    "checks": [
+      {
+        "check": "detail eq Unauthorized",
+        "ok": false,
+        "actual": "Not Found"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.auth-required/switch-llm.json",
+    "hint": "expected 401, got 404"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//switch_llm\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"openai/qa-f09-noauth\",\n        \"usage_id\": \"qa-f09-noauth\"\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 59,\n  \"checks\": [\n    {\n      \"check\": \"detail eq Unauthorized\",\n      \"ok\": false,\n      \"actual\": \"Not Found\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.auth-required/switch-llm.json\",\n  \"hint\": \"expected 401, got 404\"\n}\n",
+  "stderr": ""
+}

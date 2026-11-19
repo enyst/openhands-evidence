@@ -1,0 +1,81 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg callbacks \
+  --check order_first_event.0 eq visualizer --check order_first_event.1 eq first --check order_first_event.2 eq second \
+  --check consistent_order eq true --check every_event_delivered eq true \
+  --check persisted_before_user_callback eq true --check persisted_before_visualizer eq false \
+  --check failed_write_error contains "disk full" --check delivered_before_failure len-eq 2 --check delivered_after_failure len-eq 0
+{
+  "ok": true,
+  "mode": "callbacks",
+  "order_first_event": [
+    "visualizer",
+    "first",
+    "second"
+  ],
+  "every_event_delivered": true,
+  "consistent_order": true,
+  "persisted_before_user_callback": true,
+  "persisted_before_visualizer": false,
+  "failed_write_error": "OSError: disk full (simulated)",
+  "delivered_before_failure": [
+    "SystemPromptEvent",
+    "MessageEvent"
+  ],
+  "delivered_after_failure": [],
+  "_exit": 0,
+  "_seconds": 5.1,
+  "checks": [
+    {
+      "check": "order_first_event.0 eq visualizer",
+      "ok": true,
+      "actual": "visualizer"
+    },
+    {
+      "check": "order_first_event.1 eq first",
+      "ok": true,
+      "actual": "first"
+    },
+    {
+      "check": "order_first_event.2 eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "consistent_order eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "every_event_delivered eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "persisted_before_user_callback eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "persisted_before_visualizer eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "failed_write_error contains disk full",
+      "ok": true,
+      "actual": "OSError: disk full (simulated)"
+    },
+    {
+      "check": "delivered_before_failure len-eq 2",
+      "ok": true,
+      "actual": "[\"SystemPromptEvent\", \"MessageEvent\"]"
+    },
+    {
+      "check": "delivered_after_failure len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    }
+  ]
+}
+
+[exit 0 after 5s]

@@ -1,0 +1,78 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/switching --arg llm-object \
+  --check requests.a eq 1 --check requests.b eq 2 --check requests.c eq 0 \
+  --check profile_store_untouched eq true --check side_answer eq "B answers the side question" \
+  --check model_after_reswitch eq openai/gpt-4.1-nano \
+  --check condenser_model eq openai/gpt-4.1-nano --check condenser_base_url_is_c eq true \
+  --check independent_condenser_model eq anthropic/claude-sonnet-4-5-20250929
+{
+  "ok": true,
+  "mode": "llm-object",
+  "requests": {
+    "a": 1,
+    "b": 2,
+    "c": 0
+  },
+  "profile_store_untouched": true,
+  "side_answer": "B answers the side question",
+  "model_after_reswitch": "openai/gpt-4.1-nano",
+  "condenser_model": "openai/gpt-4.1-nano",
+  "condenser_base_url_is_c": true,
+  "registry": [
+    "agent",
+    "condenser",
+    "other"
+  ],
+  "independent_condenser_model": "anthropic/claude-sonnet-4-5-20250929",
+  "_exit": 0,
+  "_seconds": 6.4,
+  "checks": [
+    {
+      "check": "requests.a eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "requests.b eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "requests.c eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "profile_store_untouched eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "side_answer eq B answers the side question",
+      "ok": true,
+      "actual": "B answers the side question"
+    },
+    {
+      "check": "model_after_reswitch eq openai/gpt-4.1-nano",
+      "ok": true,
+      "actual": "openai/gpt-4.1-nano"
+    },
+    {
+      "check": "condenser_model eq openai/gpt-4.1-nano",
+      "ok": true,
+      "actual": "openai/gpt-4.1-nano"
+    },
+    {
+      "check": "condenser_base_url_is_c eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "independent_condenser_model eq anthropic/claude-sonnet-4-5-20250929",
+      "ok": true,
+      "actual": "anthropic/claude-sonnet-4-5-20250929"
+    }
+  ]
+}
+
+[exit 0 after 7s]

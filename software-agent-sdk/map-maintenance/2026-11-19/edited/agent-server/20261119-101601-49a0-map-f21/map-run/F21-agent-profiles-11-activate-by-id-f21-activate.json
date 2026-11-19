@@ -1,0 +1,182 @@
+{
+  "file": "F21-agent-profiles.md",
+  "bullet": "Activate by id (`F21.activate`).",
+  "ids": [
+    "F21.activate"
+  ],
+  "line": 360,
+  "script": "BEFORE=$(control-agent-server api GET /api/settings --field agent_settings | jq -S -c .)\ncontrol-agent-server api POST \"/api/agent-profiles/$CODER/activate\" --expect 200 --check id eq \"$CODER\" \\\n  --check agent_settings_applied eq false --save F21.activate/activate\ncontrol-agent-server api GET /api/agent-profiles --check active_agent_profile_id eq \"$CODER\"\ncontrol-agent-server api GET /api/settings --check active_agent_profile_id eq \"$CODER\" --check active_profile eq deepseek-flash \\\n  --check agent_settings.llm.model eq deepseek/deepseek-flash --save F21.activate/settings\nAFTER=$(control-agent-server api GET /api/settings --field agent_settings | jq -S -c .)\ntest \"$BEFORE\" = \"$AFTER\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 1555,
+  "failed_line": 5,
+  "failed_command": "control-agent-server api GET /api/settings --check active_agent_profile_id eq \"$CODER\" --check active_profile eq deepseek-flash --check agent_settings.llm.model eq deepseek/deepseek-flash --save F21.activate/settings",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/settings",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "3021",
+        "content-type": "application/json"
+      },
+      "body": {
+        "agent_settings": {
+          "schema_version": 10,
+          "agent_kind": "openhands",
+          "agent": "CodeActAgent",
+          "llm": {
+            "model": "litellm_proxy/deepseek-v4.1-flash",
+            "api_key": "**********",
+            "provider_connection_id": null,
+            "auth_type": "api_key",
+            "subscription_vendor": null,
+            "base_url": "https://llm-proxy.eval.all-hands.dev/",
+            "api_version": null,
+            "aws_access_key_id": null,
+            "aws_secret_access_key": null,
+            "aws_session_token": null,
+            "aws_region_name": null,
+            "aws_profile_name": null,
+            "aws_role_name": null,
+            "aws_session_name": null,
+            "aws_bedrock_runtime_endpoint": null,
+            "openrouter_site_url": "https://docs.all-hands.dev/",
+            "openrouter_app_name": "OpenHands",
+            "num_retries": 5,
+            "retry_multiplier": 8.0,
+            "retry_min_wait": 8,
+            "retry_max_wait": 64,
+            "timeout": 300,
+            "stream_idle_timeout": 300.0,
+            "max_message_chars": 30000,
+            "temperature": null,
+            "top_p": null,
+            "top_k": null,
+            "max_input_tokens": null,
+            "max_output_tokens": null,
+            "model_canonical_name": null,
+            "api_mode": "auto",
+            "capability_overrides": {},
+            "extra_headers": null,
+            "input_cost_per_token": null,
+            "output_cost_per_token": null,
+            "ollama_base_url": null,
+            "stream": false,
+            "drop_params": true,
+            "disable_vision": null,
+            "disable_stop_word": false,
+            "caching_prompt": true,
+            "log_completions_to_file": false,
+            "log_completions": false,
+            "log_completions_folder": "logs/completions",
+            "custom_tokenizer": null,
+            "native_tool_calling": true,
+            "force_string_serializer": null,
+            "inline_image_urls": null,
+            "reasoning_effort": "high",
+            "reasoning_summary": null,
+            "enable_encrypted_reasoning": true,
+            "prompt_cache_retention": "24h",
+            "extended_thinking_budget": 200000,
+            "seed": null,
+            "usage_id": "default",
+            "litellm_extra_body": {},
+            "is_subscription": false
+          },
+          "tools": null,
+          "enable_classify_and_switch_llm_tool": false,
+          "active_meta_profile": null,
+          "meta_profile": null,
+          "meta_profile_llms": {},
+          "tool_concurrency_limit": 1,
+          "mcp_config": {},
+          "persona": null,
+          "agent_context": {
+            "skills": [],
+            "system_message_suffix": null,
+            "user_message_suffix": null,
+            "load_user_skills": false,
+            "load_public_skills": false,
+            "marketplace_path": "marketplaces/default.json",
+            "registered_marketplaces": [],
+            "load_project_skills": false,
+            "load_memory": false,
+            "disabled_skills": [],
+            "secrets": null,
+            "current_datetime": "2026-11-19T10:16:13.365690Z"
+          },
+          "condenser": {
+            "condenser_kind": "llm_summarizing",
+            "enabled": true,
+            "max_size": 240,
+            "max_tokens": null,
+            "keep_first": 2,
+            "minimum_progress": 0.1,
+            "hard_context_reset_max_retries": 5,
+            "hard_context_reset_context_scaling": 0.8
+          },
+          "verification": {
+            "critic_enabled": false,
+            "critic_mode": "finish_and_message",
+            "enable_iterative_refinement": false,
+            "critic_threshold": 0.6,
+            "max_refinement_iterations": 3,
+            "critic_server_url": null,
+            "critic_model_name": null,
+            "critic_api_key": null
+          }
+        },
+        "conversation_settings": {
+          "schema_version": 1,
+          "max_iterations": 500,
+          "confirmation_mode": false,
+          "security_analyzer": "llm",
+          "default_runtime": "local",
+          "worktree_base": "default_branch",
+          "worktree_base_ref": null,
+          "worktree_branch_prefix": "openhands/",
+          "container_memory": null,
+          "container_cpus": null,
+          "container_browser": true
+        },
+        "llm_api_key_is_set": true,
+        "active_profile": "deepseek-flash",
+        "active_agent_profile_id": "1049ae73-46b9-45c0-98de-3b213d0fe2b3",
+        "active_meta_profile": null,
+        "misc_settings": {}
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 67,
+    "checks": [
+      {
+        "check": "active_agent_profile_id eq 1049ae73-46b9-45c0-98de-3b213d0fe2b3",
+        "ok": true,
+        "actual": "1049ae73-46b9-45c0-98de-3b213d0fe2b3"
+      },
+      {
+        "check": "active_profile eq deepseek-flash",
+        "ok": true,
+        "actual": "deepseek-flash"
+      },
+      {
+        "check": "agent_settings.llm.model eq deepseek/deepseek-flash",
+        "ok": false,
+        "actual": "litellm_proxy/deepseek-v4.1-flash"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-101601-49a0-map-f21/evidence/F21.activate/settings.json",
+    "hint": "failed check: agent_settings.llm.model eq deepseek/deepseek-flash"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/1049ae73-46b9-45c0-98de-3b213d0fe2b3/activate\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"151\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"id\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n      \"message\": \"Agent profile '1049ae73-46b9-45c0-98de-3b213d0fe2b3' activated\",\n      \"agent_settings_applied\": false\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 58,\n  \"checks\": [\n    {\n      \"check\": \"id eq 1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n      \"ok\": true,\n      \"actual\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\"\n    },\n    {\n      \"check\": \"agent_settings_applied eq false\",\n      \"ok\": true,\n      \"actual\": \"false\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-101601-49a0-map-f21/evidence/F21.activate/activate.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/agent-profiles\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"542\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"profiles\": [\n        {\n          \"id\": \"def83d4a-3c43-46e2-9560-2fd92fa4634e\",\n          \"name\": \"default\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-flash\",\n          \"mcp_server_refs\": null\n        },\n        {\n          \"id\": \"e9485768-f501-4d41-9f86-d27962c13251\",\n          \"name\": \"qa-f21-acp\",\n          \"agent_kind\": \"acp\",\n          \"revision\": 0,\n          \"llm_profile_ref\": null,\n          \"mcp_server_refs\": null\n        },\n        {\n          \"id\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n          \"name\": \"qa-f21-coder\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 1,\n          \"llm_profile_ref\": \"deepseek-pro\",\n          \"mcp_server_refs\": []\n        }\n      ],\n      \"active_agent_profile_id\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq 1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n      \"ok\": true,\n      \"actual\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3021\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"agent_settings\": {\n        \"schema_version\": 10,\n        \"agent_kind\": \"openhands\",\n        \"agent\": \"CodeActAgent\",\n        \"llm\": {\n          \"model\": \"litellm_proxy/deepseek-v4.1-flash\",\n          \"api_key\": \"**********\",\n          \"provider_connection_id\": null,\n          \"auth_type\": \"api_key\",\n          \"subscription_vendor\": null,\n          \"base_url\": \"https://llm-proxy.eval.all-hands.dev/\",\n          \"api_version\": null,\n          \"aws_access_key_id\": null,\n          \"aws_secret_access_key\": null,\n          \"aws_session_token\": null,\n          \"aws_region_name\": null,\n          \"aws_profile_name\": null,\n          \"aws_role_name\": null,\n          \"aws_session_name\": null,\n          \"aws_bedrock_runtime_endpoint\": null,\n          \"openrouter_site_url\": \"https://docs.all-hands.dev/\",\n          \"openrouter_app_name\": \"OpenHands\",\n          \"num_retries\": 5,\n          \"retry_multiplier\": 8.0,\n          \"retry_min_wait\": 8,\n          \"retry_max_wait\": 64,\n          \"timeout\": 300,\n          \"stream_idle_timeout\": 300.0,\n          \"max_message_chars\": 30000,\n          \"temperature\": null,\n          \"top_p\": null,\n          \"top_k\": null,\n          \"max_input_tokens\": null,\n          \"max_output_tokens\": null,\n          \"model_canonical_name\": null,\n          \"api_mode\": \"auto\",\n          \"capability_overrides\": {},\n          \"extra_headers\": null,\n          \"input_cost_per_token\": null,\n          \"output_cost_per_token\": null,\n          \"ollama_base_url\": null,\n          \"stream\": false,\n          \"drop_params\": true,\n          \"disable_vision\": null,\n          \"disable_stop_word\": false,\n          \"caching_prompt\": true,\n          \"log_completions_to_file\": false,\n          \"log_completions\": false,\n          \"log_completions_folder\": \"logs/completions\",\n          \"custom_tokenizer\": null,\n          \"native_tool_calling\": true,\n          \"force_string_serializer\": null,\n          \"inline_image_urls\": null,\n          \"reasoning_effort\": \"high\",\n          \"reasoning_summary\": null,\n          \"enable_encrypted_reasoning\": true,\n          \"prompt_cache_retention\": \"24h\",\n          \"extended_thinking_budget\": 200000,\n          \"seed\": null,\n          \"usage_id\": \"default\",\n          \"litellm_extra_body\": {},\n          \"is_subscription\": false\n        },\n        \"tools\": null,\n        \"enable_classify_and_switch_llm_tool\": false,\n        \"active_meta_profile\": null,\n        \"meta_profile\": null,\n        \"meta_profile_llms\": {},\n        \"tool_concurrency_limit\": 1,\n        \"mcp_config\": {},\n        \"persona\": null,\n        \"agent_context\": {\n          \"skills\": [],\n          \"system_message_suffix\": null,\n          \"user_message_suffix\": null,\n          \"load_user_skills\": false,\n          \"load_public_skills\": false,\n          \"marketplace_path\": \"marketplaces/default.json\",\n          \"registered_marketplaces\": [],\n          \"load_project_skills\": false,\n          \"load_memory\": false,\n          \"disabled_skills\": [],\n          \"secrets\": null,\n          \"current_datetime\": \"2026-11-19T10:16:13.365690Z\"\n        },\n        \"condenser\": {\n          \"condenser_kind\": \"llm_summarizing\",\n          \"enabled\": true,\n          \"max_size\": 240,\n          \"max_tokens\": null,\n          \"keep_first\": 2,\n          \"minimum_progress\": 0.1,\n          \"hard_context_reset_max_retries\": 5,\n          \"hard_context_reset_context_scaling\": 0.8\n        },\n        \"verification\": {\n          \"critic_enabled\": false,\n          \"critic_mode\": \"finish_and_message\",\n          \"enable_iterative_refinement\": false,\n          \"critic_threshold\": 0.6,\n          \"max_refinement_iterations\": 3,\n          \"critic_server_url\": null,\n          \"critic_model_name\": null,\n          \"critic_api_key\": null\n        }\n      },\n      \"conversation_settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq 1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n      \"ok\": true,\n      \"actual\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\"\n    },\n    {\n      \"check\": \"active_profile eq deepseek-flash\",\n      \"ok\": true,\n      \"actual\": \"deepseek-flash\"\n    },\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-101601-49a0-map-f21/evidence/F21.activate/settings.json\",\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+  "stderr": ""
+}

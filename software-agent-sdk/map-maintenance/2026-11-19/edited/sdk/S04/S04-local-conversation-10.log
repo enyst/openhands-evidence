@@ -1,0 +1,76 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg close \
+  --check sessions_while_open eq 1 --check sessions_after_close eq 0 --check second_close_error missing \
+  --check collected_after_close eq true --check persisted_files_kept eq true \
+  --check keep_sessions_while_open eq 1 --check keep_sessions_after_close eq 0 --check keep_files_kept eq true \
+  --check del_sessions_while_open eq 1 --check del_sessions_after eq 0
+{
+  "ok": true,
+  "mode": "close",
+  "sessions_while_open": 1,
+  "sessions_after_close": 0,
+  "second_close_error": null,
+  "collected_after_close": true,
+  "persisted_files_kept": true,
+  "keep_sessions_while_open": 1,
+  "keep_sessions_after_close": 0,
+  "keep_files_kept": true,
+  "del_sessions_while_open": 1,
+  "del_sessions_after": 0,
+  "_exit": 0,
+  "_seconds": 6.3,
+  "checks": [
+    {
+      "check": "sessions_while_open eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "sessions_after_close eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "second_close_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "collected_after_close eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "persisted_files_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "keep_sessions_while_open eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "keep_sessions_after_close eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "keep_files_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "del_sessions_while_open eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "del_sessions_after eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 6s]

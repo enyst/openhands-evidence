@@ -1,0 +1,51 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "ACP switch on a regular conversation (`F09.acp-model-native`).",
+  "ids": [
+    "F09.acp-model-native"
+  ],
+  "line": 461,
+  "script": "control-agent-server api POST \"/api/conversations/$CID/switch_acp_model\" --json '{\"model\": \"opus\"}' \\\n  --expect 400 --check detail eq 'switch_acp_model is only supported for ACP conversations.' --save F09.acp-model-native/native\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_acp_model\" --json '{}' --expect 422 --check detail.0.loc.1 eq model\ncontrol-agent-server api POST /api/conversations/00000000-0000-4000-8000-000000000000/switch_acp_model --json '{\"model\": \"opus\"}' --expect 404\ncontrol-agent-server api GET \"/api/conversations/$CID\" --quiet --check agent.kind eq Agent --check agent.llm.model eq openai/qa-f09-ws --check current_model_id missing\n",
+  "exit_code": 1,
+  "elapsed_ms": 370,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$CID/switch_acp_model\" --json '{\"model\": \"opus\"}' --expect 400 --check detail eq 'switch_acp_model is only supported for ACP conversations.' --save F09.acp-model-native/native",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//switch_acp_model",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "model": "opus"
+      },
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 69,
+    "checks": [
+      {
+        "check": "detail eq switch_acp_model is only supported for ACP conversations.",
+        "ok": false,
+        "actual": "Not Found"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.acp-model-native/native.json",
+    "hint": "expected 400, got 404"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//switch_acp_model\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"model\": \"opus\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 69,\n  \"checks\": [\n    {\n      \"check\": \"detail eq switch_acp_model is only supported for ACP conversations.\",\n      \"ok\": false,\n      \"actual\": \"Not Found\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.acp-model-native/native.json\",\n  \"hint\": \"expected 400, got 404\"\n}\n",
+  "stderr": ""
+}

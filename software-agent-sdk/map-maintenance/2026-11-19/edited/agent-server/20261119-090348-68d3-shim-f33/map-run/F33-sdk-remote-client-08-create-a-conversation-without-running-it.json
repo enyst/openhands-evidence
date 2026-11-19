@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Create a conversation without running it (`F33.conversation-create`).",
+  "ids": [
+    "F33.conversation-create"
+  ],
+  "line": 517,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-create/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation, RemoteConversation\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"idle\"), visualizer=None,\n                    delete_on_close=False, tags={\"qaf33\": \"idle\"}, max_iteration_per_run=7)\nassert isinstance(conv, RemoteConversation), type(conv)\nconv.send_message(\"qa-f33 pending message\")\nassert conv.state.execution_status.value == \"idle\"\nf33.emit(\"idle\", cid=str(conv.id))\nconv.close()\nPY\nIDLE=$(jq -r .cid \"$F33/idle.json\")\ncontrol-agent-server api GET \"/api/conversations/$IDLE\" --check execution_status eq idle --check workspace.working_dir eq \"$F33/idle\" \\\n  --check tags.qaf33 eq idle --check max_iterations eq 7 --check agent.llm.model eq deepseek/deepseek-flash \\\n  --check agent.llm.usage_id eq qa-f33 --check agent.llm.api_key ne \"$DEEPSEEK_API_KEY\" --save F33.conversation-create/get\ncontrol-agent-server conversation events \"$IDLE\" --kinds MessageEvent --contains 'qa-f33 pending message' --expect-count 1\ncontrol-agent-server conversation events \"$IDLE\" --kinds ActionEvent --expect-count 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 355,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-create/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation, RemoteConversation\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"idle\"), visualizer=None,\n                    delete_on_close=False, tags={\"qaf33\": \"idle\"}, max_iteration_per_run=7)\nassert isinstance(conv, RemoteConversation), type(conv)\nconv.send_message(\"qa-f33 pending message\")\nassert conv.state.execution_stat",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 41,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 1, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-create/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 41,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 1, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-create/probe.json\"\n}\n",
+  "stderr": ""
+}

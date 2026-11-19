@@ -1,0 +1,14 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "Roundtrip deserialization successful" \
+  --expect-output "Different settings produce different agent configuration" --expect-output EXAMPLE_COST \
+  -- python examples/01_standalone_sdk/46_agent_settings.py
+{
+  "exit": 0,
+  "seconds": 10.4,
+  "result": null,
+  "stdout_tail": "ist and show hello_settings.txt\n\n$ ls -l hello_settings.txt && cat hello_settings.txt\n\nTokens: \u2191 input 6.16K (total 12.07K) \u2022 cache hit 95.57% (total 76.37%) \u2022  \nreasoning 0 (total 16) \u2022 \u2193 output 88 (total 257) \u2022 $ (total 0.0005)\n\nObservation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nTool: terminal\nResult:\n-rw------- 1 root root 21 Nov 19 10:14 hello_settings.txt\nAgent settings work!\n\n\ud83d\udcc1 Working directory: \n<scratch>/sdk/edi\nted/S19/work/S19-settings-11/block1/runs/20261119-101427-b74667/workspace\n\ud83d\udc0d Python interpreter: /usr/local/bin/python\n\u2705 Exit code: 0\n\nAgent Action \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nSummary: Created hello_settings.txt and verified with ls\n\nThought:\nDone. I created `hello_settings.txt` containing `Agent settings work!` and \nconfirmed it exists with `ls`.\n\n\n\nFinish with message:\nCreated `hello_settings.txt` with the content `Agent settings work!` and \nconfirmed its existence using `ls -l`, which showed the file present (21 bytes) \nin the workspace directory. `cat` also verified the content is correct.\n\nTokens: \u2191 input 6.38K (total 18.45K) \u2022 cache hit 96.26% (total 83.25%) \u2022  \nreasoning 0 (total 16) \u2022 \u2193 output 132 (total 389) \u2022 $ (total 0.0007)\n\n\u2713 Agent created hello_settings.txt \u2014 settings drove real behavior\n\nTerminal-only agent tools: ['terminal']\n\u2713 Different settings produce different agent configuration\n\n\nEXAMPLE_COST: 0.000660632\n",
+  "stderr_tail": "[11/19/26 10:14:31] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 11s]

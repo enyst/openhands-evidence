@@ -1,0 +1,67 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/client --arg recovery \
+  --check transient_first.1 eq true --check transient_first.0 contains "Server returned an error response" \
+  --check transient_second.1 eq false --check transient_second.0 contains count=1 \
+  --check transient_third.0 contains count=2 \
+  --check closed_client.1 eq true --check closed_client.0 contains "has been closed and cannot be reconnected"
+{
+  "ok": true,
+  "mode": "recovery",
+  "transient_first": [
+    "Error calling MCP tool counter: Server returned an error response",
+    true
+  ],
+  "transient_second": [
+    "[Tool 'counter' executed.]count=1 pid=23203",
+    false
+  ],
+  "transient_third": [
+    "[Tool 'counter' executed.]count=2 pid=23203",
+    false
+  ],
+  "closed_client": [
+    "MCP client not connected for tool 'counter'. The client has been closed and cannot be reconnected.",
+    true
+  ],
+  "_exit": 0,
+  "_seconds": 7.8,
+  "checks": [
+    {
+      "check": "transient_first.1 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "transient_first.0 contains Server returned an error response",
+      "ok": true,
+      "actual": "Error calling MCP tool counter: Server returned an error response"
+    },
+    {
+      "check": "transient_second.1 eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "transient_second.0 contains count=1",
+      "ok": true,
+      "actual": "[Tool 'counter' executed.]count=1 pid=23203"
+    },
+    {
+      "check": "transient_third.0 contains count=2",
+      "ok": true,
+      "actual": "[Tool 'counter' executed.]count=2 pid=23203"
+    },
+    {
+      "check": "closed_client.1 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "closed_client.0 contains has been closed and cannot be reconnected",
+      "ok": true,
+      "actual": "MCP client not connected for tool 'counter'. The client has been closed and cannot be reconnected."
+    }
+  ]
+}
+
+[exit 0 after 8s]

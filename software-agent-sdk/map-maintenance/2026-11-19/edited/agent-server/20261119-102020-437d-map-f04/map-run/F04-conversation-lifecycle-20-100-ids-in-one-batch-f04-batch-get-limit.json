@@ -1,0 +1,17 @@
+{
+  "file": "F04-conversation-lifecycle.md",
+  "bullet": "100 ids in one batch (`F04.batch-get-limit`).",
+  "ids": [
+    "F04.batch-get-limit"
+  ],
+  "line": 532,
+  "script": "IDS100=$(python3 -c 'import uuid; print(\",\".join(str(uuid.uuid4()) for _ in range(100)))')\ncontrol-agent-server exec --expect-output QA_BATCH_OK --expect-output 'at most 99 items' --save F04.batch-get-limit/hundred -- python3 \"$F/qa-f04-batch.py\" \"$IDS100\" 422\n",
+  "exit_code": 0,
+  "elapsed_ms": 466,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 59,\n  \"stdout_tail\": \" \\\"status\\\": 422, \\\"body\\\": {\\\"detail\\\": [{\\\"type\\\": \\\"too_long\\\", \\\"loc\\\": [\\\"query\\\", \\\"ids\\\"], \\\"msg\\\": \\\"List should have at most 99 items after validation, not 100\\\", \\\"input\\\": [\\\"751de9e2-f43f-406d-b203-afbbcda5ac8d\\\", \\\"b64cd3ff-5f89-405b-9896-2b0388b1c0a2\\\", \\\"d388c30b-c137-4dad-a734-632f074e8eca\\\", \\\"08eaf773-6cce-43c9-b815-c4f9f0e30388\\\", \\\"1901953c-1709-49c6-a44f-e1f994f3394c\\\", \\\"5fe634cf-3118-47fb-8df6-b082dd4892ae\\\", \\\"c6bb5c35-bc11-4565-af96-b8ef0aa56932\\\", \\\"47a61f89-b862-4dd4-bda7-727dd0a3d3d4\\\", \\\"d29080fc-0e90-445f-ae58-bfd665d01709\\\", \\\"39d6c241-e35a-4c73-89ff-97c01494e79e\\\", \\\"18c336d5-9adf-4e89-a748-48bfa272ec0b\\\", \\\"d98944bb-6b6f-4162-8ba8-2e48244d443d\\\", \\\"233de724-0bd4-45d6-8d41-8bc8b246babf\\\", \\\"d77270d0-93a8-4162-b0f8-0ff168b8ca6e\\\", \\\"2f6a8bec-41ea-41ac-b2a5-7d5b2ddd75ba\\\", \\\"3a0751ec-a034-40bd-b81e-6fd05d36d285\\\", \\\"83559d6b-9ae4-4270-ab32-29903a21b186\\\", \\\"82fc0151-b2c1-474f-a090-b1b45038da14\\\", \\\"f6b87386-55dc-4f2f-90bc-0c0ec74783da\\\", \\\"9482e7ac-ec01-42fa-b702-fa427c9c6aec\\\", \\\"79f9a886-ec4d-4cf1-8857-c375c5cbeb79\\\", \\\"8de7e2bd-0aa9-4eee-9aa6-d8a31bd51daa\\\", \\\"35ec5998-80c3-4723-8445-e7e47350502c\\\", \\\"396623ee-dc96-4335-94a8-2c57cda6deda\\\", \\\"0f2804d1-676d-471e-85b4-13eb6ec1ff95\\\", \\\"c7800aec-4128-4637-b170-6bd3fb9c651c\\\", \\\"4e2de402-fc3c-4831-8fab-7326d09cebf3\\\", \\\"c4b4c8db-1f82-4a2c-874d-2af31de8ea0c\\\", \\\"2a8e363b-6332-40ea-b53f-878797370eff\\\", \\\"fbd8f026-de2a-4d00-a27a-8d1477e819cb\\\", \\\"f7102c73-756f-427f-9ab6-d9b3d5845724\\\", \\\"d82da696-4c33-4003-bc18-068e8bcaabcd\\\", \\\"7e4df9b7-c90c-4e63-bc2f-4a771840c47b\\\", \\\"fa3e\\nQA_BATCH_OK\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server/20261119-102020-437d-map-f04/evidence/F04.batch-get-limit/hundred.json\"\n}\n",
+  "stderr": ""
+}

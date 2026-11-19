@@ -1,0 +1,50 @@
+{
+  "file": "F06-conversation-events.md",
+  "bullet": "A message during a tool call (`F06.send-during-tool-call`), known bug #6729.",
+  "ids": [
+    "F06.send-during-tool-call"
+  ],
+  "line": 745,
+  "script": "TOOL_STUB=$(control-agent-server fixture llm-stub --name qa-f06-tool --step 'tool:terminal:{\"command\":\"sleep 20\"}' --print-path)\nTOOL_AGENT=\"{\\\"llm\\\": {\\\"model\\\": \\\"openai/qa-stub\\\", \\\"api_key\\\": \\\"qa-stub-key\\\", \\\"base_url\\\": \\\"$TOOL_STUB/v1\\\", \\\"num_retries\\\": 0}, \\\"tools\\\": [{\\\"name\\\": \\\"terminal\\\"}]}\"\nTC=$(control-agent-server conversation start --body-json \"{\\\"agent\\\": $TOOL_AGENT}\" --no-autotitle --print-id)\ncontrol-agent-server api POST \"/api/conversations/$TC/events\" \\\n  --json '{\"content\":[{\"type\":\"text\",\"text\":\"QA_F06_TOOL\"}],\"run\":true}' --expect 200\ncontrol-agent-server api GET \"/api/conversations/$TC/events/count\" --query kind=ActionEvent --check . eq 1 --until-ok 30\ncontrol-agent-server api GET \"/api/conversations/$TC/events/count\" --query kind=ObservationEvent --check . eq 0\ncontrol-agent-server api POST \"/api/conversations/$TC/events\" \\\n  --json '{\"content\":[{\"type\":\"text\",\"text\":\"QA_F06_DURING_TOOL\"}],\"run\":false}' --expect 200 --expect-max-ms 3000 --timeout 60 \\\n  --save F06.send-during-tool-call/post  # bug: status eq 200 && elapsed_ms ge 15000\ncontrol-agent-server api GET \"/api/conversations/$TC/events/count\" --query body=QA_F06_DURING_TOOL --check . eq 1\ncontrol-agent-server api GET \"/api/conversations/$TC/events/count\" --query kind=ObservationEvent --check . eq 0\ncontrol-agent-server api POST \"/api/conversations/$TC/interrupt\" --expect 200\ncontrol-agent-server conversation wait \"$TC\" --until paused --timeout 60\n",
+  "exit_code": 1,
+  "elapsed_ms": 22417,
+  "failed_line": 8,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$TC/events\" --json '{\"content\":[{\"type\":\"text\",\"text\":\"QA_F06_DURING_TOOL\"}],\"run\":false}' --expect 200 --expect-max-ms 3000 --timeout 60 --save F06.send-during-tool-call/post",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations/75c908f1-ad27-47c9-a727-50a7458af8d5/events",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "content": [
+          {
+            "type": "text",
+            "text": "QA_F06_DURING_TOOL"
+          }
+        ],
+        "run": false
+      },
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "16",
+        "content-type": "application/json"
+      },
+      "body": {
+        "success": true
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 19449,
+    "saved": "<scratch>/agent-server/20261119-083645-e9b2-map-f06/evidence/F06.send-during-tool-call/post.json",
+    "hint": "took 19449 ms, limit 3000 ms"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/75c908f1-ad27-47c9-a727-50a7458af8d5/events\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"QA_F06_TOOL\"\n        }\n      ],\n      \"run\": true\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 216\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/75c908f1-ad27-47c9-a727-50a7458af8d5/events/count\",\n    \"query\": [\n      [\n        \"kind\",\n        \"ActionEvent\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": 1,\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 70,\n  \"checks\": [\n    {\n      \"check\": \". eq 1\",\n      \"ok\": true,\n      \"actual\": \"1\"\n    }\n  ],\n  \"attempts\": 1\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/75c908f1-ad27-47c9-a727-50a7458af8d5/events/count\",\n    \"query\": [\n      [\n        \"kind\",\n        \"ObservationEvent\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": 0,\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 60,\n  \"checks\": [\n    {\n      \"check\": \". eq 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/75c908f1-ad27-47c9-a727-50a7458af8d5/events\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"QA_F06_DURING_TOOL\"\n        }\n      ],\n      \"run\": false\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 19449,\n  \"saved\": \"<scratch>/agent-server/20261119-083645-e9b2-map-f06/evidence/F06.send-during-tool-call/post.json\",\n  \"hint\": \"took 19449 ms, limit 3000 ms\"\n}\n",
+  "stderr": ""
+}

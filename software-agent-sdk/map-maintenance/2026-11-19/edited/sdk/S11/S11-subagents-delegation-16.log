@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "EXAMPLE_COST" -- python examples/01_standalone_sdk/42_file_based_subagents.py
+{
+  "exit": 0,
+  "seconds": 81.9,
+  "result": null,
+  "stdout_tail": "ool's behavior.\n- **Articles and prepositions** \u2014 all correct.\n- **Parallelism** \u2014 correct in the bulleted lists and in the sentence spanning \nlines 3\u20135 (\"fetches\u2026, extracts\u2026, and writes\u2026\").\n- **Punctuation** \u2014 no run-ons or comma splices detected.\n- **Spelling** \u2014 \"Behaviour\" (line 48) is British spelling, used consistently \nthroughout, so not an error. \"standalone,\" \"timestamped,\" and \"Idempotency\" are \nall correct.\n\n### Two optional style notes (explicitly *not* errors)\n\n1. **Lines 3\u20135** \u2014 the intro is a noun-phrase fragment with no main clause:\n   > `A small, standalone Python command-line tool that fetches a \nserver-rendered news page, extracts article **titles** and **URLs**, and writes \nthe results to a timestamped JSON file.`\n\n   This is standard README convention and perfectly acceptable.\n\n2. **Lines 51\u201352** \u2014 some style guides would add a comma after the introductory \ndependent clause:\n   > `... If all attempts fail the scraper logs an error and exits with code 1 \nwithout writing a file.`\n\n   Optional correction: `If all attempts fail**,** the scraper logs an error\u2026`. \nNot grammatically required.\n\n**No files were modified** \u2014 this was a review-only pass.\n\nWant me to apply either of the two optional style tweaks, or review a different \nREADME if I picked up the wrong file?\n\nTokens: \u2191 input 7.82K (total 153.51K) \u2022 cache hit 88.39% (total 70.96%) \u2022  \nreasoning 106 (total 4.61K) \u2022 \u2193 output 661 (total 11.56K) \u2022 $ (total 0.0116)\n\n\nTotal cost: $0.0116\nEXAMPLE_COST: 0.0116\n",
+  "stderr_tail": "[11/19/26 10:06:54] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 82s]

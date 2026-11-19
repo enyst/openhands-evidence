@@ -1,0 +1,197 @@
+{
+  "file": "F04-conversation-lifecycle.md",
+  "bullet": "`initial_message.run: false` (`F04.create-initial-message-run-false`), known bug.",
+  "ids": [
+    "F04.create-initial-message-run-false"
+  ],
+  "line": 306,
+  "script": "YR=$(control-agent-server api POST /api/conversations \\\n  --json \"{\\\"workspace\\\": {\\\"working_dir\\\": \\\"$W\\\"}, \\\"agent\\\": $STUB_AGENT, \\\"autotitle\\\": false, \\\"initial_message\\\": {\\\"role\\\": \\\"user\\\", \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA F04 run true.\\\"}], \\\"run\\\": true}}\" \\\n  --expect 201 --field id)\ncontrol-agent-server conversation wait \"$YR\" --until finished --timeout 15\nNR=$(control-agent-server api POST /api/conversations \\\n  --json \"{\\\"workspace\\\": {\\\"working_dir\\\": \\\"$W\\\"}, \\\"agent\\\": $STUB_AGENT, \\\"autotitle\\\": false, \\\"initial_message\\\": {\\\"role\\\": \\\"user\\\", \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA F04 run false.\\\"}], \\\"run\\\": false}}\" \\\n  --expect 201 --save F04.create-initial-message-run-false/start --field id)\ncontrol-agent-server conversation events \"$NR\" --kinds MessageEvent --contains 'QA F04 run false.' --expect-count 1\nsleep 15; control-agent-server api GET \"/api/conversations/$NR\" --check execution_status eq idle --save F04.create-initial-message-run-false/get  # bug: response.body.execution_status matches '^(running|finished)$'\ncontrol-agent-server conversation events \"$NR\" --kinds ActionEvent --expect-count 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 16883,
+  "failed_line": 9,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$NR\" --check execution_status eq idle --save F04.create-initial-message-run-false/get",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/94ee8247-0e96-45ad-859a-8aeeca8017a9",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "3626",
+        "content-type": "application/json"
+      },
+      "body": {
+        "id": "94ee8247-0e96-45ad-859a-8aeeca8017a9",
+        "workspace": {
+          "working_dir": "<scratch>/agent-server/20261119-102020-437d-map-f04/fixtures/qa-f04-ws",
+          "kind": "LocalWorkspace"
+        },
+        "persistence_dir": "<scratch>/agent-server/20261119-102020-437d-map-f04/server/workspace/conversations/94ee82470e9645ad859a8aeeca8017a9",
+        "max_iterations": 500,
+        "max_budget_per_run": null,
+        "stuck_detection": true,
+        "execution_status": "finished",
+        "confirmation_policy": {
+          "kind": "NeverConfirm"
+        },
+        "security_analyzer": null,
+        "activated_knowledge_skills": [],
+        "invoked_skills": [],
+        "blocked_actions": {},
+        "blocked_messages": {},
+        "last_user_message_id": "f6395d0d-b092-45a3-80cf-cb0406897571",
+        "leaf_event_id": "4f4c6f47-c09b-47f1-8ef5-317c9a91f15f",
+        "stats": {
+          "usage_to_metrics": {
+            "default": {
+              "model_name": "openai/qa-stub",
+              "accumulated_cost": 0.0,
+              "max_budget_per_task": null,
+              "accumulated_token_usage": {
+                "model": "openai/qa-stub",
+                "prompt_tokens": 10,
+                "completion_tokens": 5,
+                "cache_read_tokens": 0,
+                "cache_write_tokens": 0,
+                "reasoning_tokens": 0,
+                "context_window": 0,
+                "per_turn_token": 15,
+                "response_id": ""
+              },
+              "costs": [],
+              "response_latencies": [],
+              "token_usages": []
+            }
+          }
+        },
+        "secret_registry": {
+          "secret_sources": {}
+        },
+        "agent_state": {},
+        "hook_config": null,
+        "title": null,
+        "metrics": null,
+        "created_at": "2026-11-19T10:20:52.724219Z",
+        "updated_at": "2026-11-19T10:20:52.785042Z",
+        "forked_from_conversation_id": null,
+        "forked_from_event_id": null,
+        "parent_conversation_id": null,
+        "sub_conversation_ids": [],
+        "tags": {},
+        "current_model_id": null,
+        "available_models": [],
+        "current_effort": null,
+        "available_efforts": [],
+        "supports_runtime_model_switch": false,
+        "launched_agent_profile": null,
+        "agent": {
+          "llm": {
+            "model": "openai/qa-stub",
+            "api_key": null,
+            "provider_connection_id": null,
+            "auth_type": "api_key",
+            "subscription_vendor": null,
+            "base_url": "http://127.0.0.1:53627/v1",
+            "api_version": null,
+            "aws_access_key_id": null,
+            "aws_secret_access_key": null,
+            "aws_session_token": null,
+            "aws_region_name": null,
+            "aws_profile_name": null,
+            "aws_role_name": null,
+            "aws_session_name": null,
+            "aws_bedrock_runtime_endpoint": null,
+            "openrouter_site_url": "https://docs.all-hands.dev/",
+            "openrouter_app_name": "OpenHands",
+            "num_retries": 0,
+            "retry_multiplier": 8.0,
+            "retry_min_wait": 8,
+            "retry_max_wait": 64,
+            "timeout": 300,
+            "stream_idle_timeout": 300.0,
+            "max_message_chars": 30000,
+            "temperature": null,
+            "top_p": null,
+            "top_k": null,
+            "max_input_tokens": null,
+            "max_output_tokens": null,
+            "model_canonical_name": null,
+            "api_mode": "auto",
+            "capability_overrides": {},
+            "extra_headers": null,
+            "input_cost_per_token": null,
+            "output_cost_per_token": null,
+            "ollama_base_url": null,
+            "stream": false,
+            "drop_params": true,
+            "disable_vision": null,
+            "disable_stop_word": false,
+            "caching_prompt": true,
+            "log_completions_to_file": false,
+            "log_completions": false,
+            "log_completions_folder": "logs/completions",
+            "custom_tokenizer": null,
+            "native_tool_calling": true,
+            "force_string_serializer": null,
+            "inline_image_urls": null,
+            "reasoning_effort": "high",
+            "reasoning_summary": null,
+            "enable_encrypted_reasoning": true,
+            "prompt_cache_retention": "24h",
+            "extended_thinking_budget": 200000,
+            "seed": null,
+            "usage_id": "default",
+            "litellm_extra_body": {},
+            "is_subscription": false
+          },
+          "tools": [],
+          "mcp_config": {},
+          "filter_tools_regex": null,
+          "include_default_tools": [
+            "FinishTool"
+          ],
+          "agent_context": null,
+          "system_prompt": null,
+          "system_prompt_filename": "system_prompt.j2",
+          "security_policy_filename": "security_policy.j2",
+          "system_prompt_kwargs": {
+            "llm_security_analyzer": true
+          },
+          "condenser": null,
+          "critic": null,
+          "tool_concurrency_limit": 1,
+          "persona": null,
+          "kind": "Agent"
+        },
+        "client_tools": [],
+        "tool_module_qualnames": {},
+        "runtime_info": {
+          "runtime_status": "available",
+          "can_resume": true,
+          "runtime_error": null
+        }
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 65,
+    "checks": [
+      {
+        "check": "execution_status eq idle",
+        "ok": false,
+        "actual": "finished"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-102020-437d-map-f04/evidence/F04.create-initial-message-run-false/get.json",
+    "hint": "failed check: execution_status eq idle"
+  },
+  "stdout": "{\n  \"id\": \"c9ae311f-05ec-4c42-85c9-53d1c13852a4\",\n  \"ok\": true,\n  \"status\": \"finished\",\n  \"transitions\": [\n    \"finished\"\n  ],\n  \"waited_ms\": 65\n}\n{\n  \"ok\": true,\n  \"id\": \"94ee8247-0e96-45ad-859a-8aeeca8017a9\",\n  \"total\": 8,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 4,\n    \"ActionEvent\": 1,\n    \"ObservationEvent\": 1\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"f6395d0d-b092-45a3-80cf-cb0406897571\",\n      \"kind\": \"MessageEvent\",\n      \"source\": \"user\",\n      \"timestamp\": \"2026-11-19T10:20:52.750488\",\n      \"llm_message\": \"{\\\"role\\\": \\\"user\\\", \\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA F04 run false.\\\"}], \\\"thinking_blocks\\\": []}\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/94ee8247-0e96-45ad-859a-8aeeca8017a9\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3626\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"id\": \"94ee8247-0e96-45ad-859a-8aeeca8017a9\",\n      \"workspace\": {\n        \"working_dir\": \"<scratch>/agent-server/20261119-102020-437d-map-f04/fixtures/qa-f04-ws\",\n        \"kind\": \"LocalWorkspace\"\n      },\n      \"persistence_dir\": \"<scratch>/agent-server/20261119-102020-437d-map-f04/server/workspace/conversations/94ee82470e9645ad859a8aeeca8017a9\",\n      \"max_iterations\": 500,\n      \"max_budget_per_run\": null,\n      \"stuck_detection\": true,\n      \"execution_status\": \"finished\",\n      \"confirmation_policy\": {\n        \"kind\": \"NeverConfirm\"\n      },\n      \"security_analyzer\": null,\n      \"activated_knowledge_skills\": [],\n      \"invoked_skills\": [],\n      \"blocked_actions\": {},\n      \"blocked_messages\": {},\n      \"last_user_message_id\": \"f6395d0d-b092-45a3-80cf-cb0406897571\",\n      \"leaf_event_id\": \"4f4c6f47-c09b-47f1-8ef5-317c9a91f15f\",\n      \"stats\": {\n        \"usage_to_metrics\": {\n          \"default\": {\n            \"model_name\": \"openai/qa-stub\",\n            \"accumulated_cost\": 0.0,\n            \"max_budget_per_task\": null,\n            \"accumulated_token_usage\": {\n              \"model\": \"openai/qa-stub\",\n              \"prompt_tokens\": 10,\n              \"completion_tokens\": 5,\n              \"cache_read_tokens\": 0,\n              \"cache_write_tokens\": 0,\n              \"reasoning_tokens\": 0,\n              \"context_window\": 0,\n              \"per_turn_token\": 15,\n              \"response_id\": \"\"\n            },\n            \"costs\": [],\n            \"response_latencies\": [],\n            \"token_usages\": []\n          }\n        }\n      },\n      \"secret_registry\": {\n        \"secret_sources\": {}\n      },\n      \"agent_state\": {},\n      \"hook_config\": null,\n      \"title\": null,\n      \"metrics\": null,\n      \"created_at\": \"2026-11-19T10:20:52.724219Z\",\n      \"updated_at\": \"2026-11-19T10:20:52.785042Z\",\n      \"forked_from_conversation_id\": null,\n      \"forked_from_event_id\": null,\n      \"parent_conversation_id\": null,\n      \"sub_conversation_ids\": [],\n      \"tags\": {},\n      \"current_model_id\": null,\n      \"available_models\": [],\n      \"current_effort\": null,\n      \"available_efforts\": [],\n      \"supports_runtime_model_switch\": false,\n      \"launched_agent_profile\": null,\n      \"agent\": {\n        \"llm\": {\n          \"model\": \"openai/qa-stub\",\n          \"api_key\": null,\n          \"provider_connection_id\": null,\n          \"auth_type\": \"api_key\",\n          \"subscription_vendor\": null,\n          \"base_url\": \"http://127.0.0.1:53627/v1\",\n          \"api_version\": null,\n          \"aws_access_key_id\": null,\n          \"aws_secret_access_key\": null,\n          \"aws_session_token\": null,\n          \"aws_region_name\": null,\n          \"aws_profile_name\": null,\n          \"aws_role_name\": null,\n          \"aws_session_name\": null,\n          \"aws_bedrock_runtime_endpoint\": null,\n          \"openrouter_site_url\": \"https://docs.all-hands.dev/\",\n          \"openrouter_app_name\": \"OpenHands\",\n          \"num_retries\": 0,\n          \"retry_multiplier\": 8.0,\n          \"retry_min_wait\": 8,\n          \"retry_max_wait\": 64,\n          \"timeout\": 300,\n          \"stream_idle_timeout\": 300.0,\n          \"max_message_chars\": 30000,\n          \"temperature\": null,\n          \"top_p\": null,\n          \"top_k\": null,\n          \"max_input_tokens\": null,\n          \"max_output_tokens\": null,\n          \"model_canonical_name\": null,\n          \"api_mode\": \"auto\",\n          \"capability_overrides\": {},\n          \"extra_headers\": null,\n          \"input_cost_per_token\": null,\n          \"output_cost_per_token\": null,\n          \"ollama_base_url\": null,\n          \"stream\": false,\n          \"drop_params\": true,\n          \"disable_vision\": null,\n          \"disable_stop_word\": false,\n          \"caching_prompt\": true,\n          \"log_completions_to_file\": false,\n          \"log_completions\": false,\n          \"log_completions_folder\": \"logs/completions\",\n          \"custom_tokenizer\": null,\n          \"native_tool_calling\": true,\n          \"force_string_serializer\": null,\n          \"inline_image_urls\": null,\n          \"reasoning_effort\": \"high\",\n          \"reasoning_summary\": null,\n          \"enable_encrypted_reasoning\": true,\n          \"prompt_cache_retention\": \"24h\",\n          \"extended_thinking_budget\": 200000,\n          \"seed\": null,\n          \"usage_id\": \"default\",\n          \"litellm_extra_body\": {},\n          \"is_subscription\": false\n        },\n        \"tools\": [],\n        \"mcp_config\": {},\n        \"filter_tools_regex\": null,\n        \"include_default_tools\": [\n          \"FinishTool\"\n        ],\n        \"agent_context\": null,\n        \"system_prompt\": null,\n        \"system_prompt_filename\": \"system_prompt.j2\",\n        \"security_policy_filename\": \"security_policy.j2\",\n        \"system_prompt_kwargs\": {\n          \"llm_security_analyzer\": true\n        },\n        \"condenser\": null,\n        \"critic\": null,\n        \"tool_concurrency_limit\": 1,\n        \"persona\": null,\n        \"kind\": \"Agent\"\n      },\n      \"client_tools\": [],\n      \"tool_module_qualnames\": {},\n      \"runtime_info\": {\n        \"runtime_status\": \"available\",\n        \"can_resume\": true,\n        \"runtime_error\": null\n      }\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 65,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq idle\",\n      \"ok\": false,\n      \"actual\": \"finished\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-102020-437d-map-f04/evidence/F04.create-initial-message-run-false/get.json\",\n  \"hint\": \"failed check: execution_status eq idle\"\n}\n",
+  "stderr": ""
+}

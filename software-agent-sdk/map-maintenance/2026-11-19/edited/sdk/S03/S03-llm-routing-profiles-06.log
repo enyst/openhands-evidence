@@ -1,0 +1,67 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/routing --arg validation \
+  --check errors.missing_secondary eq ValidationError --check errors.missing_primary eq ValidationError \
+  --check errors.empty_random eq ValidationError --check errors.valid missing
+control-sdk program S03/routing --arg random --check calls eq 20 --check from_a gt 0 --check from_b gt 0
+{
+  "ok": true,
+  "mode": "validation",
+  "errors": {
+    "missing_secondary": "ValidationError",
+    "missing_primary": "ValidationError",
+    "empty_random": "ValidationError",
+    "valid": null
+  },
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "errors.missing_secondary eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "errors.missing_primary eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "errors.empty_random eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "errors.valid missing",
+      "ok": true,
+      "actual": "null"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "random",
+  "calls": 20,
+  "from_a": 5,
+  "from_b": 15,
+  "_exit": 0,
+  "_seconds": 6.6,
+  "checks": [
+    {
+      "check": "calls eq 20",
+      "ok": true,
+      "actual": "20"
+    },
+    {
+      "check": "from_a gt 0",
+      "ok": true,
+      "actual": "5"
+    },
+    {
+      "check": "from_b gt 0",
+      "ok": true,
+      "actual": "15"
+    }
+  ]
+}
+
+[exit 0 after 12s]

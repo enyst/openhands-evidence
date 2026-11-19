@@ -1,0 +1,87 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S19/persisted_baselines \
+  --check fixtures ge 23 --check versions len-eq 10 --check loaded.agent_settings ge 12 --check loaded.agent_profile ge 5 \
+  --check loaded.conversation_settings ge 1 --check load_failures len-eq 0 --check gate_error missing \
+  --check missing_version_refused eq true --check sentinel_refused eq PersistedSettingsCompatError
+{
+  "ok": true,
+  "fixtures": 33,
+  "surfaces": {
+    "agent_profile": 7,
+    "agent_settings": 18,
+    "conversation_settings": 1,
+    "persisted_settings": 7
+  },
+  "versions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "loaded": {
+    "agent_profile": 7,
+    "agent_settings": 18,
+    "conversation_settings": 1
+  },
+  "load_failures": [],
+  "gate_error": null,
+  "missing_version_refused": true,
+  "sentinel_refused": "PersistedSettingsCompatError",
+  "_exit": 0,
+  "_seconds": 5.4,
+  "checks": [
+    {
+      "check": "fixtures ge 23",
+      "ok": true,
+      "actual": "33"
+    },
+    {
+      "check": "versions len-eq 10",
+      "ok": true,
+      "actual": "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+    },
+    {
+      "check": "loaded.agent_settings ge 12",
+      "ok": true,
+      "actual": "18"
+    },
+    {
+      "check": "loaded.agent_profile ge 5",
+      "ok": true,
+      "actual": "7"
+    },
+    {
+      "check": "loaded.conversation_settings ge 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "load_failures len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "gate_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "missing_version_refused eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "sentinel_refused eq PersistedSettingsCompatError",
+      "ok": true,
+      "actual": "PersistedSettingsCompatError"
+    }
+  ]
+}
+
+[exit 0 after 6s]

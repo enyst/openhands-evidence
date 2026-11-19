@@ -1,0 +1,463 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S19/agent_settings \
+  --check dispatch.openhands eq OpenHandsAgentSettings --check dispatch.acp eq ACPAgentSettings \
+  --check dispatch.missing_kind eq OpenHandsAgentSettings --check dispatch.legacy_llm_kind eq OpenHandsAgentSettings \
+  --check dispatch.legacy_is_llm_subclass eq false \
+  --check migrations.current_version eq 10 --check migrations.v0_dump_version eq 10 \
+  --check migrations.v0_mcp_server_map contains fetch \
+  --check migrations.rejected.11 eq true --check migrations.rejected.-1 eq true --check migrations.rejected.seven eq true \
+  --check migrations.persisted_equals_validate eq true \
+  --check conversation_settings.schema_version eq 1 --check conversation_settings.roundtrip eq true \
+  --check conversation_settings.v0_max_iterations eq 12 --check conversation_settings.newer_rejected exists \
+  --check conversation_settings.request_max_iterations eq 77 --check conversation_settings.request_policy eq ConfirmRisky \
+  --check conversation_settings.request_analyzer eq LLMSecurityAnalyzer \
+  --check conversation_settings.override_max_iterations eq 5 --check conversation_settings.override_policy eq AlwaysConfirm \
+  --check conversation_settings.override_analyzer missing \
+  --check apply_diff.merged_max_size eq 90 --check apply_diff.merged_enabled_kept eq true \
+  --check apply_diff.merged_model eq openai/new --check apply_diff.merged_key_kept eq true \
+  --check apply_diff.persona_unset missing --check apply_diff.switched_type eq ACPAgentSettings \
+  --check apply_diff.switched_has_persona eq false \
+  --check schema.variants contains acp --check schema.variants contains openhands --check schema.labels eq true \
+  --check schema.prominence_values contains critical --check schema.conversation_sections ge 1 \
+  --check subscription.auth_type eq subscription --check subscription.vendor eq openai \
+  --check subscription.dumped_auth_type eq subscription --check subscription.api_key_in_dump eq false \
+  --check acp.is_acp eq true --check acp.command contains "@agentclientprotocol/claude-agent-acp@" \
+  --check acp.model eq claude-opus-4-6 --check acp.server eq claude-code --check acp.api_key_env eq ANTHROPIC_API_KEY \
+  --check acp.custom_without_command eq ValueError --check acp.custom_command contains my_acp.py \
+  --check acp.llm_error contains "ACPAgentSettings.llm was removed" --check acp.persisted_llm_dropped eq true
+{
+  "ok": true,
+  "create_agent": {
+    "type": "Agent",
+    "model": "openai/settings-model",
+    "tools": [
+      "terminal",
+      "file_editor"
+    ],
+    "mcp_servers": [
+      "github",
+      "off",
+      "remote"
+    ],
+    "suffix": "Answer tersely."
+  },
+  "roundtrip": {
+    "schema_version": 10,
+    "model": "openai/settings-model",
+    "condenser_max_size": 50,
+    "condenser_keep_first": 3,
+    "tools": [
+      "terminal"
+    ],
+    "off_server_enabled": false,
+    "off_server_command": "uvx",
+    "llm_key_in_plain_dump": false,
+    "from_persisted_equal": true
+  },
+  "tools": {
+    "default": [
+      "FinishTool",
+      "SwitchLLMTool",
+      "file_editor",
+      "task_tracker",
+      "terminal"
+    ],
+    "bare": [
+      "FinishTool"
+    ],
+    "bare_count": 0,
+    "dup_terminal_count": 1,
+    "dup": [
+      "terminal"
+    ]
+  },
+  "retired_switches": {
+    "live_diff_error": "ValidationError: 1 validation error for tagged-union[OpenHandsAgentSettings,LLMAgentSettings,ACPAgentSettings]\nopenhands\n  Value error, Removed agent settings: enable_sub_agents [type=value_error, input_value={'schema_version': 10, 'a...nable_sub_agents': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+    "in_code_error": "ValidationError: 1 validation error for OpenHandsAgentSettings\n  Value error, Removed agent settings: enable_sub_agents [type=value_error, input_value={'llm': LLM(model='openai...nable_sub_agents': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+    "request_error": "ValueError: Removed agent settings: enable_switch_llm_tool",
+    "migrated_tools": [
+      "terminal",
+      "file_editor",
+      "task_tracker",
+      "browser_tool_set",
+      "task_tool_set",
+      "switch_llm"
+    ],
+    "serialized_keys": []
+  },
+  "condenser": {
+    "on_type": "LLMSummarizingCondenser",
+    "on_max_size": 80,
+    "on_keep_first": 2,
+    "on_max_tokens": 32000,
+    "explicit_max_tokens": 5000,
+    "condenser_llm_usage_id": "condenser",
+    "off": null,
+    "noop_type": "NoOpCondenser",
+    "legacy_type": "LLMSummarizingCondenserSettings"
+  },
+  "verification": {
+    "with_llm_key": "APIBasedCritic",
+    "without_key": null,
+    "disabled": null,
+    "refinement_threshold": 0.7,
+    "refinement_max": 2,
+    "key_roundtrip": true
+  },
+  "mcp_secrets": {
+    "redacted_in_dump": true,
+    "encrypted_differs": true,
+    "decrypted": "ghp-secret",
+    "decrypted_header": "tok-secret",
+    "wrong_cipher": "None",
+    "legacy_plaintext": "ghp-secret",
+    "agent_real_env": "ghp-secret"
+  },
+  "concurrency_persona": {
+    "default_limit": 1,
+    "rejected": [
+      "0",
+      "-1",
+      "many"
+    ],
+    "four": 4,
+    "persona_in_prompt": true,
+    "builtin_in_plain_prompt": true,
+    "persona_replaces_builtin": true
+  },
+  "subscription": {
+    "auth_type": "subscription",
+    "vendor": "openai",
+    "dumped_auth_type": "subscription",
+    "api_key_in_dump": false
+  },
+  "acp": {
+    "type": "ACPAgent",
+    "is_acp": true,
+    "command": [
+      "npx",
+      "-y",
+      "--prefer-offline",
+      "@agentclientprotocol/claude-agent-acp@0.99.1"
+    ],
+    "pinned_binary_on_path": false,
+    "model": "claude-opus-4-6",
+    "server": "claude-code",
+    "api_key_env": "ANTHROPIC_API_KEY",
+    "custom_without_command": "ValueError",
+    "custom_command": [
+      "python",
+      "my_acp.py"
+    ],
+    "llm_error": "ValidationError: 1 validation error for ACPAgentSettings\n  Value error, ACPAgentSettings.llm was removed; use acp_model instead. [type=value_error, input_value={'llm': LLM(model='gpt-5.... is_subscription=False)}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+    "persisted_llm_dropped": true
+  },
+  "dispatch": {
+    "openhands": "OpenHandsAgentSettings",
+    "acp": "ACPAgentSettings",
+    "missing_kind": "OpenHandsAgentSettings",
+    "legacy_llm_kind": "OpenHandsAgentSettings",
+    "legacy_is_llm_subclass": false
+  },
+  "migrations": {
+    "current_version": 10,
+    "v0_loaded": "OpenHandsAgentSettings",
+    "v0_dump_version": 10,
+    "v0_mcp_server_map": [
+      "fetch"
+    ],
+    "rejected": {
+      "11": true,
+      "-1": true,
+      "seven": true
+    },
+    "persisted_equals_validate": true
+  },
+  "conversation_settings": {
+    "schema_version": 1,
+    "roundtrip": true,
+    "v0_max_iterations": 12,
+    "newer_rejected": "ValueError",
+    "request_max_iterations": 77,
+    "request_policy": "ConfirmRisky",
+    "request_policy_is_risky": true,
+    "request_analyzer": "LLMSecurityAnalyzer",
+    "override_max_iterations": 5,
+    "override_policy": "AlwaysConfirm",
+    "override_analyzer": null
+  },
+  "apply_diff": {
+    "merged_max_size": 90,
+    "merged_enabled_kept": true,
+    "merged_model": "openai/new",
+    "merged_key_kept": true,
+    "persona_unset": null,
+    "switched_type": "ACPAgentSettings",
+    "switched_has_persona": false
+  },
+  "schema": {
+    "sections": 6,
+    "variants": [
+      "acp",
+      "openhands"
+    ],
+    "has_llm_model_field": true,
+    "labels": true,
+    "prominence_values": [
+      "critical",
+      "major",
+      "minor"
+    ],
+    "conversation_sections": 3
+  },
+  "conversation": {
+    "status": "finished",
+    "file": "built-from-settings",
+    "persona_in_system_prompt": true,
+    "tool_names": [
+      "finish",
+      "terminal"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "dispatch.openhands eq OpenHandsAgentSettings",
+      "ok": true,
+      "actual": "OpenHandsAgentSettings"
+    },
+    {
+      "check": "dispatch.acp eq ACPAgentSettings",
+      "ok": true,
+      "actual": "ACPAgentSettings"
+    },
+    {
+      "check": "dispatch.missing_kind eq OpenHandsAgentSettings",
+      "ok": true,
+      "actual": "OpenHandsAgentSettings"
+    },
+    {
+      "check": "dispatch.legacy_llm_kind eq OpenHandsAgentSettings",
+      "ok": true,
+      "actual": "OpenHandsAgentSettings"
+    },
+    {
+      "check": "dispatch.legacy_is_llm_subclass eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "migrations.current_version eq 10",
+      "ok": true,
+      "actual": "10"
+    },
+    {
+      "check": "migrations.v0_dump_version eq 10",
+      "ok": true,
+      "actual": "10"
+    },
+    {
+      "check": "migrations.v0_mcp_server_map contains fetch",
+      "ok": true,
+      "actual": "[\"fetch\"]"
+    },
+    {
+      "check": "migrations.rejected.11 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "migrations.rejected.-1 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "migrations.rejected.seven eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "migrations.persisted_equals_validate eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "conversation_settings.schema_version eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "conversation_settings.roundtrip eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "conversation_settings.v0_max_iterations eq 12",
+      "ok": true,
+      "actual": "12"
+    },
+    {
+      "check": "conversation_settings.newer_rejected exists",
+      "ok": true,
+      "actual": "ValueError"
+    },
+    {
+      "check": "conversation_settings.request_max_iterations eq 77",
+      "ok": true,
+      "actual": "77"
+    },
+    {
+      "check": "conversation_settings.request_policy eq ConfirmRisky",
+      "ok": true,
+      "actual": "ConfirmRisky"
+    },
+    {
+      "check": "conversation_settings.request_analyzer eq LLMSecurityAnalyzer",
+      "ok": true,
+      "actual": "LLMSecurityAnalyzer"
+    },
+    {
+      "check": "conversation_settings.override_max_iterations eq 5",
+      "ok": true,
+      "actual": "5"
+    },
+    {
+      "check": "conversation_settings.override_policy eq AlwaysConfirm",
+      "ok": true,
+      "actual": "AlwaysConfirm"
+    },
+    {
+      "check": "conversation_settings.override_analyzer missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "apply_diff.merged_max_size eq 90",
+      "ok": true,
+      "actual": "90"
+    },
+    {
+      "check": "apply_diff.merged_enabled_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "apply_diff.merged_model eq openai/new",
+      "ok": true,
+      "actual": "openai/new"
+    },
+    {
+      "check": "apply_diff.merged_key_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "apply_diff.persona_unset missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "apply_diff.switched_type eq ACPAgentSettings",
+      "ok": true,
+      "actual": "ACPAgentSettings"
+    },
+    {
+      "check": "apply_diff.switched_has_persona eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "schema.variants contains acp",
+      "ok": true,
+      "actual": "[\"acp\", \"openhands\"]"
+    },
+    {
+      "check": "schema.variants contains openhands",
+      "ok": true,
+      "actual": "[\"acp\", \"openhands\"]"
+    },
+    {
+      "check": "schema.labels eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "schema.prominence_values contains critical",
+      "ok": true,
+      "actual": "[\"critical\", \"major\", \"minor\"]"
+    },
+    {
+      "check": "schema.conversation_sections ge 1",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "subscription.auth_type eq subscription",
+      "ok": true,
+      "actual": "subscription"
+    },
+    {
+      "check": "subscription.vendor eq openai",
+      "ok": true,
+      "actual": "openai"
+    },
+    {
+      "check": "subscription.dumped_auth_type eq subscription",
+      "ok": true,
+      "actual": "subscription"
+    },
+    {
+      "check": "subscription.api_key_in_dump eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "acp.is_acp eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "acp.command contains @agentclientprotocol/claude-agent-acp@",
+      "ok": true,
+      "actual": "[\"npx\", \"-y\", \"--prefer-offline\", \"@agentclientprotocol/claude-agent-acp@0.99.1\"]"
+    },
+    {
+      "check": "acp.model eq claude-opus-4-6",
+      "ok": true,
+      "actual": "claude-opus-4-6"
+    },
+    {
+      "check": "acp.server eq claude-code",
+      "ok": true,
+      "actual": "claude-code"
+    },
+    {
+      "check": "acp.api_key_env eq ANTHROPIC_API_KEY",
+      "ok": true,
+      "actual": "ANTHROPIC_API_KEY"
+    },
+    {
+      "check": "acp.custom_without_command eq ValueError",
+      "ok": true,
+      "actual": "ValueError"
+    },
+    {
+      "check": "acp.custom_command contains my_acp.py",
+      "ok": true,
+      "actual": "[\"python\", \"my_acp.py\"]"
+    },
+    {
+      "check": "acp.llm_error contains ACPAgentSettings.llm was removed",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for ACPAgentSettings\n  Value error, ACPAgentSettings.llm was removed; use acp_model instead. [type=value_error, input_value={'llm': LLM(model='gpt-5.... is_subscrip"
+    },
+    {
+      "check": "acp.persisted_llm_dropped eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 6s]

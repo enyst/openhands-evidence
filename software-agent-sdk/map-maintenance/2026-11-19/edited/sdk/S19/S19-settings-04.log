@@ -1,0 +1,197 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S19/acp_catalog \
+  --check providers len-eq 6 --check commands_pin_catalog.claude-code eq true --check commands_pin_catalog.codex eq true \
+  --check commands_pin_catalog.pi eq true --check commands_pin_catalog.opencode eq true \
+  --check by_agent_name.claude-agent-acp eq claude-code --check by_agent_name.Codex-ACP eq codex \
+  --check by_agent_name.my-own-agent missing \
+  --check by_command.npx_codex eq codex --check by_command.bin_claude eq claude-code \
+  --check by_command.wrapper missing --check by_command.custom missing \
+  --check file_secrets.codex contains CODEX_AUTH_JSON --check file_secrets.pi contains PI_AUTH_JSON \
+  --check default_file_secrets len-eq 4 --check unknown_provider missing \
+  --check default_plan.bins len-eq 3 --check pi_packages_deduplicated eq true --check unknown_plan_error contains "expected one of"
+control-sdk exec --expect-output 'PACKAGES="@agentclientprotocol/claude-agent-acp@' --expect-output ' @agentclientprotocol/codex-acp@' \
+  --expect-output 'WRAPPER_BINS="claude-agent-acp codex-acp"' -- python -m openhands.sdk.settings.acp_install_catalog claude-code,codex
+{
+  "ok": true,
+  "mode": "registry",
+  "providers": [
+    "claude-code",
+    "codex",
+    "gemini-cli",
+    "kimi-code",
+    "opencode",
+    "pi"
+  ],
+  "commands_pin_catalog": {
+    "claude-code": true,
+    "codex": true,
+    "gemini-cli": true,
+    "kimi-code": true,
+    "pi": true,
+    "opencode": true
+  },
+  "api_key_env": {
+    "claude-code": "ANTHROPIC_API_KEY",
+    "codex": "OPENAI_API_KEY",
+    "gemini-cli": "GEMINI_API_KEY",
+    "kimi-code": null,
+    "pi": "ANTHROPIC_API_KEY",
+    "opencode": "OPENCODE_API_KEY"
+  },
+  "by_agent_name": {
+    "claude-agent-acp": "claude-code",
+    "Codex-ACP": "codex",
+    "gemini-cli": "gemini-cli",
+    "my-own-agent": null
+  },
+  "by_command": {
+    "npx_codex": "codex",
+    "bin_claude": "claude-code",
+    "wrapper": null,
+    "custom": null
+  },
+  "file_secrets": {
+    "codex": [
+      "CODEX_AUTH_JSON"
+    ],
+    "gemini-cli": [
+      "GOOGLE_APPLICATION_CREDENTIALS_JSON"
+    ],
+    "kimi-code": [
+      "KIMI_CODE_CONFIG_TOML"
+    ],
+    "pi": [
+      "PI_AUTH_JSON"
+    ]
+  },
+  "default_file_secrets": [
+    "CODEX_AUTH_JSON",
+    "GOOGLE_APPLICATION_CREDENTIALS_JSON",
+    "KIMI_CODE_CONFIG_TOML",
+    "PI_AUTH_JSON"
+  ],
+  "unknown_provider": null,
+  "default_plan": {
+    "packages": [
+      "@agentclientprotocol/claude-agent-acp@0.99.1",
+      "@agentclientprotocol/codex-acp@2.2.2",
+      "@google/gemini-cli@0.46.0"
+    ],
+    "bins": [
+      "claude-agent-acp",
+      "codex-acp",
+      "gemini"
+    ]
+  },
+  "pi_packages_deduplicated": true,
+  "unknown_plan_error": "Unknown ACP provider 'nope' in INSTALL_ACP_PROVIDERS (expected one of: claude-code, codex, gemini-cli, kimi-code, pi, opencode)",
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "providers len-eq 6",
+      "ok": true,
+      "actual": "[\"claude-code\", \"codex\", \"gemini-cli\", \"kimi-code\", \"opencode\", \"pi\"]"
+    },
+    {
+      "check": "commands_pin_catalog.claude-code eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "commands_pin_catalog.codex eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "commands_pin_catalog.pi eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "commands_pin_catalog.opencode eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "by_agent_name.claude-agent-acp eq claude-code",
+      "ok": true,
+      "actual": "claude-code"
+    },
+    {
+      "check": "by_agent_name.Codex-ACP eq codex",
+      "ok": true,
+      "actual": "codex"
+    },
+    {
+      "check": "by_agent_name.my-own-agent missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "by_command.npx_codex eq codex",
+      "ok": true,
+      "actual": "codex"
+    },
+    {
+      "check": "by_command.bin_claude eq claude-code",
+      "ok": true,
+      "actual": "claude-code"
+    },
+    {
+      "check": "by_command.wrapper missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "by_command.custom missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "file_secrets.codex contains CODEX_AUTH_JSON",
+      "ok": true,
+      "actual": "[\"CODEX_AUTH_JSON\"]"
+    },
+    {
+      "check": "file_secrets.pi contains PI_AUTH_JSON",
+      "ok": true,
+      "actual": "[\"PI_AUTH_JSON\"]"
+    },
+    {
+      "check": "default_file_secrets len-eq 4",
+      "ok": true,
+      "actual": "[\"CODEX_AUTH_JSON\", \"GOOGLE_APPLICATION_CREDENTIALS_JSON\", \"KIMI_CODE_CONFIG_TOML\", \"PI_AUTH_JSON\"]"
+    },
+    {
+      "check": "unknown_provider missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "default_plan.bins len-eq 3",
+      "ok": true,
+      "actual": "[\"claude-agent-acp\", \"codex-acp\", \"gemini\"]"
+    },
+    {
+      "check": "pi_packages_deduplicated eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "unknown_plan_error contains expected one of",
+      "ok": true,
+      "actual": "Unknown ACP provider 'nope' in INSTALL_ACP_PROVIDERS (expected one of: claude-code, codex, gemini-cli, kimi-code, pi, opencode)"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 5.2,
+  "result": null,
+  "stdout_tail": "PACKAGES=\"@agentclientprotocol/claude-agent-acp@0.99.1 @agentclientprotocol/codex-acp@2.2.2\"\nWRAPPER_BINS=\"claude-agent-acp codex-acp\"\n",
+  "stderr_tail": "<frozen runpy>:130: RuntimeWarning: 'openhands.sdk.settings.acp_install_catalog' found in sys.modules after import of package 'openhands.sdk.settings', but prior to execution of 'openhands.sdk.settings.acp_install_catalog'; this may result in unpredictable behaviour\n",
+  "ok": true
+}
+
+[exit 0 after 11s]

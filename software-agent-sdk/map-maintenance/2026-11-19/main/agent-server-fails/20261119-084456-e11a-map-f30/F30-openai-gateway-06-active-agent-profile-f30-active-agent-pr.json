@@ -1,0 +1,70 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Active Agent Profile (`F30.active-agent-profile`).",
+  "ids": [
+    "F30.active-agent-profile"
+  ],
+  "line": 239,
+  "script": "GATEWAY_SEED=$(control-agent-server api GET /api/agent-profiles --expect 200 --field active_agent_profile_id)\ncontrol-agent-server api POST /api/agent-profiles/qa-f30-gateway --expect 201 \\\n  --json '{\"llm_profile_ref\": \"deepseek-pro\", \"tools\": [], \"mcp_server_refs\": [], \"system_message_suffix\": \"QA_F30_PROFILE: answer briefly and do not use tools.\"}'\nGATEWAY_PROFILE=$(control-agent-server api GET /api/agent-profiles/qa-f30-gateway --expect 200 --field profile.id)\ncontrol-agent-server api POST \"/api/agent-profiles/$GATEWAY_PROFILE/activate\" --expect 200\nGCID=$(control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --expect 200 \\\n  --json '{\"model\": \"openhands_deepseek-flash\", \"messages\": [{\"role\": \"system\", \"content\": \"QA_F30_GATEWAY: use plain text.\"}, {\"role\": \"user\", \"content\": \"Say hello in one short sentence and use no tools.\"}]}' \\\n  --check choices.0.message.content len-ge 1 --save F30.active-agent-profile/completion \\\n  --print-header X-OpenHands-ServerConversation-ID)\ncontrol-agent-server api GET \"/api/conversations/$GCID\" --expect 200 --quiet \\\n  --check execution_status eq finished --check launched_agent_profile.agent_profile_id eq \"$GATEWAY_PROFILE\" \\\n  --check launched_agent_profile.revision eq 0 --check agent.llm.model eq deepseek/deepseek-flash \\\n  --check agent.tools len-eq 0 \\\n  --check agent.agent_context.system_message_suffix eq \"$(printf 'QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_GATEWAY: use plain text.')\" \\\n  --save F30.active-agent-profile/conversation\ncontrol-agent-server api GET /api/agent-profiles/qa-f30-gateway --expect 200 \\\n  --check profile.revision eq 0 --check profile.llm_profile_ref eq deepseek-pro \\\n  --check profile.system_message_suffix eq 'QA_F30_PROFILE: answer briefly and do not use tools.' \\\n  --save F30.active-agent-profile/unchanged\nGATEWAY_COUNT=$(control-agent-server api GET /api/conversations/count --field .)\nLONG_SYSTEM=$(jq -cn '{model:\"openhands_deepseek-flash\",messages:[{role:\"system\",content:(\"x\" * 32769)},{role:\"user\",content:\"unused\"}]}')\ncontrol-agent-server api POST /v1/chat/completions --auth bearer --json \"$LONG_SYSTEM\" --expect 400 \\\n  --check detail eq 'System instructions are too long' --save F30.active-agent-profile/long-system\ncontrol-agent-server api GET /api/conversations/count --expect 200 --check . eq \"$GATEWAY_COUNT\"\ncontrol-agent-server api DELETE /api/agent-profiles/qa-f30-gateway --expect 200\nGCID_FALLBACK=$(control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --expect 200 \\\n  --json '{\"model\": \"openhands_deepseek-flash\", \"messages\": [{\"role\": \"user\", \"content\": \"Reply with one short word and use no tools.\"}]}' \\\n  --save F30.active-agent-profile/default-fallback --print-header X-OpenHands-ServerConversation-ID)\ncontrol-agent-server api GET \"/api/conversations/$GCID_FALLBACK\" --expect 200 --quiet \\\n  --check execution_status eq finished --check launched_agent_profile.agent_profile_id eq \"$GATEWAY_SEED\" \\\n  --check agent.llm.model eq deepseek/deepseek-flash \\\n  --check agent.agent_context.system_message_suffix not-contains QA_F30_PROFILE\ncontrol-agent-server api GET /api/settings --expect 200 --check active_agent_profile_id eq \"$GATEWAY_SEED\" --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 4403,
+  "failed_line": 10,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$GCID\" --expect 200 --quiet --check execution_status eq finished --check launched_agent_profile.agent_profile_id eq \"$GATEWAY_PROFILE\" --check launched_agent_profile.revision eq 0 --check agent.llm.model eq deepseek/deepseek-flash --check agent.tools len-eq 0 --check agent.agent_context.system_message_suffix eq \"$(printf 'QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_GATEWAY: use plain text.')\" --save F30.active-agent-profile/conv",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/05560436-9bcd-4734-bffd-3c86690d8597",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "6343",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 90,
+    "checks": [
+      {
+        "check": "execution_status eq finished",
+        "ok": true,
+        "actual": "finished"
+      },
+      {
+        "check": "launched_agent_profile.agent_profile_id eq 59a2dfd6-c698-4305-b2e2-219da29619bc",
+        "ok": true,
+        "actual": "59a2dfd6-c698-4305-b2e2-219da29619bc"
+      },
+      {
+        "check": "launched_agent_profile.revision eq 0",
+        "ok": true,
+        "actual": "0"
+      },
+      {
+        "check": "agent.llm.model eq deepseek/deepseek-flash",
+        "ok": false,
+        "actual": "litellm_proxy/deepseek-v4.1-flash"
+      },
+      {
+        "check": "agent.tools len-eq 0",
+        "ok": true,
+        "actual": "[]"
+      },
+      {
+        "check": "agent.agent_context.system_message_suffix eq QA_F30_PROFILE: answer briefly and do not use tools.\n\nQA_F30_GATEWAY: use plain text.",
+        "ok": true,
+        "actual": "QA_F30_PROFILE: answer briefly and do not use tools.\n\nQA_F30_GATEWAY: use plain text."
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.active-agent-profile/conversation.json",
+    "hint": "failed check: agent.llm.model eq deepseek/deepseek-flash"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 201,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/qa-f30-gateway\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm_profile_ref\": \"deepseek-pro\",\n      \"tools\": [],\n      \"mcp_server_refs\": [],\n      \"system_message_suffix\": \"QA_F30_PROFILE: answer briefly and do not use tools.\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 201,\n    \"headers\": {\n      \"content-length\": \"74\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"name\": \"qa-f30-gateway\",\n      \"message\": \"Agent profile 'qa-f30-gateway' saved\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 76\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/59a2dfd6-c698-4305-b2e2-219da29619bc/activate\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"151\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"id\": \"59a2dfd6-c698-4305-b2e2-219da29619bc\",\n      \"message\": \"Agent profile '59a2dfd6-c698-4305-b2e2-219da29619bc' activated\",\n      \"agent_settings_applied\": false\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 66\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/05560436-9bcd-4734-bffd-3c86690d8597\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6343\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 90,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    },\n    {\n      \"check\": \"launched_agent_profile.agent_profile_id eq 59a2dfd6-c698-4305-b2e2-219da29619bc\",\n      \"ok\": true,\n      \"actual\": \"59a2dfd6-c698-4305-b2e2-219da29619bc\"\n    },\n    {\n      \"check\": \"launched_agent_profile.revision eq 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    },\n    {\n      \"check\": \"agent.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"agent.tools len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"agent.agent_context.system_message_suffix eq QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_GATEWAY: use plain text.\",\n      \"ok\": true,\n      \"actual\": \"QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_GATEWAY: use plain text.\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.active-agent-profile/conversation.json\",\n  \"hint\": \"failed check: agent.llm.model eq deepseek/deepseek-flash\"\n}\n",
+  "stderr": ""
+}

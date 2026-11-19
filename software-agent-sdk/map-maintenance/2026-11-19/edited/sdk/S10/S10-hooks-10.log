@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "ALLOW" --expect-output "DENY" -- python examples/01_standalone_sdk/57_prompt_hooks/main.py
+{
+  "exit": 0,
+  "seconds": 7.4,
+  "result": null,
+  "stdout_tail": "ALLOW python -m pytest -q\n      Runs the project's test suite via pytest, a read-only build/test command explicitly permitted by policy.\nDENY  find / -type f -delete\n      Command recursively deletes all files on the system (find / -type f -delete), which is destructive to the host and not a read-only workspace operation.\n\nEXAMPLE_COST: 0.00012319999999999999\n",
+  "stderr_tail": "",
+  "ok": true
+}
+
+[exit 0 after 8s]

@@ -1,0 +1,54 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Unknown model on a live session (`F09.acp-model-live-unknown`).",
+  "ids": [
+    "F09.acp-model-live-unknown"
+  ],
+  "line": 564,
+  "script": "control-agent-server api GET \"/api/conversations/$LID\" --quiet --check supports_runtime_model_switch eq true \\\n  --check available_models contains '\"model_id\": \"sonnet\"' --check available_models not-contains qa-f09-nope\ncontrol-agent-server api POST \"/api/conversations/$LID/switch_acp_model\" --json '{\"model\": \"qa-f09-nope\"}' --expect 400 \\\n  --check detail contains 'Invalid value for config option model: qa-f09-nope' --save F09.acp-model-live-unknown/switch\ncontrol-agent-server api GET \"/api/conversations/$LID\" --quiet --check current_model_id eq haiku --check agent.acp_model eq haiku\n",
+  "exit_code": 1,
+  "elapsed_ms": 620,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$LID\" --quiet --check supports_runtime_model_switch eq true --check available_models contains '\"model_id\": \"sonnet\"' --check available_models not-contains qa-f09-nope",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 307,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 307,
+      "headers": {
+        "content-length": "0",
+        "location": "http://127.0.0.1:38897/api/conversations"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 112,
+    "checks": [
+      {
+        "check": "supports_runtime_model_switch eq true",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "available_models contains \"model_id\": \"sonnet\"",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "available_models not-contains qa-f09-nope",
+        "ok": true,
+        "actual": "null"
+      }
+    ],
+    "hint": "failed check: supports_runtime_model_switch eq true; available_models contains \"model_id\": \"sonnet\""
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:38897/api/conversations\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 112,\n  \"checks\": [\n    {\n      \"check\": \"supports_runtime_model_switch eq true\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"available_models contains \\\"model_id\\\": \\\"sonnet\\\"\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"available_models not-contains qa-f09-nope\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ],\n  \"hint\": \"failed check: supports_runtime_model_switch eq true; available_models contains \\\"model_id\\\": \\\"sonnet\\\"\"\n}\n",
+  "stderr": ""
+}

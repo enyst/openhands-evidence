@@ -1,0 +1,40 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S09/live_mcp --check status eq finished --check add_result_42 eq true \
+  --check reverse_expanded eq true --check tools_called contains add
+{
+  "ok": true,
+  "status": "finished",
+  "tools_called": [
+    "add",
+    "finish"
+  ],
+  "add_result_42": true,
+  "reverse_expanded": false,
+  "mcp_errors": [],
+  "_exit": 0,
+  "_seconds": 15.2,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "add_result_42 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reverse_expanded eq true",
+      "ok": false,
+      "actual": "false"
+    },
+    {
+      "check": "tools_called contains add",
+      "ok": true,
+      "actual": "[\"add\", \"finish\"]"
+    }
+  ]
+}
+
+[exit 1 after 15s]

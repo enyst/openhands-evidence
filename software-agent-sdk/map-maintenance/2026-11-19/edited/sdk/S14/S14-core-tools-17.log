@@ -1,0 +1,39 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec -- git init -q .
+control-sdk exec --model-env -- python examples/04_llm_specific_tools/01_gpt5_apply_patch_preset.py
+control-sdk exec --expect-output GPT5 -- ls
+control-sdk exec --model-env -- python examples/04_llm_specific_tools/02_gemini_file_tools.py
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 33.0,
+  "result": null,
+  "stdout_tail": "(total 95.05%) \u2022  \nreasoning 204 (total 386) \u2022 \u2193 output 388 (total 988) \u2022 $ (total 0.0008)\n\nObservation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nTool: terminal\nResult:\n---FILE---\nThis repository is a freshly initialized Git repository with no commits and no \ntracked files.\nIt currently contains only an empty workspace, serving as a blank starting \npoint.\n---STATUS---\n?? GPT5_DEMO.txt\n\n\ud83d\udcc1 Working directory: \n<scratch>/sdk/edi\nted/S14/work/S14-core-tools-17/block1/runs/20261119-101207-8bd855/workspace\n\ud83d\udc0d Python interpreter: /usr/local/bin/python\n\u2705 Exit code: 0\n\nMessage from Agent \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nCreated `GPT5_DEMO.txt` at the repo root.\n\n**What I found:** The repository is completely empty \u2014 no commits, no tracked \nfiles, no remotes, and no README or other content. So I described it as-is.\n\n**File contents (two lines):**\n```\nThis repository is a freshly initialized Git repository with no commits and no \ntracked files.\nIt currently contains only an empty workspace, serving as a blank starting \npoint.\n```\n\nIf this repository was supposed to have content (e.g., the wrong branch/checkout\nwas provided), let me know and I can update the file once the actual sources are\npresent.\n\nTokens: \u2191 input 11.49K (total 50.27K) \u2022 cache hit 96.95% (total 95.49%) \u2022  \nreasoning 0 (total 386) \u2022 \u2193 output 131 (total 1.12K) \u2022 $ (total 0.0010)\n\nEXAMPLE_COST: 0.0009891\n",
+  "stderr_tail": "[11/19/26 10:12:12] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n[11/19/26 10:12:13] WARNING  Running as root - disabling Chromium    impl.py:514\n                             sandbox (required for root). This                  \n                             reduces security isolation.                        \n",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "GPT5_DEMO.txt\n",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "exit": 0,
+  "seconds": 15.0,
+  "result": null,
+  "stdout_tail": " and list directory\n\nReasoning:\nThe user wants me to delete FACTS.txt. Simple task.\n\n$ rm -f FACTS.txt && ls -la\n\nTokens: \u2191 input 7.9K (total 36.64K) \u2022 cache hit 97.20% (total 91.87%) \u2022  \nreasoning 13 (total 54) \u2022 \u2193 output 101 (total 688) \u2022 $ (total 0.0008)\n\nObservation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nTool: terminal\nResult:\ntotal 20\ndrwxr-xr-x 4 root root 4096 Nov 19 10:12 .\ndrwxr-xr-x 7 root root 4096 Nov 19 10:12 ..\ndrwxr-xr-x 7 root root 4096 Nov 19 10:12 .git\n-rw-r--r-- 1 root root  176 Nov 19 10:12 GPT5_DEMO.txt\ndrwxr-xr-x 3 root root 4096 Nov 19 10:12 logs\n\n\ud83d\udcc1 Working directory: \n<scratch>/sdk/edi\nted/S14/work/S14-core-tools-17/block1/runs/20261119-101207-8bd855/workspace\n\ud83d\udc0d Python interpreter: /usr/local/bin/python\n\u2705 Exit code: 0\n\nAgent Action \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nSummary: finish: {\"message\": \"Removed FACTS.txt. The project directory is back \nto its original state with .git/, GPT5_DEMO.txt, and logs/.\"}\n\nThought:\nDeleted `FACTS.txt`. The directory now contains only the original contents: \n`.git/`, `GPT5_DEMO.txt`, and `logs/`.\n\n\n\nFinish with message:\nRemoved FACTS.txt. The project directory is back to its original state with \n.git/, GPT5_DEMO.txt, and logs/.\n\nTokens: \u2191 input 8.23K (total 44.88K) \u2022 cache hit 96.40% (total 92.70%) \u2022  \nreasoning 0 (total 54) \u2022 \u2193 output 99 (total 787) \u2022 $ (total 0.0010)\n\nEXAMPLE_COST: 0.0009639\n",
+  "stderr_tail": "[11/19/26 10:12:45] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 48s]

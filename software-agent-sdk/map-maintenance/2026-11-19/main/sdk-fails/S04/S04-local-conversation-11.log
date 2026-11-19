@@ -1,0 +1,113 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/control --arg pause \
+  --check idle_pause_status eq paused --check idle_pause_events eq 1 \
+  --check status_after_pause eq paused --check pause_events eq 2 --check steps_before_stop lt 4 \
+  --check status_after_resume eq finished --check steps_after_resume eq 5 --check script_left eq 0
+control-sdk program S04/control --arg pause-mid-call \
+  --check status eq paused --check pause_returned_after_s gt 0.5 --check llm_calls eq 1 \
+  --check actions eq 1 --check observations eq 1 --check pause_events eq 1 --check status_after_resume eq finished
+{
+  "ok": true,
+  "mode": "pause",
+  "idle_pause_status": "paused",
+  "idle_pause_events": 1,
+  "status_after_pause": "paused",
+  "pause_events": 2,
+  "steps_before_stop": 2,
+  "llm_calls_before_stop": 2,
+  "status_after_resume": "finished",
+  "steps_after_resume": 5,
+  "script_left": 0,
+  "_exit": 0,
+  "_seconds": 7.9,
+  "checks": [
+    {
+      "check": "idle_pause_status eq paused",
+      "ok": true,
+      "actual": "paused"
+    },
+    {
+      "check": "idle_pause_events eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "status_after_pause eq paused",
+      "ok": true,
+      "actual": "paused"
+    },
+    {
+      "check": "pause_events eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "steps_before_stop lt 4",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "status_after_resume eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "steps_after_resume eq 5",
+      "ok": true,
+      "actual": "5"
+    },
+    {
+      "check": "script_left eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+{
+  "exit": 1,
+  "seconds": 5.1,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "tate = ConversationState.create(\n                  ~~~~~~~~~~~~~~~~~~~~~~~~^\n        id=desired_id,\n        ^^^^^^^^^^^^^^\n    ...<10 lines>...\n        tags=tags,\n        ^^^^^^^^^^\n    )\n    ^\n  File \"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/state.py\", line 761, in create\n    state._save_base_state(file_store)  # initial snapshot\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/state.py\", line 606, in _save_base_state\n    payload = self.model_dump_json(exclude_none=True, context=context)\n  File \"/home/user/software-agent-sdk/.venv/lib/python3.13/site-packages/pydantic/main.py\", line 587, in model_dump_json\n    return self.__pydantic_serializer__.to_json(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        self,\n        ^^^^^\n    ...<14 lines>...\n        polymorphic_serialization=polymorphic_serialization,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ).decode()\n    ^\npydantic_core._pydantic_core.PydanticSerializationError: Error serializing to JSON: PydanticSerializationError: Unable to serialize unknown type: <class 'threading.Event'>\n[11/19/26 08:44:44] WARNING  Error closing agent:     local_conversation.py:3618\n                             'LocalConversation'                                \n                             object has no attribute                            \n                             'agent'                                            \n",
+  "ok": false,
+  "error": "the program printed no JSON result",
+  "checks": [
+    {
+      "check": "status eq paused",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "pause_returned_after_s gt 0.5",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "llm_calls eq 1",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "actions eq 1",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "observations eq 1",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "pause_events eq 1",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "status_after_resume eq finished",
+      "ok": false,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 1 after 13s]

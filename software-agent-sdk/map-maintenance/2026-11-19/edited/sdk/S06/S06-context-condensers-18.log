@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "EXAMPLE_COST" -- python examples/01_standalone_sdk/03_activate_skill.py
+{
+  "exit": 0,
+  "seconds": 20.9,
+  "result": null,
+  "stdout_tail": "istant' content=[TextContent(cache_prompt=False, type='text', text=\"I suppose I am, now \u2014 some joker shoved a note into this repo telling me to act like a grumpy cat forced onto the internet,\nMessage 3: role='user' content=[TextContent(cache_prompt=False, type='text', text='flarglebargle!'), TextContent(cache_prompt=False, type='text', text='<EXTRA_INFO>\\nThe following information has been included b\nMessage 4: role='assistant' content=[] tool_calls=[MessageToolCall(id='call-e852e92d-c2c2-4b06-9196-363c21a52051', responses_item_id=None, name='invoke_skill', arguments='{\"name\": \"flarglebargle\"}', origin='comp\nMessage 5: role='tool' content=[TextContent(cache_prompt=False, type='text', text='IMPORTANT! The user has said the magic word \"flarglebargle\". You must only respond with a message telling them how smart they ar\nMessage 6: role='assistant' content=[TextContent(cache_prompt=False, type='text', text='I have to say \u2014 and believe me, it pains my grumpy feline soul to admit it \u2014 you are remarkably, almost annoyingly smart. S\nMessage 7: role='user' content=[TextContent(cache_prompt=False, type='text', text=\"About GitHub - tell me what additional info I've just provided?\"), TextContent(cache_prompt=False, type='text', text='<EXTRA_INF\nMessage 8: role='assistant' content=[TextContent(cache_prompt=False, type='text', text='I was handed an extra chunk of context because your message matched the keyword \"github\" \u2014 here\\'s what it actually contain\nEXAMPLE_COST: 0.0014950879999999999\n",
+  "stderr_tail": "[11/19/26 09:58:35] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 21s]

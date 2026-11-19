@@ -1,0 +1,33 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Live ACP switch (`F09.acp-model-live`).",
+  "ids": [
+    "F09.acp-model-live"
+  ],
+  "line": 518,
+  "script": "LID=$(control-agent-server conversation start --no-autotitle --body-json '{\"agent_settings\": {\"agent_kind\": \"acp\", \"acp_server\": \"claude-code\", \"acp_model\": \"sonnet\"}}' \\\n  --secret ANTHROPIC_API_KEY=\"$DEEPSEEK_API_KEY\" --secret ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic --secret IS_SANDBOX=1 \\\n  --prompt 'Reply with the single word: ok' --wait --until finished --timeout 300 --print-id)\nSESS=$(control-agent-server api GET \"/api/conversations/$LID\" --check supports_runtime_model_switch eq true --check current_model_id eq sonnet \\\n  --check available_models contains '\"model_id\": \"haiku\"' --check stats.usage_to_metrics.acp-managed.accumulated_token_usage.completion_tokens gt 0 \\\n  --field agent_state.acp_session_id)\ntest -n \"$SESS\"\nLC1=$(control-agent-server api GET \"/api/conversations/$LID\" --field stats.usage_to_metrics.acp-managed.accumulated_token_usage.completion_tokens)\ncontrol-agent-server api POST \"/api/conversations/$LID/switch_acp_model\" --json '{\"model\": \"haiku\"}' --expect 200 --check success eq true --save F09.acp-model-live/switch\ncontrol-agent-server api GET \"/api/conversations/$LID\" --quiet --check current_model_id eq haiku --check agent.acp_model eq haiku \\\n  --check agent_state.acp_current_model_id eq haiku --check agent_state.acp_session_id eq \"$SESS\" --save F09.acp-model-live/get\ncontrol-agent-server state cat \"server/workspace/conversations/${LID//-/}/base_state.json\" --max-chars 200 --check agent.acp_model eq haiku --check agent_state.acp_current_model_id eq haiku\ncontrol-agent-server api POST \"/api/conversations/$LID/switch_acp_model\" --json '{\"model\": \"   \"}' --expect 400 --check detail eq 'model must be a non-empty string'\ncontrol-agent-server api POST \"/api/conversations/$LID/switch_acp_model\" --json '{\"model\": \"qa-f09-nope\"}' --expect 4xx,5xx --save F09.acp-model-live/unknown-model\ncontrol-agent-server api GET \"/api/conversations/$LID\" --quiet --check current_model_id eq haiku --check agent.acp_model eq haiku\ncontrol-agent-server conversation send \"$LID\" --text 'Reply with the single word: ok' --wait --until finished,error --timeout 300\ncontrol-agent-server api GET \"/api/conversations/$LID\" --until-ok 30 --quiet --check execution_status eq finished --check agent_state.acp_session_id eq \"$SESS\" \\\n  --check stats.usage_to_metrics.acp-managed.model_name eq haiku \\\n  --check stats.usage_to_metrics.acp-managed.accumulated_token_usage.completion_tokens gt \"$LC1\" --save F09.acp-model-live/second-turn\n",
+  "exit_code": 1,
+  "elapsed_ms": 301334,
+  "failed_line": 3,
+  "failed_command": "LID=$(control-agent-server conversation start --no-autotitle --body-json '{\"agent_settings\": {\"agent_kind\": \"acp\", \"acp_server\": \"claude-code\", \"acp_model\": \"sonnet\"}}' --secret ANTHROPIC_API_KEY=\"$DEEPSEEK_API_KEY\" --secret ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic --secret IS_SANDBOX=1 --prompt 'Reply with the single word: ok' --wait --until finished --timeout 300 --print-id)",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "id": "2ada665f-79a1-4150-bc40-f580eebf14f9",
+    "status": 201,
+    "execution_status": "idle",
+    "workspace": "<scratch>/agent-server/20261119-103442-2a82-map-f09/fixtures/workspaces/103706-721757",
+    "wait": {
+      "ok": false,
+      "status": "error",
+      "transitions": [
+        "idle",
+        "running",
+        "error"
+      ],
+      "hint": "still error after 300s; wanted ['finished']"
+    }
+  },
+  "stdout": "",
+  "stderr": ""
+}

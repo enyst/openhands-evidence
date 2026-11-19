@@ -1,0 +1,22 @@
+{
+  "file": "F27-hooks-subagents-tools.md",
+  "bullet": "Tool schema keywords (`F27.tool-schema-keywords`), known bug #6766.",
+  "ids": [
+    "F27.tool-schema-keywords"
+  ],
+  "line": 756,
+  "script": "cat > \"$F/pytools/qa_f27_strict_tools.py\" <<'EOF'\nfrom typing import Literal\n\nfrom pydantic import ConfigDict, Field\n\nfrom openhands.sdk import Action, Observation, ToolDefinition\nfrom openhands.sdk.tool import ToolExecutor, register_tool\n\n\nclass QaF27StrictAction(Action):\n    model_config = ConfigDict(extra=\"forbid\")\n    order_id: str = Field(pattern=r\"^QAORD-[0-9]{6}$\", description=\"Order id.\")\n    currency: Literal[\"USD\"] = Field(description=\"Currency.\")\n\n\nclass QaF27StrictObservation(Observation):\n    pass\n\n\nclass QaF27StrictExecutor(ToolExecutor):\n    def __call__(self, action, conversation=None):\n        return QaF27StrictObservation.from_text(text=f\"QA_F27_STRICT_RAN {action.order_id}\")\n\n\nclass QaF27StrictTool(ToolDefinition[QaF27StrictAction, QaF27StrictObservation]):\n    @classmethod\n    def create(cls, conv_state=None, **params):\n        return [cls(description=\"QA strict tool.\", action_type=QaF27StrictAction,\n                    observation_type=QaF27StrictObservation, executor=QaF27StrictExecutor())]\n\n\nregister_tool(\"qa_f27_strict\", QaF27StrictTool)\nEOF\nSST=$(control-agent-server fixture llm-stub --name qa-f27-schema --step 'tool:finish:{\"message\":\"QA_F27_SCHEMA\"}' --print-path)\nSAG=\"{\\\"llm\\\": {\\\"model\\\": \\\"openai/qa-stub\\\", \\\"api_key\\\": \\\"qa-stub-key\\\", \\\"base_url\\\": \\\"$SST/v1\\\", \\\"num_retries\\\": 0}, \\\"tools\\\": [{\\\"name\\\": \\\"qa_f27_strict\\\"}]}\"\nSCHEMA_CID=$(control-agent-server conversation start --workspace \"$MW\" --no-autotitle \\\n  --body-json \"{\\\"agent\\\": $SAG, \\\"tool_module_qualnames\\\": {\\\"qa_f27_strict\\\": \\\"qa_f27_strict_tools\\\"}}\" \\\n  --prompt 'qa-f27-schema' --wait --timeout 120 --print-id)\ncontrol-agent-server api GET \"/api/conversations/$SCHEMA_CID\" --expect 200 --check execution_status eq finished --quiet\ncontrol-agent-server sink read --name qa-f27-schema --contains '\"name\": \"qa_f27_strict\"' --expect-min 1 --save F27.tool-schema-keywords/request\ncontrol-agent-server sink read --name qa-f27-schema --contains 'QAORD-[0-9]{6}' --expect-min 1  # bug: ok eq false && requests eq 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 3230,
+  "failed_line": 41,
+  "failed_command": "control-agent-server sink read --name qa-f27-schema --contains 'QAORD-[0-9]{6}' --expect-min 1",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "requests": 0,
+    "paths": {},
+    "last": []
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/934ba781-8fb7-4df4-8931-8e5b8cd280b3\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3705\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"requests\": 1,\n  \"paths\": {\n    \"/v1/chat/completions\": 1\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-19T10:26:35Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/chat/completions\\\", \\\"call\\\": 0, \\\"step\\\": {\\\"tool\\\": \\\"finish\\\", \\\"args\\\": {\\\"message\\\": \\\"QA_F27_SCHEMA\\\"}}, \\\"body\\\": {\\\"messages\\\": [{\\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<SOUL>\\\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\\\n</SOUL>\\\\n\\\\n<ROLE>\\\\n* Your primary role is to assist users by executing com\\u2026\"\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-102353-4359-map-f27/evidence/F27.tool-schema-keywords/request.json\"\n}\n{\n  \"ok\": false,\n  \"requests\": 0,\n  \"paths\": {},\n  \"last\": []\n}\n",
+  "stderr": ""
+}

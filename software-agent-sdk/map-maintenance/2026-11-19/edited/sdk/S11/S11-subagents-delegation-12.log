@@ -1,0 +1,86 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/scope \
+  --check execution_status eq finished --check lists_sheller eq true --check lists_editor eq false \
+  --check observations.0.is_error eq true --check observations.0.text contains "uses file_editor, which this agent does not have" \
+  --check observations.1.status eq completed --check scoped_written eq true \
+  --check nested_task_tool_scoped eq true --check lonely_says_none eq true
+{
+  "ok": true,
+  "execution_status": "finished",
+  "lists_sheller": true,
+  "lists_editor": false,
+  "observations": [
+    {
+      "task_id": "unknown",
+      "subagent": "editor",
+      "status": "error",
+      "is_error": true,
+      "text": "Failed to execute task: Agent 'editor' uses file_editor, which this agent does not have."
+    },
+    {
+      "task_id": "task_00000001",
+      "subagent": "sheller",
+      "status": "completed",
+      "is_error": false,
+      "text": "shell ok"
+    }
+  ],
+  "scoped_written": true,
+  "nested_task_tool_scoped": true,
+  "sub_states": 1,
+  "lonely_says_none": true,
+  "scope_model": {
+    "tools": true
+  },
+  "_exit": 0,
+  "_seconds": 5.8,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "lists_sheller eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "lists_editor eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "observations.0.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.0.text contains uses file_editor, which this agent does not have",
+      "ok": true,
+      "actual": "Failed to execute task: Agent 'editor' uses file_editor, which this agent does not have."
+    },
+    {
+      "check": "observations.1.status eq completed",
+      "ok": true,
+      "actual": "completed"
+    },
+    {
+      "check": "scoped_written eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "nested_task_tool_scoped eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "lonely_says_none eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 6s]

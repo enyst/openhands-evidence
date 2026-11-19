@@ -1,0 +1,43 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Effort across a model switch (`F09.acp-effort-model-switch`).",
+  "ids": [
+    "F09.acp-effort-model-switch"
+  ],
+  "line": 682,
+  "script": "control-agent-server api POST \"/api/conversations/$EID/switch_acp_model\" --json '{\"model\": \"haiku\"}' --expect 200\ncontrol-agent-server api GET \"/api/conversations/$EID\" --quiet --check current_model_id eq haiku --check current_effort eq high \\\n  --check available_efforts contains '\"value\": \"high\"' --check agent.acp_effort eq high --check agent_state.acp_current_effort eq high \\\n  --check agent_state.acp_session_id eq \"$ESESS\" --save F09.acp-effort-model-switch/haiku\ncontrol-agent-server api POST \"/api/conversations/$EID/switch_acp_model\" --json '{\"model\": \"sonnet\"}' --expect 200\ncontrol-agent-server api GET \"/api/conversations/$EID\" --quiet --check current_model_id eq sonnet --check current_effort eq high \\\n  --check available_efforts contains '\"value\": \"max\"' --check agent_state.acp_session_id eq \"$ESESS\" --save F09.acp-effort-model-switch/back\n",
+  "exit_code": 1,
+  "elapsed_ms": 356,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$EID/switch_acp_model\" --json '{\"model\": \"haiku\"}' --expect 200",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//switch_acp_model",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "model": "haiku"
+      },
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 64,
+    "hint": "expected 200, got 404"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//switch_acp_model\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"model\": \"haiku\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 64,\n  \"hint\": \"expected 200, got 404\"\n}\n",
+  "stderr": ""
+}

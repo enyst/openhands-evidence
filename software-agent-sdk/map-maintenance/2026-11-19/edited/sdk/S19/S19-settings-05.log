@@ -1,0 +1,96 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S19/acp_catalog --arg npm --check pins ge 7 --check missing_pins len-eq 0
+{
+  "ok": true,
+  "mode": "npm",
+  "providers": [
+    "claude-code",
+    "codex",
+    "gemini-cli",
+    "kimi-code",
+    "opencode",
+    "pi"
+  ],
+  "commands_pin_catalog": {
+    "claude-code": true,
+    "codex": true,
+    "gemini-cli": true,
+    "kimi-code": true,
+    "pi": true,
+    "opencode": true
+  },
+  "api_key_env": {
+    "claude-code": "ANTHROPIC_API_KEY",
+    "codex": "OPENAI_API_KEY",
+    "gemini-cli": "GEMINI_API_KEY",
+    "kimi-code": null,
+    "pi": "ANTHROPIC_API_KEY",
+    "opencode": "OPENCODE_API_KEY"
+  },
+  "by_agent_name": {
+    "claude-agent-acp": "claude-code",
+    "Codex-ACP": "codex",
+    "gemini-cli": "gemini-cli",
+    "my-own-agent": null
+  },
+  "by_command": {
+    "npx_codex": "codex",
+    "bin_claude": "claude-code",
+    "wrapper": null,
+    "custom": null
+  },
+  "file_secrets": {
+    "codex": [
+      "CODEX_AUTH_JSON"
+    ],
+    "gemini-cli": [
+      "GOOGLE_APPLICATION_CREDENTIALS_JSON"
+    ],
+    "kimi-code": [
+      "KIMI_CODE_CONFIG_TOML"
+    ],
+    "pi": [
+      "PI_AUTH_JSON"
+    ]
+  },
+  "default_file_secrets": [
+    "CODEX_AUTH_JSON",
+    "GOOGLE_APPLICATION_CREDENTIALS_JSON",
+    "KIMI_CODE_CONFIG_TOML",
+    "PI_AUTH_JSON"
+  ],
+  "unknown_provider": null,
+  "default_plan": {
+    "packages": [
+      "@agentclientprotocol/claude-agent-acp@0.99.1",
+      "@agentclientprotocol/codex-acp@2.2.2",
+      "@google/gemini-cli@0.46.0"
+    ],
+    "bins": [
+      "claude-agent-acp",
+      "codex-acp",
+      "gemini"
+    ]
+  },
+  "pi_packages_deduplicated": true,
+  "unknown_plan_error": "Unknown ACP provider 'nope' in INSTALL_ACP_PROVIDERS (expected one of: claude-code, codex, gemini-cli, kimi-code, pi, opencode)",
+  "pins": 7,
+  "pins_published": 7,
+  "missing_pins": [],
+  "_exit": 0,
+  "_seconds": 6.2,
+  "checks": [
+    {
+      "check": "pins ge 7",
+      "ok": true,
+      "actual": "7"
+    },
+    {
+      "check": "missing_pins len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    }
+  ]
+}
+
+[exit 0 after 6s]

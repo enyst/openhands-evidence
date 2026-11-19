@@ -1,0 +1,121 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/builtins \
+  --check registered_without_browser len-eq 3 --check registered_without_browser not-contains web-researcher \
+  --check registered_later_with_browser.0 eq web-researcher --check registered len-eq 4 \
+  --check deprecated_maps_to.default eq general-purpose --check deprecated_maps_to.explore eq code-explorer \
+  --check deprecated_maps_to.bash eq bash-runner --check deprecated_warned.bash eq true \
+  --check description_lists.general-purpose eq true --check description_lists.web-researcher eq true \
+  --check example_in_description.code-explorer eq true --check example_in_description.bash-runner eq true
+{
+  "ok": true,
+  "registered_without_browser": [
+    "bash-runner",
+    "code-explorer",
+    "general-purpose"
+  ],
+  "registered_later_with_browser": [
+    "web-researcher"
+  ],
+  "registered": [
+    "bash-runner",
+    "code-explorer",
+    "general-purpose",
+    "web-researcher"
+  ],
+  "deprecated_maps_to": {
+    "default": "general-purpose",
+    "default cli mode": "general-purpose",
+    "explore": "code-explorer",
+    "bash": "bash-runner"
+  },
+  "deprecated_warned": {
+    "default": true,
+    "default cli mode": true,
+    "explore": true,
+    "bash": true
+  },
+  "description_lists": {
+    "bash-runner": true,
+    "code-explorer": true,
+    "general-purpose": true,
+    "web-researcher": true
+  },
+  "example_in_description": {
+    "code-explorer": true,
+    "bash-runner": true,
+    "web-researcher": true,
+    "general-purpose": true
+  },
+  "example_keys": [
+    "bash-runner",
+    "code-explorer",
+    "general-purpose",
+    "web-researcher"
+  ],
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "registered_without_browser len-eq 3",
+      "ok": true,
+      "actual": "[\"bash-runner\", \"code-explorer\", \"general-purpose\"]"
+    },
+    {
+      "check": "registered_without_browser not-contains web-researcher",
+      "ok": true,
+      "actual": "[\"bash-runner\", \"code-explorer\", \"general-purpose\"]"
+    },
+    {
+      "check": "registered_later_with_browser.0 eq web-researcher",
+      "ok": true,
+      "actual": "web-researcher"
+    },
+    {
+      "check": "registered len-eq 4",
+      "ok": true,
+      "actual": "[\"bash-runner\", \"code-explorer\", \"general-purpose\", \"web-researcher\"]"
+    },
+    {
+      "check": "deprecated_maps_to.default eq general-purpose",
+      "ok": true,
+      "actual": "general-purpose"
+    },
+    {
+      "check": "deprecated_maps_to.explore eq code-explorer",
+      "ok": true,
+      "actual": "code-explorer"
+    },
+    {
+      "check": "deprecated_maps_to.bash eq bash-runner",
+      "ok": true,
+      "actual": "bash-runner"
+    },
+    {
+      "check": "deprecated_warned.bash eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "description_lists.general-purpose eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "description_lists.web-researcher eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "example_in_description.code-explorer eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "example_in_description.bash-runner eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 5s]

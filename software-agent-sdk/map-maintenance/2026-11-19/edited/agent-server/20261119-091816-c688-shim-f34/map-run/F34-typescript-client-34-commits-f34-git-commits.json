@@ -1,0 +1,17 @@
+{
+  "file": "F34-typescript-client.md",
+  "bullet": "Commits (`F34.git-commits`).",
+  "ids": [
+    "F34.git-commits"
+  ],
+  "line": 1487,
+  "script": "TREPO=$(control-agent-server fixture git-repo --name qa-f34-typed-repo --print-path)\nTHEAD=$(git -C \"$TREPO\" rev-parse HEAD)\nTROOT=$(git -C \"$TREPO\" rev-parse HEAD~1)\ncat > \"$F34/typed-git.mjs\" <<'JS'\nimport { writeFileSync } from 'node:fs';\nimport { m, c, host, apiKey, F34, assert } from './lib.mjs';\nconst [repo, head, root] = process.argv.slice(2);\nconst manager = new m.ConversationManager({ host, apiKey });\nconst commits = await manager.git.getCommits(repo);\nassert.deepEqual(commits.commits.map((x) => [x.sha, x.subject]), [[head, 'Add util'], [root, 'Initial commit']]);\nassert.equal(commits.has_more, false);\nconst first = await new c.AgentServerClient({ host, apiKey }).git.getCommits(repo, { limit: 1 });\nassert.deepEqual([first.commits.length, first.commits[0].sha, first.has_more], [1, head, true]);\nconst changes = await manager.git.getCommitChanges(repo, head.slice(0, 7));\nassert.deepEqual(changes, [{ status: 'ADDED', path: 'src/util.py' }]);\nassert.deepEqual(await new c.GitClient({ host, apiKey }).getCommitChanges(repo, root),\n  [{ status: 'ADDED', path: 'README.md' }, { status: 'ADDED', path: 'src/app.py' }]);\nawait assert.rejects(manager.git.getCommits(repo, { limit: 0 }), (e) => m.isHttpError(e) && e.status === 422 &&\n  e.validationErrors[0].loc.join('.') === 'query.limit');\nawait assert.rejects(manager.git.getCommitChanges(repo, 'deadbeef'), (e) => m.isHttpError(e) && e.status === 400);\nawait assert.rejects(new c.GitClient({ host }).getCommits(repo), (e) => m.isHttpError(e) && e.status === 401);\nwriteFileSync(`${F34}/typed-commits.json`, JSON.stringify(commits));\nconsole.log('QA_F34_TYPED_GIT_OK');\nJS\ncontrol-agent-server exec --timeout 60 --expect-output QA_F34_TYPED_GIT_OK --save F34.git-commits/program -- node \"$F34/typed-git.mjs\" \"$TREPO\" \"$THEAD\" \"$TROOT\"\ncontrol-agent-server api GET /api/git/commits --query path=\"$TREPO\" --expect 200 --quiet --raw-out \"$F34/rest-commits.json\" --save F34.git-commits/rest\ndiff <(jq -S . \"$F34/rest-commits.json\") <(jq -S . \"$F34/typed-commits.json\")\n",
+  "exit_code": 0,
+  "elapsed_ms": 2378,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 752,\n  \"stdout_tail\": \"QA_F34_TYPED_GIT_OK\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/evidence/F34.git-commits/program.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/git/commits\",\n    \"query\": [\n      [\n        \"path\",\n        \"<scratch>/agent-server/20261119-091816-c688-shim-f34/fixtures/qa-f34-typed-repo\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"346\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 69,\n  \"raw_out\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/fixtures/qa-f34/rest-commits.json\",\n  \"saved\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/evidence/F34.git-commits/rest.json\"\n}\n",
+  "stderr": ""
+}

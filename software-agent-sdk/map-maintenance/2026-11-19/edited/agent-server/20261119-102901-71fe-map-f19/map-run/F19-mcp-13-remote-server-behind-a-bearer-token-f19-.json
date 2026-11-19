@@ -1,0 +1,66 @@
+{
+  "file": "F19-mcp.md",
+  "bullet": "Remote server behind a bearer token (`F19.test-remote-bearer`), known bug #6687.",
+  "ids": [
+    "F19.test-remote-bearer"
+  ],
+  "line": 537,
+  "script": "control-agent-server api POST /api/mcp/test --expect 200 --save F19.test-remote-bearer/auth-bearer \\\n  --json \"{\\\"name\\\":\\\"qa-http\\\",\\\"server\\\":{\\\"type\\\":\\\"http\\\",\\\"url\\\":\\\"http://127.0.0.1:$BEARER_PORT/mcp\\\",\\\"auth\\\":{\\\"strategy\\\":\\\"bearer\\\",\\\"value\\\":\\\"qa-f19-bearer\\\"}},\\\"timeout\\\":20,\\\"tool_call\\\":{\\\"name\\\":\\\"read_subject\\\",\\\"arguments\\\":{\\\"subject\\\":\\\"hi\\\"}}}\" \\\n  --check ok eq true --check tools contains read_subject --check tool_result.text eq QA_HTTP_SUBJECT:hi\ncontrol-agent-server api POST /api/mcp/test --expect 200 \\\n  --json \"{\\\"server\\\":{\\\"type\\\":\\\"shttp\\\",\\\"url\\\":\\\"http://127.0.0.1:$BEARER_PORT/mcp\\\",\\\"headers\\\":{\\\"Authorization\\\":\\\"Bearer qa-f19-bearer\\\"}},\\\"timeout\\\":20}\" \\\n  --check ok eq true --check tools contains read_subject\ncontrol-agent-server api POST /api/mcp/test --expect 200 \\\n  --json \"{\\\"server\\\":{\\\"transport\\\":\\\"http\\\",\\\"url\\\":\\\"http://127.0.0.1:$BEARER_PORT/mcp\\\",\\\"auth\\\":{\\\"strategy\\\":\\\"header\\\",\\\"headers\\\":{\\\"Authorization\\\":\\\"Bearer qa-f19-bearer\\\"}}},\\\"timeout\\\":20}\" \\\n  --check ok eq true --check tools contains read_subject\ncontrol-agent-server api POST /api/mcp/test --expect 200 --save F19.test-remote-bearer/wrong-token \\\n  --json \"{\\\"server\\\":{\\\"transport\\\":\\\"http\\\",\\\"url\\\":\\\"http://127.0.0.1:$BEARER_PORT/mcp\\\",\\\"auth\\\":{\\\"strategy\\\":\\\"bearer\\\",\\\"value\\\":\\\"qa-f19-wrong\\\"}},\\\"timeout\\\":20}\" \\\n  --check ok eq false --check error contains 401  # bug: status eq 200 && response.body.error contains 'error response'\n",
+  "exit_code": 1,
+  "elapsed_ms": 2342,
+  "failed_line": 10,
+  "failed_command": "control-agent-server api POST /api/mcp/test --expect 200 --save F19.test-remote-bearer/wrong-token --json \"{\\\"server\\\":{\\\"transport\\\":\\\"http\\\",\\\"url\\\":\\\"http://127.0.0.1:$BEARER_PORT/mcp\\\",\\\"auth\\\":{\\\"strategy\\\":\\\"bearer\\\",\\\"value\\\":\\\"qa-f19-wrong\\\"}},\\\"timeout\\\":20}\" --check ok eq false --check error contains 401",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "POST",
+      "path": "/api/mcp/test",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "server": {
+          "transport": "http",
+          "url": "http://127.0.0.1:48361/mcp",
+          "auth": {
+            "strategy": "bearer",
+            "value": "qa-f19-wrong"
+          }
+        },
+        "timeout": 20
+      },
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "89",
+        "content-type": "application/json"
+      },
+      "body": {
+        "ok": false,
+        "error": "MCPError: Server returned an error response",
+        "error_kind": "unknown"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 721,
+    "checks": [
+      {
+        "check": "ok eq false",
+        "ok": true,
+        "actual": "false"
+      },
+      {
+        "check": "error contains 401",
+        "ok": false,
+        "actual": "MCPError: Server returned an error response"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-102901-71fe-map-f19/evidence/F19.test-remote-bearer/wrong-token.json",
+    "hint": "failed check: error contains 401"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/mcp/test\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"name\": \"qa-http\",\n      \"server\": {\n        \"type\": \"http\",\n        \"url\": \"http://127.0.0.1:48361/mcp\",\n        \"auth\": {\n          \"strategy\": \"bearer\",\n          \"value\": \"qa-f19-bearer\"\n        }\n      },\n      \"timeout\": 20,\n      \"tool_call\": {\n        \"name\": \"read_subject\",\n        \"arguments\": {\n          \"subject\": \"hi\"\n        }\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"107\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"ok\": true,\n      \"tools\": [\n        \"read_subject\",\n        \"qa_wait\"\n      ],\n      \"tool_result\": {\n        \"is_error\": false,\n        \"text\": \"QA_HTTP_SUBJECT:hi\"\n      }\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 232,\n  \"checks\": [\n    {\n      \"check\": \"ok eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"tools contains read_subject\",\n      \"ok\": true,\n      \"actual\": \"[\\\"read_subject\\\", \\\"qa_wait\\\"]\"\n    },\n    {\n      \"check\": \"tool_result.text eq QA_HTTP_SUBJECT:hi\",\n      \"ok\": true,\n      \"actual\": \"QA_HTTP_SUBJECT:hi\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-102901-71fe-map-f19/evidence/F19.test-remote-bearer/auth-bearer.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/mcp/test\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"server\": {\n        \"type\": \"shttp\",\n        \"url\": \"http://127.0.0.1:48361/mcp\",\n        \"headers\": {\n          \"Authorization\": \"Bearer qa-f19-bearer\"\n        }\n      },\n      \"timeout\": 20\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"46\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"ok\": true,\n      \"tools\": [\n        \"read_subject\",\n        \"qa_wait\"\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 94,\n  \"checks\": [\n    {\n      \"check\": \"ok eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"tools contains read_subject\",\n      \"ok\": true,\n      \"actual\": \"[\\\"read_subject\\\", \\\"qa_wait\\\"]\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/mcp/test\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"server\": {\n        \"transport\": \"http\",\n        \"url\": \"http://127.0.0.1:48361/mcp\",\n        \"auth\": {\n          \"strategy\": \"header\",\n          \"headers\": {\n            \"Authorization\": \"Bearer qa-f19-bearer\"\n          }\n        }\n      },\n      \"timeout\": 20\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"46\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"ok\": true,\n      \"tools\": [\n        \"read_subject\",\n        \"qa_wait\"\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 96,\n  \"checks\": [\n    {\n      \"check\": \"ok eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"tools contains read_subject\",\n      \"ok\": true,\n      \"actual\": \"[\\\"read_subject\\\", \\\"qa_wait\\\"]\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/mcp/test\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"server\": {\n        \"transport\": \"http\",\n        \"url\": \"http://127.0.0.1:48361/mcp\",\n        \"auth\": {\n          \"strategy\": \"bearer\",\n          \"value\": \"qa-f19-wrong\"\n        }\n      },\n      \"timeout\": 20\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"89\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"ok\": false,\n      \"error\": \"MCPError: Server returned an error response\",\n      \"error_kind\": \"unknown\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 721,\n  \"checks\": [\n    {\n      \"check\": \"ok eq false\",\n      \"ok\": true,\n      \"actual\": \"false\"\n    },\n    {\n      \"check\": \"error contains 401\",\n      \"ok\": false,\n      \"actual\": \"MCPError: Server returned an error response\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-102901-71fe-map-f19/evidence/F19.test-remote-bearer/wrong-token.json\",\n  \"hint\": \"failed check: error contains 401\"\n}\n",
+  "stderr": ""
+}

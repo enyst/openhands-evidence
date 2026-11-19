@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Background command (`F33.workspace-background`).",
+  "ids": [
+    "F33.workspace-background"
+  ],
+  "line": 349,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.workspace-background/probe -- .venv/bin/python - <<'PY'\nimport time\nimport f33\n\nws = f33.workspace(\"bg\")\ncmd = ws.start_command(\"echo qa-f33-bg-start; sleep 60; echo qa-f33-bg-late\", cwd=ws.working_dir, timeout=120)\nrunning = ws.get_command_output(cmd)\nassert running is None or running.get(\"exit_code\") is None, running\nws.stop_command(cmd)\ndeadline = time.monotonic() + 30\nwhile (out := ws.get_command_output(cmd)) is None or out.get(\"exit_code\") is None:\n    assert time.monotonic() < deadline, out\n    time.sleep(0.5)\nassert \"qa-f33-bg-start\" in out[\"stdout\"] and \"qa-f33-bg-late\" not in out[\"stdout\"], out\nws.stop_command(\"0\" * 32)\nf33.emit(\"bg\", command_id=cmd, exit_code=out[\"exit_code\"])\nPY\nBG=$(jq -r .command_id \"$F33/bg.json\")\ncontrol-agent-server api GET /api/bash/bash_events/search --query kind__eq=BashOutput --query command_id__eq=\"$BG\" \\\n  --check items.-1.exit_code eq \"$(jq .exit_code \"$F33/bg.json\")\" --check items.-1.exit_code ne 0 \\\n  --check items contains qa-f33-bg-start --check items not-contains qa-f33-bg-late --save F33.workspace-background/outputs\n",
+  "exit_code": 1,
+  "elapsed_ms": 413,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.workspace-background/probe -- .venv/bin/python - <<'PY'\nimport time\nimport f33\n\nws = f33.workspace(\"bg\")\ncmd = ws.start_command(\"echo qa-f33-bg-start; sleep 60; echo qa-f33-bg-late\", cwd=ws.working_dir, timeout=120)\nrunning = ws.get_command_output(cmd)\nassert running is None or running.get(\"exit_code\") is None, running\nws.stop_command(cmd)\ndeadline = time.monotonic() + 30\nwhile (out := ws.get_command_output(cmd)) is None or out.get(\"ex",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 45,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 2, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.workspace-background/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 45,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 2, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.workspace-background/probe.json\"\n}\n",
+  "stderr": ""
+}

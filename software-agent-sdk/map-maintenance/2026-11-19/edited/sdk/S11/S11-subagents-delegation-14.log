@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "EXAMPLE_COST" -- python examples/01_standalone_sdk/41_task_tool_set.py
+{
+  "exit": 0,
+  "seconds": 19.6,
+  "result": null,
+  "stdout_tail": "hearts** pump deoxygenated blood \nthrough the gills, and one **systemic heart** circulates the oxygenated blood to\nthe rest of the body. Fun fact: their blood is blue because it uses copper-based\n**hemocyanin** instead of iron-based hemoglobin to carry oxygen \u2014 and the \nsystemic heart actually stops beating when the octopus swims, which is why they \nprefer crawling, as swimming exhausts them quickly.\n\nMessage from Quiz Host Agent to User \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nThe animal expert confirmed my answer. Here's the result:\n\n---\n\n\u2705 **Confirmed: C) Three is correct!**\n\n**Question:** How many hearts does a typical octopus have?\n\n- A) One\n- B) Two\n- **C) Three** \u2190 my pick\n- D) Four\n\n**The expert's explanation:**\nOctopuses have three hearts \u2014 two **branchial hearts** pump deoxygenated blood \nthrough the gills, and one **systemic heart** circulates the oxygenated blood to\nthe rest of the body.\n\n**Bonus fun fact from the expert:** Their blood is blue because it uses \ncopper-based **hemocyanin** instead of iron-based hemoglobin. Even more \ninteresting \u2014 the systemic heart actually *stops beating* when the octopus \nswims, which is why they prefer crawling, since swimming exhausts them quickly.\n\nSo my reasoning about the two branchial hearts plus one systemic heart was \nexactly right. \ud83d\udc19\n\nTokens: \u2191 input 5.42K (total 27.99K) \u2022 cache hit 96.77% (total 95.13%) \u2022  \nreasoning 0 (total 311) \u2022 \u2193 output 196 (total 1.36K) \u2022 $ (total 0.0009)\n\n\nEXAMPLE_COST: 0.0008748208000000001\n",
+  "stderr_tail": "[11/19/26 10:05:55] WARNING  No persistence_dir provided; falling   state.py:678\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 20s]

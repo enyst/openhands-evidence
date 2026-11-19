@@ -1,0 +1,58 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Validate a linked draft (`F23.validate-linked-draft`).",
+  "ids": [
+    "F23.validate-linked-draft"
+  ],
+  "line": 504,
+  "script": "printf '{\"llm\": {\"model\": \"deepseek/deepseek-flash\", \"api_key\": \"%s\", \"num_retries\": 0}}' \"$DEEPSEEK_API_KEY\" \\\n  | control-agent-server api POST /api/profiles/qa-f23-draft/validate --stdin --timeout 120 --expect 200 --check valid eq true\ncontrol-agent-server api POST /api/profiles/qa-f23-draft/validate --timeout 120 --expect 200 \\\n  --json \"{\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"provider_connection_id\\\": \\\"$CONN\\\", \\\"num_retries\\\": 0}}\" \\\n  --save F23.validate-linked-draft/linked --check valid eq true --check error eq null\n",
+  "exit_code": 1,
+  "elapsed_ms": 1136,
+  "failed_line": 2,
+  "failed_command": "control-agent-server api POST /api/profiles/qa-f23-draft/validate --stdin --timeout 120 --expect 200 --check valid eq true",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "POST",
+      "path": "/api/profiles/qa-f23-draft/validate",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "llm": {
+          "model": "deepseek/deepseek-flash",
+          "api_key": "",
+          "num_retries": 0
+        }
+      },
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "307",
+        "content-type": "application/json"
+      },
+      "body": {
+        "valid": false,
+        "error": {
+          "type": "LLMBadRequestError",
+          "message": "litellm.BadRequestError: DeepseekException - {\"error\":{\"message\":\"Authentication Fails (governor) (request_id: 7a2f3894-427a-4869-a2b6-f63e51e14777)\",\"type\":\"authentication_error\",\"param\":null,\"code\":\"invalid_request_error\"}}"
+        }
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 824,
+    "checks": [
+      {
+        "check": "valid eq true",
+        "ok": false,
+        "actual": "false"
+      }
+    ],
+    "hint": "failed check: valid eq true"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/profiles/qa-f23-draft/validate\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"deepseek/deepseek-flash\",\n        \"api_key\": \"\",\n        \"num_retries\": 0\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"307\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"valid\": false,\n      \"error\": {\n        \"type\": \"LLMBadRequestError\",\n        \"message\": \"litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 7a2f3894-427a-4869-a2b6-f63e51e14777)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\"\n      }\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 824,\n  \"checks\": [\n    {\n      \"check\": \"valid eq true\",\n      \"ok\": false,\n      \"actual\": \"false\"\n    }\n  ],\n  \"hint\": \"failed check: valid eq true\"\n}\n",
+  "stderr": ""
+}

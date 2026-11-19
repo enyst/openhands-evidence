@@ -1,0 +1,471 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S19/agent_profiles \
+  --check schema_version eq 4 --check model.id_is_uuid eq true --check model.mcp_refs_default missing \
+  --check model.errors.missing_llm_ref eq ValidationError --check model.errors.acp_unknown_server eq ValidationError \
+  --check model.errors.acp_with_llm_ref eq ValidationError --check model.errors.acp_with_persona eq ValidationError \
+  --check model.dump_keys_have_secret eq false \
+  --check migrations.v1_version eq 4 --check migrations.v1_tools missing --check migrations.v2_tools contains task_tool_set \
+  --check migrations.rejected.5 eq true --check migrations.rejected.-1 eq true --check migrations.rejected.three eq true \
+  --check store.file_in_persistence_dir eq true --check store.file_schema_version eq 4 --check store.same_id eq true \
+  --check store.loaded_persona eq Pirate --check store.missing_names_available eq true \
+  --check store.rename_kept_id eq true --check store.renamed_name eq qa \
+  --check store.summaries len-eq 2 --check store.limit eq ProfileLimitExceeded --check store.race_revision eq 5 \
+  --check store.list_after_delete not-contains qa.json \
+  --check resolve.type eq OpenHandsAgentSettings --check resolve.model eq openai/fast-model --check resolve.llm_key_loaded eq true \
+  --check resolve.mcp len-eq 1 --check resolve.all_mcp len-eq 2 --check resolve.none_mcp len-eq 0 \
+  --check resolve.skills len-eq 1 --check resolve.skills contains deploy --check resolve.persona eq Pirate \
+  --check resolve.errors.missing_llm eq UnresolvedProfileReferences --check resolve.errors.missing_llm_ref eq ghost \
+  --check resolve.errors.dangling_mcp eq UnresolvedProfileReferences --check resolve.errors.dangling_mcp_refs contains gone \
+  --check resolve.errors.both_problems eq 2 --check resolve.ok_dry_valid eq true \
+  --check resolve.dry_dump.valid eq false --check resolve.dry_dump.dangling_mcp_server_refs contains gone \
+  --check resolve.dry_has_secret eq false --check resolve.launched_status eq finished \
+  --check refs.referrers contains a1 --check refs.delete_blocked_names_referrers eq true \
+  --check refs.rewritten contains a2 --check refs.a1_ref eq quick --check refs.llm_profiles contains quick.json \
+  --check seed.name eq default --check seed.llm_ref eq quick --check seed.persona eq Pirate \
+  --check seed.mcp_refs missing --check seed.disabled_skills len-eq 0 --check seed.acp_type eq ACPAgentProfile \
+  --check seed.id_kept eq true --check seed.revision_bumped eq true
+{
+  "ok": true,
+  "schema_version": 4,
+  "model": {
+    "id_is_uuid": true,
+    "revision": 0,
+    "mcp_refs_default": null,
+    "acp_secret_refs": [
+      "ANTHROPIC_API_KEY"
+    ],
+    "errors": {
+      "missing_llm_ref": "ValidationError",
+      "acp_unknown_server": "ValidationError",
+      "acp_with_llm_ref": "ValidationError",
+      "acp_with_persona": "ValidationError"
+    },
+    "dump_keys_have_secret": false
+  },
+  "migrations": {
+    "v1_tools": null,
+    "v1_version": 4,
+    "v2_tools": [
+      "terminal",
+      "file_editor",
+      "task_tracker",
+      "browser_tool_set",
+      "task_tool_set",
+      "switch_llm"
+    ],
+    "rejected": {
+      "5": true,
+      "-1": true,
+      "three": true
+    }
+  },
+  "store": {
+    "file_in_persistence_dir": true,
+    "file_schema_version": 4,
+    "file_has_id": true,
+    "loaded_persona": "Pirate",
+    "same_id": true,
+    "missing_names_available": true,
+    "rename_kept_id": true,
+    "renamed_name": "qa",
+    "summaries": [
+      "coder",
+      "qa"
+    ],
+    "limit": "ProfileLimitExceeded",
+    "race_revision": 5,
+    "list_after_delete": [
+      "coder.json",
+      "race.json"
+    ]
+  },
+  "resolve": {
+    "type": "OpenHandsAgentSettings",
+    "model": "openai/fast-model",
+    "llm_key_loaded": true,
+    "mcp": [
+      "github"
+    ],
+    "all_mcp": [
+      "fetch",
+      "github"
+    ],
+    "none_mcp": [],
+    "skills": [
+      "deploy"
+    ],
+    "persona": "Pirate",
+    "tools": [
+      "terminal"
+    ],
+    "errors": {
+      "missing_llm": "UnresolvedProfileReferences",
+      "missing_llm_ref": "ghost",
+      "dangling_mcp": "UnresolvedProfileReferences",
+      "dangling_mcp_refs": [
+        "gone"
+      ],
+      "both_problems": 2
+    },
+    "dry_has_secret": false,
+    "dry_dump": {
+      "agent_kind": "openhands",
+      "valid": false,
+      "errors": [
+        "LLM profile 'ghost' not found",
+        "MCP server(s) not configured: gone"
+      ],
+      "unusable_tools": [
+        "browser_tool_set"
+      ],
+      "llm_profile_ref": "ghost",
+      "llm_profile_resolved": false,
+      "llm_api_key_set": false,
+      "mcp_server_refs": [
+        "gone"
+      ],
+      "resolved_mcp_config_keys": [],
+      "dangling_mcp_server_refs": [
+        "gone"
+      ],
+      "disabled_skills": [],
+      "public_skills": null,
+      "resolved_skills": [],
+      "secret_refs": null,
+      "integration_refs": null,
+      "acp_api_key_secret_name": null,
+      "acp_base_url_secret_name": null,
+      "acp_file_secret_names": [],
+      "meta_profile_ref": null,
+      "dangling_meta_profile_ref": null,
+      "dangling_meta_profile_llm_refs": [],
+      "resolved_settings": null
+    },
+    "ok_dry_valid": true,
+    "launched_status": "finished"
+  },
+  "refs": {
+    "referrers": [
+      "a1",
+      "a2",
+      "coder",
+      "race"
+    ],
+    "delete_blocked_names_referrers": true,
+    "rewritten": [
+      "a1",
+      "a2",
+      "coder",
+      "race"
+    ],
+    "a1_ref": "quick",
+    "llm_profiles": [
+      "quick.json"
+    ]
+  },
+  "seed": {
+    "name": "default",
+    "llm_ref": "quick",
+    "persona": "Pirate",
+    "tools": [
+      "terminal"
+    ],
+    "disabled_skills": [],
+    "mcp_refs": null,
+    "acp_type": "ACPAgentProfile",
+    "acp_server": "codex",
+    "id_kept": true,
+    "revision_bumped": true
+  },
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "schema_version eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "model.id_is_uuid eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "model.mcp_refs_default missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "model.errors.missing_llm_ref eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "model.errors.acp_unknown_server eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "model.errors.acp_with_llm_ref eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "model.errors.acp_with_persona eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "model.dump_keys_have_secret eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "migrations.v1_version eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "migrations.v1_tools missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "migrations.v2_tools contains task_tool_set",
+      "ok": true,
+      "actual": "[\"terminal\", \"file_editor\", \"task_tracker\", \"browser_tool_set\", \"task_tool_set\", \"switch_llm\"]"
+    },
+    {
+      "check": "migrations.rejected.5 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "migrations.rejected.-1 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "migrations.rejected.three eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "store.file_in_persistence_dir eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "store.file_schema_version eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "store.same_id eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "store.loaded_persona eq Pirate",
+      "ok": true,
+      "actual": "Pirate"
+    },
+    {
+      "check": "store.missing_names_available eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "store.rename_kept_id eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "store.renamed_name eq qa",
+      "ok": true,
+      "actual": "qa"
+    },
+    {
+      "check": "store.summaries len-eq 2",
+      "ok": true,
+      "actual": "[\"coder\", \"qa\"]"
+    },
+    {
+      "check": "store.limit eq ProfileLimitExceeded",
+      "ok": true,
+      "actual": "ProfileLimitExceeded"
+    },
+    {
+      "check": "store.race_revision eq 5",
+      "ok": true,
+      "actual": "5"
+    },
+    {
+      "check": "store.list_after_delete not-contains qa.json",
+      "ok": true,
+      "actual": "[\"coder.json\", \"race.json\"]"
+    },
+    {
+      "check": "resolve.type eq OpenHandsAgentSettings",
+      "ok": true,
+      "actual": "OpenHandsAgentSettings"
+    },
+    {
+      "check": "resolve.model eq openai/fast-model",
+      "ok": true,
+      "actual": "openai/fast-model"
+    },
+    {
+      "check": "resolve.llm_key_loaded eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "resolve.mcp len-eq 1",
+      "ok": true,
+      "actual": "[\"github\"]"
+    },
+    {
+      "check": "resolve.all_mcp len-eq 2",
+      "ok": true,
+      "actual": "[\"fetch\", \"github\"]"
+    },
+    {
+      "check": "resolve.none_mcp len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "resolve.skills len-eq 1",
+      "ok": true,
+      "actual": "[\"deploy\"]"
+    },
+    {
+      "check": "resolve.skills contains deploy",
+      "ok": true,
+      "actual": "[\"deploy\"]"
+    },
+    {
+      "check": "resolve.persona eq Pirate",
+      "ok": true,
+      "actual": "Pirate"
+    },
+    {
+      "check": "resolve.errors.missing_llm eq UnresolvedProfileReferences",
+      "ok": true,
+      "actual": "UnresolvedProfileReferences"
+    },
+    {
+      "check": "resolve.errors.missing_llm_ref eq ghost",
+      "ok": true,
+      "actual": "ghost"
+    },
+    {
+      "check": "resolve.errors.dangling_mcp eq UnresolvedProfileReferences",
+      "ok": true,
+      "actual": "UnresolvedProfileReferences"
+    },
+    {
+      "check": "resolve.errors.dangling_mcp_refs contains gone",
+      "ok": true,
+      "actual": "[\"gone\"]"
+    },
+    {
+      "check": "resolve.errors.both_problems eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "resolve.ok_dry_valid eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "resolve.dry_dump.valid eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "resolve.dry_dump.dangling_mcp_server_refs contains gone",
+      "ok": true,
+      "actual": "[\"gone\"]"
+    },
+    {
+      "check": "resolve.dry_has_secret eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "resolve.launched_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "refs.referrers contains a1",
+      "ok": true,
+      "actual": "[\"a1\", \"a2\", \"coder\", \"race\"]"
+    },
+    {
+      "check": "refs.delete_blocked_names_referrers eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "refs.rewritten contains a2",
+      "ok": true,
+      "actual": "[\"a1\", \"a2\", \"coder\", \"race\"]"
+    },
+    {
+      "check": "refs.a1_ref eq quick",
+      "ok": true,
+      "actual": "quick"
+    },
+    {
+      "check": "refs.llm_profiles contains quick.json",
+      "ok": true,
+      "actual": "[\"quick.json\"]"
+    },
+    {
+      "check": "seed.name eq default",
+      "ok": true,
+      "actual": "default"
+    },
+    {
+      "check": "seed.llm_ref eq quick",
+      "ok": true,
+      "actual": "quick"
+    },
+    {
+      "check": "seed.persona eq Pirate",
+      "ok": true,
+      "actual": "Pirate"
+    },
+    {
+      "check": "seed.mcp_refs missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "seed.disabled_skills len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "seed.acp_type eq ACPAgentProfile",
+      "ok": true,
+      "actual": "ACPAgentProfile"
+    },
+    {
+      "check": "seed.id_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "seed.revision_bumped eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 6s]

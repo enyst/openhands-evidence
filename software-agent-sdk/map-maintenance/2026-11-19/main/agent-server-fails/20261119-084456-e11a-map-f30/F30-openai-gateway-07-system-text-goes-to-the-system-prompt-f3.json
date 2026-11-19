@@ -1,0 +1,45 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "System text goes to the system prompt (`F30.chat-system-suffix`).",
+  "ids": [
+    "F30.chat-system-suffix"
+  ],
+  "line": 285,
+  "script": "control-agent-server api GET \"/api/conversations/$CID\" \\\n  --check agent.agent_context.system_message_suffix eq \"$(printf 'QA_F30_SYS: answer in one short sentence and never use tools.\\n\\nQA_F30_DEV: plain text only.')\" \\\n  --quiet --save F30.chat-system-suffix/conversation\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" \\\n  --query kind=openhands.sdk.event.llm_convertible.system.SystemPromptEvent \\\n  --check items len-eq 1 --check items.0.dynamic_context.text contains QA_F30_SYS \\\n  --check items.0.dynamic_context.text contains QA_F30_DEV --quiet\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_NEW_TURN \\\n  --check items len-eq 1 --quiet\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_SYS \\\n  --check items len-eq 0 --quiet\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_DEV \\\n  --check items len-eq 0 --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 431,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$CID\" --check agent.agent_context.system_message_suffix eq \"$(printf 'QA_F30_SYS: answer in one short sentence and never use tools.\\n\\nQA_F30_DEV: plain text only.')\" --quiet --save F30.chat-system-suffix/conversation",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 307,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 307,
+      "headers": {
+        "content-length": "0",
+        "location": "http://127.0.0.1:44003/api/conversations"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 61,
+    "checks": [
+      {
+        "check": "agent.agent_context.system_message_suffix eq QA_F30_SYS: answer in one short sentence and never use tools.\n\nQA_F30_DEV: plain text only.",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.chat-system-suffix/conversation.json",
+    "hint": "failed check: agent.agent_context.system_message_suffix eq QA_F30_SYS: answer in one short sentence and never use tools.\n\nQA_F30_DEV: plain text only."
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:44003/api/conversations\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"agent.agent_context.system_message_suffix eq QA_F30_SYS: answer in one short sentence and never use tools.\\n\\nQA_F30_DEV: plain text only.\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.chat-system-suffix/conversation.json\",\n  \"hint\": \"failed check: agent.agent_context.system_message_suffix eq QA_F30_SYS: answer in one short sentence and never use tools.\\n\\nQA_F30_DEV: plain text only.\"\n}\n",
+  "stderr": ""
+}

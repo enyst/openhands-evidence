@@ -1,0 +1,23 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "The loaded hook runs (`F09.load-plugin-hook-runs`).",
+  "ids": [
+    "F09.load-plugin-hook-runs"
+  ],
+  "line": 866,
+  "script": "control-agent-server conversation send \"$PID\" --text 'Reply with the single word: ok' --wait --until finished,error --timeout 240\ncontrol-agent-server api GET \"/api/conversations/$PID\" --quiet --check execution_status eq finished\ncontrol-agent-server conversation events \"$PID\" --kinds HookExecutionEvent --contains '\"stdout\": \"QA_PLUGIN_HOOK' --expect-count 1 --save F09.load-plugin-hook-runs/hook-events\n",
+  "exit_code": 1,
+  "elapsed_ms": 378,
+  "failed_line": 1,
+  "failed_command": "control-agent-server conversation send \"$PID\" --text 'Reply with the single word: ok' --wait --until finished,error --timeout 240",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "body": {
+      "detail": "Not Found"
+    }
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"body\": {\n    \"detail\": \"Not Found\"\n  }\n}\n",
+  "stderr": ""
+}

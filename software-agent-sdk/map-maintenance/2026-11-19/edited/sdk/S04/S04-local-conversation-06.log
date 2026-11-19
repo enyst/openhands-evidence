@@ -1,0 +1,51 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/lifecycle --arg compat \
+  --check remove_tool contains "tools were removed mid-conversation" --check remove_tool contains file_editor \
+  --check remove_default_tool contains "tools were removed mid-conversation" \
+  --check change_agent_class contains "persisted agent is of type Agent" \
+  --check add_tool eq finished --check change_llm eq finished
+{
+  "ok": true,
+  "mode": "compat",
+  "remove_tool": "ValueError: Cannot resume conversation: tools were removed mid-conversation (removed: ['file_editor']). To use different tools, start a new conversation.",
+  "add_tool": "finished",
+  "change_llm": "finished",
+  "change_agent_class": "ValueError: Cannot load from persisted: persisted agent is of type Agent, but self is of type OtherAgent.",
+  "remove_default_tool": "ValueError: Cannot resume conversation: tools were removed mid-conversation (removed: ['think']). To use different tools, start a new conversation.",
+  "_exit": 0,
+  "_seconds": 5.9,
+  "checks": [
+    {
+      "check": "remove_tool contains tools were removed mid-conversation",
+      "ok": true,
+      "actual": "ValueError: Cannot resume conversation: tools were removed mid-conversation (removed: ['file_editor']). To use different tools, start a new conversation."
+    },
+    {
+      "check": "remove_tool contains file_editor",
+      "ok": true,
+      "actual": "ValueError: Cannot resume conversation: tools were removed mid-conversation (removed: ['file_editor']). To use different tools, start a new conversation."
+    },
+    {
+      "check": "remove_default_tool contains tools were removed mid-conversation",
+      "ok": true,
+      "actual": "ValueError: Cannot resume conversation: tools were removed mid-conversation (removed: ['think']). To use different tools, start a new conversation."
+    },
+    {
+      "check": "change_agent_class contains persisted agent is of type Agent",
+      "ok": true,
+      "actual": "ValueError: Cannot load from persisted: persisted agent is of type Agent, but self is of type OtherAgent."
+    },
+    {
+      "check": "add_tool eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "change_llm eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 6s]

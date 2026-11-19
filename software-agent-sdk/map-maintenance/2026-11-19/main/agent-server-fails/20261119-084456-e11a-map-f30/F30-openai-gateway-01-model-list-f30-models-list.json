@@ -1,0 +1,87 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Model list (`F30.models-list`).",
+  "ids": [
+    "F30.models-list"
+  ],
+  "line": 125,
+  "script": "control-agent-server api GET /v1/models --auth bearer --expect 200 --check object eq list --check data len-eq 2 \\\n  --check data.0.id eq openhands_deepseek-flash --check data.1.id eq openhands_deepseek-pro \\\n  --check data.0.object eq model --check data.0.owned_by eq openhands --check data.0.created eq 0 \\\n  --save F30.models-list/list\ncontrol-agent-server api GET /api/profiles --check profiles len-eq 2 --check profiles.0.name eq deepseek-flash \\\n  --check profiles.1.name eq deepseek-pro --quiet\ncontrol-agent-server llm set --profile qa-f30-old --model openai/qa-unused --base-url http://127.0.0.1:9/v1 \\\n  --no-api-key --no-validate --no-activate\ncontrol-agent-server api GET /v1/models --auth bearer --check data len-eq 3 --check data.2.id eq openhands_qa-f30-old --quiet\ncontrol-agent-server api POST /api/profiles/qa-f30-old/rename --json '{\"new_name\": \"qa-f30-new\"}' --expect 200\ncontrol-agent-server api GET /v1/models --auth bearer --check data contains openhands_qa-f30-new \\\n  --check data not-contains openhands_qa-f30-old --save F30.models-list/renamed\ncontrol-agent-server api DELETE /api/profiles/qa-f30-new --expect 200\ncontrol-agent-server api GET /v1/models --auth bearer --check data len-eq 2 --check data not-contains openhands_qa-f30-new \\\n  --save F30.models-list/deleted\ncontrol-agent-server api POST /v1/chat/completions --auth bearer \\\n  --json '{\"model\": \"openhands_qa-f30-new\", \"messages\": [{\"role\": \"user\", \"content\": \"x\"}]}' \\\n  --expect 404 --check detail eq \"Profile 'qa-f30-new' not found\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 447,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api GET /v1/models --auth bearer --expect 200 --check object eq list --check data len-eq 2 --check data.0.id eq openhands_deepseek-flash --check data.1.id eq openhands_deepseek-pro --check data.0.object eq model --check data.0.owned_by eq openhands --check data.0.created eq 0 --save F30.models-list/list",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/v1/models",
+      "query": [],
+      "auth": "bearer",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "112",
+        "content-type": "application/json"
+      },
+      "body": {
+        "object": "list",
+        "data": [
+          {
+            "id": "openhands_deepseek-flash",
+            "created": 0,
+            "object": "model",
+            "owned_by": "openhands"
+          }
+        ]
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 61,
+    "checks": [
+      {
+        "check": "object eq list",
+        "ok": true,
+        "actual": "list"
+      },
+      {
+        "check": "data len-eq 2",
+        "ok": false,
+        "actual": "[{\"id\": \"openhands_deepseek-flash\", \"created\": 0, \"object\": \"model\", \"owned_by\": \"openhands\"}]"
+      },
+      {
+        "check": "data.0.id eq openhands_deepseek-flash",
+        "ok": true,
+        "actual": "openhands_deepseek-flash"
+      },
+      {
+        "check": "data.1.id eq openhands_deepseek-pro",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "data.0.object eq model",
+        "ok": true,
+        "actual": "model"
+      },
+      {
+        "check": "data.0.owned_by eq openhands",
+        "ok": true,
+        "actual": "openhands"
+      },
+      {
+        "check": "data.0.created eq 0",
+        "ok": true,
+        "actual": "0"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.models-list/list.json",
+    "hint": "failed check: data len-eq 2; data.1.id eq openhands_deepseek-pro"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/v1/models\",\n    \"query\": [],\n    \"auth\": \"bearer\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"112\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"object\": \"list\",\n      \"data\": [\n        {\n          \"id\": \"openhands_deepseek-flash\",\n          \"created\": 0,\n          \"object\": \"model\",\n          \"owned_by\": \"openhands\"\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"object eq list\",\n      \"ok\": true,\n      \"actual\": \"list\"\n    },\n    {\n      \"check\": \"data len-eq 2\",\n      \"ok\": false,\n      \"actual\": \"[{\\\"id\\\": \\\"openhands_deepseek-flash\\\", \\\"created\\\": 0, \\\"object\\\": \\\"model\\\", \\\"owned_by\\\": \\\"openhands\\\"}]\"\n    },\n    {\n      \"check\": \"data.0.id eq openhands_deepseek-flash\",\n      \"ok\": true,\n      \"actual\": \"openhands_deepseek-flash\"\n    },\n    {\n      \"check\": \"data.1.id eq openhands_deepseek-pro\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"data.0.object eq model\",\n      \"ok\": true,\n      \"actual\": \"model\"\n    },\n    {\n      \"check\": \"data.0.owned_by eq openhands\",\n      \"ok\": true,\n      \"actual\": \"openhands\"\n    },\n    {\n      \"check\": \"data.0.created eq 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.models-list/list.json\",\n  \"hint\": \"failed check: data len-eq 2; data.1.id eq openhands_deepseek-pro\"\n}\n",
+  "stderr": ""
+}

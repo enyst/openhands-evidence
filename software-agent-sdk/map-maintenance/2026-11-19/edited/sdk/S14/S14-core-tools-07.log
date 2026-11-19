@@ -1,0 +1,105 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+for backend in tmux subprocess; do
+  control-sdk program S14/terminal_flags --arg "$backend" \
+    --check steps.hard.exit_code eq -1 --check steps.hard.is_error eq false \
+    --check steps.hard.text contains "timed out after 1.0 seconds" --check steps.hard.timeout eq true \
+    --check steps.idle.exit_code eq -1 --check steps.idle.text contains "no new output after 2 seconds" \
+    --check steps.idle.timeout eq true
+done
+{
+  "ok": true,
+  "mode": "tmux",
+  "execution_status": "finished",
+  "steps": {
+    "control": {
+      "exit_code": 0,
+      "timeout": false,
+      "is_error": false,
+      "text": "synthetic-status-output\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-07/block1/runs/20261119-101032-241ec2/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 2.35
+    },
+    "comment": {
+      "exit_code": 0,
+      "timeout": false,
+      "is_error": false,
+      "text": "# Read-only: print a status line.\n\n\nsleep 2 && printf '%s-%s\\n' synthetic status-output\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-07/block1/runs/20261119-101032-241ec2/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 0.12
+    },
+    "hard": {
+      "exit_code": -1,
+      "timeout": false,
+      "is_error": false,
+      "text": "# Read-only: print a status line.\n\n\nsleep 2 && printf '%s-%s\\n' synthetic status-output\nclear\nsleep 5\n[The command timed out after 1.0 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "seconds": 1.13
+    },
+    "hard_stop": {
+      "exit_code": 130,
+      "timeout": false,
+      "is_error": false,
+      "text": "^C\n[The command completed with exit code 130. CTRL+C was sent.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-07/block1/runs/20261119-101032-241ec2/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 130]",
+      "seconds": 0.13
+    },
+    "idle": {
+      "exit_code": -1,
+      "timeout": false,
+      "is_error": false,
+      "text": "\n[The command has no new output after 2 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "seconds": 2.21
+    },
+    "idle_stop": {
+      "exit_code": 130,
+      "timeout": false,
+      "is_error": false,
+      "text": "^C\n[The command completed with exit code 130. CTRL+C was sent.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-07/block1/runs/20261119-101032-241ec2/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 130]",
+      "seconds": 0.13
+    },
+    "after": {
+      "exit_code": 0,
+      "timeout": false,
+      "is_error": false,
+      "text": "after-ok\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-07/block1/runs/20261119-101032-241ec2/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 0.12
+    }
+  },
+  "_exit": 0,
+  "_seconds": 11.5,
+  "checks": [
+    {
+      "check": "steps.hard.exit_code eq -1",
+      "ok": true,
+      "actual": "-1"
+    },
+    {
+      "check": "steps.hard.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.hard.text contains timed out after 1.0 seconds",
+      "ok": true,
+      "actual": "# Read-only: print a status line.\n\n\nsleep 2 && printf '%s-%s\\n' synthetic status-output\nclear\nsleep 5\n[The command timed out after 1.0 seconds. You may wait longer to see additional output by sending "
+    },
+    {
+      "check": "steps.hard.timeout eq true",
+      "ok": false,
+      "actual": "false"
+    },
+    {
+      "check": "steps.idle.exit_code eq -1",
+      "ok": true,
+      "actual": "-1"
+    },
+    {
+      "check": "steps.idle.text contains no new output after 2 seconds",
+      "ok": true,
+      "actual": "\n[The command has no new output after 2 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \""
+    },
+    {
+      "check": "steps.idle.timeout eq true",
+      "ok": false,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 1 after 12s]

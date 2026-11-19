@@ -1,0 +1,57 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Restart (`F23.persist-restart`).",
+  "ids": [
+    "F23.persist-restart"
+  ],
+  "line": 521,
+  "script": "BEFORE=$(control-agent-server api GET /api/llm/provider-connections --field .)\ncontrol-agent-server restart\ncontrol-agent-server api GET /api/llm/provider-connections --expect 200 --check . len-eq 2 --check 0.id eq \"$CONN\" \\\n  --check 0.api_key_set eq true --save F23.persist-restart/list\ntest \"$(control-agent-server api GET /api/llm/provider-connections --field .)\" = \"$BEFORE\"\ncontrol-agent-server api POST /api/profiles/qa-f23-linked/activate --expect 200\ncontrol-agent-server api GET /api/settings --header 'X-Expose-Secrets: plaintext' --max-chars 200 \\\n  --check agent_settings.llm.api_key eq \"$DEEPSEEK_API_KEY\" --save F23.persist-restart/settings\n",
+  "exit_code": 1,
+  "elapsed_ms": 9426,
+  "failed_line": 3,
+  "failed_command": "control-agent-server api GET /api/llm/provider-connections --expect 200 --check . len-eq 2 --check 0.id eq \"$CONN\" --check 0.api_key_set eq true --save F23.persist-restart/list",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/llm/provider-connections",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "2",
+        "content-type": "application/json"
+      },
+      "body": [],
+      "truncated": false
+    },
+    "elapsed_ms": 62,
+    "checks": [
+      {
+        "check": ". len-eq 2",
+        "ok": false,
+        "actual": "[]"
+      },
+      {
+        "check": "0.id eq ",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "0.api_key_set eq true",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-083255-9d46-map-f23/evidence/F23.persist-restart/list.json",
+    "hint": "failed check: . len-eq 2; 0.id eq ; 0.api_key_set eq true"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-083255-9d46-map-f23\",\n  \"url\": \"http://127.0.0.1:48675\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6600,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/llm/provider-connections\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"2\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": [],\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 62,\n  \"checks\": [\n    {\n      \"check\": \". len-eq 2\",\n      \"ok\": false,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"0.id eq \",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"0.api_key_set eq true\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-083255-9d46-map-f23/evidence/F23.persist-restart/list.json\",\n  \"hint\": \"failed check: . len-eq 2; 0.id eq ; 0.api_key_set eq true\"\n}\n",
+  "stderr": ""
+}

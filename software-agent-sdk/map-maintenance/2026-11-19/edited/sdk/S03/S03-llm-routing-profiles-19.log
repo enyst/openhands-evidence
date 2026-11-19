@@ -1,0 +1,89 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/profiles --arg meta \
+  --check list len-eq 2 --check loaded_classes.1 eq strong --check loaded_template eq true \
+  --check after_delete len-eq 1 --check template_without_instance_text contains "instance_text" \
+  --check template_and_classes contains "cannot also define classes" --check over_limit contains "limit reached"
+control-sdk program S03/profiles --arg default-dir \
+  --check profile_dir matches '/openhands/profiles$' --check meta_profile_dir matches '/openhands/meta-profiles$'
+{
+  "ok": true,
+  "mode": "meta",
+  "list": [
+    "direct",
+    "structured"
+  ],
+  "loaded_classes": [
+    "cheap",
+    "strong"
+  ],
+  "loaded_template": true,
+  "summaries": 2,
+  "after_delete": [
+    "structured"
+  ],
+  "template_without_instance_text": "ValidationError: 1 validation error for MetaProfile\n  Value error, Direct-routing meta-profiles must include {{ instance_text }} in prompt_template. [type=value_error, input_value={'classifier_model': 'c',...', 'model_table': '- a'}, input_type=dict]\n    For further information visit https://errors.",
+  "template_and_classes": "ValidationError: 1 validation error for MetaProfile\n  Value error, Direct-routing meta-profiles cannot also define classes. [type=value_error, input_value={'classifier_model': 'c',...iption='x', model='a')]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value",
+  "over_limit": "MetaProfileLimitExceeded: Meta-profile limit reached (1).",
+  "_exit": 0,
+  "_seconds": 4.8,
+  "checks": [
+    {
+      "check": "list len-eq 2",
+      "ok": true,
+      "actual": "[\"direct\", \"structured\"]"
+    },
+    {
+      "check": "loaded_classes.1 eq strong",
+      "ok": true,
+      "actual": "strong"
+    },
+    {
+      "check": "loaded_template eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "after_delete len-eq 1",
+      "ok": true,
+      "actual": "[\"structured\"]"
+    },
+    {
+      "check": "template_without_instance_text contains instance_text",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for MetaProfile\n  Value error, Direct-routing meta-profiles must include {{ instance_text }} in prompt_template. [type=value_error, input_value={'classifier_model':"
+    },
+    {
+      "check": "template_and_classes contains cannot also define classes",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for MetaProfile\n  Value error, Direct-routing meta-profiles cannot also define classes. [type=value_error, input_value={'classifier_model': 'c',...iption='x', model"
+    },
+    {
+      "check": "over_limit contains limit reached",
+      "ok": true,
+      "actual": "MetaProfileLimitExceeded: Meta-profile limit reached (1)."
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "default-dir",
+  "oh_persistence_dir": "<scratch>/sdk/edited/S03/work/S03-llm-routing-profiles-19/block1/runs/20261119-094635-ed744b/openhands",
+  "profile_dir": "<scratch>/sdk/edited/S03/work/S03-llm-routing-profiles-19/block1/runs/20261119-094635-ed744b/openhands/profiles",
+  "meta_profile_dir": "<scratch>/sdk/edited/S03/work/S03-llm-routing-profiles-19/block1/runs/20261119-094635-ed744b/openhands/meta-profiles",
+  "_exit": 0,
+  "_seconds": 4.8,
+  "checks": [
+    {
+      "check": "profile_dir matches /openhands/profiles$",
+      "ok": true,
+      "actual": "<scratch>/sdk/edited/S03/work/S03-llm-routing-profiles-19/block1/runs/20261119-094635-ed744b/openhands/profiles"
+    },
+    {
+      "check": "meta_profile_dir matches /openhands/meta-profiles$",
+      "ok": true,
+      "actual": "<scratch>/sdk/edited/S03/work/S03-llm-routing-profiles-19/block1/runs/20261119-094635-ed744b/openhands/meta-profiles"
+    }
+  ]
+}
+
+[exit 0 after 10s]

@@ -1,0 +1,355 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/model_router --arg selection \
+  --check initial.enabled eq true --check initial.selection.mode eq auto --check initial.last_route_name eq null \
+  --check initial.routes.0.name eq first --check initial.routes.1.model eq openai/gpt-4.1-mini --check initial.routes.1.label eq second \
+  --check after_auto_turn.last_route_name eq first \
+  --check after_manual.selection.manual_route_name eq second --check router_kept eq RouterLLM --check state_agent_follows eq true \
+  --check after_manual_turn.last_route_name eq second \
+  --check persisted.router_name eq base_router --check persisted.selection.mode eq manual --check persisted.selection.manual_route_name eq second \
+  --check unknown_route_error contains "LLM route 'missing' was not found" --check after_unknown_route.manual_route_name eq second \
+  --check after_resume_turn.selection.mode eq auto --check after_resume_turn.last_route_name eq first \
+  --check requests.first eq 2 --check requests.second eq 1 --check costs.route-first eq 0.28 --check costs.route-second eq 0.14 \
+  --check persisted_before_resume.manual_route_name eq second --check resumed_type eq RouterLLM \
+  --check resumed.selection.mode eq auto --check resumed.last_route_name eq null \
+  --check manual_without_route contains 'manual_route_name is required' --check auto_with_route contains 'only valid in manual' \
+  --check update_request_without_selection contains 'Field required' \
+  --check plain_switch_error eq 'ValueError: Current agent LLM is not a RouterLLM.' --check plain_resume_error contains 'not a RouterLLM' \
+  --check plain_status.enabled eq false --check plain_status.routes len-eq 0
+{
+  "ok": true,
+  "mode": "selection",
+  "initial": {
+    "enabled": true,
+    "selection": {
+      "mode": "auto",
+      "manual_route_name": null
+    },
+    "last_route_name": null,
+    "routes": [
+      {
+        "name": "first",
+        "model": "openai/gpt-4.1",
+        "label": "first"
+      },
+      {
+        "name": "second",
+        "model": "openai/gpt-4.1-mini",
+        "label": "second"
+      }
+    ]
+  },
+  "after_auto_turn": {
+    "enabled": true,
+    "selection": {
+      "mode": "auto",
+      "manual_route_name": null
+    },
+    "last_route_name": "first",
+    "routes": [
+      {
+        "name": "first",
+        "model": "openai/gpt-4.1",
+        "label": "first"
+      },
+      {
+        "name": "second",
+        "model": "openai/gpt-4.1-mini",
+        "label": "second"
+      }
+    ]
+  },
+  "after_manual": {
+    "enabled": true,
+    "selection": {
+      "mode": "manual",
+      "manual_route_name": "second"
+    },
+    "last_route_name": "first",
+    "routes": [
+      {
+        "name": "first",
+        "model": "openai/gpt-4.1",
+        "label": "first"
+      },
+      {
+        "name": "second",
+        "model": "openai/gpt-4.1-mini",
+        "label": "second"
+      }
+    ]
+  },
+  "router_kept": "RouterLLM",
+  "state_agent_follows": true,
+  "after_manual_turn": {
+    "enabled": true,
+    "selection": {
+      "mode": "manual",
+      "manual_route_name": "second"
+    },
+    "last_route_name": "second",
+    "routes": [
+      {
+        "name": "first",
+        "model": "openai/gpt-4.1",
+        "label": "first"
+      },
+      {
+        "name": "second",
+        "model": "openai/gpt-4.1-mini",
+        "label": "second"
+      }
+    ]
+  },
+  "persisted": {
+    "router_name": "base_router",
+    "selection": {
+      "mode": "manual",
+      "manual_route_name": "second"
+    },
+    "routes": [
+      "first",
+      "second"
+    ]
+  },
+  "unknown_route_error": "ValueError: LLM route 'missing' was not found. Available routes: first, second",
+  "after_unknown_route": {
+    "mode": "manual",
+    "manual_route_name": "second"
+  },
+  "after_resume_turn": {
+    "enabled": true,
+    "selection": {
+      "mode": "auto",
+      "manual_route_name": null
+    },
+    "last_route_name": "first",
+    "routes": [
+      {
+        "name": "first",
+        "model": "openai/gpt-4.1",
+        "label": "first"
+      },
+      {
+        "name": "second",
+        "model": "openai/gpt-4.1-mini",
+        "label": "second"
+      }
+    ]
+  },
+  "requests": {
+    "first": 2,
+    "second": 1
+  },
+  "costs": {
+    "route-first": 0.28,
+    "route-second": 0.14
+  },
+  "persisted_before_resume": {
+    "mode": "manual",
+    "manual_route_name": "second"
+  },
+  "resumed": {
+    "enabled": true,
+    "selection": {
+      "mode": "auto",
+      "manual_route_name": null
+    },
+    "last_route_name": null,
+    "routes": [
+      {
+        "name": "first",
+        "model": "openai/gpt-4.1",
+        "label": "first"
+      },
+      {
+        "name": "second",
+        "model": "openai/gpt-4.1-mini",
+        "label": "second"
+      }
+    ]
+  },
+  "resumed_type": "RouterLLM",
+  "manual_without_route": "ValidationError: 1 validation error for ModelRouterSelection\n  Value error, manual_route_name is required in manual routing mode [type=value_error, input_value={'mode': 'manual'}, input_type=dict]\n   ",
+  "auto_with_route": "ValidationError: 1 validation error for ModelRouterSelection\n  Value error, manual_route_name is only valid in manual routing mode [type=value_error, input_value={'mode': 'auto', 'manual_route_name': ",
+  "update_request_without_selection": "ValidationError: 1 validation error for ModelRouterUpdateRequest\nselection\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.de",
+  "validation_error_type": "ValidationError",
+  "plain_switch_error": "ValueError: Current agent LLM is not a RouterLLM.",
+  "plain_resume_error": "ValueError: Current agent LLM is not a RouterLLM.",
+  "plain_status": {
+    "enabled": false,
+    "selection": null,
+    "last_route_name": null,
+    "routes": []
+  },
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "initial.enabled eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "initial.selection.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "initial.last_route_name eq null",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "initial.routes.0.name eq first",
+      "ok": true,
+      "actual": "first"
+    },
+    {
+      "check": "initial.routes.1.model eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "initial.routes.1.label eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "after_auto_turn.last_route_name eq first",
+      "ok": true,
+      "actual": "first"
+    },
+    {
+      "check": "after_manual.selection.manual_route_name eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "router_kept eq RouterLLM",
+      "ok": true,
+      "actual": "RouterLLM"
+    },
+    {
+      "check": "state_agent_follows eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "after_manual_turn.last_route_name eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "persisted.router_name eq base_router",
+      "ok": true,
+      "actual": "base_router"
+    },
+    {
+      "check": "persisted.selection.mode eq manual",
+      "ok": true,
+      "actual": "manual"
+    },
+    {
+      "check": "persisted.selection.manual_route_name eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "unknown_route_error contains LLM route 'missing' was not found",
+      "ok": true,
+      "actual": "ValueError: LLM route 'missing' was not found. Available routes: first, second"
+    },
+    {
+      "check": "after_unknown_route.manual_route_name eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "after_resume_turn.selection.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "after_resume_turn.last_route_name eq first",
+      "ok": true,
+      "actual": "first"
+    },
+    {
+      "check": "requests.first eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "requests.second eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "costs.route-first eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "costs.route-second eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "persisted_before_resume.manual_route_name eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "resumed_type eq RouterLLM",
+      "ok": true,
+      "actual": "RouterLLM"
+    },
+    {
+      "check": "resumed.selection.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "resumed.last_route_name eq null",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "manual_without_route contains manual_route_name is required",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for ModelRouterSelection\n  Value error, manual_route_name is required in manual routing mode [type=value_error, input_value={'mode': 'manual'}, input_type=dict]\n   "
+    },
+    {
+      "check": "auto_with_route contains only valid in manual",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for ModelRouterSelection\n  Value error, manual_route_name is only valid in manual routing mode [type=value_error, input_value={'mode': 'auto', 'manual_route_name': "
+    },
+    {
+      "check": "update_request_without_selection contains Field required",
+      "ok": true,
+      "actual": "ValidationError: 1 validation error for ModelRouterUpdateRequest\nselection\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.de"
+    },
+    {
+      "check": "plain_switch_error eq ValueError: Current agent LLM is not a RouterLLM.",
+      "ok": true,
+      "actual": "ValueError: Current agent LLM is not a RouterLLM."
+    },
+    {
+      "check": "plain_resume_error contains not a RouterLLM",
+      "ok": true,
+      "actual": "ValueError: Current agent LLM is not a RouterLLM."
+    },
+    {
+      "check": "plain_status.enabled eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "plain_status.routes len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    }
+  ]
+}
+
+[exit 0 after 6s]

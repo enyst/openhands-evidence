@@ -1,0 +1,51 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Load a plugin (`F09.load-plugin`).",
+  "ids": [
+    "F09.load-plugin"
+  ],
+  "line": 836,
+  "script": "AS=$(control-agent-server api GET /api/settings --header 'X-Expose-Secrets: encrypted' --field agent_settings --unsafe-unredacted \\\n  | jq -c --arg m \"$MKT\" '.tools = [] | .agent_context.registered_marketplaces = [{\"name\": \"qa-f09-mkt\", \"source\": $m}]')\nPID=$(control-agent-server conversation start --no-autotitle --body-json \"{\\\"agent_settings\\\": $AS, \\\"secrets_encrypted\\\": true}\" --print-id)\ncontrol-agent-server api GET \"/api/conversations/$PID\" --query include_skills=true --quiet \\\n  --check agent.agent_context.registered_marketplaces.0.name eq qa-f09-mkt --check agent.agent_context.skills len-eq 0 --check hook_config missing\ncontrol-agent-server ws start \"/sockets/events/$PID\" --name qa-f09-plugin --duration 120\ncontrol-agent-server api POST \"/api/conversations/$PID/load_plugin\" --json '{\"plugin_ref\": \"qa-f09-mkt-plugin@qa-f09-mkt\"}' \\\n  --expect 200 --check success eq true --save F09.load-plugin/load\ncontrol-agent-server api GET \"/api/conversations/$PID\" --query include_skills=true --quiet \\\n  --check agent.agent_context.skills len-eq 2 --check agent.agent_context.skills contains qa-f09-mkt-plugin-skill \\\n  --check agent.agent_context.skills contains 'qa-f09-mkt-plugin:qa-hello' \\\n  --check hook_config.user_prompt_submit len-eq 1 --check hook_config.user_prompt_submit.0.hooks.0.command eq 'echo QA_PLUGIN_HOOK' \\\n  --save F09.load-plugin/get\ncontrol-agent-server state cat \"server/workspace/conversations/${PID//-/}/base_state.json\" --max-chars 200 \\\n  --contains qa-f09-mkt-plugin-skill --check hook_config.user_prompt_submit len-eq 1\ncontrol-agent-server ws read qa-f09-plugin --kinds ConversationStateUpdateEvent --contains '\"key\": \"agent\"' --expect-min 1 --wait 20 --save F09.load-plugin/agent-frame\ncontrol-agent-server ws read qa-f09-plugin --contains qa-f09-mkt-plugin-skill --expect-none\ncontrol-agent-server ws stop qa-f09-plugin --kinds ConversationStateUpdateEvent --contains QA_PLUGIN_HOOK --expect-min 1 --wait 20\n",
+  "exit_code": 1,
+  "elapsed_ms": 3086,
+  "failed_line": 7,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$PID/load_plugin\" --json '{\"plugin_ref\": \"qa-f09-mkt-plugin@qa-f09-mkt\"}' --expect 200 --check success eq true --save F09.load-plugin/load",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 400,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations/9207925b-51da-4fcc-801b-e756468bd834/load_plugin",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "plugin_ref": "qa-f09-mkt-plugin@qa-f09-mkt"
+      },
+      "files": []
+    },
+    "response": {
+      "status": 400,
+      "headers": {
+        "content-length": "107",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Unable to parse plugin source: . Expected formats: 'github:owner/repo', git URL, or local path"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 67,
+    "checks": [
+      {
+        "check": "success eq true",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.load-plugin/load.json",
+    "hint": "expected 200, got 400"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/9207925b-51da-4fcc-801b-e756468bd834\",\n    \"query\": [\n      [\n        \"include_skills\",\n        \"true\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"5288\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \"agent.agent_context.registered_marketplaces.0.name eq qa-f09-mkt\",\n      \"ok\": true,\n      \"actual\": \"qa-f09-mkt\"\n    },\n    {\n      \"check\": \"agent.agent_context.skills len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"hook_config missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"capture\": \"qa-f09-plugin\",\n  \"out\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/captures/qa-f09-plugin.jsonl\",\n  \"hint\": \"`control-agent-server ws stop qa-f09-plugin` (or `ws read qa-f09-plugin`) after triggering the action\"\n}\n{\n  \"ok\": false,\n  \"status\": 400,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/9207925b-51da-4fcc-801b-e756468bd834/load_plugin\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"plugin_ref\": \"qa-f09-mkt-plugin@qa-f09-mkt\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 400,\n    \"headers\": {\n      \"content-length\": \"107\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Unable to parse plugin source: . Expected formats: 'github:owner/repo', git URL, or local path\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \"success eq true\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.load-plugin/load.json\",\n  \"hint\": \"expected 200, got 400\"\n}\n",
+  "stderr": ""
+}

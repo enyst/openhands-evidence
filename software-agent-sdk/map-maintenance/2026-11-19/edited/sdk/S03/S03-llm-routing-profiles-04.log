@@ -1,0 +1,74 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/routing --arg discovery \
+  --check status eq finished --check before_first_message len-eq 0 \
+  --check registered contains router-primary --check registered contains router-secondary \
+  --check registered contains condenser --check stats contains router-secondary \
+  --check duplicate_usage_ids.error missing --check duplicate_usage_ids.registered len-eq 1
+{
+  "ok": true,
+  "mode": "discovery",
+  "before_first_message": [],
+  "registered": [
+    "condenser",
+    "router-primary",
+    "router-secondary"
+  ],
+  "stats": [
+    "condenser",
+    "router-primary",
+    "router-secondary"
+  ],
+  "status": "finished",
+  "duplicate_usage_ids": {
+    "error": null,
+    "registered": [
+      "agent"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 5.8,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "before_first_message len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "registered contains router-primary",
+      "ok": true,
+      "actual": "[\"condenser\", \"router-primary\", \"router-secondary\"]"
+    },
+    {
+      "check": "registered contains router-secondary",
+      "ok": true,
+      "actual": "[\"condenser\", \"router-primary\", \"router-secondary\"]"
+    },
+    {
+      "check": "registered contains condenser",
+      "ok": true,
+      "actual": "[\"condenser\", \"router-primary\", \"router-secondary\"]"
+    },
+    {
+      "check": "stats contains router-secondary",
+      "ok": true,
+      "actual": "[\"condenser\", \"router-primary\", \"router-secondary\"]"
+    },
+    {
+      "check": "duplicate_usage_ids.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "duplicate_usage_ids.registered len-eq 1",
+      "ok": true,
+      "actual": "[\"agent\"]"
+    }
+  ]
+}
+
+[exit 0 after 6s]

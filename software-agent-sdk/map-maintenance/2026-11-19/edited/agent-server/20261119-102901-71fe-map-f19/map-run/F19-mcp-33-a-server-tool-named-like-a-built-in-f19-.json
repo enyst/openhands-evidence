@@ -1,0 +1,32 @@
+{
+  "file": "F19-mcp.md",
+  "bullet": "A server tool named like a built-in (`F19.conversation-tool`), known bug #6992.",
+  "ids": [
+    "F19.conversation-tool"
+  ],
+  "line": 1058,
+  "script": "SH_STUB=$(control-agent-server fixture llm-stub --name qa-f19-sh-stub --step 'tool:terminal:{\"command\":\"echo QA_F19_BUILTIN_TERMINAL\"}' --step 'tool:qa_sibling:{}' --step 'tool:finish:{\"message\":\"QA_F19_SH_DONE\"}' --print-path)\nSH_AGENT=$(jq -nc --arg b \"$SH_STUB/v1\" --argjson s \"$PAYLOAD_SRV\" '{llm: {model: \"openai/qa-stub\", api_key: \"qa-stub-key\", base_url: $b, num_retries: 0}, tools: [{name: \"terminal\"}], mcp_config: {\"qa-f19-shadow\": ($s + {args: ($s.args + [\"3\"])})}}')\nSHCID=$(control-agent-server conversation start --body-json \"$(jq -nc --argjson a \"$SH_AGENT\" '{agent: $a}')\" --no-autotitle --print-id)\ntrap 'control-agent-server api DELETE \"/api/conversations/$SHCID\" --expect 200,404 >/dev/null || true' EXIT\ncontrol-agent-server api POST \"/api/conversations/$SHCID/events\" --json '{\"role\": \"user\", \"content\": [{\"type\": \"text\", \"text\": \"Use both tools.\"}], \"run\": true}' \\\n  --expect 200 --save F19.conversation-tool/shadow-first-message\ncontrol-agent-server conversation wait \"$SHCID\" --until finished --timeout 90\ncontrol-agent-server conversation events \"$SHCID\" --kinds ObservationEvent --contains QA_F19_BUILTIN_TERMINAL --expect-kind ObservationEvent\ncontrol-agent-server conversation events \"$SHCID\" --kinds ObservationEvent --contains QA_F19_SIBLING --expect-kind ObservationEvent \\\n  --save F19.conversation-tool/shadow-sibling # bug: matching eq 0 && kinds.AgentErrorEvent eq 1\ncontrol-agent-server sink read --name qa-f19-sh-stub --contains '\"name\": \"qa-f19-shadow_terminal\"' --expect-min 1\n",
+  "exit_code": 1,
+  "elapsed_ms": 8106,
+  "failed_line": 9,
+  "failed_command": "control-agent-server conversation events \"$SHCID\" --kinds ObservationEvent --contains QA_F19_SIBLING --expect-kind ObservationEvent --save F19.conversation-tool/shadow-sibling",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "id": "a7886c0c-8a76-413e-bf69-82590b9b6b21",
+    "total": 14,
+    "kinds": {
+      "SystemPromptEvent": 1,
+      "MessageEvent": 1,
+      "ConversationStateUpdateEvent": 6,
+      "ActionEvent": 3,
+      "ObservationEvent": 2,
+      "AgentErrorEvent": 1
+    },
+    "matching": 0,
+    "events": [],
+    "saved": "<scratch>/agent-server/20261119-102901-71fe-map-f19/evidence/F19.conversation-tool/shadow-sibling.json"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/a7886c0c-8a76-413e-bf69-82590b9b6b21/events\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Use both tools.\"\n        }\n      ],\n      \"run\": true\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 1133,\n  \"saved\": \"<scratch>/agent-server/20261119-102901-71fe-map-f19/evidence/F19.conversation-tool/shadow-first-message.json\"\n}\n{\n  \"id\": \"a7886c0c-8a76-413e-bf69-82590b9b6b21\",\n  \"ok\": true,\n  \"status\": \"finished\",\n  \"transitions\": [\n    \"idle\",\n    \"running\",\n    \"finished\"\n  ],\n  \"waited_ms\": 4189\n}\n{\n  \"ok\": true,\n  \"id\": \"a7886c0c-8a76-413e-bf69-82590b9b6b21\",\n  \"total\": 14,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 6,\n    \"ActionEvent\": 3,\n    \"ObservationEvent\": 2,\n    \"AgentErrorEvent\": 1\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"92782455-32d4-4e13-9493-1259e890edec\",\n      \"kind\": \"ObservationEvent\",\n      \"source\": \"environment\",\n      \"timestamp\": \"2026-11-19T10:31:31.384780\",\n      \"tool_name\": \"terminal\",\n      \"observation\": \"{\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA_F19_BUILTIN_TERMINAL\\\"}], \\\"is_error\\\": false, \\\"command\\\": \\\"echo QA_F19_BUILTIN_TERMINAL\\\", \\\"exit_code\\\": 0, \\\"timeout\\\": false, \\\"metadata\\\": {\\\"exit_code\\\": 0, \\\"pid\\\": -1, \\\"username\\\": \\\"root\\\", \\\"hostname\\\": \\\"vm\\\", \\\"working_dir\\\": \\\"/tmp/claude-0/-home-\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"id\": \"a7886c0c-8a76-413e-bf69-82590b9b6b21\",\n  \"total\": 14,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 6,\n    \"ActionEvent\": 3,\n    \"ObservationEvent\": 2,\n    \"AgentErrorEvent\": 1\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"<scratch>/agent-server/20261119-102901-71fe-map-f19/evidence/F19.conversation-tool/shadow-sibling.json\"\n}\n",
+  "stderr": ""
+}

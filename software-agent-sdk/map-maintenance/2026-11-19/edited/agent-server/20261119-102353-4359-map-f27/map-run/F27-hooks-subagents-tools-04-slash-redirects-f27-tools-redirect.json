@@ -1,0 +1,17 @@
+{
+  "file": "F27-hooks-subagents-tools.md",
+  "bullet": "Slash redirects (`F27.tools-redirect`).",
+  "ids": [
+    "F27.tools-redirect"
+  ],
+  "line": 281,
+  "script": "NOSLASH=/api/tools\ncontrol-agent-server api GET \"$NOSLASH\" --expect 307 --check-header location matches '/api/tools/$' --save F27.tools-redirect/no-slash\ncontrol-agent-server api GET /api/tools/catalog/ --expect 307 --check-header location matches '/api/tools/catalog$'\n",
+  "exit_code": 0,
+  "elapsed_ms": 717,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/tools\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:35507/api/tools/\"\n    },\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 58,\n  \"checks\": [\n    {\n      \"check\": \"header location matches /api/tools/$\",\n      \"ok\": true,\n      \"actual\": \"http://127.0.0.1:35507/api/tools/\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-102353-4359-map-f27/evidence/F27.tools-redirect/no-slash.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/tools/catalog/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:35507/api/tools/catalog\"\n    },\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 63,\n  \"checks\": [\n    {\n      \"check\": \"header location matches /api/tools/catalog$\",\n      \"ok\": true,\n      \"actual\": \"http://127.0.0.1:35507/api/tools/catalog\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

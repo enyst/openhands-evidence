@@ -1,0 +1,17 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Token callbacks on a remote conversation (`F33.conversation-token-callbacks`).",
+  "ids": [
+    "F33.conversation-token-callbacks"
+  ],
+  "line": 945,
+  "script": "test \"$(jq .deltas \"$F33/stream.json\")\" -gt 0\ncontrol-agent-server assert --json \"$F33/stream.json\" --check tokens gt 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 8,
+  "failed_line": 1,
+  "failed_command": "test \"$(jq .deltas \"$F33/stream.json\")\" -gt 0",
+  "failed_status": 2,
+  "observation": null,
+  "stdout": "",
+  "stderr": "jq: error: Could not open file /stream.json: No such file or directory\n<scratch>/agent-server/20261119-090348-68d3-shim-f33/private/F33-sdk-remote-client.recipe.sh: line 5: test: : integer expression expected\n"
+}

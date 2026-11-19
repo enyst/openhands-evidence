@@ -1,0 +1,27 @@
+{
+  "file": "F32-webhooks-and-telemetry.md",
+  "bullet": "Full-state snapshot on every attach (`F32.events-full-state`).",
+  "ids": [
+    "F32.events-full-state"
+  ],
+  "line": 160,
+  "script": "control-agent-server sink read --path \"/events/$HEX\" --contains '\"key\": \"full_state\"' --expect-min 2 --expect-max 2 --wait 15\ncontrol-agent-server sink read --path \"/events/$HEX\" --contains '\"api_key\": \"**********\"' --expect-min 1\ntest -n \"$DEEPSEEK_API_KEY\"\ncontrol-agent-server sink read --contains \"$DEEPSEEK_API_KEY\" --expect-max 0\ncontrol-agent-server conversation events \"$CID\" --key full_state --expect-count 0\ncontrol-agent-server restart\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query limit=1 --expect 200 --quiet\ncontrol-agent-server sink read --path \"/events/$HEX\" --contains '\"key\": \"full_state\"' --expect-min 3 --expect-max 3 --wait 15 --save F32.events-full-state/after-restart\n",
+  "exit_code": 1,
+  "elapsed_ms": 1030,
+  "failed_line": 3,
+  "failed_command": "test -n \"$DEEPSEEK_API_KEY\"",
+  "failed_status": 1,
+  "observation": {
+    "ok": true,
+    "requests": 2,
+    "paths": {
+      "/events/a0eefd108e4c4a0c83300d8c9200cc03": 2
+    },
+    "last": [
+      "{\"at\": \"2026-11-19T08:23:47Z\", \"method\": \"POST\", \"path\": \"/events/a0eefd108e4c4a0c83300d8c9200cc03\", \"headers\": {\"Host\": \"127.0.0.1:52263\", \"Accept\": \"*/*\", \"Accept-Encoding\": \"gzip, deflate\", \"Connection\": \"keep-alive\", \"User-Agent\": \"python-httpx/0.28.1\", \"X-Session-API-Key\": \"<redacted:session-api-key>\", \"Content-Length\": \"21020\", \"Content-Type\": \"application/json\"}, \"body\": [{\"id\": \"1abf\u2026",
+      "{\"at\": \"2026-11-19T08:23:49Z\", \"method\": \"POST\", \"path\": \"/events/a0eefd108e4c4a0c83300d8c9200cc03\", \"headers\": {\"Host\": \"127.0.0.1:52263\", \"Accept\": \"*/*\", \"Accept-Encoding\": \"gzip, deflate\", \"Connection\": \"keep-alive\", \"User-Agent\": \"python-httpx/0.28.1\", \"X-Session-API-Key\": \"<redacted:session-api-key>\", \"Content-Length\": \"7145\", \"Content-Type\": \"application/json\"}, \"body\": [{\"id\": \"74605\u2026"
+    ]
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"requests\": 2,\n  \"paths\": {\n    \"/events/a0eefd108e4c4a0c83300d8c9200cc03\": 2\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-19T08:23:47Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/events/a0eefd108e4c4a0c83300d8c9200cc03\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:52263\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"X-Session-API-Key\\\": \\\"<redacted:session-api-key>\\\", \\\"Content-Length\\\": \\\"21020\\\", \\\"Content-Type\\\": \\\"application/json\\\"}, \\\"body\\\": [{\\\"id\\\": \\\"1abf\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-19T08:23:49Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/events/a0eefd108e4c4a0c83300d8c9200cc03\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:52263\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"X-Session-API-Key\\\": \\\"<redacted:session-api-key>\\\", \\\"Content-Length\\\": \\\"7145\\\", \\\"Content-Type\\\": \\\"application/json\\\"}, \\\"body\\\": [{\\\"id\\\": \\\"74605\\u2026\"\n  ]\n}\n{\n  \"ok\": true,\n  \"requests\": 2,\n  \"paths\": {\n    \"/events/a0eefd108e4c4a0c83300d8c9200cc03\": 2\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-19T08:23:47Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/events/a0eefd108e4c4a0c83300d8c9200cc03\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:52263\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"X-Session-API-Key\\\": \\\"<redacted:session-api-key>\\\", \\\"Content-Length\\\": \\\"21020\\\", \\\"Content-Type\\\": \\\"application/json\\\"}, \\\"body\\\": [{\\\"id\\\": \\\"1abf\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-19T08:23:49Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/events/a0eefd108e4c4a0c83300d8c9200cc03\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:52263\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"X-Session-API-Key\\\": \\\"<redacted:session-api-key>\\\", \\\"Content-Length\\\": \\\"7145\\\", \\\"Content-Type\\\": \\\"application/json\\\"}, \\\"body\\\": [{\\\"id\\\": \\\"74605\\u2026\"\n  ]\n}\n",
+  "stderr": ""
+}

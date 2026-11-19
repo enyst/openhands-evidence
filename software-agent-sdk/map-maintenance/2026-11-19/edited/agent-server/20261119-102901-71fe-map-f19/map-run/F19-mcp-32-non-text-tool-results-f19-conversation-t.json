@@ -1,0 +1,31 @@
+{
+  "file": "F19-mcp.md",
+  "bullet": "Non-text tool results (`F19.conversation-tool`), known bug #6993.",
+  "ids": [
+    "F19.conversation-tool"
+  ],
+  "line": 1038,
+  "script": "PL_STUB=$(control-agent-server fixture llm-stub --name qa-f19-pl-stub --step 'tool:qa_resource:{}' --step 'tool:qa_structured_only:{}' --step 'tool:finish:{\"message\":\"QA_F19_PL_DONE\"}' --print-path)\nPL_AGENT=$(jq -nc --arg b \"$PL_STUB/v1\" --argjson s \"$PAYLOAD_SRV\" '{llm: {model: \"openai/qa-stub\", api_key: \"qa-stub-key\", base_url: $b, num_retries: 0}, tools: [], mcp_config: {\"qa-f19-payload\": $s}}')\nPLCID=$(control-agent-server conversation start --body-json \"$(jq -nc --argjson a \"$PL_AGENT\" '{agent: $a}')\" --no-autotitle --prompt 'Read the payloads.' --wait --timeout 90 --print-id)\ncontrol-agent-server conversation events \"$PLCID\" --kinds ObservationEvent --contains \"Tool 'qa_structured_only' executed\" --expect-kind ObservationEvent\ncontrol-agent-server conversation events \"$PLCID\" --kinds ObservationEvent --contains QA_F19_STRUCTURED --expect-kind ObservationEvent --save F19.conversation-tool/structured-only # bug: matching eq 0 && kinds.ObservationEvent eq 3\ncontrol-agent-server conversation events \"$PLCID\" --kinds ObservationEvent --contains QA_F19_RESOURCE_TEXT --expect-kind ObservationEvent --save F19.conversation-tool/resource # bug: matching eq 0 && kinds.ObservationEvent eq 3\ncontrol-agent-server api DELETE \"/api/conversations/$PLCID\" --expect 200 --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 3780,
+  "failed_line": 5,
+  "failed_command": "control-agent-server conversation events \"$PLCID\" --kinds ObservationEvent --contains QA_F19_STRUCTURED --expect-kind ObservationEvent --save F19.conversation-tool/structured-only",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "id": "c199de23-d476-4e8e-8889-87a60138fb30",
+    "total": 14,
+    "kinds": {
+      "SystemPromptEvent": 1,
+      "MessageEvent": 1,
+      "ConversationStateUpdateEvent": 6,
+      "ActionEvent": 3,
+      "ObservationEvent": 3
+    },
+    "matching": 0,
+    "events": [],
+    "saved": "<scratch>/agent-server/20261119-102901-71fe-map-f19/evidence/F19.conversation-tool/structured-only.json"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"id\": \"c199de23-d476-4e8e-8889-87a60138fb30\",\n  \"total\": 14,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 6,\n    \"ActionEvent\": 3,\n    \"ObservationEvent\": 3\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"65c82939-210d-4dc3-8119-fcb821835724\",\n      \"kind\": \"ObservationEvent\",\n      \"source\": \"environment\",\n      \"timestamp\": \"2026-11-19T10:31:23.811746\",\n      \"tool_name\": \"qa_structured_only\",\n      \"observation\": \"{\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"[Tool 'qa_structured_only' executed.]\\\"}], \\\"is_error\\\": false, \\\"tool_name\\\": \\\"qa_structured_only\\\", \\\"kind\\\": \\\"MCPToolObservation\\\"}\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"id\": \"c199de23-d476-4e8e-8889-87a60138fb30\",\n  \"total\": 14,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 6,\n    \"ActionEvent\": 3,\n    \"ObservationEvent\": 3\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"<scratch>/agent-server/20261119-102901-71fe-map-f19/evidence/F19.conversation-tool/structured-only.json\"\n}\n",
+  "stderr": ""
+}

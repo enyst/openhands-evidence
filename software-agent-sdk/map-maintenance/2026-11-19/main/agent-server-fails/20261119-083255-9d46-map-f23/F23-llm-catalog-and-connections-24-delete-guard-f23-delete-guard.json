@@ -1,0 +1,47 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Delete guard (`F23.delete-guard`).",
+  "ids": [
+    "F23.delete-guard"
+  ],
+  "line": 645,
+  "script": "control-agent-server api DELETE \"/api/llm/provider-connections/$CONN\" --expect 409 --save F23.delete-guard/profile-and-settings \\\n  --check detail eq 'Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked and referenced by the active agent settings. Update those references before deleting it.'\ncontrol-agent-server api POST /api/profiles/deepseek-flash/activate --expect 200\ncontrol-agent-server api DELETE \"/api/llm/provider-connections/$CONN\" --expect 409 --save F23.delete-guard/profile \\\n  --check detail eq 'Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked. Update those references before deleting it.'\ncontrol-agent-server api POST /api/profiles/qa-f23-linked/activate --expect 200\ncontrol-agent-server api DELETE /api/profiles/qa-f23-linked --expect 200\ncontrol-agent-server api DELETE \"/api/llm/provider-connections/$CONN\" --expect 409 --save F23.delete-guard/settings \\\n  --check detail eq 'Provider connection cannot be deleted while it is referenced by the active agent settings. Update those references before deleting it.'\ncontrol-agent-server api GET /api/llm/provider-connections --check . len-eq 2 --check 0.id eq \"$CONN\" --check 0.api_key_set eq true\ncontrol-agent-server api POST /api/profiles/deepseek-flash/activate --expect 200\ncontrol-agent-server api GET /api/settings --check active_profile eq deepseek-flash --check agent_settings.llm.provider_connection_id eq null\n",
+  "exit_code": 1,
+  "elapsed_ms": 366,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api DELETE \"/api/llm/provider-connections/$CONN\" --expect 409 --save F23.delete-guard/profile-and-settings --check detail eq 'Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked and referenced by the active agent settings. Update those references before deleting it.'",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 307,
+    "request": {
+      "method": "DELETE",
+      "path": "/api/llm/provider-connections/",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 307,
+      "headers": {
+        "content-length": "0",
+        "location": "http://127.0.0.1:48675/api/llm/provider-connections"
+      },
+      "body": "",
+      "truncated": false
+    },
+    "elapsed_ms": 56,
+    "checks": [
+      {
+        "check": "detail eq Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked and referenced by the active agent settings. Update those references before deleting it.",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-083255-9d46-map-f23/evidence/F23.delete-guard/profile-and-settings.json",
+    "hint": "expected 409, got 307"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"DELETE\",\n    \"path\": \"/api/llm/provider-connections/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:48675/api/llm/provider-connections\"\n    },\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 56,\n  \"checks\": [\n    {\n      \"check\": \"detail eq Provider connection cannot be deleted while it is referenced by LLM profile(s): qa-f23-linked and referenced by the active agent settings. Update those references before deleting it.\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-083255-9d46-map-f23/evidence/F23.delete-guard/profile-and-settings.json\",\n  \"hint\": \"expected 409, got 307\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,64 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/client --arg oauth \
+  --check valid.authorization eq "Bearer stored-access-token" --check valid.server_log len-eq 0 \
+  --check expired.authorization eq "Bearer fresh-access-token" \
+  --check expired.server_log eq '["metadata", "/oauth/token grant=refresh_token refresh=stored-refresh-token"]' \
+  --check expired_no_metadata.authorization eq "Bearer fresh-access-token" \
+  --check expired_no_metadata.server_log eq '["/token grant=refresh_token refresh=stored-refresh-token"]'
+{
+  "ok": true,
+  "mode": "oauth",
+  "valid": {
+    "authorization": "Bearer stored-access-token",
+    "server_log": []
+  },
+  "expired": {
+    "authorization": "Bearer fresh-access-token",
+    "server_log": [
+      "metadata",
+      "/oauth/token grant=refresh_token refresh=stored-refresh-token"
+    ]
+  },
+  "expired_no_metadata": {
+    "authorization": "Bearer fresh-access-token",
+    "server_log": [
+      "/token grant=refresh_token refresh=stored-refresh-token"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 8.5,
+  "checks": [
+    {
+      "check": "valid.authorization eq Bearer stored-access-token",
+      "ok": true,
+      "actual": "Bearer stored-access-token"
+    },
+    {
+      "check": "valid.server_log len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "expired.authorization eq Bearer fresh-access-token",
+      "ok": true,
+      "actual": "Bearer fresh-access-token"
+    },
+    {
+      "check": "expired.server_log eq [\"metadata\", \"/oauth/token grant=refresh_token refresh=stored-refresh-token\"]",
+      "ok": true,
+      "actual": "[\"metadata\", \"/oauth/token grant=refresh_token refresh=stored-refresh-token\"]"
+    },
+    {
+      "check": "expired_no_metadata.authorization eq Bearer fresh-access-token",
+      "ok": true,
+      "actual": "Bearer fresh-access-token"
+    },
+    {
+      "check": "expired_no_metadata.server_log eq [\"/token grant=refresh_token refresh=stored-refresh-token\"]",
+      "ok": true,
+      "actual": "[\"/token grant=refresh_token refresh=stored-refresh-token\"]"
+    }
+  ]
+}
+
+[exit 0 after 9s]

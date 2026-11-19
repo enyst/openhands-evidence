@@ -1,0 +1,46 @@
+{
+  "file": "F32-webhooks-and-telemetry.md",
+  "bullet": "Token and cost buckets from real usage (`F32.telemetry-usage-buckets`).",
+  "ids": [
+    "F32.telemetry-usage-buckets"
+  ],
+  "line": 508,
+  "script": "control-agent-server api GET \"/api/conversations/$UCID\" --check stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0\ncontrol-agent-server sink read --name qa-f32-telemetry --contains '\"total_tokens_bucket\": \"' --expect-min 1\ncontrol-agent-server sink read --name qa-f32-telemetry --contains '\"total_tokens_bucket\": \"unknown\"' --expect-max 0 --save F32.telemetry-usage-buckets/outcome\n",
+  "exit_code": 1,
+  "elapsed_ms": 332,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$UCID\" --check stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 307,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 307,
+      "headers": {
+        "content-length": "0",
+        "location": "http://127.0.0.1:49259/api/conversations"
+      },
+      "body": "",
+      "truncated": false
+    },
+    "elapsed_ms": 55,
+    "checks": [
+      {
+        "check": "stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "hint": "failed check: stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:49259/api/conversations\"\n    },\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 55,\n  \"checks\": [\n    {\n      \"check\": \"stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"hint\": \"failed check: stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0\"\n}\n",
+  "stderr": ""
+}

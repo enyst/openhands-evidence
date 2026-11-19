@@ -1,0 +1,96 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/switching --arg profile \
+  --check requests.a eq 1 --check requests.b eq 1 --check active_model eq openai/gpt-4.1-mini \
+  --check registry contains profile:model-b --check stats.agent eq 0.14 --check stats.profile:model-b eq 0.14 \
+  --check persisted_model eq openai/gpt-4.1-mini --check missing_profile_error eq FileNotFoundError \
+  --check model_after_missing eq openai/gpt-4.1-mini --check prompt_cache_key_kept eq true \
+  --check prompt_cache_key_is_conversation_id eq true --check status eq finished
+{
+  "ok": true,
+  "mode": "profile",
+  "requests": {
+    "a": 1,
+    "b": 1
+  },
+  "active_model": "openai/gpt-4.1-mini",
+  "registry": [
+    "agent",
+    "profile:model-b"
+  ],
+  "stats": {
+    "agent": 0.14,
+    "profile:model-b": 0.14
+  },
+  "persisted_model": "openai/gpt-4.1-mini",
+  "missing_profile_error": "FileNotFoundError",
+  "model_after_missing": "openai/gpt-4.1-mini",
+  "prompt_cache_key_kept": true,
+  "prompt_cache_key_is_conversation_id": true,
+  "status": "finished",
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "requests.a eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "requests.b eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "active_model eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "registry contains profile:model-b",
+      "ok": true,
+      "actual": "[\"agent\", \"profile:model-b\"]"
+    },
+    {
+      "check": "stats.agent eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "stats.profile:model-b eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "persisted_model eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "missing_profile_error eq FileNotFoundError",
+      "ok": true,
+      "actual": "FileNotFoundError"
+    },
+    {
+      "check": "model_after_missing eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "prompt_cache_key_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "prompt_cache_key_is_conversation_id eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 6s]

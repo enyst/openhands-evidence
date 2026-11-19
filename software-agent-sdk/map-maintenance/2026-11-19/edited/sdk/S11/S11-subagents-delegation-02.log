@@ -1,0 +1,66 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk program S11/task_resume_session --arg create --check observations.0.status eq completed --field id)
+control-sdk program S11/task_resume_session --arg resume --arg "$CID" \
+  --check observations len-eq 2 --check observations.1.task_id eq task_00000001 \
+  --check observations.1.status eq completed --check echoer_calls eq 1 --check subagent_dirs len-eq 1
+control-sdk program S11/task_resume_session --arg retype \
+  --check observations.1.task_id eq task_00000001 --check observations.1.status eq completed \
+  --check echoer_calls eq 2 --check other_calls eq 0
+{
+  "ok": true,
+  "mode": "resume",
+  "id": "052e0d6d-ff51-4a96-8e01-f350713b549c",
+  "execution_status": "finished",
+  "observations": [
+    {
+      "task_id": "task_00000001",
+      "subagent": "echoer",
+      "status": "completed",
+      "is_error": false,
+      "text": "said hello"
+    },
+    {
+      "task_id": "unknown",
+      "subagent": "echoer",
+      "status": "error",
+      "is_error": true,
+      "text": "Failed to execute task: Task 'task_00000001' not found. Available tasks: "
+    }
+  ],
+  "echoer_calls": 0,
+  "other_calls": 0,
+  "subagent_dirs": [
+    "0086739434cf4021adbaf39406db7253"
+  ],
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "observations len-eq 2",
+      "ok": true,
+      "actual": "[{\"task_id\": \"task_00000001\", \"subagent\": \"echoer\", \"status\": \"completed\", \"is_error\": false, \"text\": \"said hello\"}, {\"task_id\": \"unknown\", \"subagent\": \"echoer\", \"status\": \"error\", \"is_error\": true, \""
+    },
+    {
+      "check": "observations.1.task_id eq task_00000001",
+      "ok": false,
+      "actual": "unknown"
+    },
+    {
+      "check": "observations.1.status eq completed",
+      "ok": false,
+      "actual": "error"
+    },
+    {
+      "check": "echoer_calls eq 1",
+      "ok": false,
+      "actual": "0"
+    },
+    {
+      "check": "subagent_dirs len-eq 1",
+      "ok": true,
+      "actual": "[\"0086739434cf4021adbaf39406db7253\"]"
+    }
+  ]
+}
+
+[exit 1 after 11s]

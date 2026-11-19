@@ -1,0 +1,69 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/conversation --arg disabled \
+  --check error missing --check status eq finished --check tools eq '["finish"]' --check marker_written eq false
+control-sdk program S09/client --arg timeout \
+  --check all_disabled_error contains "All configured MCP servers are disabled: off" \
+  --check mixed_enabled_names_sample len-eq 3
+{
+  "ok": true,
+  "mode": "disabled",
+  "error": null,
+  "status": "finished",
+  "tools": [
+    "finish"
+  ],
+  "marker_written": false,
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "tools eq [\"finish\"]",
+      "ok": true,
+      "actual": "[\"finish\"]"
+    },
+    {
+      "check": "marker_written eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "timeout",
+  "slow_error": "MCPTimeoutError: MCP tool listing timed out after 2 seconds.\nMCP servers configured: sleepy\n\nPossible solutions:\n  1. Increase the timeout value (default is 30 seconds)\n  2. Check if the MCP server is running and responding\n  3. Verify network connectivity to the MCP server\n",
+  "slow_seconds": 4.1,
+  "unreachable_error": "MCPError: MCP Connection Failure",
+  "all_disabled_error": "ValueError: All configured MCP servers are disabled: off. Enable at least one, or skip the call entirely.",
+  "mixed_enabled_names_sample": [
+    "add",
+    "counter",
+    "die"
+  ],
+  "_exit": 0,
+  "_seconds": 10.5,
+  "checks": [
+    {
+      "check": "all_disabled_error contains All configured MCP servers are disabled: off",
+      "ok": true,
+      "actual": "ValueError: All configured MCP servers are disabled: off. Enable at least one, or skip the call entirely."
+    },
+    {
+      "check": "mixed_enabled_names_sample len-eq 3",
+      "ok": true,
+      "actual": "[\"add\", \"counter\", \"die\"]"
+    }
+  ]
+}
+
+[exit 0 after 16s]

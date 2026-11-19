@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Pause a blocking run (`F33.conversation-pause`).",
+  "ids": [
+    "F33.conversation-pause"
+  ],
+  "line": 1348,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-pause/probe -- .venv/bin/python - <<'PY'\nimport threading\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import ActionEvent\n\nacted = threading.Event()\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"pause\"), visualizer=None, delete_on_close=False,\n                    callbacks=[lambda e: isinstance(e, ActionEvent) and acted.set()])\nconv.send_message(\"Run this exact shell command: sleep 8; printf done > qa-f33-pause.txt\")\nrunner = threading.Thread(target=conv.run, kwargs={\"timeout\": 300})\nrunner.start()\nassert acted.wait(180), \"no ActionEvent\"\nconv.pause()\nrunner.join(120)\nassert not runner.is_alive(), \"run() did not return after pause()\"\npaused = conv.state.execution_status.value\nassert paused == \"paused\", paused\nconv.run(timeout=300)\nassert conv.state.execution_status.value == \"finished\", conv.state.execution_status\nf33.emit(\"pause\", cid=str(conv.id), paused=paused)\nconv.close()\nPY\nPAUSED=$(jq -r .cid \"$F33/pause.json\")\ntest \"$(cat \"$F33/pause/qa-f33-pause.txt\")\" = done\ncontrol-agent-server conversation events \"$PAUSED\" --kinds PauseEvent --expect-count 1 --save F33.conversation-pause/pause-event\ncontrol-agent-server conversation events \"$PAUSED\" --key execution_status --contains paused --expect-min 1\ncontrol-agent-server api GET \"/api/conversations/$PAUSED\" --check execution_status eq finished --save F33.conversation-pause/get\n",
+  "exit_code": 1,
+  "elapsed_ms": 349,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-pause/probe -- .venv/bin/python - <<'PY'\nimport threading\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import ActionEvent\n\nacted = threading.Event()\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"pause\"), visualizer=None, delete_on_close=False,\n                    callbacks=[lambda e: isinstance(e, ActionEvent) and acted.set()])\nconv.send_message(\"Run this exact shell command:",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 31,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 2, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-pause/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 31,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 2, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-pause/probe.json\"\n}\n",
+  "stderr": ""
+}

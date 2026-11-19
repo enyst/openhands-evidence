@@ -1,0 +1,30 @@
+{
+  "file": "F34-typescript-client.md",
+  "bullet": "Event stream on Node's WebSocket (`F34.event-stream`).",
+  "ids": [
+    "F34.event-stream"
+  ],
+  "line": 849,
+  "script": "TOTAL=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)\ncat > \"$F34/stream.mjs\" <<'JS'\nimport { m, c, host, apiKey, assert, waitFor } from './lib.mjs';\nconst [cid, total] = process.argv.slice(2);\nconst stored = (await new m.RemoteEventsList({ baseUrl: host, apiKey }, cid).getEvents()).map((e) => e.id);\nassert.equal(stored.length, Number(total));\nconst url = c.buildConversationEventStreamUrl(host, cid);\nassert.equal(url, `${host.replace('http', 'ws')}/sockets/events/${cid}`);\nconst frames = [];\nlet state = {};\nconst stream = new c.ConversationEventStream({ url, sessionApiKey: apiKey, queryParams: { resend_mode: 'all' },\n  onMessage: (frame) => frames.push(JSON.parse(frame.data)), onStateChange: (next) => { state = next; } });\nassert.throws(() => stream.send('{}'), /not open/);\nstream.start();\nawait waitFor(() => state.isConnected, 10000, 50);\nawait waitFor(() => { const seen = new Set(frames.map((f) => f.id)); return stored.every((id) => seen.has(id)); }, 15000, 100);\nstream.send(JSON.stringify({ role: 'user', content: [{ type: 'text', text: 'qa-f34-stream: reply with the single word ok, then finish.' }] }));\nconst sent = await waitFor(() => frames.findIndex((f) => f.kind === 'MessageEvent' && f.source === 'user' &&\n  JSON.stringify(f).includes('qa-f34-stream')) + 1, 15000, 100);\nawait waitFor(() => frames.slice(sent).some((f) => f.kind === 'ConversationStateUpdateEvent' &&\n  f.key === 'execution_status' && f.value === 'finished'), 240000, 250);\nstream.stop();\nassert.equal(state.isConnected, false);\nconst errors = [];\nconst bad = new c.ConversationEventStream({ url, sessionApiKey: 'qa-f34-wrong-key',\n  onStateChange: (next) => { if (next.error) errors.push(next.error.message); } });\nbad.start();\nawait waitFor(() => errors.length, 10000, 50);\nbad.stop();\nassert.equal(errors[0], 'WebSocket closed with code 4001: Authentication failed');\nconst leaky = new c.ConversationEventStream({ url: `${url}?session_api_key=${apiKey}`,\n  onStateChange: (next) => { if (next.error) errors.push(next.error.message); } });\nleaky.start();\nleaky.stop();\nassert.equal(errors.at(-1), 'Use sessionApiKey for first-frame authentication, not URL credentials');\nconsole.log('QA_F34_STREAM_OK');\nJS\ncontrol-agent-server exec --timeout 300 --expect-output QA_F34_STREAM_OK --save F34.event-stream/program -- node \"$F34/stream.mjs\" \"$CID\" \"$TOTAL\"\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query body=qa-f34-stream --check items len-ge 1 \\\n  --check items.0.source eq user --save F34.event-stream/message\ncontrol-agent-server api GET \"/api/conversations/$CID\" --max-chars 300 --check execution_status eq finished\ncontrol-agent-server api GET \"/api/conversations/$CID/events/count\" --query source=user --check . eq 2\n",
+  "exit_code": 1,
+  "elapsed_ms": 241596,
+  "failed_line": 38,
+  "failed_command": "control-agent-server exec --timeout 300 --expect-output QA_F34_STREAM_OK --save F34.event-stream/program -- node \"$F34/stream.mjs\" \"$CID\" \"$TOTAL\"",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 240959,
+    "stdout_tail": "",
+    "stderr_tail": "file://<scratch>/agent-server/20261119-084010-1ff7-map-f34/fixtures/qa-f34/lib.mjs:15\n    if (Date.now() > end) throw new Error('waitFor timed out');\n                                ^\n\nError: waitFor timed out\n    at waitFor (file://<scratch>/agent-server/20261119-084010-1ff7-map-f34/fixtures/qa-f34/lib.mjs:15:33)\n    at async file://<scratch>/agent-server/20261119-084010-1ff7-map-f34/fixtures/qa-f34/stream.mjs:18:1\n\nNode.js v22.23.5\n",
+    "hint": {
+      "missing": [
+        "QA_F34_STREAM_OK"
+      ],
+      "unexpected": []
+    },
+    "saved": "<scratch>/agent-server/20261119-084010-1ff7-map-f34/evidence/F34.event-stream/program.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 240959,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"file://<scratch>/agent-server/20261119-084010-1ff7-map-f34/fixtures/qa-f34/lib.mjs:15\\n    if (Date.now() > end) throw new Error('waitFor timed out');\\n                                ^\\n\\nError: waitFor timed out\\n    at waitFor (file://<scratch>/agent-server/20261119-084010-1ff7-map-f34/fixtures/qa-f34/lib.mjs:15:33)\\n    at async file://<scratch>/agent-server/20261119-084010-1ff7-map-f34/fixtures/qa-f34/stream.mjs:18:1\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_STREAM_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261119-084010-1ff7-map-f34/evidence/F34.event-stream/program.json\"\n}\n",
+  "stderr": ""
+}

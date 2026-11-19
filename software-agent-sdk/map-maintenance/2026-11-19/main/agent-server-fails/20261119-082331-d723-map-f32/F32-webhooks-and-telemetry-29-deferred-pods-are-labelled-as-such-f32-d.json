@@ -1,0 +1,23 @@
+{
+  "file": "F32-webhooks-and-telemetry.md",
+  "bullet": "Deferred pods are labelled as such (`F32.deferred-init-flag`), known bug.",
+  "ids": [
+    "F32.deferred-init-flag"
+  ],
+  "line": 678,
+  "script": "control-agent-server sink read --name qa-f32-deferred --path /init --contains agent_server.server_started --expect-min 1\ncontrol-agent-server sink read --name qa-f32-deferred --path /init --contains '\"deferred_init\": ' --expect-min 1\ncontrol-agent-server sink read --name qa-f32-deferred --path /init --contains '\"deferred_init\": true' --expect-min 1 --save F32.deferred-init-flag/events  # bug: requests eq 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 1070,
+  "failed_line": 3,
+  "failed_command": "control-agent-server sink read --name qa-f32-deferred --path /init --contains '\"deferred_init\": true' --expect-min 1 --save F32.deferred-init-flag/events",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "requests": 0,
+    "paths": {},
+    "last": [],
+    "saved": "<scratch>/agent-server/20261119-082331-d723-map-f32/evidence/F32.deferred-init-flag/events.json"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"requests\": 1,\n  \"paths\": {\n    \"/init\": 1\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-19T08:29:36Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/init\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:47947\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Content-Length\\\": \\\"489\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.server_started\\\", \\\"distinct_id\\\": \\\"anon:e92e92f46b1c\\u2026\"\n  ]\n}\n{\n  \"ok\": true,\n  \"requests\": 3,\n  \"paths\": {\n    \"/init\": 3\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-19T08:29:36Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/init\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:47947\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Content-Length\\\": \\\"489\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.server_started\\\", \\\"distinct_id\\\": \\\"anon:e92e92f46b1c\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-19T08:29:37Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/init\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:47947\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Content-Length\\\": \\\"795\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.conversation_created\\\", \\\"distinct_id\\\": \\\"qa-f32-defe\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-19T08:29:39Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/init\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:47947\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Content-Length\\\": \\\"489\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.server_stopped\\\", \\\"distinct_id\\\": \\\"anon:e92e92f46b1c\\u2026\"\n  ]\n}\n{\n  \"ok\": false,\n  \"requests\": 0,\n  \"paths\": {},\n  \"last\": [],\n  \"saved\": \"<scratch>/agent-server/20261119-082331-d723-map-f32/evidence/F32.deferred-init-flag/events.json\"\n}\n",
+  "stderr": ""
+}

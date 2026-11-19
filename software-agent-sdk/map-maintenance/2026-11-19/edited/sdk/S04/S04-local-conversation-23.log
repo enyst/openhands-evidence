@@ -1,0 +1,134 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/goal_ask --arg asked \
+  --check first.kind eq GoalAsked --check first.question eq "Delete the old build caches?" \
+  --check first.ask_id_is_pending eq true --check first.agent_calls eq 1 --check first.judge_calls eq 0 \
+  --check first.user_messages len-eq 1 --check first.user_messages.0.sender eq goal \
+  --check again.kind eq GoalAsked --check again.same_question eq true \
+  --check again.agent_calls eq 1 --check again.judge_calls eq 0 --check again.user_messages eq 1 \
+  --check answered.kind eq GoalOutcome --check answered.status eq complete \
+  --check answered.agent_calls eq 2 --check answered.judge_calls eq 1 --check answered.pending eq false
+{
+  "ok": true,
+  "mode": "asked",
+  "first": {
+    "kind": "GoalAsked",
+    "ask_id": "0dcac6c3-8c4b-4685-8a6e-90896c47aa75",
+    "question": "Delete the old build caches?",
+    "ask_id_is_pending": true,
+    "agent_calls": 1,
+    "judge_calls": 0,
+    "user_messages": [
+      {
+        "text": "Tidy the build machine.",
+        "sender": "goal"
+      }
+    ]
+  },
+  "again": {
+    "kind": "GoalAsked",
+    "ask_id": "0dcac6c3-8c4b-4685-8a6e-90896c47aa75",
+    "question": "Delete the old build caches?",
+    "same_question": true,
+    "agent_calls": 1,
+    "judge_calls": 0,
+    "user_messages": 1
+  },
+  "answered": {
+    "kind": "GoalOutcome",
+    "status": "complete",
+    "agent_calls": 2,
+    "judge_calls": 1,
+    "pending": false
+  },
+  "_exit": 0,
+  "_seconds": 4.9,
+  "checks": [
+    {
+      "check": "first.kind eq GoalAsked",
+      "ok": true,
+      "actual": "GoalAsked"
+    },
+    {
+      "check": "first.question eq Delete the old build caches?",
+      "ok": true,
+      "actual": "Delete the old build caches?"
+    },
+    {
+      "check": "first.ask_id_is_pending eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "first.agent_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "first.judge_calls eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "first.user_messages len-eq 1",
+      "ok": true,
+      "actual": "[{\"text\": \"Tidy the build machine.\", \"sender\": \"goal\"}]"
+    },
+    {
+      "check": "first.user_messages.0.sender eq goal",
+      "ok": true,
+      "actual": "goal"
+    },
+    {
+      "check": "again.kind eq GoalAsked",
+      "ok": true,
+      "actual": "GoalAsked"
+    },
+    {
+      "check": "again.same_question eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "again.agent_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "again.judge_calls eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "again.user_messages eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "answered.kind eq GoalOutcome",
+      "ok": true,
+      "actual": "GoalOutcome"
+    },
+    {
+      "check": "answered.status eq complete",
+      "ok": true,
+      "actual": "complete"
+    },
+    {
+      "check": "answered.agent_calls eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "answered.judge_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "answered.pending eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 5s]

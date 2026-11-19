@@ -1,0 +1,115 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/memory \
+  --check memory_before_first_message missing --check user_in_prompt eq true \
+  --check project_in_prompt eq true --check user_before_project eq true \
+  --check daily_log_in_prompt eq false --check memory_in_static eq false \
+  --check write_path_advertised eq true --check memory_in_agent_context_dump eq false \
+  --check memory_in_persisted_state eq false \
+  --check big_first_line_kept eq false --check big_last_line_kept eq true \
+  --check big_truncation_notice eq true --check big_partial_lines eq 0 --check big_kept_lines gt 50 \
+  --check broken_status eq finished --check broken_has_memory_block eq false
+{
+  "ok": true,
+  "memory_before_first_message": null,
+  "user_in_prompt": true,
+  "project_in_prompt": true,
+  "user_before_project": true,
+  "daily_log_in_prompt": false,
+  "memory_in_static": false,
+  "write_path_advertised": true,
+  "memory_in_agent_context_dump": false,
+  "memory_in_persisted_state": false,
+  "big_first_line_kept": false,
+  "big_last_line_kept": true,
+  "big_truncation_notice": true,
+  "big_kept_lines": 109,
+  "big_partial_lines": 0,
+  "broken_status": "finished",
+  "broken_has_memory_block": false,
+  "_exit": 0,
+  "_seconds": 4.9,
+  "checks": [
+    {
+      "check": "memory_before_first_message missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "user_in_prompt eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "project_in_prompt eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "user_before_project eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "daily_log_in_prompt eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "memory_in_static eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "write_path_advertised eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "memory_in_agent_context_dump eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "memory_in_persisted_state eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "big_first_line_kept eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "big_last_line_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "big_truncation_notice eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "big_partial_lines eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "big_kept_lines gt 50",
+      "ok": true,
+      "actual": "109"
+    },
+    {
+      "check": "broken_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "broken_has_memory_block eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 5s]

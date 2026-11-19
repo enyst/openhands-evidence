@@ -1,0 +1,75 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/views --arg goal \
+  --check complete.status eq complete --check complete.iterations eq 2 --check complete.score eq 0.95 \
+  --check complete.followup_names_missing eq true --check complete.user_messages eq 2 \
+  --check capped.status eq capped --check capped.iterations eq 2 \
+  --check capped.last_score eq 0 --check capped.last_missing contains "could not be parsed"
+{
+  "ok": true,
+  "mode": "goal",
+  "complete": {
+    "status": "complete",
+    "iterations": 2,
+    "score": 0.95,
+    "user_messages": 2,
+    "followup_names_missing": true,
+    "conversation_status": "finished"
+  },
+  "capped": {
+    "status": "capped",
+    "iterations": 2,
+    "last_score": 0.0,
+    "last_missing": "Judge verdict could not be parsed."
+  },
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "complete.status eq complete",
+      "ok": true,
+      "actual": "complete"
+    },
+    {
+      "check": "complete.iterations eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "complete.score eq 0.95",
+      "ok": true,
+      "actual": "0.95"
+    },
+    {
+      "check": "complete.followup_names_missing eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "complete.user_messages eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "capped.status eq capped",
+      "ok": true,
+      "actual": "capped"
+    },
+    {
+      "check": "capped.iterations eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "capped.last_score eq 0",
+      "ok": true,
+      "actual": "0.0"
+    },
+    {
+      "check": "capped.last_missing contains could not be parsed",
+      "ok": true,
+      "actual": "Judge verdict could not be parsed."
+    }
+  ]
+}
+
+[exit 0 after 5s]

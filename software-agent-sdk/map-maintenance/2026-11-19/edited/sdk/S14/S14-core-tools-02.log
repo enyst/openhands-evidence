@@ -1,0 +1,706 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/terminal --arg subprocess --env OH_RUNTIME_IDLE_TIMEOUT_SECONDS=100 \
+  --check pooled eq false --check steps.shell.text contains my-shell \
+  --check cwd_is_sub eq true --check steps.persist.text contains "FOO=bar CLIENT=from-client PARENT=inherited" \
+  --check steps.persist.username exists --check steps.persist.py_interpreter matches python \
+  --check steps.fail.exit_code eq 2 --check steps.fail.is_error eq false \
+  --check steps.two_commands.is_error eq true --check steps.two_commands.text contains "Cannot execute multiple commands" \
+  --check heredoc_lines eq 400 --check steps.server_up.text contains "status 200" \
+  --check steps.answer.text contains "hello bob" --check steps.answer.exit_code eq 0 \
+  --check steps.idle.exit_code eq -1 --check steps.idle.text contains "no new output after 3 seconds" \
+  --check steps.more.text contains "Below is the output of the previous command" \
+  --check steps.ctrl_c.exit_code eq 130 \
+  --check steps.hard.text contains "timed out after 1.0 seconds" --check steps.after_hard.exit_code eq 130 \
+  --check steps.capped.is_error eq true --check steps.capped.text contains "Refusing to run" \
+  --check big_text_len le 30000 --check big_saved_files len-eq 1 --check big_notice_names_saved_file eq true \
+  --check escape_filtered eq true --check steps.fake_ps1.exit_code eq 3 \
+  --check steps.literal.is_error eq true --check steps.literal.text contains "list literal" \
+  --check steps.secret.text contains "token=<secret-hidden>" --check secret_leaked eq false \
+  --check steps.reset.text contains "Terminal session has been reset" \
+  --check after_reset_in_workspace eq true --check steps.after_reset.text not-contains FOO=bar \
+  --check steps.reset_input.kind eq AgentErrorEvent \
+  --check steps.reset_input.text contains "Cannot use reset=True with is_input=True" \
+  --check parallel_calls eq 3 --check parallel_overlap eq false \
+  --check shell_alive_before_close eq true --check shell_alive_after_close eq false \
+  --check tmux_servers_after_close eq 0
+{
+  "ok": true,
+  "mode": "subprocess",
+  "pooled": false,
+  "backend_at_end": "TmuxTerminal",
+  "steps": {
+    "cd": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004l\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 327,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "shell": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004lshell=<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/home/my-shell\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 493,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "persist": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004l<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub\nFOO=bar CLIENT=from-client PARENT=inherited\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 531,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "fail": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004lls: cannot access '/no-such-dir': No such file or directory\n\u001b[?2004h\n[The command completed with exit code 2.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 2]",
+      "text_len": 387,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 2,
+      "meta_exit_code": 2,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "two_commands": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nCannot execute multiple commands at once.\nPlease run each command separately OR chain them into a single command via && or ;\nProvided commands:\n(1) echo one\n(2) echo two",
+      "text_len": 208,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ],
+      "exit_code": null,
+      "meta_exit_code": -1,
+      "cwd": null,
+      "username": null,
+      "py_interpreter": null,
+      "timeout": false
+    },
+    "heredoc": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "cat > big.txt <<'EOF'\n\u001b[?2004l\u001b[?2004hline 0\n\u001b[?2004l\u001b[?2004hline 1\n\u001b[?2004l\u001b[?2004hline 2\n\u001b[?2004l\u001b[?2004hline 3\n\u001b[?2004l\u001b[?2004hline 4\n\u001b[?2004l\u001b[?2004hline 5\n\u001b[?2004l\u001b[?2004hline 6\n\u001b[?2004l\u001b[?2004hline 7\n\u001b[?2004l\u001b[?2004hline 8\n\u001b[?2004l\u001b[?2004hline 9\n\u001b[?2004l\u001b[?2004hline 10\n\u001b[?2004l\u001b[?2004hline 11\n\u001b[?2004l\u001b[?2004hline 12\n\u001b[?2004l\u001b[?2004hline 13\n\u001b[?2004l\u001b[?2004hline 14\n\u001b[?2004l\u001b[?2004hline 15\n\u001b[?2004l\u001b[?2004hline 16\n\u001b[?2004l\u001b[?2004hline 17\n\u001b[?2004l\u001b[?2004hline 18\n\u001b[?2004l\u001b[?2004hline 19\n\u001b[?2004l\u001b[?2004hline 20\n\u001b[?2004l\u001b[?2004hline 21\n\u001b[?2004l\u001b[?2004hline 22\n\u001b[?2004l\u001b[?2004hline 23\n\u001b[?2004l\u001b[?2004hline 24\n\u001b[?2004l\u001b[?2004hline 25\n\u001b[?2004l\u001b[?2004hline 26\n\u001b[?2004l\u001b[?2004hline 27\n\u001b[?2004l\u001b[?2004hline 28\n\u001b[?2004l\u001b[?2004hline 29\n\u001b[?2004l\u001b[?2004hline 30\n\u001b[?2004l\u001b[?2004hline 31\n\u001b[?2004l\u001b[?2004hline 32\n\u001b[?2004l\u001b[?2004hline 33\n\u001b[?2004l\u001b[?2004hline 34\n\u001b[?2004l\u001b[?2004hline 35\n\u001b[?2004l\u001b[?2004hline 36\n\u001b[?2004l\u001b[?2004hline 37\n\u001b[?2004l\u001b[?2004hline 38\n\u001b[?2004l\u001b[?2004hline 39\n\u001b[?2004l\u001b[?2004hline 40\n\u001b[?2004l\u001b[?2004hline 41\n\u001b[?2004l\u001b[?2004hline 42\n\u001b[?2004l\u001b[?2004hline 43\n\u001b[?2004l\u001b[?2004hline 44\n\u001b[?2004l\u001b[?2004hline 45\n\u001b[?2004l\u001b[?2004hline 46\n\u001b[?2004l\u001b[?2004hline 47\n\u001b[?2004l\u001b[?2004hline 48\n\u001b[?2004l\u001b[?2004hline 49\n\u001b[?2004l\u001b[?2004hline 50\n\u001b[?2004l\u001b[?2004hline 51\n\u001b[?2004l\u001b[?2004hline 52\n\u001b[?2004l\u001b[?2004hline 53\n\u001b[?2004l\u001b[?2004hline 54\n\u001b[?2004l\u001b[?2004hline 55\n\u001b[?2004l\u001b[?2004hline 56\n\u001b[?2004l\u001b[?2004hline 57\n\u001b[?2004l\u001b[?2004hline 58\n\u001b[?2004l\u001b[?2004hline 59\n\u001b[?2004l\u001b[?2004hline 60\n\u001b[?2004l\u001b[?2004hline 61\n\u001b[?2004l\u001b[?2004hline 62\n\u001b[?2004l\u001b[?2004hline 63\n\u001b[?2004l\u001b[?2004hline 64\n\u001b[?2004l\u001b[?2004hline 65\n\u001b[?2004l\u001b[?2004hline 66\n\u001b[?2004l\u001b[?2004hline 67\n\u001b[?2004l\u001b[?2004hline 68\n\u001b[?2004l\u001b[?2004hline 69\n\u001b[?2004l\u001b[?2004hline 70\n\u001b[?2004l\u001b[?2004hline 71\n\u001b[?2004l\u001b[?2004hline 72\n\u001b[?2004l\u001b[?2004hline 73\n\u001b[?2004l\u001b[?2004hline 74\n\u001b[?2004l\u001b[?2004hline 75\n\u001b[?2004l\u001b[?2004hline 76\n\u001b[?2004l\u001b[?2004hline 77\n\u001b[?2004l\u001b[?2004hline 78\n\u001b[?2004l\u001b[?2004hline 79\n\u001b[?2004l\u001b[?2004hline 80\n\u001b[?2004l\u001b[?2004hline 81\n\u001b[?2004l\u001b[?2004hline 82\n\u001b[?2004l\u001b[?2004hline 83\n\u001b[?2004l\u001b[?2004hline 84\n\u001b[?2004l\u001b[?2004hline 85\n\u001b[?2004l\u001b[?2004hline 86\n\u001b[?2004l\u001b[?2004hline 87\n\u001b[?2004l\u001b[?2004hline 88\n\u001b[?2004l\u001b[?2004hline 89\n\u001b[?2004l\u001b[?2004hline 90\n\u001b[?2004l\u001b[?2004hline 91\n\u001b[?2004l\u001b[?2004hline 92\n\u001b[?2004l\u001b[?2004hline 93\n\u001b[?2004l\u001b[?2004hline 94\n\u001b[?2004l\u001b[?2004hline 95\n\u001b[?2004l\u001b[?2004hline 96\n\u001b[?2004l\u001b[?2004hline 97\n\u001b[?2004l\u001b[?2004hline 98\n\u001b[?2004l\u001b[?2004hline 99\n\u001b[?2004l\u001b[?2004hline 100\n\u001b[?2004l\u001b[?2004hline 101\n\u001b[?2004l\u001b[?2004hline 102\n\u001b[?2004l\u001b[?2004hline 103\n\u001b[?2004l\u001b[?2004hline 104\n\u001b[?2004l\u001b[?2004hline 105\n\u001b[?2004l\u001b[?2004hline 106\n\u001b[?2004l\u001b[?2004hline 107\n\u001b[?2004l\u001b[?2004hline 108\n\u001b[?2004l\u001b[?2004hline 109\n\u001b[?2004l\u001b[?2004hline 110\n\u001b[?2004l\u001b[?2004hline 111\n\u001b[?2004l\u001b[?2004hline 112\n\u001b[?2004l\u001b[?2004hline 113\n\u001b[?2004l\u001b[?2004hline 114\n\u001b[?2004l\u001b[?2004hline 115\n\u001b[?2004l\u001b[?2004hline 116\n\u001b[?2004l\u001b[?2004hline 117\n\u001b[?2004l\u001b[?2004hline 118\n\u001b[?2004l\u001b[?2004hline 119\n\u001b[?2004l\u001b[?2004hline 120\n\u001b[?2004l\u001b[?2004hline 121\n\u001b[?2004l\u001b[?2004hline 122\n\u001b[?2004l\u001b[?20\u2026",
+      "text_len": 10259,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "count": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004l400\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 331,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "server": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004l[1] 28426\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 337,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "server_up": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004lstatus 200\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 338,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "server_stop": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004lstopped\n[1]+  Terminated              nohup python3 -m http.server 53671 --bind 127.0.0.1 > server.log 2>&1\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 435,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "prompt": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004lname?\n[The command has no new output after 3 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "text_len": 360,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": -1,
+      "meta_exit_code": -1,
+      "cwd": null,
+      "username": null,
+      "py_interpreter": null,
+      "timeout": false
+    },
+    "answer": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "hello bob\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 329,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "idle": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004l\n[The command has no new output after 3 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "text_len": 355,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": -1,
+      "meta_exit_code": -1,
+      "cwd": null,
+      "username": null,
+      "py_interpreter": null,
+      "timeout": false
+    },
+    "more": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "[Below is the output of the previous command.]\n\n[The command has no new output after 3 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "text_len": 394,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": -1,
+      "meta_exit_code": -1,
+      "cwd": null,
+      "username": null,
+      "py_interpreter": null,
+      "timeout": false
+    },
+    "ctrl_c": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "^C\n\u001b[?2004h\n[The command completed with exit code 130. CTRL+C was sent.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 130]",
+      "text_len": 343,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 130,
+      "meta_exit_code": 130,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "hard": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004l\n[The command timed out after 1.0 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "text_len": 349,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": -1,
+      "meta_exit_code": -1,
+      "cwd": null,
+      "username": null,
+      "py_interpreter": null,
+      "timeout": false
+    },
+    "after_hard": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "^C\n\u001b[?2004h\n[The command completed with exit code 130. CTRL+C was sent.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 130]",
+      "text_len": 343,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 130,
+      "meta_exit_code": 130,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "capped": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nRefusing to run foreground terminal command with timeout=95s.\n\nThis runtime is subject to idle cleanup after 100s. Foreground terminal commands are capped at 90% of that threshold, currently 90s, so commands can return control before the runtime is considered idle.\n\nFor long-running work, use a shorter timeout, omit the timeout to use the terminal soft-timeout/polling flow, or start the command in the background and poll its log file.",
+      "text_len": 477,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ],
+      "exit_code": null,
+      "meta_exit_code": -1,
+      "cwd": null,
+      "username": null,
+      "py_interpreter": null,
+      "timeout": false
+    },
+    "big": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004lxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\u2026",
+      "text_len": 30000,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "dsr": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004lab\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 330,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "after_dsr": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004lnext\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 332,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "fake_ps1": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004l\n###PS1JSON###\n{broken\n\u001b[?2004h\n[The command completed with exit code 3.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 3]",
+      "text_len": 350,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 3,
+      "meta_exit_code": 3,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "literal": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\n[Tool-argument error] The `command` argument looks like a Python/JSON list literal, not a shell command. It starts with: '[\"ls\", \"-la\"]'\n\nThe `terminal` tool runs exactly ONE shell command at a time. To pass structured data or multi-line code:\n  - Write a script first with `file_editor` (command=\"create\", path=\"/tmp/run.py\", ...), then invoke it: `python /tmp/run.py`.\n  - Or use a heredoc inline, e.g.:\n        python - <<'EOF'\n        DATABASES = {'default': {...}}\n        # your code here\n        EOF\n\nDo not put a Python list/dict literal into the `command` field; the shell cannot interpret it.",
+      "text_len": 641,
+      "content_types": [
+        "TextContent",
+        "TextContent"
+      ],
+      "exit_code": null,
+      "meta_exit_code": -1,
+      "cwd": null,
+      "username": null,
+      "py_interpreter": null,
+      "timeout": false
+    },
+    "secret": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "\u001b[?2004ltoken=<secret-hidden>\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 349,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "reset": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "Terminal session has been reset. All previous environment variables and session state have been cleared.",
+      "text_len": 104,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": -1,
+      "cwd": null,
+      "username": null,
+      "py_interpreter": null,
+      "timeout": false
+    },
+    "after_reset": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace\nFOO=\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 467,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "shell_after_reset": {
+      "tool": "terminal",
+      "kind": "TerminalObservation",
+      "is_error": false,
+      "text": "shell=/bin/bash\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "text_len": 322,
+      "content_types": [
+        "TextContent"
+      ],
+      "exit_code": 0,
+      "meta_exit_code": 0,
+      "cwd": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace",
+      "username": "root",
+      "py_interpreter": "/usr/local/bin/python",
+      "timeout": false
+    },
+    "reset_input": {
+      "tool": "terminal",
+      "kind": "AgentErrorEvent",
+      "is_error": true,
+      "text": "Error executing tool 'terminal': Cannot use reset=True with is_input=True",
+      "text_len": 73,
+      "content_types": []
+    }
+  },
+  "steps_run": 28,
+  "cwd_is_sub": true,
+  "after_reset_in_workspace": true,
+  "heredoc_lines": 400,
+  "escape_filtered": true,
+  "dsr_reply_visible": false,
+  "after_dsr_clean": true,
+  "parallel_calls": 3,
+  "parallel_overlap": false,
+  "secret_leaked": false,
+  "big_saved_files": [
+    "terminal_output_a9123484.txt"
+  ],
+  "big_text_len": 30000,
+  "big_notice_names_saved_file": true,
+  "bracketed_paste_in_output": true,
+  "shell_alive_before_close": true,
+  "shell_alive_after_close": false,
+  "tmux_servers_after_close": 0,
+  "_exit": 0,
+  "_seconds": 26.3,
+  "checks": [
+    {
+      "check": "pooled eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.shell.text contains my-shell",
+      "ok": true,
+      "actual": "\u001b[?2004lshell=<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/home/my-shell\n\u001b[?2004h\n[The command comp"
+    },
+    {
+      "check": "cwd_is_sub eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.persist.text contains FOO=bar CLIENT=from-client PARENT=inherited",
+      "ok": true,
+      "actual": "\u001b[?2004l<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace/sub\nFOO=bar CLIENT=from-client PAREN"
+    },
+    {
+      "check": "steps.persist.username exists",
+      "ok": true,
+      "actual": "root"
+    },
+    {
+      "check": "steps.persist.py_interpreter matches python",
+      "ok": true,
+      "actual": "/usr/local/bin/python"
+    },
+    {
+      "check": "steps.fail.exit_code eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "steps.fail.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.two_commands.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.two_commands.text contains Cannot execute multiple commands",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nCannot execute multiple commands at once.\nPlease run each command separately OR chain them into a single command via && or ;\nProvided commands:\n(1) echo one\n(2) "
+    },
+    {
+      "check": "heredoc_lines eq 400",
+      "ok": true,
+      "actual": "400"
+    },
+    {
+      "check": "steps.server_up.text contains status 200",
+      "ok": true,
+      "actual": "\u001b[?2004lstatus 200\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-"
+    },
+    {
+      "check": "steps.answer.text contains hello bob",
+      "ok": true,
+      "actual": "hello bob\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-02/"
+    },
+    {
+      "check": "steps.answer.exit_code eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "steps.idle.exit_code eq -1",
+      "ok": true,
+      "actual": "-1"
+    },
+    {
+      "check": "steps.idle.text contains no new output after 3 seconds",
+      "ok": true,
+      "actual": "\u001b[?2004l\n[The command has no new output after 3 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys ("
+    },
+    {
+      "check": "steps.more.text contains Below is the output of the previous command",
+      "ok": true,
+      "actual": "[Below is the output of the previous command.]\n\n[The command has no new output after 3 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interac"
+    },
+    {
+      "check": "steps.ctrl_c.exit_code eq 130",
+      "ok": true,
+      "actual": "130"
+    },
+    {
+      "check": "steps.hard.text contains timed out after 1.0 seconds",
+      "ok": true,
+      "actual": "\u001b[?2004l\n[The command timed out after 1.0 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\","
+    },
+    {
+      "check": "steps.after_hard.exit_code eq 130",
+      "ok": true,
+      "actual": "130"
+    },
+    {
+      "check": "steps.capped.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.capped.text contains Refusing to run",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\nRefusing to run foreground terminal command with timeout=95s.\n\nThis runtime is subject to idle cleanup after 100s. Foreground terminal commands are capped at 90%"
+    },
+    {
+      "check": "big_text_len le 30000",
+      "ok": true,
+      "actual": "30000"
+    },
+    {
+      "check": "big_saved_files len-eq 1",
+      "ok": true,
+      "actual": "[\"terminal_output_a9123484.txt\"]"
+    },
+    {
+      "check": "big_notice_names_saved_file eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "escape_filtered eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.fake_ps1.exit_code eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "steps.literal.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.literal.text contains list literal",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\n\n[Tool-argument error] The `command` argument looks like a Python/JSON list literal, not a shell command. It starts with: '[\"ls\", \"-la\"]'\n\nThe `terminal` tool run"
+    },
+    {
+      "check": "steps.secret.text contains token=<secret-hidden>",
+      "ok": true,
+      "actual": "\u001b[?2004ltoken=<secret-hidden>\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/wor"
+    },
+    {
+      "check": "secret_leaked eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.reset.text contains Terminal session has been reset",
+      "ok": true,
+      "actual": "Terminal session has been reset. All previous environment variables and session state have been cleared."
+    },
+    {
+      "check": "after_reset_in_workspace eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.after_reset.text not-contains FOO=bar",
+      "ok": true,
+      "actual": "<scratch>/sdk/edited/S14/work/S14-core-tools-02/block1/runs/20261119-100828-39a3b9/workspace\nFOO=\n[The command completed with exit code 0"
+    },
+    {
+      "check": "steps.reset_input.kind eq AgentErrorEvent",
+      "ok": true,
+      "actual": "AgentErrorEvent"
+    },
+    {
+      "check": "steps.reset_input.text contains Cannot use reset=True with is_input=True",
+      "ok": true,
+      "actual": "Error executing tool 'terminal': Cannot use reset=True with is_input=True"
+    },
+    {
+      "check": "parallel_calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "parallel_overlap eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "shell_alive_before_close eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "shell_alive_after_close eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "tmux_servers_after_close eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 26s]

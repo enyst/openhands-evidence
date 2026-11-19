@@ -1,0 +1,398 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S10/config_forms \
+  --check typed_pre_tool_use eq 1 --check pascal_pre_tool_use eq 1 --check legacy_events len-eq 2 \
+  --check unknown_event_rejected eq true --check both_spellings_rejected eq true --check extra_field_rejected eq true \
+  --check async_alias eq true --check async_dumps_as.0 eq async --check async_roundtrip eq true \
+  --check merged_pre_tool_use eq 2 --check merged_stop eq 1 \
+  --check command_requires_command eq true --check prompt_requires_prompt eq true --check prompt_forbids_command eq true \
+  --check prompt_forbids_async eq true --check agent_forbids_command eq true --check agent_forbids_async eq true \
+  --check display_prompt eq prompt-hook:policy --check display_agent eq agent-hook:review --check display_command eq ./check.sh \
+  --check missing_is_empty eq true --check user_file_found eq true --check project_wins eq true --check explicit_path eq true \
+  --check match.star_any eq true --check match.empty_any eq true --check match.star_no_tool eq true \
+  --check match.exact_no_tool eq false --check match.exact eq true --check match.exact_other eq false \
+  --check match.slash_regex eq true --check match.auto_regex eq true --check match.full_match_only eq false \
+  --check match.bad_regex_exact eq true \
+  --check exit0.continue eq true --check exit0.success eq true \
+  --check exit2.continue eq false --check exit2.blocked eq true \
+  --check exit1.continue eq true --check exit1.blocked eq false --check exit1.success eq false \
+  --check json_deny.continue eq false --check json_deny.reason eq policy \
+  --check json_continue_false.continue eq false --check json_non_string_decision.continue eq true \
+  --check missing_command.success eq false --check missing_command.exit_code eq 127 --check missing_command.continue eq true \
+  --check chain_continue eq false --check chain_results eq 1 --check chain_second_ran eq false \
+  --check timeout_error contains "timed out" --check timeout_success eq false
+{
+  "ok": true,
+  "typed_pre_tool_use": 1,
+  "pascal_pre_tool_use": 1,
+  "legacy_events": [
+    "pre_tool_use",
+    "stop"
+  ],
+  "unknown_event_rejected": true,
+  "both_spellings_rejected": true,
+  "extra_field_rejected": true,
+  "async_alias": true,
+  "async_dumps_as": [
+    "async"
+  ],
+  "async_roundtrip": true,
+  "merged_pre_tool_use": 2,
+  "merged_stop": 1,
+  "command_requires_command": true,
+  "prompt_requires_prompt": true,
+  "prompt_forbids_command": true,
+  "prompt_forbids_async": true,
+  "agent_forbids_command": true,
+  "agent_forbids_async": true,
+  "display_prompt": "prompt-hook:policy",
+  "display_agent": "agent-hook:review",
+  "display_command": "./check.sh",
+  "missing_is_empty": true,
+  "user_file_found": true,
+  "project_wins": true,
+  "explicit_path": true,
+  "match": {
+    "star_any": true,
+    "empty_any": true,
+    "star_no_tool": true,
+    "exact_no_tool": false,
+    "exact": true,
+    "exact_other": false,
+    "slash_regex": true,
+    "auto_regex": true,
+    "full_match_only": false,
+    "bad_regex_exact": true
+  },
+  "exit0": {
+    "continue": true,
+    "blocked": false,
+    "success": true,
+    "exit_code": 0,
+    "reason": null,
+    "error": null
+  },
+  "exit2": {
+    "continue": false,
+    "blocked": true,
+    "success": false,
+    "exit_code": 2,
+    "reason": null,
+    "error": null
+  },
+  "exit1": {
+    "continue": true,
+    "blocked": false,
+    "success": false,
+    "exit_code": 1,
+    "reason": null,
+    "error": null
+  },
+  "json_deny": {
+    "continue": false,
+    "blocked": true,
+    "success": true,
+    "exit_code": 0,
+    "reason": "policy",
+    "error": null
+  },
+  "json_continue_false": {
+    "continue": false,
+    "blocked": true,
+    "success": true,
+    "exit_code": 0,
+    "reason": null,
+    "error": null
+  },
+  "json_non_string_decision": {
+    "continue": true,
+    "blocked": false,
+    "success": true,
+    "exit_code": 0,
+    "reason": null,
+    "error": null
+  },
+  "missing_command": {
+    "continue": true,
+    "blocked": false,
+    "success": false,
+    "exit_code": 127,
+    "reason": null,
+    "error": null
+  },
+  "chain_continue": false,
+  "chain_results": 1,
+  "chain_second_ran": false,
+  "timeout_error": "Hook timed out after 1 seconds",
+  "timeout_success": false,
+  "_exit": 0,
+  "_seconds": 6.0,
+  "checks": [
+    {
+      "check": "typed_pre_tool_use eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "pascal_pre_tool_use eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "legacy_events len-eq 2",
+      "ok": true,
+      "actual": "[\"pre_tool_use\", \"stop\"]"
+    },
+    {
+      "check": "unknown_event_rejected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "both_spellings_rejected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "extra_field_rejected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "async_alias eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "async_dumps_as.0 eq async",
+      "ok": true,
+      "actual": "async"
+    },
+    {
+      "check": "async_roundtrip eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "merged_pre_tool_use eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "merged_stop eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "command_requires_command eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "prompt_requires_prompt eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "prompt_forbids_command eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "prompt_forbids_async eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "agent_forbids_command eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "agent_forbids_async eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "display_prompt eq prompt-hook:policy",
+      "ok": true,
+      "actual": "prompt-hook:policy"
+    },
+    {
+      "check": "display_agent eq agent-hook:review",
+      "ok": true,
+      "actual": "agent-hook:review"
+    },
+    {
+      "check": "display_command eq ./check.sh",
+      "ok": true,
+      "actual": "./check.sh"
+    },
+    {
+      "check": "missing_is_empty eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "user_file_found eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "project_wins eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "explicit_path eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "match.star_any eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "match.empty_any eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "match.star_no_tool eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "match.exact_no_tool eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "match.exact eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "match.exact_other eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "match.slash_regex eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "match.auto_regex eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "match.full_match_only eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "match.bad_regex_exact eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "exit0.continue eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "exit0.success eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "exit2.continue eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "exit2.blocked eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "exit1.continue eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "exit1.blocked eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "exit1.success eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "json_deny.continue eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "json_deny.reason eq policy",
+      "ok": true,
+      "actual": "policy"
+    },
+    {
+      "check": "json_continue_false.continue eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "json_non_string_decision.continue eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "missing_command.success eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "missing_command.exit_code eq 127",
+      "ok": true,
+      "actual": "127"
+    },
+    {
+      "check": "missing_command.continue eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "chain_continue eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "chain_results eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "chain_second_ran eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "timeout_error contains timed out",
+      "ok": true,
+      "actual": "Hook timed out after 1 seconds"
+    },
+    {
+      "check": "timeout_success eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 6s]

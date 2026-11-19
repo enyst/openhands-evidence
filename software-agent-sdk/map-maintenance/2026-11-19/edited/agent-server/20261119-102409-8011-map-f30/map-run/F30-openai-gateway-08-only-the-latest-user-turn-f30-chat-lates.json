@@ -1,0 +1,64 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Only the latest user turn (`F30.chat-latest-user-only`).",
+  "ids": [
+    "F30.chat-latest-user-only"
+  ],
+  "line": 311,
+  "script": "control-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user \\\n  --check items len-eq 1 --check items.0.llm_message.content len-eq 1 \\\n  --check items.0.llm_message.content.0.text eq 'QA_F30_NEW_TURN: say hello.' --save F30.chat-latest-user-only/user-events\ncontrol-agent-server state grep QA_F30_NEW_TURN --glob 'server/workspace/conversations/**/*'\ncontrol-agent-server state grep QA_F30_OLD_TURN --glob 'server/**/*' --expect-none\ncontrol-agent-server state grep QA_F30_OLD_ANSWER --glob 'server/**/*' --expect-none\n",
+  "exit_code": 1,
+  "elapsed_ms": 388,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --check items len-eq 1 --check items.0.llm_message.content len-eq 1 --check items.0.llm_message.content.0.text eq 'QA_F30_NEW_TURN: say hello.' --save F30.chat-latest-user-only/user-events",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations//events/search",
+      "query": [
+        [
+          "source",
+          "user"
+        ]
+      ],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 62,
+    "checks": [
+      {
+        "check": "items len-eq 1",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "items.0.llm_message.content len-eq 1",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "items.0.llm_message.content.0.text eq QA_F30_NEW_TURN: say hello.",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-102409-8011-map-f30/evidence/F30.chat-latest-user-only/user-events.json",
+    "hint": "expected <400, got 404"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations//events/search\",\n    \"query\": [\n      [\n        \"source\",\n        \"user\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 62,\n  \"checks\": [\n    {\n      \"check\": \"items len-eq 1\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content len-eq 1\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content.0.text eq QA_F30_NEW_TURN: say hello.\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-102409-8011-map-f30/evidence/F30.chat-latest-user-only/user-events.json\",\n  \"hint\": \"expected <400, got 404\"\n}\n",
+  "stderr": ""
+}

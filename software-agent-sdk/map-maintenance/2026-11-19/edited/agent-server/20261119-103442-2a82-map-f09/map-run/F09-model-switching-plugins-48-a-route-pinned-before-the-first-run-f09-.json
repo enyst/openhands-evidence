@@ -1,0 +1,46 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "A route pinned before the first run (`F09.model-router-before-first-run`), known bug #5639.",
+  "ids": [
+    "F09.model-router-before-first-run"
+  ],
+  "line": 1335,
+  "script": "RB=$(control-agent-server conversation start --placeholder-agent --tools none --no-autotitle --print-id)\ncontrol-agent-server api POST \"/api/conversations/$RB/model_router/routes\" --json '{\"profile_name\": \"deepseek-flash\", \"route_name\": \"flash\"}' --expect 200\ncontrol-agent-server api PATCH \"/api/conversations/$RB/model_router\" --json '{\"selection\": {\"mode\": \"manual\", \"manual_route_name\": \"flash\"}}' --expect 200\ncontrol-agent-server conversation send \"$RB\" --text 'Reply with the single word: ok' --wait --until finished,error --timeout 240\ncontrol-agent-server api GET \"/api/conversations/$RB\" --quiet --check execution_status eq finished\ncontrol-agent-server api GET \"/api/conversations/$RB/model_router\" --quiet --check last_route_name eq flash\ncontrol-agent-server api GET \"/api/conversations/$RB\" --until-ok 20 --quiet \\\n  --check 'stats.usage_to_metrics.profile:deepseek-flash.accumulated_token_usage.prompt_tokens' gt 0 --save F09.model-router-before-first-run/stats  # bug: status eq 200 && checks.0.actual eq null\n",
+  "exit_code": 1,
+  "elapsed_ms": 24447,
+  "failed_line": 7,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$RB\" --until-ok 20 --quiet --check 'stats.usage_to_metrics.profile:deepseek-flash.accumulated_token_usage.prompt_tokens' gt 0 --save F09.model-router-before-first-run/stats",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/97bbb012-9f0b-4efc-b6e5-8fec4bd9bba0",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "8220",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 20070,
+    "checks": [
+      {
+        "check": "stats.usage_to_metrics.profile:deepseek-flash.accumulated_token_usage.prompt_tokens gt 0",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "attempts": 40,
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.model-router-before-first-run/stats.json",
+    "hint": "failed check: stats.usage_to_metrics.profile:deepseek-flash.accumulated_token_usage.prompt_tokens gt 0"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/97bbb012-9f0b-4efc-b6e5-8fec4bd9bba0/model_router/routes\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"profile_name\": \"deepseek-flash\",\n      \"route_name\": \"flash\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"249\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"enabled\": true,\n      \"selection\": {\n        \"mode\": \"auto\",\n        \"manual_route_name\": null\n      },\n      \"last_route_name\": null,\n      \"routes\": [\n        {\n          \"name\": \"default\",\n          \"model\": \"openai/qa-placeholder\",\n          \"label\": \"default\"\n        },\n        {\n          \"name\": \"flash\",\n          \"model\": \"litellm_proxy/deepseek-v4.1-flash\",\n          \"label\": \"flash\"\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 72\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"PATCH\",\n    \"path\": \"/api/conversations/97bbb012-9f0b-4efc-b6e5-8fec4bd9bba0/model_router\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"selection\": {\n        \"mode\": \"manual\",\n        \"manual_route_name\": \"flash\"\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"254\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"enabled\": true,\n      \"selection\": {\n        \"mode\": \"manual\",\n        \"manual_route_name\": \"flash\"\n      },\n      \"last_route_name\": null,\n      \"routes\": [\n        {\n          \"name\": \"default\",\n          \"model\": \"openai/qa-placeholder\",\n          \"label\": \"default\"\n        },\n        {\n          \"name\": \"flash\",\n          \"model\": \"litellm_proxy/deepseek-v4.1-flash\",\n          \"label\": \"flash\"\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 74\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"body\": {\n    \"success\": true\n  },\n  \"wait\": {\n    \"ok\": true,\n    \"status\": \"finished\",\n    \"transitions\": [\n      \"running\",\n      \"finished\"\n    ],\n    \"waited_ms\": 1688\n  }\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/97bbb012-9f0b-4efc-b6e5-8fec4bd9bba0\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"8220\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/97bbb012-9f0b-4efc-b6e5-8fec4bd9bba0/model_router\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"257\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 62,\n  \"checks\": [\n    {\n      \"check\": \"last_route_name eq flash\",\n      \"ok\": true,\n      \"actual\": \"flash\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/97bbb012-9f0b-4efc-b6e5-8fec4bd9bba0\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"8220\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 20070,\n  \"checks\": [\n    {\n      \"check\": \"stats.usage_to_metrics.profile:deepseek-flash.accumulated_token_usage.prompt_tokens gt 0\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"attempts\": 40,\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.model-router-before-first-run/stats.json\",\n  \"hint\": \"failed check: stats.usage_to_metrics.profile:deepseek-flash.accumulated_token_usage.prompt_tokens gt 0\"\n}\n",
+  "stderr": ""
+}

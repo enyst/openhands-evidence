@@ -1,0 +1,95 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/sender \
+  --check prefix eq "conversation:" --check value_is_prefix_plus_hex eq true --check hex_parses eq true \
+  --check in_memory len-eq 2 --check in_memory.0.text eq QA_S04_FROM_USER --check in_memory.0.sender eq null \
+  --check in_memory.1.text eq QA_S04_FROM_CONVERSATION --check in_memory.1.sender matches '^conversation:[0-9a-f]{32}$' \
+  --check after_reload len-eq 2 --check after_reload.0.sender eq null \
+  --check after_reload.1.sender matches '^conversation:[0-9a-f]{32}$'
+{
+  "prefix": "conversation:",
+  "value": "conversation:8e41fe72b4cf4a78bd239a22afd16209",
+  "value_is_prefix_plus_hex": true,
+  "hex_parses": true,
+  "in_memory": [
+    {
+      "text": "QA_S04_FROM_USER",
+      "sender": null
+    },
+    {
+      "text": "QA_S04_FROM_CONVERSATION",
+      "sender": "conversation:8e41fe72b4cf4a78bd239a22afd16209"
+    }
+  ],
+  "after_reload": [
+    {
+      "text": "QA_S04_FROM_USER",
+      "sender": null
+    },
+    {
+      "text": "QA_S04_FROM_CONVERSATION",
+      "sender": "conversation:8e41fe72b4cf4a78bd239a22afd16209"
+    }
+  ],
+  "ok": true,
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "prefix eq conversation:",
+      "ok": true,
+      "actual": "conversation:"
+    },
+    {
+      "check": "value_is_prefix_plus_hex eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "hex_parses eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "in_memory len-eq 2",
+      "ok": true,
+      "actual": "[{\"text\": \"QA_S04_FROM_USER\", \"sender\": null}, {\"text\": \"QA_S04_FROM_CONVERSATION\", \"sender\": \"conversation:8e41fe72b4cf4a78bd239a22afd16209\"}]"
+    },
+    {
+      "check": "in_memory.0.text eq QA_S04_FROM_USER",
+      "ok": true,
+      "actual": "QA_S04_FROM_USER"
+    },
+    {
+      "check": "in_memory.0.sender eq null",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "in_memory.1.text eq QA_S04_FROM_CONVERSATION",
+      "ok": true,
+      "actual": "QA_S04_FROM_CONVERSATION"
+    },
+    {
+      "check": "in_memory.1.sender matches ^conversation:[0-9a-f]{32}$",
+      "ok": true,
+      "actual": "conversation:8e41fe72b4cf4a78bd239a22afd16209"
+    },
+    {
+      "check": "after_reload len-eq 2",
+      "ok": true,
+      "actual": "[{\"text\": \"QA_S04_FROM_USER\", \"sender\": null}, {\"text\": \"QA_S04_FROM_CONVERSATION\", \"sender\": \"conversation:8e41fe72b4cf4a78bd239a22afd16209\"}]"
+    },
+    {
+      "check": "after_reload.0.sender eq null",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "after_reload.1.sender matches ^conversation:[0-9a-f]{32}$",
+      "ok": true,
+      "actual": "conversation:8e41fe72b4cf4a78bd239a22afd16209"
+    }
+  ]
+}
+
+[exit 0 after 5s]

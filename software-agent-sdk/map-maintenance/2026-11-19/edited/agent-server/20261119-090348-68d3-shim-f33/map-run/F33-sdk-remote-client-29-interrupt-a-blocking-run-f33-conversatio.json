@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Interrupt a blocking run (`F33.conversation-interrupt`).",
+  "ids": [
+    "F33.conversation-interrupt"
+  ],
+  "line": 1383,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-interrupt/probe -- .venv/bin/python - <<'PY'\nimport os\nimport threading\nimport time\nimport f33\nfrom openhands.sdk import Conversation\n\nstub = f33.agent(model=\"openai/qa-stub\", base_url=os.environ[\"HANG_STUB\"] + \"/v1\", api_key=\"qa-stub\", num_retries=0)\nconv = Conversation(agent=stub, workspace=f33.workspace(\"interrupt\"), visualizer=None, delete_on_close=False)\nconv.set_title(\"qa-f33 interrupt\")\nconv.send_message(\"qa-f33 interrupt me\")\nerrors = []\n\n\ndef run():\n    try:\n        conv.run(timeout=300)\n    except Exception as e:  # recorded, asserted below\n        errors.append(repr(e))\n\n\nrunner = threading.Thread(target=run)\nrunner.start()\ndeadline = time.monotonic() + 60\nwhile not open(os.environ[\"HANG_LOG\"]).read().strip():\n    assert time.monotonic() < deadline, \"the model call never started\"\n    time.sleep(0.2)\nt0 = time.monotonic()\nconv.interrupt()\nrunner.join(60)\nreturned = time.monotonic() - t0\nassert not runner.is_alive(), \"run() did not return after interrupt()\"\nassert not errors, errors\ninterrupted = conv.state.execution_status.value\nassert interrupted == \"paused\" and returned < 15, (interrupted, returned)\nconv.run(timeout=120)\nassert conv.state.execution_status.value == \"finished\", conv.state.execution_status\nf33.emit(\"interrupt\", cid=str(conv.id), returned=round(returned, 1), interrupted=interrupted)\nconv.close()\nPY\nINT=$(jq -r .cid \"$F33/interrupt.json\")\ncontrol-agent-server conversation events \"$INT\" --kinds InterruptEvent --expect-count 1 --save F33.conversation-interrupt/interrupt-event\ncontrol-agent-server conversation events \"$INT\" --kinds PauseEvent --expect-count 0\ncontrol-agent-server conversation events \"$INT\" --key execution_status --contains paused --expect-min 1\ncontrol-agent-server api GET \"/api/conversations/$INT\" --check execution_status eq finished --save F33.conversation-interrupt/get\ncontrol-agent-server sink read --name qa-f33-hang --path /v1/chat/completions --expect-min 2 --expect-max 2\n",
+  "exit_code": 1,
+  "elapsed_ms": 341,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-interrupt/probe -- .venv/bin/python - <<'PY'\nimport os\nimport threading\nimport time\nimport f33\nfrom openhands.sdk import Conversation\n\nstub = f33.agent(model=\"openai/qa-stub\", base_url=os.environ[\"HANG_STUB\"] + \"/v1\", api_key=\"qa-stub\", num_retries=0)\nconv = Conversation(agent=stub, workspace=f33.workspace(\"interrupt\"), visualizer=None, delete_on_close=False)\nconv.set_title(\"qa-f33 interrupt\")\nconv.send_message(\"qa-f33 int",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 40,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-interrupt/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 40,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 4, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-interrupt/probe.json\"\n}\n",
+  "stderr": ""
+}

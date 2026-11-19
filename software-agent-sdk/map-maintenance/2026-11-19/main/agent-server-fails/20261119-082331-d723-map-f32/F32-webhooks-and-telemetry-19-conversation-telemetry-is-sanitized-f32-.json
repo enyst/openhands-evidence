@@ -1,0 +1,22 @@
+{
+  "file": "F32-webhooks-and-telemetry.md",
+  "bullet": "Conversation telemetry is sanitized (`F32.telemetry-conversation`).",
+  "ids": [
+    "F32.telemetry-conversation"
+  ],
+  "line": 460,
+  "script": "UCID=$(control-agent-server conversation start --tools none --no-autotitle --prompt 'Reply with exactly: ok QA_F32_PRIVATE' --body-json '{\"user_id\": \"qa-f32-user\"}' --tag automationid=qa-f32 --wait --print-id)\ncontrol-agent-server sink read --name qa-f32-telemetry --contains '\"event\": \"agent_server.conversation_finished\", \"distinct_id\": \"qa-f32-user\"' --expect-min 1 --expect-max 1 --wait 15 --save F32.telemetry-conversation/finished\ncontrol-agent-server sink read --name qa-f32-telemetry --contains '\"event\": \"agent_server.conversation_created\", \"distinct_id\": \"qa-f32-user\"' --expect-min 1 --expect-max 1 --save F32.telemetry-conversation/created\nREF=$(python3 -c 'import json, sys; print(next(e[\"properties\"][\"conversation_ref\"] for line in sys.stdin for e in json.loads(line)[\"body\"][\"events\"] if e[\"distinct_id\"] == \"qa-f32-user\"))' < \"$AGENT_SERVER_VERIFY_RUN/fixtures/qa-f32-telemetry.jsonl\")\ntest \"${#REF}\" -eq 32\ncontrol-agent-server sink read --name qa-f32-telemetry --contains \"\\\"conversation_ref\\\": \\\"$REF\\\", \\\"llm_model_family\\\": \\\"deepseek\\\", \\\"agent_kind\\\"\" --expect-min 1 --expect-max 1\ncontrol-agent-server sink read --name qa-f32-telemetry --contains \"\\\"conversation_ref\\\": \\\"$REF\\\", \\\"terminal_status\\\": \\\"finished\\\"\" --expect-min 1 --expect-max 1\ncontrol-agent-server sink read --name qa-f32-telemetry --contains '\"llm_model_family\": \"deepseek\"}' --expect-min 1\ncontrol-agent-server sink read --name qa-f32-telemetry --contains '\"is_automation\": true' --expect-min 1\ncontrol-agent-server sink read --name qa-f32-telemetry --contains QA_F32_PRIVATE --expect-max 0\ncontrol-agent-server sink read --name qa-f32-telemetry --contains \"$UCID\" --expect-max 0\ncontrol-agent-server sink read --name qa-f32-telemetry --contains \"${UCID//-/}\" --expect-max 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 5091,
+  "failed_line": 6,
+  "failed_command": "control-agent-server sink read --name qa-f32-telemetry --contains \"\\\"conversation_ref\\\": \\\"$REF\\\", \\\"llm_model_family\\\": \\\"deepseek\\\", \\\"agent_kind\\\"\" --expect-min 1 --expect-max 1",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "requests": 0,
+    "paths": {},
+    "last": []
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"requests\": 1,\n  \"paths\": {\n    \"/v1/events\": 1\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-19T08:27:42Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/events\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:33297\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Authorization\\\": \\\"Bearer qa-f32-token\\\", \\\"Content-Length\\\": \\\"699\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.conve\\u2026\"\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-082331-d723-map-f32/evidence/F32.telemetry-conversation/finished.json\"\n}\n{\n  \"ok\": true,\n  \"requests\": 1,\n  \"paths\": {\n    \"/v1/events\": 1\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-19T08:27:39Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/events\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:33297\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Authorization\\\": \\\"Bearer qa-f32-token\\\", \\\"Content-Length\\\": \\\"797\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.conve\\u2026\"\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-082331-d723-map-f32/evidence/F32.telemetry-conversation/created.json\"\n}\n{\n  \"ok\": false,\n  \"requests\": 0,\n  \"paths\": {},\n  \"last\": []\n}\n",
+  "stderr": ""
+}

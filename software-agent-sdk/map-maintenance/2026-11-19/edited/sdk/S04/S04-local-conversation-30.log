@@ -1,0 +1,161 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/resolution --arg judge \
+  --check profiles_before len-eq 0 --check profiles_after eq '["resolution_judge.json"]' \
+  --check saved.model eq openai/qa-judge-a --check saved.api_key_kept eq true \
+  --check judge.usage_id eq resolution_judge --check judge.llm_timeout eq 60 --check judge.llm_num_retries eq 0 \
+  --check verdict.owed eq answer --check verdict.needs_user eq true --check verdict.resolved eq false \
+  --check verdict.model eq openai/qa-judge-a --check verdict.judgments len-eq 7 \
+  --check request.has_state eq true --check request.names_questions eq true \
+  --check reused_model eq openai/qa-judge-a \
+  --check cipher.plain_key_on_disk eq false --check cipher.loaded_key_matches eq true \
+  --check bad_reply_error contains "did not reply with JSON" --check bad_reply_requests eq 1
+{
+  "profiles_before": [],
+  "profiles_after": [
+    "resolution_judge.json"
+  ],
+  "saved": {
+    "model": "openai/qa-judge-a",
+    "base_url": "http://127.0.0.1:32939/v1",
+    "api_key_kept": true,
+    "usage_id": "resolution_judge"
+  },
+  "judge": {
+    "model": "openai/qa-judge-a",
+    "usage_id": "resolution_judge",
+    "llm_timeout": 60,
+    "llm_num_retries": 0,
+    "timeout": 60,
+    "num_retries": 1
+  },
+  "verdict": {
+    "owed": "answer",
+    "resolved": false,
+    "needs_user": true,
+    "probability": 0.1,
+    "model": "openai/qa-judge-a",
+    "judgments": [
+      "asks_to_check",
+      "asks_user",
+      "handled",
+      "hands_off_review",
+      "offers_choice",
+      "reports_problem",
+      "task_done"
+    ]
+  },
+  "request": {
+    "model": "qa-judge-a",
+    "has_state": true,
+    "names_questions": true
+  },
+  "reused_model": "openai/qa-judge-a",
+  "cipher": {
+    "plain_key_on_disk": false,
+    "loaded_key_matches": true
+  },
+  "bad_reply_error": "ValueError: The LLM judge did not reply with JSON",
+  "bad_reply_requests": 1,
+  "ok": true,
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "profiles_before len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "profiles_after eq [\"resolution_judge.json\"]",
+      "ok": true,
+      "actual": "[\"resolution_judge.json\"]"
+    },
+    {
+      "check": "saved.model eq openai/qa-judge-a",
+      "ok": true,
+      "actual": "openai/qa-judge-a"
+    },
+    {
+      "check": "saved.api_key_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "judge.usage_id eq resolution_judge",
+      "ok": true,
+      "actual": "resolution_judge"
+    },
+    {
+      "check": "judge.llm_timeout eq 60",
+      "ok": true,
+      "actual": "60"
+    },
+    {
+      "check": "judge.llm_num_retries eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "verdict.owed eq answer",
+      "ok": true,
+      "actual": "answer"
+    },
+    {
+      "check": "verdict.needs_user eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "verdict.resolved eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "verdict.model eq openai/qa-judge-a",
+      "ok": true,
+      "actual": "openai/qa-judge-a"
+    },
+    {
+      "check": "verdict.judgments len-eq 7",
+      "ok": true,
+      "actual": "[\"asks_to_check\", \"asks_user\", \"handled\", \"hands_off_review\", \"offers_choice\", \"reports_problem\", \"task_done\"]"
+    },
+    {
+      "check": "request.has_state eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "request.names_questions eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reused_model eq openai/qa-judge-a",
+      "ok": true,
+      "actual": "openai/qa-judge-a"
+    },
+    {
+      "check": "cipher.plain_key_on_disk eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "cipher.loaded_key_matches eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "bad_reply_error contains did not reply with JSON",
+      "ok": true,
+      "actual": "ValueError: The LLM judge did not reply with JSON"
+    },
+    {
+      "check": "bad_reply_requests eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 0 after 5s]

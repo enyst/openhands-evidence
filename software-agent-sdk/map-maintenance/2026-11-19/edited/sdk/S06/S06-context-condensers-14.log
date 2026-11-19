@@ -1,0 +1,78 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg pipeline \
+  --check pipeline_handles_requests eq true --check noop_only_pipeline_handles_requests eq false \
+  --check pipeline_status eq finished --check pipeline_condensations ge 1 --check pipeline_atomic eq true \
+  --check pipeline_second_member_calls eq 0 --check pipeline_condensations_after_request gt 1 \
+  --check noop_status eq finished --check noop_condensations eq 0 --check noop_view_len eq 20
+{
+  "ok": true,
+  "mode": "pipeline",
+  "pipeline_handles_requests": true,
+  "noop_only_pipeline_handles_requests": false,
+  "pipeline_error": null,
+  "pipeline_status": "finished",
+  "pipeline_condensations": 2,
+  "pipeline_atomic": true,
+  "pipeline_second_member_calls": 0,
+  "pipeline_condensations_after_request": 3,
+  "noop_error": null,
+  "noop_status": "finished",
+  "noop_condensations": 0,
+  "noop_view_len": 20,
+  "_exit": 0,
+  "_seconds": 7.1,
+  "checks": [
+    {
+      "check": "pipeline_handles_requests eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "noop_only_pipeline_handles_requests eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "pipeline_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "pipeline_condensations ge 1",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "pipeline_atomic eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "pipeline_second_member_calls eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "pipeline_condensations_after_request gt 1",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "noop_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "noop_condensations eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "noop_view_len eq 20",
+      "ok": true,
+      "actual": "20"
+    }
+  ]
+}
+
+[exit 0 after 7s]

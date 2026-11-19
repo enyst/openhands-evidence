@@ -1,0 +1,342 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/prompt_variants \
+  --check default_tags contains SOUL --check default_tags contains SECURITY --check default_tags contains MEMORY \
+  --check static_same_across_contexts eq true --check static_has_dynamic_values eq false \
+  --check dynamic_has_values eq true --check soul_default eq true \
+  --check planning_differs eq true --check planning_tags contains PLAN_STRUCTURE \
+  --check plain_gpt5_section eq false --check gpt5_gpt5_section eq true --check gpt5_preamble eq true \
+  --check codex_gpt5_section eq true --check codex_preamble eq false \
+  --check canonical_gpt5_section eq true --check override_preamble eq true \
+  --check claude_vendor eq '["Claude-Specific"]' --check gemini_vendor eq '["Gemini-Specific"]' \
+  --check gpt4o_vendor len-eq 0 --check gpt4o_baseline eq true \
+  --check inline_starts eq true --check inline_has_default_tags eq false \
+  --check template_rendered eq "Team blue prompt for test-model." \
+  --check missing_template_error eq FileNotFoundError --check missing_relative_error eq FileNotFoundError \
+  --check inline_and_file_error eq ValidationError \
+  --check persona_starts eq true --check persona_tags not-contains SOUL --check persona_tags not-contains ROLE \
+  --check persona_tags contains SECURITY --check persona_tags contains MEMORY
+control-sdk exec -- sh -c 'printf "%s\n" "You are Bob, a terse build engineer." > "$OH_PERSISTENCE_DIR/SOUL.md"'
+control-sdk program S06/prompt_variants --check soul_custom eq true --check soul_default eq false
+{
+  "ok": true,
+  "default_tags": [
+    "CODE_QUALITY",
+    "EFFICIENCY",
+    "ENVIRONMENT_SETUP",
+    "EXTERNAL_SERVICES",
+    "FILE_SYSTEM_GUIDELINES",
+    "MEMORY",
+    "PROBLEM_SOLVING_WORKFLOW",
+    "PROCESS_MANAGEMENT",
+    "PULL_REQUESTS",
+    "ROLE",
+    "SECURITY",
+    "SECURITY_RISK_ASSESSMENT",
+    "SELF_DOCUMENTATION",
+    "SOUL",
+    "TROUBLESHOOTING",
+    "VERSION_CONTROL"
+  ],
+  "static_same_across_contexts": true,
+  "static_has_dynamic_values": false,
+  "dynamic_has_values": true,
+  "soul_default": true,
+  "soul_custom": false,
+  "planning_differs": true,
+  "planning_tags": [
+    "EFFICIENCY",
+    "FILE_SYSTEM_GUIDELINES",
+    "IMPORTANT_PRINCIPLES",
+    "PLANNING_WORKFLOW",
+    "PLAN_SCOPE",
+    "PLAN_STRUCTURE",
+    "ROLE"
+  ],
+  "plain_gpt5_section": false,
+  "plain_preamble": false,
+  "gpt5_gpt5_section": true,
+  "gpt5_preamble": true,
+  "codex_gpt5_section": true,
+  "codex_preamble": false,
+  "canonical_gpt5_section": true,
+  "canonical_preamble": true,
+  "override_gpt5_section": true,
+  "override_preamble": true,
+  "claude_vendor": [
+    "Claude-Specific"
+  ],
+  "claude_baseline": true,
+  "gemini_vendor": [
+    "Gemini-Specific"
+  ],
+  "gemini_baseline": true,
+  "gpt4o_vendor": [],
+  "gpt4o_baseline": true,
+  "inline_starts": true,
+  "inline_has_default_tags": false,
+  "template_rendered": "Team blue prompt for test-model.",
+  "missing_template_error": "FileNotFoundError",
+  "missing_relative_error": "FileNotFoundError",
+  "inline_and_file_error": "ValidationError",
+  "persona_starts": true,
+  "persona_tags": [
+    "EXTERNAL_SERVICES",
+    "MEMORY",
+    "PROCESS_MANAGEMENT",
+    "SECURITY",
+    "SECURITY_RISK_ASSESSMENT"
+  ],
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "default_tags contains SOUL",
+      "ok": true,
+      "actual": "[\"CODE_QUALITY\", \"EFFICIENCY\", \"ENVIRONMENT_SETUP\", \"EXTERNAL_SERVICES\", \"FILE_SYSTEM_GUIDELINES\", \"MEMORY\", \"PROBLEM_SOLVING_WORKFLOW\", \"PROCESS_MANAGEMENT\", \"PULL_REQUESTS\", \"ROLE\", \"SECURITY\", \"SEC"
+    },
+    {
+      "check": "default_tags contains SECURITY",
+      "ok": true,
+      "actual": "[\"CODE_QUALITY\", \"EFFICIENCY\", \"ENVIRONMENT_SETUP\", \"EXTERNAL_SERVICES\", \"FILE_SYSTEM_GUIDELINES\", \"MEMORY\", \"PROBLEM_SOLVING_WORKFLOW\", \"PROCESS_MANAGEMENT\", \"PULL_REQUESTS\", \"ROLE\", \"SECURITY\", \"SEC"
+    },
+    {
+      "check": "default_tags contains MEMORY",
+      "ok": true,
+      "actual": "[\"CODE_QUALITY\", \"EFFICIENCY\", \"ENVIRONMENT_SETUP\", \"EXTERNAL_SERVICES\", \"FILE_SYSTEM_GUIDELINES\", \"MEMORY\", \"PROBLEM_SOLVING_WORKFLOW\", \"PROCESS_MANAGEMENT\", \"PULL_REQUESTS\", \"ROLE\", \"SECURITY\", \"SEC"
+    },
+    {
+      "check": "static_same_across_contexts eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "static_has_dynamic_values eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "dynamic_has_values eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "soul_default eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "planning_differs eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "planning_tags contains PLAN_STRUCTURE",
+      "ok": true,
+      "actual": "[\"EFFICIENCY\", \"FILE_SYSTEM_GUIDELINES\", \"IMPORTANT_PRINCIPLES\", \"PLANNING_WORKFLOW\", \"PLAN_SCOPE\", \"PLAN_STRUCTURE\", \"ROLE\"]"
+    },
+    {
+      "check": "plain_gpt5_section eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "gpt5_gpt5_section eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "gpt5_preamble eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "codex_gpt5_section eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "codex_preamble eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "canonical_gpt5_section eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "override_preamble eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "claude_vendor eq [\"Claude-Specific\"]",
+      "ok": true,
+      "actual": "[\"Claude-Specific\"]"
+    },
+    {
+      "check": "gemini_vendor eq [\"Gemini-Specific\"]",
+      "ok": true,
+      "actual": "[\"Gemini-Specific\"]"
+    },
+    {
+      "check": "gpt4o_vendor len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "gpt4o_baseline eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "inline_starts eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "inline_has_default_tags eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "template_rendered eq Team blue prompt for test-model.",
+      "ok": true,
+      "actual": "Team blue prompt for test-model."
+    },
+    {
+      "check": "missing_template_error eq FileNotFoundError",
+      "ok": true,
+      "actual": "FileNotFoundError"
+    },
+    {
+      "check": "missing_relative_error eq FileNotFoundError",
+      "ok": true,
+      "actual": "FileNotFoundError"
+    },
+    {
+      "check": "inline_and_file_error eq ValidationError",
+      "ok": true,
+      "actual": "ValidationError"
+    },
+    {
+      "check": "persona_starts eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "persona_tags not-contains SOUL",
+      "ok": true,
+      "actual": "[\"EXTERNAL_SERVICES\", \"MEMORY\", \"PROCESS_MANAGEMENT\", \"SECURITY\", \"SECURITY_RISK_ASSESSMENT\"]"
+    },
+    {
+      "check": "persona_tags not-contains ROLE",
+      "ok": true,
+      "actual": "[\"EXTERNAL_SERVICES\", \"MEMORY\", \"PROCESS_MANAGEMENT\", \"SECURITY\", \"SECURITY_RISK_ASSESSMENT\"]"
+    },
+    {
+      "check": "persona_tags contains SECURITY",
+      "ok": true,
+      "actual": "[\"EXTERNAL_SERVICES\", \"MEMORY\", \"PROCESS_MANAGEMENT\", \"SECURITY\", \"SECURITY_RISK_ASSESSMENT\"]"
+    },
+    {
+      "check": "persona_tags contains MEMORY",
+      "ok": true,
+      "actual": "[\"EXTERNAL_SERVICES\", \"MEMORY\", \"PROCESS_MANAGEMENT\", \"SECURITY\", \"SECURITY_RISK_ASSESSMENT\"]"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "",
+  "stderr_tail": "",
+  "ok": true
+}
+{
+  "ok": true,
+  "default_tags": [
+    "CODE_QUALITY",
+    "EFFICIENCY",
+    "ENVIRONMENT_SETUP",
+    "EXTERNAL_SERVICES",
+    "FILE_SYSTEM_GUIDELINES",
+    "MEMORY",
+    "PROBLEM_SOLVING_WORKFLOW",
+    "PROCESS_MANAGEMENT",
+    "PULL_REQUESTS",
+    "ROLE",
+    "SECURITY",
+    "SECURITY_RISK_ASSESSMENT",
+    "SELF_DOCUMENTATION",
+    "SOUL",
+    "TROUBLESHOOTING",
+    "VERSION_CONTROL"
+  ],
+  "static_same_across_contexts": true,
+  "static_has_dynamic_values": false,
+  "dynamic_has_values": true,
+  "soul_default": false,
+  "soul_custom": true,
+  "planning_differs": true,
+  "planning_tags": [
+    "EFFICIENCY",
+    "FILE_SYSTEM_GUIDELINES",
+    "IMPORTANT_PRINCIPLES",
+    "PLANNING_WORKFLOW",
+    "PLAN_SCOPE",
+    "PLAN_STRUCTURE",
+    "ROLE"
+  ],
+  "plain_gpt5_section": false,
+  "plain_preamble": false,
+  "gpt5_gpt5_section": true,
+  "gpt5_preamble": true,
+  "codex_gpt5_section": true,
+  "codex_preamble": false,
+  "canonical_gpt5_section": true,
+  "canonical_preamble": true,
+  "override_gpt5_section": true,
+  "override_preamble": true,
+  "claude_vendor": [
+    "Claude-Specific"
+  ],
+  "claude_baseline": true,
+  "gemini_vendor": [
+    "Gemini-Specific"
+  ],
+  "gemini_baseline": true,
+  "gpt4o_vendor": [],
+  "gpt4o_baseline": true,
+  "inline_starts": true,
+  "inline_has_default_tags": false,
+  "template_rendered": "Team blue prompt for test-model.",
+  "missing_template_error": "FileNotFoundError",
+  "missing_relative_error": "FileNotFoundError",
+  "inline_and_file_error": "ValidationError",
+  "persona_starts": true,
+  "persona_tags": [
+    "EXTERNAL_SERVICES",
+    "MEMORY",
+    "PROCESS_MANAGEMENT",
+    "SECURITY",
+    "SECURITY_RISK_ASSESSMENT"
+  ],
+  "_exit": 0,
+  "_seconds": 5.1,
+  "checks": [
+    {
+      "check": "soul_custom eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "soul_default eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 10s]

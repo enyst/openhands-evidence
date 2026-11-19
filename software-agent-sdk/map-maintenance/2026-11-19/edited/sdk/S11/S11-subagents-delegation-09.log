@@ -1,0 +1,100 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/workspace_agents \
+  --check execution_status eq finished --check registered_before_send eq false --check registered_after_send eq true \
+  --check observations.0.subagent eq ws-reviewer --check observations.0.text eq "notes say hi" \
+  --check observations.1.subagent eq bash-runner --check observations.1.status eq completed \
+  --check builtin_written eq true --check description_lists_ws_reviewer eq true --check script_left eq 0 \
+  --check temp_task_dirs_before_close eq 1 --check temp_task_dirs_after_close eq 0
+{
+  "ok": true,
+  "execution_status": "finished",
+  "registered_before_send": false,
+  "registered_after_send": true,
+  "observations": [
+    {
+      "task_id": "task_00000001",
+      "subagent": "ws-reviewer",
+      "status": "completed",
+      "is_error": false,
+      "text": "notes say hi"
+    },
+    {
+      "task_id": "task_00000002",
+      "subagent": "bash-runner",
+      "status": "completed",
+      "is_error": false,
+      "text": "wrote builtin.txt"
+    }
+  ],
+  "builtin_written": true,
+  "description_lists_ws_reviewer": true,
+  "script_left": 0,
+  "temp_task_dirs_before_close": 1,
+  "temp_task_dirs_after_close": 0,
+  "_exit": 0,
+  "_seconds": 5.5,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "registered_before_send eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "registered_after_send eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "observations.0.subagent eq ws-reviewer",
+      "ok": true,
+      "actual": "ws-reviewer"
+    },
+    {
+      "check": "observations.0.text eq notes say hi",
+      "ok": true,
+      "actual": "notes say hi"
+    },
+    {
+      "check": "observations.1.subagent eq bash-runner",
+      "ok": true,
+      "actual": "bash-runner"
+    },
+    {
+      "check": "observations.1.status eq completed",
+      "ok": true,
+      "actual": "completed"
+    },
+    {
+      "check": "builtin_written eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "description_lists_ws_reviewer eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "script_left eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "temp_task_dirs_before_close eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "temp_task_dirs_after_close eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 6s]

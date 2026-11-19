@@ -1,0 +1,61 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Switch during a running turn (`F09.switch-llm-mid-run`).",
+  "ids": [
+    "F09.switch-llm-mid-run"
+  ],
+  "line": 361,
+  "script": "MID=$(control-agent-server conversation start --tools terminal --no-autotitle --prompt 'Run this exact shell command and nothing else: sleep 20' --print-id)\ncontrol-agent-server ws start \"/sockets/events/$MID\" --name qa-f09-midrun --duration 300\ncontrol-agent-server ws read qa-f09-midrun --kinds ActionEvent --contains 'sleep 20' --expect-min 1 --wait 120\ncontrol-agent-server api POST \"/api/conversations/$MID/switch_llm\" \\\n  --json \"{\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"api_key\\\": \\\"$ENC\\\", \\\"usage_id\\\": \\\"qa-f09-midrun\\\", \\\"num_retries\\\": 0}}\" \\\n  --expect 200 --check success eq true --save F09.switch-llm-mid-run/switch\ncontrol-agent-server conversation wait \"$MID\" --until finished,error --timeout 240\ncontrol-agent-server ws stop qa-f09-midrun --kinds ConversationStateUpdateEvent --contains qa-f09-midrun --expect-min 1 --wait 20 --save F09.switch-llm-mid-run/frames\ncontrol-agent-server api GET \"/api/conversations/$MID\" --until-ok 60 --quiet --check execution_status eq finished \\\n  --check agent.llm.usage_id eq qa-f09-midrun \\\n  --check stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0 \\\n  --check stats.usage_to_metrics.qa-f09-midrun.accumulated_token_usage.prompt_tokens gt 0 --save F09.switch-llm-mid-run/stats\n",
+  "exit_code": 1,
+  "elapsed_ms": 86719,
+  "failed_line": 9,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$MID\" --until-ok 60 --quiet --check execution_status eq finished --check agent.llm.usage_id eq qa-f09-midrun --check stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0 --check stats.usage_to_metrics.qa-f09-midrun.accumulated_token_usage.prompt_tokens gt 0 --save F09.switch-llm-mid-run/stats",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/d0d8d45a-d64e-44e2-9d9a-7cb0a633ded4",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "6472",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 60407,
+    "checks": [
+      {
+        "check": "execution_status eq finished",
+        "ok": false,
+        "actual": "error"
+      },
+      {
+        "check": "agent.llm.usage_id eq qa-f09-midrun",
+        "ok": true,
+        "actual": "qa-f09-midrun"
+      },
+      {
+        "check": "stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0",
+        "ok": true,
+        "actual": "4786"
+      },
+      {
+        "check": "stats.usage_to_metrics.qa-f09-midrun.accumulated_token_usage.prompt_tokens gt 0",
+        "ok": false,
+        "actual": "0"
+      }
+    ],
+    "attempts": 117,
+    "saved": "<scratch>/agent-server/20261119-082330-b8e9-map-f09/evidence/F09.switch-llm-mid-run/stats.json",
+    "hint": "failed check: execution_status eq finished; stats.usage_to_metrics.qa-f09-midrun.accumulated_token_usage.prompt_tokens gt 0"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"capture\": \"qa-f09-midrun\",\n  \"out\": \"<scratch>/agent-server/20261119-082330-b8e9-map-f09/captures/qa-f09-midrun.jsonl\",\n  \"hint\": \"`control-agent-server ws stop qa-f09-midrun` (or `ws read qa-f09-midrun`) after triggering the action\"\n}\n{\n  \"ok\": true,\n  \"capture\": \"qa-f09-midrun\",\n  \"out\": \"<scratch>/agent-server/20261119-082330-b8e9-map-f09/captures/qa-f09-midrun.jsonl\",\n  \"opened\": true,\n  \"stopped\": null,\n  \"frames\": 3,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 2,\n    \"ActionEvent\": 1\n  },\n  \"close\": null,\n  \"matching\": 1,\n  \"matching_kinds\": [\n    \"ActionEvent\"\n  ],\n  \"frames_shown\": [\n    {\n      \"kind\": \"ActionEvent\",\n      \"frame\": \"{\\\"id\\\": \\\"38393c24-15ce-4c69-895c-fd8256b4c9ec\\\", \\\"timestamp\\\": \\\"2026-11-19T08:24:07.996686\\\", \\\"source\\\": \\\"agent\\\", \\\"parent_id\\\": \\\"60bbcdae-8a67-4c2a-9699-ec23bb3dc48d\\\", \\\"thought\\\": [], \\\"reasoning_content\\\": \\\"The user wants me to run exactly `sleep 20` and nothing else. Let me do that.\\\", \\\"thinking_blocks\\\": [], \\\"action\\\": {\\\"command\\\": \\\"sleep 20\\\", \\\"is_input\\\": false, \\\"timeout\\\": 30.0, \\\"reset\\\": false, \\\"kind\\\": \\\"Ter\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/d0d8d45a-d64e-44e2-9d9a-7cb0a633ded4/switch_llm\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"deepseek/deepseek-flash\",\n        \"api_key\": \"\",\n        \"usage_id\": \"qa-f09-midrun\",\n        \"num_retries\": 0\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 65,\n  \"checks\": [\n    {\n      \"check\": \"success eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-082330-b8e9-map-f09/evidence/F09.switch-llm-mid-run/switch.json\"\n}\n{\n  \"id\": \"d0d8d45a-d64e-44e2-9d9a-7cb0a633ded4\",\n  \"ok\": true,\n  \"status\": \"error\",\n  \"transitions\": [\n    \"running\",\n    \"error\"\n  ],\n  \"waited_ms\": 20412\n}\n{\n  \"ok\": true,\n  \"capture\": \"qa-f09-midrun\",\n  \"out\": \"<scratch>/agent-server/20261119-082330-b8e9-map-f09/captures/qa-f09-midrun.jsonl\",\n  \"opened\": true,\n  \"stopped\": \"stopped\",\n  \"frames\": 8,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 5,\n    \"ActionEvent\": 1,\n    \"ObservationEvent\": 1,\n    \"ConversationErrorEvent\": 1\n  },\n  \"close\": null,\n  \"matching\": 2,\n  \"matching_kinds\": [\n    \"ConversationStateUpdateEvent\"\n  ],\n  \"frames_shown\": [\n    {\n      \"kind\": \"ConversationStateUpdateEvent\",\n      \"frame\": \"{\\\"id\\\": \\\"06690fb5-9493-46d4-8541-fb8e91f5d253\\\", \\\"timestamp\\\": \\\"2026-11-19T08:24:08.383349\\\", \\\"source\\\": \\\"environment\\\", \\\"parent_id\\\": \\\"38393c24-15ce-4c69-895c-fd8256b4c9ec\\\", \\\"key\\\": \\\"agent\\\", \\\"value\\\": {\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"api_key\\\": null, \\\"provider_connection_id\\\": null, \\\"auth_type\\\": \\\"api_key\\\", \\\"subscription_vendor\\\": null, \\\"base_url\\\": null, \\\"api_version\\\": null, \\\"aws_access_key_id\\\": \\u2026\"\n    },\n    {\n      \"kind\": \"ConversationStateUpdateEvent\",\n      \"frame\": \"{\\\"id\\\": \\\"6297062c-94ca-4541-b6c4-788df8bc3747\\\", \\\"timestamp\\\": \\\"2026-11-19T08:24:28.932808\\\", \\\"source\\\": \\\"environment\\\", \\\"key\\\": \\\"full_state\\\", \\\"value\\\": {\\\"id\\\": \\\"d0d8d45a-d64e-44e2-9d9a-7cb0a633ded4\\\", \\\"agent\\\": {\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"auth_type\\\": \\\"api_key\\\", \\\"openrouter_site_url\\\": \\\"https://docs.all-hands.dev/\\\", \\\"openrouter_app_name\\\": \\\"OpenHands\\\", \\\"num_retries\\\": 0, \\\"retry_multiplier\\\": 8.\\u2026\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-082330-b8e9-map-f09/evidence/F09.switch-llm-mid-run/frames.json\"\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/d0d8d45a-d64e-44e2-9d9a-7cb0a633ded4\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6472\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 60407,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": false,\n      \"actual\": \"error\"\n    },\n    {\n      \"check\": \"agent.llm.usage_id eq qa-f09-midrun\",\n      \"ok\": true,\n      \"actual\": \"qa-f09-midrun\"\n    },\n    {\n      \"check\": \"stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0\",\n      \"ok\": true,\n      \"actual\": \"4786\"\n    },\n    {\n      \"check\": \"stats.usage_to_metrics.qa-f09-midrun.accumulated_token_usage.prompt_tokens gt 0\",\n      \"ok\": false,\n      \"actual\": \"0\"\n    }\n  ],\n  \"attempts\": 117,\n  \"saved\": \"<scratch>/agent-server/20261119-082330-b8e9-map-f09/evidence/F09.switch-llm-mid-run/stats.json\",\n  \"hint\": \"failed check: execution_status eq finished; stats.usage_to_metrics.qa-f09-midrun.accumulated_token_usage.prompt_tokens gt 0\"\n}\n",
+  "stderr": ""
+}

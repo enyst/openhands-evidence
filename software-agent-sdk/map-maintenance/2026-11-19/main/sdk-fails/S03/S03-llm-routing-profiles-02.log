@@ -1,0 +1,93 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/conversation_stats \
+  --check first_run.usage_ids contains secondary --check first_run.combined_cost eq 0.42
+control-sdk program S02/conversation_stats --arg before-first-message \
+  --check first_run.secondary_in_registry eq true --check first_run.usage_ids contains secondary \
+  --check first_run.secondary_cost eq 0.14 --check first_run.combined_cost eq 0.42
+{
+  "ok": true,
+  "order": "after-run",
+  "first_run": {
+    "usage_ids": [
+      "agent",
+      "secondary"
+    ],
+    "agent_cost": 0.28,
+    "secondary_in_registry": true,
+    "secondary_cost": 0.14,
+    "combined_cost": 0.42,
+    "combined_prompt_tokens": 300
+  },
+  "resumed": {
+    "restored_agent_cost": 0.28,
+    "agent_cost_after": 0.42,
+    "agent_calls_after": 3,
+    "usage_ids": [
+      "agent"
+    ],
+    "status": "finished"
+  },
+  "_exit": 0,
+  "_seconds": 6.7,
+  "checks": [
+    {
+      "check": "first_run.usage_ids contains secondary",
+      "ok": true,
+      "actual": "[\"agent\", \"secondary\"]"
+    },
+    {
+      "check": "first_run.combined_cost eq 0.42",
+      "ok": true,
+      "actual": "0.42"
+    }
+  ]
+}
+{
+  "ok": true,
+  "order": "before-first-message",
+  "first_run": {
+    "usage_ids": [
+      "agent"
+    ],
+    "agent_cost": 0.28,
+    "secondary_in_registry": true,
+    "secondary_cost": null,
+    "combined_cost": 0.28,
+    "combined_prompt_tokens": 200
+  },
+  "resumed": {
+    "restored_agent_cost": 0.28,
+    "agent_cost_after": 0.42,
+    "agent_calls_after": 3,
+    "usage_ids": [
+      "agent"
+    ],
+    "status": "finished"
+  },
+  "_exit": 0,
+  "_seconds": 6.2,
+  "checks": [
+    {
+      "check": "first_run.secondary_in_registry eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "first_run.usage_ids contains secondary",
+      "ok": false,
+      "actual": "[\"agent\"]"
+    },
+    {
+      "check": "first_run.secondary_cost eq 0.14",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "first_run.combined_cost eq 0.42",
+      "ok": false,
+      "actual": "0.28"
+    }
+  ]
+}
+
+[exit 1 after 13s]

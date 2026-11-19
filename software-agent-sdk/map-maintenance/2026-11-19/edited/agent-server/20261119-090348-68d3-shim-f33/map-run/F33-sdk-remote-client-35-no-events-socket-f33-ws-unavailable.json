@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "No events socket (`F33.ws-unavailable`).",
+  "ids": [
+    "F33.ws-unavailable"
+  ],
+  "line": 1634,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.ws-unavailable/probe -- .venv/bin/python - <<'PY'\nimport os\nimport threading\nimport time\nimport httpx\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import WebSocketConnectionError\n\nproxy = f33.Proxy(block_ws=True)\nws = f33.workspace(\"nows\", host=proxy.url)\nassert ws.alive, \"REST does not pass the proxy\"\nos.environ[\"OPENHANDS_REMOTE_WS_READY_TIMEOUT\"] = \"3\"\nt0 = time.monotonic()\ntry:\n    Conversation(agent=f33.agent(), workspace=ws, visualizer=None, delete_on_close=False)\n    raise AssertionError(\"a conversation connected without its events socket\")\nexcept WebSocketConnectionError as e:\n    refused_cid, ready_wait = str(e.conversation_id), time.monotonic() - t0\nassert 3 <= ready_wait < 10 and proxy.refused >= 1, (ready_wait, proxy.refused)\nos.environ[\"OPENHANDS_REMOTE_WS_READY_REQUIRED\"] = \"false\"\nseen = []\nconv = Conversation(agent=f33.agent(), workspace=ws, visualizer=None, delete_on_close=False, callbacks=[seen.append])\nconv.set_title(\"qa-f33 no socket\")\nconv.send_message(\"Reply with one word: ready\")\nfinished_at = []\n\n\ndef watch():\n    with httpx.Client(base_url=f33.URL, headers={\"X-Session-API-Key\": f33.KEY}) as http:\n        while not finished_at:\n            if http.get(f\"/api/conversations/{conv.id}\").json()[\"execution_status\"] == \"finished\":\n                finished_at.append(time.monotonic())\n            time.sleep(0.25)\n\n\nthreading.Thread(target=watch, daemon=True).start()\nconv.run(timeout=300)\nlag = time.monotonic() - finished_at[0]\nassert conv.state.execution_status.value == \"finished\", conv.state.execution_status\nassert 29 <= lag <= 40, lag\nassert not seen and not proxy.sockets, (len(seen), proxy.sockets)\nf33.emit(\"nows\", refused_cid=refused_cid, ready_wait=round(ready_wait, 1), cid=str(conv.id), lag=round(lag, 1),\n         local=f33.kinds(conv.state.events))\nconv.close()\nPY\nNOWS=$(jq -r .cid \"$F33/nows.json\")\ncontrol-agent-server api GET \"/api/conversations/$(jq -r .refused_cid \"$F33/nows.json\")\" --check execution_status eq idle \\\n  --save F33.ws-unavailable/left-behind\ncontrol-agent-server api GET \"/api/conversations/$NOWS\" --check execution_status eq finished --save F33.ws-unavailable/get\nfor K in SystemPromptEvent MessageEvent ActionEvent ObservationEvent; do\n  control-agent-server conversation events \"$NOWS\" --kinds $K --expect-count \"$(jq \".local.$K // 0\" \"$F33/nows.json\")\"\ndone\n",
+  "exit_code": 1,
+  "elapsed_ms": 471,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.ws-unavailable/probe -- .venv/bin/python - <<'PY'\nimport os\nimport threading\nimport time\nimport httpx\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import WebSocketConnectionError\n\nproxy = f33.Proxy(block_ws=True)\nws = f33.workspace(\"nows\", host=proxy.url)\nassert ws.alive, \"REST does not pass the proxy\"\nos.environ[\"OPENHANDS_REMOTE_WS_READY_TIMEOUT\"] = \"3\"\nt0 = time.monotonic()\ntry:\n    Co",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 179,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 5, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.ws-unavailable/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 179,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 5, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.ws-unavailable/probe.json\"\n}\n",
+  "stderr": ""
+}

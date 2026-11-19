@@ -1,0 +1,44 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Load the same plugin twice (`F09.load-plugin-twice`).",
+  "ids": [
+    "F09.load-plugin-twice"
+  ],
+  "line": 873,
+  "script": "control-agent-server api POST \"/api/conversations/$QID/load_plugin\" --json '{\"plugin_ref\": \"qa-f09-mkt-plugin@qa-f09-mkt\"}' --expect 200 --save F09.load-plugin-twice/second-load\ncontrol-agent-server api GET \"/api/conversations/$QID\" --query include_skills=true --quiet \\\n  --check agent.agent_context.skills len-eq 2 --check agent.agent_context.skills contains qa-f09-mkt-plugin-skill --check hook_config.user_prompt_submit len-ge 1\ncontrol-agent-server api GET \"/api/conversations/$QID\" --quiet --check hook_config.user_prompt_submit len-eq 1 --save F09.load-plugin-twice/get\n",
+  "exit_code": 1,
+  "elapsed_ms": 363,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$QID/load_plugin\" --json '{\"plugin_ref\": \"qa-f09-mkt-plugin@qa-f09-mkt\"}' --expect 200 --save F09.load-plugin-twice/second-load",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//load_plugin",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "plugin_ref": "qa-f09-mkt-plugin@qa-f09-mkt"
+      },
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 61,
+    "saved": "<scratch>/agent-server/20261119-082330-b8e9-map-f09/evidence/F09.load-plugin-twice/second-load.json",
+    "hint": "expected 200, got 404"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//load_plugin\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"plugin_ref\": \"qa-f09-mkt-plugin@qa-f09-mkt\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"saved\": \"<scratch>/agent-server/20261119-082330-b8e9-map-f09/evidence/F09.load-plugin-twice/second-load.json\",\n  \"hint\": \"expected 200, got 404\"\n}\n",
+  "stderr": ""
+}

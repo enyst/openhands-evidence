@@ -1,0 +1,49 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Rotate the key (`F23.conn-rotate-key`).",
+  "ids": [
+    "F23.conn-rotate-key"
+  ],
+  "line": 476,
+  "script": "control-agent-server api PATCH \"/api/llm/provider-connections/$CONN\" --json '{\"api_key\": \"sk-qa-f23-rotated-QA23\"}' --expect 200 \\\n  --check api_key_set eq true --save F23.conn-rotate-key/rotate\ncontrol-agent-server api GET /api/settings --header 'X-Expose-Secrets: plaintext' --max-chars 200 --check agent_settings.llm.api_key eq \"$DEEPSEEK_API_KEY\"\ncontrol-agent-server api PATCH /api/settings --json '{\"active_profile\": \"qa-f23-linked\"}' --expect 200 --quiet\ncontrol-agent-server api GET /api/settings --header 'X-Expose-Secrets: plaintext' --max-chars 200 --check active_profile eq qa-f23-linked \\\n  --check agent_settings.llm.api_key eq sk-qa-f23-rotated-QA23 --save F23.conn-rotate-key/settings-rotated\nBAD=$(control-agent-server conversation start --tools none --no-autotitle --prompt 'Reply with one word: ok' --wait --until error --timeout 180 --print-id)\ncontrol-agent-server conversation events \"$BAD\" --kinds ConversationErrorEvent --contains QA23 --expect-kind ConversationErrorEvent \\\n  --full --save F23.conn-rotate-key/provider-rejects\nprintf '{\"api_key\": \"%s\"}' \"$DEEPSEEK_API_KEY\" | control-agent-server api PATCH \"/api/llm/provider-connections/$CONN\" --stdin --expect 200\ncontrol-agent-server api POST /api/profiles/qa-f23-linked/activate --expect 200\nGOOD=$(control-agent-server conversation start --tools none --no-autotitle --prompt 'Reply with one word: ok' --wait --timeout 180 --print-id)\ncontrol-agent-server api GET \"/api/conversations/$GOOD\" --max-chars 200 --check execution_status eq finished --save F23.conn-rotate-key/rotated-back\n",
+  "exit_code": 1,
+  "elapsed_ms": 348,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api PATCH \"/api/llm/provider-connections/$CONN\" --json '{\"api_key\": \"sk-qa-f23-rotated-QA23\"}' --expect 200 --check api_key_set eq true --save F23.conn-rotate-key/rotate",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 307,
+    "request": {
+      "method": "PATCH",
+      "path": "/api/llm/provider-connections/",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "api_key": "sk-qa-f23-rotated-QA23"
+      },
+      "files": []
+    },
+    "response": {
+      "status": 307,
+      "headers": {
+        "content-length": "0",
+        "location": "http://127.0.0.1:48675/api/llm/provider-connections"
+      },
+      "body": "",
+      "truncated": false
+    },
+    "elapsed_ms": 57,
+    "checks": [
+      {
+        "check": "api_key_set eq true",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-083255-9d46-map-f23/evidence/F23.conn-rotate-key/rotate.json",
+    "hint": "expected 200, got 307"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"PATCH\",\n    \"path\": \"/api/llm/provider-connections/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"api_key\": \"sk-qa-f23-rotated-QA23\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:48675/api/llm/provider-connections\"\n    },\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 57,\n  \"checks\": [\n    {\n      \"check\": \"api_key_set eq true\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-083255-9d46-map-f23/evidence/F23.conn-rotate-key/rotate.json\",\n  \"hint\": \"expected 200, got 307\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,17 @@
+{
+  "file": "F21-agent-profiles.md",
+  "bullet": "Lock wait does not stall the server (`F21.busy-blocks-server`).",
+  "ids": [
+    "F21.busy-blocks-server"
+  ],
+  "line": 936,
+  "script": "control-agent-server api GET /alive --auth none --expect 200 --expect-max-ms 2000\ncontrol-agent-server api GET /api/agent-profiles --expect 200 --quiet > /dev/null  # creates the store dir under --only\nLOCK=\"$AGENT_SERVER_VERIFY_RUN/home/.openhands/agent-profiles/.agent-profiles.lock\"\nexec 9>>\"$LOCK\"\nflock -w 5 9\n(exec 9>&- >/dev/null 2>&1; control-agent-server api GET /api/agent-profiles/qa-f21-coder --timeout 90 --quiet) &\nsleep 5\ncontrol-agent-server api GET /alive --auth none --expect 200 --timeout 60 --expect-max-ms 2000 --save F21.busy-blocks-server/alive\nflock -u 9\nwait\n",
+  "exit_code": 0,
+  "elapsed_ms": 6323,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/alive\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"15\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"status\": \"ok\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/alive\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"15\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"status\": \"ok\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 83,\n  \"saved\": \"<scratch>/agent-server/20261119-101601-49a0-map-f21/evidence/F21.busy-blocks-server/alive.json\"\n}\n",
+  "stderr": ""
+}

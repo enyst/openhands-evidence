@@ -1,0 +1,287 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/profiles --arg crud \
+  --check files len-eq 2 --check tmp_leftovers eq 0 --check schema_version eq 1 \
+  --check loaded_model eq openai/gpt-4o-mini --check loaded_temperature eq 0.1 --check summaries len-eq 2 \
+  --check after_rename contains bold.json --check after_delete len-eq 1 \
+  --check invalid_name contains "Invalid profile name" --check missing contains "Available profiles: fast" \
+  --check corrupted contains "Failed to load profile"
+control-sdk program S03/profiles --arg secrets \
+  --check masked_has_secret eq false --check masked_loaded_key missing \
+  --check plain_has_secret eq true --check plain_loaded_key eq sk-profile-secret \
+  --check encrypted_has_secret eq false --check encrypted_loaded_key eq sk-profile-secret \
+  --check summaries.plain eq true --check summaries.masked eq false --check summaries_expose_secret eq false
+control-sdk program S03/profiles --arg concurrency \
+  --check errors len-eq 0 --check reads_ok eq true --check profiles len-eq 5 --check tmp_leftovers eq 0 \
+  --check over_limit_is_profile_limit eq true --check overwrite_error missing --check limited_profiles len-eq 2
+control-sdk program S03/profiles --arg migration \
+  --check legacy_model eq openhands/claude-opus-5 --check legacy_base_url missing \
+  --check thirdparty_model eq litellm_proxy/claude-opus-5 --check thirdparty_base_url eq https://litellm.example.com/ \
+  --check future_error contains "newer than supported"
+{
+  "ok": true,
+  "mode": "crud",
+  "files": [
+    "creative.json",
+    "fast.json"
+  ],
+  "tmp_leftovers": 0,
+  "schema_version": 1,
+  "list": [
+    "fast.json",
+    "creative.json"
+  ],
+  "summaries": [
+    {
+      "name": "creative",
+      "model": "anthropic/claude-sonnet-4-5-20250929",
+      "base_url": null,
+      "provider_connection_id": null,
+      "provider_connection_broken": false,
+      "api_key_set": false
+    },
+    {
+      "name": "fast",
+      "model": "openai/gpt-4o-mini",
+      "base_url": null,
+      "provider_connection_id": null,
+      "provider_connection_broken": false,
+      "api_key_set": false
+    }
+  ],
+  "loaded_model": "openai/gpt-4o-mini",
+  "loaded_temperature": 0.1,
+  "after_rename": [
+    "bold.json",
+    "fast.json"
+  ],
+  "after_delete": [
+    "fast.json"
+  ],
+  "invalid_name": "Invalid: Invalid profile name: '../escape'. Profile names must be 1-64 characters, start with a letter or digit, and contain only letters, digits, '.', '_', or '-'.",
+  "missing": "FileNotFoundError: Profile `nope` not found. Available profiles: fast.json",
+  "corrupted": "Invalid: Failed to load profile `broken`: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+  "_exit": 0,
+  "_seconds": 4.9,
+  "checks": [
+    {
+      "check": "files len-eq 2",
+      "ok": true,
+      "actual": "[\"creative.json\", \"fast.json\"]"
+    },
+    {
+      "check": "tmp_leftovers eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "schema_version eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "loaded_model eq openai/gpt-4o-mini",
+      "ok": true,
+      "actual": "openai/gpt-4o-mini"
+    },
+    {
+      "check": "loaded_temperature eq 0.1",
+      "ok": true,
+      "actual": "0.1"
+    },
+    {
+      "check": "summaries len-eq 2",
+      "ok": true,
+      "actual": "[{\"name\": \"creative\", \"model\": \"anthropic/claude-sonnet-4-5-20250929\", \"base_url\": null, \"provider_connection_id\": null, \"provider_connection_broken\": false, \"api_key_set\": false}, {\"name\": \"fast\", \"m"
+    },
+    {
+      "check": "after_rename contains bold.json",
+      "ok": true,
+      "actual": "[\"bold.json\", \"fast.json\"]"
+    },
+    {
+      "check": "after_delete len-eq 1",
+      "ok": true,
+      "actual": "[\"fast.json\"]"
+    },
+    {
+      "check": "invalid_name contains Invalid profile name",
+      "ok": true,
+      "actual": "Invalid: Invalid profile name: '../escape'. Profile names must be 1-64 characters, start with a letter or digit, and contain only letters, digits, '.', '_', or '-'."
+    },
+    {
+      "check": "missing contains Available profiles: fast",
+      "ok": true,
+      "actual": "FileNotFoundError: Profile `nope` not found. Available profiles: fast.json"
+    },
+    {
+      "check": "corrupted contains Failed to load profile",
+      "ok": true,
+      "actual": "Invalid: Failed to load profile `broken`: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "secrets",
+  "masked_has_secret": false,
+  "masked_loaded_key": null,
+  "plain_has_secret": true,
+  "plain_loaded_key": "sk-profile-secret",
+  "encrypted_has_secret": false,
+  "encrypted_loaded_key": "sk-profile-secret",
+  "summaries": {
+    "encrypted": true,
+    "masked": false,
+    "plain": true
+  },
+  "summaries_expose_secret": false,
+  "_exit": 0,
+  "_seconds": 4.9,
+  "checks": [
+    {
+      "check": "masked_has_secret eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "masked_loaded_key missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "plain_has_secret eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "plain_loaded_key eq sk-profile-secret",
+      "ok": true,
+      "actual": "sk-profile-secret"
+    },
+    {
+      "check": "encrypted_has_secret eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "encrypted_loaded_key eq sk-profile-secret",
+      "ok": true,
+      "actual": "sk-profile-secret"
+    },
+    {
+      "check": "summaries.plain eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "summaries.masked eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "summaries_expose_secret eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "concurrency",
+  "errors": [],
+  "reads_ok": true,
+  "profiles": [
+    "shared.json",
+    "w0.json",
+    "w1.json",
+    "w2.json",
+    "w3.json"
+  ],
+  "tmp_leftovers": 0,
+  "over_limit_error": "ProfileLimitExceeded: Profile limit reached (2).",
+  "over_limit_is_profile_limit": true,
+  "overwrite_error": null,
+  "limited_profiles": [
+    "one.json",
+    "two.json"
+  ],
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "errors len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "reads_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "profiles len-eq 5",
+      "ok": true,
+      "actual": "[\"shared.json\", \"w0.json\", \"w1.json\", \"w2.json\", \"w3.json\"]"
+    },
+    {
+      "check": "tmp_leftovers eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "over_limit_is_profile_limit eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "overwrite_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "limited_profiles len-eq 2",
+      "ok": true,
+      "actual": "[\"one.json\", \"two.json\"]"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "migration",
+  "legacy_model": "openhands/claude-opus-5",
+  "legacy_base_url": null,
+  "thirdparty_model": "litellm_proxy/claude-opus-5",
+  "thirdparty_base_url": "https://litellm.example.com/",
+  "future_error": "Invalid: Failed to load profile `future`: LLM profile schema_version 2 is newer than supported version 1",
+  "_exit": 0,
+  "_seconds": 6.0,
+  "checks": [
+    {
+      "check": "legacy_model eq openhands/claude-opus-5",
+      "ok": true,
+      "actual": "openhands/claude-opus-5"
+    },
+    {
+      "check": "legacy_base_url missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "thirdparty_model eq litellm_proxy/claude-opus-5",
+      "ok": true,
+      "actual": "litellm_proxy/claude-opus-5"
+    },
+    {
+      "check": "thirdparty_base_url eq https://litellm.example.com/",
+      "ok": true,
+      "actual": "https://litellm.example.com/"
+    },
+    {
+      "check": "future_error contains newer than supported",
+      "ok": true,
+      "actual": "Invalid: Failed to load profile `future`: LLM profile schema_version 2 is newer than supported version 1"
+    }
+  ]
+}
+
+[exit 0 after 21s]

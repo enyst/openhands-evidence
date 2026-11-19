@@ -1,0 +1,45 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "GET right after a mid-run switch (`F09.switch-llm-mid-run-get`), known bug.",
+  "ids": [
+    "F09.switch-llm-mid-run-get"
+  ],
+  "line": 427,
+  "script": "GID=$(control-agent-server conversation start --tools terminal --no-autotitle --prompt 'Run this exact shell command and nothing else: sleep 20' --print-id)\ntrap 'control-agent-server conversation wait \"$GID\" --until finished,error --timeout 240 >/dev/null 2>&1 || true; control-agent-server ws stop qa-f09-midget >/dev/null 2>&1 || true' EXIT\ncontrol-agent-server ws start \"/sockets/events/$GID\" --name qa-f09-midget --duration 150\ncontrol-agent-server ws read qa-f09-midget --kinds ActionEvent --contains 'sleep 20' --expect-min 1 --wait 120\ncontrol-agent-server api POST \"/api/conversations/$GID/switch_llm\" \\\n  --json \"{\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"api_key\\\": \\\"$ENC\\\", \\\"usage_id\\\": \\\"qa-f09-midget\\\", \\\"num_retries\\\": 0}}\" \\\n  --expect 200 --save F09.switch-llm-mid-run-get/switch\ncontrol-agent-server ws read qa-f09-midget --kinds ConversationStateUpdateEvent --contains '\"usage_id\": \"qa-f09-midget\"' --expect-min 1 --wait 10 --save F09.switch-llm-mid-run-get/frames\ncontrol-agent-server api GET \"/api/conversations/$GID\" --quiet --check execution_status eq running\ncontrol-agent-server api GET \"/api/conversations/$GID\" --quiet --check agent.llm.usage_id eq qa-f09-midget --save F09.switch-llm-mid-run-get/get  # bug: status eq 200 && checks.0.actual eq default\ncontrol-agent-server state cat \"server/workspace/conversations/${GID//-/}/base_state.json\" --max-chars 200 --check agent.llm.usage_id eq qa-f09-midget  # bug: checks.0.actual eq default\ncontrol-agent-server conversation wait \"$GID\" --until finished,error --timeout 240\ncontrol-agent-server api GET \"/api/conversations/$GID\" --quiet --check execution_status eq finished --check agent.llm.usage_id eq qa-f09-midget\n",
+  "exit_code": 1,
+  "elapsed_ms": 25471,
+  "failed_line": 10,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$GID\" --quiet --check agent.llm.usage_id eq qa-f09-midget --save F09.switch-llm-mid-run-get/get",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/9869d5e1-6292-4ca3-b1d4-f077cec02e70",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "6154",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 67,
+    "checks": [
+      {
+        "check": "agent.llm.usage_id eq qa-f09-midget",
+        "ok": false,
+        "actual": "default"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm-mid-run-get/get.json",
+    "hint": "failed check: agent.llm.usage_id eq qa-f09-midget"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"capture\": \"qa-f09-midget\",\n  \"out\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/captures/qa-f09-midget.jsonl\",\n  \"hint\": \"`control-agent-server ws stop qa-f09-midget` (or `ws read qa-f09-midget`) after triggering the action\"\n}\n{\n  \"ok\": true,\n  \"capture\": \"qa-f09-midget\",\n  \"out\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/captures/qa-f09-midget.jsonl\",\n  \"opened\": true,\n  \"stopped\": null,\n  \"frames\": 3,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 2,\n    \"ActionEvent\": 1\n  },\n  \"close\": null,\n  \"matching\": 1,\n  \"matching_kinds\": [\n    \"ActionEvent\"\n  ],\n  \"frames_shown\": [\n    {\n      \"kind\": \"ActionEvent\",\n      \"frame\": \"{\\\"id\\\": \\\"f96b308b-2bb2-4571-9693-24354964c8bb\\\", \\\"timestamp\\\": \\\"2026-11-19T10:36:37.547960\\\", \\\"source\\\": \\\"agent\\\", \\\"parent_id\\\": \\\"8e185f7b-0d95-4ee3-a033-15376b30de1e\\\", \\\"thought\\\": [], \\\"reasoning_content\\\": \\\"The user wants me to run exactly `sleep 20` and nothing else. Let me do that.\\\", \\\"thinking_blocks\\\": [], \\\"action\\\": {\\\"command\\\": \\\"sleep 20\\\", \\\"is_input\\\": false, \\\"timeout\\\": 25.0, \\\"reset\\\": false, \\\"kind\\\": \\\"Ter\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/9869d5e1-6292-4ca3-b1d4-f077cec02e70/switch_llm\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"deepseek/deepseek-flash\",\n        \"api_key\": \"\",\n        \"usage_id\": \"qa-f09-midget\",\n        \"num_retries\": 0\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 71,\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm-mid-run-get/switch.json\"\n}\n{\n  \"ok\": true,\n  \"capture\": \"qa-f09-midget\",\n  \"out\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/captures/qa-f09-midget.jsonl\",\n  \"opened\": true,\n  \"stopped\": null,\n  \"frames\": 4,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 3,\n    \"ActionEvent\": 1\n  },\n  \"close\": null,\n  \"matching\": 1,\n  \"matching_kinds\": [\n    \"ConversationStateUpdateEvent\"\n  ],\n  \"frames_shown\": [\n    {\n      \"kind\": \"ConversationStateUpdateEvent\",\n      \"frame\": \"{\\\"id\\\": \\\"8f54b248-abcf-48a0-8068-b4d9742c2d07\\\", \\\"timestamp\\\": \\\"2026-11-19T10:36:38.426181\\\", \\\"source\\\": \\\"environment\\\", \\\"parent_id\\\": \\\"f96b308b-2bb2-4571-9693-24354964c8bb\\\", \\\"key\\\": \\\"agent\\\", \\\"value\\\": {\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"api_key\\\": null, \\\"provider_connection_id\\\": null, \\\"auth_type\\\": \\\"api_key\\\", \\\"subscription_vendor\\\": null, \\\"base_url\\\": null, \\\"api_version\\\": null, \\\"aws_access_key_id\\\": \\u2026\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm-mid-run-get/frames.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/9869d5e1-6292-4ca3-b1d4-f077cec02e70\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6154\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 89,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq running\",\n      \"ok\": true,\n      \"actual\": \"running\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/9869d5e1-6292-4ca3-b1d4-f077cec02e70\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6154\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \"agent.llm.usage_id eq qa-f09-midget\",\n      \"ok\": false,\n      \"actual\": \"default\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm-mid-run-get/get.json\",\n  \"hint\": \"failed check: agent.llm.usage_id eq qa-f09-midget\"\n}\n",
+  "stderr": ""
+}

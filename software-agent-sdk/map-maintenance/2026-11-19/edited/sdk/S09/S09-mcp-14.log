@@ -1,0 +1,234 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/client --arg config \
+  --check unknown_field_error eq true --check stdio_without_command_error eq true \
+  --check http_without_url_error eq true --check auth_and_header_error eq true \
+  --check coerce_external eq '["x"]' --check create_rejects_external contains "create_mcp_tools expects native MCP servers" \
+  --check secret_in_plain_dump eq false --check secret_in_cipher_dump eq false --check cipher_roundtrip eq env-secret \
+  --check openai_props eq '["config", "note", "summary"]' --check openai_required eq '["config"]' \
+  --check security_risk_added eq true --check responses_name eq nested --check responses_nested_type eq object \
+  --check mcp_arguments eq '{"config": {"title": "t", "tags": ["x"], "limits": {"max": 1}}}' \
+  --check extras_direct_error eq true --check kind_arguments eq '{"kind": "keep-me"}' \
+  --check kind_call contains kind=keep-me --check invalid_error eq true --check missing_error eq true \
+  --check fail.is_error eq true --check picture_content contains ImageContent \
+  --check structured_text contains '"answer":42' \
+  --check wire_spelling eq true --check restored_type eq MCPToolDefinition --check restored_same_schema eq true \
+  --check legacy_key_rewritten eq true --check legacy_spelling_loads eq true --check frozen eq true \
+  --check kind_in_dump eq MCPToolDefinition
+{
+  "ok": true,
+  "mode": "config",
+  "unknown_field_error": true,
+  "stdio_without_command_error": true,
+  "http_without_url_error": true,
+  "auth_and_header_error": true,
+  "coerce_external": [
+    "x"
+  ],
+  "create_rejects_external": "TypeError: create_mcp_tools expects native MCP servers: dict[str, MCPServer]. Use coerce_mcp_config() at external config boundaries.",
+  "secret_in_plain_dump": false,
+  "secret_in_cipher_dump": false,
+  "cipher_roundtrip": "env-secret",
+  "openai_props": [
+    "config",
+    "note",
+    "summary"
+  ],
+  "openai_required": [
+    "config"
+  ],
+  "security_risk_added": true,
+  "responses_name": "nested",
+  "responses_nested_type": "object",
+  "annotations": null,
+  "extras_direct_error": true,
+  "mcp_arguments": {
+    "config": {
+      "title": "t",
+      "tags": [
+        "x"
+      ],
+      "limits": {
+        "max": 1
+      }
+    }
+  },
+  "kind_arguments": {
+    "kind": "keep-me"
+  },
+  "kind_call": "[Tool 'kind_echo' executed.]kind=keep-me",
+  "invalid_error": true,
+  "missing_error": true,
+  "fail": {
+    "is_error": true,
+    "text": "[Tool 'fail' executed.]Error calling tool 'fail': tool failed: boom"
+  },
+  "picture_content": [
+    "TextContent",
+    "TextContent",
+    "ImageContent"
+  ],
+  "structured_text": "[Tool 'structured' executed.]{\"answer\":42,\"items\":[\"a\",\"b\"]}",
+  "wire_spelling": true,
+  "restored_type": "MCPToolDefinition",
+  "restored_same_schema": true,
+  "legacy_key_rewritten": true,
+  "legacy_spelling_loads": true,
+  "frozen": true,
+  "kind_in_dump": "MCPToolDefinition",
+  "_exit": 0,
+  "_seconds": 6.4,
+  "checks": [
+    {
+      "check": "unknown_field_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stdio_without_command_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "http_without_url_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "auth_and_header_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "coerce_external eq [\"x\"]",
+      "ok": true,
+      "actual": "[\"x\"]"
+    },
+    {
+      "check": "create_rejects_external contains create_mcp_tools expects native MCP servers",
+      "ok": true,
+      "actual": "TypeError: create_mcp_tools expects native MCP servers: dict[str, MCPServer]. Use coerce_mcp_config() at external config boundaries."
+    },
+    {
+      "check": "secret_in_plain_dump eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "secret_in_cipher_dump eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "cipher_roundtrip eq env-secret",
+      "ok": true,
+      "actual": "env-secret"
+    },
+    {
+      "check": "openai_props eq [\"config\", \"note\", \"summary\"]",
+      "ok": true,
+      "actual": "[\"config\", \"note\", \"summary\"]"
+    },
+    {
+      "check": "openai_required eq [\"config\"]",
+      "ok": true,
+      "actual": "[\"config\"]"
+    },
+    {
+      "check": "security_risk_added eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "responses_name eq nested",
+      "ok": true,
+      "actual": "nested"
+    },
+    {
+      "check": "responses_nested_type eq object",
+      "ok": true,
+      "actual": "object"
+    },
+    {
+      "check": "mcp_arguments eq {\"config\": {\"title\": \"t\", \"tags\": [\"x\"], \"limits\": {\"max\": 1}}}",
+      "ok": true,
+      "actual": "{\"config\": {\"title\": \"t\", \"tags\": [\"x\"], \"limits\": {\"max\": 1}}}"
+    },
+    {
+      "check": "extras_direct_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "kind_arguments eq {\"kind\": \"keep-me\"}",
+      "ok": true,
+      "actual": "{\"kind\": \"keep-me\"}"
+    },
+    {
+      "check": "kind_call contains kind=keep-me",
+      "ok": true,
+      "actual": "[Tool 'kind_echo' executed.]kind=keep-me"
+    },
+    {
+      "check": "invalid_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "missing_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "fail.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "picture_content contains ImageContent",
+      "ok": true,
+      "actual": "[\"TextContent\", \"TextContent\", \"ImageContent\"]"
+    },
+    {
+      "check": "structured_text contains \"answer\":42",
+      "ok": true,
+      "actual": "[Tool 'structured' executed.]{\"answer\":42,\"items\":[\"a\",\"b\"]}"
+    },
+    {
+      "check": "wire_spelling eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "restored_type eq MCPToolDefinition",
+      "ok": true,
+      "actual": "MCPToolDefinition"
+    },
+    {
+      "check": "restored_same_schema eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "legacy_key_rewritten eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "legacy_spelling_loads eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "frozen eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "kind_in_dump eq MCPToolDefinition",
+      "ok": true,
+      "actual": "MCPToolDefinition"
+    }
+  ]
+}
+
+[exit 0 after 7s]

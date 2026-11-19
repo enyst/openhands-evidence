@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "A stuck agent (`F33.conversation-stuck`).",
+  "ids": [
+    "F33.conversation-stuck"
+  ],
+  "line": 1526,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-stuck/probe -- .venv/bin/python - <<'PY'\nimport os\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\n\nstub = f33.agent(model=\"openai/qa-stub\", base_url=os.environ[\"LOOP_STUB\"] + \"/v1\", api_key=\"qa-stub\", num_retries=0)\nconv = Conversation(agent=stub, workspace=f33.workspace(\"stuck\"), visualizer=None, delete_on_close=False)\nconv.set_title(\"qa-f33 stuck\")\nconv.send_message(\"qa-f33 loop forever\")\nt0 = time.monotonic()\ntry:\n    conv.run(timeout=120)\n    raise AssertionError(\"run() returned although the agent is stuck\")\nexcept ConversationRunError as e:\n    detail = str(e.original_exception)\n    assert e.conversation_error is None and \"stuck\" in detail, (detail, e.conversation_error)\nwaited = time.monotonic() - t0\nassert waited < 30, waited\nf33.emit(\"stuck\", cid=str(conv.id), waited=round(waited, 1), detail=detail)\nconv.close()\nPY\nSTUCK=$(jq -r .cid \"$F33/stuck.json\")\ncontrol-agent-server api GET \"/api/conversations/$STUCK\" --check execution_status eq stuck --save F33.conversation-stuck/get\ncontrol-agent-server conversation events \"$STUCK\" --kinds ActionEvent --contains qa-f33 --expect-min 3\ncontrol-agent-server conversation events \"$STUCK\" --kinds ConversationErrorEvent --expect-count 0\n",
+  "exit_code": 1,
+  "elapsed_ms": 399,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-stuck/probe -- .venv/bin/python - <<'PY'\nimport os\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\n\nstub = f33.agent(model=\"openai/qa-stub\", base_url=os.environ[\"LOOP_STUB\"] + \"/v1\", api_key=\"qa-stub\", num_retries=0)\nconv = Conversation(agent=stub, workspace=f33.workspace(\"stuck\"), visualizer=None, delete_on_close=False)\nconv.set_title(\"qa",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 32,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 3, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-stuck/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 32,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 3, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-stuck/probe.json\"\n}\n",
+  "stderr": ""
+}

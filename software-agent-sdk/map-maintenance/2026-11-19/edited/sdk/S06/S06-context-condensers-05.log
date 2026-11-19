@@ -1,0 +1,53 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg tokens \
+  --check status eq finished --check condensations ge 1 --check events_total lt 200 \
+  --check view_under_max_tokens eq true --check atomic eq true --check summary_reached_agent eq true
+{
+  "ok": true,
+  "mode": "tokens",
+  "error": null,
+  "status": "finished",
+  "max_tokens": 9717,
+  "condensations": 2,
+  "events_total": 26,
+  "view_tokens": 7372,
+  "view_under_max_tokens": true,
+  "atomic": true,
+  "summary_reached_agent": true,
+  "_exit": 0,
+  "_seconds": 6.8,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "condensations ge 1",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "events_total lt 200",
+      "ok": true,
+      "actual": "26"
+    },
+    {
+      "check": "view_under_max_tokens eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "atomic eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "summary_reached_agent eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 7s]

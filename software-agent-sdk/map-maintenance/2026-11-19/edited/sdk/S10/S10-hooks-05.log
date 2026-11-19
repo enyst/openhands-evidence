@@ -1,0 +1,169 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S10/llm_hooks \
+  --check first_status eq finished --check first_script_left eq 0 --check execution_status eq finished \
+  --check pre_commands.0 eq prompt-hook:policy \
+  --check pre_blocked.0 eq true --check pre_success.0 eq true \
+  --check pre_blocked.1 eq false --check pre_success.1 eq false --check pre_errors.1 contains "no parseable JSON" \
+  --check rejection_reasons.0 eq "listing files is not allowed" --check fall_open_ran eq true \
+  --check stop_commands.0 eq agent-hook:reviewer --check stop_blocked.0 eq true --check stop_reasons.0 eq "write REPORT.md" \
+  --check stop_blocked.1 eq false --check stop_feedback.0 eq "[Stop hook feedback] write REPORT.md" \
+  --check rejection_reasons.1 eq "the switched model says no" --check switched_script_left eq 0 \
+  --check usage_ids contains prompt-hook:policy
+{
+  "ok": true,
+  "first_status": "finished",
+  "first_script_left": 0,
+  "execution_status": "finished",
+  "switched_script_left": 0,
+  "pre_commands": [
+    "prompt-hook:policy",
+    "prompt-hook:policy",
+    "prompt-hook:policy"
+  ],
+  "pre_blocked": [
+    true,
+    false,
+    true
+  ],
+  "pre_success": [
+    true,
+    false,
+    true
+  ],
+  "pre_errors": [
+    null,
+    "Prompt hook returned no parseable JSON \u2014 defaulting to allow",
+    null
+  ],
+  "rejection_reasons": [
+    "listing files is not allowed",
+    "the switched model says no"
+  ],
+  "fall_open_ran": true,
+  "stop_commands": [
+    "agent-hook:reviewer",
+    "agent-hook:reviewer",
+    "agent-hook:reviewer"
+  ],
+  "stop_blocked": [
+    true,
+    false,
+    false
+  ],
+  "stop_reasons": [
+    "write REPORT.md",
+    "ok",
+    "fine"
+  ],
+  "stop_feedback": [
+    "[Stop hook feedback] write REPORT.md"
+  ],
+  "first_usage_ids": [
+    "prompt-hook:policy"
+  ],
+  "usage_ids": [
+    "prompt-hook:policy",
+    "switched"
+  ],
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "first_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "first_script_left eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "pre_commands.0 eq prompt-hook:policy",
+      "ok": true,
+      "actual": "prompt-hook:policy"
+    },
+    {
+      "check": "pre_blocked.0 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "pre_success.0 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "pre_blocked.1 eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "pre_success.1 eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "pre_errors.1 contains no parseable JSON",
+      "ok": true,
+      "actual": "Prompt hook returned no parseable JSON \u2014 defaulting to allow"
+    },
+    {
+      "check": "rejection_reasons.0 eq listing files is not allowed",
+      "ok": true,
+      "actual": "listing files is not allowed"
+    },
+    {
+      "check": "fall_open_ran eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stop_commands.0 eq agent-hook:reviewer",
+      "ok": true,
+      "actual": "agent-hook:reviewer"
+    },
+    {
+      "check": "stop_blocked.0 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stop_reasons.0 eq write REPORT.md",
+      "ok": true,
+      "actual": "write REPORT.md"
+    },
+    {
+      "check": "stop_blocked.1 eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "stop_feedback.0 eq [Stop hook feedback] write REPORT.md",
+      "ok": true,
+      "actual": "[Stop hook feedback] write REPORT.md"
+    },
+    {
+      "check": "rejection_reasons.1 eq the switched model says no",
+      "ok": true,
+      "actual": "the switched model says no"
+    },
+    {
+      "check": "switched_script_left eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "usage_ids contains prompt-hook:policy",
+      "ok": true,
+      "actual": "[\"prompt-hook:policy\", \"switched\"]"
+    }
+  ]
+}
+
+[exit 0 after 5s]

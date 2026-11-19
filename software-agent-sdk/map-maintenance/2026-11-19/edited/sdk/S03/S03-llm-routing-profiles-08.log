@@ -1,0 +1,250 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/model_router --arg add-route \
+  --check agent_llm_type eq RouterLLM --check returned.enabled eq true --check returned.selection.mode eq auto \
+  --check returned.routes.0.name eq default --check returned.routes.0.model eq openai/gpt-4.1 \
+  --check returned.routes.1.name eq reviewer --check returned.routes.1.model eq openai/gpt-4.1-mini \
+  --check route_usage_ids.default eq agent --check route_usage_ids.reviewer eq profile:qa-reviewer \
+  --check registry contains profile:qa-reviewer --check registry_holds_route eq true \
+  --check after_auto_turn.last_route_name eq default --check after_reviewer_turn.last_route_name eq reviewer \
+  --check requests.agent eq 2 --check requests.reviewer eq 1 \
+  --check costs.agent eq 0.28 --check costs.profile:qa-reviewer eq 0.14 \
+  --check duplicate_route_error eq 'ValueError: Model router route already exists: default' \
+  --check missing_profile_error contains FileNotFoundError --check routes_after_errors len-eq 2 \
+  --check route_model_after_profile_edit eq openai/gpt-4.1-mini \
+  --check multimodal_type eq MultimodalRouter --check multimodal_routes.2 eq qa-reviewer --check multimodal_routes len-eq 3 \
+  --check named_base_routes.0 eq main --check named_base_routes.1 eq qa-reviewer
+{
+  "ok": true,
+  "mode": "add-route",
+  "returned": {
+    "enabled": true,
+    "selection": {
+      "mode": "auto",
+      "manual_route_name": null
+    },
+    "last_route_name": null,
+    "routes": [
+      {
+        "name": "default",
+        "model": "openai/gpt-4.1",
+        "label": "default"
+      },
+      {
+        "name": "reviewer",
+        "model": "openai/gpt-4.1-mini",
+        "label": "reviewer"
+      }
+    ]
+  },
+  "agent_llm_type": "RouterLLM",
+  "route_usage_ids": {
+    "default": "agent",
+    "reviewer": "profile:qa-reviewer"
+  },
+  "registry": [
+    "agent",
+    "profile:qa-reviewer"
+  ],
+  "registry_holds_route": true,
+  "after_auto_turn": {
+    "enabled": true,
+    "selection": {
+      "mode": "auto",
+      "manual_route_name": null
+    },
+    "last_route_name": "default",
+    "routes": [
+      {
+        "name": "default",
+        "model": "openai/gpt-4.1",
+        "label": "default"
+      },
+      {
+        "name": "reviewer",
+        "model": "openai/gpt-4.1-mini",
+        "label": "reviewer"
+      }
+    ]
+  },
+  "after_reviewer_turn": {
+    "enabled": true,
+    "selection": {
+      "mode": "manual",
+      "manual_route_name": "reviewer"
+    },
+    "last_route_name": "reviewer",
+    "routes": [
+      {
+        "name": "default",
+        "model": "openai/gpt-4.1",
+        "label": "default"
+      },
+      {
+        "name": "reviewer",
+        "model": "openai/gpt-4.1-mini",
+        "label": "reviewer"
+      }
+    ]
+  },
+  "requests": {
+    "agent": 2,
+    "reviewer": 1
+  },
+  "costs": {
+    "agent": 0.28,
+    "profile:qa-reviewer": 0.14
+  },
+  "duplicate_route_error": "ValueError: Model router route already exists: default",
+  "missing_profile_error": "FileNotFoundError: Profile `qa-no-such-profile` not found. Available profiles: qa-reviewer.json",
+  "route_model_after_profile_edit": "openai/gpt-4.1-mini",
+  "routes_after_errors": [
+    "default",
+    "reviewer"
+  ],
+  "multimodal_type": "MultimodalRouter",
+  "multimodal_routes": [
+    "primary",
+    "secondary",
+    "qa-reviewer"
+  ],
+  "named_base_routes": [
+    "main",
+    "qa-reviewer"
+  ],
+  "_exit": 0,
+  "_seconds": 5.8,
+  "checks": [
+    {
+      "check": "agent_llm_type eq RouterLLM",
+      "ok": true,
+      "actual": "RouterLLM"
+    },
+    {
+      "check": "returned.enabled eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "returned.selection.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "returned.routes.0.name eq default",
+      "ok": true,
+      "actual": "default"
+    },
+    {
+      "check": "returned.routes.0.model eq openai/gpt-4.1",
+      "ok": true,
+      "actual": "openai/gpt-4.1"
+    },
+    {
+      "check": "returned.routes.1.name eq reviewer",
+      "ok": true,
+      "actual": "reviewer"
+    },
+    {
+      "check": "returned.routes.1.model eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "route_usage_ids.default eq agent",
+      "ok": true,
+      "actual": "agent"
+    },
+    {
+      "check": "route_usage_ids.reviewer eq profile:qa-reviewer",
+      "ok": true,
+      "actual": "profile:qa-reviewer"
+    },
+    {
+      "check": "registry contains profile:qa-reviewer",
+      "ok": true,
+      "actual": "[\"agent\", \"profile:qa-reviewer\"]"
+    },
+    {
+      "check": "registry_holds_route eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "after_auto_turn.last_route_name eq default",
+      "ok": true,
+      "actual": "default"
+    },
+    {
+      "check": "after_reviewer_turn.last_route_name eq reviewer",
+      "ok": true,
+      "actual": "reviewer"
+    },
+    {
+      "check": "requests.agent eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "requests.reviewer eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "costs.agent eq 0.28",
+      "ok": true,
+      "actual": "0.28"
+    },
+    {
+      "check": "costs.profile:qa-reviewer eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "duplicate_route_error eq ValueError: Model router route already exists: default",
+      "ok": true,
+      "actual": "ValueError: Model router route already exists: default"
+    },
+    {
+      "check": "missing_profile_error contains FileNotFoundError",
+      "ok": true,
+      "actual": "FileNotFoundError: Profile `qa-no-such-profile` not found. Available profiles: qa-reviewer.json"
+    },
+    {
+      "check": "routes_after_errors len-eq 2",
+      "ok": true,
+      "actual": "[\"default\", \"reviewer\"]"
+    },
+    {
+      "check": "route_model_after_profile_edit eq openai/gpt-4.1-mini",
+      "ok": true,
+      "actual": "openai/gpt-4.1-mini"
+    },
+    {
+      "check": "multimodal_type eq MultimodalRouter",
+      "ok": true,
+      "actual": "MultimodalRouter"
+    },
+    {
+      "check": "multimodal_routes.2 eq qa-reviewer",
+      "ok": true,
+      "actual": "qa-reviewer"
+    },
+    {
+      "check": "multimodal_routes len-eq 3",
+      "ok": true,
+      "actual": "[\"primary\", \"secondary\", \"qa-reviewer\"]"
+    },
+    {
+      "check": "named_base_routes.0 eq main",
+      "ok": true,
+      "actual": "main"
+    },
+    {
+      "check": "named_base_routes.1 eq qa-reviewer",
+      "ok": true,
+      "actual": "qa-reviewer"
+    }
+  ]
+}
+
+[exit 0 after 6s]

@@ -1,0 +1,17 @@
+{
+  "file": "F34-typescript-client.md",
+  "bullet": "Restart (`F34.restart-reload`).",
+  "ids": [
+    "F34.restart-reload"
+  ],
+  "line": 1332,
+  "script": "TOTAL=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)\ncontrol-agent-server restart\ncat > \"$F34/restart.mjs\" <<'JS'\nimport { m, host, apiKey, F34, assert } from './lib.mjs';\nconst [cid, total] = process.argv.slice(2);\nconst manager = new m.ConversationManager({ host, apiKey });\nconst conversation = await manager.loadConversation(cid);\nassert.equal(await conversation.state.getExecutionStatus(), 'finished');\nassert.equal((await manager.getConversation(cid)).title, 'qa-f34-title');\nassert.equal(await conversation.state.events.count(), Number(total));\nassert.equal((await conversation.getHookConfig()).pre_tool_use[0].hooks[0].command, 'echo qa-f34-hook');\nassert.equal((await conversation.workspace.downloadAsText(`${F34}/work/qa-f34.txt`)).trim(), 'hi');\nconsole.log('QA_F34_RESTART_OK');\nJS\ncontrol-agent-server exec --timeout 60 --expect-output QA_F34_RESTART_OK --save F34.restart-reload/program -- node \"$F34/restart.mjs\" \"$CID\" \"$TOTAL\"\ncontrol-agent-server api GET \"/api/conversations/$CID/events/count\" --check . eq \"$TOTAL\"\n",
+  "exit_code": 0,
+  "elapsed_ms": 9718,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34\",\n  \"url\": \"http://127.0.0.1:52701\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6106,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 662,\n  \"stdout_tail\": \"QA_F34_RESTART_OK\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server/20261119-091816-c688-shim-f34/evidence/F34.restart-reload/program.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/b6d9de61-08e6-40a9-ae19-59a38671b38b/events/count\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"2\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": 31,\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 62,\n  \"checks\": [\n    {\n      \"check\": \". eq 31\",\n      \"ok\": true,\n      \"actual\": \"31\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

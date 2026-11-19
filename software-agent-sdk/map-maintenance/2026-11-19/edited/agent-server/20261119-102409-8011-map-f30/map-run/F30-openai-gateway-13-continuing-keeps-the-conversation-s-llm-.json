@@ -1,0 +1,79 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Continuing keeps the conversation's LLM (`F30.chat-reuse-keeps-llm`).",
+  "ids": [
+    "F30.chat-reuse-keeps-llm"
+  ],
+  "line": 435,
+  "script": "UNUSED=$(control-agent-server fixture llm-stub --name qa-f30-unused --step reply:QA_F30_UNUSED_REPLY --print-path)\ncontrol-agent-server llm set --profile qa-f30-unused --model openai/qa-stub --base-url \"$UNUSED/v1\" \\\n  --no-api-key --no-validate --no-activate --num-retries 0\nR=$(control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CID\" \\\n  --json '{\"model\": \"openhands_qa-f30-unused\", \"messages\": [{\"role\": \"system\", \"content\": \"QA_F30_LATE_SYS\"}, {\"role\": \"user\", \"content\": \"QA_F30_SWITCH: reply with one short word and use no tools.\"}]}' \\\n  --check model eq openhands_qa-f30-unused --check choices.0.message.content ne QA_F30_UNUSED_REPLY \\\n  --save F30.chat-reuse-keeps-llm/other-model --print-header X-OpenHands-ServerConversation-ID)\ntest \"$R\" = \"$CID\"\ncontrol-agent-server sink read --name qa-f30-unused --expect-max 0\ncontrol-agent-server api GET \"/api/conversations/$CID\" --check agent.llm.model eq deepseek/deepseek-flash \\\n  --check agent.agent_context.system_message_suffix not-contains QA_F30_LATE_SYS --quiet\ncontrol-agent-server api POST /v1/chat/completions --auth bearer --header \"X-OpenHands-ServerConversation-ID: $CID\" \\\n  --json '{\"model\": \"gpt-4o\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_UNKNOWN_MODEL\"}]}' \\\n  --expect 404 --check detail eq \"Unknown OpenHands model 'gpt-4o'. Use GET /v1/models.\"\ncontrol-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_UNKNOWN_MODEL \\\n  --check items len-eq 0 --quiet\ncontrol-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 \\\n  --json '{\"model\": \"openhands_qa-f30-unused\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_FRESH_STUB\"}]}' \\\n  --check choices.0.message.content eq QA_F30_UNUSED_REPLY\ncontrol-agent-server sink read --name qa-f30-unused --contains QA_F30_FRESH_STUB --expect-min 1 --expect-max 1\n",
+  "exit_code": 1,
+  "elapsed_ms": 1379,
+  "failed_line": 7,
+  "failed_command": "R=$(control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CID\" --json '{\"model\": \"openhands_qa-f30-unused\", \"messages\": [{\"role\": \"system\", \"content\": \"QA_F30_LATE_SYS\"}, {\"role\": \"user\", \"content\": \"QA_F30_SWITCH: reply with one short word and use no tools.\"}]}' --check model eq openhands_qa-f30-unused --check choices.0.message.content ne QA_F30_UNUSED_REPLY --save F30.chat-reuse-keeps-llm/other-model --print-header X-OpenHa",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 422,
+    "request": {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "query": [],
+      "auth": "bearer",
+      "body": {
+        "model": "openhands_qa-f30-unused",
+        "messages": [
+          {
+            "role": "system",
+            "content": "QA_F30_LATE_SYS"
+          },
+          {
+            "role": "user",
+            "content": "QA_F30_SWITCH: reply with one short word and use no tools."
+          }
+        ]
+      },
+      "files": []
+    },
+    "response": {
+      "status": 422,
+      "headers": {
+        "content-length": "204",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": [
+          {
+            "type": "uuid_parsing",
+            "loc": [
+              "header",
+              "X-OpenHands-ServerConversation-ID"
+            ],
+            "msg": "Input should be a valid UUID, invalid length: found 0",
+            "input": "",
+            "ctx": {
+              "error": "invalid length: found 0"
+            }
+          }
+        ]
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 72,
+    "checks": [
+      {
+        "check": "model eq openhands_qa-f30-unused",
+        "ok": false,
+        "actual": "null"
+      },
+      {
+        "check": "choices.0.message.content ne QA_F30_UNUSED_REPLY",
+        "ok": true,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-102409-8011-map-f30/evidence/F30.chat-reuse-keeps-llm/other-model.json",
+    "hint": "expected <400, got 422"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"profile\": {\n    \"profile\": \"qa-f30-unused\",\n    \"model\": \"openai/qa-stub\",\n    \"saved\": 201\n  }\n}\n",
+  "stderr": ""
+}

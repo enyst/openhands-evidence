@@ -1,0 +1,44 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Stateless replay (`F30.responses-stateless-replay`).",
+  "ids": [
+    "F30.responses-stateless-replay"
+  ],
+  "line": 960,
+  "script": "R2=$(control-agent-server api POST /v1/responses --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $RID\" \\\n  --json '{\"model\": \"openhands_deepseek-flash\", \"input\": [{\"role\": \"developer\", \"content\": \"QA_F30_R_DEV: answer in plain text and use no tools.\"}, {\"role\": \"user\", \"content\": \"QA_F30_R1: remember the word apple.\"}, {\"type\": \"message\", \"role\": \"assistant\", \"content\": [{\"type\": \"output_text\", \"text\": \"QA_F30_R_PREV\", \"annotations\": []}]}, {\"role\": \"user\", \"content\": [{\"type\": \"input_text\", \"text\": \"QA_F30_R2: reply with one short word.\"}]}]}' \\\n  --check status eq completed --check output.0.content.0.text len-ge 1 \\\n  --save F30.responses-stateless-replay/replay --print-header X-OpenHands-ServerConversation-ID)\ntest \"$R2\" != \"$RID\"\ncontrol-agent-server api GET \"/api/conversations/$R2/events/search\" --query source=user --check items len-eq 1 \\\n  --check items.0.llm_message.content len-eq 9 --check items.0.llm_message.content.0.text eq '<message role=\"user\">' \\\n  --check items.0.llm_message.content.1.text eq 'QA_F30_R1: remember the word apple.' \\\n  --check items.0.llm_message.content.3.text eq '<message role=\"assistant\">' \\\n  --check items.0.llm_message.content.4.text eq QA_F30_R_PREV --check items.0.llm_message.content.8.text eq '</message>' \\\n  --check items.0.llm_message.content not-contains QA_F30_R_DEV --save F30.responses-stateless-replay/user-message\ncontrol-agent-server api GET \"/api/conversations/$R2\" \\\n  --check agent.agent_context.system_message_suffix eq 'QA_F30_R_DEV: answer in plain text and use no tools.' --quiet\ncontrol-agent-server api GET \"/api/conversations/$RID/events/search\" --query source=user --check items len-eq 1 --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 2213,
+  "failed_line": 12,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$R2\" --check agent.agent_context.system_message_suffix eq 'QA_F30_R_DEV: answer in plain text and use no tools.' --quiet",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/23a1c207-487d-42c4-b7cc-6dfc814add52",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "6365",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 75,
+    "checks": [
+      {
+        "check": "agent.agent_context.system_message_suffix eq QA_F30_R_DEV: answer in plain text and use no tools.",
+        "ok": false,
+        "actual": "QA_F30_PROFILE: answer briefly and do not use tools.\n\nQA_F30_R_DEV: answer in plain text and use no tools."
+      }
+    ],
+    "hint": "failed check: agent.agent_context.system_message_suffix eq QA_F30_R_DEV: answer in plain text and use no tools."
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/23a1c207-487d-42c4-b7cc-6dfc814add52/events/search\",\n    \"query\": [\n      [\n        \"source\",\n        \"user\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"926\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"items\": [\n        {\n          \"id\": \"e7df6763-ee41-4283-a453-3a3468824c10\",\n          \"timestamp\": \"2026-11-19T08:50:49.079353\",\n          \"source\": \"user\",\n          \"parent_id\": \"f3620999-575e-4344-b39b-d4b356022497\",\n          \"llm_message\": {\n            \"role\": \"user\",\n            \"content\": [\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"<message role=\\\"user\\\">\"\n              },\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"QA_F30_R1: remember the word apple.\"\n              },\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"</message>\"\n              },\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"<message role=\\\"assistant\\\">\"\n              },\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"QA_F30_R_PREV\"\n              },\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"</message>\"\n              },\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"<message role=\\\"user\\\">\"\n              },\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"QA_F30_R2: reply with one short word.\"\n              },\n              {\n                \"cache_prompt\": false,\n                \"type\": \"text\",\n                \"text\": \"</message>\"\n              }\n            ],\n            \"thinking_blocks\": []\n          },\n          \"activated_skills\": [],\n          \"extended_content\": [],\n          \"kind\": \"MessageEvent\"\n        }\n      ],\n      \"next_page_id\": null\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 66,\n  \"checks\": [\n    {\n      \"check\": \"items len-eq 1\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"id\\\": \\\"e7df6763-ee41-4283-a453-3a3468824c10\\\", \\\"timestamp\\\": \\\"2026-11-19T08:50:49.079353\\\", \\\"source\\\": \\\"user\\\", \\\"parent_id\\\": \\\"f3620999-575e-4344-b39b-d4b356022497\\\", \\\"llm_message\\\": {\\\"role\\\": \\\"user\\\", \\\"conte\\u2026\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content len-eq 9\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<message role=\\\\\\\"user\\\\\\\">\\\"}, {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA_F30_R1: remember the word apple.\\\"}, {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"te\\u2026\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content.0.text eq <message role=\\\"user\\\">\",\n      \"ok\": true,\n      \"actual\": \"<message role=\\\"user\\\">\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content.1.text eq QA_F30_R1: remember the word apple.\",\n      \"ok\": true,\n      \"actual\": \"QA_F30_R1: remember the word apple.\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content.3.text eq <message role=\\\"assistant\\\">\",\n      \"ok\": true,\n      \"actual\": \"<message role=\\\"assistant\\\">\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content.4.text eq QA_F30_R_PREV\",\n      \"ok\": true,\n      \"actual\": \"QA_F30_R_PREV\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content.8.text eq </message>\",\n      \"ok\": true,\n      \"actual\": \"</message>\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content not-contains QA_F30_R_DEV\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<message role=\\\\\\\"user\\\\\\\">\\\"}, {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA_F30_R1: remember the word apple.\\\"}, {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"te\\u2026\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.responses-stateless-replay/user-message.json\"\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/23a1c207-487d-42c4-b7cc-6dfc814add52\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6365\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 75,\n  \"checks\": [\n    {\n      \"check\": \"agent.agent_context.system_message_suffix eq QA_F30_R_DEV: answer in plain text and use no tools.\",\n      \"ok\": false,\n      \"actual\": \"QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_R_DEV: answer in plain text and use no tools.\"\n    }\n  ],\n  \"hint\": \"failed check: agent.agent_context.system_message_suffix eq QA_F30_R_DEV: answer in plain text and use no tools.\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Provider error surfaces (`F33.conversation-run-error`).",
+  "ids": [
+    "F33.conversation-run-error"
+  ],
+  "line": 1603,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-run-error/probe -- .venv/bin/python - <<'PY'\nimport os\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\n\nconv = Conversation(agent=f33.agent(model=\"openai/qa-stub\", base_url=os.environ[\"STUB\"] + \"/v1\", api_key=\"qa-stub\", num_retries=0),\n                    workspace=f33.workspace(\"error\"), visualizer=None, delete_on_close=False)\nconv.send_message(\"hello\")\nt0 = time.monotonic()\ntry:\n    conv.run(timeout=120)\n    raise AssertionError(\"run() returned although the provider failed\")\nexcept ConversationRunError as e:\n    assert e.conversation_error is not None and e.conversation_error.code == \"LLMAuthenticationError\", e\nassert time.monotonic() - t0 < 60, time.monotonic() - t0\nassert conv.state.execution_status.value == \"error\"\nf33.emit(\"error\", cid=str(conv.id))\nconv.close()\nPY\nERR=$(jq -r .cid \"$F33/error.json\")\ncontrol-agent-server api GET \"/api/conversations/$ERR\" --check execution_status eq error --save F33.conversation-run-error/get\ncontrol-agent-server conversation events \"$ERR\" --kinds ConversationErrorEvent --contains LLMAuthenticationError --expect-min 1\ncontrol-agent-server sink read --name qa-f33-stub --path /v1/chat/completions --expect-min 1\n",
+  "exit_code": 1,
+  "elapsed_ms": 367,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-run-error/probe -- .venv/bin/python - <<'PY'\nimport os\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\n\nconv = Conversation(agent=f33.agent(model=\"openai/qa-stub\", base_url=os.environ[\"STUB\"] + \"/v1\", api_key=\"qa-stub\", num_retries=0),\n                    workspace=f33.workspace(\"error\"), visualizer=None, delete_on_close=False)\nconv.send_m",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 41,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 3, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-run-error/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 41,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 3, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-run-error/probe.json\"\n}\n",
+  "stderr": ""
+}

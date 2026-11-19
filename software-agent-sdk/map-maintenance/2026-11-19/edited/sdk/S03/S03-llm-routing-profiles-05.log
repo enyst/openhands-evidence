@@ -1,0 +1,63 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/routing --arg multimodal \
+  --check served.0 eq secondary --check served.1 eq primary --check served.2 eq primary \
+  --check secondary_vision eq false \
+  --check agent_replies.0 eq "secondary: short answer" --check agent_replies.1 eq "primary: image answer" \
+  --check agent_replies.2 eq "primary: long answer"
+{
+  "ok": true,
+  "mode": "multimodal",
+  "served": [
+    "secondary",
+    "primary",
+    "primary"
+  ],
+  "secondary_vision": false,
+  "secondary_max_input": 20000,
+  "agent_replies": [
+    "secondary: short answer",
+    "primary: image answer",
+    "primary: long answer"
+  ],
+  "_exit": 0,
+  "_seconds": 6.0,
+  "checks": [
+    {
+      "check": "served.0 eq secondary",
+      "ok": true,
+      "actual": "secondary"
+    },
+    {
+      "check": "served.1 eq primary",
+      "ok": true,
+      "actual": "primary"
+    },
+    {
+      "check": "served.2 eq primary",
+      "ok": true,
+      "actual": "primary"
+    },
+    {
+      "check": "secondary_vision eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "agent_replies.0 eq secondary: short answer",
+      "ok": true,
+      "actual": "secondary: short answer"
+    },
+    {
+      "check": "agent_replies.1 eq primary: image answer",
+      "ok": true,
+      "actual": "primary: image answer"
+    },
+    {
+      "check": "agent_replies.2 eq primary: long answer",
+      "ok": true,
+      "actual": "primary: long answer"
+    }
+  ]
+}
+
+[exit 0 after 6s]

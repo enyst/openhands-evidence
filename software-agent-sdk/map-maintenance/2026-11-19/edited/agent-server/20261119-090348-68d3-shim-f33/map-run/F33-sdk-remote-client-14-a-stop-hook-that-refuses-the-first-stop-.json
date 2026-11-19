@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "A Stop hook that refuses the first stop (`F33.conversation-stop-hook`).",
+  "ids": [
+    "F33.conversation-stop-hook"
+  ],
+  "line": 798,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-stop-hook/probe -- .venv/bin/python - <<'PY'\nimport os\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import ActionEvent, HookExecutionEvent, MessageEvent\nfrom openhands.sdk.hooks import HookConfig, HookDefinition, HookMatcher\n\nws = f33.workspace(\"stophook\")\ncalls = os.path.join(ws.working_dir, \"qa-f33-stop-calls\")\ncommand = (f\"echo call >> {calls}; if [ $(wc -l < {calls}) -eq 1 ]; then \"\n           \"echo 'qa-f33 stop hook: first create the file qa-f33-stop.txt containing exactly: again' >&2; exit 2; fi\")\nconv = Conversation(agent=f33.agent(), workspace=ws, visualizer=None, delete_on_close=False,\n                    hook_config=HookConfig(stop=[HookMatcher(hooks=[HookDefinition(command=command)])]))\nconv.send_message(\"Reply with one word: ready\")\nconv.run(timeout=300)\nstatus = conv.state.refresh_from_server()[\"execution_status\"]\nevents = list(conv.state.events)\nstops = [i for i, e in enumerate(events) if isinstance(e, HookExecutionEvent) and e.hook_event_type == \"Stop\"]\nassert status == \"finished\", status\nassert [(events[i].blocked, events[i].exit_code) for i in stops] == [(True, 2), (False, 0)], [events[i] for i in stops]\nfeedback = next(i for i, e in enumerate(events) if isinstance(e, MessageEvent) and e.source == \"environment\"\n                and \"qa-f33 stop hook\" in e.llm_message.content[0].text)\nassert stops[0] < feedback < stops[1], (stops, feedback)\nturns = [e for e in events[feedback:stops[1]] if isinstance(e, (ActionEvent, MessageEvent)) and e.source == \"agent\"]\nassert turns, events[feedback:]\nwith open(calls) as f:\n    assert f.read().count(\"call\") == 2\nf33.emit(\"stophook\", cid=str(conv.id), local=f33.kinds(events), turns_after_feedback=len(turns))\nconv.close()\nPY\nHOOK=$(jq -r .cid \"$F33/stophook.json\")\ncontrol-agent-server api GET \"/api/conversations/$HOOK\" --check execution_status eq finished \\\n  --check hook_config.stop.0.hooks.0.command contains qa-f33-stop-calls --save F33.conversation-stop-hook/get\ncontrol-agent-server conversation events \"$HOOK\" --kinds HookExecutionEvent --contains '\"blocked\": true' --expect-count 1 \\\n  --save F33.conversation-stop-hook/blocked\ncontrol-agent-server conversation events \"$HOOK\" --kinds HookExecutionEvent --contains '\"exit_code\": 0' --expect-count 1\nfor K in HookExecutionEvent MessageEvent ActionEvent ObservationEvent; do\n  control-agent-server conversation events \"$HOOK\" --kinds $K --expect-count \"$(jq \".local.$K // 0\" \"$F33/stophook.json\")\"\ndone\n",
+  "exit_code": 1,
+  "elapsed_ms": 320,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-stop-hook/probe -- .venv/bin/python - <<'PY'\nimport os\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import ActionEvent, HookExecutionEvent, MessageEvent\nfrom openhands.sdk.hooks import HookConfig, HookDefinition, HookMatcher\n\nws = f33.workspace(\"stophook\")\ncalls = os.path.join(ws.working_dir, \"qa-f33-stop-calls\")\ncommand = (f\"echo call >> {calls}; if [ $(wc -l < {calls}) -eq 1 ]; then \"\n      ",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 31,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 2, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-stop-hook/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 31,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 2, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-stop-hook/probe.json\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,42 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+CID=$(control-sdk conversation new --tools terminal,file_editor --field id)
+control-sdk conversation send "$CID" --run \
+  --text "Create hello.sh in the current directory that prints 'hello from sh', make it executable, run it with the terminal, then finish." \
+  --check execution_status eq finished
+control-sdk exec --expect-output "hello from sh" -- sh ./hello.sh
+{
+  "ok": true,
+  "id": "e419b826-6d33-47c1-86a6-afd0b5e40b24",
+  "execution_status": "finished",
+  "event_count": 8,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "Created `hello.sh` in the current directory with:\n\n```sh\n#!/bin/sh\necho \"hello from sh\"\n```\n\nMade it executable (`chmod +x`) and ran it \u2014 output was `hello from sh` (exit code 0).",
+  "accumulated_cost": 0.0004495008,
+  "tools": [
+    "terminal",
+    "file_editor"
+  ],
+  "script_left": null,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "exit": 0,
+  "seconds": 0.0,
+  "result": null,
+  "stdout_tail": "hello from sh\n",
+  "stderr_tail": "",
+  "ok": true
+}
+
+[exit 0 after 17s]

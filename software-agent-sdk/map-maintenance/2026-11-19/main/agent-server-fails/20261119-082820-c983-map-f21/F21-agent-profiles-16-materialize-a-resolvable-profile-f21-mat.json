@@ -1,0 +1,115 @@
+{
+  "file": "F21-agent-profiles.md",
+  "bullet": "Materialize a resolvable profile (`F21.materialize-valid`).",
+  "ids": [
+    "F21.materialize-valid"
+  ],
+  "line": 476,
+  "script": "control-agent-server api POST /api/agent-profiles/qa-f21-preview --expect 201 \\\n  --json '{\"llm_profile_ref\": \"deepseek-flash\", \"tools\": [], \"mcp_server_refs\": [\"qa-f21-mcp\"], \"secret_refs\": [\"QA_F21_ALLOWED\"], \"system_message_suffix\": \"QA F21 suffix\"}'\nN_CONV=$(control-agent-server api GET /api/conversations/count --field .)\ncontrol-agent-server api POST /api/agent-profiles/qa-f21-preview/materialize --expect 200 --quiet \\\n  --check agent_kind eq openhands --check valid eq true --check errors len-eq 0 --check llm_profile_ref eq deepseek-flash \\\n  --check llm_profile_resolved eq true --check llm_api_key_set eq true --check resolved_mcp_config_keys contains qa-f21-mcp \\\n  --check dangling_mcp_server_refs len-eq 0 --check resolved_skills contains qa-f21-skill --check secret_refs contains QA_F21_ALLOWED \\\n  --check resolved_settings.llm.model eq deepseek/deepseek-flash --check resolved_settings.llm.api_key eq '**********' \\\n  --check resolved_settings.tools len-eq 0 --check resolved_settings.mcp_config.qa-f21-mcp.url eq https://example.invalid/mcp \\\n  --check resolved_settings.agent_context.system_message_suffix eq 'QA F21 suffix' --save F21.materialize-valid/stored\nRAW=\"$AGENT_SERVER_VERIFY_RUN/private/qa-f21-materialize.json\"\ncontrol-agent-server api POST /api/agent-profiles/qa-f21-preview/materialize --expect 200 --quiet --raw-out \"$RAW\"\ngrep -q deepseek/deepseek-flash \"$RAW\"\nif grep -qF \"$DEEPSEEK_API_KEY\" \"$RAW\"; then false; fi\nrm -f \"$RAW\"\ncontrol-agent-server api GET /api/agent-profiles/qa-f21-preview --check profile.revision eq 0\ncontrol-agent-server api GET /api/conversations/count --check . eq \"$N_CONV\"\ncontrol-agent-server api GET /api/settings --check active_agent_profile_id eq \"$CODER\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 2960,
+  "failed_line": 4,
+  "failed_command": "control-agent-server api POST /api/agent-profiles/qa-f21-preview/materialize --expect 200 --quiet --check agent_kind eq openhands --check valid eq true --check errors len-eq 0 --check llm_profile_ref eq deepseek-flash --check llm_profile_resolved eq true --check llm_api_key_set eq true --check resolved_mcp_config_keys contains qa-f21-mcp --check dangling_mcp_server_refs len-eq 0 --check resolved_skills contains qa-f21-skill --check secret_refs contains QA_F21_ALLOWED --check resolved_settings.ll",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "POST",
+      "path": "/api/agent-profiles/qa-f21-preview/materialize",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "687470",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 1832,
+    "checks": [
+      {
+        "check": "agent_kind eq openhands",
+        "ok": true,
+        "actual": "openhands"
+      },
+      {
+        "check": "valid eq true",
+        "ok": true,
+        "actual": "true"
+      },
+      {
+        "check": "errors len-eq 0",
+        "ok": true,
+        "actual": "[]"
+      },
+      {
+        "check": "llm_profile_ref eq deepseek-flash",
+        "ok": true,
+        "actual": "deepseek-flash"
+      },
+      {
+        "check": "llm_profile_resolved eq true",
+        "ok": true,
+        "actual": "true"
+      },
+      {
+        "check": "llm_api_key_set eq true",
+        "ok": true,
+        "actual": "true"
+      },
+      {
+        "check": "resolved_mcp_config_keys contains qa-f21-mcp",
+        "ok": true,
+        "actual": "[\"qa-f21-mcp\"]"
+      },
+      {
+        "check": "dangling_mcp_server_refs len-eq 0",
+        "ok": true,
+        "actual": "[]"
+      },
+      {
+        "check": "resolved_skills contains qa-f21-skill",
+        "ok": true,
+        "actual": "[\"add-javadoc\", \"add-skill\", \"agent-canvas-environment\", \"agent-creator\", \"agent-memory\", \"agent-sdk-builder\", \"azure-devops\", \"bitbucket\", \"bitbucket-cloud\", \"bitbucket-data-center\", \"canvas-extensio\u2026"
+      },
+      {
+        "check": "secret_refs contains QA_F21_ALLOWED",
+        "ok": true,
+        "actual": "[\"QA_F21_ALLOWED\"]"
+      },
+      {
+        "check": "resolved_settings.llm.model eq deepseek/deepseek-flash",
+        "ok": false,
+        "actual": "litellm_proxy/deepseek-v4.1-flash"
+      },
+      {
+        "check": "resolved_settings.llm.api_key eq **********",
+        "ok": true,
+        "actual": "**********"
+      },
+      {
+        "check": "resolved_settings.tools len-eq 0",
+        "ok": true,
+        "actual": "[]"
+      },
+      {
+        "check": "resolved_settings.mcp_config.qa-f21-mcp.url eq https://example.invalid/mcp",
+        "ok": true,
+        "actual": "https://example.invalid/mcp"
+      },
+      {
+        "check": "resolved_settings.agent_context.system_message_suffix eq QA F21 suffix",
+        "ok": true,
+        "actual": "QA F21 suffix"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-082820-c983-map-f21/evidence/F21.materialize-valid/stored.json",
+    "hint": "failed check: resolved_settings.llm.model eq deepseek/deepseek-flash"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 201,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/qa-f21-preview\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm_profile_ref\": \"deepseek-flash\",\n      \"tools\": [],\n      \"mcp_server_refs\": [\n        \"qa-f21-mcp\"\n      ],\n      \"secret_refs\": [\n        \"QA_F21_ALLOWED\"\n      ],\n      \"system_message_suffix\": \"QA F21 suffix\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 201,\n    \"headers\": {\n      \"content-length\": \"74\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"name\": \"qa-f21-preview\",\n      \"message\": \"Agent profile 'qa-f21-preview' saved\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/qa-f21-preview/materialize\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"687470\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 1832,\n  \"checks\": [\n    {\n      \"check\": \"agent_kind eq openhands\",\n      \"ok\": true,\n      \"actual\": \"openhands\"\n    },\n    {\n      \"check\": \"valid eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"errors len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"llm_profile_ref eq deepseek-flash\",\n      \"ok\": true,\n      \"actual\": \"deepseek-flash\"\n    },\n    {\n      \"check\": \"llm_profile_resolved eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"llm_api_key_set eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"resolved_mcp_config_keys contains qa-f21-mcp\",\n      \"ok\": true,\n      \"actual\": \"[\\\"qa-f21-mcp\\\"]\"\n    },\n    {\n      \"check\": \"dangling_mcp_server_refs len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"resolved_skills contains qa-f21-skill\",\n      \"ok\": true,\n      \"actual\": \"[\\\"add-javadoc\\\", \\\"add-skill\\\", \\\"agent-canvas-environment\\\", \\\"agent-creator\\\", \\\"agent-memory\\\", \\\"agent-sdk-builder\\\", \\\"azure-devops\\\", \\\"bitbucket\\\", \\\"bitbucket-cloud\\\", \\\"bitbucket-data-center\\\", \\\"canvas-extensio\\u2026\"\n    },\n    {\n      \"check\": \"secret_refs contains QA_F21_ALLOWED\",\n      \"ok\": true,\n      \"actual\": \"[\\\"QA_F21_ALLOWED\\\"]\"\n    },\n    {\n      \"check\": \"resolved_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"resolved_settings.llm.api_key eq **********\",\n      \"ok\": true,\n      \"actual\": \"**********\"\n    },\n    {\n      \"check\": \"resolved_settings.tools len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"resolved_settings.mcp_config.qa-f21-mcp.url eq https://example.invalid/mcp\",\n      \"ok\": true,\n      \"actual\": \"https://example.invalid/mcp\"\n    },\n    {\n      \"check\": \"resolved_settings.agent_context.system_message_suffix eq QA F21 suffix\",\n      \"ok\": true,\n      \"actual\": \"QA F21 suffix\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-082820-c983-map-f21/evidence/F21.materialize-valid/stored.json\",\n  \"hint\": \"failed check: resolved_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+  "stderr": ""
+}

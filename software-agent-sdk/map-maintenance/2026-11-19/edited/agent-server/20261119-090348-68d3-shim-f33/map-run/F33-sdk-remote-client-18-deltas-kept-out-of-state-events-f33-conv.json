@@ -1,0 +1,25 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Deltas kept out of `state.events` (`F33.conversation-streaming-state`).",
+  "ids": [
+    "F33.conversation-streaming-state"
+  ],
+  "line": 959,
+  "script": "test \"$(jq '.local.MessageEvent // 0' \"$F33/stream.json\")\" -eq \"$(control-agent-server conversation events \"$STREAM\" --kinds MessageEvent | jq .matching)\"\ncontrol-agent-server assert --json \"$F33/stream.json\" --check local.StreamingDeltaEvent missing\n",
+  "exit_code": 2,
+  "elapsed_ms": 433,
+  "failed_line": 1,
+  "failed_command": "test \"$(jq '.local.MessageEvent // 0' \"$F33/stream.json\")\" -eq \"$(control-agent-server conversation events \"$STREAM\" --kinds MessageEvent | jq .matching)\"",
+  "failed_status": 2,
+  "observation": {
+    "ok": false,
+    "exit": 1,
+    "error": "GET /api/conversations//events/search returned 404",
+    "status": 404,
+    "body": {
+      "detail": "Not Found"
+    }
+  },
+  "stdout": "",
+  "stderr": "jq: error: Could not open file /stream.json: No such file or directory\n<scratch>/agent-server/20261119-090348-68d3-shim-f33/private/F33-sdk-remote-client.recipe.sh: line 5: test: : integer expression expected\n"
+}

@@ -1,0 +1,152 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S19/credential_binding \
+  --check load.value eq auth-v1 --check load.version eq 1 --check replace_version eq 2 --check after_replace eq auth-v2 \
+  --check stale eq CredentialConflict --check bad_auth eq CredentialAuthorizationRejected \
+  --check reauthorized_value eq auth-v2 --check revision_bumped eq true \
+  --check reauthorize_other_url eq credential_binding_url_mismatch \
+  --check status_errors.404 eq CredentialNeedsReauthentication --check status_errors.400 eq CredentialNeedsReauthentication \
+  --check status_errors.422 eq CredentialNeedsReauthentication --check status_errors.409 eq CredentialConflict \
+  --check status_errors.401 eq CredentialAuthorizationRejected --check status_errors.403 eq CredentialAuthorizationRejected \
+  --check status_errors.501 eq CredentialBindingUnsupported --check status_errors.500 eq CredentialSyncError \
+  --check invalid_url eq CredentialInvalidResponse --check garbage eq CredentialInvalidResponse \
+  --check unreachable eq CredentialSyncError --check server_puts eq 1
+{
+  "ok": true,
+  "load": {
+    "value": "auth-v1",
+    "version": "1"
+  },
+  "replace_version": "2",
+  "after_replace": "auth-v2",
+  "stale": "CredentialConflict",
+  "bad_auth": "CredentialAuthorizationRejected",
+  "reauthorized_value": "auth-v2",
+  "revision_bumped": true,
+  "reauthorize_other_url": "credential_binding_url_mismatch",
+  "status_errors": {
+    "404": "CredentialNeedsReauthentication",
+    "400": "CredentialNeedsReauthentication",
+    "422": "CredentialNeedsReauthentication",
+    "409": "CredentialConflict",
+    "401": "CredentialAuthorizationRejected",
+    "403": "CredentialAuthorizationRejected",
+    "501": "CredentialBindingUnsupported",
+    "500": "CredentialSyncError"
+  },
+  "invalid_url": "CredentialInvalidResponse",
+  "garbage": "CredentialInvalidResponse",
+  "unreachable": "CredentialSyncError",
+  "invalid_url_is_invalid_response": true,
+  "server_puts": 1,
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "load.value eq auth-v1",
+      "ok": true,
+      "actual": "auth-v1"
+    },
+    {
+      "check": "load.version eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "replace_version eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "after_replace eq auth-v2",
+      "ok": true,
+      "actual": "auth-v2"
+    },
+    {
+      "check": "stale eq CredentialConflict",
+      "ok": true,
+      "actual": "CredentialConflict"
+    },
+    {
+      "check": "bad_auth eq CredentialAuthorizationRejected",
+      "ok": true,
+      "actual": "CredentialAuthorizationRejected"
+    },
+    {
+      "check": "reauthorized_value eq auth-v2",
+      "ok": true,
+      "actual": "auth-v2"
+    },
+    {
+      "check": "revision_bumped eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reauthorize_other_url eq credential_binding_url_mismatch",
+      "ok": true,
+      "actual": "credential_binding_url_mismatch"
+    },
+    {
+      "check": "status_errors.404 eq CredentialNeedsReauthentication",
+      "ok": true,
+      "actual": "CredentialNeedsReauthentication"
+    },
+    {
+      "check": "status_errors.400 eq CredentialNeedsReauthentication",
+      "ok": true,
+      "actual": "CredentialNeedsReauthentication"
+    },
+    {
+      "check": "status_errors.422 eq CredentialNeedsReauthentication",
+      "ok": true,
+      "actual": "CredentialNeedsReauthentication"
+    },
+    {
+      "check": "status_errors.409 eq CredentialConflict",
+      "ok": true,
+      "actual": "CredentialConflict"
+    },
+    {
+      "check": "status_errors.401 eq CredentialAuthorizationRejected",
+      "ok": true,
+      "actual": "CredentialAuthorizationRejected"
+    },
+    {
+      "check": "status_errors.403 eq CredentialAuthorizationRejected",
+      "ok": true,
+      "actual": "CredentialAuthorizationRejected"
+    },
+    {
+      "check": "status_errors.501 eq CredentialBindingUnsupported",
+      "ok": true,
+      "actual": "CredentialBindingUnsupported"
+    },
+    {
+      "check": "status_errors.500 eq CredentialSyncError",
+      "ok": true,
+      "actual": "CredentialSyncError"
+    },
+    {
+      "check": "invalid_url eq CredentialInvalidResponse",
+      "ok": true,
+      "actual": "CredentialInvalidResponse"
+    },
+    {
+      "check": "garbage eq CredentialInvalidResponse",
+      "ok": true,
+      "actual": "CredentialInvalidResponse"
+    },
+    {
+      "check": "unreachable eq CredentialSyncError",
+      "ok": true,
+      "actual": "CredentialSyncError"
+    },
+    {
+      "check": "server_puts eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 0 after 6s]

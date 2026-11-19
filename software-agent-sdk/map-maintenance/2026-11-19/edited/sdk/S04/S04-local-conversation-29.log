@@ -1,0 +1,184 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/resolution --arg verdicts \
+  --check questions eq '["asks_to_check", "asks_user", "handled", "hands_off_review", "offers_choice", "reports_problem", "task_done"]' \
+  --check done.owed eq nothing --check done.resolved eq true --check done.probability eq 0.9 --check done.note eq "0.90 nothing" \
+  --check asks.owed eq answer --check asks.needs_user eq true --check asks.probability eq 0.2 \
+  --check review.owed eq review --check review.needs_user eq true \
+  --check unfinished.owed eq unfinished --check unfinished.needs_user eq false --check unfinished.probability eq 0.4 \
+  --check unclear.owed eq unclear --check unclear.resolved eq false --check unclear.probability eq 0.7 \
+  --check problem.owed eq check --check problem.needs_user eq false \
+  --check out_of_range.owed eq unfinished --check out_of_range.probability eq 0.0
+{
+  "questions": [
+    "asks_to_check",
+    "asks_user",
+    "handled",
+    "hands_off_review",
+    "offers_choice",
+    "reports_problem",
+    "task_done"
+  ],
+  "done": {
+    "owed": "nothing",
+    "probability": 0.9,
+    "resolved": true,
+    "needs_user": false,
+    "note": "0.90 nothing",
+    "model": "qa-judge"
+  },
+  "asks": {
+    "owed": "answer",
+    "probability": 0.2,
+    "resolved": false,
+    "needs_user": true,
+    "note": "0.20 answer",
+    "model": "qa-judge"
+  },
+  "review": {
+    "owed": "review",
+    "probability": 0.1,
+    "resolved": false,
+    "needs_user": true,
+    "note": "0.10 review",
+    "model": "qa-judge"
+  },
+  "unfinished": {
+    "owed": "unfinished",
+    "probability": 0.4,
+    "resolved": false,
+    "needs_user": false,
+    "note": "0.40 unfinished",
+    "model": "qa-judge"
+  },
+  "unclear": {
+    "owed": "unclear",
+    "probability": 0.7,
+    "resolved": false,
+    "needs_user": false,
+    "note": "0.70 unclear",
+    "model": "qa-judge"
+  },
+  "problem": {
+    "owed": "check",
+    "probability": 0.3,
+    "resolved": false,
+    "needs_user": false,
+    "note": "0.30 check",
+    "model": "qa-judge"
+  },
+  "out_of_range": {
+    "owed": "unfinished",
+    "probability": 0.0,
+    "resolved": false,
+    "needs_user": false,
+    "note": "0.00 unfinished",
+    "model": "qa-judge"
+  },
+  "ok": true,
+  "_exit": 0,
+  "_seconds": 4.8,
+  "checks": [
+    {
+      "check": "questions eq [\"asks_to_check\", \"asks_user\", \"handled\", \"hands_off_review\", \"offers_choice\", \"reports_problem\", \"task_done\"]",
+      "ok": true,
+      "actual": "[\"asks_to_check\", \"asks_user\", \"handled\", \"hands_off_review\", \"offers_choice\", \"reports_problem\", \"task_done\"]"
+    },
+    {
+      "check": "done.owed eq nothing",
+      "ok": true,
+      "actual": "nothing"
+    },
+    {
+      "check": "done.resolved eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "done.probability eq 0.9",
+      "ok": true,
+      "actual": "0.9"
+    },
+    {
+      "check": "done.note eq 0.90 nothing",
+      "ok": true,
+      "actual": "0.90 nothing"
+    },
+    {
+      "check": "asks.owed eq answer",
+      "ok": true,
+      "actual": "answer"
+    },
+    {
+      "check": "asks.needs_user eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "asks.probability eq 0.2",
+      "ok": true,
+      "actual": "0.2"
+    },
+    {
+      "check": "review.owed eq review",
+      "ok": true,
+      "actual": "review"
+    },
+    {
+      "check": "review.needs_user eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "unfinished.owed eq unfinished",
+      "ok": true,
+      "actual": "unfinished"
+    },
+    {
+      "check": "unfinished.needs_user eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "unfinished.probability eq 0.4",
+      "ok": true,
+      "actual": "0.4"
+    },
+    {
+      "check": "unclear.owed eq unclear",
+      "ok": true,
+      "actual": "unclear"
+    },
+    {
+      "check": "unclear.resolved eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "unclear.probability eq 0.7",
+      "ok": true,
+      "actual": "0.7"
+    },
+    {
+      "check": "problem.owed eq check",
+      "ok": true,
+      "actual": "check"
+    },
+    {
+      "check": "problem.needs_user eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "out_of_range.owed eq unfinished",
+      "ok": true,
+      "actual": "unfinished"
+    },
+    {
+      "check": "out_of_range.probability eq 0.0",
+      "ok": true,
+      "actual": "0.0"
+    }
+  ]
+}
+
+[exit 0 after 5s]

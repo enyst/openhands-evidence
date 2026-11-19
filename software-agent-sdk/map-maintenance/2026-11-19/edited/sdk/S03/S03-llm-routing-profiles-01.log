@@ -1,0 +1,111 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/routing --arg registry \
+  --check usage_ids.0 eq first --check usage_ids.1 eq copy --check same_instance eq true \
+  --check duplicate_error eq ValueError --check unique_registry_ids eq true \
+  --check first_cost eq 0.14 --check copy_cost eq 0 --check copy_metrics_independent eq true \
+  --check notified.1 eq copy --check after_remove len-eq 1 --check missing_error eq KeyError \
+  --check independent_keeps_metrics eq true \
+  --check failing_subscriber_add_error missing --check failing_subscriber_registered.0 eq n
+{
+  "ok": true,
+  "mode": "registry",
+  "usage_ids": [
+    "first",
+    "copy"
+  ],
+  "same_instance": true,
+  "duplicate_error": "ValueError",
+  "unique_registry_ids": true,
+  "first_cost": 0.14,
+  "copy_cost": 0.0,
+  "copy_metrics_independent": true,
+  "notified": [
+    "first",
+    "copy"
+  ],
+  "after_remove": [
+    "first"
+  ],
+  "missing_error": "KeyError",
+  "independent_keeps_metrics": true,
+  "failing_subscriber_add_error": null,
+  "failing_subscriber_registered": [
+    "n"
+  ],
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "usage_ids.0 eq first",
+      "ok": true,
+      "actual": "first"
+    },
+    {
+      "check": "usage_ids.1 eq copy",
+      "ok": true,
+      "actual": "copy"
+    },
+    {
+      "check": "same_instance eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "duplicate_error eq ValueError",
+      "ok": true,
+      "actual": "ValueError"
+    },
+    {
+      "check": "unique_registry_ids eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "first_cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "copy_cost eq 0",
+      "ok": true,
+      "actual": "0.0"
+    },
+    {
+      "check": "copy_metrics_independent eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "notified.1 eq copy",
+      "ok": true,
+      "actual": "copy"
+    },
+    {
+      "check": "after_remove len-eq 1",
+      "ok": true,
+      "actual": "[\"first\"]"
+    },
+    {
+      "check": "missing_error eq KeyError",
+      "ok": true,
+      "actual": "KeyError"
+    },
+    {
+      "check": "independent_keeps_metrics eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "failing_subscriber_add_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "failing_subscriber_registered.0 eq n",
+      "ok": true,
+      "actual": "n"
+    }
+  ]
+}
+
+[exit 0 after 6s]

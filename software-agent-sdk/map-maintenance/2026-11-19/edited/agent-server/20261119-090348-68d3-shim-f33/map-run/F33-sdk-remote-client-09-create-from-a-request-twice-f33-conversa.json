@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Create from a request, twice (`F33.conversation-create-request`).",
+  "ids": [
+    "F33.conversation-create-request"
+  ],
+  "line": 541,
+  "script": "N0=$(control-agent-server api GET /api/conversations/count --field .)\ncontrol-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-create-request/probe -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\nimport f33\nfrom openhands.sdk import RemoteConversation, TextContent\nfrom openhands.sdk.conversation.request import SendMessageRequest, StartConversationRequest\nfrom openhands.sdk.event import MessageEvent\nfrom openhands.sdk.workspace import LocalWorkspace\n\nws = f33.workspace(\"request\")\ncid = uuid.uuid4()\nrequest = StartConversationRequest(\n    agent_settings={\"agent_kind\": \"openhands\", \"tools\": [{\"name\": \"terminal\"}],\n                    \"llm\": {\"model\": \"deepseek/deepseek-flash\", \"api_key\": os.environ[\"DEEPSEEK_API_KEY\"], \"usage_id\": \"qa-f33-settings\"}},\n    workspace=LocalWorkspace(working_dir=ws.working_dir), conversation_id=cid, tags={\"qaf33\": \"request\"}, max_iterations=9,\n    initial_message=SendMessageRequest(content=[TextContent(text=\"qa-f33 create: reply with one word\")], run=True),\n)\nfirst = RemoteConversation.create(ws, request, visualizer=None)\nagain = RemoteConversation.create(ws, request, visualizer=None)\nassert first.id == again.id == cid, (first.id, again.id, cid)\nassert (first.agent.llm.model, first.agent.llm.usage_id, first.max_iteration_per_run) == (\"deepseek/deepseek-flash\", \"qa-f33-settings\", 9)\nassert first.delete_on_close is False\nusers = [e for e in again.state.events if isinstance(e, MessageEvent) and e.source == \"user\"]\nassert len(users) == 1, users\nf33.emit(\"request\", cid=str(cid))\nfirst.close()\nagain.close()\nPY\nREQ=$(jq -r .cid \"$F33/request.json\")\ncontrol-agent-server conversation wait \"$REQ\" --until finished --timeout 300\ncontrol-agent-server api GET /api/conversations/count --check . eq $((N0 + 1))\ncontrol-agent-server api GET \"/api/conversations/$REQ\" --check execution_status eq finished --check tags.qaf33 eq request \\\n  --check max_iterations eq 9 --check agent.llm.usage_id eq qa-f33-settings --check workspace.working_dir eq \"$F33/request\" \\\n  --save F33.conversation-create-request/get\ncontrol-agent-server api GET \"/api/conversations/$REQ/events/search\" --query source=user --check items len-eq 1 \\\n  --check items.0.llm_message.content.0.text eq 'qa-f33 create: reply with one word' --save F33.conversation-create-request/user-messages\n",
+  "exit_code": 1,
+  "elapsed_ms": 732,
+  "failed_line": 2,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-create-request/probe -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\nimport f33\nfrom openhands.sdk import RemoteConversation, TextContent\nfrom openhands.sdk.conversation.request import SendMessageRequest, StartConversationRequest\nfrom openhands.sdk.event import MessageEvent\nfrom openhands.sdk.workspace import LocalWorkspace\n\nws = f33.workspace(\"request\")\ncid = uuid.uuid4()\nrequest = StartConversationRequest(\n    agent_s",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 31,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 3, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-create-request/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 31,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 3, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-create-request/probe.json\"\n}\n",
+  "stderr": ""
+}

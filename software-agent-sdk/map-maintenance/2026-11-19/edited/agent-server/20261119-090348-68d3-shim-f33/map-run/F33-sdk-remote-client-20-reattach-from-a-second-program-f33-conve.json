@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Reattach from a second program (`F33.conversation-attach`).",
+  "ids": [
+    "F33.conversation-attach"
+  ],
+  "line": 1012,
+  "script": "N0=$(control-agent-server api GET /api/conversations/count --field .)\ncontrol-agent-server exec --env PYTHONPATH=\"$F33\" --env CID=\"$CID\" --save F33.conversation-attach/probe -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\nimport httpx\nimport f33\nfrom openhands.sdk import Conversation, RemoteConversation\nfrom openhands.sdk.event import MessageEvent\n\ncid = uuid.UUID(os.environ[\"CID\"])\nws = f33.workspace(\"run\")\nsaved = RemoteConversation.attach(ws, cid, visualizer=None)\nsame = Conversation(agent=f33.agent(), workspace=ws, conversation_id=cid, visualizer=None, delete_on_close=False)\nassert saved.id == same.id == cid\nassert f33.kinds(saved.state.events) == f33.kinds(same.state.events)\nfirst = next(e for e in saved.state.events if isinstance(e, MessageEvent) and e.source == \"user\")\nassert \"qa-f33-run.txt\" in first.llm_message.content[0].text, first\nassert saved.state.execution_status.value == \"finished\" and saved.agent.llm.model == \"deepseek/deepseek-flash\"\ntry:\n    RemoteConversation.attach(ws, uuid.uuid4(), visualizer=None)\n    raise AssertionError(\"attach accepted an unknown id\")\nexcept httpx.HTTPStatusError as e:\n    assert e.response.status_code == 404, e\nwanted = uuid.uuid4()\nmade = Conversation(agent=f33.agent(), workspace=ws, conversation_id=wanted, visualizer=None, delete_on_close=False)\nassert made.id == wanted, (made.id, wanted)\nf33.emit(\"attach\", kinds=f33.kinds(saved.state.events), made=str(made.id))\nfor conv in (saved, same, made):\n    conv.close()\nPY\ncontrol-agent-server api GET /api/conversations/count --check . eq $((N0 + 1))\ncontrol-agent-server api GET \"/api/conversations/$(jq -r .made \"$F33/attach.json\")\" --check execution_status eq idle \\\n  --save F33.conversation-attach/created-by-id\nfor K in MessageEvent ActionEvent ObservationEvent; do\n  control-agent-server conversation events \"$CID\" --kinds $K --expect-count \"$(jq \".kinds.$K\" \"$F33/attach.json\")\"\ndone\n",
+  "exit_code": 1,
+  "elapsed_ms": 1122,
+  "failed_line": 2,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --env CID=\"$CID\" --save F33.conversation-attach/probe -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\nimport httpx\nimport f33\nfrom openhands.sdk import Conversation, RemoteConversation\nfrom openhands.sdk.event import MessageEvent\n\ncid = uuid.UUID(os.environ[\"CID\"])\nws = f33.workspace(\"run\")\nsaved = RemoteConversation.attach(ws, cid, visualizer=None)\nsame = Conversation(agent=f33.agent(), workspace=ws, conversation_id=cid, visualizer=None, dele",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 287,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-attach/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 287,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 4, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-attach/probe.json\"\n}\n",
+  "stderr": ""
+}

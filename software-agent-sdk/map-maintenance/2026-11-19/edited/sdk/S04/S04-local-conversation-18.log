@@ -1,0 +1,95 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S04/views --arg visualizer \
+  --check default_has_user_panel eq true --check default_has_observation_panel eq true \
+  --check default_shows_command eq true --check default_uses_boxes eq true --check omitted_prints_panels eq true \
+  --check none_prints eq 0 --check instance_skip_user eq false \
+  --check custom_saw_every_event eq true --check custom_events eq 6 --check custom_printed eq 0 \
+  --check action_rendering contains "$ echo shown-in-panel" --check observation_rendering contains "shown-in-panel"
+{
+  "ok": true,
+  "mode": "visualizer",
+  "default_has_user_panel": true,
+  "default_has_observation_panel": true,
+  "default_shows_command": true,
+  "default_uses_boxes": true,
+  "none_prints": 0,
+  "instance_skip_user": false,
+  "omitted_prints_panels": true,
+  "custom_events": 6,
+  "custom_saw_every_event": true,
+  "custom_kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "custom_printed": 0,
+  "action_rendering": "Summary: terminal: {\"command\": \"echo shown-in-panel\"}\n\n$ echo shown-in-panel",
+  "observation_rendering": "Tool: terminal\nResult:\nshown-in-panel\n\n\ud83d\udcc1 Working directory: /tmp/claude-0/-home-user/e897642a-59be-52ec-8941-1436d58bd1f",
+  "_exit": 0,
+  "_seconds": 6.0,
+  "checks": [
+    {
+      "check": "default_has_user_panel eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "default_has_observation_panel eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "default_shows_command eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "default_uses_boxes eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "omitted_prints_panels eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "none_prints eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "instance_skip_user eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "custom_saw_every_event eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "custom_events eq 6",
+      "ok": true,
+      "actual": "6"
+    },
+    {
+      "check": "custom_printed eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "action_rendering contains $ echo shown-in-panel",
+      "ok": true,
+      "actual": "Summary: terminal: {\"command\": \"echo shown-in-panel\"}\n\n$ echo shown-in-panel"
+    },
+    {
+      "check": "observation_rendering contains shown-in-panel",
+      "ok": true,
+      "actual": "Tool: terminal\nResult:\nshown-in-panel\n\n\ud83d\udcc1 Working directory: /tmp/claude-0/-home-user/e897642a-59be-52ec-8941-1436d58bd1f"
+    }
+  ]
+}
+
+[exit 0 after 6s]

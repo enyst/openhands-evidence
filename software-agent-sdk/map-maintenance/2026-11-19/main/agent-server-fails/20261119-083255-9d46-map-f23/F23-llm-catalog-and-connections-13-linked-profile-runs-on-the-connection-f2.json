@@ -1,0 +1,67 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Linked profile runs on the connection (`F23.linked-run`).",
+  "ids": [
+    "F23.linked-run"
+  ],
+  "line": 366,
+  "script": "control-agent-server llm preset deepseek\ncontrol-agent-server api POST /api/profiles/qa-f23-linked --expect 201 \\\n  --json \"{\\\"llm\\\": {\\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"provider_connection_id\\\": \\\"$CONN\\\", \\\"api_key\\\": \\\"sk-qa-f23-inline\\\"}}\"\ncontrol-agent-server state cat home/.openhands/profiles/qa-f23-linked.json --not-contains sk-qa-f23-inline \\\n  --check api_key missing --check provider_connection_id eq \"$CONN\"\ncontrol-agent-server api GET /api/profiles \\\n  --check profiles contains \"\\\"name\\\": \\\"qa-f23-linked\\\", \\\"model\\\": \\\"deepseek/deepseek-flash\\\", \\\"base_url\\\": null, \\\"provider_connection_id\\\": \\\"$CONN\\\", \\\"provider_connection_broken\\\": false, \\\"api_key_set\\\": true\"\ncontrol-agent-server api POST /api/profiles/qa-f23-linked/activate --expect 200 --check llm_applied eq true\ncontrol-agent-server api GET /api/settings --header 'X-Expose-Secrets: plaintext' --max-chars 200 --check active_profile eq qa-f23-linked \\\n  --check agent_settings.llm.api_key eq \"$DEEPSEEK_API_KEY\" --check agent_settings.llm.provider_connection_id eq \"$CONN\" --save F23.linked-run/settings\nCID=$(control-agent-server conversation start --tools none --no-autotitle --prompt 'Reply with one word: ok' --wait --timeout 180 --print-id)\ncontrol-agent-server api GET \"/api/conversations/$CID\" --max-chars 300 --check execution_status eq finished \\\n  --check agent.llm.provider_connection_id eq \"$CONN\" --check agent.llm.model eq deepseek/deepseek-flash \\\n  --check stats.usage_to_metrics.default.accumulated_token_usage.completion_tokens gt 0 --save F23.linked-run/conversation\ncontrol-agent-server conversation events \"$CID\" --kinds MessageEvent,ActionEvent --contains '\"source\": \"agent\"' --expect-min 1 --save F23.linked-run/reply\n",
+  "exit_code": 1,
+  "elapsed_ms": 2327,
+  "failed_line": 4,
+  "failed_command": "control-agent-server state cat home/.openhands/profiles/qa-f23-linked.json --not-contains sk-qa-f23-inline --check api_key missing --check provider_connection_id eq \"$CONN\"",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "path": "home/.openhands/profiles/qa-f23-linked.json",
+    "bytes": 1041,
+    "mode": "0o600",
+    "content": {
+      "model": "deepseek/deepseek-flash",
+      "api_key": "<redacted:encrypted>",
+      "provider_connection_id": "",
+      "auth_type": "api_key",
+      "openrouter_site_url": "https://docs.all-hands.dev/",
+      "openrouter_app_name": "OpenHands",
+      "num_retries": 5,
+      "retry_multiplier": 8.0,
+      "retry_min_wait": 8,
+      "retry_max_wait": 64,
+      "timeout": 300,
+      "stream_idle_timeout": 300.0,
+      "max_message_chars": 30000,
+      "api_mode": "auto",
+      "capability_overrides": {},
+      "stream": false,
+      "drop_params": true,
+      "disable_stop_word": false,
+      "caching_prompt": true,
+      "log_completions_to_file": false,
+      "log_completions": false,
+      "log_completions_folder": "logs/completions",
+      "native_tool_calling": true,
+      "reasoning_effort": "high",
+      "enable_encrypted_reasoning": true,
+      "prompt_cache_retention": "24h",
+      "extended_thinking_budget": 200000,
+      "usage_id": "default",
+      "litellm_extra_body": {},
+      "is_subscription": false,
+      "schema_version": 1
+    },
+    "checks": [
+      {
+        "check": "api_key missing",
+        "ok": false,
+        "actual": "<redacted:encrypted>"
+      },
+      {
+        "check": "provider_connection_id eq ",
+        "ok": true,
+        "actual": ""
+      }
+    ]
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"via\": \"proxy\",\n  \"profiles\": [\n    {\n      \"profile\": \"deepseek-flash\",\n      \"model\": \"litellm_proxy/deepseek-v4.1-flash\",\n      \"validate\": {\n        \"status\": 200,\n        \"body\": {\n          \"valid\": true,\n          \"error\": null\n        }\n      },\n      \"saved\": 201,\n      \"activated\": 200\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 201,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/profiles/qa-f23-linked\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"deepseek/deepseek-flash\",\n        \"provider_connection_id\": \"\",\n        \"api_key\": \"sk-qa-f23-inline\"\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 201,\n    \"headers\": {\n      \"content-length\": \"66\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"name\": \"qa-f23-linked\",\n      \"message\": \"Profile 'qa-f23-linked' saved\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 71\n}\n{\n  \"ok\": false,\n  \"path\": \"home/.openhands/profiles/qa-f23-linked.json\",\n  \"bytes\": 1041,\n  \"mode\": \"0o600\",\n  \"content\": {\n    \"model\": \"deepseek/deepseek-flash\",\n    \"api_key\": \"<redacted:encrypted>\",\n    \"provider_connection_id\": \"\",\n    \"auth_type\": \"api_key\",\n    \"openrouter_site_url\": \"https://docs.all-hands.dev/\",\n    \"openrouter_app_name\": \"OpenHands\",\n    \"num_retries\": 5,\n    \"retry_multiplier\": 8.0,\n    \"retry_min_wait\": 8,\n    \"retry_max_wait\": 64,\n    \"timeout\": 300,\n    \"stream_idle_timeout\": 300.0,\n    \"max_message_chars\": 30000,\n    \"api_mode\": \"auto\",\n    \"capability_overrides\": {},\n    \"stream\": false,\n    \"drop_params\": true,\n    \"disable_stop_word\": false,\n    \"caching_prompt\": true,\n    \"log_completions_to_file\": false,\n    \"log_completions\": false,\n    \"log_completions_folder\": \"logs/completions\",\n    \"native_tool_calling\": true,\n    \"reasoning_effort\": \"high\",\n    \"enable_encrypted_reasoning\": true,\n    \"prompt_cache_retention\": \"24h\",\n    \"extended_thinking_budget\": 200000,\n    \"usage_id\": \"default\",\n    \"litellm_extra_body\": {},\n    \"is_subscription\": false,\n    \"schema_version\": 1\n  },\n  \"checks\": [\n    {\n      \"check\": \"api_key missing\",\n      \"ok\": false,\n      \"actual\": \"<redacted:encrypted>\"\n    },\n    {\n      \"check\": \"provider_connection_id eq \",\n      \"ok\": true,\n      \"actual\": \"\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

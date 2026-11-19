@@ -1,0 +1,49 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Unoffered effort on a live session (`F09.acp-effort-unoffered`).",
+  "ids": [
+    "F09.acp-effort-unoffered"
+  ],
+  "line": 626,
+  "script": "control-agent-server api GET \"/api/conversations/$EID\" --quiet --check available_efforts not-contains ultra --check current_effort eq high\ncontrol-agent-server api POST \"/api/conversations/$EID/switch_acp_effort\" --json '{\"effort\": \"ultra\"}' --expect 400 \\\n  --check detail eq \"Reasoning effort 'ultra' is not offered for the current model; choose one of: default, low, medium, high, xhigh, max.\" --save F09.acp-effort-unoffered/ultra\ncontrol-agent-server api POST \"/api/conversations/$EID/switch_acp_effort\" --json '{\"effort\": \"  \"}' --expect 400 --check detail eq 'effort must be a non-empty string'\ncontrol-agent-server api GET \"/api/conversations/$EID\" --quiet --check current_effort eq high --check agent.acp_effort eq high --check agent_state.acp_current_effort eq high\n",
+  "exit_code": 1,
+  "elapsed_ms": 351,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$EID\" --quiet --check available_efforts not-contains ultra --check current_effort eq high",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 307,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 307,
+      "headers": {
+        "content-length": "0",
+        "location": "http://127.0.0.1:36517/api/conversations"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 56,
+    "checks": [
+      {
+        "check": "available_efforts not-contains ultra",
+        "ok": true,
+        "actual": "null"
+      },
+      {
+        "check": "current_effort eq high",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "hint": "failed check: current_effort eq high"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:36517/api/conversations\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 56,\n  \"checks\": [\n    {\n      \"check\": \"available_efforts not-contains ultra\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"current_effort eq high\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"hint\": \"failed check: current_effort eq high\"\n}\n",
+  "stderr": ""
+}

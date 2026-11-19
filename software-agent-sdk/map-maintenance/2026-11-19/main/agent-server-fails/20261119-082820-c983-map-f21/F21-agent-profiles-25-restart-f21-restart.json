@@ -1,0 +1,117 @@
+{
+  "file": "F21-agent-profiles.md",
+  "bullet": "Restart (`F21.restart`).",
+  "ids": [
+    "F21.restart"
+  ],
+  "line": 773,
+  "script": "control-agent-server restart\ncontrol-agent-server api GET /api/agent-profiles --check active_agent_profile_id eq \"$CODER\" --save F21.restart/list\ncontrol-agent-server api GET /api/agent-profiles/qa-f21-coder --check profile.id eq \"$CODER\" --check profile.revision eq 1 \\\n  --check profile.persona eq 'QA F21 persona'\ncontrol-agent-server api GET /api/agent-profiles/qa-f21-acp --check profile.id eq \"$ACP\" --check profile.agent_kind eq acp\ncontrol-agent-server api GET /api/agent-profiles/default --check profile.id eq \"$SEED\"\ncontrol-agent-server api GET /api/settings --check active_agent_profile_id eq \"$CODER\"\ncontrol-agent-server doctor\n",
+  "exit_code": 1,
+  "elapsed_ms": 9971,
+  "failed_line": 2,
+  "failed_command": "control-agent-server api GET /api/agent-profiles --check active_agent_profile_id eq \"$CODER\" --save F21.restart/list",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/agent-profiles",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "1368",
+        "content-type": "application/json"
+      },
+      "body": {
+        "profiles": [
+          {
+            "id": "0fd51496-72dd-4010-9603-0963cc46360e",
+            "name": "default",
+            "agent_kind": "openhands",
+            "revision": 0,
+            "llm_profile_ref": "deepseek-flash",
+            "mcp_server_refs": null
+          },
+          {
+            "id": "df33e368-ff05-42b7-bea0-fe0c490e8462",
+            "name": "qa-f21-acp",
+            "agent_kind": "acp",
+            "revision": 0,
+            "llm_profile_ref": null,
+            "mcp_server_refs": null
+          },
+          {
+            "id": "330024a0-d041-4e54-9b2a-f8f326915e42",
+            "name": "qa-f21-additions",
+            "agent_kind": "openhands",
+            "revision": 0,
+            "llm_profile_ref": "deepseek-flash",
+            "mcp_server_refs": []
+          },
+          {
+            "id": "e19506b6-7247-4d68-ad6b-505095b9c909",
+            "name": "qa-f21-coder",
+            "agent_kind": "openhands",
+            "revision": 1,
+            "llm_profile_ref": "deepseek-pro",
+            "mcp_server_refs": []
+          },
+          {
+            "id": "ef103187-d8e2-47f3-ad6f-70c125b2bf9e",
+            "name": "qa-f21-preview",
+            "agent_kind": "openhands",
+            "revision": 0,
+            "llm_profile_ref": "deepseek-flash",
+            "mcp_server_refs": [
+              "qa-f21-mcp"
+            ]
+          },
+          {
+            "id": "79bf051e-41fc-4659-b042-7f751323304d",
+            "name": "qa-f21-runner",
+            "agent_kind": "openhands",
+            "revision": 0,
+            "llm_profile_ref": "deepseek-pro",
+            "mcp_server_refs": []
+          },
+          {
+            "id": "0e9c50a2-ceb8-4956-8dfe-264a0c313ada",
+            "name": "qa-f21-scoped",
+            "agent_kind": "openhands",
+            "revision": 0,
+            "llm_profile_ref": "deepseek-flash",
+            "mcp_server_refs": []
+          },
+          {
+            "id": "927559d7-a2d1-4b63-b21a-afa058be29cb",
+            "name": "qa-f21-ts2",
+            "agent_kind": "openhands",
+            "revision": 0,
+            "llm_profile_ref": "deepseek-flash",
+            "mcp_server_refs": []
+          }
+        ],
+        "active_agent_profile_id": "927559d7-a2d1-4b63-b21a-afa058be29cb"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 438,
+    "checks": [
+      {
+        "check": "active_agent_profile_id eq e19506b6-7247-4d68-ad6b-505095b9c909",
+        "ok": false,
+        "actual": "927559d7-a2d1-4b63-b21a-afa058be29cb"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-082820-c983-map-f21/evidence/F21.restart/list.json",
+    "hint": "failed check: active_agent_profile_id eq e19506b6-7247-4d68-ad6b-505095b9c909"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-082820-c983-map-f21\",\n  \"url\": \"http://127.0.0.1:53931\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6663,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/agent-profiles\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1368\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"profiles\": [\n        {\n          \"id\": \"0fd51496-72dd-4010-9603-0963cc46360e\",\n          \"name\": \"default\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-flash\",\n          \"mcp_server_refs\": null\n        },\n        {\n          \"id\": \"df33e368-ff05-42b7-bea0-fe0c490e8462\",\n          \"name\": \"qa-f21-acp\",\n          \"agent_kind\": \"acp\",\n          \"revision\": 0,\n          \"llm_profile_ref\": null,\n          \"mcp_server_refs\": null\n        },\n        {\n          \"id\": \"330024a0-d041-4e54-9b2a-f8f326915e42\",\n          \"name\": \"qa-f21-additions\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-flash\",\n          \"mcp_server_refs\": []\n        },\n        {\n          \"id\": \"e19506b6-7247-4d68-ad6b-505095b9c909\",\n          \"name\": \"qa-f21-coder\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 1,\n          \"llm_profile_ref\": \"deepseek-pro\",\n          \"mcp_server_refs\": []\n        },\n        {\n          \"id\": \"ef103187-d8e2-47f3-ad6f-70c125b2bf9e\",\n          \"name\": \"qa-f21-preview\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-flash\",\n          \"mcp_server_refs\": [\n            \"qa-f21-mcp\"\n          ]\n        },\n        {\n          \"id\": \"79bf051e-41fc-4659-b042-7f751323304d\",\n          \"name\": \"qa-f21-runner\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-pro\",\n          \"mcp_server_refs\": []\n        },\n        {\n          \"id\": \"0e9c50a2-ceb8-4956-8dfe-264a0c313ada\",\n          \"name\": \"qa-f21-scoped\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-flash\",\n          \"mcp_server_refs\": []\n        },\n        {\n          \"id\": \"927559d7-a2d1-4b63-b21a-afa058be29cb\",\n          \"name\": \"qa-f21-ts2\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-flash\",\n          \"mcp_server_refs\": []\n        }\n      ],\n      \"active_agent_profile_id\": \"927559d7-a2d1-4b63-b21a-afa058be29cb\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 438,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq e19506b6-7247-4d68-ad6b-505095b9c909\",\n      \"ok\": false,\n      \"actual\": \"927559d7-a2d1-4b63-b21a-afa058be29cb\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-082820-c983-map-f21/evidence/F21.restart/list.json\",\n  \"hint\": \"failed check: active_agent_profile_id eq e19506b6-7247-4d68-ad6b-505095b9c909\"\n}\n",
+  "stderr": ""
+}

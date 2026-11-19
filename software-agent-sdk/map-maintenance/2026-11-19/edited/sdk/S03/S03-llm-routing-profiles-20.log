@@ -1,0 +1,150 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/subscription \
+  --check login_error missing --check is_subscription eq true --check model eq openai/gpt-5.5 \
+  --check base_url eq https://chatgpt.com/backend-api/codex --check stream eq true \
+  --check unsupported_model_error contains "not supported for subscription access" \
+  --check forced_login_error contains "consent has not been previously acknowledged" \
+  --check requests.text eq "codex reply" --check requests.count eq 2 \
+  --check requests.omitted_everywhere len-eq 5 --check requests.store eq false \
+  --check requests.authorization_uses_cached_token eq true --check requests.originator eq codex_cli_rs \
+  --check serialized.is_subscription eq true --check serialized.token_in_dump eq false \
+  --check from_env.is_subscription eq true --check from_env.model eq openai/gpt-5.5
+{
+  "ok": true,
+  "auth_files": [
+    "openai_oauth.json"
+  ],
+  "login_error": null,
+  "is_subscription": true,
+  "model": "openai/gpt-5.5",
+  "base_url": "https://chatgpt.com/backend-api/codex",
+  "stream": true,
+  "uses_responses_api": true,
+  "unsupported_model_error": "ValueError: Model 'gpt-4o' is not supported for subscription access. Supported models: gpt-5.5, gpt-5.6-luna, gpt-5.6-sol, gpt-5.6-terra, gpt-6-astra, gpt-6-luna, gpt-6-sol, gpt-6.1-sol, gpt-6.2-astra, gpt-6.2-sol",
+  "forced_login_error": "RuntimeError: Cannot proceed with ChatGPT sign-in: running in non-interactive mode and consent has not been previously acknowledged. Please run interactively first to acknowledge the terms.",
+  "requests": {
+    "error": null,
+    "text": "codex reply",
+    "count": 2,
+    "keys": [
+      "input",
+      "instructions",
+      "model",
+      "store",
+      "stream",
+      "tool_choice"
+    ],
+    "omitted_everywhere": [
+      "include",
+      "max_output_tokens",
+      "prompt_cache_retention",
+      "reasoning",
+      "temperature"
+    ],
+    "stream": true,
+    "store": false,
+    "authorization_uses_cached_token": true,
+    "originator": "codex_cli_rs"
+  },
+  "serialized": {
+    "is_subscription": true,
+    "auth_type": "subscription",
+    "token_in_dump": false
+  },
+  "from_env": {
+    "error": null,
+    "is_subscription": true,
+    "model": "openai/gpt-5.5"
+  },
+  "_exit": 0,
+  "_seconds": 5.8,
+  "checks": [
+    {
+      "check": "login_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "is_subscription eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "model eq openai/gpt-5.5",
+      "ok": true,
+      "actual": "openai/gpt-5.5"
+    },
+    {
+      "check": "base_url eq https://chatgpt.com/backend-api/codex",
+      "ok": true,
+      "actual": "https://chatgpt.com/backend-api/codex"
+    },
+    {
+      "check": "stream eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "unsupported_model_error contains not supported for subscription access",
+      "ok": true,
+      "actual": "ValueError: Model 'gpt-4o' is not supported for subscription access. Supported models: gpt-5.5, gpt-5.6-luna, gpt-5.6-sol, gpt-5.6-terra, gpt-6-astra, gpt-6-luna, gpt-6-sol, gpt-6.1-sol, gpt-6.2-astra"
+    },
+    {
+      "check": "forced_login_error contains consent has not been previously acknowledged",
+      "ok": true,
+      "actual": "RuntimeError: Cannot proceed with ChatGPT sign-in: running in non-interactive mode and consent has not been previously acknowledged. Please run interactively first to acknowledge the terms."
+    },
+    {
+      "check": "requests.text eq codex reply",
+      "ok": true,
+      "actual": "codex reply"
+    },
+    {
+      "check": "requests.count eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "requests.omitted_everywhere len-eq 5",
+      "ok": true,
+      "actual": "[\"include\", \"max_output_tokens\", \"prompt_cache_retention\", \"reasoning\", \"temperature\"]"
+    },
+    {
+      "check": "requests.store eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "requests.authorization_uses_cached_token eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "requests.originator eq codex_cli_rs",
+      "ok": true,
+      "actual": "codex_cli_rs"
+    },
+    {
+      "check": "serialized.is_subscription eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "serialized.token_in_dump eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "from_env.is_subscription eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "from_env.model eq openai/gpt-5.5",
+      "ok": true,
+      "actual": "openai/gpt-5.5"
+    }
+  ]
+}
+
+[exit 0 after 6s]

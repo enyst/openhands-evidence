@@ -1,0 +1,17 @@
+{
+  "file": "F27-hooks-subagents-tools.md",
+  "bullet": "Client tools stay out of the catalog (`F27.catalog-sealed`).",
+  "ids": [
+    "F27.catalog-sealed"
+  ],
+  "line": 616,
+  "script": "CCID=$(control-agent-server conversation start --no-run --no-autotitle --tools terminal \\\n  --body-json '{\"client_tools\": [{\"name\": \"qa_f27_client_tool\", \"description\": \"QA client-side tool\"}]}' --print-id)\ncontrol-agent-server api GET \"/api/conversations/$CCID\" --expect 200 --check agent.tools contains qa_f27_client_tool --quiet\ncontrol-agent-server api GET /api/tools/catalog --expect 200 --quiet --check tools not-contains qa_f27_client_tool \\\n  --check tools contains '\"name\": \"terminal\"' --save F27.catalog-sealed/catalog\n",
+  "exit_code": 0,
+  "elapsed_ms": 1511,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/af02fc09-c5f9-4ea2-8dee-8c87f683aadd\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"5599\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 74,\n  \"checks\": [\n    {\n      \"check\": \"agent.tools contains qa_f27_client_tool\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"name\\\": \\\"terminal\\\", \\\"params\\\": {}}, {\\\"name\\\": \\\"qa_f27_client_tool\\\", \\\"params\\\": {\\\"spec\\\": {\\\"name\\\": \\\"qa_f27_client_tool\\\", \\\"description\\\": \\\"QA client-side tool\\\", \\\"parameters\\\": {\\\"type\\\": \\\"object\\\", \\\"properties\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/tools/catalog\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"2938\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"tools not-contains qa_f27_client_tool\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"name\\\": \\\"route_task_to_model\\\", \\\"user_selectable\\\": false, \\\"usable\\\": true, \\\"description\\\": \\\"\\\", \\\"in_default_set\\\": false}, {\\\"name\\\": \\\"ask_oracle\\\", \\\"user_selectable\\\": false, \\\"usable\\\": true, \\\"description\\\": \\u2026\"\n    },\n    {\n      \"check\": \"tools contains \\\"name\\\": \\\"terminal\\\"\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"name\\\": \\\"route_task_to_model\\\", \\\"user_selectable\\\": false, \\\"usable\\\": true, \\\"description\\\": \\\"\\\", \\\"in_default_set\\\": false}, {\\\"name\\\": \\\"ask_oracle\\\", \\\"user_selectable\\\": false, \\\"usable\\\": true, \\\"description\\\": \\u2026\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-102353-4359-map-f27/evidence/F27.catalog-sealed/catalog.json\"\n}\n",
+  "stderr": ""
+}

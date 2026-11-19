@@ -1,0 +1,58 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/profiles --arg connections \
+  --check stored_api_key missing --check stored_connection_id eq conn1 \
+  --check loaded_key eq sk-shared-connection --check loaded_base_url eq https://anthropic.example.com \
+  --check rotated_key eq sk-rotated --check dangling_error contains ProviderConnectionNotFound \
+  --check sibling_dir_default eq true
+{
+  "ok": true,
+  "mode": "connections",
+  "stored_api_key": null,
+  "stored_connection_id": "conn1",
+  "loaded_key": "sk-shared-connection",
+  "loaded_base_url": "https://anthropic.example.com",
+  "rotated_key": "sk-rotated",
+  "dangling_error": "ProviderConnectionNotFound: Profile 'linked' references provider connection 'conn1', which does not exist. Update the profile or recreate the connection.",
+  "sibling_dir_default": true,
+  "_exit": 0,
+  "_seconds": 4.9,
+  "checks": [
+    {
+      "check": "stored_api_key missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "stored_connection_id eq conn1",
+      "ok": true,
+      "actual": "conn1"
+    },
+    {
+      "check": "loaded_key eq sk-shared-connection",
+      "ok": true,
+      "actual": "sk-shared-connection"
+    },
+    {
+      "check": "loaded_base_url eq https://anthropic.example.com",
+      "ok": true,
+      "actual": "https://anthropic.example.com"
+    },
+    {
+      "check": "rotated_key eq sk-rotated",
+      "ok": true,
+      "actual": "sk-rotated"
+    },
+    {
+      "check": "dangling_error contains ProviderConnectionNotFound",
+      "ok": true,
+      "actual": "ProviderConnectionNotFound: Profile 'linked' references provider connection 'conn1', which does not exist. Update the profile or recreate the connection."
+    },
+    {
+      "check": "sibling_dir_default eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 5s]

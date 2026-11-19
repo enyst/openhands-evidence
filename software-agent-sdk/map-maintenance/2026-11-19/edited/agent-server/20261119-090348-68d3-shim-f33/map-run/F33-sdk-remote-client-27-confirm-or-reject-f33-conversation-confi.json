@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Confirm or reject (`F33.conversation-confirmation`).",
+  "ids": [
+    "F33.conversation-confirmation"
+  ],
+  "line": 1321,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-confirmation/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.security.confirmation_policy import AlwaysConfirm\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"confirm\"), visualizer=None, delete_on_close=False)\nconv.set_confirmation_policy(AlwaysConfirm())\nconv.send_message(\"Run this exact shell command: printf no > qa-f33-confirm.txt\")\nconv.run(timeout=300)\nassert conv.state.execution_status.value == \"waiting_for_confirmation\", conv.state.execution_status\nconv.reject_pending_actions(\"qa-f33 rejected\")\nf33.emit(\"confirm\", cid=str(conv.id))\nconv.close()\nPY\nCONF=$(jq -r .cid \"$F33/confirm.json\")\ncontrol-agent-server api GET \"/api/conversations/$CONF\" --check confirmation_policy.kind eq AlwaysConfirm \\\n  --check execution_status eq idle --until-ok 30 --save F33.conversation-confirmation/get\ncontrol-agent-server conversation events \"$CONF\" --kinds UserRejectObservation --contains 'qa-f33 rejected' --expect-count 1 \\\n  --save F33.conversation-confirmation/reject\ncontrol-agent-server conversation events \"$CONF\" --kinds ObservationEvent --expect-count 0\ntest ! -e \"$F33/confirm/qa-f33-confirm.txt\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 332,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-confirmation/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.security.confirmation_policy import AlwaysConfirm\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"confirm\"), visualizer=None, delete_on_close=False)\nconv.set_confirmation_policy(AlwaysConfirm())\nconv.send_message(\"Run this exact shell command: printf no > qa-f33-confirm.txt\")\nconv.run(timeou",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 28,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 1, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-confirmation/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 28,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 1, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-confirmation/probe.json\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,187 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/terminal_wait --arg subprocess \
+  --check execution_status eq finished \
+  --check steps.long.exit_code eq -1 --check steps.long.is_error eq false --check steps.long.seconds lt 2.5 \
+  --check steps.long.text contains "timed out after 1 seconds" \
+  --check max_poll_seconds lt 2.5 --check finished_seen eq true --check polls_until_done le 3 \
+  --check steps.exit.is_error eq true --check steps.exit.exit_code eq -1 --check steps.exit.text contains final-output \
+  --check steps.exit.text contains "The terminal was closed before command completion" \
+  --check steps.after_exit.is_error eq true --check steps.after_exit.text contains "Use reset=True" \
+  --check steps.after_exit.text not-contains "still-here" \
+  --check steps.after_reset.exit_code eq 0 --check steps.after_reset.text contains back \
+  --check invalid.0 contains "must be finite and positive" --check invalid.-1 contains "must be finite and positive"
+{
+  "ok": true,
+  "mode": "subprocess",
+  "execution_status": "finished",
+  "steps": {
+    "warm": {
+      "exit_code": 0,
+      "is_error": false,
+      "text": "\u001b[?2004lready\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 0.03
+    },
+    "long": {
+      "exit_code": -1,
+      "is_error": false,
+      "text": "\u001b[?2004l\n[The command timed out after 1 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "seconds": 1.02
+    },
+    "poll0": {
+      "exit_code": -1,
+      "is_error": false,
+      "text": "[Below is the output of the previous command.]\n\n[The command timed out after 1 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "seconds": 1.02
+    },
+    "poll1": {
+      "exit_code": 0,
+      "is_error": false,
+      "text": "finished\n\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 1.02
+    },
+    "poll2": {
+      "exit_code": null,
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nNo previous running command to retrieve logs from.",
+      "seconds": 0.0
+    },
+    "poll3": {
+      "exit_code": null,
+      "is_error": true,
+      "text": "[An error occurred during execution.]\n\nNo previous running command to retrieve logs from.",
+      "seconds": 0.0
+    },
+    "exit": {
+      "exit_code": -1,
+      "is_error": true,
+      "text": "59be-52ec-8941-1436d58bd1fa/scratchpad/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace\",\n  \"py_interpreter_path\": \"/usr/local/bin/python\"\n}\n###PS1END###\nprintf '%s%s\\n' 'final-' 'output'; exit 7\n\u001b[?2004lfinal-output\nexit\n\n[The terminal was closed before command completion. The result is unknown. Use reset=True to start a new session; the command was not retried.]",
+      "seconds": 0.05
+    },
+    "after_exit": {
+      "exit_code": -1,
+      "is_error": true,
+      "text": "59be-52ec-8941-1436d58bd1fa/scratchpad/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace\",\n  \"py_interpreter_path\": \"/usr/local/bin/python\"\n}\n###PS1END###\nprintf '%s%s\\n' 'final-' 'output'; exit 7\n\u001b[?2004lfinal-output\nexit\n\n[The terminal was closed before command completion. The result is unknown. Use reset=True to start a new session; the command was not retried.]",
+      "seconds": 0.01
+    },
+    "reset": {
+      "exit_code": 0,
+      "is_error": false,
+      "text": "Terminal session has been reset. All previous environment variables and session state have been cleared.",
+      "seconds": 0.09
+    },
+    "after_reset": {
+      "exit_code": 0,
+      "is_error": false,
+      "text": "back\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 0.12
+    }
+  },
+  "max_poll_seconds": 1.02,
+  "polls_until_done": 2,
+  "finished_seen": true,
+  "invalid": {
+    "0": "ValueError: max_observation_wait_seconds must be finite and positive",
+    "-1": "ValueError: max_observation_wait_seconds must be finite and positive"
+  },
+  "_exit": 0,
+  "_seconds": 8.5,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "steps.long.exit_code eq -1",
+      "ok": true,
+      "actual": "-1"
+    },
+    {
+      "check": "steps.long.is_error eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "steps.long.seconds lt 2.5",
+      "ok": true,
+      "actual": "1.02"
+    },
+    {
+      "check": "steps.long.text contains timed out after 1 seconds",
+      "ok": true,
+      "actual": "\u001b[?2004l\n[The command timed out after 1 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \""
+    },
+    {
+      "check": "max_poll_seconds lt 2.5",
+      "ok": true,
+      "actual": "1.02"
+    },
+    {
+      "check": "finished_seen eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "polls_until_done le 3",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "steps.exit.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.exit.exit_code eq -1",
+      "ok": true,
+      "actual": "-1"
+    },
+    {
+      "check": "steps.exit.text contains final-output",
+      "ok": true,
+      "actual": "59be-52ec-8941-1436d58bd1fa/scratchpad/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace\",\n  \"py_interpreter_path\": \"/usr/local/bin/python\"\n}\n###PS1END###\nprintf '%s%s"
+    },
+    {
+      "check": "steps.exit.text contains The terminal was closed before command completion",
+      "ok": true,
+      "actual": "59be-52ec-8941-1436d58bd1fa/scratchpad/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace\",\n  \"py_interpreter_path\": \"/usr/local/bin/python\"\n}\n###PS1END###\nprintf '%s%s"
+    },
+    {
+      "check": "steps.after_exit.is_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "steps.after_exit.text contains Use reset=True",
+      "ok": true,
+      "actual": "59be-52ec-8941-1436d58bd1fa/scratchpad/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace\",\n  \"py_interpreter_path\": \"/usr/local/bin/python\"\n}\n###PS1END###\nprintf '%s%s"
+    },
+    {
+      "check": "steps.after_exit.text not-contains still-here",
+      "ok": true,
+      "actual": "59be-52ec-8941-1436d58bd1fa/scratchpad/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20261119-101055-99479e/workspace\",\n  \"py_interpreter_path\": \"/usr/local/bin/python\"\n}\n###PS1END###\nprintf '%s%s"
+    },
+    {
+      "check": "steps.after_reset.exit_code eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "steps.after_reset.text contains back",
+      "ok": true,
+      "actual": "back\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-09/block1/runs/20"
+    },
+    {
+      "check": "invalid.0 contains must be finite and positive",
+      "ok": true,
+      "actual": "ValueError: max_observation_wait_seconds must be finite and positive"
+    },
+    {
+      "check": "invalid.-1 contains must be finite and positive",
+      "ok": true,
+      "actual": "ValueError: max_observation_wait_seconds must be finite and positive"
+    }
+  ]
+}
+
+[exit 0 after 9s]

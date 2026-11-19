@@ -1,0 +1,56 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Switch to a caller-supplied LLM (`F09.switch-llm`).",
+  "ids": [
+    "F09.switch-llm"
+  ],
+  "line": 193,
+  "script": "control-agent-server api POST \"/api/conversations/$CID/switch_llm\" \\\n  --json '{\"llm\": {\"model\": \"openai/qa-f09-switched\", \"api_key\": \"sk-qa-f09-switched\", \"base_url\": \"http://127.0.0.1:9/v1\", \"usage_id\": \"qa-f09-switched\"}}' \\\n  --expect 200 --check success eq true --save F09.switch-llm/switch\ncontrol-agent-server api GET \"/api/conversations/$CID\" --expect 200 --quiet \\\n  --check agent.llm.model eq openai/qa-f09-switched --check agent.llm.usage_id eq qa-f09-switched \\\n  --check agent.llm.base_url eq http://127.0.0.1:9/v1 --check agent.llm.api_key missing \\\n  --check agent.condenser.llm.model eq openai/qa-f09-switched --check agent.condenser.llm.usage_id eq condenser \\\n  --check execution_status eq idle --save F09.switch-llm/get\ncontrol-agent-server state cat \"server/workspace/conversations/${CID//-/}/base_state.json\" --max-chars 200 \\\n  --check agent.llm.model eq openai/qa-f09-switched --check agent.llm.api_key matches '^gAAAAA' --not-contains sk-qa-f09-switched\ncontrol-agent-server state cat \"server/workspace/conversations/${CID//-/}/meta.json\" --max-chars 200 --check agent missing\ncontrol-agent-server state grep sk-qa-f09-switched --glob 'server/**/*' --expect-none\n",
+  "exit_code": 1,
+  "elapsed_ms": 335,
+  "failed_line": 1,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$CID/switch_llm\" --json '{\"llm\": {\"model\": \"openai/qa-f09-switched\", \"api_key\": \"sk-qa-f09-switched\", \"base_url\": \"http://127.0.0.1:9/v1\", \"usage_id\": \"qa-f09-switched\"}}' --expect 200 --check success eq true --save F09.switch-llm/switch",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//switch_llm",
+      "query": [],
+      "auth": "header",
+      "body": {
+        "llm": {
+          "model": "openai/qa-f09-switched",
+          "api_key": "sk-qa-f09-switched",
+          "base_url": "http://127.0.0.1:9/v1",
+          "usage_id": "qa-f09-switched"
+        }
+      },
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 53,
+    "checks": [
+      {
+        "check": "success eq true",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm/switch.json",
+    "hint": "expected 200, got 404"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//switch_llm\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"openai/qa-f09-switched\",\n        \"api_key\": \"sk-qa-f09-switched\",\n        \"base_url\": \"http://127.0.0.1:9/v1\",\n        \"usage_id\": \"qa-f09-switched\"\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 53,\n  \"checks\": [\n    {\n      \"check\": \"success eq true\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm/switch.json\",\n  \"hint\": \"expected 200, got 404\"\n}\n",
+  "stderr": ""
+}

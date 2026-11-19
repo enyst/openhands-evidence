@@ -1,0 +1,17 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Corrupted file (`F23.corrupt-file`).",
+  "ids": [
+    "F23.corrupt-file"
+  ],
+  "line": 567,
+  "script": "cp \"$CF\" \"$F23/connections-backup.json\"\nprintf '{\"schema_version\": 1, \"connections\": [' > \"$CF\"\ncontrol-agent-server api GET /api/llm/provider-connections --expect 400 \\\n  --check detail contains 'Provider connections file is unreadable' --save F23.corrupt-file/list\ncontrol-agent-server api POST /api/llm/provider-connections --json '{\"display_name\": \"qa-f23-corrupt\", \"api_key\": \"sk-qa-f23-corrupt\"}' \\\n  --expect 400 --check detail contains 'Provider connections file is unreadable'\ntest \"$(cat \"$CF\")\" = '{\"schema_version\": 1, \"connections\": ['\nprintf '{\"schema_version\": 2, \"connections\": []}' > \"$CF\"\ncontrol-agent-server api GET /api/llm/provider-connections --expect 400 --check detail eq 'schema_version 2 is newer than supported 1' \\\n  --save F23.corrupt-file/newer-schema\ncontrol-agent-server api DELETE \"/api/llm/provider-connections/$DEF\" --expect 400 --check detail eq 'schema_version 2 is newer than supported 1'\ntest \"$(cat \"$CF\")\" = '{\"schema_version\": 2, \"connections\": []}'\ncp \"$F23/connections-backup.json\" \"$CF\"\ncontrol-agent-server api GET /api/llm/provider-connections --expect 200 --check . len-eq 2 --check 0.id eq \"$CONN\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 6,
+  "failed_line": 1,
+  "failed_command": "cp \"$CF\" \"$F23/connections-backup.json\"",
+  "failed_status": 1,
+  "observation": null,
+  "stdout": "",
+  "stderr": "cp: cannot stat '<scratch>/agent-server/20261119-083255-9d46-map-f23/home/.openhands/provider-connections/provider_connections.json': No such file or directory\n"
+}

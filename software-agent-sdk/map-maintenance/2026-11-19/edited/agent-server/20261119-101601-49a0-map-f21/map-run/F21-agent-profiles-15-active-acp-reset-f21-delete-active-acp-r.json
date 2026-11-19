@@ -1,0 +1,188 @@
+{
+  "file": "F21-agent-profiles.md",
+  "bullet": "Active ACP reset (`F21.delete-active-acp-reset`).",
+  "ids": [
+    "F21.delete-active-acp-reset"
+  ],
+  "line": 452,
+  "script": "DEFAULT_ID=$(control-agent-server api GET /api/agent-profiles --field profiles | jq -r '.[] | select(.name == \"default\") | .id')\ncontrol-agent-server api PATCH /api/settings --json '{\"agent_settings_diff\": {\"agent_kind\": \"acp\", \"acp_server\": \"codex\"}}' \\\n  --expect 200 --check agent_settings.agent_kind eq acp\ncontrol-agent-server api POST /api/settings/mcp/qa-f21-mcp --expect 201 \\\n  --json '{\"transport\": \"http\", \"url\": \"https://example.invalid/mcp\", \"description\": \"QA F21\"}'\ncontrol-agent-server api POST /api/agent-profiles/qa-f21-acp-active --json '{\"agent_kind\": \"acp\", \"acp_server\": \"codex\"}' --expect 201\nACTIVE_ACP=$(control-agent-server api GET /api/agent-profiles/qa-f21-acp-active --field profile.id)\ncontrol-agent-server api POST \"/api/agent-profiles/$ACTIVE_ACP/activate\" --expect 200\ncontrol-agent-server api GET /api/settings --check active_agent_profile_id eq \"$ACTIVE_ACP\" --check agent_settings.agent_kind eq acp \\\n  --check agent_settings.mcp_config.qa-f21-mcp exists\ncontrol-agent-server api DELETE /api/agent-profiles/qa-f21-acp-active --expect 200\ncontrol-agent-server api GET /api/settings --check active_agent_profile_id eq \"$DEFAULT_ID\" --check agent_settings.agent_kind eq openhands \\\n  --check agent_settings.acp_server missing --check agent_settings.mcp_config.qa-f21-mcp.url eq https://example.invalid/mcp \\\n  --save F21.delete-active-acp-reset/settings\ncontrol-agent-server api POST /api/profiles/deepseek-flash/activate --expect 200\ncontrol-agent-server api POST \"/api/agent-profiles/$CODER/activate\" --expect 200\ncontrol-agent-server api GET /api/settings --check agent_settings.llm.model eq deepseek/deepseek-flash \\\n  --check llm_api_key_is_set eq true --check active_agent_profile_id eq \"$CODER\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 4595,
+  "failed_line": 17,
+  "failed_command": "control-agent-server api GET /api/settings --check agent_settings.llm.model eq deepseek/deepseek-flash --check llm_api_key_is_set eq true --check active_agent_profile_id eq \"$CODER\"",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/settings",
+      "query": [],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "3128",
+        "content-type": "application/json"
+      },
+      "body": {
+        "agent_settings": {
+          "schema_version": 10,
+          "agent_kind": "openhands",
+          "agent": "CodeActAgent",
+          "llm": {
+            "model": "litellm_proxy/deepseek-v4.1-flash",
+            "api_key": "**********",
+            "provider_connection_id": null,
+            "auth_type": "api_key",
+            "subscription_vendor": null,
+            "base_url": "https://llm-proxy.eval.all-hands.dev/",
+            "api_version": null,
+            "aws_access_key_id": null,
+            "aws_secret_access_key": null,
+            "aws_session_token": null,
+            "aws_region_name": null,
+            "aws_profile_name": null,
+            "aws_role_name": null,
+            "aws_session_name": null,
+            "aws_bedrock_runtime_endpoint": null,
+            "openrouter_site_url": "https://docs.all-hands.dev/",
+            "openrouter_app_name": "OpenHands",
+            "num_retries": 5,
+            "retry_multiplier": 8.0,
+            "retry_min_wait": 8,
+            "retry_max_wait": 64,
+            "timeout": 300,
+            "stream_idle_timeout": 300.0,
+            "max_message_chars": 30000,
+            "temperature": null,
+            "top_p": null,
+            "top_k": null,
+            "max_input_tokens": null,
+            "max_output_tokens": null,
+            "model_canonical_name": null,
+            "api_mode": "auto",
+            "capability_overrides": {},
+            "extra_headers": null,
+            "input_cost_per_token": null,
+            "output_cost_per_token": null,
+            "ollama_base_url": null,
+            "stream": false,
+            "drop_params": true,
+            "disable_vision": null,
+            "disable_stop_word": false,
+            "caching_prompt": true,
+            "log_completions_to_file": false,
+            "log_completions": false,
+            "log_completions_folder": "logs/completions",
+            "custom_tokenizer": null,
+            "native_tool_calling": true,
+            "force_string_serializer": null,
+            "inline_image_urls": null,
+            "reasoning_effort": "high",
+            "reasoning_summary": null,
+            "enable_encrypted_reasoning": true,
+            "prompt_cache_retention": "24h",
+            "extended_thinking_budget": 200000,
+            "seed": null,
+            "usage_id": "default",
+            "litellm_extra_body": {},
+            "is_subscription": false
+          },
+          "tools": null,
+          "enable_classify_and_switch_llm_tool": false,
+          "active_meta_profile": null,
+          "meta_profile": null,
+          "meta_profile_llms": {},
+          "tool_concurrency_limit": 1,
+          "mcp_config": {
+            "qa-f21-mcp": {
+              "url": "https://example.invalid/mcp",
+              "transport": "http",
+              "description": "QA F21",
+              "enabled": true
+            }
+          },
+          "persona": null,
+          "agent_context": {
+            "skills": [],
+            "system_message_suffix": null,
+            "user_message_suffix": null,
+            "load_user_skills": false,
+            "load_public_skills": false,
+            "marketplace_path": "marketplaces/default.json",
+            "registered_marketplaces": [],
+            "load_project_skills": false,
+            "load_memory": false,
+            "disabled_skills": [],
+            "secrets": null,
+            "current_datetime": "2026-11-19T10:17:18.354910Z"
+          },
+          "condenser": {
+            "condenser_kind": "llm_summarizing",
+            "enabled": true,
+            "max_size": 240,
+            "max_tokens": null,
+            "keep_first": 2,
+            "minimum_progress": 0.1,
+            "hard_context_reset_max_retries": 5,
+            "hard_context_reset_context_scaling": 0.8
+          },
+          "verification": {
+            "critic_enabled": false,
+            "critic_mode": "finish_and_message",
+            "enable_iterative_refinement": false,
+            "critic_threshold": 0.6,
+            "max_refinement_iterations": 3,
+            "critic_server_url": null,
+            "critic_model_name": null,
+            "critic_api_key": null
+          }
+        },
+        "conversation_settings": {
+          "schema_version": 1,
+          "max_iterations": 500,
+          "confirmation_mode": false,
+          "security_analyzer": "llm",
+          "default_runtime": "local",
+          "worktree_base": "default_branch",
+          "worktree_base_ref": null,
+          "worktree_branch_prefix": "openhands/",
+          "container_memory": null,
+          "container_cpus": null,
+          "container_browser": true
+        },
+        "llm_api_key_is_set": true,
+        "active_profile": "deepseek-flash",
+        "active_agent_profile_id": "1049ae73-46b9-45c0-98de-3b213d0fe2b3",
+        "active_meta_profile": null,
+        "misc_settings": {}
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 77,
+    "checks": [
+      {
+        "check": "agent_settings.llm.model eq deepseek/deepseek-flash",
+        "ok": false,
+        "actual": "litellm_proxy/deepseek-v4.1-flash"
+      },
+      {
+        "check": "llm_api_key_is_set eq true",
+        "ok": true,
+        "actual": "true"
+      },
+      {
+        "check": "active_agent_profile_id eq 1049ae73-46b9-45c0-98de-3b213d0fe2b3",
+        "ok": true,
+        "actual": "1049ae73-46b9-45c0-98de-3b213d0fe2b3"
+      }
+    ],
+    "hint": "failed check: agent_settings.llm.model eq deepseek/deepseek-flash"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"PATCH\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"agent_settings_diff\": {\n        \"agent_kind\": \"acp\",\n        \"acp_server\": \"codex\"\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1511\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"agent_settings\": {\n        \"schema_version\": 10,\n        \"agent_kind\": \"acp\",\n        \"acp_server\": \"codex\",\n        \"acp_command\": [],\n        \"acp_args\": [],\n        \"acp_model\": null,\n        \"acp_effort\": null,\n        \"acp_session_mode\": null,\n        \"acp_prompt_timeout\": 1800.0,\n        \"acp_startup_timeout\": 90.0,\n        \"mcp_config\": {},\n        \"acp_isolate_data_dir\": false,\n        \"acp_file_secrets\": [\n          {\n            \"secret_name\": \"CODEX_AUTH_JSON\",\n            \"filename\": \"auth.json\",\n            \"env_var\": \"CODEX_HOME\",\n            \"subdir\": \"codex\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          },\n          {\n            \"secret_name\": \"GOOGLE_APPLICATION_CREDENTIALS_JSON\",\n            \"filename\": \"gcloud-credentials.json\",\n            \"env_var\": \"GOOGLE_APPLICATION_CREDENTIALS\",\n            \"subdir\": \"gemini-cli\",\n            \"env_points_to\": \"file\",\n            \"warn_if_unset\": [\n              \"GOOGLE_CLOUD_PROJECT\",\n              \"GOOGLE_CLOUD_LOCATION\"\n            ]\n          },\n          {\n            \"secret_name\": \"KIMI_CODE_CONFIG_TOML\",\n            \"filename\": \"config.toml\",\n            \"env_var\": \"KIMI_CODE_HOME\",\n            \"subdir\": \"kimi-code\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          },\n          {\n            \"secret_name\": \"PI_AUTH_JSON\",\n            \"filename\": \"auth.json\",\n            \"env_var\": \"PI_CODING_AGENT_DIR\",\n            \"subdir\": \"pi\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          }\n        ],\n        \"agent_context\": null,\n        \"verification\": {\n          \"critic_api_key\": null\n        }\n      },\n      \"conversation_settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": false,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"def83d4a-3c43-46e2-9560-2fd92fa4634e\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 69,\n  \"checks\": [\n    {\n      \"check\": \"agent_settings.agent_kind eq acp\",\n      \"ok\": true,\n      \"actual\": \"acp\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 201,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/settings/mcp/qa-f21-mcp\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"transport\": \"http\",\n      \"url\": \"https://example.invalid/mcp\",\n      \"description\": \"QA F21\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 201,\n    \"headers\": {\n      \"content-length\": \"1618\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"agent_settings\": {\n        \"schema_version\": 10,\n        \"agent_kind\": \"acp\",\n        \"acp_server\": \"codex\",\n        \"acp_command\": [],\n        \"acp_args\": [],\n        \"acp_model\": null,\n        \"acp_effort\": null,\n        \"acp_session_mode\": null,\n        \"acp_prompt_timeout\": 1800.0,\n        \"acp_startup_timeout\": 90.0,\n        \"mcp_config\": {\n          \"qa-f21-mcp\": {\n            \"url\": \"https://example.invalid/mcp\",\n            \"transport\": \"http\",\n            \"description\": \"QA F21\",\n            \"enabled\": true\n          }\n        },\n        \"acp_isolate_data_dir\": false,\n        \"acp_file_secrets\": [\n          {\n            \"secret_name\": \"CODEX_AUTH_JSON\",\n            \"filename\": \"auth.json\",\n            \"env_var\": \"CODEX_HOME\",\n            \"subdir\": \"codex\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          },\n          {\n            \"secret_name\": \"GOOGLE_APPLICATION_CREDENTIALS_JSON\",\n            \"filename\": \"gcloud-credentials.json\",\n            \"env_var\": \"GOOGLE_APPLICATION_CREDENTIALS\",\n            \"subdir\": \"gemini-cli\",\n            \"env_points_to\": \"file\",\n            \"warn_if_unset\": [\n              \"GOOGLE_CLOUD_PROJECT\",\n              \"GOOGLE_CLOUD_LOCATION\"\n            ]\n          },\n          {\n            \"secret_name\": \"KIMI_CODE_CONFIG_TOML\",\n            \"filename\": \"config.toml\",\n            \"env_var\": \"KIMI_CODE_HOME\",\n            \"subdir\": \"kimi-code\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          },\n          {\n            \"secret_name\": \"PI_AUTH_JSON\",\n            \"filename\": \"auth.json\",\n            \"env_var\": \"PI_CODING_AGENT_DIR\",\n            \"subdir\": \"pi\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          }\n        ],\n        \"agent_context\": null,\n        \"verification\": {\n          \"critic_api_key\": null\n        }\n      },\n      \"conversation_settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": false,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"def83d4a-3c43-46e2-9560-2fd92fa4634e\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 73\n}\n{\n  \"ok\": true,\n  \"status\": 201,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/qa-f21-acp-active\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"agent_kind\": \"acp\",\n      \"acp_server\": \"codex\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 201,\n    \"headers\": {\n      \"content-length\": \"80\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"name\": \"qa-f21-acp-active\",\n      \"message\": \"Agent profile 'qa-f21-acp-active' saved\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 84\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/2dd88a57-8bd5-4525-874f-2c8b59078f58/activate\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"151\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"id\": \"2dd88a57-8bd5-4525-874f-2c8b59078f58\",\n      \"message\": \"Agent profile '2dd88a57-8bd5-4525-874f-2c8b59078f58' activated\",\n      \"agent_settings_applied\": false\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 70\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1618\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"agent_settings\": {\n        \"schema_version\": 10,\n        \"agent_kind\": \"acp\",\n        \"acp_server\": \"codex\",\n        \"acp_command\": [],\n        \"acp_args\": [],\n        \"acp_model\": null,\n        \"acp_effort\": null,\n        \"acp_session_mode\": null,\n        \"acp_prompt_timeout\": 1800.0,\n        \"acp_startup_timeout\": 90.0,\n        \"mcp_config\": {\n          \"qa-f21-mcp\": {\n            \"url\": \"https://example.invalid/mcp\",\n            \"transport\": \"http\",\n            \"description\": \"QA F21\",\n            \"enabled\": true\n          }\n        },\n        \"acp_isolate_data_dir\": false,\n        \"acp_file_secrets\": [\n          {\n            \"secret_name\": \"CODEX_AUTH_JSON\",\n            \"filename\": \"auth.json\",\n            \"env_var\": \"CODEX_HOME\",\n            \"subdir\": \"codex\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          },\n          {\n            \"secret_name\": \"GOOGLE_APPLICATION_CREDENTIALS_JSON\",\n            \"filename\": \"gcloud-credentials.json\",\n            \"env_var\": \"GOOGLE_APPLICATION_CREDENTIALS\",\n            \"subdir\": \"gemini-cli\",\n            \"env_points_to\": \"file\",\n            \"warn_if_unset\": [\n              \"GOOGLE_CLOUD_PROJECT\",\n              \"GOOGLE_CLOUD_LOCATION\"\n            ]\n          },\n          {\n            \"secret_name\": \"KIMI_CODE_CONFIG_TOML\",\n            \"filename\": \"config.toml\",\n            \"env_var\": \"KIMI_CODE_HOME\",\n            \"subdir\": \"kimi-code\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          },\n          {\n            \"secret_name\": \"PI_AUTH_JSON\",\n            \"filename\": \"auth.json\",\n            \"env_var\": \"PI_CODING_AGENT_DIR\",\n            \"subdir\": \"pi\",\n            \"env_points_to\": \"dir\",\n            \"warn_if_unset\": []\n          }\n        ],\n        \"agent_context\": null,\n        \"verification\": {\n          \"critic_api_key\": null\n        }\n      },\n      \"conversation_settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": false,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"2dd88a57-8bd5-4525-874f-2c8b59078f58\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 60,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq 2dd88a57-8bd5-4525-874f-2c8b59078f58\",\n      \"ok\": true,\n      \"actual\": \"2dd88a57-8bd5-4525-874f-2c8b59078f58\"\n    },\n    {\n      \"check\": \"agent_settings.agent_kind eq acp\",\n      \"ok\": true,\n      \"actual\": \"acp\"\n    },\n    {\n      \"check\": \"agent_settings.mcp_config.qa-f21-mcp exists\",\n      \"ok\": true,\n      \"actual\": \"{\\\"url\\\": \\\"https://example.invalid/mcp\\\", \\\"transport\\\": \\\"http\\\", \\\"description\\\": \\\"QA F21\\\", \\\"enabled\\\": true}\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"DELETE\",\n    \"path\": \"/api/agent-profiles/qa-f21-acp-active\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"82\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"name\": \"qa-f21-acp-active\",\n      \"message\": \"Agent profile 'qa-f21-acp-active' deleted\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 75\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3060\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"agent_settings\": {\n        \"schema_version\": 10,\n        \"agent_kind\": \"openhands\",\n        \"agent\": \"CodeActAgent\",\n        \"llm\": {\n          \"model\": \"gpt-5.6\",\n          \"api_key\": null,\n          \"provider_connection_id\": null,\n          \"auth_type\": \"api_key\",\n          \"subscription_vendor\": null,\n          \"base_url\": null,\n          \"api_version\": null,\n          \"aws_access_key_id\": null,\n          \"aws_secret_access_key\": null,\n          \"aws_session_token\": null,\n          \"aws_region_name\": null,\n          \"aws_profile_name\": null,\n          \"aws_role_name\": null,\n          \"aws_session_name\": null,\n          \"aws_bedrock_runtime_endpoint\": null,\n          \"openrouter_site_url\": \"https://docs.all-hands.dev/\",\n          \"openrouter_app_name\": \"OpenHands\",\n          \"num_retries\": 5,\n          \"retry_multiplier\": 8.0,\n          \"retry_min_wait\": 8,\n          \"retry_max_wait\": 64,\n          \"timeout\": 300,\n          \"stream_idle_timeout\": 300.0,\n          \"max_message_chars\": 30000,\n          \"temperature\": null,\n          \"top_p\": null,\n          \"top_k\": null,\n          \"max_input_tokens\": null,\n          \"max_output_tokens\": null,\n          \"model_canonical_name\": null,\n          \"api_mode\": \"auto\",\n          \"capability_overrides\": {},\n          \"extra_headers\": null,\n          \"input_cost_per_token\": null,\n          \"output_cost_per_token\": null,\n          \"ollama_base_url\": null,\n          \"stream\": false,\n          \"drop_params\": true,\n          \"disable_vision\": null,\n          \"disable_stop_word\": false,\n          \"caching_prompt\": true,\n          \"log_completions_to_file\": false,\n          \"log_completions\": false,\n          \"log_completions_folder\": \"logs/completions\",\n          \"custom_tokenizer\": null,\n          \"native_tool_calling\": true,\n          \"force_string_serializer\": null,\n          \"inline_image_urls\": null,\n          \"reasoning_effort\": \"high\",\n          \"reasoning_summary\": null,\n          \"enable_encrypted_reasoning\": true,\n          \"prompt_cache_retention\": \"24h\",\n          \"extended_thinking_budget\": 200000,\n          \"seed\": null,\n          \"usage_id\": \"default\",\n          \"litellm_extra_body\": {},\n          \"is_subscription\": false\n        },\n        \"tools\": null,\n        \"enable_classify_and_switch_llm_tool\": false,\n        \"active_meta_profile\": null,\n        \"meta_profile\": null,\n        \"meta_profile_llms\": {},\n        \"tool_concurrency_limit\": 1,\n        \"mcp_config\": {\n          \"qa-f21-mcp\": {\n            \"url\": \"https://example.invalid/mcp\",\n            \"transport\": \"http\",\n            \"description\": \"QA F21\",\n            \"enabled\": true\n          }\n        },\n        \"persona\": null,\n        \"agent_context\": {\n          \"skills\": [],\n          \"system_message_suffix\": null,\n          \"user_message_suffix\": null,\n          \"load_user_skills\": false,\n          \"load_public_skills\": false,\n          \"marketplace_path\": \"marketplaces/default.json\",\n          \"registered_marketplaces\": [],\n          \"load_project_skills\": false,\n          \"load_memory\": false,\n          \"disabled_skills\": [],\n          \"secrets\": null,\n          \"current_datetime\": \"2026-11-19T10:17:18.354910Z\"\n        },\n        \"condenser\": {\n          \"condenser_kind\": \"llm_summarizing\",\n          \"enabled\": true,\n          \"max_size\": 240,\n          \"max_tokens\": null,\n          \"keep_first\": 2,\n          \"minimum_progress\": 0.1,\n          \"hard_context_reset_max_retries\": 5,\n          \"hard_context_reset_context_scaling\": 0.8\n        },\n        \"verification\": {\n          \"critic_enabled\": false,\n          \"critic_mode\": \"finish_and_message\",\n          \"enable_iterative_refinement\": false,\n          \"critic_threshold\": 0.6,\n          \"max_refinement_iterations\": 3,\n          \"critic_server_url\": null,\n          \"critic_model_name\": null,\n          \"critic_api_key\": null\n        }\n      },\n      \"conversation_settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": false,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"def83d4a-3c43-46e2-9560-2fd92fa4634e\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 71,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq def83d4a-3c43-46e2-9560-2fd92fa4634e\",\n      \"ok\": true,\n      \"actual\": \"def83d4a-3c43-46e2-9560-2fd92fa4634e\"\n    },\n    {\n      \"check\": \"agent_settings.agent_kind eq openhands\",\n      \"ok\": true,\n      \"actual\": \"openhands\"\n    },\n    {\n      \"check\": \"agent_settings.acp_server missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"agent_settings.mcp_config.qa-f21-mcp.url eq https://example.invalid/mcp\",\n      \"ok\": true,\n      \"actual\": \"https://example.invalid/mcp\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-101601-49a0-map-f21/evidence/F21.delete-active-acp-reset/settings.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/profiles/deepseek-flash/activate\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"123\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"name\": \"deepseek-flash\",\n      \"message\": \"Profile 'deepseek-flash' activated and applied to current settings\",\n      \"llm_applied\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/1049ae73-46b9-45c0-98de-3b213d0fe2b3/activate\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"151\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"id\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n      \"message\": \"Agent profile '1049ae73-46b9-45c0-98de-3b213d0fe2b3' activated\",\n      \"agent_settings_applied\": false\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 66\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3128\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"agent_settings\": {\n        \"schema_version\": 10,\n        \"agent_kind\": \"openhands\",\n        \"agent\": \"CodeActAgent\",\n        \"llm\": {\n          \"model\": \"litellm_proxy/deepseek-v4.1-flash\",\n          \"api_key\": \"**********\",\n          \"provider_connection_id\": null,\n          \"auth_type\": \"api_key\",\n          \"subscription_vendor\": null,\n          \"base_url\": \"https://llm-proxy.eval.all-hands.dev/\",\n          \"api_version\": null,\n          \"aws_access_key_id\": null,\n          \"aws_secret_access_key\": null,\n          \"aws_session_token\": null,\n          \"aws_region_name\": null,\n          \"aws_profile_name\": null,\n          \"aws_role_name\": null,\n          \"aws_session_name\": null,\n          \"aws_bedrock_runtime_endpoint\": null,\n          \"openrouter_site_url\": \"https://docs.all-hands.dev/\",\n          \"openrouter_app_name\": \"OpenHands\",\n          \"num_retries\": 5,\n          \"retry_multiplier\": 8.0,\n          \"retry_min_wait\": 8,\n          \"retry_max_wait\": 64,\n          \"timeout\": 300,\n          \"stream_idle_timeout\": 300.0,\n          \"max_message_chars\": 30000,\n          \"temperature\": null,\n          \"top_p\": null,\n          \"top_k\": null,\n          \"max_input_tokens\": null,\n          \"max_output_tokens\": null,\n          \"model_canonical_name\": null,\n          \"api_mode\": \"auto\",\n          \"capability_overrides\": {},\n          \"extra_headers\": null,\n          \"input_cost_per_token\": null,\n          \"output_cost_per_token\": null,\n          \"ollama_base_url\": null,\n          \"stream\": false,\n          \"drop_params\": true,\n          \"disable_vision\": null,\n          \"disable_stop_word\": false,\n          \"caching_prompt\": true,\n          \"log_completions_to_file\": false,\n          \"log_completions\": false,\n          \"log_completions_folder\": \"logs/completions\",\n          \"custom_tokenizer\": null,\n          \"native_tool_calling\": true,\n          \"force_string_serializer\": null,\n          \"inline_image_urls\": null,\n          \"reasoning_effort\": \"high\",\n          \"reasoning_summary\": null,\n          \"enable_encrypted_reasoning\": true,\n          \"prompt_cache_retention\": \"24h\",\n          \"extended_thinking_budget\": 200000,\n          \"seed\": null,\n          \"usage_id\": \"default\",\n          \"litellm_extra_body\": {},\n          \"is_subscription\": false\n        },\n        \"tools\": null,\n        \"enable_classify_and_switch_llm_tool\": false,\n        \"active_meta_profile\": null,\n        \"meta_profile\": null,\n        \"meta_profile_llms\": {},\n        \"tool_concurrency_limit\": 1,\n        \"mcp_config\": {\n          \"qa-f21-mcp\": {\n            \"url\": \"https://example.invalid/mcp\",\n            \"transport\": \"http\",\n            \"description\": \"QA F21\",\n            \"enabled\": true\n          }\n        },\n        \"persona\": null,\n        \"agent_context\": {\n          \"skills\": [],\n          \"system_message_suffix\": null,\n          \"user_message_suffix\": null,\n          \"load_user_skills\": false,\n          \"load_public_skills\": false,\n          \"marketplace_path\": \"marketplaces/default.json\",\n          \"registered_marketplaces\": [],\n          \"load_project_skills\": false,\n          \"load_memory\": false,\n          \"disabled_skills\": [],\n          \"secrets\": null,\n          \"current_datetime\": \"2026-11-19T10:17:18.354910Z\"\n        },\n        \"condenser\": {\n          \"condenser_kind\": \"llm_summarizing\",\n          \"enabled\": true,\n          \"max_size\": 240,\n          \"max_tokens\": null,\n          \"keep_first\": 2,\n          \"minimum_progress\": 0.1,\n          \"hard_context_reset_max_retries\": 5,\n          \"hard_context_reset_context_scaling\": 0.8\n        },\n        \"verification\": {\n          \"critic_enabled\": false,\n          \"critic_mode\": \"finish_and_message\",\n          \"enable_iterative_refinement\": false,\n          \"critic_threshold\": 0.6,\n          \"max_refinement_iterations\": 3,\n          \"critic_server_url\": null,\n          \"critic_model_name\": null,\n          \"critic_api_key\": null\n        }\n      },\n      \"conversation_settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 77,\n  \"checks\": [\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"llm_api_key_is_set eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"active_agent_profile_id eq 1049ae73-46b9-45c0-98de-3b213d0fe2b3\",\n      \"ok\": true,\n      \"actual\": \"1049ae73-46b9-45c0-98de-3b213d0fe2b3\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,94 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+for backend in tmux subprocess; do
+  control-sdk program S14/terminal_flags --arg "$backend" \
+    --check steps.control.exit_code eq 0 --check steps.control.text contains synthetic-status-output \
+    --check steps.comment.exit_code eq 0 --check steps.comment.seconds ge 1.5 \
+    --check steps.comment.text contains synthetic-status-output
+done
+{
+  "ok": true,
+  "mode": "tmux",
+  "execution_status": "finished",
+  "steps": {
+    "control": {
+      "exit_code": 0,
+      "timeout": false,
+      "is_error": false,
+      "text": "synthetic-status-output\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-08/block1/runs/20261119-101043-336856/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 2.39
+    },
+    "comment": {
+      "exit_code": 0,
+      "timeout": false,
+      "is_error": false,
+      "text": "# Read-only: print a status line.\n\n\nsleep 2 && printf '%s-%s\\n' synthetic status-output\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-08/block1/runs/20261119-101043-336856/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 0.12
+    },
+    "hard": {
+      "exit_code": -1,
+      "timeout": false,
+      "is_error": false,
+      "text": "# Read-only: print a status line.\n\n\nsleep 2 && printf '%s-%s\\n' synthetic status-output\nclear\nsleep 5\n[The command timed out after 1.0 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "seconds": 1.21
+    },
+    "hard_stop": {
+      "exit_code": 130,
+      "timeout": false,
+      "is_error": false,
+      "text": "^C\n[The command completed with exit code 130. CTRL+C was sent.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-08/block1/runs/20261119-101043-336856/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 130]",
+      "seconds": 0.13
+    },
+    "idle": {
+      "exit_code": -1,
+      "timeout": false,
+      "is_error": false,
+      "text": "\n[The command has no new output after 2 seconds. You may wait longer to see additional output by sending empty command '', send other commands to interact with the current process, send keys (\"C-c\", \"C-z\", \"C-d\") to interrupt/kill the previous command before sending your new command, or use the timeout parameter in terminal for future commands.]",
+      "seconds": 2.21
+    },
+    "idle_stop": {
+      "exit_code": 130,
+      "timeout": false,
+      "is_error": false,
+      "text": "^C\n[The command completed with exit code 130. CTRL+C was sent.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-08/block1/runs/20261119-101043-336856/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 130]",
+      "seconds": 0.12
+    },
+    "after": {
+      "exit_code": 0,
+      "timeout": false,
+      "is_error": false,
+      "text": "after-ok\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tools-08/block1/runs/20261119-101043-336856/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+      "seconds": 0.12
+    }
+  },
+  "_exit": 0,
+  "_seconds": 11.5,
+  "checks": [
+    {
+      "check": "steps.control.exit_code eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "steps.control.text contains synthetic-status-output",
+      "ok": true,
+      "actual": "synthetic-status-output\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/edited/S14/work/S14-core-tool"
+    },
+    {
+      "check": "steps.comment.exit_code eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "steps.comment.seconds ge 1.5",
+      "ok": false,
+      "actual": "0.12"
+    },
+    {
+      "check": "steps.comment.text contains synthetic-status-output",
+      "ok": false,
+      "actual": "# Read-only: print a status line.\n\n\nsleep 2 && printf '%s-%s\\n' synthetic status-output\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/e897642a-59be-52e"
+    }
+  ]
+}
+
+[exit 1 after 12s]

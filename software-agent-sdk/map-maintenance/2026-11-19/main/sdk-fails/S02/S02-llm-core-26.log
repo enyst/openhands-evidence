@@ -1,0 +1,101 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S02/api_compliance \
+  --check patterns len-eq 8 --check rejections_typed eq true \
+  --check results.unmatched_tool_use.error_type eq LLMMalformedConversationHistoryError \
+  --check results.unmatched_tool_result.error_type eq LLMMalformedConversationHistoryError \
+  --check results.duplicate_tool_call_id.error_type eq LLMMalformedConversationHistoryError \
+  --check results.parallel_wrong_order.error_type eq LLMMalformedConversationHistoryError
+{
+  "ok": true,
+  "model": "litellm_proxy/deepseek-v4.1-flash",
+  "patterns": [
+    "duplicate_tool_call_id",
+    "interleaved_assistant_message",
+    "interleaved_user_message",
+    "parallel_missing_result",
+    "parallel_wrong_order",
+    "unmatched_tool_result",
+    "unmatched_tool_use",
+    "wrong_tool_call_id"
+  ],
+  "results": {
+    "unmatched_tool_use": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "unmatched_tool_result": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "interleaved_user_message": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "interleaved_assistant_message": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "duplicate_tool_call_id": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "wrong_tool_call_id": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "parallel_missing_result": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "parallel_wrong_order": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    }
+  },
+  "rejected": [],
+  "rejections_typed": true,
+  "_exit": 0,
+  "_seconds": 20.8,
+  "checks": [
+    {
+      "check": "patterns len-eq 8",
+      "ok": true,
+      "actual": "[\"duplicate_tool_call_id\", \"interleaved_assistant_message\", \"interleaved_user_message\", \"parallel_missing_result\", \"parallel_wrong_order\", \"unmatched_tool_result\", \"unmatched_tool_use\", \"wrong_tool_ca"
+    },
+    {
+      "check": "rejections_typed eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "results.unmatched_tool_use.error_type eq LLMMalformedConversationHistoryError",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "results.unmatched_tool_result.error_type eq LLMMalformedConversationHistoryError",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "results.duplicate_tool_call_id.error_type eq LLMMalformedConversationHistoryError",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "results.parallel_wrong_order.error_type eq LLMMalformedConversationHistoryError",
+      "ok": false,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 1 after 21s]

@@ -1,0 +1,119 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S19/profile_sandbox \
+  --check old_payload_sandbox eq null \
+  --check variants.openhands.spec_id eq registry.example/agent-server:qa-s19 --check variants.openhands.round_trip eq true \
+  --check variants.acp.type eq ACPAgentProfile --check variants.acp.spec_id eq registry.example/agent-server:qa-s19 \
+  --check variants.acp.round_trip eq true \
+  --check refused.empty_spec eq string_too_short --check refused.no_spec eq missing \
+  --check refused.extra_key eq extra_forbidden --check refused.string eq model_type \
+  --check store.spec_id eq registry.example/agent-server:qa-s19 --check store.on_disk_spec eq 1 \
+  --check resolve.same_settings eq true --check resolve.settings_mention_spec eq false
+{
+  "ok": true,
+  "old_payload_sandbox": null,
+  "old_dump_sandbox": null,
+  "variants": {
+    "openhands": {
+      "type": "OpenHandsAgentProfile",
+      "spec_id": "registry.example/agent-server:qa-s19",
+      "is_settings_type": true,
+      "round_trip": true
+    },
+    "acp": {
+      "type": "ACPAgentProfile",
+      "spec_id": "registry.example/agent-server:qa-s19",
+      "is_settings_type": true,
+      "round_trip": true
+    }
+  },
+  "refused": {
+    "empty_spec": "string_too_short",
+    "no_spec": "missing",
+    "extra_key": "extra_forbidden",
+    "string": "model_type"
+  },
+  "store": {
+    "spec_id": "registry.example/agent-server:qa-s19",
+    "on_disk_spec": 1
+  },
+  "resolve": {
+    "same_settings": true,
+    "settings_mention_spec": false
+  },
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "old_payload_sandbox eq null",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "variants.openhands.spec_id eq registry.example/agent-server:qa-s19",
+      "ok": true,
+      "actual": "registry.example/agent-server:qa-s19"
+    },
+    {
+      "check": "variants.openhands.round_trip eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "variants.acp.type eq ACPAgentProfile",
+      "ok": true,
+      "actual": "ACPAgentProfile"
+    },
+    {
+      "check": "variants.acp.spec_id eq registry.example/agent-server:qa-s19",
+      "ok": true,
+      "actual": "registry.example/agent-server:qa-s19"
+    },
+    {
+      "check": "variants.acp.round_trip eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "refused.empty_spec eq string_too_short",
+      "ok": true,
+      "actual": "string_too_short"
+    },
+    {
+      "check": "refused.no_spec eq missing",
+      "ok": true,
+      "actual": "missing"
+    },
+    {
+      "check": "refused.extra_key eq extra_forbidden",
+      "ok": true,
+      "actual": "extra_forbidden"
+    },
+    {
+      "check": "refused.string eq model_type",
+      "ok": true,
+      "actual": "model_type"
+    },
+    {
+      "check": "store.spec_id eq registry.example/agent-server:qa-s19",
+      "ok": true,
+      "actual": "registry.example/agent-server:qa-s19"
+    },
+    {
+      "check": "store.on_disk_spec eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "resolve.same_settings eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "resolve.settings_mention_spec eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 5s]

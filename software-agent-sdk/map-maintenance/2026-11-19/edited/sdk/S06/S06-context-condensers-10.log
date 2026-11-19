@@ -1,0 +1,85 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg hard \
+  --check summary_calls eq 3 --check retry_shrank eq true --check condensations eq 1 \
+  --check summary eq "SUMMARY-H: reset." --check offset eq 1 --check system_prompt_kept eq true \
+  --check view_kinds eq '["SystemPromptEvent", "CondensationSummaryEvent"]' \
+  --check exhausted_error eq NoCondensationAvailableException --check exhausted_calls eq 3 \
+  --check exhausted_condensations eq 0
+{
+  "ok": true,
+  "mode": "hard",
+  "summary_calls": 3,
+  "summary_prompt_lengths": [
+    2122,
+    2323,
+    2210
+  ],
+  "retry_shrank": true,
+  "condensations": 1,
+  "summary": "SUMMARY-H: reset.",
+  "offset": 1,
+  "view_kinds": [
+    "SystemPromptEvent",
+    "CondensationSummaryEvent"
+  ],
+  "system_prompt_kept": true,
+  "exhausted_error": "NoCondensationAvailableException",
+  "exhausted_calls": 3,
+  "exhausted_condensations": 0,
+  "_exit": 0,
+  "_seconds": 5.7,
+  "checks": [
+    {
+      "check": "summary_calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "retry_shrank eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "condensations eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "summary eq SUMMARY-H: reset.",
+      "ok": true,
+      "actual": "SUMMARY-H: reset."
+    },
+    {
+      "check": "offset eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "system_prompt_kept eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "view_kinds eq [\"SystemPromptEvent\", \"CondensationSummaryEvent\"]",
+      "ok": true,
+      "actual": "[\"SystemPromptEvent\", \"CondensationSummaryEvent\"]"
+    },
+    {
+      "check": "exhausted_error eq NoCondensationAvailableException",
+      "ok": true,
+      "actual": "NoCondensationAvailableException"
+    },
+    {
+      "check": "exhausted_calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "exhausted_condensations eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 6s]

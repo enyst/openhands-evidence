@@ -1,0 +1,63 @@
+{
+  "file": "F30-openai-gateway.md",
+  "bullet": "Confirmation stops a new conversation (`F30.chat-confirmation-409`).",
+  "ids": [
+    "F30.chat-confirmation-409"
+  ],
+  "line": 779,
+  "script": "CONF=$(control-agent-server fixture llm-stub --name qa-f30-confirm \\\n  --step 'tool:terminal:{\"command\":\"echo QA_F30_NEEDS_OK > qa_f30_confirm.txt\"}' --print-path)\ncontrol-agent-server llm set --profile qa-f30-confirm --model openai/qa-stub --base-url \"$CONF/v1\" \\\n  --no-api-key --no-validate --no-activate --num-retries 0\ncontrol-agent-server api PATCH /api/settings --json '{\"conversation_settings_diff\": {\"confirmation_mode\": true, \"security_analyzer\": \"none\"}}' --expect 200\nCFID=$(python3 -c 'import uuid; print(uuid.uuid4())')\ncontrol-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CFID\" \\\n  --json '{\"model\": \"openhands_qa-f30-confirm\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_CONFIRM\"}]}' \\\n  --expect 409 --check detail eq 'Agent run ended with status: waiting_for_confirmation' --expect-max-ms 30000 \\\n  --check-header x-openhands-serverconversation-id missing --save F30.chat-confirmation-409/conflict\ncontrol-agent-server api GET \"/api/conversations/$CFID\" --check execution_status eq waiting_for_confirmation \\\n  --check confirmation_policy.kind eq AlwaysConfirm --quiet\ntest ! -e \"$AGENT_SERVER_VERIFY_RUN/server/workspace/project/qa_f30_confirm.txt\"\ncontrol-agent-server api PATCH /api/settings --json '{\"conversation_settings_diff\": {\"confirmation_mode\": false, \"security_analyzer\": \"llm\"}}' --expect 200\ncontrol-agent-server api GET /api/settings --check conversation_settings.confirmation_mode eq false \\\n  --check conversation_settings.security_analyzer eq llm --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 2063,
+  "failed_line": 7,
+  "failed_command": "control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CFID\" --json '{\"model\": \"openhands_qa-f30-confirm\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_CONFIRM\"}]}' --expect 409 --check detail eq 'Agent run ended with status: waiting_for_confirmation' --expect-max-ms 30000 --check-header x-openhands-serverconversation-id missing --save F30.chat-confirmation-409/conflict",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 500,
+    "request": {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "query": [],
+      "auth": "bearer",
+      "body": {
+        "model": "openhands_qa-f30-confirm",
+        "messages": [
+          {
+            "role": "user",
+            "content": "QA_F30_CONFIRM"
+          }
+        ]
+      },
+      "files": []
+    },
+    "response": {
+      "status": 500,
+      "headers": {
+        "content-length": "88",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Internal Server Error",
+        "exception": "500: Agent run ended with status: stuck"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 352,
+    "checks": [
+      {
+        "check": "detail eq Agent run ended with status: waiting_for_confirmation",
+        "ok": false,
+        "actual": "Internal Server Error"
+      },
+      {
+        "check": "header x-openhands-serverconversation-id missing",
+        "ok": true,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.chat-confirmation-409/conflict.json",
+    "hint": "expected 409, got 500"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"profile\": {\n    \"profile\": \"qa-f30-confirm\",\n    \"model\": \"openai/qa-stub\",\n    \"saved\": 201\n  }\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"PATCH\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"conversation_settings_diff\": {\n        \"confirmation_mode\": true,\n        \"security_analyzer\": \"none\"\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3021\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"agent_settings\": {\n        \"schema_version\": 10,\n        \"agent_kind\": \"openhands\",\n        \"agent\": \"CodeActAgent\",\n        \"llm\": {\n          \"model\": \"litellm_proxy/deepseek-v4.1-flash\",\n          \"api_key\": \"**********\",\n          \"provider_connection_id\": null,\n          \"auth_type\": \"api_key\",\n          \"subscription_vendor\": null,\n          \"base_url\": \"https://llm-proxy.eval.all-hands.dev/\",\n          \"api_version\": null,\n          \"aws_access_key_id\": null,\n          \"aws_secret_access_key\": null,\n          \"aws_session_token\": null,\n          \"aws_region_name\": null,\n          \"aws_profile_name\": null,\n          \"aws_role_name\": null,\n          \"aws_session_name\": null,\n          \"aws_bedrock_runtime_endpoint\": null,\n          \"openrouter_site_url\": \"https://docs.all-hands.dev/\",\n          \"openrouter_app_name\": \"OpenHands\",\n          \"num_retries\": 5,\n          \"retry_multiplier\": 8.0,\n          \"retry_min_wait\": 8,\n          \"retry_max_wait\": 64,\n          \"timeout\": 300,\n          \"stream_idle_timeout\": 300.0,\n          \"max_message_chars\": 30000,\n          \"temperature\": null,\n          \"top_p\": null,\n          \"top_k\": null,\n          \"max_input_tokens\": null,\n          \"max_output_tokens\": null,\n          \"model_canonical_name\": null,\n          \"api_mode\": \"auto\",\n          \"capability_overrides\": {},\n          \"extra_headers\": null,\n          \"input_cost_per_token\": null,\n          \"output_cost_per_token\": null,\n          \"ollama_base_url\": null,\n          \"stream\": false,\n          \"drop_params\": true,\n          \"disable_vision\": null,\n          \"disable_stop_word\": false,\n          \"caching_prompt\": true,\n          \"log_completions_to_file\": false,\n          \"log_completions\": false,\n          \"log_completions_folder\": \"logs/completions\",\n          \"custom_tokenizer\": null,\n          \"native_tool_calling\": true,\n          \"force_string_serializer\": null,\n          \"inline_image_urls\": null,\n          \"reasoning_effort\": \"high\",\n          \"reasoning_summary\": null,\n          \"enable_encrypted_reasoning\": true,\n          \"prompt_cache_retention\": \"24h\",\n          \"extended_thinking_budget\": 200000,\n          \"seed\": null,\n          \"usage_id\": \"default\",\n          \"litellm_extra_body\": {},\n          \"is_subscription\": false\n        },\n        \"tools\": null,\n        \"enable_classify_and_switch_llm_tool\": false,\n        \"active_meta_profile\": null,\n        \"meta_profile\": null,\n        \"meta_profile_llms\": {},\n        \"tool_concurrency_limit\": 1,\n        \"mcp_config\": {},\n        \"persona\": null,\n        \"agent_context\": {\n          \"skills\": [],\n          \"system_message_suffix\": null,\n          \"user_message_suffix\": null,\n          \"load_user_skills\": false,\n          \"load_public_skills\": false,\n          \"marketplace_path\": \"marketplaces/default.json\",\n          \"registered_marketplaces\": [],\n          \"load_project_skills\": false,\n          \"load_memory\": false,\n          \"disabled_skills\": [],\n          \"secrets\": null,\n          \"current_datetime\": \"2026-11-19T08:45:07.475861Z\"\n        },\n        \"condenser\": {\n          \"condenser_kind\": \"llm_summarizing\",\n          \"enabled\": true,\n          \"max_size\": 240,\n          \"max_tokens\": null,\n          \"keep_first\": 2,\n          \"minimum_progress\": 0.1,\n          \"hard_context_reset_max_retries\": 5,\n          \"hard_context_reset_context_scaling\": 0.8\n        },\n        \"verification\": {\n          \"critic_enabled\": false,\n          \"critic_mode\": \"finish_and_message\",\n          \"enable_iterative_refinement\": false,\n          \"critic_threshold\": 0.6,\n          \"max_refinement_iterations\": 3,\n          \"critic_server_url\": null,\n          \"critic_model_name\": null,\n          \"critic_api_key\": null\n        }\n      },\n      \"conversation_settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": true,\n        \"security_analyzer\": \"none\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"59a2dfd6-c698-4305-b2e2-219da29619bc\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 72\n}\n{\n  \"ok\": false,\n  \"status\": 500,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/v1/chat/completions\",\n    \"query\": [],\n    \"auth\": \"bearer\",\n    \"body\": {\n      \"model\": \"openhands_qa-f30-confirm\",\n      \"messages\": [\n        {\n          \"role\": \"user\",\n          \"content\": \"QA_F30_CONFIRM\"\n        }\n      ]\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 500,\n    \"headers\": {\n      \"content-length\": \"88\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Internal Server Error\",\n      \"exception\": \"500: Agent run ended with status: stuck\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 352,\n  \"checks\": [\n    {\n      \"check\": \"detail eq Agent run ended with status: waiting_for_confirmation\",\n      \"ok\": false,\n      \"actual\": \"Internal Server Error\"\n    },\n    {\n      \"check\": \"header x-openhands-serverconversation-id missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-084456-e11a-map-f30/evidence/F30.chat-confirmation-409/conflict.json\",\n  \"hint\": \"expected 409, got 500\"\n}\n",
+  "stderr": ""
+}

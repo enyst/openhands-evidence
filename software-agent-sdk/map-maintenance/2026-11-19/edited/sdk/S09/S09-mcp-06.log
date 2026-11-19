@@ -1,0 +1,44 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/client --arg timeout \
+  --check slow_error contains "MCP tool listing timed out after 2 seconds" \
+  --check slow_error contains "MCP servers configured: sleepy" --check slow_seconds lt 15 \
+  --check unreachable_error eq "MCPError: MCP Connection Failure"
+{
+  "ok": true,
+  "mode": "timeout",
+  "slow_error": "MCPTimeoutError: MCP tool listing timed out after 2 seconds.\nMCP servers configured: sleepy\n\nPossible solutions:\n  1. Increase the timeout value (default is 30 seconds)\n  2. Check if the MCP server is running and responding\n  3. Verify network connectivity to the MCP server\n",
+  "slow_seconds": 4.1,
+  "unreachable_error": "MCPError: MCP Connection Failure",
+  "all_disabled_error": "ValueError: All configured MCP servers are disabled: off. Enable at least one, or skip the call entirely.",
+  "mixed_enabled_names_sample": [
+    "add",
+    "counter",
+    "die"
+  ],
+  "_exit": 0,
+  "_seconds": 10.3,
+  "checks": [
+    {
+      "check": "slow_error contains MCP tool listing timed out after 2 seconds",
+      "ok": true,
+      "actual": "MCPTimeoutError: MCP tool listing timed out after 2 seconds.\nMCP servers configured: sleepy\n\nPossible solutions:\n  1. Increase the timeout value (default is 30 seconds)\n  2. Check if the MCP server is"
+    },
+    {
+      "check": "slow_error contains MCP servers configured: sleepy",
+      "ok": true,
+      "actual": "MCPTimeoutError: MCP tool listing timed out after 2 seconds.\nMCP servers configured: sleepy\n\nPossible solutions:\n  1. Increase the timeout value (default is 30 seconds)\n  2. Check if the MCP server is"
+    },
+    {
+      "check": "slow_seconds lt 15",
+      "ok": true,
+      "actual": "4.1"
+    },
+    {
+      "check": "unreachable_error eq MCPError: MCP Connection Failure",
+      "ok": true,
+      "actual": "MCPError: MCP Connection Failure"
+    }
+  ]
+}
+
+[exit 0 after 10s]

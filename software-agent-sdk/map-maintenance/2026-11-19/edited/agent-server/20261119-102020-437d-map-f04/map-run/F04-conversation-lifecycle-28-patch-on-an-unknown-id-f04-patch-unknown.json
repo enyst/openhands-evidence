@@ -1,0 +1,17 @@
+{
+  "file": "F04-conversation-lifecycle.md",
+  "bullet": "PATCH on an unknown id (`F04.patch-unknown-id`).",
+  "ids": [
+    "F04.patch-unknown-id"
+  ],
+  "line": 641,
+  "script": "control-agent-server api GET /openapi.json --check 'paths./api/conversations/{conversation_id}.patch.responses.404' exists --quiet\ncontrol-agent-server api GET \"/api/conversations/$NOPE\" --expect 404\ncontrol-agent-server api PATCH \"/api/conversations/$NOPE\" --json '{\"title\": \"QA nobody\"}' --expect 404 --save F04.patch-unknown-id/unknown\n",
+  "exit_code": 0,
+  "elapsed_ms": 1089,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/openapi.json\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"727525\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 76,\n  \"checks\": [\n    {\n      \"check\": \"paths./api/conversations/{conversation_id}.patch.responses.404 exists\",\n      \"ok\": true,\n      \"actual\": \"{\\\"description\\\": \\\"Item not found\\\"}\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/64c947c2-66f2-4eb5-9e52-9829bd852994\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 62\n}\n{\n  \"ok\": true,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"PATCH\",\n    \"path\": \"/api/conversations/64c947c2-66f2-4eb5-9e52-9829bd852994\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"title\": \"QA nobody\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"saved\": \"<scratch>/agent-server/20261119-102020-437d-map-f04/evidence/F04.patch-unknown-id/unknown.json\"\n}\n",
+  "stderr": ""
+}

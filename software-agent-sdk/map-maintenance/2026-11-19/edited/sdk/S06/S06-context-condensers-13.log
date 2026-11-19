@@ -1,0 +1,58 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg resume \
+  --check condensations ge 1 --check reopened_view_matches eq true --check rebuilt_view_matches eq true \
+  --check reopened_summaries eq 1 --check error_after_resume missing \
+  --check resumed_call_has_summary eq true --check resumed_status eq finished
+{
+  "ok": true,
+  "mode": "resume",
+  "condensations": 2,
+  "reopened_view_matches": true,
+  "rebuilt_view_matches": true,
+  "reopened_summaries": 1,
+  "error_after_resume": null,
+  "resumed_call_has_summary": true,
+  "resumed_call_messages": 7,
+  "resumed_status": "finished",
+  "_exit": 0,
+  "_seconds": 5.9,
+  "checks": [
+    {
+      "check": "condensations ge 1",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "reopened_view_matches eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "rebuilt_view_matches eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "reopened_summaries eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "error_after_resume missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "resumed_call_has_summary eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "resumed_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+
+[exit 0 after 6s]

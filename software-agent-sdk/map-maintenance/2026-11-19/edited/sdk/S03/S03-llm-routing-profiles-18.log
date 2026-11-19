@@ -1,0 +1,188 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/switching --arg route \
+  --check status eq finished --check active_model eq openai/gpt-4.1 \
+  --check requests.classifier eq 1 --check requests.strong eq 1 --check requests.cheap eq 0 \
+  --check classifier_saw_task eq true --check stats contains classifier:classifier \
+  --check observations.0.text contains "switched to LLM profile 'strong'" \
+  --check bad_class.error eq true --check bad_class.text contains "did not pick a valid category" \
+  --check missing_classifier.error eq true --check missing_classifier.text contains "no-classifier"
+control-sdk program S03/switching --arg route-direct \
+  --check status eq finished --check active_model eq openai/gpt-4.1-nano --check requests.cheap eq 1 \
+  --check stats contains classifier:classifier --check bad_class.error eq true
+{
+  "ok": true,
+  "mode": "route",
+  "status": "finished",
+  "active_model": "openai/gpt-4.1",
+  "requests": {
+    "agent": 1,
+    "classifier": 1,
+    "cheap": 0,
+    "strong": 1
+  },
+  "classifier_saw_task": true,
+  "stats": [
+    "agent",
+    "classifier:classifier",
+    "condenser",
+    "profile:strong"
+  ],
+  "observations": [
+    {
+      "tool": "route_task_to_model",
+      "error": false,
+      "text": "Classified task as 'hard debugging' and switched to LLM profile 'strong' (model 'openai/gpt-4.1'). Future agent steps will use this profile."
+    },
+    {
+      "tool": "finish",
+      "error": false,
+      "text": "done on strong"
+    }
+  ],
+  "bad_class": {
+    "tool": "route_task_to_model",
+    "error": true,
+    "text": "[An error occurred during execution.]\nClassifier did not pick a valid category (reply: '7'); refusing to silently route to a default. Retry the tool or fix the meta-profile classes."
+  },
+  "missing_classifier": {
+    "tool": "route_task_to_model",
+    "error": true,
+    "text": "[An error occurred during execution.]\nFailed to load classifier profile 'no-classifier': Profile `no-classifier` not found. Available profiles: strong.json, classifier.json, cheap.json"
+  },
+  "_exit": 0,
+  "_seconds": 7.9,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "active_model eq openai/gpt-4.1",
+      "ok": true,
+      "actual": "openai/gpt-4.1"
+    },
+    {
+      "check": "requests.classifier eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "requests.strong eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "requests.cheap eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "classifier_saw_task eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "stats contains classifier:classifier",
+      "ok": true,
+      "actual": "[\"agent\", \"classifier:classifier\", \"condenser\", \"profile:strong\"]"
+    },
+    {
+      "check": "observations.0.text contains switched to LLM profile 'strong'",
+      "ok": true,
+      "actual": "Classified task as 'hard debugging' and switched to LLM profile 'strong' (model 'openai/gpt-4.1'). Future agent steps will use this profile."
+    },
+    {
+      "check": "bad_class.error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "bad_class.text contains did not pick a valid category",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\nClassifier did not pick a valid category (reply: '7'); refusing to silently route to a default. Retry the tool or fix the meta-profile classes."
+    },
+    {
+      "check": "missing_classifier.error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "missing_classifier.text contains no-classifier",
+      "ok": true,
+      "actual": "[An error occurred during execution.]\nFailed to load classifier profile 'no-classifier': Profile `no-classifier` not found. Available profiles: strong.json, classifier.json, cheap.json"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "route-direct",
+  "status": "finished",
+  "active_model": "openai/gpt-4.1-nano",
+  "requests": {
+    "agent": 1,
+    "classifier": 1,
+    "cheap": 1,
+    "strong": 0
+  },
+  "classifier_saw_task": true,
+  "stats": [
+    "agent",
+    "classifier:classifier",
+    "condenser",
+    "profile:cheap"
+  ],
+  "observations": [
+    {
+      "tool": "route_task_to_model",
+      "error": false,
+      "text": "Classified task as 'model: cheap' and switched to LLM profile 'cheap' (model 'openai/gpt-4.1-nano'). Future agent steps will use this profile."
+    },
+    {
+      "tool": "finish",
+      "error": false,
+      "text": "done on cheap"
+    }
+  ],
+  "bad_class": {
+    "tool": "route_task_to_model",
+    "error": true,
+    "text": "[An error occurred during execution.]\nClassifier reply did not resolve to a saved LLM profile (reply: '7'); refusing to silently route to a default. Retry the tool or extend the model table."
+  },
+  "missing_classifier": {
+    "tool": "route_task_to_model",
+    "error": true,
+    "text": "[An error occurred during execution.]\nFailed to load classifier profile 'no-classifier': Profile `no-classifier` not found. Available profiles: strong.json, classifier.json, cheap.json"
+  },
+  "_exit": 0,
+  "_seconds": 7.9,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "active_model eq openai/gpt-4.1-nano",
+      "ok": true,
+      "actual": "openai/gpt-4.1-nano"
+    },
+    {
+      "check": "requests.cheap eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "stats contains classifier:classifier",
+      "ok": true,
+      "actual": "[\"agent\", \"classifier:classifier\", \"condenser\", \"profile:cheap\"]"
+    },
+    {
+      "check": "bad_class.error eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 16s]

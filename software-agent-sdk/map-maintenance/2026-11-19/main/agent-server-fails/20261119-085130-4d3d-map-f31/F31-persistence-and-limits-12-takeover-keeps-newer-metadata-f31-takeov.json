@@ -1,0 +1,72 @@
+{
+  "file": "F31-persistence-and-limits.md",
+  "bullet": "Takeover keeps newer metadata (`F31.takeover-keeps-metadata`), known bug.",
+  "ids": [
+    "F31.takeover-keeps-metadata"
+  ],
+  "line": 403,
+  "script": "Y=$(control-agent-server conversation start --tools none --no-autotitle --title 'QA F31 before B' --no-run --print-id)\nB=$(control-agent-server launch --new --name f31-meta --share-conversations-from \"$AGENT_SERVER_VERIFY_RUN\" --print-run)\ntrap 'control-agent-server stop --run \"$B\" >/dev/null 2>&1 || true' EXIT\nPIDB=$(jq -r .pid \"$B/run.json\")\ncontrol-agent-server api PATCH \"/api/conversations/$Y\" --json '{\"title\": \"QA F31 after B\"}' --expect 200 --check success eq true\ncontrol-agent-server state cat meta.json --conversation \"$Y\" --check title eq 'QA F31 after B'\ncontrol-agent-server restart --hard\ncontrol-agent-server api GET \"/api/conversations/$Y/events/count\" --run \"$B\" --expect 200\ncontrol-agent-server state cat owner_lease.json --conversation \"$Y\" --check owner_pid eq \"$PIDB\" --check generation eq 2\ncontrol-agent-server state cat meta.json --conversation \"$Y\" --check title eq 'QA F31 after B'  # bug: content.title eq 'QA F31 before B'\ncontrol-agent-server api GET \"/api/conversations/$Y\" --run \"$B\" --check title eq 'QA F31 after B' --save F31.takeover-keeps-metadata/get-after-takeover  # bug: status eq 200 && response.body.title eq 'QA F31 before B'\n",
+  "exit_code": 1,
+  "elapsed_ms": 19592,
+  "failed_line": 10,
+  "failed_command": "control-agent-server state cat meta.json --conversation \"$Y\" --check title eq 'QA F31 after B'",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "path": "meta.json",
+    "bytes": 1124,
+    "mode": "0o600",
+    "content": {
+      "workspace": {
+        "working_dir": "<scratch>/agent-server/20261119-085130-4d3d-map-f31/fixtures/workspaces/085411-893996",
+        "kind": "LocalWorkspace"
+      },
+      "worktree": false,
+      "worktree_options": null,
+      "conversation_id": null,
+      "parent_conversation_id": null,
+      "confirmation_policy": {
+        "kind": "NeverConfirm"
+      },
+      "security_analyzer": null,
+      "initial_message": null,
+      "max_iterations": 500,
+      "stuck_detection": true,
+      "secrets": {},
+      "secrets_encrypted": true,
+      "tool_module_qualnames": {},
+      "client_tools": [],
+      "agent_launch_additions": null,
+      "agent_definitions": [],
+      "plugins": null,
+      "hook_config": null,
+      "tags": {},
+      "user_id": null,
+      "observability_metadata": {},
+      "observability_tags": [],
+      "observability_span_name": "conversation",
+      "observability_parent_span_context": null,
+      "autotitle": false,
+      "title_llm_profile": null,
+      "prompt": null,
+      "required_runtime_credential_bindings": [],
+      "id": "5c349b6091a5431cb0d8155cfa2ccbb7",
+      "title": "QA F31 before B",
+      "metrics": null,
+      "created_at": "2026-11-19T08:54:12.199183Z",
+      "updated_at": "2026-11-19T08:54:12.552052Z",
+      "forked_from_conversation_id": null,
+      "forked_from_event_id": null,
+      "launched_agent_profile": null
+    },
+    "checks": [
+      {
+        "check": "title eq QA F31 after B",
+        "ok": false,
+        "actual": "QA F31 before B"
+      }
+    ]
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"PATCH\",\n    \"path\": \"/api/conversations/5c349b60-91a5-431c-b0d8-155cfa2ccbb7\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"title\": \"QA F31 after B\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 77,\n  \"checks\": [\n    {\n      \"check\": \"success eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"path\": \"meta.json\",\n  \"bytes\": 1123,\n  \"mode\": \"0o600\",\n  \"content\": {\n    \"workspace\": {\n      \"working_dir\": \"<scratch>/agent-server/20261119-085130-4d3d-map-f31/fixtures/workspaces/085411-893996\",\n      \"kind\": \"LocalWorkspace\"\n    },\n    \"worktree\": false,\n    \"worktree_options\": null,\n    \"conversation_id\": null,\n    \"parent_conversation_id\": null,\n    \"confirmation_policy\": {\n      \"kind\": \"NeverConfirm\"\n    },\n    \"security_analyzer\": null,\n    \"initial_message\": null,\n    \"max_iterations\": 500,\n    \"stuck_detection\": true,\n    \"secrets\": {},\n    \"secrets_encrypted\": true,\n    \"tool_module_qualnames\": {},\n    \"client_tools\": [],\n    \"agent_launch_additions\": null,\n    \"agent_definitions\": [],\n    \"plugins\": null,\n    \"hook_config\": null,\n    \"tags\": {},\n    \"user_id\": null,\n    \"observability_metadata\": {},\n    \"observability_tags\": [],\n    \"observability_span_name\": \"conversation\",\n    \"observability_parent_span_context\": null,\n    \"autotitle\": false,\n    \"title_llm_profile\": null,\n    \"prompt\": null,\n    \"required_runtime_credential_bindings\": [],\n    \"id\": \"5c349b6091a5431cb0d8155cfa2ccbb7\",\n    \"title\": \"QA F31 after B\",\n    \"metrics\": null,\n    \"created_at\": \"2026-11-19T08:54:12.199183Z\",\n    \"updated_at\": \"2026-11-19T08:54:20.460128Z\",\n    \"forked_from_conversation_id\": null,\n    \"forked_from_event_id\": null,\n    \"launched_agent_profile\": null\n  },\n  \"checks\": [\n    {\n      \"check\": \"title eq QA F31 after B\",\n      \"ok\": true,\n      \"actual\": \"QA F31 after B\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-085130-4d3d-map-f31\",\n  \"url\": \"http://127.0.0.1:40765\",\n  \"rotated_key\": false,\n  \"hard\": true,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6351,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/5c349b60-91a5-431c-b0d8-155cfa2ccbb7/events/count\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": 0,\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 302\n}\n{\n  \"ok\": true,\n  \"path\": \"owner_lease.json\",\n  \"bytes\": 178,\n  \"mode\": \"0o644\",\n  \"content\": {\n    \"owner_instance_id\": \"1cca1e02412c4e7494d0d4fffe7f095b\",\n    \"generation\": 2,\n    \"expires_at\": 1795078513.5927718,\n    \"owner_host\": \"vm\",\n    \"owner_pid\": 25064,\n    \"owner_started_at\": \"203363\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"owner_pid eq 25064\",\n      \"ok\": true,\n      \"actual\": \"25064\"\n    },\n    {\n      \"check\": \"generation eq 2\",\n      \"ok\": true,\n      \"actual\": \"2\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"path\": \"meta.json\",\n  \"bytes\": 1124,\n  \"mode\": \"0o600\",\n  \"content\": {\n    \"workspace\": {\n      \"working_dir\": \"<scratch>/agent-server/20261119-085130-4d3d-map-f31/fixtures/workspaces/085411-893996\",\n      \"kind\": \"LocalWorkspace\"\n    },\n    \"worktree\": false,\n    \"worktree_options\": null,\n    \"conversation_id\": null,\n    \"parent_conversation_id\": null,\n    \"confirmation_policy\": {\n      \"kind\": \"NeverConfirm\"\n    },\n    \"security_analyzer\": null,\n    \"initial_message\": null,\n    \"max_iterations\": 500,\n    \"stuck_detection\": true,\n    \"secrets\": {},\n    \"secrets_encrypted\": true,\n    \"tool_module_qualnames\": {},\n    \"client_tools\": [],\n    \"agent_launch_additions\": null,\n    \"agent_definitions\": [],\n    \"plugins\": null,\n    \"hook_config\": null,\n    \"tags\": {},\n    \"user_id\": null,\n    \"observability_metadata\": {},\n    \"observability_tags\": [],\n    \"observability_span_name\": \"conversation\",\n    \"observability_parent_span_context\": null,\n    \"autotitle\": false,\n    \"title_llm_profile\": null,\n    \"prompt\": null,\n    \"required_runtime_credential_bindings\": [],\n    \"id\": \"5c349b6091a5431cb0d8155cfa2ccbb7\",\n    \"title\": \"QA F31 before B\",\n    \"metrics\": null,\n    \"created_at\": \"2026-11-19T08:54:12.199183Z\",\n    \"updated_at\": \"2026-11-19T08:54:12.552052Z\",\n    \"forked_from_conversation_id\": null,\n    \"forked_from_event_id\": null,\n    \"launched_agent_profile\": null\n  },\n  \"checks\": [\n    {\n      \"check\": \"title eq QA F31 after B\",\n      \"ok\": false,\n      \"actual\": \"QA F31 before B\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,18 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S03/live_switch \
+  --check first_model eq deepseek/deepseek-flash --check second_model eq deepseek/deepseek-v4-pro \
+  --check status eq finished --check usage_ids contains profile:pro --check calls.agent ge 1 --check calls.profile:pro ge 1
+{
+  "ok": false,
+  "exit": 3,
+  "error": "blocked: set DEEPSEEK_API_KEY for deepseek-pro",
+  "seconds": 4.5,
+  "result": {
+    "ok": false,
+    "blocked": "set DEEPSEEK_API_KEY for deepseek-pro"
+  },
+  "stdout_tail": "{\"ok\": false, \"blocked\": \"set DEEPSEEK_API_KEY for deepseek-pro\"}\n",
+  "stderr_tail": ""
+}
+
+[exit 3 after 5s]

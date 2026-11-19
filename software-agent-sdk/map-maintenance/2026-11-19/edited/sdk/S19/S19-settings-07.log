@@ -1,0 +1,13 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk exec --timeout 900 --expect-output "persisted settings fixture" \
+  --expect-output "from PyPI release openhands-sdk==" -- python .github/scripts/check_persisted_settings_compat.py
+{
+  "exit": 0,
+  "seconds": 21.3,
+  "result": null,
+  "stdout_tail": "sistedSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v6/persisted_settings.json from schema_version 6 to 7\n::notice title=AgentSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v7/agent_settings_acp.json from schema_version 7 to 10\n::notice title=AgentSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v7/agent_settings_openhands.json from schema_version 7 to 10\n::notice title=AgentSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v8/agent_settings_acp.json from schema_version 8 to 10\n::notice title=AgentSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v8/agent_settings_mcp_empty_server.json from schema_version 8 to 10\n::notice title=AgentSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v8/agent_settings_openhands.json from schema_version 8 to 10\n::notice title=AgentSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v8/agent_settings_tool_switches.json from schema_version 8 to 10\n::notice title=AgentSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v9/agent_settings_mcp_empty_server.json from schema_version 9 to 10\n::notice title=AgentSettings::Migrated fixture tests/sdk/persisted_settings_baselines/v9/agent_settings_openhands.json from schema_version 9 to 10\nValidated 33 persisted settings fixture(s) under tests/sdk/persisted_settings_baselines\nValidated 8 baseline payload(s) from PyPI release openhands-sdk==1.62.0, openhands-agent-server==1.62.0\n",
+  "stderr_tail": "[11/19/26 10:13:52] WARNING  Dropping stored MCP server(s) with    config.py:537\n                             neither 'command' nor 'url': qa-empty              \n[11/19/26 10:13:52] WARNING  Dropping stored MCP server(s) with    config.py:537\n                             neither 'command' nor 'url': qa-empty              \n",
+  "ok": true
+}
+
+[exit 0 after 22s]

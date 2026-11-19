@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Time out, then wait again (`F33.conversation-run-timeout`).",
+  "ids": [
+    "F33.conversation-run-timeout"
+  ],
+  "line": 1439,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-run-timeout/probe -- .venv/bin/python - <<'PY'\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"timeout\"), visualizer=None, delete_on_close=False)\nconv.send_message(\"Run this exact shell command: sleep 15; printf late > qa-f33-timeout.txt\")\nt0 = time.monotonic()\ntry:\n    conv.run(timeout=3)\n    raise AssertionError(\"run() returned before its timeout\")\nexcept ConversationRunError as e:\n    assert isinstance(e.original_exception, TimeoutError), repr(e.original_exception)\nwaited = time.monotonic() - t0\nassert 3 <= waited < 10, waited\nstatus = conv.state.refresh_from_server()[\"execution_status\"]\nassert status == \"running\", status\nconv.run(timeout=300)\nassert conv.state.execution_status.value == \"finished\", conv.state.execution_status\nf33.emit(\"timeout\", cid=str(conv.id), waited=waited, status_after_timeout=status)\nconv.close()\nPY\nTOUT=$(jq -r .cid \"$F33/timeout.json\")\ntest \"$(cat \"$F33/timeout/qa-f33-timeout.txt\")\" = late\ncontrol-agent-server api GET \"/api/conversations/$TOUT\" --check execution_status eq finished --save F33.conversation-run-timeout/get\ncontrol-agent-server api GET \"/api/conversations/$TOUT/events/search\" --query source=user --check items len-eq 1\n",
+  "exit_code": 1,
+  "elapsed_ms": 429,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-run-timeout/probe -- .venv/bin/python - <<'PY'\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"timeout\"), visualizer=None, delete_on_close=False)\nconv.send_message(\"Run this exact shell command: sleep 15; printf late > qa-f33-timeout.txt\")\nt0 = time.monotonic()\ntry:\n    conv.",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 40,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 2, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-run-timeout/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 40,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 2, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.conversation-run-timeout/probe.json\"\n}\n",
+  "stderr": ""
+}

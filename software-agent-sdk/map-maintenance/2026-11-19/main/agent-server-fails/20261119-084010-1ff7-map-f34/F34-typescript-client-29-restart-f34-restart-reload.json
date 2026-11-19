@@ -1,0 +1,30 @@
+{
+  "file": "F34-typescript-client.md",
+  "bullet": "Restart (`F34.restart-reload`).",
+  "ids": [
+    "F34.restart-reload"
+  ],
+  "line": 1332,
+  "script": "TOTAL=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)\ncontrol-agent-server restart\ncat > \"$F34/restart.mjs\" <<'JS'\nimport { m, host, apiKey, F34, assert } from './lib.mjs';\nconst [cid, total] = process.argv.slice(2);\nconst manager = new m.ConversationManager({ host, apiKey });\nconst conversation = await manager.loadConversation(cid);\nassert.equal(await conversation.state.getExecutionStatus(), 'finished');\nassert.equal((await manager.getConversation(cid)).title, 'qa-f34-title');\nassert.equal(await conversation.state.events.count(), Number(total));\nassert.equal((await conversation.getHookConfig()).pre_tool_use[0].hooks[0].command, 'echo qa-f34-hook');\nassert.equal((await conversation.workspace.downloadAsText(`${F34}/work/qa-f34.txt`)).trim(), 'hi');\nconsole.log('QA_F34_RESTART_OK');\nJS\ncontrol-agent-server exec --timeout 60 --expect-output QA_F34_RESTART_OK --save F34.restart-reload/program -- node \"$F34/restart.mjs\" \"$CID\" \"$TOTAL\"\ncontrol-agent-server api GET \"/api/conversations/$CID/events/count\" --check . eq \"$TOTAL\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 11201,
+  "failed_line": 15,
+  "failed_command": "control-agent-server exec --timeout 60 --expect-output QA_F34_RESTART_OK --save F34.restart-reload/program -- node \"$F34/restart.mjs\" \"$CID\" \"$TOTAL\"",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 1177,
+    "stdout_tail": "",
+    "stderr_tail": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'error'\n- 'finished'\n\n    at file://<scratch>/agent-server/20261119-084010-1ff7-map-f34/fixtures/qa-f34/restart.mjs:5:8\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 'error',\n  expected: 'finished',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.5\n",
+    "hint": {
+      "missing": [
+        "QA_F34_RESTART_OK"
+      ],
+      "unexpected": []
+    },
+    "saved": "<scratch>/agent-server/20261119-084010-1ff7-map-f34/evidence/F34.restart-reload/program.json"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261119-084010-1ff7-map-f34\",\n  \"url\": \"http://127.0.0.1:38215\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6910,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 1177,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"node:internal/modules/run_main:123\\n    triggerUncaughtException(\\n    ^\\n\\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\\n+ actual - expected\\n\\n+ 'error'\\n- 'finished'\\n\\n    at file://<scratch>/agent-server/20261119-084010-1ff7-map-f34/fixtures/qa-f34/restart.mjs:5:8\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {\\n  generatedMessage: true,\\n  code: 'ERR_ASSERTION',\\n  actual: 'error',\\n  expected: 'finished',\\n  operator: 'strictEqual',\\n  diff: 'simple'\\n}\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_RESTART_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261119-084010-1ff7-map-f34/evidence/F34.restart-reload/program.json\"\n}\n",
+  "stderr": ""
+}

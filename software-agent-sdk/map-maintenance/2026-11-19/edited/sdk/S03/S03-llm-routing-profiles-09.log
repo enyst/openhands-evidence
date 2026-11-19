@@ -1,0 +1,151 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S03/model_router --arg switch-replaces \
+  --check after_switch_profile.type eq LLM --check after_switch_profile.usage_id eq profile:qa-plain-b \
+  --check after_switch_profile.status.enabled eq false --check select_after_switch_profile contains 'not a RouterLLM' \
+  --check after_switch_llm.type eq LLM --check after_switch_llm.model eq openai/gpt-4.1-nano --check after_switch_llm.status.enabled eq false \
+  --check requests.b eq 1 --check requests.c eq 1 --check requests.routes eq 0 \
+  --check router_switch_llm.copy eq true --check router_switch_llm.original.mode eq auto \
+  --check router_switch_llm.copy_selection.manual_route_name eq second --check router_switch_llm.active_route_name eq second \
+  --check router_switch_llm.resumed.mode eq auto \
+  --check router_switch_unknown contains "LLM route 'missing' was not found" \
+  --check router_with_route_duplicate contains 'already exists: first'
+{
+  "ok": true,
+  "mode": "switch-replaces",
+  "after_switch_profile": {
+    "type": "LLM",
+    "model": "openai/gpt-4.1-mini",
+    "usage_id": "profile:qa-plain-b",
+    "status": {
+      "enabled": false,
+      "selection": null,
+      "last_route_name": null,
+      "routes": []
+    }
+  },
+  "select_after_switch_profile": "ValueError: Current agent LLM is not a RouterLLM.",
+  "after_switch_llm": {
+    "type": "LLM",
+    "model": "openai/gpt-4.1-nano",
+    "status": {
+      "enabled": false,
+      "selection": null,
+      "last_route_name": null,
+      "routes": []
+    }
+  },
+  "requests": {
+    "b": 1,
+    "c": 1,
+    "routes": 0
+  },
+  "router_switch_llm": {
+    "copy": true,
+    "original": {
+      "mode": "auto",
+      "manual_route_name": null
+    },
+    "copy_selection": {
+      "mode": "manual",
+      "manual_route_name": "second"
+    },
+    "active_route_name": "second",
+    "resumed": {
+      "mode": "auto",
+      "manual_route_name": null
+    }
+  },
+  "router_switch_unknown": "ValueError: LLM route 'missing' was not found. Available routes: first, second",
+  "router_with_route_duplicate": "ValueError: Model router route already exists: first",
+  "_exit": 0,
+  "_seconds": 6.0,
+  "checks": [
+    {
+      "check": "after_switch_profile.type eq LLM",
+      "ok": true,
+      "actual": "LLM"
+    },
+    {
+      "check": "after_switch_profile.usage_id eq profile:qa-plain-b",
+      "ok": true,
+      "actual": "profile:qa-plain-b"
+    },
+    {
+      "check": "after_switch_profile.status.enabled eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "select_after_switch_profile contains not a RouterLLM",
+      "ok": true,
+      "actual": "ValueError: Current agent LLM is not a RouterLLM."
+    },
+    {
+      "check": "after_switch_llm.type eq LLM",
+      "ok": true,
+      "actual": "LLM"
+    },
+    {
+      "check": "after_switch_llm.model eq openai/gpt-4.1-nano",
+      "ok": true,
+      "actual": "openai/gpt-4.1-nano"
+    },
+    {
+      "check": "after_switch_llm.status.enabled eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "requests.b eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "requests.c eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "requests.routes eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "router_switch_llm.copy eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "router_switch_llm.original.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "router_switch_llm.copy_selection.manual_route_name eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "router_switch_llm.active_route_name eq second",
+      "ok": true,
+      "actual": "second"
+    },
+    {
+      "check": "router_switch_llm.resumed.mode eq auto",
+      "ok": true,
+      "actual": "auto"
+    },
+    {
+      "check": "router_switch_unknown contains LLM route 'missing' was not found",
+      "ok": true,
+      "actual": "ValueError: LLM route 'missing' was not found. Available routes: first, second"
+    },
+    {
+      "check": "router_with_route_duplicate contains already exists: first",
+      "ok": true,
+      "actual": "ValueError: Model router route already exists: first"
+    }
+  ]
+}
+
+[exit 0 after 6s]

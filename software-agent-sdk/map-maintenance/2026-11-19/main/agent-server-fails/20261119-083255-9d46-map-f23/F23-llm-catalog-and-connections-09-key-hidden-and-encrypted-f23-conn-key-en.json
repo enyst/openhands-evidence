@@ -1,0 +1,22 @@
+{
+  "file": "F23-llm-catalog-and-connections.md",
+  "bullet": "Key hidden and encrypted (`F23.conn-key-encrypted`).",
+  "ids": [
+    "F23.conn-key-encrypted"
+  ],
+  "line": 274,
+  "script": "control-agent-server api GET /api/llm/provider-connections --check . not-contains \"$DEEPSEEK_API_KEY\" \\\n  --check . not-contains sk-qa-f23-default --check 0.api_key missing --save F23.conn-key-encrypted/list\ncontrol-agent-server state cat home/.openhands/provider-connections/provider_connections.json --mode 600 \\\n  --check schema_version eq 1 --check connections.0.id eq \"$CONN\" --check connections.0.api_key matches '^gAAAAA' \\\n  --check connections.1.api_key matches '^gAAAAA' --not-contains \"$DEEPSEEK_API_KEY\" --not-contains sk-qa-f23-default\ncontrol-agent-server state grep qa-f23-deepseek --glob 'home/**/*'\ncontrol-agent-server state grep --env-value DEEPSEEK_API_KEY --glob 'home/**/*' --expect-none\n",
+  "exit_code": 2,
+  "elapsed_ms": 651,
+  "failed_line": 3,
+  "failed_command": "control-agent-server state cat home/.openhands/provider-connections/provider_connections.json --mode 600 --check schema_version eq 1 --check connections.0.id eq \"$CONN\" --check connections.0.api_key matches '^gAAAAA' --check connections.1.api_key matches '^gAAAAA' --not-contains \"$DEEPSEEK_API_KEY\" --not-contains sk-qa-f23-default",
+  "failed_status": 2,
+  "observation": {
+    "ok": false,
+    "exit": 2,
+    "error": "home/.openhands/provider-connections/provider_connections.json does not exist",
+    "example": "control-agent-server state ls 'home/.openhands/*'"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/llm/provider-connections\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"2\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": [],\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 64,\n  \"checks\": [\n    {\n      \"check\": \". not-contains \",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \". not-contains sk-qa-f23-default\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"0.api_key missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-083255-9d46-map-f23/evidence/F23.conn-key-encrypted/list.json\"\n}\n{\n  \"ok\": false,\n  \"exit\": 2,\n  \"error\": \"home/.openhands/provider-connections/provider_connections.json does not exist\",\n  \"example\": \"control-agent-server state ls 'home/.openhands/*'\"\n}\n",
+  "stderr": ""
+}

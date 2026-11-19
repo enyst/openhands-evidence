@@ -1,0 +1,24 @@
+{
+  "file": "F33-sdk-remote-client.md",
+  "bullet": "Async workspace (`F33.async-workspace`).",
+  "ids": [
+    "F33.async-workspace"
+  ],
+  "line": 464,
+  "script": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.async-workspace/probe -- .venv/bin/python - <<'PY'\nimport asyncio\nimport os\nimport f33\nfrom openhands.sdk.workspace import AsyncRemoteWorkspace\n\n\nasync def main():\n    path = os.path.join(f33.DIR, \"async\")\n    os.makedirs(path, exist_ok=True)\n    async with AsyncRemoteWorkspace(host=f33.URL, api_key=f33.KEY, working_dir=path) as ws:\n        r = await ws.execute_command(\"printf qa-f33-async; pwd >&2\", cwd=path)\n        assert (r.exit_code, r.stdout, r.stderr) == (0, \"qa-f33-async\", path + \"\\n\"), r\n        up = await ws.file_upload(b\"qa-f33-async-bytes\", os.path.join(path, \"a.txt\"))\n        down = await ws.file_download(os.path.join(path, \"a.txt\"), os.path.join(f33.DIR, \"async-down.txt\"))\n        assert up.success and down.success and down.file_size == 18, (up, down)\n        changes = sorted(str(c.path) for c in await ws.git_changes(os.environ[\"REPO\"]))\n        assert changes == [\"README.md\", \"notes.txt\"], changes\n        diff = await ws.git_diff(os.path.join(os.environ[\"REPO\"], \"README.md\"))\n        assert \"Modified, not committed.\" in diff.modified, diff\n        bg = await ws.start_command(\"echo qa-f33-async-bg; sleep 60; echo qa-f33-async-late\", cwd=path, timeout=120)\n        running = await ws.get_command_output(bg)\n        assert running is None or running.get(\"exit_code\") is None, running\n        await ws.stop_command(bg)\n        for _ in range(60):\n            out = await ws.get_command_output(bg)\n            if out is not None and out.get(\"exit_code\") is not None:\n                break\n            await asyncio.sleep(0.5)\n        assert out and \"qa-f33-async-bg\" in out[\"stdout\"] and \"qa-f33-async-late\" not in out[\"stdout\"], out\n        await ws.stop_command(\"0\" * 32)\n        info = await ws.get_server_info()\n    assert ws._client is None\n    return info[\"build_git_sha\"], bg, out[\"exit_code\"]\n\n\nsha, bg, code = asyncio.run(main())\nf33.emit(\"async\", sha=sha, command_id=bg, exit_code=code)\nPY\ntest \"$(cat \"$F33/async-down.txt\")\" = qa-f33-async-bytes\ncontrol-agent-server api GET /api/bash/bash_events/search --query kind__eq=BashCommand --query sort_order=TIMESTAMP_DESC --query limit=2 \\\n  --check items.1.command contains qa-f33-async --check items.1.cwd eq \"$F33/async\" \\\n  --check items.0.command contains qa-f33-async-bg --save F33.async-workspace/command\ncontrol-agent-server api GET /api/bash/bash_events/search --query kind__eq=BashOutput --query command_id__eq=\"$(jq -r .command_id \"$F33/async.json\")\" \\\n  --check items.-1.exit_code eq \"$(jq .exit_code \"$F33/async.json\")\" --check items.-1.exit_code ne 0 \\\n  --check items not-contains qa-f33-async-late --save F33.async-workspace/background\n",
+  "exit_code": 1,
+  "elapsed_ms": 364,
+  "failed_line": 1,
+  "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.async-workspace/probe -- .venv/bin/python - <<'PY'\nimport asyncio\nimport os\nimport f33\nfrom openhands.sdk.workspace import AsyncRemoteWorkspace\n\n\nasync def main():\n    path = os.path.join(f33.DIR, \"async\")\n    os.makedirs(path, exist_ok=True)\n    async with AsyncRemoteWorkspace(host=f33.URL, api_key=f33.KEY, working_dir=path) as ws:\n        r = await ws.execute_command(\"printf qa-f33-async; pwd >&2\", cwd=path)\n        assert (r.exit_co",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "exit_code": 1,
+    "elapsed_ms": 83,
+    "stdout_tail": "",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 3, in <module>\nModuleNotFoundError: No module named 'f33'\n",
+    "saved": "<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.async-workspace/probe.json"
+  },
+  "stdout": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 83,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 3, in <module>\\nModuleNotFoundError: No module named 'f33'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261119-090348-68d3-shim-f33/evidence/F33.async-workspace/probe.json\"\n}\n",
+  "stderr": ""
+}

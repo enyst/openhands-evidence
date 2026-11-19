@@ -1,0 +1,66 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/builtins \
+  --check example_in_description.general-purpose eq true --check example_in_description.web-researcher eq true
+{
+  "ok": true,
+  "registered_without_browser": [
+    "bash-runner",
+    "code-explorer",
+    "general-purpose"
+  ],
+  "registered_later_with_browser": [
+    "web-researcher"
+  ],
+  "registered": [
+    "bash-runner",
+    "code-explorer",
+    "general-purpose",
+    "web-researcher"
+  ],
+  "deprecated_maps_to": {
+    "default": "general-purpose",
+    "default cli mode": "general-purpose",
+    "explore": "code-explorer",
+    "bash": "bash-runner"
+  },
+  "deprecated_warned": {
+    "default": true,
+    "default cli mode": true,
+    "explore": true,
+    "bash": true
+  },
+  "description_lists": {
+    "bash-runner": true,
+    "code-explorer": true,
+    "general-purpose": true,
+    "web-researcher": true
+  },
+  "example_in_description": {
+    "code-explorer": true,
+    "bash-runner": true,
+    "web-researcher": true,
+    "general-purpose": true
+  },
+  "example_keys": [
+    "bash-runner",
+    "code-explorer",
+    "general-purpose",
+    "web-researcher"
+  ],
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "example_in_description.general-purpose eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "example_in_description.web-researcher eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 0 after 5s]

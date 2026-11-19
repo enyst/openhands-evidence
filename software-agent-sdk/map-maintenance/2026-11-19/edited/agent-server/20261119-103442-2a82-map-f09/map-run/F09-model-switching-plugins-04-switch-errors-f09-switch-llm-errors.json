@@ -1,0 +1,49 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Switch errors (`F09.switch-llm-errors`).",
+  "ids": [
+    "F09.switch-llm-errors"
+  ],
+  "line": 235,
+  "script": "control-agent-server api POST /api/conversations/00000000-0000-4000-8000-000000000000/switch_llm \\\n  --json '{\"llm\": {\"model\": \"openai/qa-f09-x\", \"usage_id\": \"qa-f09-x\"}}' --expect 404 --save F09.switch-llm-errors/unknown-conversation\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_llm\" --json '{}' --expect 422 --check detail.0.loc.1 eq llm --save F09.switch-llm-errors/no-llm\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_llm\" --json '{\"llm\": {\"api_key\": \"sk-qa-f09\", \"usage_id\": \"qa-f09-nomodel\"}}' \\\n  --expect 422 --check detail.0.msg contains 'model must be specified'\ncontrol-agent-server api POST \"/api/conversations/$CID/switch_llm\" \\\n  --json '{\"llm\": {\"model\": \"openai/qa-f09-dangling\", \"provider_connection_id\": \"qa-f09-missing\", \"usage_id\": \"qa-f09-dangling\"}}' \\\n  --expect 422 --check detail contains \"provider connection 'qa-f09-missing', which does not exist\" --save F09.switch-llm-errors/dangling-connection\ncontrol-agent-server api GET \"/api/conversations/$CID\" --quiet --check agent.llm.model eq openai/qa-f09-ws --check agent.llm.usage_id eq qa-f09-ws\n",
+  "exit_code": 1,
+  "elapsed_ms": 723,
+  "failed_line": 3,
+  "failed_command": "control-agent-server api POST \"/api/conversations/$CID/switch_llm\" --json '{}' --expect 422 --check detail.0.loc.1 eq llm --save F09.switch-llm-errors/no-llm",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 404,
+    "request": {
+      "method": "POST",
+      "path": "/api/conversations//switch_llm",
+      "query": [],
+      "auth": "header",
+      "body": {},
+      "files": []
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "content-length": "22",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Not Found"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 55,
+    "checks": [
+      {
+        "check": "detail.0.loc.1 eq llm",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm-errors/no-llm.json",
+    "hint": "expected 422, got 404"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/00000000-0000-4000-8000-000000000000/switch_llm\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm\": {\n        \"model\": \"openai/qa-f09-x\",\n        \"usage_id\": \"qa-f09-x\"\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 60,\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm-errors/unknown-conversation.json\"\n}\n{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations//switch_llm\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {},\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 55,\n  \"checks\": [\n    {\n      \"check\": \"detail.0.loc.1 eq llm\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261119-103442-2a82-map-f09/evidence/F09.switch-llm-errors/no-llm.json\",\n  \"hint\": \"expected 422, got 404\"\n}\n",
+  "stderr": ""
+}

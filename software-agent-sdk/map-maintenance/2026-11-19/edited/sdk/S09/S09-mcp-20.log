@@ -1,0 +1,104 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/runtime --arg budget \
+  --check budget_send_seconds lt 2.5 --check budget_tools_after_send eq '[]' \
+  --check budget_run_seconds ge 2 --check budget_status eq finished \
+  --check budget_first_call_tools contains slow_echo --check budget_texts.0 contains "echo: late" \
+  --check default_send_seconds ge 4 --check default_tools_after_send contains echo
+{
+  "ok": true,
+  "mode": "budget",
+  "budget_send_seconds": 1.01,
+  "budget_tools_after_send": [],
+  "budget_run_seconds": 4.13,
+  "budget_status": "finished",
+  "budget_first_call_tools": [
+    "finish",
+    "slow_add",
+    "slow_counter",
+    "slow_die",
+    "slow_echo",
+    "slow_fail",
+    "slow_getenv",
+    "slow_headers",
+    "slow_kind_echo",
+    "slow_nested",
+    "slow_picture",
+    "slow_register_extra",
+    "slow_register_late",
+    "slow_remove_extra",
+    "slow_reverse",
+    "slow_session",
+    "slow_slow",
+    "slow_structured"
+  ],
+  "budget_texts": [
+    "[Tool 'slow_echo' executed.]echo: late",
+    "done"
+  ],
+  "default_send_seconds": 5.02,
+  "default_tools_after_send": [
+    "add",
+    "counter",
+    "die",
+    "echo",
+    "fail",
+    "getenv",
+    "headers",
+    "kind_echo",
+    "nested",
+    "picture",
+    "register_extra",
+    "register_late",
+    "remove_extra",
+    "reverse",
+    "session",
+    "slow",
+    "structured"
+  ],
+  "_exit": 0,
+  "_seconds": 15.8,
+  "checks": [
+    {
+      "check": "budget_send_seconds lt 2.5",
+      "ok": true,
+      "actual": "1.01"
+    },
+    {
+      "check": "budget_tools_after_send eq []",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "budget_run_seconds ge 2",
+      "ok": true,
+      "actual": "4.13"
+    },
+    {
+      "check": "budget_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "budget_first_call_tools contains slow_echo",
+      "ok": true,
+      "actual": "[\"finish\", \"slow_add\", \"slow_counter\", \"slow_die\", \"slow_echo\", \"slow_fail\", \"slow_getenv\", \"slow_headers\", \"slow_kind_echo\", \"slow_nested\", \"slow_picture\", \"slow_register_extra\", \"slow_register_late\""
+    },
+    {
+      "check": "budget_texts.0 contains echo: late",
+      "ok": true,
+      "actual": "[Tool 'slow_echo' executed.]echo: late"
+    },
+    {
+      "check": "default_send_seconds ge 4",
+      "ok": true,
+      "actual": "5.02"
+    },
+    {
+      "check": "default_tools_after_send contains echo",
+      "ok": true,
+      "actual": "[\"add\", \"counter\", \"die\", \"echo\", \"fail\", \"getenv\", \"headers\", \"kind_echo\", \"nested\", \"picture\", \"register_extra\", \"register_late\", \"remove_extra\", \"reverse\", \"session\", \"slow\", \"structured\"]"
+    }
+  ]
+}
+
+[exit 0 after 16s]

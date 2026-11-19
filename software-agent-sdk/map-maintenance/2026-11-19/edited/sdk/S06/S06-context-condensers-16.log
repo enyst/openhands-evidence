@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "Conversation finished with LLM Summarizing Condenser." -- python examples/01_standalone_sdk/14_context_condenser.py
+{
+  "exit": 0,
+  "seconds": 91.6,
+  "result": null,
+  "stdout_tail": "otal 22.66K) \u2022 cache hit 72.93% (total 86.44%) \u2022  \nreasoning 90 (total 230) \u2022 \u2193 output 198 (total 548) \u2022 $ (total 0.0007)\n\nObservation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nTool: terminal\nResult:\ntotal 12\ndrwxr-xr-x 3 root root 4096 Nov 19 09:58 .\ndrwxr-xr-x 7 root root 4096 Nov 19 09:56 ..\ndrwxr-xr-x 4 root root 4096 Nov 19 09:57 .conversations\n\n\ud83d\udcc1 Working directory: \n<scratch>/sdk/edi\nted/S06/work/S06-context-condensers-16/block1/runs/20261119-095631-01d4dd/worksp\nace\n\ud83d\udc0d Python interpreter: /usr/local/bin/python\n\u2705 Exit code: 0\n\nMessage from Agent \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nDeleted both files (`math_utils.py` and `test_math_utils.py`), along with the \ngenerated `__pycache__` and `.pytest_cache` directories. The workspace is now \nclean, containing only the `.conversations` directory.\n\nTokens: \u2191 input 9.86K (total 32.52K) \u2022 cache hit 97.33% (total 89.74%) \u2022  \nreasoning 0 (total 230) \u2022 \u2193 output 55 (total 603) \u2022 $ (total 0.0008)\n\n====================================================================================================\nConversation finished with LLM Summarizing Condenser.\nTotal LLM messages collected: 56\n\nThe condenser automatically summarized older conversation history\nwhen the conversation exceeded the configured max_size threshold.\nThis helps manage context length while preserving important information.\nEXAMPLE_COST: 0.0008427328000000001\n",
+  "stderr_tail": "",
+  "ok": true
+}
+
+[exit 0 after 92s]
