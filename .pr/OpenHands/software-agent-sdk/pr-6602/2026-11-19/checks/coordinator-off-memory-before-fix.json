@@ -1,0 +1,91 @@
+{
+  "ok": true,
+  "id": "4712957e-5d12-4924-86e2-5d15cb0b16c1",
+  "total": 23,
+  "kinds": {
+    "ConversationStateUpdateEvent": 12,
+    "SystemPromptEvent": 1,
+    "MessageEvent": 4,
+    "ActionEvent": 3,
+    "ObservationEvent": 3
+  },
+  "matching": 10,
+  "events": [
+    {
+      "id": "e491e00e-5d2d-4887-89be-75fc17c4840e",
+      "kind": "MessageEvent",
+      "source": "user",
+      "timestamp": "2026-11-19T01:36:25.364033",
+      "llm_message": "{\"role\": \"user\", \"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Start one child conversation titled offon-child with isolation shared whose task is: reply with the single word done and finish. Do nothing else.\"}], \"thinking_blocks\": []}"
+    },
+    {
+      "id": "7b10d7e9-019a-4eaa-b592-09a1419cfd86",
+      "kind": "ActionEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T01:36:27.474725",
+      "tool_name": "start_child_conversation",
+      "action": "{\"task\": \"Reply with the single word: done. Then finish. Do nothing else.\", \"title\": \"offon-child\", \"isolation\": \"shared\", \"kind\": \"StartChildConversationAction\"}"
+    },
+    {
+      "id": "80138f8e-f653-46c2-a2d3-13101c685536",
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "timestamp": "2026-11-19T01:36:27.615774",
+      "tool_name": "start_child_conversation",
+      "observation": "{\"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Started child conversation aaa9fdd4-9714-4019-a547-0a53bf257844 (status: idle).\\n{\\n  \\\"conversation_id\\\": \\\"aaa9fdd4-9714-4019-a547-0a53bf257844\\\",\\n  \\\"parent_conversation_id\\\": \\\"4712957e-5d12-4924-86e2-5d15cb0b16c1\\\",\\n  \\\"status\\\": \\\u2026"
+    },
+    {
+      "id": "e78faf5b-f5e9-4af9-afc8-a157b0fcdc8d",
+      "kind": "MessageEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T01:36:29.338831",
+      "llm_message": "{\"role\": \"assistant\", \"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Started child conversation [offon-child](conversation:aaa9fdd4-9714-4019-a547-0a53bf257844) with `shared` isolation (id `aaa9fdd4-9714-4019-a547-0a53bf257844`, no URL yet). Its task is to reply \\\"done\\\" and finish.\"}]\u2026"
+    },
+    {
+      "id": "cea79547-3b4e-4c5d-b01f-51e2473fce93",
+      "kind": "MessageEvent",
+      "source": "user",
+      "timestamp": "2026-11-19T02:04:18.893166",
+      "llm_message": "{\"role\": \"user\", \"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Call the list_workers tool once, then the read_project_memory tool once with no name. Report exactly what each tool returned, then stop. Do not retry.\"}], \"thinking_blocks\": []}"
+    },
+    {
+      "id": "342d899d-ae0f-4cc1-a259-4517a0d016a0",
+      "kind": "ActionEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T02:04:21.330612",
+      "tool_name": "list_workers",
+      "action": "{\"kind\": \"ListWorkersAction\"}"
+    },
+    {
+      "id": "f9356e9a-b9d2-46c9-844e-7f722d03e8fc",
+      "kind": "ActionEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T02:04:21.336622",
+      "tool_name": "read_project_memory",
+      "action": "{\"name\": \"MEMORY.md\", \"kind\": \"ReadProjectMemoryAction\"}"
+    },
+    {
+      "id": "1a7f88a5-9436-4d5e-bc4d-d78476b67409",
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "timestamp": "2026-11-19T02:04:21.361845",
+      "tool_name": "list_workers",
+      "observation": "{\"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Projects is turned off on this server, so the project tools do nothing until the user turns the feature back on. Tell the user; do not retry.\"}], \"is_error\": true, \"conversations\": [], \"kind\": \"ListWorkersObservation\"}"
+    },
+    {
+      "id": "0d1a590d-433b-46b8-a749-bda4b2f63b73",
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "timestamp": "2026-11-19T02:04:21.381492",
+      "tool_name": "read_project_memory",
+      "observation": "{\"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"MEMORY.md does not exist yet; create it with update_project_memory and no base_revision.\"}], \"is_error\": false, \"name\": \"MEMORY.md\", \"kind\": \"ReadProjectMemoryObservation\"}"
+    },
+    {
+      "id": "c55c22c8-4d9b-42ab-bccc-ed164075880e",
+      "kind": "MessageEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T02:04:24.999071",
+      "llm_message": "{\"role\": \"assistant\", \"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Here is exactly what each tool returned:\\n\\n**list_workers:**\\n> [An error occurred during execution.]\\n>\\n> Projects is turned off on this server, so the project tools do nothing until the user turns the feature back\u2026"
+    }
+  ]
+}

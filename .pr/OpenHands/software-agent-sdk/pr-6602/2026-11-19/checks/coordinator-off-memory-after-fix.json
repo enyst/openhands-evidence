@@ -1,0 +1,92 @@
+{
+  "ok": true,
+  "id": "4712957e-5d12-4924-86e2-5d15cb0b16c1",
+  "total": 35,
+  "kinds": {
+    "ConversationStateUpdateEvent": 18,
+    "SystemPromptEvent": 1,
+    "MessageEvent": 6,
+    "ActionEvent": 5,
+    "ObservationEvent": 5
+  },
+  "matching": 16,
+  "events": [
+    {
+      "id": "f9356e9a-b9d2-46c9-844e-7f722d03e8fc",
+      "kind": "ActionEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T02:04:21.336622",
+      "tool_name": "read_project_memory",
+      "action": "{\"name\": \"MEMORY.md\", \"kind\": \"ReadProjectMemoryAction\"}"
+    },
+    {
+      "id": "1a7f88a5-9436-4d5e-bc4d-d78476b67409",
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "timestamp": "2026-11-19T02:04:21.361845",
+      "tool_name": "list_workers",
+      "observation": "{\"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Projects is turned off on this server, so the project tools do nothing until the user turns the feature back on. Tell the user; do not retry.\"}], \"is_error\": true, \"conversations\": [], \"kind\": \"ListWorkersObservation\"}"
+    },
+    {
+      "id": "0d1a590d-433b-46b8-a749-bda4b2f63b73",
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "timestamp": "2026-11-19T02:04:21.381492",
+      "tool_name": "read_project_memory",
+      "observation": "{\"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"MEMORY.md does not exist yet; create it with update_project_memory and no base_revision.\"}], \"is_error\": false, \"name\": \"MEMORY.md\", \"kind\": \"ReadProjectMemoryObservation\"}"
+    },
+    {
+      "id": "c55c22c8-4d9b-42ab-bccc-ed164075880e",
+      "kind": "MessageEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T02:04:24.999071",
+      "llm_message": "{\"role\": \"assistant\", \"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Here is exactly what each tool returned:\\n\\n**list_workers:**\\n> [An error occurred during execution.]\\n>\\n> Projects is turned off on this server, so the project tools do nothing until the user turns the feature back\u2026"
+    },
+    {
+      "id": "75ed80ee-fdc8-4c6a-8e0b-dbe0c4211c87",
+      "kind": "MessageEvent",
+      "source": "user",
+      "timestamp": "2026-11-19T02:06:21.513175",
+      "llm_message": "{\"role\": \"user\", \"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Call the read_project_memory tool once for MEMORY.md, then the list_workers tool once. Report exactly what each tool returned, then stop. Do not retry and do not call any other tool.\"}], \"thinking_blocks\": []}"
+    },
+    {
+      "id": "66c2dabd-249f-47e2-b505-6e0b4d7cde64",
+      "kind": "ActionEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T02:06:24.310155",
+      "tool_name": "read_project_memory",
+      "action": "{\"name\": \"MEMORY.md\", \"kind\": \"ReadProjectMemoryAction\"}"
+    },
+    {
+      "id": "e36c6ef7-18b8-4973-86fa-ed790a4e5033",
+      "kind": "ActionEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T02:06:24.311250",
+      "tool_name": "list_workers",
+      "action": "{\"kind\": \"ListWorkersAction\"}"
+    },
+    {
+      "id": "4c5f3043-e6b6-40a8-b115-c067402a0f63",
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "timestamp": "2026-11-19T02:06:24.330339",
+      "tool_name": "read_project_memory",
+      "observation": "{\"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Projects is turned off on this server, so the project tools do nothing until the user turns the feature back on. Tell the user; do not retry.\"}], \"is_error\": true, \"kind\": \"ReadProjectMemoryObservation\"}"
+    },
+    {
+      "id": "541766a5-bba1-484d-bdf0-8918225c793f",
+      "kind": "ObservationEvent",
+      "source": "environment",
+      "timestamp": "2026-11-19T02:06:24.337812",
+      "tool_name": "list_workers",
+      "observation": "{\"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Projects is turned off on this server, so the project tools do nothing until the user turns the feature back on. Tell the user; do not retry.\"}], \"is_error\": true, \"conversations\": [], \"kind\": \"ListWorkersObservation\"}"
+    },
+    {
+      "id": "58062879-891e-4497-bc43-f9f66590fa8a",
+      "kind": "MessageEvent",
+      "source": "agent",
+      "timestamp": "2026-11-19T02:06:26.412181",
+      "llm_message": "{\"role\": \"assistant\", \"content\": [{\"cache_prompt\": false, \"type\": \"text\", \"text\": \"Here is exactly what each tool returned:\\n\\n**read_project_memory (MEMORY.md):**\\n> [An error occurred during execution.]\\n>\\n> Projects is turned off on this server, so the project tools do nothing until the user tur\u2026"
+    }
+  ]
+}

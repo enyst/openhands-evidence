@@ -64,6 +64,16 @@ Real browser, Canvas (Paper), flags turned on through Settings › Experimental:
 ![Paper, flag off: the existing project's URL shows the off notice](paper-off-existing-project.png)
 ![Paper: same board after off, on and a stack restart](paper-on-board-after-restart.png)
 
+## Addendum: a coordinator while Projects is off (SDK f4677a7c1, fix 0e01f4261)
+
+Upstream moved to `f4677a7c1` (stress tests and the verify skill only); the fork mirror was fast-forwarded to it.
+
+- The coordinator gets `project` at creation (`ProjectService.start_coordinator`) and keeps it, its coordinator prompt and all nine project tools while Projects is off: the flag withholds tools only from new conversations. Seen in the stored `base_state.json` and over the API.
+- **Bug found and fixed on the fork.** With Projects off, on the real model, `list_workers` correctly said Projects is off, but `read_project_memory` answered "MEMORY.md does not exist yet; create it with update_project_memory", although `MEMORY.md` existed (`OFFON-MARKER-91`). It read the server's "Projects are turned off" 404 as a missing file. [`checks/coordinator-off-memory-before-fix.json`](checks/coordinator-off-memory-before-fix.json)
+- Fix [`0e01f4261`](https://github.com/enyst/agent-sdk/commit/0e01f42619adc44242dcc235870ceb82a250a211) on `enyst/agent-sdk:fix/projects-memory-off-20261119`: only a 404 for the file itself means missing. Regression case added to `test_tools_say_so_when_projects_was_turned_off` (fails before, passes after; 52/52 project tool tests).
+- After the fix, same server and coordinator, Projects off: both tools say Projects is off and the model tells the user. [`checks/coordinator-off-memory-after-fix.json`](checks/coordinator-off-memory-after-fix.json)
+- Control, Projects on: the same calls return `OFFON-MARKER-91` and the board, which now lists the child started while off. [`checks/coordinator-on-memory-control.json`](checks/coordinator-on-memory-control.json)
+
 ## Not proven on this head
 
 - Relayed decision cards and user-only closure in the browser, git-worktree worker isolation, the 390 px phone layout, upload/preview/download/delete of user files, and the PDF preview gap (blank without a native viewer) were not rerun here; their earlier results stay in the 16 and 18 November folders.
