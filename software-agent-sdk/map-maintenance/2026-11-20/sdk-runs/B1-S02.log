@@ -1,0 +1,378 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B1-S02",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 22,
+    "fail": 4,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 1,
+      "ids": [
+        "S02.completion",
+        "S02.native-tool-calling",
+        "S02.metrics",
+        "S02.pricing-override",
+        "S02.log-completions",
+        "S02.reasoning-content",
+        "S02.api-mode"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-01.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 2,
+      "ids": [
+        "S02.api-mode",
+        "S02.responses-reasoning"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-02.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 3,
+      "ids": [
+        "S02.streaming",
+        "S02.stream-no-callback",
+        "S02.reasoning-content"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-03.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 4,
+      "ids": [
+        "S02.streaming",
+        "S02.responses-reasoning"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-04.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 5,
+      "ids": [
+        "S02.metrics"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-05.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 6,
+      "ids": [
+        "S02.timeouts"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-06.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 7,
+      "ids": [
+        "S02.anthropic-thinking",
+        "S02.prompt-caching"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-07.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 8,
+      "ids": [
+        "S02.thinking-text-reply"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-08.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 9,
+      "ids": [
+        "S02.reasoning-options",
+        "S02.model-features"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-09.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 10,
+      "ids": [
+        "S02.prompted-tool-calling",
+        "S02.native-tool-calling"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-10.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 11,
+      "ids": [
+        "S02.retries"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-11.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 12,
+      "ids": [
+        "S02.no-response-retry"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-12.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 13,
+      "ids": [
+        "S02.error-mapping"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-13.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 14,
+      "ids": [
+        "S02.prompt-caching"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-14.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 15,
+      "ids": [
+        "S02.prompt-caching"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-15.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 16,
+      "ids": [
+        "S02.token-count",
+        "S02.context-window-guard"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-16.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 17,
+      "ids": [
+        "S02.message-formatting"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-17.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 18,
+      "ids": [
+        "S02.image-inline"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-18.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 19,
+      "ids": [
+        "S02.image-request-guard"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-19.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 20,
+      "ids": [
+        "S02.image-adapter-loss"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-20.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 21,
+      "ids": [
+        "S02.log-completions"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-21.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 22,
+      "ids": [
+        "S02.serialization"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-22.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 23,
+      "ids": [
+        "S02.conversation-stats",
+        "S02.metrics"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-23.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 24,
+      "ids": [
+        "S02.completion",
+        "S02.streaming",
+        "S02.metrics",
+        "S02.api-mode"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-24.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 25,
+      "ids": [
+        "S02.metrics",
+        "S02.conversation-stats",
+        "S02.streaming",
+        "S02.message-formatting"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-25.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 26,
+      "ids": [
+        "S02.error-mapping"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S02/transcripts/S02-llm-core-26.log"
+    },
+    {
+      "family": "S02-llm-core.md",
+      "bullet": 27,
+      "ids": [
+        "S02.anthropic-thinking",
+        "S02.responses-reasoning"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}

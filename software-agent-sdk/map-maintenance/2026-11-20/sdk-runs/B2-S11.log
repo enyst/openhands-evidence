@@ -1,0 +1,240 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B2-S11",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 12,
+    "fail": 3,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 1,
+      "ids": [
+        "S11.register-programmatic",
+        "S11.task-run",
+        "S11.task-resume",
+        "S11.task-errors",
+        "S11.task-limits",
+        "S11.task-metrics",
+        "S11.task-persistence",
+        "S11.task-hooks"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-01.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 2,
+      "ids": [
+        "S11.task-resume",
+        "S11.task-persistence"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-02.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 3,
+      "ids": [
+        "S11.task-observability"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-03.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 4,
+      "ids": [
+        "S11.task-secrets"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-04.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 5,
+      "ids": [
+        "S11.task-observability"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 6,
+      "ids": [
+        "S11.register-programmatic",
+        "S11.register-if-absent",
+        "S11.markdown-schema",
+        "S11.file-discovery",
+        "S11.file-precedence",
+        "S11.plugin-agents",
+        "S11.definition-factory",
+        "S11.definition-model"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-06.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 7,
+      "ids": [
+        "S11.builtin-agents",
+        "S11.factory-info"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-07.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 8,
+      "ids": [
+        "S11.factory-info"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-08.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 9,
+      "ids": [
+        "S11.conversation-autoregister",
+        "S11.builtin-agents",
+        "S11.task-persistence"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-09.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 10,
+      "ids": [
+        "S11.task-confirmation"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-10.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 11,
+      "ids": [
+        "S11.task-confirmation",
+        "S11.delegate-executor"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-11.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 12,
+      "ids": [
+        "S11.sub-agent-scope"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-12.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 13,
+      "ids": [
+        "S11.delegate-executor",
+        "S11.delegation-visualizer"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-13.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 14,
+      "ids": [
+        "S11.task-run",
+        "S11.task-resume",
+        "S11.delegation-visualizer"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-14.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 15,
+      "ids": [
+        "S11.register-programmatic",
+        "S11.builtin-agents",
+        "S11.task-metrics"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-15.log"
+    },
+    {
+      "family": "S11-subagents-delegation.md",
+      "bullet": 16,
+      "ids": [
+        "S11.definition-factory"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S11/transcripts/S11-subagents-delegation-16.log"
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg no-response \
+  --check responses.text eq hi --check responses.requests eq 2 --check responses.temperatures.1 eq 1.0 \
+  --check responses_async_exhausted.error eq LLMNoResponseError --check responses_async_exhausted.requests eq 2 \
+  --check chat.text eq hi --check chat.temperatures.1 eq 1.0 \
+  --check chat_exhausted.error eq LLMNoResponseError \
+  --check content_free.text eq hi --check content_free.requests eq 2 --check content_free.temperatures.1 eq 1.0 \
+  --check content_free_stream.text eq hi --check content_free_stream.requests eq 2 --check content_free_stream.temperatures.1 eq 1.0 \
+  --check length_capped.error missing --check length_capped.text eq "" --check length_capped.requests eq 1 \
+  --check reasoning_only.reasoning eq "only thinking" --check reasoning_only.requests eq 1
+{
+  "ok": true,
+  "mode": "no-response",
+  "chat": {
+    "text": "hi",
+    "error": null,
+    "requests": 3,
+    "temperatures": [
+      0.0,
+      1.0,
+      1.0
+    ]
+  },
+  "chat_exhausted": {
+    "error": "LLMNoResponseError",
+    "requests": 2
+  },
+  "chat_async": {
+    "text": "hi",
+    "error": null
+  },
+  "content_free": {
+    "text": "hi",
+    "error": null,
+    "requests": 2,
+    "temperatures": [
+      0.0,
+      1.0
+    ]
+  },
+  "content_free_stream": {
+    "text": "hi",
+    "error": null,
+    "requests": 2,
+    "temperatures": [
+      0.0,
+      1.0
+    ]
+  },
+  "length_capped": {
+    "text": "",
+    "error": null,
+    "requests": 1
+  },
+  "reasoning_only": {
+    "text": "",
+    "reasoning": "only thinking",
+    "error": null,
+    "requests": 1
+  },
+  "responses": {
+    "text": "hi",
+    "error": null,
+    "requests": 2,
+    "temperatures": [
+      0.0,
+      0.0
+    ]
+  },
+  "responses_async_exhausted": {
+    "error": "LLMServiceUnavailableError",
+    "requests": 2
+  },
+  "_exit": 0,
+  "_seconds": 32.9,
+  "checks": [
+    {
+      "check": "responses.text eq hi",
+      "ok": true,
+      "actual": "hi"
+    },
+    {
+      "check": "responses.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "responses.temperatures.1 eq 1.0",
+      "ok": false,
+      "actual": "0.0"
+    },
+    {
+      "check": "responses_async_exhausted.error eq LLMNoResponseError",
+      "ok": false,
+      "actual": "LLMServiceUnavailableError"
+    },
+    {
+      "check": "responses_async_exhausted.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "chat.text eq hi",
+      "ok": true,
+      "actual": "hi"
+    },
+    {
+      "check": "chat.temperatures.1 eq 1.0",
+      "ok": true,
+      "actual": "1.0"
+    },
+    {
+      "check": "chat_exhausted.error eq LLMNoResponseError",
+      "ok": true,
+      "actual": "LLMNoResponseError"
+    },
+    {
+      "check": "content_free.text eq hi",
+      "ok": true,
+      "actual": "hi"
+    },
+    {
+      "check": "content_free.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "content_free.temperatures.1 eq 1.0",
+      "ok": true,
+      "actual": "1.0"
+    },
+    {
+      "check": "content_free_stream.text eq hi",
+      "ok": true,
+      "actual": "hi"
+    },
+    {
+      "check": "content_free_stream.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "content_free_stream.temperatures.1 eq 1.0",
+      "ok": true,
+      "actual": "1.0"
+    },
+    {
+      "check": "length_capped.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "length_capped.text eq ",
+      "ok": true,
+      "actual": ""
+    },
+    {
+      "check": "length_capped.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "reasoning_only.reasoning eq only thinking",
+      "ok": true,
+      "actual": "only thinking"
+    },
+    {
+      "check": "reasoning_only.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 1 after 34s]

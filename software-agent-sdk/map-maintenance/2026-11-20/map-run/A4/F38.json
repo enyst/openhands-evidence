@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "file": "F38-conversation-mentions.md",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 53,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3390,
+      "transcript": "<scratch>/agent-server/20261120-093429-cbed-map-f38/evidence/map-run/F38-conversation-mentions-00-preconditions.json"
+    },
+    {
+      "bullet": "The feature flag (`F38.flag`, `F38.flag-gates`).",
+      "ids": [
+        "F38.flag",
+        "F38.flag-gates"
+      ],
+      "line": 69,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5365,
+      "transcript": "<scratch>/agent-server/20261120-093429-cbed-map-f38/evidence/map-run/F38-conversation-mentions-01-the-feature-flag-f38-flag-f38-flag-gates.json"
+    },
+    {
+      "bullet": "Model-backed: the agent finds and links a conversation (`F38.find`).",
+      "ids": [
+        "F38.find"
+      ],
+      "line": 88,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6422,
+      "transcript": "<scratch>/agent-server/20261120-093429-cbed-map-f38/evidence/map-run/F38-conversation-mentions-02-model-backed-the-agent-finds-and-links-a.json"
+    },
+    {
+      "bullet": "Model-backed: the agent reads a mentioned conversation (`F38.read`, `F38.read-only`).",
+      "ids": [
+        "F38.read",
+        "F38.read-only"
+      ],
+      "line": 102,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5848,
+      "transcript": "<scratch>/agent-server/20261120-093429-cbed-map-f38/evidence/map-run/F38-conversation-mentions-03-model-backed-the-agent-reads-a-mentioned.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-093429-cbed-map-f38",
+  "launch_flags": []
+}

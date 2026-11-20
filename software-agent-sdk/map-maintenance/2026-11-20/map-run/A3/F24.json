@@ -1,0 +1,242 @@
+{
+  "ok": true,
+  "file": "F24-openai-subscription.md",
+  "summary": {
+    "pass": 20,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 1,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 88,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6391,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-00-preconditions.json"
+    },
+    {
+      "bullet": "Subscription models (`F24.models`).",
+      "ids": [
+        "F24.models"
+      ],
+      "line": 225,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 404,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-01-subscription-models-f24-models.json"
+    },
+    {
+      "bullet": "Status with no login (`F24.status-disconnected`).",
+      "ids": [
+        "F24.status-disconnected"
+      ],
+      "line": 233,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 818,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-02-status-with-no-login-f24-status-disconne.json"
+    },
+    {
+      "bullet": "Status with a stored login (`F24.status-connected`).",
+      "ids": [
+        "F24.status-connected"
+      ],
+      "line": 245,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 397,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-03-status-with-a-stored-login-f24-status-co.json"
+    },
+    {
+      "bullet": "Key required (`F24.auth-required`).",
+      "ids": [
+        "F24.auth-required"
+      ],
+      "line": 256,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4743,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-04-key-required-f24-auth-required.json"
+    },
+    {
+      "bullet": "Login across a restart (`F24.status-restart`).",
+      "ids": [
+        "F24.status-restart"
+      ],
+      "line": 277,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10516,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-05-login-across-a-restart-f24-status-restar.json"
+    },
+    {
+      "bullet": "Logout (`F24.logout`).",
+      "ids": [
+        "F24.logout"
+      ],
+      "line": 287,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1541,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-06-logout-f24-logout.json"
+    },
+    {
+      "bullet": "Rejected refresh (`F24.status-refresh-rejected`).",
+      "ids": [
+        "F24.status-refresh-rejected"
+      ],
+      "line": 297,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2327,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-07-rejected-refresh-f24-status-refresh-reje.json"
+    },
+    {
+      "bullet": "Invalid credentials file (`F24.status-invalid-file`).",
+      "ids": [
+        "F24.status-invalid-file"
+      ],
+      "line": 314,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1481,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-08-invalid-credentials-file-f24-status-inva.json"
+    },
+    {
+      "bullet": "Malformed polls (`F24.device-poll-invalid`).",
+      "ids": [
+        "F24.device-poll-invalid"
+      ],
+      "line": 328,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1165,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-09-malformed-polls-f24-device-poll-invalid.json"
+    },
+    {
+      "bullet": "Unknown token (`F24.device-poll-unknown`).",
+      "ids": [
+        "F24.device-poll-unknown"
+      ],
+      "line": 339,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 724,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-10-unknown-token-f24-device-poll-unknown.json"
+    },
+    {
+      "bullet": "Start a login (`F24.device-start`).",
+      "ids": [
+        "F24.device-start"
+      ],
+      "line": 347,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1548,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-11-start-a-login-f24-device-start.json"
+    },
+    {
+      "bullet": "Pending login (`F24.device-poll-pending`).",
+      "ids": [
+        "F24.device-poll-pending"
+      ],
+      "line": 365,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6907,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-12-pending-login-f24-device-poll-pending.json"
+    },
+    {
+      "bullet": "Logout cancels pending logins (`F24.logout-cancels-pending`).",
+      "ids": [
+        "F24.logout-cancels-pending"
+      ],
+      "line": 379,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 855,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-13-logout-cancels-pending-logins-f24-logout.json"
+    },
+    {
+      "bullet": "Pending logins and restarts (`F24.pending-lost-on-restart`).",
+      "ids": [
+        "F24.pending-lost-on-restart"
+      ],
+      "line": 389,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12178,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-14-pending-logins-and-restarts-f24-pending-.json"
+    },
+    {
+      "bullet": "TypeScript client (`F24.ts-client`).",
+      "ids": [
+        "F24.ts-client"
+      ],
+      "line": 402,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2077,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-15-typescript-client-f24-ts-client.json"
+    },
+    {
+      "bullet": "Offline-safe routes (`F24.offline-safe`).",
+      "ids": [
+        "F24.offline-safe"
+      ],
+      "line": 414,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12720,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-16-offline-safe-routes-f24-offline-safe.json"
+    },
+    {
+      "bullet": "Outage during a pending login (`F24.device-poll-outage`).",
+      "ids": [
+        "F24.device-poll-outage"
+      ],
+      "line": 433,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17566,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-17-outage-during-a-pending-login-f24-device.json"
+    },
+    {
+      "bullet": "Status with an expired login offline (`F24.status-offline`).",
+      "ids": [
+        "F24.status-offline"
+      ],
+      "line": 457,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11356,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-18-status-with-an-expired-login-offline-f24.json"
+    },
+    {
+      "bullet": "Start and poll a login offline (`F24.device-start-offline`).",
+      "ids": [
+        "F24.device-start-offline"
+      ],
+      "line": 485,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11894,
+      "transcript": "<scratch>/agent-server/20261120-090135-bacf-map-f24/evidence/map-run/F24-openai-subscription-19-start-and-poll-a-login-offline-f24-devic.json"
+    },
+    {
+      "bullet": "Complete a login (`F24.login-complete`), blocked.",
+      "ids": [
+        "F24.login-complete"
+      ],
+      "status": "blocked"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-090135-bacf-map-f24",
+  "launch_flags": []
+}

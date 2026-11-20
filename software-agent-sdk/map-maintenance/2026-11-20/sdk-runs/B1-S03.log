@@ -1,0 +1,333 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B1-S03",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 19,
+    "fail": 2,
+    "blocked": 3
+  },
+  "results": [
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 1,
+      "ids": [
+        "S03.registry-crud",
+        "S03.registry-independent-metrics",
+        "S03.registry-stats-wiring"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-01.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 2,
+      "ids": [
+        "S03.registry-stats-wiring"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-02.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 3,
+      "ids": [
+        "S03.session-per-conversation"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-03.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 4,
+      "ids": [
+        "S03.agent-llm-discovery"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-04.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 5,
+      "ids": [
+        "S03.multimodal-router-images",
+        "S03.multimodal-router-text"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-05.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 6,
+      "ids": [
+        "S03.router-validation",
+        "S03.random-router"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-06.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 7,
+      "ids": [
+        "S03.model-router-selection"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-07.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 8,
+      "ids": [
+        "S03.model-router-add-route"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-08.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 9,
+      "ids": [
+        "S03.model-router-switch-replaces"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-09.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 10,
+      "ids": [
+        "S03.model-router-before-first-run"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-10.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 11,
+      "ids": [
+        "S03.fallback-transient",
+        "S03.fallback-skip",
+        "S03.fallback-metrics",
+        "S03.fallback-profile-resolution"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-11.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 12,
+      "ids": [
+        "S03.profile-save-load",
+        "S03.profile-secrets",
+        "S03.profile-concurrency-limits",
+        "S03.profile-migration"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-12.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 13,
+      "ids": [
+        "S03.provider-connections"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-13.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 14,
+      "ids": [
+        "S03.switch-profile"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-14.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 15,
+      "ids": [
+        "S03.switch-llm-object"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-15.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 16,
+      "ids": [
+        "S03.switch-keeps-usage"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-16.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 17,
+      "ids": [
+        "S03.switch-llm-tool"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-17.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 18,
+      "ids": [
+        "S03.route-task-to-model"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-18.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 19,
+      "ids": [
+        "S03.meta-profile-store"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-19.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 20,
+      "ids": [
+        "S03.subscription-login",
+        "S03.subscription-requests"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-20.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 21,
+      "ids": [
+        "S03.switch-profile",
+        "S03.registry-stats-wiring"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "block 1 is blocked (exit 3: a missing prerequisite)",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-21.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 22,
+      "ids": [
+        "S03.registry-crud",
+        "S03.profile-save-load",
+        "S03.fallback-transient"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S03/transcripts/S03-llm-routing-profiles-22.log"
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 23,
+      "ids": [
+        "S03.multimodal-router-images",
+        "S03.switch-profile",
+        "S03.switch-llm-tool",
+        "S03.route-task-to-model"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    },
+    {
+      "family": "S03-llm-routing-profiles.md",
+      "bullet": 24,
+      "ids": [
+        "S03.subscription-login"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}

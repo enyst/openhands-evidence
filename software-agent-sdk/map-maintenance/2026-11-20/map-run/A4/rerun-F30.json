@@ -1,0 +1,236 @@
+{
+  "ok": false,
+  "file": "F30-openai-gateway.md",
+  "summary": {
+    "pass": 1,
+    "fail": 14,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 100,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2261,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-00-preconditions.json"
+    },
+    {
+      "bullet": "Model list (`F30.models-list`).",
+      "ids": [
+        "F30.models-list"
+      ],
+      "line": 128,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 348,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-01-model-list-f30-models-list.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server api GET /v1/models --auth bearer --expect 200 --check object eq list --check data len-eq 2 --check data.0.id eq openhands_deepseek-flash --check data.1.id eq openhands_deepseek-pro --check data.0.object eq model --check data.0.owned_by eq openhands --check data.0.created eq 0 --save F30.models-list/list",
+      "stdout_tail": "     \"object\": \"model\",\n          \"owned_by\": \"openhands\"\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 66,\n  \"checks\": [\n    {\n      \"check\": \"object eq list\",\n      \"ok\": true,\n      \"actual\": \"list\"\n    },\n    {\n      \"check\": \"data len-eq 2\",\n      \"ok\": false,\n      \"actual\": \"[{\\\"id\\\": \\\"openhands_deepseek-flash\\\", \\\"created\\\": 0, \\\"object\\\": \\\"model\\\", \\\"owned_by\\\": \\\"openhands\\\"}]\"\n    },\n    {\n      \"check\": \"data.0.id eq openhands_deepseek-flash\",\n      \"ok\": true,\n      \"actual\": \"openhands_deepseek-flash\"\n    },\n    {\n      \"check\": \"data.1.id eq openhands_deepseek-pro\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"data.0.object eq model\",\n      \"ok\": true,\n      \"actual\": \"model\"\n    },\n    {\n      \"check\": \"data.0.owned_by eq openhands\",\n      \"ok\": true,\n      \"actual\": \"openhands\"\n    },\n    {\n      \"check\": \"data.0.created eq 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/F30.models-list/list.json\",\n  \"hint\": \"failed check: data len-eq 2; data.1.id eq openhands_deepseek-pro\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Chat completion (`F30.chat-basic`).",
+      "ids": [
+        "F30.chat-basic"
+      ],
+      "line": 198,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 4654,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-02-chat-completion-f30-chat-basic.json",
+      "failed_line": 8,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$CID\" --check execution_status eq finished --check title missing --check agent.llm.model eq deepseek/deepseek-flash --check workspace.working_dir eq \"$AGENT_SERVER_VERIFY_RUN/server/workspace/project\" --quiet --save F30.chat-basic/conversation",
+      "stdout_tail": "ry\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6728\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 83,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    },\n    {\n      \"check\": \"title missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"agent.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"workspace.working_dir eq <scratch>/agent-server/20261120-094533-8063-map-f30/server/workspace/project\",\n      \"ok\": true,\n      \"actual\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/server/workspace/project\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/F30.chat-basic/conversation.json\",\n  \"hint\": \"failed check: agent.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Active Agent Profile (`F30.active-agent-profile`).",
+      "ids": [
+        "F30.active-agent-profile"
+      ],
+      "line": 242,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 3353,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-03-active-agent-profile-f30-active-agent-pr.json",
+      "failed_line": 10,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$GCID\" --expect 200 --quiet --check execution_status eq finished --check launched_agent_profile.agent_profile_id eq \"$GATEWAY_PROFILE\" --check launched_agent_profile.revision eq 0 --check agent.llm.model eq deepseek/deepseek-flash --check agent.tools len-eq 0 --check agent.agent_context.system_message_suffix eq \"$(printf 'QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_GATEWAY: use plain text.')\" --save F30.active-agent-profile/conv",
+      "stdout_tail": "d_ms\": 87,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    },\n    {\n      \"check\": \"launched_agent_profile.agent_profile_id eq d5e4e0f5-6790-4f54-a51a-b7c85dfa2d1c\",\n      \"ok\": true,\n      \"actual\": \"d5e4e0f5-6790-4f54-a51a-b7c85dfa2d1c\"\n    },\n    {\n      \"check\": \"launched_agent_profile.revision eq 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    },\n    {\n      \"check\": \"agent.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"agent.tools len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"agent.agent_context.system_message_suffix eq QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_GATEWAY: use plain text.\",\n      \"ok\": true,\n      \"actual\": \"QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_GATEWAY: use plain text.\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/F30.active-agent-profile/conversation.json\",\n  \"hint\": \"failed check: agent.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "System text goes to the system prompt (`F30.chat-system-suffix`).",
+      "ids": [
+        "F30.chat-system-suffix"
+      ],
+      "line": 288,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 392,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-04-system-text-goes-to-the-system-prompt-f3.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$CID\" --check agent.agent_context.system_message_suffix eq \"$(printf 'QA_F30_SYS: answer in one short sentence and never use tools.\\n\\nQA_F30_DEV: plain text only.')\" --quiet --save F30.chat-system-suffix/conversation",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:59257/api/conversations\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 68,\n  \"checks\": [\n    {\n      \"check\": \"agent.agent_context.system_message_suffix eq QA_F30_SYS: answer in one short sentence and never use tools.\\n\\nQA_F30_DEV: plain text only.\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/F30.chat-system-suffix/conversation.json\",\n  \"hint\": \"failed check: agent.agent_context.system_message_suffix eq QA_F30_SYS: answer in one short sentence and never use tools.\\n\\nQA_F30_DEV: plain text only.\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Only the latest user turn (`F30.chat-latest-user-only`).",
+      "ids": [
+        "F30.chat-latest-user-only"
+      ],
+      "line": 311,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 409,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-05-only-the-latest-user-turn-f30-chat-lates.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --check items len-eq 1 --check items.0.llm_message.content len-eq 1 --check items.0.llm_message.content.0.text eq 'QA_F30_NEW_TURN: say hello.' --save F30.chat-latest-user-only/user-events",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations//events/search\",\n    \"query\": [\n      [\n        \"source\",\n        \"user\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Not Found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 71,\n  \"checks\": [\n    {\n      \"check\": \"items len-eq 1\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content len-eq 1\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    },\n    {\n      \"check\": \"items.0.llm_message.content.0.text eq QA_F30_NEW_TURN: say hello.\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/F30.chat-latest-user-only/user-events.json\",\n  \"hint\": \"expected <400, got 404\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Continue with the header (`F30.chat-reuse-header`).",
+      "ids": [
+        "F30.chat-reuse-header"
+      ],
+      "line": 363,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 1322,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-06-continue-with-the-header-f30-chat-reuse-.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server ws start \"/sockets/events/$CID\" --name qa-f30-reuse --duration 300",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"capture\": \"qa-f30-reuse\",\n  \"out\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/captures/qa-f30-reuse.jsonl\",\n  \"hint\": \"`control-agent-server ws stop qa-f30-reuse` (or `ws read qa-f30-reuse`) after triggering the action\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Continue after a restart (`F30.chat-reuse-after-restart`).",
+      "ids": [
+        "F30.chat-reuse-after-restart"
+      ],
+      "line": 396,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 10408,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-07-continue-after-a-restart-f30-chat-reuse-.json",
+      "failed_line": 4,
+      "failed_command": "R=$(control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CID\" --json '{\"model\": \"openhands_deepseek-flash\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_AFTER_RESTART: reply with one short word and use no tools.\"}]}' --check choices.0.message.content len-ge 1 --save F30.chat-reuse-after-restart/third --print-header X-OpenHands-ServerConversation-ID)",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261120-094533-8063-map-f30\",\n  \"url\": \"http://127.0.0.1:59257\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 7353,\n  \"ready_path\": \"/ready\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Continuing keeps the conversation's LLM (`F30.chat-reuse-keeps-llm`).",
+      "ids": [
+        "F30.chat-reuse-keeps-llm"
+      ],
+      "line": 435,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 1609,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-08-continuing-keeps-the-conversation-s-llm-.json",
+      "failed_line": 7,
+      "failed_command": "R=$(control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CID\" --json '{\"model\": \"openhands_qa-f30-unused\", \"messages\": [{\"role\": \"system\", \"content\": \"QA_F30_LATE_SYS\"}, {\"role\": \"user\", \"content\": \"QA_F30_SWITCH: reply with one short word and use no tools.\"}]}' --check model eq openhands_qa-f30-unused --check choices.0.message.content ne QA_F30_UNUSED_REPLY --save F30.chat-reuse-keeps-llm/other-model --print-header X-OpenHa",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"profile\": {\n    \"profile\": \"qa-f30-unused\",\n    \"model\": \"openai/qa-stub\",\n    \"saved\": 201\n  }\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "The agent runs its own tools (`F30.chat-agent-tools`).",
+      "ids": [
+        "F30.chat-agent-tools"
+      ],
+      "line": 671,
+      "status": "fail",
+      "exit_code": 2,
+      "elapsed_ms": 5129,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-09-the-agent-runs-its-own-tools-f30-chat-ag.json",
+      "failed_line": 6,
+      "failed_command": "control-agent-server state cat server/workspace/project/qa_f30_tool.txt --contains QA_F30_TOOL_RAN",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"exit\": 2,\n  \"error\": \"server/workspace/project/qa_f30_tool.txt does not exist\",\n  \"example\": \"control-agent-server state ls 'home/.openhands/*'\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Confirmation stops a new conversation (`F30.chat-confirmation-409`).",
+      "ids": [
+        "F30.chat-confirmation-409"
+      ],
+      "line": 782,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 2139,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-10-confirmation-stops-a-new-conversation-f3.json",
+      "failed_line": 7,
+      "failed_command": "control-agent-server api POST /v1/chat/completions --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $CFID\" --json '{\"model\": \"openhands_qa-f30-confirm\", \"messages\": [{\"role\": \"user\", \"content\": \"QA_F30_CONFIRM\"}]}' --expect 409 --check detail eq 'Agent run ended with status: waiting_for_confirmation' --expect-max-ms 30000 --check-header x-openhands-serverconversation-id missing --save F30.chat-confirmation-409/conflict",
+      "stdout_tail": "   \"truncated\": false\n  },\n  \"elapsed_ms\": 74\n}\n{\n  \"ok\": false,\n  \"status\": 500,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/v1/chat/completions\",\n    \"query\": [],\n    \"auth\": \"bearer\",\n    \"body\": {\n      \"model\": \"openhands_qa-f30-confirm\",\n      \"messages\": [\n        {\n          \"role\": \"user\",\n          \"content\": \"QA_F30_CONFIRM\"\n        }\n      ]\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 500,\n    \"headers\": {\n      \"content-length\": \"88\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Internal Server Error\",\n      \"exception\": \"500: Agent run ended with status: stuck\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 337,\n  \"checks\": [\n    {\n      \"check\": \"detail eq Agent run ended with status: waiting_for_confirmation\",\n      \"ok\": false,\n      \"actual\": \"Internal Server Error\"\n    },\n    {\n      \"check\": \"header x-openhands-serverconversation-id missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/F30.chat-confirmation-409/conflict.json\",\n  \"hint\": \"expected 409, got 500\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Confirmation on a continued conversation (`F30.chat-reuse-confirmation`).",
+      "ids": [
+        "F30.chat-reuse-confirmation"
+      ],
+      "line": 806,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 23481,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-11-confirmation-on-a-continued-conversation.json",
+      "failed_line": 16,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$RCID\" --until-ok 20 --check execution_status eq waiting_for_confirmation --quiet --save F30.chat-reuse-confirmation/state-while-request-waits",
+      "stdout_tail": ": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"d5e4e0f5-6790-4f54-a51a-b7c85dfa2d1c\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 72\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/2d326925-f198-41e1-b915-9841ef179d3d\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6123\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 20148,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq waiting_for_confirmation\",\n      \"ok\": false,\n      \"actual\": \"stuck\"\n    }\n  ],\n  \"attempts\": 40,\n  \"saved\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/F30.chat-reuse-confirmation/state-while-request-waits.json\",\n  \"hint\": \"failed check: execution_status eq waiting_for_confirmation\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Run limit on a continued conversation (`F30.chat-reuse-run-limit-429`).",
+      "ids": [
+        "F30.chat-reuse-run-limit-429"
+      ],
+      "line": 870,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 20311,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-12-run-limit-on-a-continued-conversation-f3.json",
+      "failed_line": 9,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$CID/events/search\" --query source=user --query body=QA_F30_SECOND --check items len-eq 1 --quiet",
+      "stdout_tail": " \"running\"\n  ],\n  \"waited_ms\": 207\n}\n{\n  \"ok\": true,\n  \"requests\": 1,\n  \"paths\": {\n    \"/v1/chat/completions\": 1\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-20T09:46:48Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/chat/completions\\\", \\\"call\\\": 0, \\\"step\\\": {\\\"hang\\\": 300.0}, \\\"body\\\": {\\\"model\\\": \\\"qa-stub\\\", \\\"messages\\\": [{\\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<SOUL>\\\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\\\n</SOUL>\\\\n\\\\n<ROLE>\\\\n* Your primary role is to assist users by executing commands, modifying code\\u2026\"\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations//events/search\",\n    \"query\": [\n      [\n        \"source\",\n        \"user\"\n      ],\n      [\n        \"body\",\n        \"QA_F30_SECOND\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"22\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 61,\n  \"checks\": [\n    {\n      \"check\": \"items len-eq 1\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"hint\": \"expected <400, got 404\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Responses (`F30.responses-basic`).",
+      "ids": [
+        "F30.responses-basic"
+      ],
+      "line": 1022,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 4977,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-13-responses-f30-responses-basic.json",
+      "failed_line": 12,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$RID\" --check execution_status eq finished --check agent.agent_context.system_message_suffix eq 'QA_F30_INSTR: answer in plain text.' --quiet",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/0ca5d41c-1294-4301-8faa-c70b30ff5389\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6350\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 73,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    },\n    {\n      \"check\": \"agent.agent_context.system_message_suffix eq QA_F30_INSTR: answer in plain text.\",\n      \"ok\": false,\n      \"actual\": \"QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_INSTR: answer in plain text.\"\n    }\n  ],\n  \"hint\": \"failed check: agent.agent_context.system_message_suffix eq QA_F30_INSTR: answer in plain text.\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Stateless replay (`F30.responses-stateless-replay`).",
+      "ids": [
+        "F30.responses-stateless-replay"
+      ],
+      "line": 1056,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 3144,
+      "transcript": "<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/map-run/F30-openai-gateway-14-stateless-replay-f30-responses-stateless.json",
+      "failed_line": 12,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$R2\" --check agent.agent_context.system_message_suffix eq 'QA_F30_R_DEV: answer in plain text and use no tools.' --quiet",
+      "stdout_tail": " \\\"text\\\", \\\"text\\\": \\\"<message role=\\\\\\\"user\\\\\\\">\\\"}, {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA_F30_R1: remember the word apple.\\\"}, {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"te\\u2026\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-094533-8063-map-f30/evidence/F30.responses-stateless-replay/user-message.json\"\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/0cb58659-88d5-46f4-aa3c-afdf1917d722\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6367\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 79,\n  \"checks\": [\n    {\n      \"check\": \"agent.agent_context.system_message_suffix eq QA_F30_R_DEV: answer in plain text and use no tools.\",\n      \"ok\": false,\n      \"actual\": \"QA_F30_PROFILE: answer briefly and do not use tools.\\n\\nQA_F30_R_DEV: answer in plain text and use no tools.\"\n    }\n  ],\n  \"hint\": \"failed check: agent.agent_context.system_message_suffix eq QA_F30_R_DEV: answer in plain text and use no tools.\"\n}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-094533-8063-map-f30",
+  "launch_flags": []
+}

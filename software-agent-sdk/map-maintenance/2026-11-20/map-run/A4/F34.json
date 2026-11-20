@@ -1,0 +1,477 @@
+{
+  "ok": false,
+  "file": "F34-typescript-client.md",
+  "summary": {
+    "pass": 31,
+    "fail": 7,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 150,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3110,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-00-preconditions.json"
+    },
+    {
+      "bullet": "Server status and version gate (`F34.server-client`).",
+      "ids": [
+        "F34.server-client"
+      ],
+      "line": 260,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3002,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-01-server-status-and-version-gate-f34-serve.json"
+    },
+    {
+      "bullet": "Errors (`F34.http-errors`).",
+      "ids": [
+        "F34.http-errors"
+      ],
+      "line": 308,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2013,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-02-errors-f34-http-errors.json"
+    },
+    {
+      "bullet": "Workspace commands (`F34.workspace-exec`).",
+      "ids": [
+        "F34.workspace-exec"
+      ],
+      "line": 347,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2858,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-03-workspace-commands-f34-workspace-exec.json"
+    },
+    {
+      "bullet": "Workspace files (`F34.workspace-files`).",
+      "ids": [
+        "F34.workspace-files"
+      ],
+      "line": 376,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2032,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-04-workspace-files-f34-workspace-files.json"
+    },
+    {
+      "bullet": "Binary download through RemoteWorkspace (`F34.workspace-binary-download`), known bug.",
+      "ids": [
+        "F34.workspace-binary-download"
+      ],
+      "line": 409,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 1530,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-05-binary-download-through-remoteworkspace-.json",
+      "failed_line": 16,
+      "failed_command": "control-agent-server assert --json \"$F34/binary.json\" --check blob eq '[255, 0, 128, 254, 65]' --check file_size eq 5",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 862,\n  \"stdout_tail\": \"QA_F34_BINARY_READ\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/F34.workspace-binary-download/program.json\"\n}\n{\"blob\":[239,191,189,0,239,191,189,239,191,189,65],\"file_size\":11}{\n  \"ok\": false,\n  \"value\": {\n    \"blob\": [\n      239,\n      191,\n      189,\n      0,\n      239,\n      191,\n      189,\n      239,\n      191,\n      189,\n      65\n    ],\n    \"file_size\": 11\n  },\n  \"checks\": [\n    {\n      \"check\": \"blob eq [255, 0, 128, 254, 65]\",\n      \"ok\": false,\n      \"actual\": \"[239, 191, 189, 0, 239, 191, 189, 239, 191, 189, 65]\"\n    },\n    {\n      \"check\": \"file_size eq 5\",\n      \"ok\": false,\n      \"actual\": \"11\"\n    }\n  ],\n  \"hint\": \"failed check: blob eq [255, 0, 128, 254, 65]; file_size eq 5\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "value.file_size eq 11 && value.blob eq '[239, 191, 189, 0, 239, 191, 189, 239, 191, 189, 65]'"
+    },
+    {
+      "bullet": "Conversation-scoped workspace (`F34.workspace-scoped`).",
+      "ids": [
+        "F34.workspace-scoped"
+      ],
+      "line": 438,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1621,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-06-conversation-scoped-workspace-f34-worksp.json"
+    },
+    {
+      "bullet": "Git through RemoteWorkspace (`F34.workspace-git`).",
+      "ids": [
+        "F34.workspace-git"
+      ],
+      "line": 468,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2856,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-07-git-through-remoteworkspace-f34-workspac.json"
+    },
+    {
+      "bullet": "Git status type (`F34.workspace-git-types`).",
+      "ids": [
+        "F34.workspace-git-types"
+      ],
+      "line": 506,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5773,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-08-git-status-type-f34-workspace-git-types.json"
+    },
+    {
+      "bullet": "Bash client (`F34.bash-client`).",
+      "ids": [
+        "F34.bash-client"
+      ],
+      "line": 541,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7543,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-09-bash-client-f34-bash-client.json"
+    },
+    {
+      "bullet": "Bash events socket from Node (`F34.bash-websocket`).",
+      "ids": [
+        "F34.bash-websocket"
+      ],
+      "line": 590,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5242,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-10-bash-events-socket-from-node-f34-bash-we.json"
+    },
+    {
+      "bullet": "Workspace session (`F34.workspace-session`).",
+      "ids": [
+        "F34.workspace-session"
+      ],
+      "line": 622,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1749,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-11-workspace-session-f34-workspace-session.json"
+    },
+    {
+      "bullet": "Create a conversation (`F34.conversation-create`).",
+      "ids": [
+        "F34.conversation-create"
+      ],
+      "line": 651,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1994,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-12-create-a-conversation-f34-conversation-c.json"
+    },
+    {
+      "bullet": "Send and run (`F34.conversation-run`).",
+      "ids": [
+        "F34.conversation-run"
+      ],
+      "line": 682,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 2359,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-13-send-and-run-f34-conversation-run.json",
+      "failed_line": 29,
+      "failed_command": "control-agent-server exec --timeout 300 --expect-output QA_F34_RUN_OK --save F34.conversation-run/program -- node \"$F34/run.mjs\" \"$CID\"",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 2064,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"node:internal/modules/run_main:123\\n    triggerUncaughtException(\\n    ^\\n\\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\\n+ actual - expected\\n\\n+ 'error'\\n- 'finished'\\n\\n    at file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/run.mjs:16:8\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {\\n  generatedMessage: true,\\n  code: 'ERR_ASSERTION',\\n  actual: 'error',\\n  expected: 'finished',\\n  operator: 'strictEqual',\\n  diff: 'simple'\\n}\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_RUN_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/F34.conversation-run/program.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Events list (`F34.events-list`).",
+      "ids": [
+        "F34.events-list"
+      ],
+      "line": 759,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 1791,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-14-events-list-f34-events-list.json",
+      "failed_line": 26,
+      "failed_command": "control-agent-server exec --timeout 60 --expect-output QA_F34_EVENTS_OK --save F34.events-list/program -- node \"$F34/events.mjs\" \"$CID\" \"$TOTAL\"",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 1057,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"node:internal/modules/run_main:123\\n    triggerUncaughtException(\\n    ^\\n\\nAssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\\n\\n  assert.ok(actions.items.length >= 1 && actions.items.every((e) => e.kind === 'ActionEvent'))\\n\\n    at file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/events.mjs:11:8\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {\\n  generatedMessage: true,\\n  code: 'ERR_ASSERTION',\\n  actual: false,\\n  expected: true,\\n  operator: '==',\\n  diff: 'simple'\\n}\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_EVENTS_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/F34.events-list/program.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Unknown event id (`F34.events-unknown-id`).",
+      "ids": [
+        "F34.events-unknown-id"
+      ],
+      "line": 796,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1846,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-15-unknown-event-id-f34-events-unknown-id.json"
+    },
+    {
+      "bullet": "Short event kinds (`F34.events-search-kind`).",
+      "ids": [
+        "F34.events-search-kind"
+      ],
+      "line": 824,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1335,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-16-short-event-kinds-f34-events-search-kind.json"
+    },
+    {
+      "bullet": "Event stream on Node's WebSocket (`F34.event-stream`).",
+      "ids": [
+        "F34.event-stream"
+      ],
+      "line": 849,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 241725,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-17-event-stream-on-node-s-websocket-f34-eve.json",
+      "failed_line": 38,
+      "failed_command": "control-agent-server exec --timeout 300 --expect-output QA_F34_STREAM_OK --save F34.event-stream/program -- node \"$F34/stream.mjs\" \"$CID\" \"$TOTAL\"",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 241026,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/lib.mjs:15\\n    if (Date.now() > end) throw new Error('waitFor timed out');\\n                                ^\\n\\nError: waitFor timed out\\n    at waitFor (file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/lib.mjs:15:33)\\n    at async file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/stream.mjs:18:1\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_STREAM_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/F34.event-stream/program.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Conversation callback socket from Node (`F34.ws-callback-client`).",
+      "ids": [
+        "F34.ws-callback-client"
+      ],
+      "line": 903,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7242,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-18-conversation-callback-socket-from-node-f.json"
+    },
+    {
+      "bullet": "Title and confirmation policy (`F34.conversation-controls`).",
+      "ids": [
+        "F34.conversation-controls"
+      ],
+      "line": 934,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4595,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-19-title-and-confirmation-policy-f34-conver.json"
+    },
+    {
+      "bullet": "Conversation manager (`F34.manager`).",
+      "ids": [
+        "F34.manager"
+      ],
+      "line": 957,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 3582,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-20-conversation-manager-f34-manager.json",
+      "failed_line": 28,
+      "failed_command": "control-agent-server exec --timeout 60 --expect-output QA_F34_MANAGER_OK --save F34.manager/program -- node \"$F34/manager.mjs\" \"$CID\" \"$SCID\" \"$COUNT\" \"$FINISHED\"",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 1649,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"node:internal/modules/run_main:123\\n    triggerUncaughtException(\\n    ^\\n\\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\\n+ actual - expected\\n\\n+ 'error'\\n- 'finished'\\n\\n    at file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/manager.mjs:12:8\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {\\n  generatedMessage: true,\\n  code: 'ERR_ASSERTION',\\n  actual: 'error',\\n  expected: 'finished',\\n  operator: 'strictEqual',\\n  diff: 'simple'\\n}\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_MANAGER_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/F34.manager/program.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Batches above the server limit (`F34.manager-batch-over-limit`).",
+      "ids": [
+        "F34.manager-batch-over-limit"
+      ],
+      "line": 998,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3271,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-21-batches-above-the-server-limit-f34-manag.json"
+    },
+    {
+      "bullet": "Update result (`F34.manager-update-result`).",
+      "ids": [
+        "F34.manager-update-result"
+      ],
+      "line": 1036,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2601,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-22-update-result-f34-manager-update-result.json"
+    },
+    {
+      "bullet": "Create options (`F34.manager-create-options`).",
+      "ids": [
+        "F34.manager-create-options"
+      ],
+      "line": 1062,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2767,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-23-create-options-f34-manager-create-option.json"
+    },
+    {
+      "bullet": "ACP conversations (`F34.manager-acp`).",
+      "ids": [
+        "F34.manager-acp"
+      ],
+      "line": 1095,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3490,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-24-acp-conversations-f34-manager-acp.json"
+    },
+    {
+      "bullet": "Fork, navigate and ask (`F34.conversation-branching`).",
+      "ids": [
+        "F34.conversation-branching"
+      ],
+      "line": 1131,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 8737,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-25-fork-navigate-and-ask-f34-conversation-b.json",
+      "failed_line": 36,
+      "failed_command": "control-agent-server exec --timeout 180 --expect-output QA_F34_BRANCHING_OK --save F34.conversation-branching/program -- node \"$F34/branching.mjs\" \"$CID\" \"$TOTAL\"",
+      "stdout_tail": "software-agent-sdk/clients/typescript/dist/client/http-client.js:200:23)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\\n    at async RemoteConversation.askAgent (file:///home/user/software-agent-sdk/clients/typescript/dist/conversation/remote-conversation.js:194:26)\\n    at async file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/branching.mjs:23:22 {\\n  status: 500,\\n  statusText: 'Internal Server Error',\\n  response: {\\n    detail: 'Internal Server Error',\\n    exception: 'litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 78841881-57d7-4c63-bbdb-4b74bbaf4c58)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}',\\n    error_id: 'bbc83bf42c19495caaa36ebf7f6978ba'\\n  }\\n}\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_BRANCHING_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/F34.conversation-branching/program.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Confirmation and secrets (`F34.conversation-confirm`).",
+      "ids": [
+        "F34.conversation-confirm"
+      ],
+      "line": 1193,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 7368,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-26-confirmation-and-secrets-f34-conversatio.json",
+      "failed_line": 48,
+      "failed_command": "control-agent-server exec --timeout 600 --env QA_F34_SECRET=\"$QA_F34_SECRET\" --expect-output QA_F34_CONFIRM_OK --save F34.conversation-confirm/program -- node \"$F34/confirm.mjs\"",
+      "stdout_tail": "e://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/confirm.mjs:17\\n  if (['error', 'stuck'].includes(status)) throw new Error(`conversation ${status}`);\\n                                                 ^\\n\\nError: conversation error\\n    at file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/confirm.mjs:17:50\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\\n    at async waitFor (file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/lib.mjs:13:19)\\n    at async file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/confirm.mjs:26:9\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_CONFIRM_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/F34.conversation-confirm/program.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Hooks (`F34.hooks-client`).",
+      "ids": [
+        "F34.hooks-client"
+      ],
+      "line": 1276,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1726,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-27-hooks-f34-hooks-client.json"
+    },
+    {
+      "bullet": "MCP test (`F34.mcp-client`).",
+      "ids": [
+        "F34.mcp-client"
+      ],
+      "line": 1304,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7068,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-28-mcp-test-f34-mcp-client.json"
+    },
+    {
+      "bullet": "Restart (`F34.restart-reload`).",
+      "ids": [
+        "F34.restart-reload"
+      ],
+      "line": 1332,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 12136,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-29-restart-f34-restart-reload.json",
+      "failed_line": 15,
+      "failed_command": "control-agent-server exec --timeout 60 --expect-output QA_F34_RESTART_OK --save F34.restart-reload/program -- node \"$F34/restart.mjs\" \"$CID\" \"$TOTAL\"",
+      "stdout_tail": "-server/20261120-085043-d72f-map-f34\",\n  \"url\": \"http://127.0.0.1:40443\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 7979,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 1449,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"node:internal/modules/run_main:123\\n    triggerUncaughtException(\\n    ^\\n\\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\\n+ actual - expected\\n\\n+ 'error'\\n- 'finished'\\n\\n    at file://<scratch>/agent-server/20261120-085043-d72f-map-f34/fixtures/qa-f34/restart.mjs:5:8\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {\\n  generatedMessage: true,\\n  code: 'ERR_ASSERTION',\\n  actual: 'error',\\n  expected: 'finished',\\n  operator: 'strictEqual',\\n  diff: 'simple'\\n}\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F34_RESTART_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/F34.restart-reload/program.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Event stream reconnect (`F34.event-stream-reconnect`).",
+      "ids": [
+        "F34.event-stream-reconnect"
+      ],
+      "line": 1355,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 21741,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-30-event-stream-reconnect-f34-event-stream-.json"
+    },
+    {
+      "bullet": "Reconnect on Node's own WebSocket (`F34.event-stream-reconnect-native`).",
+      "ids": [
+        "F34.event-stream-reconnect-native"
+      ],
+      "line": 1388,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 25249,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-31-reconnect-on-node-s-own-websocket-f34-ev.json"
+    },
+    {
+      "bullet": "Batch events by POST (`F34.events-batch-post`).",
+      "ids": [
+        "F34.events-batch-post"
+      ],
+      "line": 1420,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2019,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-32-batch-events-by-post-f34-events-batch-po.json"
+    },
+    {
+      "bullet": "Load a plugin (`F34.load-plugin`).",
+      "ids": [
+        "F34.load-plugin"
+      ],
+      "line": 1451,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4312,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-33-load-a-plugin-f34-load-plugin.json"
+    },
+    {
+      "bullet": "Commits (`F34.git-commits`).",
+      "ids": [
+        "F34.git-commits"
+      ],
+      "line": 1487,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1878,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-34-commits-f34-git-commits.json"
+    },
+    {
+      "bullet": "Archives (`F34.file-archive`).",
+      "ids": [
+        "F34.file-archive"
+      ],
+      "line": 1526,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1486,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-35-archives-f34-file-archive.json"
+    },
+    {
+      "bullet": "Deferred init (`F34.init-client`).",
+      "ids": [
+        "F34.init-client"
+      ],
+      "line": 1574,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11573,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-36-deferred-init-f34-init-client.json"
+    },
+    {
+      "bullet": "Endpoint audit against this checkout (`F34.endpoint-audit`).",
+      "ids": [
+        "F34.endpoint-audit"
+      ],
+      "line": 1615,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16981,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-37-endpoint-audit-against-this-checkout-f34.json"
+    },
+    {
+      "bullet": "Old server version (`F34.version-gate-old`).",
+      "ids": [
+        "F34.version-gate-old"
+      ],
+      "line": 1660,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22475,
+      "transcript": "<scratch>/agent-server/20261120-085043-d72f-map-f34/evidence/map-run/F34-typescript-client-38-old-server-version-f34-version-gate-old.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-085043-d72f-map-f34",
+  "launch_flags": []
+}

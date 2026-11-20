@@ -1,0 +1,411 @@
+{
+  "ok": true,
+  "file": "F18-settings-and-secrets.md",
+  "summary": {
+    "pass": 36,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 122,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 18,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-00-preconditions.json"
+    },
+    {
+      "bullet": "Fresh defaults (`F18.get-defaults`).",
+      "ids": [
+        "F18.get-defaults"
+      ],
+      "line": 275,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1009,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-01-fresh-defaults-f18-get-defaults.json"
+    },
+    {
+      "bullet": "Agent settings schema (`F18.agent-schema`).",
+      "ids": [
+        "F18.agent-schema"
+      ],
+      "line": 288,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 404,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-02-agent-settings-schema-f18-agent-schema.json"
+    },
+    {
+      "bullet": "Conversation settings schema (`F18.conversation-schema`).",
+      "ids": [
+        "F18.conversation-schema"
+      ],
+      "line": 302,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 420,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-03-conversation-settings-schema-f18-convers.json"
+    },
+    {
+      "bullet": "Key required (`F18.auth-required`).",
+      "ids": [
+        "F18.auth-required"
+      ],
+      "line": 316,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5672,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-04-key-required-f18-auth-required.json"
+    },
+    {
+      "bullet": "Set the LLM (`F18.patch-llm`).",
+      "ids": [
+        "F18.patch-llm"
+      ],
+      "line": 333,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 964,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-05-set-the-llm-f18-patch-llm.json"
+    },
+    {
+      "bullet": "Exposure modes (`F18.expose-modes`).",
+      "ids": [
+        "F18.expose-modes"
+      ],
+      "line": 347,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2672,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-06-exposure-modes-f18-expose-modes.json"
+    },
+    {
+      "bullet": "Post back what GET returned (`F18.roundtrip`).",
+      "ids": [
+        "F18.roundtrip"
+      ],
+      "line": 360,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2688,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-07-post-back-what-get-returned-f18-roundtri.json"
+    },
+    {
+      "bullet": "Sparse agent diff and unset (`F18.agent-diff-merge`).",
+      "ids": [
+        "F18.agent-diff-merge"
+      ],
+      "line": 378,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1575,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-08-sparse-agent-diff-and-unset-f18-agent-di.json"
+    },
+    {
+      "bullet": "Conversation settings (`F18.conversation-diff`).",
+      "ids": [
+        "F18.conversation-diff"
+      ],
+      "line": 394,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1600,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-09-conversation-settings-f18-conversation-d.json"
+    },
+    {
+      "bullet": "Opaque misc settings (`F18.misc-settings-merge`).",
+      "ids": [
+        "F18.misc-settings-merge"
+      ],
+      "line": 408,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2004,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-10-opaque-misc-settings-f18-misc-settings-m.json"
+    },
+    {
+      "bullet": "Rejected PATCH bodies (`F18.patch-validation`).",
+      "ids": [
+        "F18.patch-validation"
+      ],
+      "line": 423,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3124,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-11-rejected-patch-bodies-f18-patch-validati.json"
+    },
+    {
+      "bullet": "Active LLM profile pointer (`F18.active-profile-pointer`).",
+      "ids": [
+        "F18.active-profile-pointer"
+      ],
+      "line": 440,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5050,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-12-active-llm-profile-pointer-f18-active-pr.json"
+    },
+    {
+      "bullet": "Agent kind switch (`F18.agent-kind-switch`).",
+      "ids": [
+        "F18.agent-kind-switch"
+      ],
+      "line": 466,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3900,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-13-agent-kind-switch-f18-agent-kind-switch.json"
+    },
+    {
+      "bullet": "Upsert, list and read a secret (`F18.secret-put-list-get`).",
+      "ids": [
+        "F18.secret-put-list-get"
+      ],
+      "line": 499,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4025,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-14-upsert-list-and-read-a-secret-f18-secret.json"
+    },
+    {
+      "bullet": "Delete a secret (`F18.secret-delete`).",
+      "ids": [
+        "F18.secret-delete"
+      ],
+      "line": 518,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3700,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-15-delete-a-secret-f18-secret-delete.json"
+    },
+    {
+      "bullet": "Secret names (`F18.secret-name-validation`).",
+      "ids": [
+        "F18.secret-name-validation"
+      ],
+      "line": 529,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5944,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-16-secret-names-f18-secret-name-validation.json"
+    },
+    {
+      "bullet": "Encrypted at rest (`F18.encrypted-at-rest`).",
+      "ids": [
+        "F18.encrypted-at-rest"
+      ],
+      "line": 550,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1840,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-17-encrypted-at-rest-f18-encrypted-at-rest.json"
+    },
+    {
+      "bullet": "Secrets scoped by an agent profile (`F18.secret-scope-agent-profile`).",
+      "ids": [
+        "F18.secret-scope-agent-profile"
+      ],
+      "line": 565,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6983,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-18-secrets-scoped-by-an-agent-profile-f18-s.json"
+    },
+    {
+      "bullet": "SDK consumer (`F18.sdk-remote-workspace`).",
+      "ids": [
+        "F18.sdk-remote-workspace"
+      ],
+      "line": 593,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6738,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-19-sdk-consumer-f18-sdk-remote-workspace.json"
+    },
+    {
+      "bullet": "SDK clones with the stored token (`F18.sdk-clone-repos`).",
+      "ids": [
+        "F18.sdk-clone-repos"
+      ],
+      "line": 603,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10521,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-20-sdk-clones-with-the-stored-token-f18-sdk.json"
+    },
+    {
+      "bullet": "TypeScript client (`F18.ts-client`).",
+      "ids": [
+        "F18.ts-client"
+      ],
+      "line": 636,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4637,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-21-typescript-client-f18-ts-client.json"
+    },
+    {
+      "bullet": "Persistence across a restart (`F18.persist-restart`).",
+      "ids": [
+        "F18.persist-restart"
+      ],
+      "line": 662,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15413,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-22-persistence-across-a-restart-f18-persist.json"
+    },
+    {
+      "bullet": "Experimental features (`F18.experimental-features`).",
+      "ids": [
+        "F18.experimental-features"
+      ],
+      "line": 677,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2908,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-23-experimental-features-f18-experimental-f.json"
+    },
+    {
+      "bullet": "Upgrade from the latest release (`F18.upgrade-from-release`).",
+      "ids": [
+        "F18.upgrade-from-release"
+      ],
+      "line": 703,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 36247,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-24-upgrade-from-the-latest-release-f18-upgr.json"
+    },
+    {
+      "bullet": "Corrupted files (`F18.corrupted-files`).",
+      "ids": [
+        "F18.corrupted-files"
+      ],
+      "line": 735,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4541,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-25-corrupted-files-f18-corrupted-files.json"
+    },
+    {
+      "bullet": "No cipher (`F18.no-cipher`).",
+      "ids": [
+        "F18.no-cipher"
+      ],
+      "line": 774,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11308,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-26-no-cipher-f18-no-cipher.json"
+    },
+    {
+      "bullet": "Placeholder secret value (`F18.secret-empty-value`).",
+      "ids": [
+        "F18.secret-empty-value"
+      ],
+      "line": 797,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1950,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-27-placeholder-secret-value-f18-secret-empt.json"
+    },
+    {
+      "bullet": "Empty secret value (`F18.secret-empty-value`).",
+      "ids": [
+        "F18.secret-empty-value"
+      ],
+      "line": 820,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2689,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-28-empty-secret-value-f18-secret-empty-valu.json"
+    },
+    {
+      "bullet": "Dangling agent-profile pointer (`F18.dangling-pointers`).",
+      "ids": [
+        "F18.dangling-pointers"
+      ],
+      "line": 837,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1637,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-29-dangling-agent-profile-pointer-f18-dangl.json"
+    },
+    {
+      "bullet": "Dangling meta-profile pointer (`F18.dangling-pointers`).",
+      "ids": [
+        "F18.dangling-pointers"
+      ],
+      "line": 857,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1984,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-30-dangling-meta-profile-pointer-f18-dangli.json"
+    },
+    {
+      "bullet": "Agent profile that no longer loads (`F18.secret-scope-profile-errors`).",
+      "ids": [
+        "F18.secret-scope-profile-errors"
+      ],
+      "line": 875,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2082,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-31-agent-profile-that-no-longer-loads-f18-s.json"
+    },
+    {
+      "bullet": "Agent-profile store busy (`F18.secret-scope-profile-errors`).",
+      "ids": [
+        "F18.secret-scope-profile-errors"
+      ],
+      "line": 898,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 75014,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-32-agent-profile-store-busy-f18-secret-scop.json"
+    },
+    {
+      "bullet": "Documented status for an invalid name (`F18.secret-name-contract`).",
+      "ids": [
+        "F18.secret-name-contract"
+      ],
+      "line": 920,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2671,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-33-documented-status-for-an-invalid-name-f1.json"
+    },
+    {
+      "bullet": "Cipher key lost (`F18.secret-key-rotation`).",
+      "ids": [
+        "F18.secret-key-rotation"
+      ],
+      "line": 933,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 42251,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-34-cipher-key-lost-f18-secret-key-rotation.json"
+    },
+    {
+      "bullet": "Supported key rotation (`F18.secret-key-previous-keys`).",
+      "ids": [
+        "F18.secret-key-previous-keys"
+      ],
+      "line": 973,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 21168,
+      "transcript": "<scratch>/agent-server/20261120-084658-2cac-map-f18/evidence/map-run/F18-settings-and-secrets-35-supported-key-rotation-f18-secret-key-pr.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-084658-2cac-map-f18",
+  "launch_flags": []
+}

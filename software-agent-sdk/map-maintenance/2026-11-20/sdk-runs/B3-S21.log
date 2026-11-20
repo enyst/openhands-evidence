@@ -1,0 +1,225 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B3-S21",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 12,
+    "fail": 2,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 1,
+      "ids": [
+        "S21.construct",
+        "S21.step",
+        "S21.tool-call-events",
+        "S21.permissions-auto-approve",
+        "S21.usage-cost",
+        "S21.mcp-forwarding",
+        "S21.secrets-env",
+        "S21.masking",
+        "S21.model-selection",
+        "S21.model-switch",
+        "S21.init-state",
+        "S21.cleanup"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-01.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 2,
+      "ids": [
+        "S21.ask-agent"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-02.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 3,
+      "ids": [
+        "S21.session-resume",
+        "S21.model-selection"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-03.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 4,
+      "ids": [
+        "S21.init-state"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-04.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 5,
+      "ids": [
+        "S21.npx-cache-warm"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-05.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 6,
+      "ids": [
+        "S21.timeouts-retry"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-06.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 7,
+      "ids": [
+        "S21.timeouts-retry"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-07.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 8,
+      "ids": [
+        "S21.cancel-pause"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-08.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 9,
+      "ids": [
+        "S21.file-secrets",
+        "S21.auth-selection",
+        "S21.model-selection",
+        "S21.secrets-env"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-09.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 10,
+      "ids": [
+        "S21.model-discovery",
+        "S21.settings"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-10.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 11,
+      "ids": [
+        "S21.effort",
+        "S21.effort-switch",
+        "S21.model-discovery",
+        "S21.settings"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-11.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 12,
+      "ids": [
+        "S21.tracing"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-12.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 13,
+      "ids": [
+        "S21.provider-registry"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-13.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 14,
+      "ids": [
+        "S21.handshake-live",
+        "S21.provider-registry"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S21/transcripts/S21-acp-agent-14.log"
+    },
+    {
+      "family": "S21-acp-agent.md",
+      "bullet": 15,
+      "ids": [
+        "S21.live-turn",
+        "S21.step",
+        "S21.ask-agent",
+        "S21.usage-cost"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}

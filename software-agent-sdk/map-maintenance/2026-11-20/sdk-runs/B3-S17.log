@@ -1,0 +1,166 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B3-S17",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 9,
+    "fail": 1
+  },
+  "results": [
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 1,
+      "ids": [
+        "S17.custom-tool-definition",
+        "S17.tool-set",
+        "S17.resolve-tool",
+        "S17.annotations-and-resources",
+        "S17.execute-tool",
+        "S17.tool-spec"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-01.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 2,
+      "ids": [
+        "S17.register-tool",
+        "S17.resolve-tool",
+        "S17.auto-naming",
+        "S17.auto-registration",
+        "S17.tool-spec",
+        "S17.usability",
+        "S17.catalog",
+        "S17.module-qualnames"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-02.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 3,
+      "ids": [
+        "S17.llm-schemas",
+        "S17.injected-fields",
+        "S17.annotations-and-resources",
+        "S17.custom-tool-definition",
+        "S17.py-type",
+        "S17.output-coercion",
+        "S17.schema-serialization"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-03.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 4,
+      "ids": [
+        "S17.schema-constraints"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-04.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 5,
+      "ids": [
+        "S17.schema-serialization"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-05.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 6,
+      "ids": [
+        "S17.agent-tool-init"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-06.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 7,
+      "ids": [
+        "S17.client-tool-ack",
+        "S17.client-tool-schema",
+        "S17.client-tools-conversation"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-07.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 8,
+      "ids": [
+        "S17.client-tool-spec",
+        "S17.client-tool-registration",
+        "S17.client-tools-conversation"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-08.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 9,
+      "ids": [
+        "S17.custom-tool-definition",
+        "S17.tool-set"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-09.log"
+    },
+    {
+      "family": "S17-custom-and-client-tools.md",
+      "bullet": 10,
+      "ids": [
+        "S17.client-tools-conversation",
+        "S17.client-tool-ack"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S17/transcripts/S17-custom-and-client-tools-10.log"
+    }
+  ]
+}

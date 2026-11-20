@@ -1,0 +1,290 @@
+{
+  "ok": true,
+  "file": "F17-workspaces-registry.md",
+  "summary": {
+    "pass": 25,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 78,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 451,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-00-preconditions.json"
+    },
+    {
+      "bullet": "Empty registry (`F17.list-empty`).",
+      "ids": [
+        "F17.list-empty"
+      ],
+      "line": 162,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 784,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-01-empty-registry-f17-list-empty.json"
+    },
+    {
+      "bullet": "A refused delete on a fresh directory (`F17.noop-delete-no-file`).",
+      "ids": [
+        "F17.noop-delete-no-file"
+      ],
+      "line": 170,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1827,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-02-a-refused-delete-on-a-fresh-directory-f1.json"
+    },
+    {
+      "bullet": "Register a repository and a plain directory (`F17.add-workspaces`).",
+      "ids": [
+        "F17.add-workspaces"
+      ],
+      "line": 186,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1293,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-03-register-a-repository-and-a-plain-direct.json"
+    },
+    {
+      "bullet": "Wire format (`F17.wire-format`).",
+      "ids": [
+        "F17.wire-format"
+      ],
+      "line": 199,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1024,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-04-wire-format-f17-wire-format.json"
+    },
+    {
+      "bullet": "Idempotent re-add (`F17.idempotent-add`).",
+      "ids": [
+        "F17.idempotent-add"
+      ],
+      "line": 219,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1054,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-05-idempotent-re-add-f17-idempotent-add.json"
+    },
+    {
+      "bullet": "Delete a workspace (`F17.delete-workspace`).",
+      "ids": [
+        "F17.delete-workspace"
+      ],
+      "line": 233,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1001,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-06-delete-a-workspace-f17-delete-workspace.json"
+    },
+    {
+      "bullet": "Unknown paths (`F17.delete-not-found`).",
+      "ids": [
+        "F17.delete-not-found"
+      ],
+      "line": 245,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1856,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-07-unknown-paths-f17-delete-not-found.json"
+    },
+    {
+      "bullet": "No-op writes leave the file alone (`F17.noop-write-untouched`).",
+      "ids": [
+        "F17.noop-write-untouched"
+      ],
+      "line": 258,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2415,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-08-no-op-writes-leave-the-file-alone-f17-no.json"
+    },
+    {
+      "bullet": "Paths are opaque strings (`F17.paths-opaque`).",
+      "ids": [
+        "F17.paths-opaque"
+      ],
+      "line": 279,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3811,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-09-paths-are-opaque-strings-f17-paths-opaqu.json"
+    },
+    {
+      "bullet": "Validation (`F17.validation`).",
+      "ids": [
+        "F17.validation"
+      ],
+      "line": 308,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6232,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-10-validation-f17-validation.json"
+    },
+    {
+      "bullet": "Register parents (`F17.add-parents`).",
+      "ids": [
+        "F17.add-parents"
+      ],
+      "line": 351,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1942,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-11-register-parents-f17-add-parents.json"
+    },
+    {
+      "bullet": "Children of a parent (`F17.parent-children`).",
+      "ids": [
+        "F17.parent-children"
+      ],
+      "line": 368,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1745,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-12-children-of-a-parent-f17-parent-children.json"
+    },
+    {
+      "bullet": "Delete a parent (`F17.delete-parent`).",
+      "ids": [
+        "F17.delete-parent"
+      ],
+      "line": 383,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1791,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-13-delete-a-parent-f17-delete-parent.json"
+    },
+    {
+      "bullet": "Two independent lists (`F17.lists-independent`).",
+      "ids": [
+        "F17.lists-independent"
+      ],
+      "line": 399,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2299,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-14-two-independent-lists-f17-lists-independ.json"
+    },
+    {
+      "bullet": "Persistence across a restart (`F17.persist-restart`).",
+      "ids": [
+        "F17.persist-restart"
+      ],
+      "line": 415,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10743,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-15-persistence-across-a-restart-f17-persist.json"
+    },
+    {
+      "bullet": "Session key required (`F17.auth-required`).",
+      "ids": [
+        "F17.auth-required"
+      ],
+      "line": 424,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6571,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-16-session-key-required-f17-auth-required.json"
+    },
+    {
+      "bullet": "Concurrent writes (`F17.concurrent-adds`).",
+      "ids": [
+        "F17.concurrent-adds"
+      ],
+      "line": 451,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10566,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-17-concurrent-writes-f17-concurrent-adds.json"
+    },
+    {
+      "bullet": "Two servers, one file (`F17.shared-dir`).",
+      "ids": [
+        "F17.shared-dir"
+      ],
+      "line": 484,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 36267,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-18-two-servers-one-file-f17-shared-dir.json"
+    },
+    {
+      "bullet": "TypeScript client (`F17.ts-client`).",
+      "ids": [
+        "F17.ts-client"
+      ],
+      "line": 529,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1734,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-19-typescript-client-f17-ts-client.json"
+    },
+    {
+      "bullet": "Corrupted file (`F17.corrupted-file`).",
+      "ids": [
+        "F17.corrupted-file"
+      ],
+      "line": 541,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3813,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-20-corrupted-file-f17-corrupted-file.json"
+    },
+    {
+      "bullet": "Future or invalid schema (`F17.future-schema`).",
+      "ids": [
+        "F17.future-schema"
+      ],
+      "line": 567,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7841,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-21-future-or-invalid-schema-f17-future-sche.json"
+    },
+    {
+      "bullet": "Unreadable file (`F17.io-error`).",
+      "ids": [
+        "F17.io-error"
+      ],
+      "line": 602,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3866,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-22-unreadable-file-f17-io-error.json"
+    },
+    {
+      "bullet": "No-op writes on read-only storage (`F17.noop-write-readonly`).",
+      "ids": [
+        "F17.noop-write-readonly"
+      ],
+      "line": 630,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3631,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-23-no-op-writes-on-read-only-storage-f17-no.json"
+    },
+    {
+      "bullet": "Location without `OH_PERSISTENCE_DIR` (`F17.persistence-location`).",
+      "ids": [
+        "F17.persistence-location"
+      ],
+      "line": 664,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22138,
+      "transcript": "<scratch>/agent-server/20261120-085423-a385-map-f17/evidence/map-run/F17-workspaces-registry-24-location-without-oh-persistence-dir-f17-.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-085423-a385-map-f17",
+  "launch_flags": []
+}

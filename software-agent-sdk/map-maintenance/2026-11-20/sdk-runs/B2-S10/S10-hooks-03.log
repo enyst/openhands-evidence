@@ -1,0 +1,36 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S10/hook_secrets --check status eq finished --check hook_runs eq 1 \
+  --check terminal_text eq TERMINAL_SECRET_SET --check hook_stdout eq HOOK_SECRET_SET
+{
+  "ok": true,
+  "status": "finished",
+  "hook_runs": 1,
+  "hook_stdout": "HOOK_SECRET_UNSET",
+  "terminal_text": "TERMINAL_SECRET_SET",
+  "_exit": 0,
+  "_seconds": 44.9,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "hook_runs eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "terminal_text eq TERMINAL_SECRET_SET",
+      "ok": true,
+      "actual": "TERMINAL_SECRET_SET"
+    },
+    {
+      "check": "hook_stdout eq HOOK_SECRET_SET",
+      "ok": false,
+      "actual": "HOOK_SECRET_UNSET"
+    }
+  ]
+}
+
+[exit 1 after 46s]

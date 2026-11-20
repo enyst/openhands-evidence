@@ -1,0 +1,159 @@
+{
+  "ok": false,
+  "file": "F01-server-status.md",
+  "summary": {
+    "pass": 9,
+    "fail": 3,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 51,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 54,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-00-preconditions.json"
+    },
+    {
+      "bullet": "Liveness (`F01.alive`).",
+      "ids": [
+        "F01.alive"
+      ],
+      "line": 68,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5278,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-01-liveness-f01-alive.json"
+    },
+    {
+      "bullet": "Health (`F01.health`).",
+      "ids": [
+        "F01.health"
+      ],
+      "line": 76,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2923,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-02-health-f01-health.json"
+    },
+    {
+      "bullet": "Readiness (`F01.ready`).",
+      "ids": [
+        "F01.ready"
+      ],
+      "line": 81,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2791,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-03-readiness-f01-ready.json"
+    },
+    {
+      "bullet": "Server info (`F01.server-info`).",
+      "ids": [
+        "F01.server-info"
+      ],
+      "line": 86,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 2720,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-04-server-info-f01-server-info.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server api GET /server_info --auth none --expect 200 --check build_git_sha eq \"$(git rev-parse HEAD)\" --check capabilities contains idempotent_conversation_create_v1 --check capabilities contains tool_catalog_v1 --check capabilities contains agent_launch_pipeline_v1 --check capabilities contains profile_public_skills_v1 --check usable_tools contains terminal --check conversation_runtime eq local --check sdk_version exists --save F01.server-info/info",
+      "stdout_tail": "adiness_probe_v1\\\", \\\"credential_binding_activation_guard_v1\\\", \\\"idempot\\u2026\"\n    },\n    {\n      \"check\": \"capabilities contains profile_public_skills_v1\",\n      \"ok\": true,\n      \"actual\": \"[\\\"conversation_runtime_routes_v1\\\", \\\"profile_secret_scope_v1\\\", \\\"profile_persona_v1\\\", \\\"credential_binding_v1\\\", \\\"credential_binding_readiness_probe_v1\\\", \\\"credential_binding_activation_guard_v1\\\", \\\"idempot\\u2026\"\n    },\n    {\n      \"check\": \"usable_tools contains terminal\",\n      \"ok\": true,\n      \"actual\": \"[\\\"ClassifyAndSwitchLLMTool\\\", \\\"ask_oracle\\\", \\\"task_tool_set\\\", \\\"task\\\", \\\"file_editor\\\", \\\"task_tracker\\\", \\\"terminal\\\", \\\"workflow_tool_set\\\", \\\"workflow\\\", \\\"ask_user\\\", \\\"start_child_conversation\\\", \\\"find_conversati\\u2026\"\n    },\n    {\n      \"check\": \"conversation_runtime eq local\",\n      \"ok\": true,\n      \"actual\": \"local\"\n    },\n    {\n      \"check\": \"sdk_version exists\",\n      \"ok\": true,\n      \"actual\": \"1.63.1\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/F01.server-info/info.json\",\n  \"hint\": \"failed check: build_git_sha eq 5938bab32b615824e8ddebfe74b3ce83a50e9fb3\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Root alias (`F01.root-info`).",
+      "ids": [
+        "F01.root-info"
+      ],
+      "line": 101,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 5331,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-05-root-alias-f01-root-info.json",
+      "failed_line": 2,
+      "failed_command": "control-agent-server api GET / --auth none --expect 200 --check build_git_sha eq \"$(git rev-parse HEAD)\" --raw-out \"$F01/root.json\" --save F01.root-info/root",
+      "stdout_tail": "      \"tool_catalog_v1\",\n        \"agent_profile_draft_materialize_v1\",\n        \"agent_launch_pipeline_v1\",\n        \"profile_public_skills_v1\",\n        \"skill_catalog_v1\",\n        \"conversation_model_router_routes_v1\",\n        \"conversation_configuration_additions_v1\",\n        \"conversation_mcp_install_v1\",\n        \"canvas_app_backend_secret_grants_v1\",\n        \"canvas_app_backend_enable_lifecycle_v1\"\n      ],\n      \"app_backend_ingress_url\": null,\n      \"max_foreground_terminal_timeout_seconds\": null,\n      \"docs\": \"/docs\",\n      \"redoc\": \"/redoc\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 440,\n  \"checks\": [\n    {\n      \"check\": \"build_git_sha eq 5938bab32b615824e8ddebfe74b3ce83a50e9fb3\",\n      \"ok\": false,\n      \"actual\": \"2ae63c2babd130d198ce4527d5c5cad9ff927b7a\"\n    }\n  ],\n  \"raw_out\": \"<scratch>/agent-server/20261120-083041-ade5-map-f01/fixtures/qa-f01/root.json\",\n  \"saved\": \"<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/F01.root-info/root.json\",\n  \"hint\": \"failed check: build_git_sha eq 5938bab32b615824e8ddebfe74b3ce83a50e9fb3\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Uptime across a restart (`F01.uptime-restart`).",
+      "ids": [
+        "F01.uptime-restart"
+      ],
+      "line": 109,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 68484,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-06-uptime-across-a-restart-f01-uptime-resta.json"
+    },
+    {
+      "bullet": "Idle time (`F01.idle-time`).",
+      "ids": [
+        "F01.idle-time"
+      ],
+      "line": 124,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14580,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-07-idle-time-f01-idle-time.json"
+    },
+    {
+      "bullet": "OpenAPI document (`F01.openapi`).",
+      "ids": [
+        "F01.openapi"
+      ],
+      "line": 139,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2868,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-08-openapi-document-f01-openapi.json"
+    },
+    {
+      "bullet": "Static files (`F01.static-files`).",
+      "ids": [
+        "F01.static-files"
+      ],
+      "line": 148,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 55626,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-09-static-files-f01-static-files.json",
+      "failed_line": 17,
+      "failed_command": "control-agent-server api GET /server_info --auth none --expect 200 --check build_git_sha eq \"$(git rev-parse HEAD)\" --check capabilities contains tool_catalog_v1",
+      "stdout_tail": "\"tool_catalog_v1\",\n        \"agent_profile_draft_materialize_v1\",\n        \"agent_launch_pipeline_v1\",\n        \"profile_public_skills_v1\",\n        \"skill_catalog_v1\",\n        \"conversation_model_router_routes_v1\",\n        \"conversation_configuration_additions_v1\",\n        \"conversation_mcp_install_v1\",\n        \"canvas_app_backend_secret_grants_v1\",\n        \"canvas_app_backend_enable_lifecycle_v1\"\n      ],\n      \"app_backend_ingress_url\": null,\n      \"max_foreground_terminal_timeout_seconds\": null,\n      \"docs\": \"/docs\",\n      \"redoc\": \"/redoc\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 379,\n  \"checks\": [\n    {\n      \"check\": \"build_git_sha eq 5938bab32b615824e8ddebfe74b3ce83a50e9fb3\",\n      \"ok\": false,\n      \"actual\": \"2ae63c2babd130d198ce4527d5c5cad9ff927b7a\"\n    },\n    {\n      \"check\": \"capabilities contains tool_catalog_v1\",\n      \"ok\": true,\n      \"actual\": \"[\\\"conversation_runtime_routes_v1\\\", \\\"profile_secret_scope_v1\\\", \\\"profile_persona_v1\\\", \\\"credential_binding_v1\\\", \\\"credential_binding_readiness_probe_v1\\\", \\\"credential_binding_activation_guard_v1\\\", \\\"idempot\\u2026\"\n    }\n  ],\n  \"hint\": \"failed check: build_git_sha eq 5938bab32b615824e8ddebfe74b3ce83a50e9fb3\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "DEBUG tracebacks (`F01.debug-tracebacks`).",
+      "ids": [
+        "F01.debug-tracebacks"
+      ],
+      "line": 191,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 80350,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-10-debug-tracebacks-f01-debug-tracebacks.json"
+    },
+    {
+      "bullet": "Tool preload (`F01.preload-tools`).",
+      "ids": [
+        "F01.preload-tools"
+      ],
+      "line": 217,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 120631,
+      "transcript": "<scratch>/agent-server/20261120-083041-ade5-map-f01/evidence/map-run/F01-server-status-11-tool-preload-f01-preload-tools.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-083041-ade5-map-f01",
+  "launch_flags": []
+}

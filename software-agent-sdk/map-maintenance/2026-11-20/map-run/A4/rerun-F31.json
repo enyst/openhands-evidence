@@ -1,0 +1,56 @@
+{
+  "ok": false,
+  "file": "F31-persistence-and-limits.md",
+  "summary": {
+    "pass": 1,
+    "fail": 2,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 87,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3567,
+      "transcript": "<scratch>/agent-server/20261120-094338-70e1-map-f31/evidence/map-run/F31-persistence-and-limits-00-preconditions.json"
+    },
+    {
+      "bullet": "State survives restarts (`F31.state-survives-restarts`).",
+      "ids": [
+        "F31.state-survives-restarts"
+      ],
+      "line": 270,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 12913,
+      "transcript": "<scratch>/agent-server/20261120-094338-70e1-map-f31/evidence/map-run/F31-persistence-and-limits-01-state-survives-restarts-f31-state-surviv.json",
+      "failed_line": 11,
+      "failed_command": "control-agent-server api GET /api/settings --check misc_settings.qa_f31 eq kept --check agent_settings.llm.model eq deepseek/deepseek-flash --quiet",
+      "stdout_tail": "8-b360b3fda09d\",\n  \"total\": 3,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 1\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"2d6c0ca0-dc10-4d47-90e1-9fe201f15b08\",\n      \"kind\": \"MessageEvent\",\n      \"source\": \"user\",\n      \"timestamp\": \"2026-11-20T09:43:53.231446\",\n      \"llm_message\": \"{\\\"role\\\": \\\"user\\\", \\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"qa-f31-state-marker\\\"}], \\\"thinking_blocks\\\": []}\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3002\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 77,\n  \"checks\": [\n    {\n      \"check\": \"misc_settings.qa_f31 eq kept\",\n      \"ok\": true,\n      \"actual\": \"kept\"\n    },\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Nothing secret in plaintext (`F31.no-plaintext-at-rest`).",
+      "ids": [
+        "F31.no-plaintext-at-rest"
+      ],
+      "line": 292,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 5488,
+      "transcript": "<scratch>/agent-server/20261120-094338-70e1-map-f31/evidence/map-run/F31-persistence-and-limits-02-nothing-secret-in-plaintext-f31-no-plain.json",
+      "failed_line": 8,
+      "failed_command": "control-agent-server api GET /api/settings --header 'X-Expose-Secrets: plaintext' --check agent_settings.llm.api_key eq \"$DEEPSEEK_API_KEY\" --quiet",
+      "stdout_tail": "ind\": \"StaticSecret\"\n        }\n      }\n    },\n    \"tags\": {},\n    \"agent_state\": {}\n  },\n  \"checks\": [\n    {\n      \"check\": \"secret_registry.secret_sources.QA_F31_CONV.value exists\",\n      \"ok\": true,\n      \"actual\": \"<redacted:encrypted>\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"glob\": \"server/workspace/conversations/**/*\",\n  \"files_with_match\": [\n    \"server/workspace/conversations/7126e21decae485c87a4e2acec5b49f4/base_state.json\",\n    \"server/workspace/conversations/7126e21decae485c87a4e2acec5b49f4/events/event-00000-240ae2a6-9e67-4aae-9f43-f73d32862f2c.json\",\n    \"server/workspace/conversations/7126e21decae485c87a4e2acec5b49f4/meta.json\"\n  ],\n  \"matches\": 3\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3017\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 69,\n  \"checks\": [\n    {\n      \"check\": \"agent_settings.llm.api_key eq \",\n      \"ok\": false,\n      \"actual\": \"<redacted:LLM_API_KEY>\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.api_key eq \"\n}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-094338-70e1-map-f31",
+  "launch_flags": []
+}

@@ -1,0 +1,97 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S21/acp_conversation --arg timeouts \
+  --check cases.hang.agent_messages.0 contains "ACP prompt timed out after 2s" \
+  --check cases.hang.prompts_sent eq 1 --check cases.hang.cancel_sent eq 1 --check cases.hang.status eq error \
+  --check cases.hang.seconds lt 5
+{
+  "ok": true,
+  "mode": "timeouts",
+  "cases": {
+    "slow": {
+      "raised": null,
+      "seconds": 4.4,
+      "status": "finished",
+      "prompts_sent": 1,
+      "cancel_sent": 0,
+      "finished": true,
+      "errors": [],
+      "agent_messages": [
+        ""
+      ]
+    },
+    "flaky": {
+      "raised": null,
+      "seconds": 5.1,
+      "status": "finished",
+      "prompts_sent": 2,
+      "cancel_sent": 0,
+      "finished": true,
+      "errors": [],
+      "agent_messages": [
+        ""
+      ]
+    },
+    "fail": {
+      "raised": "ConversationRunError: Conversation run failed for id=1840e853-106b-41a2-b4a6-d14c9f587bb4: Prompt rejected: model exploded",
+      "seconds": 0.0,
+      "status": "error",
+      "prompts_sent": 1,
+      "cancel_sent": 0,
+      "finished": false,
+      "errors": [
+        {
+          "code": "ACPPromptError",
+          "detail": "[-32602] Prompt rejected: model exploded"
+        }
+      ],
+      "agent_messages": [
+        "ACP error: [-32602] Prompt rejected: model exploded"
+      ]
+    },
+    "hang": {
+      "raised": null,
+      "seconds": 6.2,
+      "status": "stuck",
+      "prompts_sent": 3,
+      "cancel_sent": 3,
+      "finished": false,
+      "errors": [],
+      "agent_messages": [
+        "ACP prompt timed out after 2s with no activity from the agent. The agent may have stalled, or it may have completed its ",
+        "ACP prompt timed out after 2s with no activity from the agent. The agent may have stalled, or it may have completed its ",
+        "ACP prompt timed out after 2s with no activity from the agent. The agent may have stalled, or it may have completed its "
+      ]
+    }
+  },
+  "_exit": 0,
+  "_seconds": 48.7,
+  "checks": [
+    {
+      "check": "cases.hang.agent_messages.0 contains ACP prompt timed out after 2s",
+      "ok": true,
+      "actual": "ACP prompt timed out after 2s with no activity from the agent. The agent may have stalled, or it may have completed its "
+    },
+    {
+      "check": "cases.hang.prompts_sent eq 1",
+      "ok": false,
+      "actual": "3"
+    },
+    {
+      "check": "cases.hang.cancel_sent eq 1",
+      "ok": false,
+      "actual": "3"
+    },
+    {
+      "check": "cases.hang.status eq error",
+      "ok": false,
+      "actual": "stuck"
+    },
+    {
+      "check": "cases.hang.seconds lt 5",
+      "ok": false,
+      "actual": "6.2"
+    }
+  ]
+}
+
+[exit 1 after 50s]

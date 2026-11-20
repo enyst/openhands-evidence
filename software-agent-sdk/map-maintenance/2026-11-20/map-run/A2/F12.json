@@ -1,0 +1,372 @@
+{
+  "ok": true,
+  "file": "F12-runtime-and-credentials.md",
+  "summary": {
+    "pass": 29,
+    "fail": 0,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 2,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 145,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 29459,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-00-preconditions.json"
+    },
+    {
+      "bullet": "Discovery (`F12.discovery`).",
+      "ids": [
+        "F12.discovery"
+      ],
+      "line": 182,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5434,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-01-discovery-f12-discovery.json"
+    },
+    {
+      "bullet": "Runtime info (`F12.runtime-info`).",
+      "ids": [
+        "F12.runtime-info"
+      ],
+      "line": 198,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9385,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-02-runtime-info-f12-runtime-info.json"
+    },
+    {
+      "bullet": "Reprovision (`F12.runtime-reprovision`).",
+      "ids": [
+        "F12.runtime-reprovision"
+      ],
+      "line": 213,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17022,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-03-reprovision-f12-runtime-reprovision.json"
+    },
+    {
+      "bullet": "Runtime errors (`F12.runtime-errors`).",
+      "ids": [
+        "F12.runtime-errors"
+      ],
+      "line": 229,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13050,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-04-runtime-errors-f12-runtime-errors.json"
+    },
+    {
+      "bullet": "TypeScript client (`F12.ts-client`).",
+      "ids": [
+        "F12.ts-client"
+      ],
+      "line": 241,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 144039,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-05-typescript-client-f12-ts-client.json"
+    },
+    {
+      "bullet": "Pause releases everything (`F12.sandbox-pause-releases`).",
+      "ids": [
+        "F12.sandbox-pause-releases"
+      ],
+      "line": 268,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 18200,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-06-pause-releases-everything-f12-sandbox-pa.json"
+    },
+    {
+      "bullet": "Runtime of an unloaded conversation (`F12.runtime-cold`).",
+      "ids": [
+        "F12.runtime-cold"
+      ],
+      "line": 288,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 34709,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-07-runtime-of-an-unloaded-conversation-f12-.json"
+    },
+    {
+      "bullet": "Rehydrate after a pause (`F12.sandbox-pause-rehydrate`).",
+      "ids": [
+        "F12.sandbox-pause-rehydrate"
+      ],
+      "line": 300,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22763,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-08-rehydrate-after-a-pause-f12-sandbox-paus.json"
+    },
+    {
+      "bullet": "Pause a running conversation (`F12.sandbox-pause-running`).",
+      "ids": [
+        "F12.sandbox-pause-running"
+      ],
+      "line": 320,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 21491,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-09-pause-a-running-conversation-f12-sandbox.json"
+    },
+    {
+      "bullet": "Open sockets across a pause (`F12.sandbox-pause-websocket`), known bug.",
+      "ids": [
+        "F12.sandbox-pause-websocket"
+      ],
+      "line": 339,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 34319,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-10-open-sockets-across-a-pause-f12-sandbox-.json",
+      "failed_line": 18,
+      "failed_command": "control-agent-server assert --check closed_or_streaming eq true",
+      "stdout_tail": ":MessageEvent\"\n  ],\n  \"frames_shown\": [\n    {\n      \"kind\": \"durable:MessageEvent\",\n      \"frame\": \"{\\\"type\\\": \\\"durable\\\", \\\"seq\\\": 1, \\\"event\\\": {\\\"id\\\": \\\"9c4fbbd0-38a5-4520-bf7b-bad2e29b3cdd\\\", \\\"timestamp\\\": \\\"2026-11-20T08:38:28.430124\\\", \\\"source\\\": \\\"user\\\", \\\"parent_id\\\": \\\"59a8feda-a0e2-4c9b-a8f2-be518fa20e41\\\", \\\"llm_message\\\": {\\\"role\\\": \\\"user\\\", \\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA_F12_AFTER_PAUSE\\\"}], \\\"thinking_blocks\\\": []}, \\\"activated_skills\\\": [], \\\"extended_content\\\": [], \\\"kind\\\": \\\"Mes\\u2026\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/F12.sandbox-pause-websocket/fresh-session-socket.json\"\n}\n{\"close\":null,\"kinds\":{\"ConversationStateUpdateEvent\":1}}\n{\"close\":null,\"kinds\":{\"sync\":1,\"transient:ConversationStateUpdateEvent\":1}}\n{\n  \"ok\": false,\n  \"value\": {\n    \"opened\": true,\n    \"close\": null,\n    \"messages\": 0,\n    \"closed_or_streaming\": false\n  },\n  \"checks\": [\n    {\n      \"check\": \"closed_or_streaming eq true\",\n      \"ok\": false,\n      \"actual\": \"false\"\n    }\n  ],\n  \"hint\": \"failed check: closed_or_streaming eq true\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "value.opened eq true && value.close missing && value.messages eq 0"
+    },
+    {
+      "bullet": "Unsupported secret names (`F12.binding-unsupported-secret`).",
+      "ids": [
+        "F12.binding-unsupported-secret"
+      ],
+      "line": 377,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3873,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-11-unsupported-secret-names-f12-binding-uns.json"
+    },
+    {
+      "bullet": "Body validation (`F12.binding-validation`).",
+      "ids": [
+        "F12.binding-validation"
+      ],
+      "line": 387,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14277,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-12-body-validation-f12-binding-validation.json"
+    },
+    {
+      "bullet": "Pending binding for an unknown id (`F12.binding-pending`).",
+      "ids": [
+        "F12.binding-pending"
+      ],
+      "line": 411,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5690,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-13-pending-binding-for-an-unknown-id-f12-bi.json"
+    },
+    {
+      "bullet": "Source answers (`F12.binding-source-statuses`).",
+      "ids": [
+        "F12.binding-source-statuses"
+      ],
+      "line": 426,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 49342,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-14-source-answers-f12-binding-source-status.json"
+    },
+    {
+      "bullet": "Unavailable source (`F12.binding-source-unavailable`).",
+      "ids": [
+        "F12.binding-source-unavailable"
+      ],
+      "line": 462,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6956,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-15-unavailable-source-f12-binding-source-un.json"
+    },
+    {
+      "bullet": "Regular conversation, loaded (`F12.binding-native-too-late`).",
+      "ids": [
+        "F12.binding-native-too-late"
+      ],
+      "line": 477,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4361,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-16-regular-conversation-loaded-f12-binding-.json"
+    },
+    {
+      "bullet": "Regular conversation, not loaded (`F12.binding-native-cold`).",
+      "ids": [
+        "F12.binding-native-cold"
+      ],
+      "line": 487,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7772,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-17-regular-conversation-not-loaded-f12-bind.json"
+    },
+    {
+      "bullet": "Bind a loaded ACP Codex conversation (`F12.binding-live-acp`).",
+      "ids": [
+        "F12.binding-live-acp"
+      ],
+      "line": 505,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10244,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-18-bind-a-loaded-acp-codex-conversation-f12.json"
+    },
+    {
+      "bullet": "Re-bind (`F12.binding-rebind`).",
+      "ids": [
+        "F12.binding-rebind"
+      ],
+      "line": 524,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10150,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-19-re-bind-f12-binding-rebind.json"
+    },
+    {
+      "bullet": "Required after a pause (`F12.binding-required-after-pause`).",
+      "ids": [
+        "F12.binding-required-after-pause"
+      ],
+      "line": 546,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13636,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-20-required-after-a-pause-f12-binding-requi.json"
+    },
+    {
+      "bullet": "Required after a restart (`F12.binding-required-after-restart`).",
+      "ids": [
+        "F12.binding-required-after-restart"
+      ],
+      "line": 568,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 32308,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-21-required-after-a-restart-f12-binding-req.json"
+    },
+    {
+      "bullet": "Pending binding consumed at create (`F12.binding-pending-on-create`).",
+      "ids": [
+        "F12.binding-pending-on-create"
+      ],
+      "line": 587,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5617,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-22-pending-binding-consumed-at-create-f12-b.json"
+    },
+    {
+      "bullet": "A pause drops pending bindings (`F12.binding-pending-cleared`).",
+      "ids": [
+        "F12.binding-pending-cleared"
+      ],
+      "line": 601,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4248,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-23-a-pause-drops-pending-bindings-f12-bindi.json"
+    },
+    {
+      "bullet": "Profile excludes the secret (`F12.binding-profile-scope`).",
+      "ids": [
+        "F12.binding-profile-scope"
+      ],
+      "line": 614,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9185,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-24-profile-excludes-the-secret-f12-binding-.json"
+    },
+    {
+      "bullet": "Launched profile from the runtime (`F12.runtime-launched-profile`).",
+      "ids": [
+        "F12.runtime-launched-profile"
+      ],
+      "line": 627,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 30115,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-25-launched-profile-from-the-runtime-f12-ru.json"
+    },
+    {
+      "bullet": "Managed key refresh on a 401 (`F12.managed-key-refresh`).",
+      "ids": [
+        "F12.managed-key-refresh"
+      ],
+      "line": 658,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 32083,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-26-managed-key-refresh-on-a-401-f12-managed.json"
+    },
+    {
+      "bullet": "Refresh scope (`F12.managed-key-scope`).",
+      "ids": [
+        "F12.managed-key-scope"
+      ],
+      "line": 690,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 58342,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-27-refresh-scope-f12-managed-key-scope.json"
+    },
+    {
+      "bullet": "Refresh after a model switch (`F12.managed-key-switch`).",
+      "ids": [
+        "F12.managed-key-switch"
+      ],
+      "line": 727,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 26405,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-28-refresh-after-a-model-switch-f12-managed.json"
+    },
+    {
+      "bullet": "Docker runtime mode without a daemon (`F12.docker-runtime-contract`).",
+      "ids": [
+        "F12.docker-runtime-contract"
+      ],
+      "line": 760,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24285,
+      "transcript": "<scratch>/agent-server/20261120-083157-5c24-map-f12/evidence/map-run/F12-runtime-and-credentials-29-docker-runtime-mode-without-a-daemon-f12.json"
+    },
+    {
+      "bullet": "Docker runtime with a daemon (`F12.docker-runtime`).",
+      "ids": [
+        "F12.docker-runtime"
+      ],
+      "status": "blocked",
+      "missing": [
+        "docker"
+      ],
+      "hint": "this machine lacks docker (`control-agent-server capabilities`)"
+    },
+    {
+      "bullet": "Docker runtime startup deadline (`F12.docker-startup-timeout`).",
+      "ids": [
+        "F12.docker-startup-timeout"
+      ],
+      "status": "blocked",
+      "missing": [
+        "docker"
+      ],
+      "hint": "this machine lacks docker (`control-agent-server capabilities`)"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-083157-5c24-map-f12",
+  "launch_flags": []
+}

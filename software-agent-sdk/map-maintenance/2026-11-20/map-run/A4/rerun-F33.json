@@ -1,0 +1,358 @@
+{
+  "ok": false,
+  "file": "F33-sdk-remote-client.md",
+  "summary": {
+    "pass": 1,
+    "fail": 22,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 120,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5169,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-00-preconditions.json"
+    },
+    {
+      "bullet": "LLM profiles, secrets and MCP from the server (`F33.workspace-settings`).",
+      "ids": [
+        "F33.workspace-settings"
+      ],
+      "line": 435,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 5647,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-01-llm-profiles-secrets-and-mcp-from-the-se.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.workspace-settings/probe -- .venv/bin/python - <<'PY'\nimport os\nimport f33\n\nws = f33.workspace(\"settings\")\nllm = ws.get_llm()\nassert (llm.model, llm.usage_id) == (\"deepseek/deepseek-flash\", \"profile:deepseek-flash\"), llm\nassert llm.api_key.get_secret_value() == os.environ[\"DEEPSEEK_API_KEY\"]\npro = ws.get_llm(profile_name=\"deepseek-pro\", temperature=0.0)\nassert (pro.model, pro.usage_id, pro.temperature) == (\"deepseek/deepseek-v4-pro\", \"",
+      "stdout_tail": "nt=None openrouter_site_url='https://docs.all-hands.dev/' openrouter_app_name='OpenHands' num_retries=5 retry_multiplier=8.0 retry_min_wait=8 retry_max_wait=64 timeout=300 stream_idle_timeout=300.0 max_message_chars=30000 temperature=None top_p=None top_k=None max_input_tokens=None max_output_tokens=None model_canonical_name=None api_mode='auto' capability_overrides={} extra_headers=None input_cost_per_token=None output_cost_per_token=None ollama_base_url=None stream=False drop_params=True disable_vision=None disable_stop_word=False caching_prompt=True log_completions_to_file=False log_completions=False log_completions_folder='logs/completions' custom_tokenizer=None native_tool_calling=True force_string_serializer=None inline_image_urls=None reasoning_effort='high' reasoning_summary=None enable_encrypted_reasoning=True prompt_cache_retention='24h' extended_thinking_budget=200000 seed=None usage_id='profile:deepseek-flash' litellm_extra_body={} fallback_strategy=None retry_listener=None is_subscription=False\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.workspace-settings/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Create from a request, twice (`F33.conversation-create-request`).",
+      "ids": [
+        "F33.conversation-create-request"
+      ],
+      "line": 541,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 6061,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-02-create-from-a-request-twice-f33-conversa.json",
+      "failed_line": 2,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-create-request/probe -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\nimport f33\nfrom openhands.sdk import RemoteConversation, TextContent\nfrom openhands.sdk.conversation.request import SendMessageRequest, StartConversationRequest\nfrom openhands.sdk.event import MessageEvent\nfrom openhands.sdk.workspace import LocalWorkspace\n\nws = f33.workspace(\"request\")\ncid = uuid.uuid4()\nrequest = StartConversationRequest(\n    agent_s",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 5401,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 13, in <module>\\n  File \\\"<frozen os>\\\", line 717, in __getitem__\\nKeyError: 'DEEPSEEK_API_KEY'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-create-request/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Create from a saved agent profile (`F33.conversation-create-profile`).",
+      "ids": [
+        "F33.conversation-create-profile"
+      ],
+      "line": 588,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 11258,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-03-create-from-a-saved-agent-profile-f33-co.json",
+      "failed_line": 6,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --env PROFILE=\"$PROFILE\" --save F33.conversation-create-profile/probe -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\nimport f33\nfrom openhands.sdk import RemoteConversation, TextContent\nfrom openhands.sdk.conversation.request import SendMessageRequest, StartConversationRequest\nfrom openhands.sdk.workspace import LocalWorkspace\n\nws = f33.workspace(\"profile\")\nprofile = uuid.UUID(os.environ[\"PROFILE\"])\neverything = ws.get_secrets()\nscoped = ws.g",
+      "stdout_tail": "input_tokens=None, max_output_tokens=None, model_canonical_name=None, api_mode='auto', capability_overrides={}, extra_headers=None, input_cost_per_token=None, output_cost_per_token=None, ollama_base_url=None, stream=False, drop_params=True, disable_vision=None, disable_stop_word=False, caching_prompt=True, log_completions_to_file=False, log_completions=False, log_completions_folder='logs/completions', custom_tokenizer=None, native_tool_calling=True, force_string_serializer=None, inline_image_urls=None, reasoning_effort='high', reasoning_summary=None, enable_encrypted_reasoning=True, prompt_cache_retention='24h', extended_thinking_budget=200000, seed=None, usage_id='condenser', litellm_extra_body={}, fallback_strategy=None, retry_listener=None, is_subscription=False), max_size=240, max_tokens=None, keep_first=2, minimum_progress=0.1, hard_context_reset_max_retries=5, hard_context_reset_context_scaling=0.8, kind='LLMSummarizingCondenser') critic=None tool_concurrency_limit=1 persona=None kind='Agent'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-create-profile/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Send and run to completion (`F33.conversation-run`, `F33.conversation-callbacks`, `F33.conversation-stats`).",
+      "ids": [
+        "F33.conversation-run",
+        "F33.conversation-callbacks",
+        "F33.conversation-stats"
+      ],
+      "line": 761,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 7783,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-04-send-and-run-to-completion-f33-conversat.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-run/probe -- .venv/bin/python - <<'PY'\nfrom collections import Counter\nimport f33\nfrom openhands.sdk import Conversation\n\nseen = Counter()\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"run\"), visualizer=None, delete_on_close=False,\n                    callbacks=[lambda e: seen.update([type(e).__name__])])\nconv.send_message(\"Create the file qa-f33-run.txt in the current directory containing exactly: hi\")\nc",
+      "stdout_tail": "interval, timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=5e632c06-a2f9-4164-8844-10e11631c42d: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 90db06c2-3291-4186-988c-96c9cb7a5ebd)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-run/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "A Stop hook that refuses the first stop (`F33.conversation-stop-hook`).",
+      "ids": [
+        "F33.conversation-stop-hook"
+      ],
+      "line": 798,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 6730,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-05-a-stop-hook-that-refuses-the-first-stop-.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-stop-hook/probe -- .venv/bin/python - <<'PY'\nimport os\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import ActionEvent, HookExecutionEvent, MessageEvent\nfrom openhands.sdk.hooks import HookConfig, HookDefinition, HookMatcher\n\nws = f33.workspace(\"stophook\")\ncalls = os.path.join(ws.working_dir, \"qa-f33-stop-calls\")\ncommand = (f\"echo call >> {calls}; if [ $(wc -l < {calls}) -eq 1 ]; then \"\n      ",
+      "stdout_tail": "al, timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=1f38c275-5f62-4441-afcb-cbc3c07a179a: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 8ee83f28-ffee-4d97-90e4-5edbd4160dbb)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-stop-hook/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Client-defined tool (`F33.client-tools`).",
+      "ids": [
+        "F33.client-tools"
+      ],
+      "line": 851,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 7452,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-06-client-defined-tool-f33-client-tools.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.client-tools/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import ActionEvent, ObservationEvent\nfrom openhands.sdk.tool.client_tool import ClientToolObservation, ClientToolSpec\n\nspec = ClientToolSpec(name=\"qa_f33_notify\", description=\"Show a notification to the user (qa-f33 client tool).\",\n                      parameters={\"type\": \"object\", \"properties\": {\"message\": {\"type",
+      "stdout_tail": "oll_interval, timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=69b91e96-7d50-4a89-9f27-5a1557b635bf: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 56828bca-cd0f-4b80-9d61-a20dff3703f8)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.client-tools/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Streamed tokens (`F33.conversation-streaming`).",
+      "ids": [
+        "F33.conversation-streaming"
+      ],
+      "line": 914,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 6835,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-07-streamed-tokens-f33-conversation-streami.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-streaming/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import StreamingDeltaEvent\n\ntokens, deltas = [], []\nconv = Conversation(agent=f33.agent(stream=True), workspace=f33.workspace(\"stream\"), visualizer=None, delete_on_close=False,\n                    token_callbacks=[tokens.append], callbacks=[lambda e: isinstance(e, StreamingDeltaEvent) and deltas.append(e)",
+      "stdout_tail": "al, timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=cbdf2e8a-12b7-490b-a2aa-8a2d837d4a74: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 0925825f-cd1c-4d83-b679-e4973c731dc6)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-streaming/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Token callbacks on a remote conversation (`F33.conversation-token-callbacks`).",
+      "ids": [
+        "F33.conversation-token-callbacks"
+      ],
+      "line": 945,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 11,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-08-token-callbacks-on-a-remote-conversation.json",
+      "failed_line": 1,
+      "failed_command": "test \"$(jq .deltas \"$F33/stream.json\")\" -gt 0",
+      "stdout_tail": "",
+      "stderr_tail": "jq: error: Could not open file <scratch>/agent-server/20261120-095211-e6ea-map-f33/fixtures/qa-f33/stream.json: No such file or directory\n<scratch>/agent-server/20261120-095211-e6ea-map-f33/private/F33-sdk-remote-client.recipe.sh: line 5: test: : integer expression expected\n"
+    },
+    {
+      "bullet": "Deltas kept out of `state.events` (`F33.conversation-streaming-state`).",
+      "ids": [
+        "F33.conversation-streaming-state"
+      ],
+      "line": 959,
+      "status": "fail",
+      "exit_code": 2,
+      "elapsed_ms": 407,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-09-deltas-kept-out-of-state-events-f33-conv.json",
+      "failed_line": 1,
+      "failed_command": "test \"$(jq '.local.MessageEvent // 0' \"$F33/stream.json\")\" -eq \"$(control-agent-server conversation events \"$STREAM\" --kinds MessageEvent | jq .matching)\"",
+      "stdout_tail": "",
+      "stderr_tail": "jq: error: Could not open file <scratch>/agent-server/20261120-095211-e6ea-map-f33/fixtures/qa-f33/stream.json: No such file or directory\n<scratch>/agent-server/20261120-095211-e6ea-map-f33/private/F33-sdk-remote-client.recipe.sh: line 5: test: : integer expression expected\n"
+    },
+    {
+      "bullet": "Completion logs on the client (`F33.completion-logs`).",
+      "ids": [
+        "F33.completion-logs"
+      ],
+      "line": 971,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 6493,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-10-completion-logs-on-the-client-f33-comple.json",
+      "failed_line": 2,
+      "failed_command": "control-agent-server exec --cwd \"$F33/logs-client\" --env PYTHONPATH=\"$F33\" --save F33.completion-logs/probe -- \"$PWD/.venv/bin/python\" - <<'PY'\nimport os\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import LLMCompletionLogEvent\n\nseen = []\nconv = Conversation(agent=f33.agent(log_completions_to_file=True, log_completions_folder=\"qa-f33-logs\"), workspace=f33.workspace(\"logs\"),\n                    visualizer=None, delete_on_close=False, callbacks=[lambda e: isinstance(e",
+      "stdout_tail": "_interval, timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=75eaa90e-20a5-4626-982d-2d79bb509af8: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 9aec78ec-4d05-4e3d-8241-53b5545bce87)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.completion-logs/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Reattach from a second program (`F33.conversation-attach`).",
+      "ids": [
+        "F33.conversation-attach"
+      ],
+      "line": 1012,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 6326,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-11-reattach-from-a-second-program-f33-conve.json",
+      "failed_line": 2,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --env CID=\"$CID\" --save F33.conversation-attach/probe -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\nimport httpx\nimport f33\nfrom openhands.sdk import Conversation, RemoteConversation\nfrom openhands.sdk.event import MessageEvent\n\ncid = uuid.UUID(os.environ[\"CID\"])\nws = f33.workspace(\"run\")\nsaved = RemoteConversation.attach(ws, cid, visualizer=None)\nsame = Conversation(agent=f33.agent(), workspace=ws, conversation_id=cid, visualizer=None, dele",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 5623,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 8, in <module>\\n  File \\\"/usr/local/lib/python3.13/uuid.py\\\", line 181, in __init__\\n    raise ValueError('badly formed hexadecimal UUID string')\\nValueError: badly formed hexadecimal UUID string\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-attach/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Ask, generate and set a title (`F33.conversation-ask-title`).",
+      "ids": [
+        "F33.conversation-ask-title"
+      ],
+      "line": 1164,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 506,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-12-ask-generate-and-set-a-title-f33-convers.json",
+      "failed_line": 2,
+      "failed_command": "E0=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Fork (`F33.conversation-fork`).",
+      "ids": [
+        "F33.conversation-fork"
+      ],
+      "line": 1202,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 421,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-13-fork-f33-conversation-fork.json",
+      "failed_line": 1,
+      "failed_command": "E0=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Fork from an event, then move HEAD (`F33.conversation-fork-branch`).",
+      "ids": [
+        "F33.conversation-fork-branch"
+      ],
+      "line": 1237,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 367,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-14-fork-from-an-event-then-move-head-f33-co.json",
+      "failed_line": 1,
+      "failed_command": "E0=$(control-agent-server api GET \"/api/conversations/$CID/events/count\" --field .)",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Confirm or reject (`F33.conversation-confirmation`).",
+      "ids": [
+        "F33.conversation-confirmation"
+      ],
+      "line": 1321,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 6623,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-15-confirm-or-reject-f33-conversation-confi.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-confirmation/probe -- .venv/bin/python - <<'PY'\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.security.confirmation_policy import AlwaysConfirm\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"confirm\"), visualizer=None, delete_on_close=False)\nconv.set_confirmation_policy(AlwaysConfirm())\nconv.send_message(\"Run this exact shell command: printf no > qa-f33-confirm.txt\")\nconv.run(timeou",
+      "stdout_tail": " timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=c733e3a0-5322-4dc8-a7d9-055f8a0b6f91: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 5d731b83-d911-4a4f-8b3f-7860cfb26bf7)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-confirmation/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Pause a blocking run (`F33.conversation-pause`).",
+      "ids": [
+        "F33.conversation-pause"
+      ],
+      "line": 1348,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 186284,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-16-pause-a-blocking-run-f33-conversation-pa.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-pause/probe -- .venv/bin/python - <<'PY'\nimport threading\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import ActionEvent\n\nacted = threading.Event()\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"pause\"), visualizer=None, delete_on_close=False,\n                    callbacks=[lambda e: isinstance(e, ActionEvent) and acted.set()])\nconv.send_message(\"Run this exact shell command:",
+      "stdout_tail": " File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=a8e7b6b2-8134-4975-9240-1616b4b87ec1: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: b883e229-a817-426d-882f-5d0655d558ad)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\nTraceback (most recent call last):\\n  File \\\"<stdin>\\\", line 12, in <module>\\nAssertionError: no ActionEvent\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-pause/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Time out, then wait again (`F33.conversation-run-timeout`).",
+      "ids": [
+        "F33.conversation-run-timeout"
+      ],
+      "line": 1439,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 7720,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-17-time-out-then-wait-again-f33-conversatio.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-run-timeout/probe -- .venv/bin/python - <<'PY'\nimport time\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import ConversationRunError\n\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"timeout\"), visualizer=None, delete_on_close=False)\nconv.send_message(\"Run this exact shell command: sleep 15; printf late > qa-f33-timeout.txt\")\nt0 = time.monotonic()\ntry:\n    conv.",
+      "stdout_tail": "impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=2ba6898d-ea83-4ae1-9549-e55b7286c90e: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: bbb7e98a-08c2-4665-a3d2-60ce0dc34972)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \\\"<stdin>\\\", line 13, in <module>\\nAssertionError: RuntimeError('LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: bbb7e98a-08c2-4665-a3d2-60ce0dc34972)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}')\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-run-timeout/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Secrets for the agent (`F33.conversation-secrets`).",
+      "ids": [
+        "F33.conversation-secrets"
+      ],
+      "line": 1562,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 6675,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-18-secrets-for-the-agent-f33-conversation-s.json",
+      "failed_line": 3,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.conversation-secrets/probe -- .venv/bin/python - <<'PY'\nimport os\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.event import ObservationEvent\n\nvalue = os.environ[\"QA_F33_TOKEN\"]\nseen = []\nws = f33.workspace(\"secret\")\nconv = Conversation(agent=f33.agent(), workspace=ws, visualizer=None, delete_on_close=False,\n                    callbacks=[lambda e: isinstance(e, ObservationEvent) and seen.append(e.model_dump_json",
+      "stdout_tail": "rval, timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=87463d96-077d-4478-9ada-4ed8645fd5e7: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 833dda5e-9006-4930-bdc1-64923c75b8b2)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-secrets/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "No events socket (`F33.ws-unavailable`).",
+      "ids": [
+        "F33.ws-unavailable"
+      ],
+      "line": 1634,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 13495,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-19-no-events-socket-f33-ws-unavailable.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --save F33.ws-unavailable/probe -- .venv/bin/python - <<'PY'\nimport os\nimport threading\nimport time\nimport httpx\nimport f33\nfrom openhands.sdk import Conversation\nfrom openhands.sdk.conversation.exceptions import WebSocketConnectionError\n\nproxy = f33.Proxy(block_ws=True)\nws = f33.workspace(\"nows\", host=proxy.url)\nassert ws.alive, \"REST does not pass the proxy\"\nos.environ[\"OPENHANDS_REMOTE_WS_READY_TIMEOUT\"] = \"3\"\nt0 = time.monotonic()\ntry:\n    Co",
+      "stdout_tail": "   poll_interval, timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1575, in _wait_for_run_completion\\n    self._handle_conversation_status(status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=b062e665-18b0-4a9c-ba6e-a2b165202ad9: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 13f579af-1973-499a-8100-14164a35a8f9)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.ws-unavailable/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "A live conversation across a restart (`F33.conversation-reconnect`).",
+      "ids": [
+        "F33.conversation-reconnect"
+      ],
+      "line": 1703,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 18090,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-20-a-live-conversation-across-a-restart-f33.json",
+      "failed_line": 30,
+      "failed_command": "wait \"$PROBE\"",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33\",\n  \"url\": \"http://127.0.0.1:54873\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6864,\n  \"ready_path\": \"/ready\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Reattach after a restart and continue (`F33.conversation-restart`).",
+      "ids": [
+        "F33.conversation-restart"
+      ],
+      "line": 1815,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 15262,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-21-reattach-after-a-restart-and-continue-f3.json",
+      "failed_line": 2,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33\" --env CID=\"$CID\" --save F33.conversation-restart/probe -- .venv/bin/python - <<'PY'\nimport json\nimport os\nimport uuid\nimport f33\nfrom openhands.sdk import Conversation\n\nbefore = json.load(open(os.path.join(f33.DIR, \"run.json\")))[\"local\"]\nconv = Conversation(agent=f33.agent(), workspace=f33.workspace(\"run\"), conversation_id=uuid.UUID(os.environ[\"CID\"]),\n                    visualizer=None, delete_on_close=False)\nassert f33.kinds(conv.state.events)",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"run\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33\",\n  \"url\": \"http://127.0.0.1:54873\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 6606,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 5799,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"Traceback (most recent call last):\\n  File \\\"<stdin>\\\", line 7, in <module>\\nFileNotFoundError: [Errno 2] No such file or directory: '<scratch>/agent-server/20261120-095211-e6ea-map-f33/fixtures/qa-f33/run.json'\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.conversation-restart/probe.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "A custom tool module (`F33.custom-tool-module`).",
+      "ids": [
+        "F33.custom-tool-module"
+      ],
+      "line": 1847,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 17032,
+      "transcript": "<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/map-run/F33-sdk-remote-client-22-a-custom-tool-module-f33-custom-tool-mod.json",
+      "failed_line": 47,
+      "failed_command": "control-agent-server exec --env PYTHONPATH=\"$F33:$F33/tools\" --save F33.custom-tool-module/probe -- .venv/bin/python - <<'PY'\nimport f33\nimport qa_f33_tool  # noqa: F401  registers qa_f33_echo in this process\nfrom openhands.sdk import Conversation, Tool\nfrom openhands.sdk.event import ObservationEvent\nfrom openhands.sdk.tool.registry import get_tool_module_qualnames\n\nassert get_tool_module_qualnames()[\"qa_f33_echo\"] == \"qa_f33_tool\"\nagent = f33.agent()\nagent = agent.model_copy(update={\"tools\": [",
+      "stdout_tail": "terval, timeout, run_start_event_count\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1542, in _wait_for_run_completion\\n    self._handle_conversation_status(ws_status, since)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/conversation/impl/remote_conversation.py\\\", line 1648, in _handle_conversation_status\\n    raise ConversationRunError(\\n        self._id, RuntimeError(detail), conversation_error=error\\n    )\\nopenhands.sdk.conversation.exceptions.ConversationRunError: Conversation run failed for id=d70c943f-f84a-4a99-934d-1d198bd204ff: LLMBadRequestError: litellm.BadRequestError: DeepseekException - {\\\"error\\\":{\\\"message\\\":\\\"Authentication Fails (governor) (request_id: 6966c6da-be48-47c0-a394-3d899afb8740)\\\",\\\"type\\\":\\\"authentication_error\\\",\\\"param\\\":null,\\\"code\\\":\\\"invalid_request_error\\\"}}\\n\",\n  \"saved\": \"<scratch>/agent-server/20261120-095211-e6ea-map-f33/evidence/F33.custom-tool-module/probe.json\"\n}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-095211-e6ea-map-f33",
+  "launch_flags": []
+}

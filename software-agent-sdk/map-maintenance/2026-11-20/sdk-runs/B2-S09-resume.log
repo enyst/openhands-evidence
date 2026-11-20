@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "run": "<scratch>/sdk/B2-S09-resume",
+  "revision": "5938bab32b615824e8ddebfe74b3ce83a50e9fb3",
+  "with_llm": true,
+  "bullets": {
+    "pass": 1
+  },
+  "results": [
+    {
+      "family": "S09-mcp.md",
+      "bullet": 19,
+      "ids": [
+        "S09.runtime-add-resume"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09-resume/transcripts/S09-mcp-19.log"
+    }
+  ]
+}

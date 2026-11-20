@@ -1,0 +1,262 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B2-S08",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 16,
+    "fail": 2
+  },
+  "results": [
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 1,
+      "ids": [
+        "S08.claude-code-layout",
+        "S08.agent-plugins-layout",
+        "S08.agent-plugins-mcp",
+        "S08.path-containment",
+        "S08.commands-as-skills",
+        "S08.merge-semantics",
+        "S08.source-parsing"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-01.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 2,
+      "ids": [
+        "S08.conversation-attach",
+        "S08.plugin-agents",
+        "S08.resolved-refs",
+        "S08.ambient-plugins"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-02.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 3,
+      "ids": [
+        "S08.secret-expansion"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-03.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 4,
+      "ids": [
+        "S08.conversation-attach",
+        "S08.fetch-cache"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-04.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 5,
+      "ids": [
+        "S08.fetch-cache"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-05.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 6,
+      "ids": [
+        "S08.fetch-cache"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-06.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 7,
+      "ids": [
+        "S08.installed-plugins",
+        "S08.ambient-plugins"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-07.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 8,
+      "ids": [
+        "S08.ambient-plugins"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-08.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 9,
+      "ids": [
+        "S08.installed-plugins"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-09.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 10,
+      "ids": [
+        "S08.installation-manager"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-10.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 11,
+      "ids": [
+        "S08.marketplace-manifest"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-11.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 12,
+      "ids": [
+        "S08.marketplace-registry"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-12.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 13,
+      "ids": [
+        "S08.marketplace-auto-load"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-13.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 14,
+      "ids": [
+        "S08.load-plugin-runtime"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-14.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 15,
+      "ids": [
+        "S08.marketplace-import-path"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-15.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 16,
+      "ids": [
+        "S08.conversation-attach",
+        "S08.resolved-refs",
+        "S08.fetch-cache",
+        "S08.installed-plugins"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-16.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 17,
+      "ids": [
+        "S08.agent-plugins-layout",
+        "S08.conversation-attach"
+      ],
+      "result": "fail",
+      "proof": [
+        "integration",
+        "live"
+      ],
+      "note": "integration tests missing [] failed ['t10_agent_plugins_skill'] (<scratch>/sdk/B2-S08/work/S08-plugins-marketplace-17/block1-2/deepseek_deepseek_flash_agent-sdk-integration_N1_20261120_083650/results.json)",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-17.log"
+    },
+    {
+      "family": "S08-plugins-marketplace.md",
+      "bullet": 18,
+      "ids": [
+        "S08.marketplace-manifest"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S08/transcripts/S08-plugins-marketplace-18.log"
+    }
+  ]
+}

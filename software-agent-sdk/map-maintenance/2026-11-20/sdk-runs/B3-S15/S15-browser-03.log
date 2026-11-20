@@ -1,0 +1,22 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S15/browser_setup --arg nochrome \
+  --check detected eq null --check is_usable eq false \
+  --check usable_tools contains terminal --check usable_tools not-contains browser_tool_set \
+  --check status eq finished --check tools_map eq '["finish", "terminal"]' \
+  --check terminal_text contains "still working" --check guidance_in_prompt eq false \
+  --check warnings.0 contains "Browser tools are unavailable" \
+  --check warnings.0 contains "uvx playwright install chromium"
+{
+  "ok": false,
+  "exit": 3,
+  "error": "blocked: needs a machine without a system Chrome/Chromium; found ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/google-chrome']",
+  "seconds": 41.7,
+  "result": {
+    "ok": false,
+    "blocked": "needs a machine without a system Chrome/Chromium; found ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/google-chrome']"
+  },
+  "stdout_tail": "{\"ok\": false, \"blocked\": \"needs a machine without a system Chrome/Chromium; found ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/google-chrome']\"}\n",
+  "stderr_tail": ""
+}
+
+[exit 3 after 43s]

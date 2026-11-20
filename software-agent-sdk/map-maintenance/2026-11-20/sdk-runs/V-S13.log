@@ -1,0 +1,180 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/V-S13",
+  "revision": "abd260433593580d24cccb9b712e60f43a6f693e",
+  "with_llm": true,
+  "bullets": {
+    "pass": 9,
+    "fail": 1,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 1,
+      "ids": [
+        "S13.confirm-wait",
+        "S13.confirm-approve-reject",
+        "S13.risk-extraction",
+        "S13.llm-analyzer",
+        "S13.analysis-event",
+        "S13.security-policy-prompt"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-01.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 2,
+      "ids": [
+        "S13.risk-levels",
+        "S13.policies",
+        "S13.pattern-analyzer",
+        "S13.policy-rails",
+        "S13.ensemble",
+        "S13.toolshield",
+        "S13.grayswan",
+        "S13.settings-security"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-02.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 3,
+      "ids": [
+        "S13.secret-sources",
+        "S13.secret-registry",
+        "S13.secret-injection",
+        "S13.mask-output",
+        "S13.mask-tool-output",
+        "S13.mask-models"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-03.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 4,
+      "ids": [
+        "S13.secret-registry",
+        "S13.mask-output"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-04.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 5,
+      "ids": [
+        "S13.mask-async"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-05.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 6,
+      "ids": [
+        "S13.mask-thinking"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-06.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 7,
+      "ids": [
+        "S13.llm-analyzer",
+        "S13.confirm-wait",
+        "S13.confirm-approve-reject"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-07.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 8,
+      "ids": [
+        "S13.security-policy-prompt"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-08.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 9,
+      "ids": [
+        "S13.ensemble",
+        "S13.policies"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-09.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 10,
+      "ids": [
+        "S13.secret-injection",
+        "S13.mask-output"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/V-S13/transcripts/S13-security-confirmation-10.log"
+    },
+    {
+      "family": "S13-security-confirmation.md",
+      "bullet": 11,
+      "ids": [
+        "S13.confirm-approve-reject",
+        "S13.llm-analyzer"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}
+EXIT 1

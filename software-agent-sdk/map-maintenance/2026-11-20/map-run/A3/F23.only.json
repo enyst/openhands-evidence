@@ -1,0 +1,41 @@
+{
+  "ok": false,
+  "file": "F23-llm-catalog-and-connections.md",
+  "summary": {
+    "pass": 1,
+    "fail": 1,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 115,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 829,
+      "transcript": "<scratch>/agent-server/20261120-090819-08b8-map-f23/evidence/map-run/F23-llm-catalog-and-connections-00-preconditions.json"
+    },
+    {
+      "bullet": "Create (`F23.conn-create`).",
+      "ids": [
+        "F23.conn-create"
+      ],
+      "line": 257,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 410,
+      "transcript": "<scratch>/agent-server/20261120-090819-08b8-map-f23/evidence/map-run/F23-llm-catalog-and-connections-01-create-f23-conn-create.json",
+      "failed_line": 4,
+      "failed_command": "CONN=$(printf '{\"display_name\": \"qa-f23-deepseek\", \"provider\": \"deepseek\", \"api_key\": \"%s\"}' \"$DEEPSEEK_API_KEY\" | control-agent-server api POST /api/llm/provider-connections --stdin --expect 201 --check id matches '^[0-9a-f]{32}$' --check display_name eq qa-f23-deepseek --check provider eq deepseek --check base_url eq null --check api_key_set eq true --check api_key missing --save F23.conn-create/create --field id)",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-090819-08b8-map-f23",
+  "launch_flags": []
+}

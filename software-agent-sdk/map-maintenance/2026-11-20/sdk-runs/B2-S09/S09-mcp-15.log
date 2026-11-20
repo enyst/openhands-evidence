@@ -1,0 +1,38 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/conversation --arg payload \
+  --check error missing --check status eq finished \
+  --check resource_text contains VERIFY_RESOURCE_TEXT --check structured_only_text contains VERIFY_STRUCTURED
+{
+  "ok": true,
+  "mode": "payload",
+  "error": null,
+  "status": "finished",
+  "resource_text": "[Tool 'resource' executed.]",
+  "structured_only_text": "[Tool 'structured_only' executed.]",
+  "_exit": 0,
+  "_seconds": 27.6,
+  "checks": [
+    {
+      "check": "error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "resource_text contains VERIFY_RESOURCE_TEXT",
+      "ok": false,
+      "actual": "[Tool 'resource' executed.]"
+    },
+    {
+      "check": "structured_only_text contains VERIFY_STRUCTURED",
+      "ok": false,
+      "actual": "[Tool 'structured_only' executed.]"
+    }
+  ]
+}
+
+[exit 1 after 28s]

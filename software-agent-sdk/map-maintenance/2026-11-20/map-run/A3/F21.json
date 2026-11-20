@@ -1,0 +1,425 @@
+{
+  "ok": false,
+  "file": "F21-agent-profiles.md",
+  "summary": {
+    "pass": 25,
+    "fail": 9,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 115,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3353,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-00-preconditions.json"
+    },
+    {
+      "bullet": "No key, no access (`F21.auth-required`).",
+      "ids": [
+        "F21.auth-required"
+      ],
+      "line": 150,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3970,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-01-no-key-no-access-f21-auth-required.json"
+    },
+    {
+      "bullet": "Lazy seed (`F21.lazy-seed`).",
+      "ids": [
+        "F21.lazy-seed"
+      ],
+      "line": 167,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2674,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-02-lazy-seed-f21-lazy-seed.json"
+    },
+    {
+      "bullet": "No ghost LLM profile (`F21.seed-no-ghost-llm`).",
+      "ids": [
+        "F21.seed-no-ghost-llm"
+      ],
+      "line": 189,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17284,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-03-no-ghost-llm-profile-f21-seed-no-ghost-l.json"
+    },
+    {
+      "bullet": "ACP seed (`F21.seed-acp`).",
+      "ids": [
+        "F21.seed-acp"
+      ],
+      "line": 218,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11982,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-04-acp-seed-f21-seed-acp.json"
+    },
+    {
+      "bullet": "Create (`F21.save-create`).",
+      "ids": [
+        "F21.save-create"
+      ],
+      "line": 236,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1884,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-05-create-f21-save-create.json"
+    },
+    {
+      "bullet": "Overwrite (`F21.save-overwrite`).",
+      "ids": [
+        "F21.save-overwrite"
+      ],
+      "line": 256,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 896,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-06-overwrite-f21-save-overwrite.json"
+    },
+    {
+      "bullet": "ACP profile (`F21.acp-kind`).",
+      "ids": [
+        "F21.acp-kind"
+      ],
+      "line": 268,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1304,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-07-acp-profile-f21-acp-kind.json"
+    },
+    {
+      "bullet": "Save validation (`F21.save-validation`).",
+      "ids": [
+        "F21.save-validation"
+      ],
+      "line": 281,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4744,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-08-save-validation-f21-save-validation.json"
+    },
+    {
+      "bullet": "Name rules (`F21.name-rules`).",
+      "ids": [
+        "F21.name-rules"
+      ],
+      "line": 304,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6776,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-09-name-rules-f21-name-rules.json"
+    },
+    {
+      "bullet": "Unknown names and ids (`F21.not-found`).",
+      "ids": [
+        "F21.not-found"
+      ],
+      "line": 338,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4036,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-10-unknown-names-and-ids-f21-not-found.json"
+    },
+    {
+      "bullet": "Activate by id (`F21.activate`).",
+      "ids": [
+        "F21.activate"
+      ],
+      "line": 360,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 1573,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-11-activate-by-id-f21-activate.json",
+      "failed_line": 5,
+      "failed_command": "control-agent-server api GET /api/settings --check active_agent_profile_id eq \"$CODER\" --check active_profile eq deepseek-flash --check agent_settings.llm.model eq deepseek/deepseek-flash --save F21.activate/settings",
+      "stdout_tail": "        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 66,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"ok\": true,\n      \"actual\": \"f7c99ece-6206-4fcd-8192-a07f8749c373\"\n    },\n    {\n      \"check\": \"active_profile eq deepseek-flash\",\n      \"ok\": true,\n      \"actual\": \"deepseek-flash\"\n    },\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/F21.activate/settings.json\",\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Activate over a corrupt settings file (`F21.activate-corrupt-settings`).",
+      "ids": [
+        "F21.activate-corrupt-settings"
+      ],
+      "line": 376,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 1966,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-12-activate-over-a-corrupt-settings-file-f2.json",
+      "failed_line": 12,
+      "failed_command": "control-agent-server api GET /api/settings --check active_agent_profile_id eq \"$CODER\" --check llm_api_key_is_set eq true --check agent_settings.llm.model eq deepseek/deepseek-flash",
+      "stdout_tail": "settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 89,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"ok\": true,\n      \"actual\": \"f7c99ece-6206-4fcd-8192-a07f8749c373\"\n    },\n    {\n      \"check\": \"llm_api_key_is_set eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Rename (`F21.rename`).",
+      "ids": [
+        "F21.rename"
+      ],
+      "line": 402,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4570,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-13-rename-f21-rename.json"
+    },
+    {
+      "bullet": "Delete (`F21.delete`).",
+      "ids": [
+        "F21.delete"
+      ],
+      "line": 426,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 5812,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-14-delete-f21-delete.json",
+      "failed_line": 15,
+      "failed_command": "control-agent-server api GET /api/settings --check active_agent_profile_id eq \"$DEFAULT_ID\" --check agent_settings.agent_kind eq openhands --check agent_settings.llm.model eq deepseek/deepseek-flash",
+      "stdout_tail": "    \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"e2c4638a-ecd8-459e-88fe-47fff24be60f\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 78,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq e2c4638a-ecd8-459e-88fe-47fff24be60f\",\n      \"ok\": true,\n      \"actual\": \"e2c4638a-ecd8-459e-88fe-47fff24be60f\"\n    },\n    {\n      \"check\": \"agent_settings.agent_kind eq openhands\",\n      \"ok\": true,\n      \"actual\": \"openhands\"\n    },\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Active ACP reset (`F21.delete-active-acp-reset`).",
+      "ids": [
+        "F21.delete-active-acp-reset"
+      ],
+      "line": 452,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 5798,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-15-active-acp-reset-f21-delete-active-acp-r.json",
+      "failed_line": 17,
+      "failed_command": "control-agent-server api GET /api/settings --check agent_settings.llm.model eq deepseek/deepseek-flash --check llm_api_key_is_set eq true --check active_agent_profile_id eq \"$CODER\"",
+      "stdout_tail": "settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 79,\n  \"checks\": [\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"llm_api_key_is_set eq true\",\n      \"ok\": true,\n      \"actual\": \"true\"\n    },\n    {\n      \"check\": \"active_agent_profile_id eq f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"ok\": true,\n      \"actual\": \"f7c99ece-6206-4fcd-8192-a07f8749c373\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Materialize a resolvable profile (`F21.materialize-valid`).",
+      "ids": [
+        "F21.materialize-valid"
+      ],
+      "line": 479,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 3749,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-16-materialize-a-resolvable-profile-f21-mat.json",
+      "failed_line": 4,
+      "failed_command": "control-agent-server api POST /api/agent-profiles/qa-f21-preview/materialize --expect 200 --quiet --check agent_kind eq openhands --check valid eq true --check errors len-eq 0 --check llm_profile_ref eq deepseek-flash --check llm_profile_resolved eq true --check llm_api_key_set eq true --check resolved_mcp_config_keys contains qa-f21-mcp --check dangling_mcp_server_refs len-eq 0 --check resolved_skills contains qa-f21-skill --check secret_refs contains QA_F21_ALLOWED --check resolved_settings.ll",
+      "stdout_tail": "\\\"azure-devops\\\", \\\"bitbucket\\\", \\\"bitbucket-cloud\\\", \\\"bitbucket-data-center\\\", \\\"canvas-extensio\\u2026\"\n    },\n    {\n      \"check\": \"secret_refs contains QA_F21_ALLOWED\",\n      \"ok\": true,\n      \"actual\": \"[\\\"QA_F21_ALLOWED\\\"]\"\n    },\n    {\n      \"check\": \"resolved_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"resolved_settings.llm.api_key eq **********\",\n      \"ok\": true,\n      \"actual\": \"**********\"\n    },\n    {\n      \"check\": \"resolved_settings.tools len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    },\n    {\n      \"check\": \"resolved_settings.mcp_config.qa-f21-mcp.url eq https://example.invalid/mcp\",\n      \"ok\": true,\n      \"actual\": \"https://example.invalid/mcp\"\n    },\n    {\n      \"check\": \"resolved_settings.agent_context.system_message_suffix eq QA F21 suffix\",\n      \"ok\": true,\n      \"actual\": \"QA F21 suffix\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/F21.materialize-valid/stored.json\",\n  \"hint\": \"failed check: resolved_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Dangling references (`F21.materialize-dangling`).",
+      "ids": [
+        "F21.materialize-dangling"
+      ],
+      "line": 508,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1552,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-17-dangling-references-f21-materialize-dang.json"
+    },
+    {
+      "bullet": "Draft preview (`F21.materialize-draft`).",
+      "ids": [
+        "F21.materialize-draft"
+      ],
+      "line": 528,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4787,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-18-draft-preview-f21-materialize-draft.json"
+    },
+    {
+      "bullet": "At most 50 (`F21.limit`).",
+      "ids": [
+        "F21.limit"
+      ],
+      "line": 566,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 43298,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-19-at-most-50-f21-limit.json"
+    },
+    {
+      "bullet": "Corrupt file (`F21.corrupt-file`).",
+      "ids": [
+        "F21.corrupt-file"
+      ],
+      "line": 588,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2263,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-20-corrupt-file-f21-corrupt-file.json"
+    },
+    {
+      "bullet": "Start a conversation from a profile (`F21.conversation-start`).",
+      "ids": [
+        "F21.conversation-start"
+      ],
+      "line": 603,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 1247,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-21-start-a-conversation-from-a-profile-f21-.json",
+      "failed_line": 3,
+      "failed_command": "control-agent-server api GET /api/settings --check active_profile eq deepseek-flash --check agent_settings.llm.model eq deepseek/deepseek-flash --check agent_settings.tools missing",
+      "stdout_tail": "_key\": null\n        }\n      },\n      \"conversation_settings\": {\n        \"schema_version\": 1,\n        \"max_iterations\": 500,\n        \"confirmation_mode\": false,\n        \"security_analyzer\": \"llm\",\n        \"default_runtime\": \"local\",\n        \"worktree_base\": \"default_branch\",\n        \"worktree_base_ref\": null,\n        \"worktree_branch_prefix\": \"openhands/\",\n        \"container_memory\": null,\n        \"container_cpus\": null,\n        \"container_browser\": true\n      },\n      \"llm_api_key_is_set\": true,\n      \"active_profile\": \"deepseek-flash\",\n      \"active_agent_profile_id\": \"f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"active_meta_profile\": null,\n      \"misc_settings\": {}\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 89,\n  \"checks\": [\n    {\n      \"check\": \"active_profile eq deepseek-flash\",\n      \"ok\": true,\n      \"actual\": \"deepseek-flash\"\n    },\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"agent_settings.tools missing\",\n      \"ok\": true,\n      \"actual\": \"null\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Secret scope (`F21.secret-scope`).",
+      "ids": [
+        "F21.secret-scope"
+      ],
+      "line": 633,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 1494,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-22-secret-scope-f21-secret-scope.json",
+      "failed_line": 6,
+      "failed_command": "UCID=$(control-agent-server conversation start --agent-profile qa-f21-runner --no-autotitle --secret QA_F21_ALLOWED=qa-f21-allowed-value --secret QA_F21_OTHER=qa-f21-other-value --print-id)",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"status\": 201,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/agent-profiles/qa-f21-scoped\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"llm_profile_ref\": \"deepseek-flash\",\n      \"tools\": [],\n      \"mcp_server_refs\": [],\n      \"secret_refs\": [\n        \"QA_F21_ALLOWED\"\n      ]\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 201,\n    \"headers\": {\n      \"content-length\": \"72\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"name\": \"qa-f21-scoped\",\n      \"message\": \"Agent profile 'qa-f21-scoped' saved\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 94\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Launch additions (`F21.launch-additions`).",
+      "ids": [
+        "F21.launch-additions"
+      ],
+      "line": 667,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5577,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-23-launch-additions-f21-launch-additions.json"
+    },
+    {
+      "bullet": "Sandbox metadata (`F21.sandbox-metadata`).",
+      "ids": [
+        "F21.sandbox-metadata"
+      ],
+      "line": 706,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10039,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-24-sandbox-metadata-f21-sandbox-metadata.json"
+    },
+    {
+      "bullet": "TypeScript client (`F21.ts-client`).",
+      "ids": [
+        "F21.ts-client"
+      ],
+      "line": 760,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 877,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-25-typescript-client-f21-ts-client.json",
+      "failed_line": 50,
+      "failed_command": "control-agent-server exec --env QA_F21_CODER=\"$CODER\" --timeout 120 --expect-output QA_F21_TS_OK --save F21.ts-client/program -- node \"$F21TS/ts_agent_profiles.mjs\"",
+      "stdout_tail": "lication/json\"\n    },\n    \"body\": {\n      \"id\": \"f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"message\": \"Agent profile 'f7c99ece-6206-4fcd-8192-a07f8749c373' activated\",\n      \"agent_settings_applied\": false\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 77\n}\n{\n  \"ok\": false,\n  \"exit_code\": 1,\n  \"elapsed_ms\": 200,\n  \"stdout_tail\": \"\",\n  \"stderr_tail\": \"node:internal/modules/run_main:123\\n    triggerUncaughtException(\\n    ^\\n\\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\\n\\nfalse !== true\\n\\n    at file://<scratch>/agent-server/20261120-085652-09bd-map-f21/fixtures/qa-f21-ts/ts_agent_profiles.mjs:25:8\\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {\\n  generatedMessage: true,\\n  code: 'ERR_ASSERTION',\\n  actual: false,\\n  expected: true,\\n  operator: 'strictEqual',\\n  diff: 'simple'\\n}\\n\\nNode.js v22.23.5\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F21_TS_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/F21.ts-client/program.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Restart (`F21.restart`).",
+      "ids": [
+        "F21.restart"
+      ],
+      "line": 830,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 9759,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-26-restart-f21-restart.json",
+      "failed_line": 2,
+      "failed_command": "control-agent-server api GET /api/agent-profiles --check active_agent_profile_id eq \"$CODER\" --save F21.restart/list",
+      "stdout_tail": "nhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-pro\",\n          \"mcp_server_refs\": []\n        },\n        {\n          \"id\": \"cede2e1b-76aa-4158-b244-307273c1b875\",\n          \"name\": \"qa-f21-scoped\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-flash\",\n          \"mcp_server_refs\": []\n        },\n        {\n          \"id\": \"f5546916-13b2-4d61-a0e6-f0a0043c356a\",\n          \"name\": \"qa-f21-ts2\",\n          \"agent_kind\": \"openhands\",\n          \"revision\": 0,\n          \"llm_profile_ref\": \"deepseek-flash\",\n          \"mcp_server_refs\": []\n        }\n      ],\n      \"active_agent_profile_id\": \"f5546916-13b2-4d61-a0e6-f0a0043c356a\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 323,\n  \"checks\": [\n    {\n      \"check\": \"active_agent_profile_id eq f7c99ece-6206-4fcd-8192-a07f8749c373\",\n      \"ok\": false,\n      \"actual\": \"f5546916-13b2-4d61-a0e6-f0a0043c356a\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/F21.restart/list.json\",\n  \"hint\": \"failed check: active_agent_profile_id eq f7c99ece-6206-4fcd-8192-a07f8749c373\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "ACP skill sourcing (`F21.acp-skill-sourcing`).",
+      "ids": [
+        "F21.acp-skill-sourcing"
+      ],
+      "line": 845,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 25769,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-27-acp-skill-sourcing-f21-acp-skill-sourcin.json"
+    },
+    {
+      "bullet": "Store busy (`F21.store-busy`).",
+      "ids": [
+        "F21.store-busy"
+      ],
+      "line": 881,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 30996,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-28-store-busy-f21-store-busy.json"
+    },
+    {
+      "bullet": "Busy store at conversation start (`F21.launch-store-busy`).",
+      "ids": [
+        "F21.launch-store-busy"
+      ],
+      "line": 903,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 31791,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-29-busy-store-at-conversation-start-f21-lau.json"
+    },
+    {
+      "bullet": "Lock wait does not stall the server (`F21.busy-blocks-server`).",
+      "ids": [
+        "F21.busy-blocks-server"
+      ],
+      "line": 936,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6487,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-30-lock-wait-does-not-stall-the-server-f21-.json"
+    },
+    {
+      "bullet": "How a dangling LLM reference is reported (`F21.dangling-llm-report`).",
+      "ids": [
+        "F21.dangling-llm-report"
+      ],
+      "line": 957,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2406,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-31-how-a-dangling-llm-reference-is-reported.json"
+    },
+    {
+      "bullet": "TypeScript payload types (`F21.ts-payload-types`).",
+      "ids": [
+        "F21.ts-payload-types"
+      ],
+      "line": 987,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3754,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-32-typescript-payload-types-f21-ts-payload-.json"
+    },
+    {
+      "bullet": "`.json` names keep their identity (`F21.json-suffix-identity`).",
+      "ids": [
+        "F21.json-suffix-identity"
+      ],
+      "line": 1047,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3799,
+      "transcript": "<scratch>/agent-server/20261120-085652-09bd-map-f21/evidence/map-run/F21-agent-profiles-33-json-names-keep-their-identity-f21-json-.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-085652-09bd-map-f21",
+  "launch_flags": []
+}

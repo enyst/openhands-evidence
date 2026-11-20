@@ -1,0 +1,288 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B2-S09",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 16,
+    "fail": 3,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S09-mcp.md",
+      "bullet": 1,
+      "ids": [
+        "S09.stdio-server",
+        "S09.schema-conversion",
+        "S09.argument-validation",
+        "S09.observation",
+        "S09.secret-refs-in-calls",
+        "S09.session-reuse",
+        "S09.tools-list-changed",
+        "S09.config-var-expansion",
+        "S09.config-secrets"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-01.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 2,
+      "ids": [
+        "S09.filter-tools-regex"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-02.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 3,
+      "ids": [
+        "S09.startup-failure-tolerated"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-03.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 4,
+      "ids": [
+        "S09.startup-failure-tolerated"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-04.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 5,
+      "ids": [
+        "S09.enabled-flag"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-05.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 6,
+      "ids": [
+        "S09.listing-timeout"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-06.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 7,
+      "ids": [
+        "S09.stdio-server",
+        "S09.http-sse-server"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-07.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 8,
+      "ids": [
+        "S09.protocol-negotiation",
+        "S09.session-reuse",
+        "S09.tools-list-changed"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-08.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 9,
+      "ids": [
+        "S09.static-auth"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-09.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 10,
+      "ids": [
+        "S09.oauth"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-10.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 11,
+      "ids": [
+        "S09.oauth"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 12,
+      "ids": [
+        "S09.session-recovery"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-12.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 13,
+      "ids": [
+        "S09.session-recovery"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-13.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 14,
+      "ids": [
+        "S09.config-model",
+        "S09.config-secrets",
+        "S09.schema-conversion",
+        "S09.argument-validation",
+        "S09.observation",
+        "S09.tool-serialization"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-14.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 15,
+      "ids": [
+        "S09.observation"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-15.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 16,
+      "ids": [
+        "S09.stdio-server",
+        "S09.schema-conversion",
+        "S09.secret-refs-in-calls",
+        "S09.observation"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-16.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 17,
+      "ids": [
+        "S09.stdio-server",
+        "S09.filter-tools-regex",
+        "S09.observation"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-17.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 18,
+      "ids": [
+        "S09.runtime-add-servers"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-18.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 19,
+      "ids": [
+        "S09.runtime-add-resume"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-19.log"
+    },
+    {
+      "family": "S09-mcp.md",
+      "bullet": 20,
+      "ids": [
+        "S09.startup-budget"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S09/transcripts/S09-mcp-20.log"
+    }
+  ]
+}

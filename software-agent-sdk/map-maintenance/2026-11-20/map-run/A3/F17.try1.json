@@ -1,0 +1,7 @@
+{
+  "ok": false,
+  "exit": 3,
+  "error": "Fresh verification server failed doctor",
+  "run": "<scratch>/agent-server/20261120-082545-aff3-map-f17",
+  "doctor": "<scratch>/agent-server/20261120-082545-aff3-map-f17/evidence/map-run/doctor-before.json"
+}

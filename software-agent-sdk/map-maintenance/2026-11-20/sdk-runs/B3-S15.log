@@ -1,0 +1,157 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B3-S15",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 6,
+    "blocked": 3,
+    "fail": 1
+  },
+  "results": [
+    {
+      "family": "S15-browser.md",
+      "bullet": 1,
+      "ids": [
+        "S15.toolset-create",
+        "S15.navigate-and-read",
+        "S15.interact",
+        "S15.tabs",
+        "S15.storage",
+        "S15.observation",
+        "S15.recording-start-stop",
+        "S15.prompt-guidance",
+        "S15.action-routing",
+        "S15.cleanup"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S15/transcripts/S15-browser-01.log"
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 2,
+      "ids": [
+        "S15.tabs"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S15/transcripts/S15-browser-02.log"
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 3,
+      "ids": [
+        "S15.degrade-on-failure",
+        "S15.chromium-detection",
+        "S15.prompt-guidance"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "block 1 is blocked (exit 3: a missing prerequisite)",
+      "transcript": "<scratch>/sdk/B3-S15/transcripts/S15-browser-03.log"
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 4,
+      "ids": [
+        "S15.shared-executor",
+        "S15.cleanup"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S15/transcripts/S15-browser-04.log"
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 5,
+      "ids": [
+        "S15.executor-config"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S15/transcripts/S15-browser-05.log"
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 6,
+      "ids": [
+        "S15.session-recovery",
+        "S15.action-routing",
+        "S15.cleanup"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S15/transcripts/S15-browser-06.log"
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 7,
+      "ids": [
+        "S15.recording-start-stop",
+        "S15.recording-storage"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 8,
+      "ids": [
+        "S15.preset-browser"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S15/transcripts/S15-browser-08.log"
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 9,
+      "ids": [
+        "S15.navigate-and-read",
+        "S15.interact"
+      ],
+      "result": "fail",
+      "proof": [
+        "integration",
+        "live",
+        "scripted"
+      ],
+      "note": "integration tests missing [] failed ['t05_simple_browsing'] (<scratch>/sdk/B3-S15/work/S15-browser-09/block1-4/deepseek_deepseek_flash_agent-sdk-integration_N1_20261120_083420/results.json)",
+      "transcript": "<scratch>/sdk/B3-S15/transcripts/S15-browser-09.log"
+    },
+    {
+      "family": "S15-browser.md",
+      "bullet": 10,
+      "ids": [
+        "S15.navigate-and-read",
+        "S15.recording-start-stop",
+        "S15.recording-storage"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}

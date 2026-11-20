@@ -1,0 +1,381 @@
+{
+  "ok": true,
+  "file": "F05-run-pause-interrupt.md",
+  "summary": {
+    "pass": 33,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 117,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 46038,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-00-preconditions.json"
+    },
+    {
+      "bullet": "Run queued input on a real model (`F05.run-queued`).",
+      "ids": [
+        "F05.run-queued"
+      ],
+      "line": 188,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17383,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-01-run-queued-input-on-a-real-model-f05-run.json"
+    },
+    {
+      "bullet": "Run with nothing to do (`F05.run-finished-noop`).",
+      "ids": [
+        "F05.run-finished-noop"
+      ],
+      "line": 208,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11257,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-02-run-with-nothing-to-do-f05-run-finished-.json"
+    },
+    {
+      "bullet": "New input after finishing (`F05.run-new-input`).",
+      "ids": [
+        "F05.run-new-input"
+      ],
+      "line": 224,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8688,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-03-new-input-after-finishing-f05-run-new-in.json"
+    },
+    {
+      "bullet": "Pause an idle conversation (`F05.pause-idle`).",
+      "ids": [
+        "F05.pause-idle"
+      ],
+      "line": 236,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14323,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-04-pause-an-idle-conversation-f05-pause-idl.json"
+    },
+    {
+      "bullet": "Pause twice (`F05.pause-repeat`).",
+      "ids": [
+        "F05.pause-repeat"
+      ],
+      "line": 252,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4316,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-05-pause-twice-f05-pause-repeat.json"
+    },
+    {
+      "bullet": "Resume a paused conversation (`F05.run-resume-paused`).",
+      "ids": [
+        "F05.run-resume-paused"
+      ],
+      "line": 259,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11840,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-06-resume-a-paused-conversation-f05-run-res.json"
+    },
+    {
+      "bullet": "Interrupt with nothing running (`F05.interrupt-idle`).",
+      "ids": [
+        "F05.interrupt-idle"
+      ],
+      "line": 271,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5621,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-07-interrupt-with-nothing-running-f05-inter.json"
+    },
+    {
+      "bullet": "A run that fails (`F05.run-error`).",
+      "ids": [
+        "F05.run-error"
+      ],
+      "line": 281,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13364,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-08-a-run-that-fails-f05-run-error.json"
+    },
+    {
+      "bullet": "Pause and interrupt a terminal conversation (`F05.pause-terminal`).",
+      "ids": [
+        "F05.pause-terminal"
+      ],
+      "line": 299,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15051,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-09-pause-and-interrupt-a-terminal-conversat.json"
+    },
+    {
+      "bullet": "Responsive while a run fails (`F05.run-error-responsive`).",
+      "ids": [
+        "F05.run-error-responsive"
+      ],
+      "line": 314,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14341,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-10-responsive-while-a-run-fails-f05-run-err.json"
+    },
+    {
+      "bullet": "Run an unknown id (`F05.unknown-id-run`).",
+      "ids": [
+        "F05.unknown-id-run"
+      ],
+      "line": 351,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1122,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-11-run-an-unknown-id-f05-unknown-id-run.json"
+    },
+    {
+      "bullet": "Pause or interrupt an unknown id (`F05.unknown-id-pause`).",
+      "ids": [
+        "F05.unknown-id-pause"
+      ],
+      "line": 356,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4591,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-12-pause-or-interrupt-an-unknown-id-f05-unk.json"
+    },
+    {
+      "bullet": "Auth and malformed ids (`F05.control-errors`).",
+      "ids": [
+        "F05.control-errors"
+      ],
+      "line": 370,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16806,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-13-auth-and-malformed-ids-f05-control-error.json"
+    },
+    {
+      "bullet": "Run while running (`F05.run-conflict`).",
+      "ids": [
+        "F05.run-conflict"
+      ],
+      "line": 392,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8871,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-14-run-while-running-f05-run-conflict.json"
+    },
+    {
+      "bullet": "Pause during a long model call (`F05.pause-running`).",
+      "ids": [
+        "F05.pause-running"
+      ],
+      "line": 407,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11352,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-15-pause-during-a-long-model-call-f05-pause.json"
+    },
+    {
+      "bullet": "GET after a mid-call pause (`F05.pause-running-get`).",
+      "ids": [
+        "F05.pause-running-get"
+      ],
+      "line": 421,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4281,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-16-get-after-a-mid-call-pause-f05-pause-run.json"
+    },
+    {
+      "bullet": "Release a paused step with interrupt (`F05.pause-running-release`).",
+      "ids": [
+        "F05.pause-running-release"
+      ],
+      "line": 440,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12532,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-17-release-a-paused-step-with-interrupt-f05.json"
+    },
+    {
+      "bullet": "Interrupt a running conversation (`F05.interrupt-running`).",
+      "ids": [
+        "F05.interrupt-running"
+      ],
+      "line": 456,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14060,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-18-interrupt-a-running-conversation-f05-int.json"
+    },
+    {
+      "bullet": "Resume after an interrupt (`F05.run-after-interrupt`).",
+      "ids": [
+        "F05.run-after-interrupt"
+      ],
+      "line": 476,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4489,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-19-resume-after-an-interrupt-f05-run-after-.json"
+    },
+    {
+      "bullet": "Pause during a tool call (`F05.pause-tool-step`).",
+      "ids": [
+        "F05.pause-tool-step"
+      ],
+      "line": 488,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17651,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-20-pause-during-a-tool-call-f05-pause-tool-.json"
+    },
+    {
+      "bullet": "Interrupt during a tool call (`F05.interrupt-tool-call`).",
+      "ids": [
+        "F05.interrupt-tool-call"
+      ],
+      "line": 513,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10863,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-21-interrupt-during-a-tool-call-f05-interru.json"
+    },
+    {
+      "bullet": "Run capacity (`F05.run-capacity`).",
+      "ids": [
+        "F05.run-capacity"
+      ],
+      "line": 538,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11500,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-22-run-capacity-f05-run-capacity.json"
+    },
+    {
+      "bullet": "A run that loops ends `stuck` (`F05.stuck-detected`).",
+      "ids": [
+        "F05.stuck-detected"
+      ],
+      "line": 556,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15173,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-23-a-run-that-loops-ends-stuck-f05-stuck-de.json"
+    },
+    {
+      "bullet": "Run a stuck conversation again (`F05.stuck-rerun`).",
+      "ids": [
+        "F05.stuck-rerun"
+      ],
+      "line": 580,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10317,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-24-run-a-stuck-conversation-again-f05-stuck.json"
+    },
+    {
+      "bullet": "New input un-sticks it (`F05.stuck-new-input`).",
+      "ids": [
+        "F05.stuck-new-input"
+      ],
+      "line": 598,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6151,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-25-new-input-un-sticks-it-f05-stuck-new-inp.json"
+    },
+    {
+      "bullet": "Iteration cap (`F05.max-iterations-stop`).",
+      "ids": [
+        "F05.max-iterations-stop"
+      ],
+      "line": 611,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13748,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-26-iteration-cap-f05-max-iterations-stop.json"
+    },
+    {
+      "bullet": "Resume after the cap (`F05.max-iterations-resume`).",
+      "ids": [
+        "F05.max-iterations-resume"
+      ],
+      "line": 634,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11756,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-27-resume-after-the-cap-f05-max-iterations-.json"
+    },
+    {
+      "bullet": "Graceful restart while running (`F05.restart-running-graceful`).",
+      "ids": [
+        "F05.restart-running-graceful"
+      ],
+      "line": 653,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 30501,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-28-graceful-restart-while-running-f05-resta.json"
+    },
+    {
+      "bullet": "Statuses survive the restart (`F05.restart-keeps-status`).",
+      "ids": [
+        "F05.restart-keeps-status"
+      ],
+      "line": 667,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9413,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-29-statuses-survive-the-restart-f05-restart.json"
+    },
+    {
+      "bullet": "Crash while running (`F05.restart-hard-running`).",
+      "ids": [
+        "F05.restart-hard-running"
+      ],
+      "line": 684,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17386,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-30-crash-while-running-f05-restart-hard-run.json"
+    },
+    {
+      "bullet": "Crash during a tool call (`F05.restart-hard-tool-call`).",
+      "ids": [
+        "F05.restart-hard-tool-call"
+      ],
+      "line": 704,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 19857,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-31-crash-during-a-tool-call-f05-restart-har.json"
+    },
+    {
+      "bullet": "Crash after a mid-call pause (`F05.pause-running-crash`).",
+      "ids": [
+        "F05.pause-running-crash"
+      ],
+      "line": 743,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12326,
+      "transcript": "<scratch>/agent-server/20261120-083713-b8a0-map-f05/evidence/map-run/F05-run-pause-interrupt-32-crash-after-a-mid-call-pause-f05-pause-r.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-083713-b8a0-map-f05",
+  "launch_flags": [
+    "--config-json",
+    "{\"max_concurrent_runs\": 1}"
+  ]
+}

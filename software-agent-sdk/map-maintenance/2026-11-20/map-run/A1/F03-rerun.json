@@ -1,0 +1,44 @@
+{
+  "ok": false,
+  "file": "F03-deferred-init.md",
+  "summary": {
+    "pass": 1,
+    "fail": 1,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 110,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1769,
+      "transcript": "<scratch>/agent-server/20261120-085455-a18f-map-f03/evidence/map-run/F03-deferred-init-00-preconditions.json"
+    },
+    {
+      "bullet": "Child launcher after init (`F03.init-child-launcher`).",
+      "ids": [
+        "F03.init-child-launcher"
+      ],
+      "line": 463,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 14020,
+      "transcript": "<scratch>/agent-server/20261120-085455-a18f-map-f03/evidence/map-run/F03-deferred-init-01-child-launcher-after-init-f03-init-child.json",
+      "failed_line": 19,
+      "failed_command": "CHILD_BODY=$(python3 - \"$CHILD_RUN\" <<'PY'\nimport json, os, sys\nprint(json.dumps({\n    \"agent\": {\"llm\": {\"model\": \"deepseek/deepseek-flash\", \"api_key\": os.environ[\"DEEPSEEK_API_KEY\"]},\n              \"tools\": [{\"name\": \"start_child_conversation\"}]},\n    \"workspace\": {\"working_dir\": sys.argv[1] + \"/fixtures/child-workspace\"},\n    \"autotitle\": False, \"max_iterations\": 5,\n    \"initial_message\": {\"role\": \"user\", \"content\": [{\"type\": \"text\", \"text\":\n        'Call start_child_conversation exactly once ",
+      "stdout_tail": "}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/init\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": {\n      \"session_api_keys\": [\n        \"qa-f03-child-key\"\n      ],\n      \"max_concurrent_runs\": 2\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"30\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"state\": \"ready\",\n      \"error\": null\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \"state eq ready\",\n      \"ok\": true,\n      \"actual\": \"ready\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-085507-3e2e-f03-child/evidence/F03.init-child-launcher/init.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 401,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"none\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 401,\n    \"headers\": {\n      \"content-length\": \"25\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Unauthorized\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 88\n}\n",
+      "stderr_tail": "Traceback (most recent call last):\n  File \"<stdin>\", line 3, in <module>\n  File \"<frozen os>\", line 679, in __getitem__\nKeyError: 'DEEPSEEK_API_KEY'\n"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-085455-a18f-map-f03",
+  "launch_flags": [
+    "--no-auth",
+    "--deferred-init"
+  ]
+}

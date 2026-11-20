@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "file": "F19-mcp.md",
+  "launch_flags": [
+    "--webhook-sink"
+  ],
+  "attempts": [
+    {
+      "run": "<scratch>/agent-server/20261120-084759-8d19-map-f19",
+      "ok": true,
+      "summary": {
+        "pass": 2,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Added servers after a restart (`F19.conversation-mcp-add-restart`).": "pass"
+      }
+    },
+    {
+      "run": "<scratch>/agent-server/20261120-084856-83ee-map-f19",
+      "ok": true,
+      "summary": {
+        "pass": 2,
+        "fail": 0,
+        "xfail": 0,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Added servers after a restart (`F19.conversation-mcp-add-restart`).": "pass"
+      }
+    }
+  ]
+}

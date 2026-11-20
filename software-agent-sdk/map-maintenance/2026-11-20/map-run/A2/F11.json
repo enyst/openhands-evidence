@@ -1,0 +1,304 @@
+{
+  "ok": true,
+  "file": "F11-goals.md",
+  "summary": {
+    "pass": 26,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 110,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 26354,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-00-preconditions.json"
+    },
+    {
+      "bullet": "Invalid goal requests (`F11.goal-validation`).",
+      "ids": [
+        "F11.goal-validation"
+      ],
+      "line": 169,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7318,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-01-invalid-goal-requests-f11-goal-validatio.json"
+    },
+    {
+      "bullet": "Unknown and malformed ids (`F11.goal-unknown-id`).",
+      "ids": [
+        "F11.goal-unknown-id"
+      ],
+      "line": 184,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3801,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-02-unknown-and-malformed-ids-f11-goal-unkno.json"
+    },
+    {
+      "bullet": "Authentication (`F11.goal-auth`).",
+      "ids": [
+        "F11.goal-auth"
+      ],
+      "line": 194,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4479,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-03-authentication-f11-goal-auth.json"
+    },
+    {
+      "bullet": "Stop with nothing to stop (`F11.goal-stop-noop`).",
+      "ids": [
+        "F11.goal-stop-noop"
+      ],
+      "line": 208,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2676,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-04-stop-with-nothing-to-stop-f11-goal-stop-.json"
+    },
+    {
+      "bullet": "Resume with no goal (`F11.goal-resume-none`).",
+      "ids": [
+        "F11.goal-resume-none"
+      ],
+      "line": 217,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2368,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-05-resume-with-no-goal-f11-goal-resume-none.json"
+    },
+    {
+      "bullet": "A goal on a real model (`F11.goal-complete`).",
+      "ids": [
+        "F11.goal-complete"
+      ],
+      "line": 225,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 29039,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-06-a-goal-on-a-real-model-f11-goal-complete.json"
+    },
+    {
+      "bullet": "Goal status on the socket (`F11.goal-ws`).",
+      "ids": [
+        "F11.goal-ws"
+      ],
+      "line": 241,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2744,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-07-goal-status-on-the-socket-f11-goal-ws.json"
+    },
+    {
+      "bullet": "Same conversation, no new one (`F11.goal-in-place`).",
+      "ids": [
+        "F11.goal-in-place"
+      ],
+      "line": 248,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1187,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-08-same-conversation-no-new-one-f11-goal-in.json"
+    },
+    {
+      "bullet": "Incomplete verdict re-prompts (`F11.goal-followup`).",
+      "ids": [
+        "F11.goal-followup"
+      ],
+      "line": 259,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3333,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-09-incomplete-verdict-re-prompts-f11-goal-f.json"
+    },
+    {
+      "bullet": "Round cap (`F11.goal-capped`).",
+      "ids": [
+        "F11.goal-capped"
+      ],
+      "line": 272,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3729,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-10-round-cap-f11-goal-capped.json"
+    },
+    {
+      "bullet": "Nothing to resume after the end (`F11.goal-resume-finished`).",
+      "ids": [
+        "F11.goal-resume-finished"
+      ],
+      "line": 284,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2624,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-11-nothing-to-resume-after-the-end-f11-goal.json"
+    },
+    {
+      "bullet": "Busy while a round is in flight (`F11.goal-busy`).",
+      "ids": [
+        "F11.goal-busy"
+      ],
+      "line": 294,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4719,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-12-busy-while-a-round-is-in-flight-f11-goal.json"
+    },
+    {
+      "bullet": "Stop an active loop (`F11.goal-stop`).",
+      "ids": [
+        "F11.goal-stop"
+      ],
+      "line": 310,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5527,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-13-stop-an-active-loop-f11-goal-stop.json"
+    },
+    {
+      "bullet": "A user message supersedes the loop (`F11.goal-superseded`).",
+      "ids": [
+        "F11.goal-superseded"
+      ],
+      "line": 327,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2691,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-14-a-user-message-supersedes-the-loop-f11-g.json"
+    },
+    {
+      "bullet": "A socket message supersedes the loop (`F11.goal-superseded-socket`).",
+      "ids": [
+        "F11.goal-superseded-socket"
+      ],
+      "line": 340,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2835,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-15-a-socket-message-supersedes-the-loop-f11.json"
+    },
+    {
+      "bullet": "Interrupt the round (`F11.goal-interrupt-run`).",
+      "ids": [
+        "F11.goal-interrupt-run"
+      ],
+      "line": 352,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5453,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-16-interrupt-the-round-f11-goal-interrupt-r.json"
+    },
+    {
+      "bullet": "Busy with an ordinary run (`F11.goal-busy-run`).",
+      "ids": [
+        "F11.goal-busy-run"
+      ],
+      "line": 365,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2647,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-17-busy-with-an-ordinary-run-f11-goal-busy-.json"
+    },
+    {
+      "bullet": "Resume a stopped loop (`F11.goal-resume`).",
+      "ids": [
+        "F11.goal-resume"
+      ],
+      "line": 378,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6430,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-18-resume-a-stopped-loop-f11-goal-resume.json"
+    },
+    {
+      "bullet": "Resume after a restart (`F11.goal-restart-resume`).",
+      "ids": [
+        "F11.goal-restart-resume"
+      ],
+      "line": 395,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15876,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-19-resume-after-a-restart-f11-goal-restart-.json"
+    },
+    {
+      "bullet": "The round's provider fails (`F11.goal-run-error`).",
+      "ids": [
+        "F11.goal-run-error"
+      ],
+      "line": 409,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6092,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-20-the-round-s-provider-fails-f11-goal-run-.json"
+    },
+    {
+      "bullet": "The judge fails (`F11.goal-judge-error`).",
+      "ids": [
+        "F11.goal-judge-error"
+      ],
+      "line": 424,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8952,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-21-the-judge-fails-f11-goal-judge-error.json"
+    },
+    {
+      "bullet": "Capacity (`F11.goal-capacity`).",
+      "ids": [
+        "F11.goal-capacity"
+      ],
+      "line": 438,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12195,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-22-capacity-f11-goal-capacity.json"
+    },
+    {
+      "bullet": "Delete a conversation with an active loop (`F11.goal-delete-active`).",
+      "ids": [
+        "F11.goal-delete-active"
+      ],
+      "line": 466,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5968,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-23-delete-a-conversation-with-an-active-loo.json"
+    },
+    {
+      "bullet": "A resume after a failed last audit stays within the cap (`F11.goal-cap-overrun`).",
+      "ids": [
+        "F11.goal-cap-overrun"
+      ],
+      "line": 483,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10229,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-24-a-resume-after-a-failed-last-audit-stays.json"
+    },
+    {
+      "bullet": "A loop active at a restart ends \"interrupted\" (`F11.goal-restart-active`).",
+      "ids": [
+        "F11.goal-restart-active"
+      ],
+      "line": 510,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11495,
+      "transcript": "<scratch>/agent-server/20261120-084259-63f1-map-f11/evidence/map-run/F11-goals-25-a-loop-active-at-a-restart-ends-interrup.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-084259-63f1-map-f11",
+  "launch_flags": [
+    "--config-json",
+    "{\"max_concurrent_runs\": 1}"
+  ]
+}

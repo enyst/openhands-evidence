@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "file": "F39-message-edits.md",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "The feature flag (`F39.flag-gates`).",
+      "ids": [
+        "F39.flag-gates"
+      ],
+      "line": 59,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2678,
+      "transcript": "<scratch>/agent-server/20261120-093503-f753-map-f39/evidence/map-run/F39-message-edits-00-the-feature-flag-f39-flag-gates.json"
+    },
+    {
+      "bullet": "Model-backed: the agent edits its question (`F39.tool`).",
+      "ids": [
+        "F39.tool"
+      ],
+      "line": 72,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12453,
+      "transcript": "<scratch>/agent-server/20261120-093503-f753-map-f39/evidence/map-run/F39-message-edits-01-model-backed-the-agent-edits-its-questio.json"
+    },
+    {
+      "bullet": "What the model sees (`F39.agent-sees`, `F39.miss`).",
+      "ids": [
+        "F39.agent-sees",
+        "F39.miss"
+      ],
+      "line": 94,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7030,
+      "transcript": "<scratch>/agent-server/20261120-093503-f753-map-f39/evidence/map-run/F39-message-edits-02-what-the-model-sees-f39-agent-sees-f39-m.json"
+    },
+    {
+      "bullet": "A reaction quotes the edited text (`F39.reaction-quotes-edit`).",
+      "ids": [
+        "F39.reaction-quotes-edit"
+      ],
+      "line": 124,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1238,
+      "transcript": "<scratch>/agent-server/20261120-093503-f753-map-f39/evidence/map-run/F39-message-edits-03-a-reaction-quotes-the-edited-text-f39-re.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-093503-f753-map-f39",
+  "launch_flags": []
+}

@@ -1,0 +1,354 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B1-S01",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 23,
+    "fail": 1,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 1,
+      "ids": [
+        "S01.run-to-finish",
+        "S01.response-dispatch"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-01.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 2,
+      "ids": [
+        "S01.response-dispatch"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-02.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 3,
+      "ids": [
+        "S01.malformed-tool-call",
+        "S01.unknown-tool",
+        "S01.content-policy"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-03.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 4,
+      "ids": [
+        "S01.empty-reply-nudge"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-04.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 5,
+      "ids": [
+        "S01.empty-reply-nudge"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-05.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 6,
+      "ids": [
+        "S01.max-iterations"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-06.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 7,
+      "ids": [
+        "S01.max-budget"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-07.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 8,
+      "ids": [
+        "S01.stuck-detect",
+        "S01.stuck-recover"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-08.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 9,
+      "ids": [
+        "S01.stuck-recover"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-09.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 10,
+      "ids": [
+        "S01.stuck-thresholds"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-10.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 11,
+      "ids": [
+        "S01.stuck-nudge"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-11.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 12,
+      "ids": [
+        "S01.parallel-tools",
+        "S01.finish-truncates-batch"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-12.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 13,
+      "ids": [
+        "S01.parallel-resource-locks"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-13.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 14,
+      "ids": [
+        "S01.tool-exception"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-14.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 15,
+      "ids": [
+        "S01.message-while-running"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-15.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 16,
+      "ids": [
+        "S01.async-step",
+        "S01.message-while-running"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-16.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 17,
+      "ids": [
+        "S01.image-input",
+        "S01.image-non-vision"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-17.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 18,
+      "ids": [
+        "S01.ask-agent"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-18.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 19,
+      "ids": [
+        "S01.structured-output"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-19.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 20,
+      "ids": [
+        "S01.context-overflow"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-20.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 21,
+      "ids": [
+        "S01.run-to-finish",
+        "S01.response-dispatch",
+        "S01.ask-agent"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-21.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 22,
+      "ids": [
+        "S01.message-while-running",
+        "S01.stuck-detect",
+        "S01.parallel-tools",
+        "S01.structured-output"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-22.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 23,
+      "ids": [
+        "S01.iterative-refinement"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-23.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 24,
+      "ids": [
+        "S01.run-to-finish",
+        "S01.context-overflow"
+      ],
+      "result": "fail",
+      "proof": [
+        "integration",
+        "live"
+      ],
+      "note": "integration tests missing [] failed ['t01_fix_simple_typo', 't02_add_bash_hello'] (<scratch>/sdk/B1-S01/work/S01-agent-loop-24/block1-2/deepseek_deepseek_flash_agent-sdk-integration_N2_20261120_084721/results.json)",
+      "transcript": "<scratch>/sdk/B1-S01/transcripts/S01-agent-loop-24.log"
+    },
+    {
+      "family": "S01-agent-loop.md",
+      "bullet": 25,
+      "ids": [
+        "S01.image-input"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}

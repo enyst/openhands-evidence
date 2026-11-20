@@ -1,0 +1,447 @@
+{
+  "ok": true,
+  "file": "F34-typescript-client.md",
+  "summary": {
+    "pass": 38,
+    "fail": 0,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 150,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3214,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-00-preconditions.json"
+    },
+    {
+      "bullet": "Server status and version gate (`F34.server-client`).",
+      "ids": [
+        "F34.server-client"
+      ],
+      "line": 260,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3454,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-01-server-status-and-version-gate-f34-serve.json"
+    },
+    {
+      "bullet": "Errors (`F34.http-errors`).",
+      "ids": [
+        "F34.http-errors"
+      ],
+      "line": 308,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2307,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-02-errors-f34-http-errors.json"
+    },
+    {
+      "bullet": "Workspace commands (`F34.workspace-exec`).",
+      "ids": [
+        "F34.workspace-exec"
+      ],
+      "line": 347,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2701,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-03-workspace-commands-f34-workspace-exec.json"
+    },
+    {
+      "bullet": "Workspace files (`F34.workspace-files`).",
+      "ids": [
+        "F34.workspace-files"
+      ],
+      "line": 376,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2044,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-04-workspace-files-f34-workspace-files.json"
+    },
+    {
+      "bullet": "Binary download through RemoteWorkspace (`F34.workspace-binary-download`), known bug.",
+      "ids": [
+        "F34.workspace-binary-download"
+      ],
+      "line": 409,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 1658,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-05-binary-download-through-remoteworkspace-.json",
+      "failed_line": 16,
+      "failed_command": "control-agent-server assert --json \"$F34/binary.json\" --check blob eq '[255, 0, 128, 254, 65]' --check file_size eq 5",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"exit_code\": 0,\n  \"elapsed_ms\": 1018,\n  \"stdout_tail\": \"QA_F34_BINARY_READ\\n\",\n  \"stderr_tail\": \"\",\n  \"saved\": \"<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/F34.workspace-binary-download/program.json\"\n}\n{\"blob\":[239,191,189,0,239,191,189,239,191,189,65],\"file_size\":11}{\n  \"ok\": false,\n  \"value\": {\n    \"blob\": [\n      239,\n      191,\n      189,\n      0,\n      239,\n      191,\n      189,\n      239,\n      191,\n      189,\n      65\n    ],\n    \"file_size\": 11\n  },\n  \"checks\": [\n    {\n      \"check\": \"blob eq [255, 0, 128, 254, 65]\",\n      \"ok\": false,\n      \"actual\": \"[239, 191, 189, 0, 239, 191, 189, 239, 191, 189, 65]\"\n    },\n    {\n      \"check\": \"file_size eq 5\",\n      \"ok\": false,\n      \"actual\": \"11\"\n    }\n  ],\n  \"hint\": \"failed check: blob eq [255, 0, 128, 254, 65]; file_size eq 5\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "value.file_size eq 11 && value.blob eq '[239, 191, 189, 0, 239, 191, 189, 239, 191, 189, 65]'"
+    },
+    {
+      "bullet": "Conversation-scoped workspace (`F34.workspace-scoped`).",
+      "ids": [
+        "F34.workspace-scoped"
+      ],
+      "line": 438,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1551,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-06-conversation-scoped-workspace-f34-worksp.json"
+    },
+    {
+      "bullet": "Git through RemoteWorkspace (`F34.workspace-git`).",
+      "ids": [
+        "F34.workspace-git"
+      ],
+      "line": 468,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2555,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-07-git-through-remoteworkspace-f34-workspac.json"
+    },
+    {
+      "bullet": "Git status type (`F34.workspace-git-types`).",
+      "ids": [
+        "F34.workspace-git-types"
+      ],
+      "line": 506,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4345,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-08-git-status-type-f34-workspace-git-types.json"
+    },
+    {
+      "bullet": "Bash client (`F34.bash-client`).",
+      "ids": [
+        "F34.bash-client"
+      ],
+      "line": 541,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7612,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-09-bash-client-f34-bash-client.json"
+    },
+    {
+      "bullet": "Bash events socket from Node (`F34.bash-websocket`).",
+      "ids": [
+        "F34.bash-websocket"
+      ],
+      "line": 590,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5601,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-10-bash-events-socket-from-node-f34-bash-we.json"
+    },
+    {
+      "bullet": "Workspace session (`F34.workspace-session`).",
+      "ids": [
+        "F34.workspace-session"
+      ],
+      "line": 622,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1525,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-11-workspace-session-f34-workspace-session.json"
+    },
+    {
+      "bullet": "Create a conversation (`F34.conversation-create`).",
+      "ids": [
+        "F34.conversation-create"
+      ],
+      "line": 651,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1990,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-12-create-a-conversation-f34-conversation-c.json"
+    },
+    {
+      "bullet": "Send and run (`F34.conversation-run`).",
+      "ids": [
+        "F34.conversation-run"
+      ],
+      "line": 682,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8755,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-13-send-and-run-f34-conversation-run.json"
+    },
+    {
+      "bullet": "Events list (`F34.events-list`).",
+      "ids": [
+        "F34.events-list"
+      ],
+      "line": 759,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2029,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-14-events-list-f34-events-list.json"
+    },
+    {
+      "bullet": "Unknown event id (`F34.events-unknown-id`).",
+      "ids": [
+        "F34.events-unknown-id"
+      ],
+      "line": 796,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1807,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-15-unknown-event-id-f34-events-unknown-id.json"
+    },
+    {
+      "bullet": "Short event kinds (`F34.events-search-kind`).",
+      "ids": [
+        "F34.events-search-kind"
+      ],
+      "line": 824,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1463,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-16-short-event-kinds-f34-events-search-kind.json"
+    },
+    {
+      "bullet": "Event stream on Node's WebSocket (`F34.event-stream`).",
+      "ids": [
+        "F34.event-stream"
+      ],
+      "line": 849,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4457,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-17-event-stream-on-node-s-websocket-f34-eve.json"
+    },
+    {
+      "bullet": "Conversation callback socket from Node (`F34.ws-callback-client`).",
+      "ids": [
+        "F34.ws-callback-client"
+      ],
+      "line": 903,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5055,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-18-conversation-callback-socket-from-node-f.json"
+    },
+    {
+      "bullet": "Title and confirmation policy (`F34.conversation-controls`).",
+      "ids": [
+        "F34.conversation-controls"
+      ],
+      "line": 934,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2772,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-19-title-and-confirmation-policy-f34-conver.json"
+    },
+    {
+      "bullet": "Conversation manager (`F34.manager`).",
+      "ids": [
+        "F34.manager"
+      ],
+      "line": 957,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3243,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-20-conversation-manager-f34-manager.json"
+    },
+    {
+      "bullet": "Batches above the server limit (`F34.manager-batch-over-limit`).",
+      "ids": [
+        "F34.manager-batch-over-limit"
+      ],
+      "line": 998,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2966,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-21-batches-above-the-server-limit-f34-manag.json"
+    },
+    {
+      "bullet": "Update result (`F34.manager-update-result`).",
+      "ids": [
+        "F34.manager-update-result"
+      ],
+      "line": 1036,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3014,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-22-update-result-f34-manager-update-result.json"
+    },
+    {
+      "bullet": "Create options (`F34.manager-create-options`).",
+      "ids": [
+        "F34.manager-create-options"
+      ],
+      "line": 1062,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2709,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-23-create-options-f34-manager-create-option.json"
+    },
+    {
+      "bullet": "ACP conversations (`F34.manager-acp`).",
+      "ids": [
+        "F34.manager-acp"
+      ],
+      "line": 1095,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3419,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-24-acp-conversations-f34-manager-acp.json"
+    },
+    {
+      "bullet": "Fork, navigate and ask (`F34.conversation-branching`).",
+      "ids": [
+        "F34.conversation-branching"
+      ],
+      "line": 1131,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5404,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-25-fork-navigate-and-ask-f34-conversation-b.json"
+    },
+    {
+      "bullet": "Confirmation and secrets (`F34.conversation-confirm`).",
+      "ids": [
+        "F34.conversation-confirm"
+      ],
+      "line": 1193,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15462,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-26-confirmation-and-secrets-f34-conversatio.json"
+    },
+    {
+      "bullet": "Hooks (`F34.hooks-client`).",
+      "ids": [
+        "F34.hooks-client"
+      ],
+      "line": 1276,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1493,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-27-hooks-f34-hooks-client.json"
+    },
+    {
+      "bullet": "MCP test (`F34.mcp-client`).",
+      "ids": [
+        "F34.mcp-client"
+      ],
+      "line": 1304,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5080,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-28-mcp-test-f34-mcp-client.json"
+    },
+    {
+      "bullet": "Restart (`F34.restart-reload`).",
+      "ids": [
+        "F34.restart-reload"
+      ],
+      "line": 1332,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11624,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-29-restart-f34-restart-reload.json"
+    },
+    {
+      "bullet": "Event stream reconnect (`F34.event-stream-reconnect`).",
+      "ids": [
+        "F34.event-stream-reconnect"
+      ],
+      "line": 1355,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12193,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-30-event-stream-reconnect-f34-event-stream-.json"
+    },
+    {
+      "bullet": "Reconnect on Node's own WebSocket (`F34.event-stream-reconnect-native`).",
+      "ids": [
+        "F34.event-stream-reconnect-native"
+      ],
+      "line": 1388,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 20274,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-31-reconnect-on-node-s-own-websocket-f34-ev.json"
+    },
+    {
+      "bullet": "Batch events by POST (`F34.events-batch-post`).",
+      "ids": [
+        "F34.events-batch-post"
+      ],
+      "line": 1420,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1906,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-32-batch-events-by-post-f34-events-batch-po.json"
+    },
+    {
+      "bullet": "Load a plugin (`F34.load-plugin`).",
+      "ids": [
+        "F34.load-plugin"
+      ],
+      "line": 1451,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5131,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-33-load-a-plugin-f34-load-plugin.json"
+    },
+    {
+      "bullet": "Commits (`F34.git-commits`).",
+      "ids": [
+        "F34.git-commits"
+      ],
+      "line": 1487,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2315,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-34-commits-f34-git-commits.json"
+    },
+    {
+      "bullet": "Archives (`F34.file-archive`).",
+      "ids": [
+        "F34.file-archive"
+      ],
+      "line": 1526,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2150,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-35-archives-f34-file-archive.json"
+    },
+    {
+      "bullet": "Deferred init (`F34.init-client`).",
+      "ids": [
+        "F34.init-client"
+      ],
+      "line": 1574,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13518,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-36-deferred-init-f34-init-client.json"
+    },
+    {
+      "bullet": "Endpoint audit against this checkout (`F34.endpoint-audit`).",
+      "ids": [
+        "F34.endpoint-audit"
+      ],
+      "line": 1615,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 19159,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-37-endpoint-audit-against-this-checkout-f34.json"
+    },
+    {
+      "bullet": "Old server version (`F34.version-gate-old`).",
+      "ids": [
+        "F34.version-gate-old"
+      ],
+      "line": 1660,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22411,
+      "transcript": "<scratch>/agent-server/20261120-090717-4d37-shim-f34/evidence/map-run/F34-typescript-client-38-old-server-version-f34-version-gate-old.json"
+    }
+  ]
+}

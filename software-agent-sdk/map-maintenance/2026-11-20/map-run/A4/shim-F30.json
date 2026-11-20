@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "file": "F30-openai-gateway.md",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 100,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2522,
+      "transcript": "<scratch>/agent-server/20261120-092908-cfb5-shim-f30/evidence/map-run/F30-openai-gateway-00-preconditions.json"
+    },
+    {
+      "bullet": "Responses (`F30.responses-basic`).",
+      "ids": [
+        "F30.responses-basic"
+      ],
+      "line": 1022,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5196,
+      "transcript": "<scratch>/agent-server/20261120-092908-cfb5-shim-f30/evidence/map-run/F30-openai-gateway-01-responses-f30-responses-basic.json"
+    },
+    {
+      "bullet": "Stateless replay (`F30.responses-stateless-replay`).",
+      "ids": [
+        "F30.responses-stateless-replay"
+      ],
+      "line": 1056,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3337,
+      "transcript": "<scratch>/agent-server/20261120-092908-cfb5-shim-f30/evidence/map-run/F30-openai-gateway-02-stateless-replay-f30-responses-stateless.json"
+    },
+    {
+      "bullet": "Official OpenAI SDK (`F30.openai-sdk`).",
+      "ids": [
+        "F30.openai-sdk"
+      ],
+      "line": 1121,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9020,
+      "transcript": "<scratch>/agent-server/20261120-092908-cfb5-shim-f30/evidence/map-run/F30-openai-gateway-03-official-openai-sdk-f30-openai-sdk.json"
+    }
+  ]
+}

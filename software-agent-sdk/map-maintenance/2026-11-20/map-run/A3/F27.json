@@ -1,0 +1,407 @@
+{
+  "ok": true,
+  "file": "F27-hooks-subagents-tools.md",
+  "summary": {
+    "pass": 30,
+    "fail": 0,
+    "xfail": 3,
+    "xpass": 0,
+    "blocked": 2,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 148,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8095,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-00-preconditions.json"
+    },
+    {
+      "bullet": "Session key required (`F27.auth`).",
+      "ids": [
+        "F27.auth"
+      ],
+      "line": 242,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3913,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-01-session-key-required-f27-auth.json"
+    },
+    {
+      "bullet": "Bad bodies (`F27.validation`).",
+      "ids": [
+        "F27.validation"
+      ],
+      "line": 260,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2011,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-02-bad-bodies-f27-validation.json"
+    },
+    {
+      "bullet": "Registered tools (`F27.tools-list`).",
+      "ids": [
+        "F27.tools-list"
+      ],
+      "line": 270,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 450,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-03-registered-tools-f27-tools-list.json"
+    },
+    {
+      "bullet": "Slash redirects (`F27.tools-redirect`).",
+      "ids": [
+        "F27.tools-redirect"
+      ],
+      "line": 281,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 743,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-04-slash-redirects-f27-tools-redirect.json"
+    },
+    {
+      "bullet": "Tool catalog (`F27.catalog`).",
+      "ids": [
+        "F27.catalog"
+      ],
+      "line": 291,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 405,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-05-tool-catalog-f27-catalog.json"
+    },
+    {
+      "bullet": "Child conversation tool (`F27.child-conversation-tool`).",
+      "ids": [
+        "F27.child-conversation-tool"
+      ],
+      "line": 314,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8338,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-06-child-conversation-tool-f27-child-conver.json"
+    },
+    {
+      "bullet": "Project hooks (`F27.hooks-project`).",
+      "ids": [
+        "F27.hooks-project"
+      ],
+      "line": 348,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 425,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-07-project-hooks-f27-hooks-project.json"
+    },
+    {
+      "bullet": "Formats (`F27.hooks-formats`).",
+      "ids": [
+        "F27.hooks-formats"
+      ],
+      "line": 361,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 378,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-08-formats-f27-hooks-formats.json"
+    },
+    {
+      "bullet": "No hooks (`F27.hooks-absent`).",
+      "ids": [
+        "F27.hooks-absent"
+      ],
+      "line": 376,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3110,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-09-no-hooks-f27-hooks-absent.json"
+    },
+    {
+      "bullet": "Broken hooks.json (`F27.hooks-invalid`).",
+      "ids": [
+        "F27.hooks-invalid"
+      ],
+      "line": 393,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2919,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-10-broken-hooks-json-f27-hooks-invalid.json"
+    },
+    {
+      "bullet": "Sub-agent built-ins (`F27.subagents-builtin`).",
+      "ids": [
+        "F27.subagents-builtin"
+      ],
+      "line": 406,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1218,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-11-sub-agent-built-ins-f27-subagents-builti.json"
+    },
+    {
+      "bullet": "Project sub-agents (`F27.subagents-project`).",
+      "ids": [
+        "F27.subagents-project"
+      ],
+      "line": 425,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 671,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-12-project-sub-agents-f27-subagents-project.json"
+    },
+    {
+      "bullet": "User sub-agents (`F27.subagents-user`).",
+      "ids": [
+        "F27.subagents-user"
+      ],
+      "line": 443,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 952,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-13-user-sub-agents-f27-subagents-user.json"
+    },
+    {
+      "bullet": "Precedence (`F27.subagents-precedence`).",
+      "ids": [
+        "F27.subagents-precedence"
+      ],
+      "line": 459,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 512,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-14-precedence-f27-subagents-precedence.json"
+    },
+    {
+      "bullet": "Invalid definitions (`F27.subagents-invalid`).",
+      "ids": [
+        "F27.subagents-invalid"
+      ],
+      "line": 474,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1222,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-15-invalid-definitions-f27-subagents-invali.json"
+    },
+    {
+      "bullet": "Agent with a missing skill (`F27.subagents-bad-skill`).",
+      "ids": [
+        "F27.subagents-bad-skill"
+      ],
+      "line": 489,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3451,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-16-agent-with-a-missing-skill-f27-subagents.json"
+    },
+    {
+      "bullet": "Hooks in a conversation (`F27.hooks-conversation`).",
+      "ids": [
+        "F27.hooks-conversation"
+      ],
+      "line": 511,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17354,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-17-hooks-in-a-conversation-f27-hooks-conver.json"
+    },
+    {
+      "bullet": "Hooks and the conversation's secrets (`F27.hooks-conversation`), known bug #6966.",
+      "ids": [
+        "F27.hooks-conversation"
+      ],
+      "line": 534,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 3433,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-18-hooks-and-the-conversation-s-secrets-f27.json",
+      "failed_line": 11,
+      "failed_command": "control-agent-server conversation events \"$HSCID\" --kinds HookExecutionEvent --contains '\"stdout\": \"QA_F27_HOOK_SECRET_SET\\n\"' --expect-kind HookExecutionEvent --full --save F27.hooks-conversation/hook-secret",
+      "stdout_tail": "vent\": 1,\n    \"MessageEvent\": 1,\n    \"HookExecutionEvent\": 1,\n    \"ActionEvent\": 2,\n    \"ObservationEvent\": 2\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"8df1ac18-bac5-4602-a314-5519e04fa2e5\",\n      \"kind\": \"ObservationEvent\",\n      \"source\": \"environment\",\n      \"timestamp\": \"2026-11-20T09:04:44.426152\",\n      \"tool_name\": \"terminal\",\n      \"observation\": \"{\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA_F27_TERMINAL_SECRET_SET\\\"}], \\\"is_error\\\": false, \\\"command\\\": \\\"test -n \\\\\\\"$QA_F27_HOOK_SECRET\\\\\\\" && echo QA_F27_TERMINAL_SECRET_SET || echo QA_F27_TERMINAL_SECRET_UNSET\\\", \\\"exit_code\\\": 0, \\\"timeout\\\": false, \\\"metadata\\\": {\\\"exit_code\\\": 0, \\\"pid\\\": \\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"id\": \"c0435065-eedd-4af5-a7d6-3b5a161efd28\",\n  \"total\": 13,\n  \"kinds\": {\n    \"ConversationStateUpdateEvent\": 6,\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"HookExecutionEvent\": 1,\n    \"ActionEvent\": 2,\n    \"ObservationEvent\": 2\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/F27.hooks-conversation/hook-secret.json\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "matching eq 0 && kinds.HookExecutionEvent eq 1"
+    },
+    {
+      "bullet": "Hooks are not loaded implicitly (`F27.hooks-not-automatic`).",
+      "ids": [
+        "F27.hooks-not-automatic"
+      ],
+      "line": 557,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6172,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-19-hooks-are-not-loaded-implicitly-f27-hook.json"
+    },
+    {
+      "bullet": "Blocking hooks (`F27.hooks-block`).",
+      "ids": [
+        "F27.hooks-block"
+      ],
+      "line": 570,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13300,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-20-blocking-hooks-f27-hooks-block.json"
+    },
+    {
+      "bullet": "Client tools stay out of the catalog (`F27.catalog-sealed`).",
+      "ids": [
+        "F27.catalog-sealed"
+      ],
+      "line": 616,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1447,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-21-client-tools-stay-out-of-the-catalog-f27.json"
+    },
+    {
+      "bullet": "Client tool call (`F27.client-tool-call`).",
+      "ids": [
+        "F27.client-tool-call"
+      ],
+      "line": 627,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 27420,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-22-client-tool-call-f27-client-tool-call.json"
+    },
+    {
+      "bullet": "Forwarded sub-agent definitions (`F27.agent-definitions`).",
+      "ids": [
+        "F27.agent-definitions"
+      ],
+      "line": 684,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11531,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-23-forwarded-sub-agent-definitions-f27-agen.json"
+    },
+    {
+      "bullet": "Custom tool module (`F27.custom-tool-modules`).",
+      "ids": [
+        "F27.custom-tool-modules"
+      ],
+      "line": 711,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 35030,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-24-custom-tool-module-f27-custom-tool-modul.json"
+    },
+    {
+      "bullet": "Tool schema keywords (`F27.tool-schema-keywords`), known bug #6766.",
+      "ids": [
+        "F27.tool-schema-keywords"
+      ],
+      "line": 756,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 3188,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-25-tool-schema-keywords-f27-tool-schema-key.json",
+      "failed_line": 41,
+      "failed_command": "control-agent-server sink read --name qa-f27-schema --contains 'QAORD-[0-9]{6}' --expect-min 1",
+      "stdout_tail": "37445-e6c5-4b01-a534-2962fc7af97b\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3705\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 72,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq finished\",\n      \"ok\": true,\n      \"actual\": \"finished\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"requests\": 1,\n  \"paths\": {\n    \"/v1/chat/completions\": 1\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-20T09:06:21Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/chat/completions\\\", \\\"call\\\": 0, \\\"step\\\": {\\\"tool\\\": \\\"finish\\\", \\\"args\\\": {\\\"message\\\": \\\"QA_F27_SCHEMA\\\"}}, \\\"body\\\": {\\\"model\\\": \\\"qa-stub\\\", \\\"messages\\\": [{\\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<SOUL>\\\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\\\n</SOUL>\\\\n\\\\n<ROLE>\\\\n* Your primary role is to assist us\\u2026\"\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/F27.tool-schema-keywords/request.json\"\n}\n{\n  \"ok\": false,\n  \"requests\": 0,\n  \"paths\": {},\n  \"last\": []\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "ok eq false && requests eq 0"
+    },
+    {
+      "bullet": "Startup imports (`F27.import-modules`).",
+      "ids": [
+        "F27.import-modules"
+      ],
+      "line": 815,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13979,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-26-startup-imports-f27-import-modules.json"
+    },
+    {
+      "bullet": "Tool module gone on resume (`F27.custom-tool-missing-on-resume`), known bug #6746.",
+      "ids": [
+        "F27.custom-tool-missing-on-resume"
+      ],
+      "line": 865,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 12096,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-27-tool-module-gone-on-resume-f27-custom-to.json",
+      "failed_line": 4,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$MCID/events\" --json '{\"role\": \"user\", \"content\": [{\"type\": \"text\", \"text\": \"Reply with the single word ok.\"}], \"run\": false}' --expect 2xx,4xx --save F27.custom-tool-missing-on-resume/send",
+      "stdout_tail": "n/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 616,\n  \"checks\": [\n    {\n      \"check\": \"tool_module_qualnames.qa_f27_echo eq qa_f27_tools\",\n      \"ok\": true,\n      \"actual\": \"qa_f27_tools\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 500,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/0cde671b-9564-4f1b-9203-6c73f8d09422/events\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Reply with the single word ok.\"\n        }\n      ],\n      \"run\": false\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 500,\n    \"headers\": {\n      \"content-length\": \"145\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Internal Server Error\",\n      \"exception\": \"\\\"ToolDefinition 'qa_f27_echo' is not registered\\\"\",\n      \"error_id\": \"610d49076b9d42158cb0526f0c5b6c88\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 1318,\n  \"saved\": \"<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/F27.custom-tool-missing-on-resume/send.json\",\n  \"hint\": \"expected 2xx,4xx, got 500\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "status eq 500 && response.body.exception contains \"ToolDefinition 'qa_f27_echo' is not registered\""
+    },
+    {
+      "bullet": "Playwright browsers directory (`F27.browser-playwright-path`), blocked on a machine with Chromium at a standard path (needs Chromium only in a Playwright directory).",
+      "ids": [
+        "F27.browser-playwright-path"
+      ],
+      "status": "blocked"
+    },
+    {
+      "bullet": "Browser probe (`F27.browser-probe`), blocked on a machine with Chromium at a standard path (needs Chromium only in a Playwright directory).",
+      "ids": [
+        "F27.browser-probe"
+      ],
+      "status": "blocked"
+    },
+    {
+      "bullet": "Default tools follow the browser setting (`F27.browser-disabled-launch`).",
+      "ids": [
+        "F27.browser-disabled-launch"
+      ],
+      "line": 928,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22319,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-30-default-tools-follow-the-browser-setting.json"
+    },
+    {
+      "bullet": "Browser disabled by config (`F27.browser-disabled`).",
+      "ids": [
+        "F27.browser-disabled"
+      ],
+      "line": 953,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10369,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-31-browser-disabled-by-config-f27-browser-d.json"
+    },
+    {
+      "bullet": "Usable tools with the browser disabled (`F27.server-info-browser-disabled`).",
+      "ids": [
+        "F27.server-info-browser-disabled"
+      ],
+      "line": 969,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 827,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-32-usable-tools-with-the-browser-disabled-f.json"
+    },
+    {
+      "bullet": "Browser-only sub-agent with the browser disabled (`F27.subagents-browser-disabled`).",
+      "ids": [
+        "F27.subagents-browser-disabled"
+      ],
+      "line": 981,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10096,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-33-browser-only-sub-agent-with-the-browser-.json"
+    },
+    {
+      "bullet": "Docker conversation runtime (`F27.catalog-docker-runtime`).",
+      "ids": [
+        "F27.catalog-docker-runtime"
+      ],
+      "line": 997,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 29617,
+      "transcript": "<scratch>/agent-server/20261120-090336-08a9-map-f27/evidence/map-run/F27-hooks-subagents-tools-34-docker-conversation-runtime-f27-catalog-.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-090336-08a9-map-f27",
+  "launch_flags": []
+}

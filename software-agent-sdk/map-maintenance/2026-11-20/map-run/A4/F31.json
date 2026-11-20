@@ -1,0 +1,303 @@
+{
+  "ok": false,
+  "file": "F31-persistence-and-limits.md",
+  "summary": {
+    "pass": 21,
+    "fail": 2,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 1,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 87,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3308,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-00-preconditions.json"
+    },
+    {
+      "bullet": "Lease claimed on load (`F31.lease-claimed`).",
+      "ids": [
+        "F31.lease-claimed"
+      ],
+      "line": 125,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1432,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-01-lease-claimed-on-load-f31-lease-claimed.json"
+    },
+    {
+      "bullet": "Lease renewed (`F31.lease-renewed`).",
+      "ids": [
+        "F31.lease-renewed"
+      ],
+      "line": 137,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7968,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-02-lease-renewed-f31-lease-renewed.json"
+    },
+    {
+      "bullet": "Graceful release (`F31.lease-released-graceful`).",
+      "ids": [
+        "F31.lease-released-graceful"
+      ],
+      "line": 154,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11860,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-03-graceful-release-f31-lease-released-grac.json"
+    },
+    {
+      "bullet": "Dead owner takeover (`F31.lease-dead-owner-takeover`).",
+      "ids": [
+        "F31.lease-dead-owner-takeover"
+      ],
+      "line": 172,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9944,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-04-dead-owner-takeover-f31-lease-dead-owner.json"
+    },
+    {
+      "bullet": "Zombie owner takeover (`F31.lease-zombie-owner-takeover`).",
+      "ids": [
+        "F31.lease-zombie-owner-takeover"
+      ],
+      "line": 192,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22560,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-05-zombie-owner-takeover-f31-lease-zombie-o.json"
+    },
+    {
+      "bullet": "Crash during a tool call (`F31.crash-tool-call`).",
+      "ids": [
+        "F31.crash-tool-call"
+      ],
+      "line": 237,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16897,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-06-crash-during-a-tool-call-f31-crash-tool-.json"
+    },
+    {
+      "bullet": "State survives restarts (`F31.state-survives-restarts`).",
+      "ids": [
+        "F31.state-survives-restarts"
+      ],
+      "line": 270,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 13552,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-07-state-survives-restarts-f31-state-surviv.json",
+      "failed_line": 11,
+      "failed_command": "control-agent-server api GET /api/settings --check misc_settings.qa_f31 eq kept --check agent_settings.llm.model eq deepseek/deepseek-flash --quiet",
+      "stdout_tail": "d-f86899dc5299\",\n  \"total\": 3,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 1\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"ca71537a-c1c2-4110-aa45-f2bde1c0a08d\",\n      \"kind\": \"MessageEvent\",\n      \"source\": \"user\",\n      \"timestamp\": \"2026-11-20T09:19:23.816360\",\n      \"llm_message\": \"{\\\"role\\\": \\\"user\\\", \\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"qa-f31-state-marker\\\"}], \\\"thinking_blocks\\\": []}\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3002\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 87,\n  \"checks\": [\n    {\n      \"check\": \"misc_settings.qa_f31 eq kept\",\n      \"ok\": true,\n      \"actual\": \"kept\"\n    },\n    {\n      \"check\": \"agent_settings.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.model eq deepseek/deepseek-flash\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Nothing secret in plaintext (`F31.no-plaintext-at-rest`).",
+      "ids": [
+        "F31.no-plaintext-at-rest"
+      ],
+      "line": 292,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 4656,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-08-nothing-secret-in-plaintext-f31-no-plain.json",
+      "failed_line": 8,
+      "failed_command": "control-agent-server api GET /api/settings --header 'X-Expose-Secrets: plaintext' --check agent_settings.llm.api_key eq \"$DEEPSEEK_API_KEY\" --quiet",
+      "stdout_tail": "ind\": \"StaticSecret\"\n        }\n      }\n    },\n    \"tags\": {},\n    \"agent_state\": {}\n  },\n  \"checks\": [\n    {\n      \"check\": \"secret_registry.secret_sources.QA_F31_CONV.value exists\",\n      \"ok\": true,\n      \"actual\": \"<redacted:encrypted>\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"glob\": \"server/workspace/conversations/**/*\",\n  \"files_with_match\": [\n    \"server/workspace/conversations/e82c513c7c11430db11493f6a4f6d364/base_state.json\",\n    \"server/workspace/conversations/e82c513c7c11430db11493f6a4f6d364/events/event-00000-549362b6-0361-4516-bba6-c064230e8149.json\",\n    \"server/workspace/conversations/e82c513c7c11430db11493f6a4f6d364/meta.json\"\n  ],\n  \"matches\": 3\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/settings\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"3017\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 76,\n  \"checks\": [\n    {\n      \"check\": \"agent_settings.llm.api_key eq \",\n      \"ok\": false,\n      \"actual\": \"<redacted:LLM_API_KEY>\"\n    }\n  ],\n  \"hint\": \"failed check: agent_settings.llm.api_key eq \"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Second server reads the catalog (`F31.second-instance-catalog`).",
+      "ids": [
+        "F31.second-instance-catalog"
+      ],
+      "line": 321,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24050,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-09-second-server-reads-the-catalog-f31-seco.json"
+    },
+    {
+      "bullet": "Second server refused while the owner lives (`F31.second-instance-lease-held`).",
+      "ids": [
+        "F31.second-instance-lease-held"
+      ],
+      "line": 345,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16972,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-10-second-server-refused-while-the-owner-li.json"
+    },
+    {
+      "bullet": "Takeover after the owner dies (`F31.second-instance-takeover`).",
+      "ids": [
+        "F31.second-instance-takeover"
+      ],
+      "line": 379,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 20321,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-11-takeover-after-the-owner-dies-f31-second.json"
+    },
+    {
+      "bullet": "Takeover keeps newer metadata (`F31.takeover-keeps-metadata`), known bug.",
+      "ids": [
+        "F31.takeover-keeps-metadata"
+      ],
+      "line": 403,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 19786,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-12-takeover-keeps-newer-metadata-f31-takeov.json",
+      "failed_line": 10,
+      "failed_command": "control-agent-server state cat meta.json --conversation \"$Y\" --check title eq 'QA F31 after B'",
+      "stdout_tail": ": null,\n    \"parent_conversation_id\": null,\n    \"confirmation_policy\": {\n      \"kind\": \"NeverConfirm\"\n    },\n    \"security_analyzer\": null,\n    \"initial_message\": null,\n    \"max_iterations\": 500,\n    \"stuck_detection\": true,\n    \"secrets\": {},\n    \"secrets_encrypted\": true,\n    \"tool_module_qualnames\": {},\n    \"client_tools\": [],\n    \"agent_launch_additions\": null,\n    \"agent_definitions\": [],\n    \"plugins\": null,\n    \"hook_config\": null,\n    \"tags\": {},\n    \"user_id\": null,\n    \"observability_metadata\": {},\n    \"observability_tags\": [],\n    \"observability_span_name\": \"conversation\",\n    \"observability_parent_span_context\": null,\n    \"autotitle\": false,\n    \"title_llm_profile\": null,\n    \"prompt\": null,\n    \"required_runtime_credential_bindings\": [],\n    \"id\": \"06756eebde0f4f68b6c9131891c87b63\",\n    \"title\": \"QA F31 before B\",\n    \"metrics\": null,\n    \"created_at\": \"2026-11-20T09:20:43.020502Z\",\n    \"updated_at\": \"2026-11-20T09:20:43.289971Z\",\n    \"forked_from_conversation_id\": null,\n    \"forked_from_event_id\": null,\n    \"launched_agent_profile\": null\n  },\n  \"checks\": [\n    {\n      \"check\": \"title eq QA F31 after B\",\n      \"ok\": false,\n      \"actual\": \"QA F31 before B\"\n    }\n  ]\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "content.title eq 'QA F31 before B'"
+    },
+    {
+      "bullet": "Lease expiry fences a frozen owner (`F31.lease-expiry-fencing`).",
+      "ids": [
+        "F31.lease-expiry-fencing"
+      ],
+      "line": 430,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 37944,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-13-lease-expiry-fences-a-frozen-owner-f31-l.json"
+    },
+    {
+      "bullet": "Refused write leaves no trace (`F31.fenced-write-no-trace`).",
+      "ids": [
+        "F31.fenced-write-no-trace"
+      ],
+      "line": 475,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1404,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-14-refused-write-leaves-no-trace-f31-fenced.json"
+    },
+    {
+      "bullet": "Leasing disabled (`F31.lease-disabled`).",
+      "ids": [
+        "F31.lease-disabled"
+      ],
+      "line": 498,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 23596,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-15-leasing-disabled-f31-lease-disabled.json"
+    },
+    {
+      "bullet": "Idle eviction (`F31.idle-eviction`).",
+      "ids": [
+        "F31.idle-eviction"
+      ],
+      "line": 522,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 73517,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-16-idle-eviction-f31-idle-eviction.json"
+    },
+    {
+      "bullet": "Busy conversations are kept (`F31.eviction-skips-busy`).",
+      "ids": [
+        "F31.eviction-skips-busy"
+      ],
+      "line": 556,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 57952,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-17-busy-conversations-are-kept-f31-eviction.json"
+    },
+    {
+      "bullet": "Create at capacity (`F31.create-capacity`).",
+      "ids": [
+        "F31.create-capacity"
+      ],
+      "line": 580,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15685,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-18-create-at-capacity-f31-create-capacity.json"
+    },
+    {
+      "bullet": "Config file and environment (`F31.config-precedence`).",
+      "ids": [
+        "F31.config-precedence"
+      ],
+      "line": 607,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 21348,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-19-config-file-and-environment-f31-config-p.json"
+    },
+    {
+      "bullet": "Null from the environment (`F31.config-null-override`).",
+      "ids": [
+        "F31.config-null-override"
+      ],
+      "line": 623,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 28859,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-20-null-from-the-environment-f31-config-nul.json"
+    },
+    {
+      "bullet": "Invalid limits stop startup (`F31.config-invalid-fails-fast`).",
+      "ids": [
+        "F31.config-invalid-fails-fast"
+      ],
+      "line": 649,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 30665,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-21-invalid-limits-stop-startup-f31-config-i.json"
+    },
+    {
+      "bullet": "Unrecognised booleans and choices start anyway (`F31.config-silent-env`).",
+      "ids": [
+        "F31.config-silent-env"
+      ],
+      "line": 671,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 46858,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-22-unrecognised-booleans-and-choices-start-.json"
+    },
+    {
+      "bullet": "Per-process tmux directory removed on stop (`F31.tmux-dir-cleanup`).",
+      "ids": [
+        "F31.tmux-dir-cleanup"
+      ],
+      "line": 709,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9601,
+      "transcript": "<scratch>/agent-server/20261120-091758-db14-map-f31/evidence/map-run/F31-persistence-and-limits-23-per-process-tmux-directory-removed-on-st.json"
+    },
+    {
+      "bullet": "Storage retention and disk budget (`F31.storage-retention`).",
+      "ids": [
+        "F31.storage-retention"
+      ],
+      "status": "blocked",
+      "missing": [
+        "docker"
+      ],
+      "hint": "this machine lacks docker (`control-agent-server capabilities`)"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-091758-db14-map-f31",
+  "launch_flags": []
+}

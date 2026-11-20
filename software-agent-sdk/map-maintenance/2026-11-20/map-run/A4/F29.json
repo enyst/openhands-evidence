@@ -1,0 +1,347 @@
+{
+  "ok": true,
+  "file": "F29-app-backend-bridge.md",
+  "summary": {
+    "pass": 30,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 116,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6614,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-00-preconditions.json"
+    },
+    {
+      "bullet": "Ingress advertised (`F29.ingress-advertised`).",
+      "ids": [
+        "F29.ingress-advertised"
+      ],
+      "line": 218,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 752,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-01-ingress-advertised-f29-ingress-advertise.json"
+    },
+    {
+      "bullet": "Ingress not configured or unusable (`F29.ingress-config-errors`).",
+      "ids": [
+        "F29.ingress-config-errors"
+      ],
+      "line": 228,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 35432,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-02-ingress-not-configured-or-unusable-f29-i.json"
+    },
+    {
+      "bullet": "Session bootstrap (`F29.session-bootstrap`).",
+      "ids": [
+        "F29.session-bootstrap"
+      ],
+      "line": 279,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1548,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-03-session-bootstrap-f29-session-bootstrap.json"
+    },
+    {
+      "bullet": "Session key required (`F29.session-key-required`).",
+      "ids": [
+        "F29.session-key-required"
+      ],
+      "line": 317,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1998,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-04-session-key-required-f29-session-key-req.json"
+    },
+    {
+      "bullet": "Ingress host (`F29.session-ingress-host`).",
+      "ids": [
+        "F29.session-ingress-host"
+      ],
+      "line": 335,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1559,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-05-ingress-host-f29-session-ingress-host.json"
+    },
+    {
+      "bullet": "Forwarded proto (`F29.session-forwarded-proto`).",
+      "ids": [
+        "F29.session-forwarded-proto"
+      ],
+      "line": 353,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1614,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-06-forwarded-proto-f29-session-forwarded-pr.json"
+    },
+    {
+      "bullet": "Origin rules (`F29.session-origin-rules`).",
+      "ids": [
+        "F29.session-origin-rules"
+      ],
+      "line": 374,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2415,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-07-origin-rules-f29-session-origin-rules.json"
+    },
+    {
+      "bullet": "Backend not ready (`F29.session-backend-not-ready`).",
+      "ids": [
+        "F29.session-backend-not-ready"
+      ],
+      "line": 390,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1895,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-08-backend-not-ready-f29-session-backend-no.json"
+    },
+    {
+      "bullet": "Proxied safe methods (`F29.proxy-get`).",
+      "ids": [
+        "F29.proxy-get"
+      ],
+      "line": 407,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1480,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-09-proxied-safe-methods-f29-proxy-get.json"
+    },
+    {
+      "bullet": "Cookie required (`F29.proxy-cookie-required`).",
+      "ids": [
+        "F29.proxy-cookie-required"
+      ],
+      "line": 433,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2108,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-10-cookie-required-f29-proxy-cookie-require.json"
+    },
+    {
+      "bullet": "Unsafe methods (`F29.proxy-unsafe-methods`).",
+      "ids": [
+        "F29.proxy-unsafe-methods"
+      ],
+      "line": 450,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4747,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-11-unsafe-methods-f29-proxy-unsafe-methods.json"
+    },
+    {
+      "bullet": "App root (`F29.proxy-root`).",
+      "ids": [
+        "F29.proxy-root"
+      ],
+      "line": 484,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3704,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-12-app-root-f29-proxy-root.json"
+    },
+    {
+      "bullet": "Root `path` parameter (`F29.proxy-root-path-query`).",
+      "ids": [
+        "F29.proxy-root-path-query"
+      ],
+      "line": 513,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2467,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-13-root-path-parameter-f29-proxy-root-path-.json"
+    },
+    {
+      "bullet": "Credentials stripped (`F29.proxy-credentials-stripped`).",
+      "ids": [
+        "F29.proxy-credentials-stripped"
+      ],
+      "line": 537,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 436,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-14-credentials-stripped-f29-proxy-credentia.json"
+    },
+    {
+      "bullet": "Request framing (`F29.proxy-request-framing`).",
+      "ids": [
+        "F29.proxy-request-framing"
+      ],
+      "line": 554,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1809,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-15-request-framing-f29-proxy-request-framin.json"
+    },
+    {
+      "bullet": "Response filter (`F29.proxy-response-filter`).",
+      "ids": [
+        "F29.proxy-response-filter"
+      ],
+      "line": 582,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1381,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-16-response-filter-f29-proxy-response-filte.json"
+    },
+    {
+      "bullet": "One Date and Server header (`F29.proxy-response-headers`).",
+      "ids": [
+        "F29.proxy-response-headers"
+      ],
+      "line": 599,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1788,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-17-one-date-and-server-header-f29-proxy-res.json"
+    },
+    {
+      "bullet": "Path traversal (`F29.proxy-path-traversal`).",
+      "ids": [
+        "F29.proxy-path-traversal"
+      ],
+      "line": 619,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3326,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-18-path-traversal-f29-proxy-path-traversal.json"
+    },
+    {
+      "bullet": "WebSocket bridge (`F29.ws-bridge`).",
+      "ids": [
+        "F29.ws-bridge"
+      ],
+      "line": 640,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1465,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-19-websocket-bridge-f29-ws-bridge.json"
+    },
+    {
+      "bullet": "Handshake rejections (`F29.ws-handshake-rejections`).",
+      "ids": [
+        "F29.ws-handshake-rejections"
+      ],
+      "line": 664,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2547,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-20-handshake-rejections-f29-ws-handshake-re.json"
+    },
+    {
+      "bullet": "Subprotocol (`F29.ws-subprotocol`).",
+      "ids": [
+        "F29.ws-subprotocol"
+      ],
+      "line": 684,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2329,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-21-subprotocol-f29-ws-subprotocol.json"
+    },
+    {
+      "bullet": "Revoke a session (`F29.session-revoke`).",
+      "ids": [
+        "F29.session-revoke"
+      ],
+      "line": 713,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8613,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-22-revoke-a-session-f29-session-revoke.json"
+    },
+    {
+      "bullet": "Backend stop and disable revoke (`F29.backend-lifecycle-revokes`).",
+      "ids": [
+        "F29.backend-lifecycle-revokes"
+      ],
+      "line": 747,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 18659,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-23-backend-stop-and-disable-revoke-f29-back.json"
+    },
+    {
+      "bullet": "Crash seen by the bridge (`F29.backend-crash-detected`).",
+      "ids": [
+        "F29.backend-crash-detected"
+      ],
+      "line": 814,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2916,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-24-crash-seen-by-the-bridge-f29-backend-cra.json"
+    },
+    {
+      "bullet": "Configured control origins (`F29.session-configured-control-origin`).",
+      "ids": [
+        "F29.session-configured-control-origin"
+      ],
+      "line": 838,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 30185,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-25-configured-control-origins-f29-session-c.json"
+    },
+    {
+      "bullet": "Trusted forwarded headers (`F29.trusted-forwarded-headers`).",
+      "ids": [
+        "F29.trusted-forwarded-headers"
+      ],
+      "line": 905,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22564,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-26-trusted-forwarded-headers-f29-trusted-fo.json"
+    },
+    {
+      "bullet": "Server restart (`F29.sessions-not-persisted`).",
+      "ids": [
+        "F29.sessions-not-persisted"
+      ],
+      "line": 940,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14352,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-27-server-restart-f29-sessions-not-persiste.json"
+    },
+    {
+      "bullet": "Session expiry (`F29.session-ttl`).",
+      "ids": [
+        "F29.session-ttl"
+      ],
+      "line": 964,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 303624,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-28-session-expiry-f29-session-ttl.json"
+    },
+    {
+      "bullet": "Uninstall (`F29.uninstall-revokes`).",
+      "ids": [
+        "F29.uninstall-revokes"
+      ],
+      "line": 983,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6057,
+      "transcript": "<scratch>/agent-server/20261120-085838-2065-map-f29/evidence/map-run/F29-app-backend-bridge-29-uninstall-f29-uninstall-revokes.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-085838-2065-map-f29",
+  "launch_flags": [
+    "--canvas-ingress"
+  ]
+}

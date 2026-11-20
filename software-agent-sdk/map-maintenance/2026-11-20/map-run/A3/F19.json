@@ -1,0 +1,522 @@
+{
+  "ok": false,
+  "file": "F19-mcp.md",
+  "summary": {
+    "pass": 39,
+    "fail": 0,
+    "xfail": 4,
+    "xpass": 1,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 134,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14376,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-00-preconditions.json"
+    },
+    {
+      "bullet": "Auth (`F19.auth`).",
+      "ids": [
+        "F19.auth"
+      ],
+      "line": 347,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9343,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-01-auth-f19-auth.json"
+    },
+    {
+      "bullet": "Create one server (`F19.settings-create`).",
+      "ids": [
+        "F19.settings-create"
+      ],
+      "line": 359,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6827,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-02-create-one-server-f19-settings-create.json"
+    },
+    {
+      "bullet": "Invalid servers (`F19.settings-validation`).",
+      "ids": [
+        "F19.settings-validation"
+      ],
+      "line": 381,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9201,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-03-invalid-servers-f19-settings-validation.json"
+    },
+    {
+      "bullet": "Server with neither command nor url (`F19.settings-empty-server`).",
+      "ids": [
+        "F19.settings-empty-server"
+      ],
+      "line": 395,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3786,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-04-server-with-neither-command-nor-url-f19-.json"
+    },
+    {
+      "bullet": "Sparse patch (`F19.settings-patch`).",
+      "ids": [
+        "F19.settings-patch"
+      ],
+      "line": 408,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8025,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-05-sparse-patch-f19-settings-patch.json"
+    },
+    {
+      "bullet": "Delete one server (`F19.settings-delete`).",
+      "ids": [
+        "F19.settings-delete"
+      ],
+      "line": 435,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5868,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-06-delete-one-server-f19-settings-delete.json"
+    },
+    {
+      "bullet": "Connection test body validation (`F19.test-validation`).",
+      "ids": [
+        "F19.test-validation"
+      ],
+      "line": 450,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7103,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-07-connection-test-body-validation-f19-test.json"
+    },
+    {
+      "bullet": "Test a stdio server (`F19.test-stdio`).",
+      "ids": [
+        "F19.test-stdio"
+      ],
+      "line": 464,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9844,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-08-test-a-stdio-server-f19-test-stdio.json"
+    },
+    {
+      "bullet": "Tool failures stay in `tool_result` (`F19.test-tool-errors`).",
+      "ids": [
+        "F19.test-tool-errors"
+      ],
+      "line": 477,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14998,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-09-tool-failures-stay-in-tool-result-f19-te.json"
+    },
+    {
+      "bullet": "Connection failures (`F19.test-connect-failures`).",
+      "ids": [
+        "F19.test-connect-failures"
+      ],
+      "line": 490,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2389,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-10-connection-failures-f19-test-connect-fai.json"
+    },
+    {
+      "bullet": "Handshake timeout (`F19.test-timeout`).",
+      "ids": [
+        "F19.test-timeout"
+      ],
+      "line": 502,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6074,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-11-handshake-timeout-f19-test-timeout.json"
+    },
+    {
+      "bullet": "Encrypted env from settings (`F19.test-encrypted-env`).",
+      "ids": [
+        "F19.test-encrypted-env"
+      ],
+      "line": 519,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12059,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-12-encrypted-env-from-settings-f19-test-enc.json"
+    },
+    {
+      "bullet": "Remote server behind a bearer token (`F19.test-remote-bearer`), known bug #6687.",
+      "ids": [
+        "F19.test-remote-bearer"
+      ],
+      "line": 537,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 6987,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-13-remote-server-behind-a-bearer-token-f19-.json",
+      "failed_line": 10,
+      "failed_command": "control-agent-server api POST /api/mcp/test --expect 200 --save F19.test-remote-bearer/wrong-token --json \"{\\\"server\\\":{\\\"transport\\\":\\\"http\\\",\\\"url\\\":\\\"http://127.0.0.1:$BEARER_PORT/mcp\\\",\\\"auth\\\":{\\\"strategy\\\":\\\"bearer\\\",\\\"value\\\":\\\"qa-f19-wrong\\\"}},\\\"timeout\\\":20}\" --check ok eq false --check error contains 401",
+      "stdout_tail": "ect\\\", \\\"qa_wait\\\"]\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/mcp/test\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"server\": {\n        \"transport\": \"http\",\n        \"url\": \"http://127.0.0.1:53061/mcp\",\n        \"auth\": {\n          \"strategy\": \"bearer\",\n          \"value\": \"qa-f19-wrong\"\n        }\n      },\n      \"timeout\": 20\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"89\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"ok\": false,\n      \"error\": \"MCPError: Server returned an error response\",\n      \"error_kind\": \"unknown\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 2227,\n  \"checks\": [\n    {\n      \"check\": \"ok eq false\",\n      \"ok\": true,\n      \"actual\": \"false\"\n    },\n    {\n      \"check\": \"error contains 401\",\n      \"ok\": false,\n      \"actual\": \"MCPError: Server returned an error response\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/F19.test-remote-bearer/wrong-token.json\",\n  \"hint\": \"failed check: error contains 401\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "status eq 200 && response.body.error contains 'error response'"
+    },
+    {
+      "bullet": "OAuth start refusals and early outcomes (`F19.oauth-start-errors`).",
+      "ids": [
+        "F19.oauth-start-errors"
+      ],
+      "line": 559,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7058,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-14-oauth-start-refusals-and-early-outcomes-.json"
+    },
+    {
+      "bullet": "Unknown jobs (`F19.oauth-unknown-job`).",
+      "ids": [
+        "F19.oauth-unknown-job"
+      ],
+      "line": 580,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2191,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-15-unknown-jobs-f19-oauth-unknown-job.json"
+    },
+    {
+      "bullet": "Full OAuth consent (`F19.oauth-flow`).",
+      "ids": [
+        "F19.oauth-flow"
+      ],
+      "line": 588,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4966,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-16-full-oauth-consent-f19-oauth-flow.json"
+    },
+    {
+      "bullet": "Replayed callback (`F19.oauth-callback-replay`).",
+      "ids": [
+        "F19.oauth-callback-replay"
+      ],
+      "line": 611,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3069,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-17-replayed-callback-f19-oauth-callback-rep.json"
+    },
+    {
+      "bullet": "Port out of range (`F19.oauth-callback-bad-port`).",
+      "ids": [
+        "F19.oauth-callback-bad-port"
+      ],
+      "line": 628,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6195,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-18-port-out-of-range-f19-oauth-callback-bad.json"
+    },
+    {
+      "bullet": "Callback URL checks on a live job (`F19.oauth-callback-validation`).",
+      "ids": [
+        "F19.oauth-callback-validation"
+      ],
+      "line": 648,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9647,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-19-callback-url-checks-on-a-live-job-f19-oa.json"
+    },
+    {
+      "bullet": "Denied consent (`F19.oauth-consent-denied`).",
+      "ids": [
+        "F19.oauth-consent-denied"
+      ],
+      "line": 674,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3887,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-20-denied-consent-f19-oauth-consent-denied.json"
+    },
+    {
+      "bullet": "Consent timeout (`F19.oauth-consent-timeout`).",
+      "ids": [
+        "F19.oauth-consent-timeout"
+      ],
+      "line": 697,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5158,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-21-consent-timeout-f19-oauth-consent-timeou.json"
+    },
+    {
+      "bullet": "Redirect URI on the public origin (`F19.oauth-public-redirect`).",
+      "ids": [
+        "F19.oauth-public-redirect"
+      ],
+      "line": 713,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 23724,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-22-redirect-uri-on-the-public-origin-f19-oa.json"
+    },
+    {
+      "bullet": "Redirect to the agent-server's own route (`F19.oauth-redirect-route`).",
+      "ids": [
+        "F19.oauth-redirect-route"
+      ],
+      "line": 744,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7825,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-23-redirect-to-the-agent-server-s-own-route.json"
+    },
+    {
+      "bullet": "Unknown sign-ins on the redirect route (`F19.oauth-redirect-unknown-state`).",
+      "ids": [
+        "F19.oauth-redirect-unknown-state"
+      ],
+      "line": 779,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7165,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-24-unknown-sign-ins-on-the-redirect-route-f.json"
+    },
+    {
+      "bullet": "Callback base URL validation (`F19.oauth-callback-base-url-validation`).",
+      "ids": [
+        "F19.oauth-callback-base-url-validation"
+      ],
+      "line": 809,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4094,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-25-callback-base-url-validation-f19-oauth-c.json"
+    },
+    {
+      "bullet": "`web_url` wins over the request (`F19.oauth-web-url-precedence`).",
+      "ids": [
+        "F19.oauth-web-url-precedence"
+      ],
+      "line": 831,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14990,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-26-web-url-wins-over-the-request-f19-oauth-.json"
+    },
+    {
+      "bullet": "Callback forwarding stops at the listener (`F19.oauth-callback-no-redirect`), known bug #6808.",
+      "ids": [
+        "F19.oauth-callback-no-redirect"
+      ],
+      "line": 863,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 11454,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-27-callback-forwarding-stops-at-the-listene.json",
+      "failed_line": 48,
+      "failed_command": "control-agent-server sink read --name qa-f19-redirect-target --expect-max 0 --save F19.oauth-callback-no-redirect/redirect-target",
+      "stdout_tail": "allenge=fta0cHBZdekuUy7UxHsDL_T--Q15450KIkLqju0mElI&code_challenge_method=S256&resource=http%3A%2F%2F127.0.0.1%3A36473%2Fmcp&scope=mail.read\",\n      \"callback_ready\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 5112,\n  \"checks\": [\n    {\n      \"check\": \"job_id eq 43fb7e5e391840d3bab5e898e1e4ea48\",\n      \"ok\": true,\n      \"actual\": \"43fb7e5e391840d3bab5e898e1e4ea48\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/F19.oauth-callback-no-redirect/callback.json\"\n}\n{\n  \"ok\": false,\n  \"requests\": 1,\n  \"paths\": {\n    \"/qa-f19-redirected\": 1\n  },\n  \"last\": [\n    {\n      \"at\": \"2026-11-20T08:44:16Z\",\n      \"method\": \"GET\",\n      \"path\": \"/qa-f19-redirected\",\n      \"headers\": {\n        \"Host\": \"127.0.0.1:34445\",\n        \"Accept\": \"*/*\",\n        \"Accept-Encoding\": \"gzip, deflate\",\n        \"Connection\": \"keep-alive\",\n        \"User-Agent\": \"python-httpx/0.28.1\"\n      },\n      \"body\": null\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/F19.oauth-callback-no-redirect/redirect-target.json\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "requests eq 1"
+    },
+    {
+      "bullet": "Inline OAuth server refresh (`F19.oauth-inline-writeback`).",
+      "ids": [
+        "F19.oauth-inline-writeback"
+      ],
+      "line": 928,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3784,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-28-inline-oauth-server-refresh-f19-oauth-in.json"
+    },
+    {
+      "bullet": "Stored OAuth state (`F19.oauth-stored-state`).",
+      "ids": [
+        "F19.oauth-stored-state"
+      ],
+      "line": 960,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3094,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-29-stored-oauth-state-f19-oauth-stored-stat.json"
+    },
+    {
+      "bullet": "Disabled servers stay off (`F19.disabled-server`).",
+      "ids": [
+        "F19.disabled-server"
+      ],
+      "line": 987,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6733,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-30-disabled-servers-stay-off-f19-disabled-s.json"
+    },
+    {
+      "bullet": "The agent uses the MCP tool (`F19.conversation-tool`).",
+      "ids": [
+        "F19.conversation-tool"
+      ],
+      "line": 1019,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10000,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-31-the-agent-uses-the-mcp-tool-f19-conversa.json"
+    },
+    {
+      "bullet": "Non-text tool results (`F19.conversation-tool`), known bug #6993.",
+      "ids": [
+        "F19.conversation-tool"
+      ],
+      "line": 1038,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 4319,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-32-non-text-tool-results-f19-conversation-t.json",
+      "failed_line": 5,
+      "failed_command": "control-agent-server conversation events \"$PLCID\" --kinds ObservationEvent --contains QA_F19_STRUCTURED --expect-kind ObservationEvent --save F19.conversation-tool/structured-only",
+      "stdout_tail": "{\n  \"ok\": true,\n  \"id\": \"4e976138-4643-49c5-a01c-66a0122370c3\",\n  \"total\": 14,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 6,\n    \"ActionEvent\": 3,\n    \"ObservationEvent\": 3\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"24f36fd0-610b-4870-b55b-b05786eb1d87\",\n      \"kind\": \"ObservationEvent\",\n      \"source\": \"environment\",\n      \"timestamp\": \"2026-11-20T08:44:50.160727\",\n      \"tool_name\": \"qa_structured_only\",\n      \"observation\": \"{\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"[Tool 'qa_structured_only' executed.]\\\"}], \\\"is_error\\\": false, \\\"tool_name\\\": \\\"qa_structured_only\\\", \\\"kind\\\": \\\"MCPToolObservation\\\"}\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"id\": \"4e976138-4643-49c5-a01c-66a0122370c3\",\n  \"total\": 14,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 6,\n    \"ActionEvent\": 3,\n    \"ObservationEvent\": 3\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/F19.conversation-tool/structured-only.json\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "matching eq 0 && kinds.ObservationEvent eq 3"
+    },
+    {
+      "bullet": "A server tool named like a built-in (`F19.conversation-tool`), known bug #6992.",
+      "ids": [
+        "F19.conversation-tool"
+      ],
+      "line": 1058,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 8142,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-33-a-server-tool-named-like-a-built-in-f19-.json",
+      "failed_line": 9,
+      "failed_command": "control-agent-server conversation events \"$SHCID\" --kinds ObservationEvent --contains QA_F19_SIBLING --expect-kind ObservationEvent --save F19.conversation-tool/shadow-sibling",
+      "stdout_tail": "ersationStateUpdateEvent\": 6,\n    \"ActionEvent\": 3,\n    \"ObservationEvent\": 2,\n    \"AgentErrorEvent\": 1\n  },\n  \"matching\": 1,\n  \"events\": [\n    {\n      \"id\": \"ae17dda2-5aee-4694-82e3-e8103e44b7ce\",\n      \"kind\": \"ObservationEvent\",\n      \"source\": \"environment\",\n      \"timestamp\": \"2026-11-20T08:44:57.689400\",\n      \"tool_name\": \"terminal\",\n      \"observation\": \"{\\\"content\\\": [{\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"QA_F19_BUILTIN_TERMINAL\\\"}], \\\"is_error\\\": false, \\\"command\\\": \\\"echo QA_F19_BUILTIN_TERMINAL\\\", \\\"exit_code\\\": 0, \\\"timeout\\\": false, \\\"metadata\\\": {\\\"exit_code\\\": 0, \\\"pid\\\": -1, \\\"username\\\": \\\"root\\\", \\\"hostname\\\": \\\"vm\\\", \\\"working_dir\\\": \\\"<scratch>\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"id\": \"804f2ba1-918e-4ae6-a2ba-6d4d9f8d8c04\",\n  \"total\": 14,\n  \"kinds\": {\n    \"SystemPromptEvent\": 1,\n    \"MessageEvent\": 1,\n    \"ConversationStateUpdateEvent\": 6,\n    \"ActionEvent\": 3,\n    \"ObservationEvent\": 2,\n    \"AgentErrorEvent\": 1\n  },\n  \"matching\": 0,\n  \"events\": [],\n  \"saved\": \"<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/F19.conversation-tool/shadow-sibling.json\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "matching eq 0 && kinds.AgentErrorEvent eq 1"
+    },
+    {
+      "bullet": "Stored OAuth token refresh (`F19.oauth-refresh-writeback`).",
+      "ids": [
+        "F19.oauth-refresh-writeback"
+      ],
+      "line": 1088,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5431,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-34-stored-oauth-token-refresh-f19-oauth-ref.json"
+    },
+    {
+      "bullet": "Credentials at rest (`F19.conversation-secrets-at-rest`).",
+      "ids": [
+        "F19.conversation-secrets-at-rest"
+      ],
+      "line": 1123,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4800,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-35-credentials-at-rest-f19-conversation-sec.json"
+    },
+    {
+      "bullet": "Restart (`F19.restart`).",
+      "ids": [
+        "F19.restart"
+      ],
+      "line": 1152,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 25008,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-36-restart-f19-restart.json"
+    },
+    {
+      "bullet": "Add a server to a running conversation (`F19.conversation-mcp-add`).",
+      "ids": [
+        "F19.conversation-mcp-add"
+      ],
+      "line": 1172,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6636,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-37-add-a-server-to-a-running-conversation-f.json"
+    },
+    {
+      "bullet": "Add before the first message (`F19.conversation-mcp-add-before-init`).",
+      "ids": [
+        "F19.conversation-mcp-add-before-init"
+      ],
+      "line": 1200,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7236,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-38-add-before-the-first-message-f19-convers.json"
+    },
+    {
+      "bullet": "Refused additions (`F19.conversation-mcp-add-errors`).",
+      "ids": [
+        "F19.conversation-mcp-add-errors"
+      ],
+      "line": 1226,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4403,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-39-refused-additions-f19-conversation-mcp-a.json"
+    },
+    {
+      "bullet": "A server that cannot start (`F19.conversation-mcp-add-start-failure`).",
+      "ids": [
+        "F19.conversation-mcp-add-start-failure"
+      ],
+      "line": 1253,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1497,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-40-a-server-that-cannot-start-f19-conversat.json"
+    },
+    {
+      "bullet": "Added servers after a restart (`F19.conversation-mcp-add-restart`), known bug #6927.",
+      "ids": [
+        "F19.conversation-mcp-add-restart"
+      ],
+      "line": 1266,
+      "status": "xpass",
+      "exit_code": 0,
+      "elapsed_ms": 19038,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-41-added-servers-after-a-restart-f19-conver.json",
+      "hint": "the known bug no longer reproduces: update the map"
+    },
+    {
+      "bullet": "A slow server does not hold up the start (`F19.conversation-mcp-slow-start`).",
+      "ids": [
+        "F19.conversation-mcp-slow-start"
+      ],
+      "line": 1288,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11999,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-42-a-slow-server-does-not-hold-up-the-start.json"
+    },
+    {
+      "bullet": "A late server that fails (`F19.conversation-mcp-late-failure`).",
+      "ids": [
+        "F19.conversation-mcp-late-failure"
+      ],
+      "line": 1308,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9252,
+      "transcript": "<scratch>/agent-server/20261120-084007-35e2-map-f19/evidence/map-run/F19-mcp-43-a-late-server-that-fails-f19-conversatio.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-084007-35e2-map-f19",
+  "launch_flags": [
+    "--webhook-sink"
+  ]
+}

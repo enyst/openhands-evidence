@@ -1,0 +1,328 @@
+{
+  "ok": true,
+  "file": "F07-session-socket.md",
+  "summary": {
+    "pass": 27,
+    "fail": 0,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 84,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 32291,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-00-preconditions.json"
+    },
+    {
+      "bullet": "Sync comes first (`F07.sync-first`).",
+      "ids": [
+        "F07.sync-first"
+      ],
+      "line": 117,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7259,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-01-sync-comes-first-f07-sync-first.json"
+    },
+    {
+      "bullet": "State snapshot (`F07.snapshot-transient`).",
+      "ids": [
+        "F07.snapshot-transient"
+      ],
+      "line": 129,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6515,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-02-state-snapshot-f07-snapshot-transient.json"
+    },
+    {
+      "bullet": "Full replay (`F07.full-replay`).",
+      "ids": [
+        "F07.full-replay"
+      ],
+      "line": 142,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14985,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-03-full-replay-f07-full-replay.json"
+    },
+    {
+      "bullet": "Seq is the on-disk index (`F07.seq-on-disk`).",
+      "ids": [
+        "F07.seq-on-disk"
+      ],
+      "line": 160,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4552,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-04-seq-is-the-on-disk-index-f07-seq-on-disk.json"
+    },
+    {
+      "bullet": "Resume from a cursor (`F07.resume-cursor`).",
+      "ids": [
+        "F07.resume-cursor"
+      ],
+      "line": 167,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14811,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-05-resume-from-a-cursor-f07-resume-cursor.json"
+    },
+    {
+      "bullet": "Invalid message (`F07.error-frame`).",
+      "ids": [
+        "F07.error-frame"
+      ],
+      "line": 180,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13375,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-06-invalid-message-f07-error-frame.json"
+    },
+    {
+      "bullet": "Non-JSON and binary frames (`F07.error-non-json`).",
+      "ids": [
+        "F07.error-non-json"
+      ],
+      "line": 196,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5355,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-07-non-json-and-binary-frames-f07-error-non.json"
+    },
+    {
+      "bullet": "Non-user role (`F07.reject-non-user`).",
+      "ids": [
+        "F07.reject-non-user"
+      ],
+      "line": 224,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14891,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-08-non-user-role-f07-reject-non-user.json"
+    },
+    {
+      "bullet": "Redundant auth frame (`F07.auth-frame-ignored`).",
+      "ids": [
+        "F07.auth-frame-ignored"
+      ],
+      "line": 236,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11883,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-09-redundant-auth-frame-f07-auth-frame-igno.json"
+    },
+    {
+      "bullet": "Authentication (`F07.auth`).",
+      "ids": [
+        "F07.auth"
+      ],
+      "line": 257,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12046,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-10-authentication-f07-auth.json"
+    },
+    {
+      "bullet": "Unknown conversation (`F07.unknown-conversation`).",
+      "ids": [
+        "F07.unknown-conversation"
+      ],
+      "line": 272,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3456,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-11-unknown-conversation-f07-unknown-convers.json"
+    },
+    {
+      "bullet": "Malformed handshake (`F07.bad-handshake`).",
+      "ids": [
+        "F07.bad-handshake"
+      ],
+      "line": 281,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6739,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-12-malformed-handshake-f07-bad-handshake.json"
+    },
+    {
+      "bullet": "Live durable frame (`F07.live-durable`).",
+      "ids": [
+        "F07.live-durable"
+      ],
+      "line": 290,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22511,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-13-live-durable-frame-f07-live-durable.json"
+    },
+    {
+      "bullet": "Live frames in seq order (`F07.live-order`).",
+      "ids": [
+        "F07.live-order"
+      ],
+      "line": 310,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24589,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-14-live-frames-in-seq-order-f07-live-order.json"
+    },
+    {
+      "bullet": "Replay and live tail, each event once (`F07.replay-then-live`).",
+      "ids": [
+        "F07.replay-then-live"
+      ],
+      "line": 336,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24877,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-15-replay-and-live-tail-each-event-once-f07.json"
+    },
+    {
+      "bullet": "Send a message on the socket (`F07.send-message`).",
+      "ids": [
+        "F07.send-message"
+      ],
+      "line": 368,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 19819,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-16-send-a-message-on-the-socket-f07-send-me.json"
+    },
+    {
+      "bullet": "Cursor survives a restart (`F07.restart-resume`).",
+      "ids": [
+        "F07.restart-resume"
+      ],
+      "line": 384,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 52783,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-17-cursor-survives-a-restart-f07-restart-re.json"
+    },
+    {
+      "bullet": "Streaming progress frames (`F07.progress-frames`).",
+      "ids": [
+        "F07.progress-frames"
+      ],
+      "line": 399,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13084,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-18-streaming-progress-frames-f07-progress-f.json"
+    },
+    {
+      "bullet": "Progress is never replayed (`F07.progress-not-replayed`).",
+      "ids": [
+        "F07.progress-not-replayed"
+      ],
+      "line": 438,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6521,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-19-progress-is-never-replayed-f07-progress-.json"
+    },
+    {
+      "bullet": "Compact snapshot stats (`F07.snapshot-compact-stats`).",
+      "ids": [
+        "F07.snapshot-compact-stats"
+      ],
+      "line": 452,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5719,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-20-compact-snapshot-stats-f07-snapshot-comp.json"
+    },
+    {
+      "bullet": "Snapshot without skill bodies (`F07.snapshot-no-skill-bodies`).",
+      "ids": [
+        "F07.snapshot-no-skill-bodies"
+      ],
+      "line": 483,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 21385,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-21-snapshot-without-skill-bodies-f07-snapsh.json"
+    },
+    {
+      "bullet": "Interrupted stream (`F07.item-aborted`).",
+      "ids": [
+        "F07.item-aborted"
+      ],
+      "line": 518,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 29752,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-22-interrupted-stream-f07-item-aborted.json"
+    },
+    {
+      "bullet": "Oversized event (`F07.frame-too-large`).",
+      "ids": [
+        "F07.frame-too-large"
+      ],
+      "line": 568,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17726,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-23-oversized-event-f07-frame-too-large.json"
+    },
+    {
+      "bullet": "Stalled reader (`F07.slow-consumer`).",
+      "ids": [
+        "F07.slow-consumer"
+      ],
+      "line": 586,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 38903,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-24-stalled-reader-f07-slow-consumer.json"
+    },
+    {
+      "bullet": "Subscriber cap (`F07.subscriber-limit`).",
+      "ids": [
+        "F07.subscriber-limit"
+      ],
+      "line": 646,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5932,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-25-subscriber-cap-f07-subscriber-limit.json"
+    },
+    {
+      "bullet": "Deleting closes the socket (`F07.deleted-close`).",
+      "ids": [
+        "F07.deleted-close"
+      ],
+      "line": 700,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15731,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-26-deleting-closes-the-socket-f07-deleted-c.json"
+    },
+    {
+      "bullet": "Sync first while a run holds the lock (`F07.sync-first-during-run`), known bug #6745.",
+      "ids": [
+        "F07.sync-first-during-run"
+      ],
+      "line": 721,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 31095,
+      "transcript": "<scratch>/agent-server/20261120-082808-07de-map-f07/evidence/map-run/F07-session-socket-27-sync-first-while-a-run-holds-the-lock-f0.json",
+      "failed_line": 6,
+      "failed_command": "control-agent-server state cat \"evidence/F07.sync-first-during-run/order-$RUNC.json\" --check frames.2.kind eq sync",
+      "stdout_tail": "1\n      },\n      \"stopped\": \"until-kind sync\",\n      \"close\": null\n    },\n    \"frames\": [\n      {\n        \"direction\": \"opened\",\n        \"at\": \"2026-11-20T08:36:41Z\"\n      },\n      {\n        \"direction\": \"sent\",\n        \"at\": \"2026-11-20T08:36:41Z\",\n        \"frame\": {\n          \"role\": \"assistant\",\n          \"content\": [\n            {\n              \"type\": \"text\",\n              \"text\": \"QA_F07_LOCK_ROLE\"\n            }\n          ]\n        }\n      },\n      {\n        \"direction\": \"received\",\n        \"at\": \"2026-11-20T08:36:43Z\",\n        \"kind\": \"error\",\n        \"frame\": {\n          \"type\": \"error\",\n          \"code\": \"AssertionError\",\n          \"detail\": \"Only user messages are allowed to be sent to the agent.\"\n        }\n      },\n      {\n        \"direction\": \"received\",\n        \"at\": \"2026-11-20T08:37:05Z\",\n        \"kind\": \"sync\",\n        \"frame\": {\n          \"type\": \"sync\",\n          \"through_seq\": 6\n        }\n      },\n      {\n        \"direction\": \"ended\",\n        \"at\": \"2026-11-20T08:37:05Z\",\n        \"stopped\": \"until-kind sync\",\n        \"close\": null\n      }\n    ]\n  },\n  \"checks\": [\n    {\n      \"check\": \"frames.2.kind eq sync\",\n      \"ok\": false,\n      \"actual\": \"error\"\n    }\n  ]\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "checks.0.actual eq error"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-082808-07de-map-f07",
+  "launch_flags": []
+}

@@ -1,0 +1,134 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S05/llm_failures --arg exhausted \
+  --check hard_timeout.status eq error --check hard_timeout.requests eq 2 --check hard_timeout.errors eq 1 \
+  --check hard_timeout.code eq LLMTimeoutError --check hard_timeout.detail contains "within the LLM timeout of 1s" \
+  --check hard_timeout.classification.kind eq config --check hard_timeout.classification.retryable eq false \
+  --check hard_timeout.classification.user_action eq settings \
+  --check content_free.status eq error --check content_free.errors eq 1 --check content_free.code eq LLMNoResponseError \
+  --check content_free.classification.kind eq transient --check content_free.classification.retryable eq true \
+  --check content_free.classification.user_action eq retry \
+  --check single_quick_timeout.kind eq transient --check single_quick_timeout.retryable eq true
+{
+  "ok": true,
+  "mode": "exhausted",
+  "hard_timeout": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "requests": 1,
+    "errors": 1,
+    "code": "LLMTimeoutError",
+    "detail": "litellm.Timeout: APITimeoutError - Request timed out. Error_str: Request timed out. The model did not return a complete response within the LLM timeout of 1s (gave up after 1 attempt, 3s in total). Try a faster model, a shorter prompt (fewer tools or MCP servers), or a higher timeout in the LLM settings.",
+    "classification": {
+      "kind": "config",
+      "retryable": false,
+      "user_action": "settings",
+      "error_id": null
+    }
+  },
+  "content_free": {
+    "status": "error",
+    "raised": "ConversationRunError",
+    "requests": 2,
+    "errors": 1,
+    "code": "LLMNoResponseError",
+    "detail": "Response choices[0] message has no content, tool calls, or reasoning. Response: ModelResponse(id='chatcmpl-2', created=1795163477, model='gpt-4o-mini', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='stop', index=0, message=Message(content='', role='assistant', tool_calls=None, function_call=None, provider_specific_fields=None), provider_specific_fields={})], usage=Usage(completion_tokens=20, prompt_tokens=100, total_tokens=120, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=None, cached_tokens=0, text_tokens=None, image_tokens=None, video_tokens=None, initial_prompt_tokens=None)))",
+    "classification": {
+      "kind": "transient",
+      "retryable": true,
+      "user_action": "retry",
+      "error_id": null
+    }
+  },
+  "single_quick_timeout": {
+    "kind": "transient",
+    "retryable": true,
+    "user_action": "retry",
+    "error_id": null
+  },
+  "_exit": 0,
+  "_seconds": 36.3,
+  "checks": [
+    {
+      "check": "hard_timeout.status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "hard_timeout.requests eq 2",
+      "ok": false,
+      "actual": "1"
+    },
+    {
+      "check": "hard_timeout.errors eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "hard_timeout.code eq LLMTimeoutError",
+      "ok": true,
+      "actual": "LLMTimeoutError"
+    },
+    {
+      "check": "hard_timeout.detail contains within the LLM timeout of 1s",
+      "ok": true,
+      "actual": "litellm.Timeout: APITimeoutError - Request timed out. Error_str: Request timed out. The model did not return a complete response within the LLM timeout of 1s (gave up after 1 attempt, 3s in total). Tr"
+    },
+    {
+      "check": "hard_timeout.classification.kind eq config",
+      "ok": true,
+      "actual": "config"
+    },
+    {
+      "check": "hard_timeout.classification.retryable eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "hard_timeout.classification.user_action eq settings",
+      "ok": true,
+      "actual": "settings"
+    },
+    {
+      "check": "content_free.status eq error",
+      "ok": true,
+      "actual": "error"
+    },
+    {
+      "check": "content_free.errors eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "content_free.code eq LLMNoResponseError",
+      "ok": true,
+      "actual": "LLMNoResponseError"
+    },
+    {
+      "check": "content_free.classification.kind eq transient",
+      "ok": true,
+      "actual": "transient"
+    },
+    {
+      "check": "content_free.classification.retryable eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "content_free.classification.user_action eq retry",
+      "ok": true,
+      "actual": "retry"
+    },
+    {
+      "check": "single_quick_timeout.kind eq transient",
+      "ok": true,
+      "actual": "transient"
+    },
+    {
+      "check": "single_quick_timeout.retryable eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 1 after 37s]

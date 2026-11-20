@@ -1,0 +1,251 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B2-S07",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 14,
+    "fail": 2
+  },
+  "results": [
+    {
+      "family": "S07-skills.md",
+      "bullet": 1,
+      "ids": [
+        "S07.repo-skill-always-on",
+        "S07.keyword-trigger",
+        "S07.trigger-once",
+        "S07.task-trigger",
+        "S07.message-suffixes",
+        "S07.serialization"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-01.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 2,
+      "ids": [
+        "S07.agentskills-load",
+        "S07.resources",
+        "S07.available-skills-prompt",
+        "S07.agentskills-trigger",
+        "S07.invoke-skill-autoattach",
+        "S07.invoke-skill-run",
+        "S07.disable-model-invocation",
+        "S07.inline-commands",
+        "S07.skill-mcp-json",
+        "S07.serialization"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-02.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 3,
+      "ids": [
+        "S07.available-skills-prompt"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-03.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 4,
+      "ids": [
+        "S07.path-rules"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-04.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 5,
+      "ids": [
+        "S07.project-skills",
+        "S07.load-project-flag",
+        "S07.user-skills",
+        "S07.merge-precedence",
+        "S07.disabled-skills"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-05.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 6,
+      "ids": [
+        "S07.installed-lifecycle",
+        "S07.marketplace-install"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-06.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 7,
+      "ids": [
+        "S07.marketplace-install"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-07.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 8,
+      "ids": [
+        "S07.public-skills"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-08.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 9,
+      "ids": [
+        "S07.public-skills"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-09.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 10,
+      "ids": [
+        "S07.public-skills-switch"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-10.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 11,
+      "ids": [
+        "S07.available-skills-prompt",
+        "S07.invoke-skill-run",
+        "S07.invoke-skill-autoattach"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-11.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 12,
+      "ids": [
+        "S07.repo-skill-always-on",
+        "S07.keyword-trigger",
+        "S07.message-suffixes",
+        "S07.public-skills"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-12.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 13,
+      "ids": [
+        "S07.agentskills-load",
+        "S07.resources",
+        "S07.agentskills-trigger",
+        "S07.invoke-skill-autoattach"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-13.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 14,
+      "ids": [
+        "S07.installed-lifecycle"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-14.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 15,
+      "ids": [
+        "S07.marketplace-install"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-15.log"
+    },
+    {
+      "family": "S07-skills.md",
+      "bullet": 16,
+      "ids": [
+        "S07.available-skills-prompt",
+        "S07.invoke-skill-run"
+      ],
+      "result": "fail",
+      "proof": [
+        "integration",
+        "live"
+      ],
+      "note": "integration tests missing [] failed ['t09_invoke_skill'] (<scratch>/sdk/B2-S07/work/S07-skills-16/block1-2/deepseek_deepseek_flash_agent-sdk-integration_N1_20261120_083700/results.json)",
+      "transcript": "<scratch>/sdk/B2-S07/transcripts/S07-skills-16.log"
+    }
+  ]
+}

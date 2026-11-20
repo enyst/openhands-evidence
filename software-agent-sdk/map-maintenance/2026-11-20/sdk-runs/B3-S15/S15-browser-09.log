@@ -1,0 +1,15 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+mkdir -p "$SDK_VERIFY_RUN/home/.cache"
+ln -sfn "${PLAYWRIGHT_BROWSERS_PATH:-/opt/pw-browsers}" "$SDK_VERIFY_RUN/home/.cache/ms-playwright"
+control-sdk exec --model-env -- python tests/integration/run_infer.py --llm-config '{"model": "deepseek/deepseek-flash"}' --eval-ids t05_simple_browsing --output-dir <scratch>/sdk/B3-S15/work/S15-browser-09/block1-4
+{
+  "exit": 0,
+  "seconds": 39.8,
+  "result": null,
+  "stdout_tail": "browser \ntabs.\", \"properties\": {\"tab_id\": {\"type\": \"string\", \"description\": \"4 Character \nTab ID of the tab to close (from browser_list_tabs)\"}},...\n  - browser_get_storage: Get browser storage data including cookies,...\n  Parameters: {\"type\": \"object\", \"description\": \"Schema for getting browser \nstorage (cookies, local storage, session storage).\", \"properties\": {}}\n  - browser_set_storage: Set browser storage data including cookies,...\n  Parameters: {\"type\": \"object\", \"description\": \"Schema for setting browser \nstorage (cookies, local storage, session storage).\", \"properties\": \n{\"storage_state\": {\"type\": \"object\", \"description\": \"Storage state d...\n  - browser_start_recording: Start recording the browser session....\n  Parameters: {\"type\": \"object\", \"description\": \"Schema for starting browser \nsession recording.\", \"properties\": {}}\n  - browser_stop_recording: Stop recording the browser session....\n  Parameters: {\"type\": \"object\", \"description\": \"Schema for stopping browser \nsession recording.\", \"properties\": {}}\n  - finish: Signals the completion of the current task or conversation....\n  Parameters: {\"type\": \"object\", \"properties\": {\"message\": {\"type\": \"string\", \n\"description\": \"Final message to send to the user.\"}}, \"required\": [\"message\"]}\n\nMessage from User \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\nBrowse localhost:8000, and tell me the ultimate answer to life.\n\nTokens: \u2191 input (total 0) \u2022 cache hit (total N/A) \u2022 \u2193 output (total 0) \u2022 $ \n(total 0.00)\n\n",
+  "stderr_tail": "[11/20/26 08:34:21] WARNING  No persistence_dir provided; falling   state.py:688\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 41s]
+[integration tests missing [] failed ['t05_simple_browsing'] (<scratch>/sdk/B3-S15/work/S15-browser-09/block1-4/deepseek_deepseek_flash_agent-sdk-integration_N1_20261120_083420/results.json)]

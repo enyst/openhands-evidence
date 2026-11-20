@@ -1,0 +1,168 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B1-S05",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 8,
+    "fail": 2,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S05-events.md",
+      "bullet": 1,
+      "ids": [
+        "S05.event-base",
+        "S05.json-roundtrip",
+        "S05.to-llm-message",
+        "S05.events-to-messages",
+        "S05.openai-format",
+        "S05.unmatched-actions",
+        "S05.event-log-files",
+        "S05.event-cache",
+        "S05.event-tree",
+        "S05.visualize",
+        "S05.resume-transcript"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-01.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 2,
+      "ids": [
+        "S05.error-classification",
+        "S05.streaming-delta",
+        "S05.completion-log-event"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-02.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 3,
+      "ids": [
+        "S05.error-classification"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-03.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 4,
+      "ids": [
+        "S05.error-classification"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-04.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 5,
+      "ids": [
+        "S05.event-log-append"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-05.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 6,
+      "ids": [
+        "S05.event-log-recovery"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-06.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 7,
+      "ids": [
+        "S05.json-roundtrip",
+        "S05.events-to-messages",
+        "S05.openai-format"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-07.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 8,
+      "ids": [
+        "S05.json-roundtrip",
+        "S05.openai-format"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-08.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 9,
+      "ids": [
+        "S05.events-to-messages",
+        "S02.error-mapping"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-09.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 10,
+      "ids": [
+        "S05.system-prompt-blocks"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S05/transcripts/S05-events-10.log"
+    },
+    {
+      "family": "S05-events.md",
+      "bullet": 11,
+      "ids": [
+        "S05.token-event"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}

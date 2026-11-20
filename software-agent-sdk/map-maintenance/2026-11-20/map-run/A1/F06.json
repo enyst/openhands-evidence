@@ -1,0 +1,392 @@
+{
+  "ok": true,
+  "file": "F06-conversation-events.md",
+  "summary": {
+    "pass": 31,
+    "fail": 0,
+    "xfail": 2,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 111,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2674,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-00-preconditions.json"
+    },
+    {
+      "bullet": "Append a message without running (`F06.send-no-run`).",
+      "ids": [
+        "F06.send-no-run"
+      ],
+      "line": 130,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2496,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-01-append-a-message-without-running-f06-sen.json"
+    },
+    {
+      "bullet": "Paging and sort order (`F06.search-page`).",
+      "ids": [
+        "F06.search-page"
+      ],
+      "line": 153,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4098,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-02-paging-and-sort-order-f06-search-page.json"
+    },
+    {
+      "bullet": "Bad search parameters (`F06.search-validation`).",
+      "ids": [
+        "F06.search-validation"
+      ],
+      "line": 177,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1880,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-03-bad-search-parameters-f06-search-validat.json"
+    },
+    {
+      "bullet": "Filters (`F06.search-filters`).",
+      "ids": [
+        "F06.search-filters"
+      ],
+      "line": 186,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2302,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-04-filters-f06-search-filters.json"
+    },
+    {
+      "bullet": "Short kind names (`F06.search-kind-short`).",
+      "ids": [
+        "F06.search-kind-short"
+      ],
+      "line": 205,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1220,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-05-short-kind-names-f06-search-kind-short.json"
+    },
+    {
+      "bullet": "Time window (`F06.search-time-window`).",
+      "ids": [
+        "F06.search-time-window"
+      ],
+      "line": 223,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2293,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-06-time-window-f06-search-time-window.json"
+    },
+    {
+      "bullet": "Count (`F06.count`).",
+      "ids": [
+        "F06.count"
+      ],
+      "line": 240,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2507,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-07-count-f06-count.json"
+    },
+    {
+      "bullet": "Get one event (`F06.get-one`).",
+      "ids": [
+        "F06.get-one"
+      ],
+      "line": 251,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1100,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-08-get-one-event-f06-get-one.json"
+    },
+    {
+      "bullet": "Unknown event id (`F06.unknown-event`).",
+      "ids": [
+        "F06.unknown-event"
+      ],
+      "line": 266,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1502,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-09-unknown-event-id-f06-unknown-event.json"
+    },
+    {
+      "bullet": "Batch get (`F06.batch-get`).",
+      "ids": [
+        "F06.batch-get"
+      ],
+      "line": 284,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 723,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-10-batch-get-f06-batch-get.json"
+    },
+    {
+      "bullet": "Batch get by POST (`F06.batch-post`).",
+      "ids": [
+        "F06.batch-post"
+      ],
+      "line": 294,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3883,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-11-batch-get-by-post-f06-batch-post.json"
+    },
+    {
+      "bullet": "Unknown conversation, bad id, no key (`F06.not-found-auth`).",
+      "ids": [
+        "F06.not-found-auth"
+      ],
+      "line": 323,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5238,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-12-unknown-conversation-bad-id-no-key-f06-n.json"
+    },
+    {
+      "bullet": "Message validation (`F06.send-validation`).",
+      "ids": [
+        "F06.send-validation"
+      ],
+      "line": 347,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1855,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-13-message-validation-f06-send-validation.json"
+    },
+    {
+      "bullet": "Image content (`F06.send-image`).",
+      "ids": [
+        "F06.send-image"
+      ],
+      "line": 361,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5812,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-14-image-content-f06-send-image.json"
+    },
+    {
+      "bullet": "Non-user role (`F06.send-non-user-role`), known bug.",
+      "ids": [
+        "F06.send-non-user-role"
+      ],
+      "line": 390,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 2178,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-15-non-user-role-f06-send-non-user-role-kno.json",
+      "failed_line": 4,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$CID/events\" --json '{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"QA_F06_ASSISTANT\"}]}' --expect 4xx --save F06.send-non-user-role/assistant",
+      "stdout_tail": "\"headers\": {\n      \"content-length\": \"1\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": 5,\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 64,\n  \"checks\": [\n    {\n      \"check\": \". eq 5\",\n      \"ok\": true,\n      \"actual\": \"5\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 500,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/abbb1ef5-8135-4d99-a0c5-d4827ab94d3c/events\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"role\": \"assistant\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"QA_F06_ASSISTANT\"\n        }\n      ]\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 500,\n    \"headers\": {\n      \"content-length\": \"150\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Internal Server Error\",\n      \"exception\": \"Only user messages are allowed to be sent to the agent.\",\n      \"error_id\": \"a839156eee834d158d4ae23b4011fa7b\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 529,\n  \"saved\": \"<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/F06.send-non-user-role/assistant.json\",\n  \"hint\": \"expected 4xx, got 500\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "status eq 500 && response.body.exception contains 'Only user messages are allowed'"
+    },
+    {
+      "bullet": "First frame is a state snapshot (`F06.ws-snapshot`).",
+      "ids": [
+        "F06.ws-snapshot"
+      ],
+      "line": 418,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4259,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-16-first-frame-is-a-state-snapshot-f06-ws-s.json"
+    },
+    {
+      "bullet": "Handshake: auth and close codes (`F06.ws-handshake`).",
+      "ids": [
+        "F06.ws-handshake"
+      ],
+      "line": 430,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12431,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-17-handshake-auth-and-close-codes-f06-ws-ha.json"
+    },
+    {
+      "bullet": "Deleting a conversation closes its sockets (`F06.ws-delete-close`).",
+      "ids": [
+        "F06.ws-delete-close"
+      ],
+      "line": 455,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4404,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-18-deleting-a-conversation-closes-its-socke.json"
+    },
+    {
+      "bullet": "Replay everything (`F06.ws-replay-all`).",
+      "ids": [
+        "F06.ws-replay-all"
+      ],
+      "line": 474,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6965,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-19-replay-everything-f06-ws-replay-all.json"
+    },
+    {
+      "bullet": "Replay since a timestamp (`F06.ws-replay-since`).",
+      "ids": [
+        "F06.ws-replay-since"
+      ],
+      "line": 486,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7384,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-20-replay-since-a-timestamp-f06-ws-replay-s.json"
+    },
+    {
+      "bullet": "Bad frames on the socket (`F06.ws-bad-frame`).",
+      "ids": [
+        "F06.ws-bad-frame"
+      ],
+      "line": 501,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5017,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-21-bad-frames-on-the-socket-f06-ws-bad-fram.json"
+    },
+    {
+      "bullet": "Send a message over the socket (`F06.ws-send`).",
+      "ids": [
+        "F06.ws-send"
+      ],
+      "line": 520,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3385,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-22-send-a-message-over-the-socket-f06-ws-se.json"
+    },
+    {
+      "bullet": "Run a turn and watch it live (`F06.send-run`, `F06.ws-live`).",
+      "ids": [
+        "F06.send-run",
+        "F06.ws-live"
+      ],
+      "line": 541,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16961,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-23-run-a-turn-and-watch-it-live-f06-send-ru.json"
+    },
+    {
+      "bullet": "Log order is timestamp order (`F06.search-timestamp-order`).",
+      "ids": [
+        "F06.search-timestamp-order"
+      ],
+      "line": 585,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6098,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-24-log-order-is-timestamp-order-f06-search-.json"
+    },
+    {
+      "bullet": "A message reopens a finished conversation (`F06.send-resets-finished`).",
+      "ids": [
+        "F06.send-resets-finished"
+      ],
+      "line": 619,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1640,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-25-a-message-reopens-a-finished-conversatio.json"
+    },
+    {
+      "bullet": "History survives a restart (`F06.restart-persist`).",
+      "ids": [
+        "F06.restart-persist"
+      ],
+      "line": 634,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17139,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-26-history-survives-a-restart-f06-restart-p.json"
+    },
+    {
+      "bullet": "Run capacity full (`F06.send-run-limit`).",
+      "ids": [
+        "F06.send-run-limit"
+      ],
+      "line": 662,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14454,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-27-run-capacity-full-f06-send-run-limit.json"
+    },
+    {
+      "bullet": "A message while the agent runs (`F06.send-while-running`).",
+      "ids": [
+        "F06.send-while-running"
+      ],
+      "line": 690,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15492,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-28-a-message-while-the-agent-runs-f06-send-.json"
+    },
+    {
+      "bullet": "Streamed deltas are transient (`F06.ws-streaming-deltas`).",
+      "ids": [
+        "F06.ws-streaming-deltas"
+      ],
+      "line": 725,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10584,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-29-streamed-deltas-are-transient-f06-ws-str.json"
+    },
+    {
+      "bullet": "A message from another conversation (`F06.send-sender-conversation`).",
+      "ids": [
+        "F06.send-sender-conversation"
+      ],
+      "line": 751,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7166,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-30-a-message-from-another-conversation-f06-.json"
+    },
+    {
+      "bullet": "Refused senders (`F06.send-sender-errors`).",
+      "ids": [
+        "F06.send-sender-errors"
+      ],
+      "line": 783,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2537,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-31-refused-senders-f06-send-sender-errors.json"
+    },
+    {
+      "bullet": "A message during a tool call (`F06.send-during-tool-call`), known bug #6729.",
+      "ids": [
+        "F06.send-during-tool-call"
+      ],
+      "line": 802,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 21967,
+      "transcript": "<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/map-run/F06-conversation-events-32-a-message-during-a-tool-call-f06-send-du.json",
+      "failed_line": 8,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$TC/events\" --json '{\"content\":[{\"type\":\"text\",\"text\":\"QA_F06_DURING_TOOL\"}],\"run\":false}' --expect 200 --expect-max-ms 3000 --timeout 60 --save F06.send-during-tool-call/post",
+      "stdout_tail": "kind\",\n        \"ObservationEvent\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": 0,\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 71,\n  \"checks\": [\n    {\n      \"check\": \". eq 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/09b7b6d4-5c1b-4cdd-811f-babd778e86cf/events\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"QA_F06_DURING_TOOL\"\n        }\n      ],\n      \"run\": false\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"16\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"success\": true\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 19240,\n  \"saved\": \"<scratch>/agent-server/20261120-085056-cb04-map-f06/evidence/F06.send-during-tool-call/post.json\",\n  \"hint\": \"took 19240 ms, limit 3000 ms\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "status eq 200 && elapsed_ms ge 15000"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-085056-cb04-map-f06",
+  "launch_flags": [
+    "--env",
+    "TZ=UTC"
+  ]
+}

@@ -1,0 +1,370 @@
+{
+  "ok": false,
+  "file": "F32-webhooks-and-telemetry.md",
+  "summary": {
+    "pass": 25,
+    "fail": 3,
+    "xfail": 2,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 97,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2211,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-00-preconditions.json"
+    },
+    {
+      "bullet": "A run's events reach the webhook (`F32.events-post`).",
+      "ids": [
+        "F32.events-post"
+      ],
+      "line": 119,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4421,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-01-a-run-s-events-reach-the-webhook-f32-eve.json"
+    },
+    {
+      "bullet": "Session key and content type on every request (`F32.events-session-key`).",
+      "ids": [
+        "F32.events-session-key"
+      ],
+      "line": 136,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 874,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-02-session-key-and-content-type-on-every-re.json"
+    },
+    {
+      "bullet": "Conversation created (`F32.conversation-created`).",
+      "ids": [
+        "F32.conversation-created"
+      ],
+      "line": 148,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 977,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-03-conversation-created-f32-conversation-cr.json"
+    },
+    {
+      "bullet": "Full-state snapshot on every attach (`F32.events-full-state`).",
+      "ids": [
+        "F32.events-full-state"
+      ],
+      "line": 160,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 583,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-04-full-state-snapshot-on-every-attach-f32-.json",
+      "failed_line": 3,
+      "failed_command": "test -n \"$DEEPSEEK_API_KEY\"",
+      "stdout_tail": "-Session-API-Key\\\": \\\"<redacted:session-api-key>\\\", \\\"Content-Length\\\": \\\"6012\\\", \\\"Content-Type\\\": \\\"application/json\\\"}, \\\"body\\\": [{\\\"id\\\": \\\"5bcf5\\u2026\"\n  ]\n}\n{\n  \"ok\": true,\n  \"requests\": 2,\n  \"paths\": {\n    \"/events/5421b6eb2feb41e79fe059dc434fb83a\": 2\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-20T09:27:09Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/events/5421b6eb2feb41e79fe059dc434fb83a\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:37697\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"X-Session-API-Key\\\": \\\"<redacted:session-api-key>\\\", \\\"Content-Length\\\": \\\"21045\\\", \\\"Content-Type\\\": \\\"application/json\\\"}, \\\"body\\\": [{\\\"id\\\": \\\"d300\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-20T09:27:10Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/events/5421b6eb2feb41e79fe059dc434fb83a\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:37697\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"X-Session-API-Key\\\": \\\"<redacted:session-api-key>\\\", \\\"Content-Length\\\": \\\"6012\\\", \\\"Content-Type\\\": \\\"application/json\\\"}, \\\"body\\\": [{\\\"id\\\": \\\"5bcf5\\u2026\"\n  ]\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Conversation lifecycle posts (`F32.conversation-lifecycle`).",
+      "ids": [
+        "F32.conversation-lifecycle"
+      ],
+      "line": 181,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5074,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-05-conversation-lifecycle-posts-f32-convers.json"
+    },
+    {
+      "bullet": "No streaming deltas on webhooks (`F32.events-no-deltas`).",
+      "ids": [
+        "F32.events-no-deltas"
+      ],
+      "line": 204,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8960,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-06-no-streaming-deltas-on-webhooks-f32-even.json"
+    },
+    {
+      "bullet": "Custom headers, path prefix and buffer size (`F32.custom-headers`, `F32.buffer-size`).",
+      "ids": [
+        "F32.custom-headers",
+        "F32.buffer-size"
+      ],
+      "line": 217,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12017,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-07-custom-headers-path-prefix-and-buffer-si.json"
+    },
+    {
+      "bullet": "Events published during an in-flight batch (`F32.buffer-stranded`).",
+      "ids": [
+        "F32.buffer-stranded"
+      ],
+      "line": 237,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1109,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-08-events-published-during-an-in-flight-bat.json"
+    },
+    {
+      "bullet": "Flush on delete and on shutdown (`F32.flush-on-close`).",
+      "ids": [
+        "F32.flush-on-close"
+      ],
+      "line": 252,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 23336,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-09-flush-on-delete-and-on-shutdown-f32-flus.json"
+    },
+    {
+      "bullet": "Flush timer from the first event (`F32.flush-delay`).",
+      "ids": [
+        "F32.flush-delay"
+      ],
+      "line": 280,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15864,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-10-flush-timer-from-the-first-event-f32-flu.json"
+    },
+    {
+      "bullet": "Webhook field descriptions (`F32.webhook-spec-docs`).",
+      "ids": [
+        "F32.webhook-spec-docs"
+      ],
+      "line": 300,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2706,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-11-webhook-field-descriptions-f32-webhook-s.json"
+    },
+    {
+      "bullet": "Batch and queue limits (`F32.backpressure`).",
+      "ids": [
+        "F32.backpressure"
+      ],
+      "line": 315,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15343,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-12-batch-and-queue-limits-f32-backpressure.json"
+    },
+    {
+      "bullet": "Retries against a failing receiver (`F32.retry`).",
+      "ids": [
+        "F32.retry"
+      ],
+      "line": 349,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12514,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-13-retries-against-a-failing-receiver-f32-r.json"
+    },
+    {
+      "bullet": "Failed batches are requeued (`F32.requeue`).",
+      "ids": [
+        "F32.requeue"
+      ],
+      "line": 364,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13933,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-14-failed-batches-are-requeued-f32-requeue.json"
+    },
+    {
+      "bullet": "A slow receiver blocks the next run (`F32.slow-receiver`), known bug.",
+      "ids": [
+        "F32.slow-receiver"
+      ],
+      "line": 379,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 17447,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-15-a-slow-receiver-blocks-the-next-run-f32-.json",
+      "failed_line": 10,
+      "failed_command": "control-agent-server api POST \"/api/conversations/$WCID/run\" --expect 200 --save F32.slow-receiver/run-after-finished",
+      "stdout_tail": "/de\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-20T09:29:20Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/events/160dc5ddbd7549a9a0c7d56f861d8b91\\\", \\\"call\\\": 7, \\\"step\\\": {\\\"hang\\\": 15.0}, \\\"body\\\": [{\\\"id\\\": \\\"ad5382ee-371d-4fe9-b887-2f2a4e2fb199\\\", \\\"timestamp\\\": \\\"2026-11-20T09:29:20.793989\\\", \\\"source\\\": \\\"agent\\\", \\\"parent_id\\\": null, \\\"system_prompt\\\": {\\\"cache_prompt\\\": false, \\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"<SOUL>\\\\nYou are OpenHands agent, a helpful AI assistant that \\u2026\"\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 409,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/conversations/160dc5dd-bd75-49a9-a0c7-d56f861d8b91/run\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 409,\n    \"headers\": {\n      \"content-length\": \"78\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Conversation already running. Wait for completion or pause first.\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"saved\": \"<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/F32.slow-receiver/run-after-finished.json\",\n  \"hint\": \"expected 200, got 409\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "status eq 409 && response.body.detail contains 'Conversation already running'"
+    },
+    {
+      "bullet": "Webhooks from the environment (`F32.env-config`).",
+      "ids": [
+        "F32.env-config"
+      ],
+      "line": 407,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24280,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-16-webhooks-from-the-environment-f32-env-co.json"
+    },
+    {
+      "bullet": "Telemetry is off by default (`F32.telemetry-off-by-default`).",
+      "ids": [
+        "F32.telemetry-off-by-default"
+      ],
+      "line": 426,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 30282,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-17-telemetry-is-off-by-default-f32-telemetr.json"
+    },
+    {
+      "bullet": "Server lifecycle events (`F32.telemetry-lifecycle`).",
+      "ids": [
+        "F32.telemetry-lifecycle"
+      ],
+      "line": 443,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 21746,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-18-server-lifecycle-events-f32-telemetry-li.json"
+    },
+    {
+      "bullet": "Conversation telemetry is sanitized (`F32.telemetry-conversation`).",
+      "ids": [
+        "F32.telemetry-conversation"
+      ],
+      "line": 460,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 4272,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-19-conversation-telemetry-is-sanitized-f32-.json",
+      "failed_line": 6,
+      "failed_command": "control-agent-server sink read --name qa-f32-telemetry --contains \"\\\"conversation_ref\\\": \\\"$REF\\\", \\\"llm_model_family\\\": \\\"deepseek\\\", \\\"agent_kind\\\"\" --expect-min 1 --expect-max 1",
+      "stdout_tail": "ttpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Authorization\\\": \\\"Bearer qa-f32-token\\\", \\\"Content-Length\\\": \\\"718\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.conve\\u2026\"\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/F32.telemetry-conversation/finished.json\"\n}\n{\n  \"ok\": true,\n  \"requests\": 1,\n  \"paths\": {\n    \"/v1/events\": 1\n  },\n  \"last\": [\n    \"{\\\"at\\\": \\\"2026-11-20T09:30:40Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/v1/events\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:52447\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Authorization\\\": \\\"Bearer qa-f32-token\\\", \\\"Content-Length\\\": \\\"816\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.conve\\u2026\"\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/F32.telemetry-conversation/created.json\"\n}\n{\n  \"ok\": false,\n  \"requests\": 0,\n  \"paths\": {},\n  \"last\": []\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Unhandled errors (`F32.telemetry-request-failed`).",
+      "ids": [
+        "F32.telemetry-request-failed"
+      ],
+      "line": 485,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5492,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-20-unhandled-errors-f32-telemetry-request-f.json"
+    },
+    {
+      "bullet": "Token and cost buckets from real usage (`F32.telemetry-usage-buckets`).",
+      "ids": [
+        "F32.telemetry-usage-buckets"
+      ],
+      "line": 508,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 417,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-21-token-and-cost-buckets-from-real-usage-f.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server api GET \"/api/conversations/$UCID\" --check stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0",
+      "stdout_tail": "{\n  \"ok\": false,\n  \"status\": 307,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 307,\n    \"headers\": {\n      \"content-length\": \"0\",\n      \"location\": \"http://127.0.0.1:45659/api/conversations\"\n    },\n    \"body\": \"\",\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \"stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"hint\": \"failed check: stats.usage_to_metrics.default.accumulated_token_usage.prompt_tokens gt 0\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Failed runs (`F32.telemetry-conversation-failed`).",
+      "ids": [
+        "F32.telemetry-conversation-failed"
+      ],
+      "line": 519,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4915,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-22-failed-runs-f32-telemetry-conversation-f.json"
+    },
+    {
+      "bullet": "Consent from settings (`F32.telemetry-consent-settings`).",
+      "ids": [
+        "F32.telemetry-consent-settings"
+      ],
+      "line": 542,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24530,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-23-consent-from-settings-f32-telemetry-cons.json"
+    },
+    {
+      "bullet": "Environment override beats settings (`F32.telemetry-env-override`).",
+      "ids": [
+        "F32.telemetry-env-override"
+      ],
+      "line": 569,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 20374,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-24-environment-override-beats-settings-f32-.json"
+    },
+    {
+      "bullet": "Kill switch (`F32.telemetry-kill-switch`).",
+      "ids": [
+        "F32.telemetry-kill-switch"
+      ],
+      "line": 584,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 20938,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-25-kill-switch-f32-telemetry-kill-switch.json"
+    },
+    {
+      "bullet": "Pseudonym key and deployment kind (`F32.telemetry-salt-and-kind`).",
+      "ids": [
+        "F32.telemetry-salt-and-kind"
+      ],
+      "line": 600,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 25492,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-26-pseudonym-key-and-deployment-kind-f32-te.json"
+    },
+    {
+      "bullet": "Salt description (`F32.telemetry-salt-docs`).",
+      "ids": [
+        "F32.telemetry-salt-docs"
+      ],
+      "line": 640,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2207,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-27-salt-description-f32-telemetry-salt-docs.json"
+    },
+    {
+      "bullet": "Deferred pod gets telemetry and webhooks from `/api/init` (`F32.deferred-init`).",
+      "ids": [
+        "F32.deferred-init"
+      ],
+      "line": 654,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14432,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-28-deferred-pod-gets-telemetry-and-webhooks.json"
+    },
+    {
+      "bullet": "Deferred pods are labelled as such (`F32.deferred-init-flag`), known bug.",
+      "ids": [
+        "F32.deferred-init-flag"
+      ],
+      "line": 678,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 991,
+      "transcript": "<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/map-run/F32-webhooks-and-telemetry-29-deferred-pods-are-labelled-as-such-f32-d.json",
+      "failed_line": 3,
+      "failed_command": "control-agent-server sink read --name qa-f32-deferred --path /init --contains '\"deferred_init\": true' --expect-min 1 --save F32.deferred-init-flag/events",
+      "stdout_tail": "a2fbdb13879\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-20T09:32:38Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/init\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:45829\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Content-Length\\\": \\\"814\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.conversation_created\\\", \\\"distinct_id\\\": \\\"qa-f32-defe\\u2026\",\n    \"{\\\"at\\\": \\\"2026-11-20T09:32:40Z\\\", \\\"method\\\": \\\"POST\\\", \\\"path\\\": \\\"/init\\\", \\\"headers\\\": {\\\"Host\\\": \\\"127.0.0.1:45829\\\", \\\"Accept\\\": \\\"*/*\\\", \\\"Accept-Encoding\\\": \\\"gzip, deflate\\\", \\\"Connection\\\": \\\"keep-alive\\\", \\\"User-Agent\\\": \\\"python-httpx/0.28.1\\\", \\\"Content-Type\\\": \\\"application/json\\\", \\\"Content-Length\\\": \\\"508\\\"}, \\\"body\\\": {\\\"schema_version\\\": 1, \\\"events\\\": [{\\\"event\\\": \\\"agent_server.server_stopped\\\", \\\"distinct_id\\\": \\\"anon:2a2fbdb13879\\u2026\"\n  ]\n}\n{\n  \"ok\": false,\n  \"requests\": 0,\n  \"paths\": {},\n  \"last\": [],\n  \"saved\": \"<scratch>/agent-server/20261120-092655-93d5-map-f32/evidence/F32.deferred-init-flag/events.json\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "requests eq 0"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-092655-93d5-map-f32",
+  "launch_flags": [
+    "--webhook-sink"
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "ok": false,
+  "file": "F30-openai-gateway.md",
+  "summary": {
+    "pass": 31,
+    "fail": 3,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 100,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2249,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-00-preconditions.json"
+    },
+    {
+      "bullet": "Model list (`F30.models-list`).",
+      "ids": [
+        "F30.models-list"
+      ],
+      "line": 128,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3666,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-01-model-list-f30-models-list.json"
+    },
+    {
+      "bullet": "Bearer or session header (`F30.auth-bearer-or-header`).",
+      "ids": [
+        "F30.auth-bearer-or-header"
+      ],
+      "line": 154,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5106,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-02-bearer-or-session-header-f30-auth-bearer.json"
+    },
+    {
+      "bullet": "No session keys (`F30.auth-open-without-keys`).",
+      "ids": [
+        "F30.auth-open-without-keys"
+      ],
+      "line": 179,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11199,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-03-no-session-keys-f30-auth-open-without-ke.json"
+    },
+    {
+      "bullet": "Chat completion (`F30.chat-basic`).",
+      "ids": [
+        "F30.chat-basic"
+      ],
+      "line": 198,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4773,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-04-chat-completion-f30-chat-basic.json"
+    },
+    {
+      "bullet": "Inner gateway run (`F30.inner-gateway-run`).",
+      "ids": [
+        "F30.inner-gateway-run"
+      ],
+      "line": 226,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2231,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-05-inner-gateway-run-f30-inner-gateway-run.json"
+    },
+    {
+      "bullet": "Active Agent Profile (`F30.active-agent-profile`).",
+      "ids": [
+        "F30.active-agent-profile"
+      ],
+      "line": 242,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7971,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-06-active-agent-profile-f30-active-agent-pr.json"
+    },
+    {
+      "bullet": "System text goes to the system prompt (`F30.chat-system-suffix`).",
+      "ids": [
+        "F30.chat-system-suffix"
+      ],
+      "line": 288,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2047,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-07-system-text-goes-to-the-system-prompt-f3.json"
+    },
+    {
+      "bullet": "Only the latest user turn (`F30.chat-latest-user-only`).",
+      "ids": [
+        "F30.chat-latest-user-only"
+      ],
+      "line": 311,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1427,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-08-only-the-latest-user-turn-f30-chat-lates.json"
+    },
+    {
+      "bullet": "Streaming (`F30.chat-stream`).",
+      "ids": [
+        "F30.chat-stream"
+      ],
+      "line": 327,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3682,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-09-streaming-f30-chat-stream.json"
+    },
+    {
+      "bullet": "Continue with the header (`F30.chat-reuse-header`).",
+      "ids": [
+        "F30.chat-reuse-header"
+      ],
+      "line": 363,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8820,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-10-continue-with-the-header-f30-chat-reuse-.json"
+    },
+    {
+      "bullet": "Continue after a restart (`F30.chat-reuse-after-restart`).",
+      "ids": [
+        "F30.chat-reuse-after-restart"
+      ],
+      "line": 396,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12262,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-11-continue-after-a-restart-f30-chat-reuse-.json"
+    },
+    {
+      "bullet": "Caller-chosen id (`F30.chat-header-new-id`).",
+      "ids": [
+        "F30.chat-header-new-id"
+      ],
+      "line": 414,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5448,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-12-caller-chosen-id-f30-chat-header-new-id.json"
+    },
+    {
+      "bullet": "Continuing keeps the conversation's LLM (`F30.chat-reuse-keeps-llm`).",
+      "ids": [
+        "F30.chat-reuse-keeps-llm"
+      ],
+      "line": 435,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6090,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-13-continuing-keeps-the-conversation-s-llm-.json"
+    },
+    {
+      "bullet": "Usage per request (`F30.chat-usage-per-request`).",
+      "ids": [
+        "F30.chat-usage-per-request"
+      ],
+      "line": 467,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6093,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-14-usage-per-request-f30-chat-usage-per-req.json"
+    },
+    {
+      "bullet": "Overlapping turns on one conversation (`F30.chat-reuse-concurrent`), known bug.",
+      "ids": [
+        "F30.chat-reuse-concurrent"
+      ],
+      "line": 505,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 12374,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-15-overlapping-turns-on-one-conversation-f3.json",
+      "failed_line": 25,
+      "failed_command": "control-agent-server state cat fixtures/qa-f30/race-x.json --check choices.0.message.content eq QA_F30_RACE_B",
+      "stdout_tail": "role\\\": \\\"assistant\\\", \\u2026\"\n    },\n    {\n      \"check\": \"items.1.llm_message.content.0.text eq QA_F30_RACE_B\",\n      \"ok\": true,\n      \"actual\": \"QA_F30_RACE_B\"\n    },\n    {\n      \"check\": \"items.2.llm_message.content.0.text eq QA_F30_RACE_C\",\n      \"ok\": true,\n      \"actual\": \"QA_F30_RACE_C\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/F30.chat-reuse-concurrent/agent-messages.json\"\n}\n{\n  \"ok\": false,\n  \"path\": \"fixtures/qa-f30/race-x.json\",\n  \"bytes\": 304,\n  \"mode\": \"0o644\",\n  \"content\": {\n    \"id\": \"chatcmpl-4c0e673dd37e4789926e574adf4189fa\",\n    \"choices\": [\n      {\n        \"finish_reason\": \"stop\",\n        \"index\": 0,\n        \"message\": {\n          \"content\": \"QA_F30_RACE_C\",\n          \"role\": \"assistant\"\n        }\n      }\n    ],\n    \"created\": 1795166397,\n    \"model\": \"openhands_qa-f30-race\",\n    \"object\": \"chat.completion\",\n    \"usage\": {\n      \"completion_tokens\": 10,\n      \"prompt_tokens\": 20,\n      \"total_tokens\": 30\n    }\n  },\n  \"checks\": [\n    {\n      \"check\": \"choices.0.message.content eq QA_F30_RACE_B\",\n      \"ok\": false,\n      \"actual\": \"QA_F30_RACE_C\"\n    }\n  ]\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "content.choices.0.message.content eq QA_F30_RACE_C"
+    },
+    {
+      "bullet": "A direct message during a gateway turn (`F30.direct-event-during-turn-409`).",
+      "ids": [
+        "F30.direct-event-during-turn-409"
+      ],
+      "line": 551,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14636,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-16-a-direct-message-during-a-gateway-turn-f.json"
+    },
+    {
+      "bullet": "A gateway turn during a direct run (`F30.chat-reuse-direct-run-409`).",
+      "ids": [
+        "F30.chat-reuse-direct-run-409"
+      ],
+      "line": 599,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 19669,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-17-a-gateway-turn-during-a-direct-run-f30-c.json"
+    },
+    {
+      "bullet": "Continue a paused conversation (`F30.chat-reuse-paused`).",
+      "ids": [
+        "F30.chat-reuse-paused"
+      ],
+      "line": 638,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7540,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-18-continue-a-paused-conversation-f30-chat-.json"
+    },
+    {
+      "bullet": "The agent runs its own tools (`F30.chat-agent-tools`).",
+      "ids": [
+        "F30.chat-agent-tools"
+      ],
+      "line": 671,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5573,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-19-the-agent-runs-its-own-tools-f30-chat-ag.json"
+    },
+    {
+      "bullet": "Chat input errors (`F30.chat-input-errors`).",
+      "ids": [
+        "F30.chat-input-errors"
+      ],
+      "line": 689,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5602,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-20-chat-input-errors-f30-chat-input-errors.json"
+    },
+    {
+      "bullet": "Observability headers (`F30.observability-headers`).",
+      "ids": [
+        "F30.observability-headers"
+      ],
+      "line": 731,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6466,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-21-observability-headers-f30-observability-.json"
+    },
+    {
+      "bullet": "Run ends in error (`F30.chat-run-error-500`).",
+      "ids": [
+        "F30.chat-run-error-500"
+      ],
+      "line": 765,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2446,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-22-run-ends-in-error-f30-chat-run-error-500.json"
+    },
+    {
+      "bullet": "Confirmation stops a new conversation (`F30.chat-confirmation-409`).",
+      "ids": [
+        "F30.chat-confirmation-409"
+      ],
+      "line": 782,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3224,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-23-confirmation-stops-a-new-conversation-f3.json"
+    },
+    {
+      "bullet": "Confirmation on a continued conversation (`F30.chat-reuse-confirmation`).",
+      "ids": [
+        "F30.chat-reuse-confirmation"
+      ],
+      "line": 806,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5300,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-24-confirmation-on-a-continued-conversation.json"
+    },
+    {
+      "bullet": "Run limit (`F30.chat-run-limit-429`).",
+      "ids": [
+        "F30.chat-run-limit-429"
+      ],
+      "line": 839,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 25139,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-25-run-limit-f30-chat-run-limit-429.json"
+    },
+    {
+      "bullet": "Run limit on a continued conversation (`F30.chat-reuse-run-limit-429`).",
+      "ids": [
+        "F30.chat-reuse-run-limit-429"
+      ],
+      "line": 870,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 23063,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-26-run-limit-on-a-continued-conversation-f3.json"
+    },
+    {
+      "bullet": "Gateway timeout (`F30.chat-timeout-504`).",
+      "ids": [
+        "F30.chat-timeout-504"
+      ],
+      "line": 906,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 124470,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-27-gateway-timeout-f30-chat-timeout-504.json"
+    },
+    {
+      "bullet": "The default OpenAI client sends a timed-out turn once (`F30.chat-timeout-no-retry`).",
+      "ids": [
+        "F30.chat-timeout-no-retry"
+      ],
+      "line": 929,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 125872,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-28-the-default-openai-client-sends-a-timed-.json"
+    },
+    {
+      "bullet": "A turn that cannot start in time is retryable (`F30.inner-gateway-presend-504`).",
+      "ids": [
+        "F30.inner-gateway-presend-504"
+      ],
+      "line": 979,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 124345,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-29-a-turn-that-cannot-start-in-time-is-retr.json"
+    },
+    {
+      "bullet": "No sender on a gateway turn (`F30.inner-gateway-no-sender`).",
+      "ids": [
+        "F30.inner-gateway-no-sender"
+      ],
+      "line": 1007,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2798,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-30-no-sender-on-a-gateway-turn-f30-inner-ga.json"
+    },
+    {
+      "bullet": "Responses (`F30.responses-basic`).",
+      "ids": [
+        "F30.responses-basic"
+      ],
+      "line": 1022,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 3019,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-31-responses-f30-responses-basic.json",
+      "failed_line": 11,
+      "failed_command": "RID=$(control-agent-server api POST /v1/responses --auth bearer --timeout 180 --json '{\"model\": \"openhands_deepseek-flash\", \"input\": \"QA_F30_RESP: reply with one short word and use no tools.\", \"instructions\": \"QA_F30_INSTR: answer in plain text.\", \"metadata\": {\"qa\": \"f30\"}, \"store\": false, \"tools\": [{\"type\": \"function\", \"name\": \"qa_f30_client_tool\", \"parameters\": {\"type\": \"object\", \"properties\": {}}}], \"temperature\": 0}' --check object eq response --check status eq completed --check id matches '",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Stateless replay (`F30.responses-stateless-replay`).",
+      "ids": [
+        "F30.responses-stateless-replay"
+      ],
+      "line": 1056,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 1023,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-32-stateless-replay-f30-responses-stateless.json",
+      "failed_line": 4,
+      "failed_command": "R2=$(control-agent-server api POST /v1/responses --auth bearer --timeout 180 --header \"X-OpenHands-ServerConversation-ID: $RID\" --json '{\"model\": \"openhands_deepseek-flash\", \"input\": [{\"role\": \"developer\", \"content\": \"QA_F30_R_DEV: answer in plain text and use no tools.\"}, {\"role\": \"user\", \"content\": \"QA_F30_R1: remember the word apple.\"}, {\"type\": \"message\", \"role\": \"assistant\", \"content\": [{\"type\": \"output_text\", \"text\": \"QA_F30_R_PREV\", \"annotations\": []}]}, {\"role\": \"user\", \"content\": [{\"typ",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "bullet": "Responses errors (`F30.responses-errors`).",
+      "ids": [
+        "F30.responses-errors"
+      ],
+      "line": 1081,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6349,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-33-responses-errors-f30-responses-errors.json"
+    },
+    {
+      "bullet": "Official OpenAI SDK (`F30.openai-sdk`).",
+      "ids": [
+        "F30.openai-sdk"
+      ],
+      "line": 1121,
+      "status": "fail",
+      "exit_code": 1,
+      "elapsed_ms": 2199,
+      "transcript": "<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/map-run/F30-openai-gateway-34-official-openai-sdk-f30-openai-sdk.json",
+      "failed_line": 1,
+      "failed_command": "control-agent-server exec --openai --timeout 600 --expect-output QA_F30_SDK_OK --save F30.openai-sdk/program -- .venv/bin/python - <<'PY'\nimport os\nimport uuid\n\nfrom openai import OpenAI\n\nclient = OpenAI(timeout=180, max_retries=0)  # OPENAI_BASE_URL and OPENAI_API_KEY come from exec --openai\nmodel = \"openhands_deepseek-flash\"\nassert model in [m.id for m in client.models.list().data]\nprompt = \"reply with one short word and use no tools.\"\nfirst = client.chat.completions.with_raw_response.create(\n",
+      "stdout_tail": "chat/completions/completions.py\\\", line 1211, in create\\n    return self._post(\\n           ~~~~~~~~~~^\\n        \\\"/chat/completions\\\",\\n        ^^^^^^^^^^^^^^^^^^^^\\n    ...<47 lines>...\\n        stream_cls=Stream[ChatCompletionChunk],\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    )\\n    ^\\n  File \\\"/home/user/software-agent-sdk/.venv/lib/python3.13/site-packages/openai/_base_client.py\\\", line 1314, in post\\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\\n                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/user/software-agent-sdk/.venv/lib/python3.13/site-packages/openai/_base_client.py\\\", line 1087, in request\\n    raise self._make_status_error_from_response(err.response) from None\\nopenai.InternalServerError: Error code: 500 - {'detail': 'Internal Server Error', 'exception': '500: Agent run ended with status: error'}\\n\",\n  \"hint\": {\n    \"missing\": [\n      \"QA_F30_SDK_OK\"\n    ],\n    \"unexpected\": []\n  },\n  \"saved\": \"<scratch>/agent-server/20261120-091811-a5da-shim-f30/evidence/F30.openai-sdk/program.json\"\n}\n",
+      "stderr_tail": ""
+    }
+  ]
+}

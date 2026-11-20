@@ -1,0 +1,141 @@
+{
+  "ok": true,
+  "file": "F40-ask-user.md",
+  "summary": {
+    "pass": 10,
+    "fail": 0,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 87,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1675,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-00-preconditions.json"
+    },
+    {
+      "bullet": "The feature flag (`F40.flag-gates`).",
+      "ids": [
+        "F40.flag-gates"
+      ],
+      "line": 100,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3878,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-01-the-feature-flag-f40-flag-gates.json"
+    },
+    {
+      "bullet": "Model-backed: the agent asks (`F40.question-event`).",
+      "ids": [
+        "F40.question-event"
+      ],
+      "line": 114,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9154,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-02-model-backed-the-agent-asks-f40-question.json"
+    },
+    {
+      "bullet": "Refused answers (`F40.answer-errors`).",
+      "ids": [
+        "F40.answer-errors"
+      ],
+      "line": 133,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5676,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-03-refused-answers-f40-answer-errors.json"
+    },
+    {
+      "bullet": "Answer on the card (`F40.answer`).",
+      "ids": [
+        "F40.answer"
+      ],
+      "line": 156,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8648,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-04-answer-on-the-card-f40-answer.json"
+    },
+    {
+      "bullet": "Answer in the chat (`F40.chat-reply`).",
+      "ids": [
+        "F40.chat-reply"
+      ],
+      "line": 178,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9825,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-05-answer-in-the-chat-f40-chat-reply.json"
+    },
+    {
+      "bullet": "A Stop hook does not run over a question (`F40.stop-hook-waits`).",
+      "ids": [
+        "F40.stop-hook-waits"
+      ],
+      "line": 192,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9442,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-06-a-stop-hook-does-not-run-over-a-question.json"
+    },
+    {
+      "bullet": "A goal stops on the question (`F40.goal-asked`).",
+      "ids": [
+        "F40.goal-asked"
+      ],
+      "line": 216,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 20820,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-07-a-goal-stops-on-the-question-f40-goal-as.json"
+    },
+    {
+      "bullet": "A question left on an abandoned branch (`F40.goal-abandoned-branch`), known bug #6907.",
+      "ids": [
+        "F40.goal-abandoned-branch"
+      ],
+      "line": 245,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 12884,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-08-a-question-left-on-an-abandoned-branch-f.json",
+      "failed_line": 13,
+      "failed_command": "control-agent-server assert --check events.0.value matches '\"status\": \"(complete|capped)\"'",
+      "stdout_tail": "nds\": {\n      \"SystemPromptEvent\": 1,\n      \"MessageEvent\": 3,\n      \"ConversationStateUpdateEvent\": 16,\n      \"ActionEvent\": 3,\n      \"ObservationEvent\": 3\n    },\n    \"matching\": 2,\n    \"events\": [\n      {\n        \"id\": \"835d64c1-38d9-4d90-a5aa-6349994c3625\",\n        \"kind\": \"ConversationStateUpdateEvent\",\n        \"source\": \"environment\",\n        \"timestamp\": \"2026-11-20T09:37:11.264327\",\n        \"key\": \"goal\",\n        \"value\": \"{\\\"active\\\": false, \\\"status\\\": \\\"interrupted\\\", \\\"iteration\\\": 0, \\\"max_iterations\\\": 1, \\\"objective\\\": \\\"QA_F40_NEW Reply with the single word ok.\\\", \\\"verdict\\\": null}\"\n      }\n    ],\n    \"saved\": \"<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/F40.goal-abandoned-branch/goal.json\"\n  },\n  \"checks\": [\n    {\n      \"check\": \"events.0.value matches \\\"status\\\": \\\"(complete|capped)\\\"\",\n      \"ok\": false,\n      \"actual\": \"{\\\"active\\\": false, \\\"status\\\": \\\"interrupted\\\", \\\"iteration\\\": 0, \\\"max_iterations\\\": 1, \\\"objective\\\": \\\"QA_F40_NEW Reply with the single word ok.\\\", \\\"verdict\\\": null}\"\n    }\n  ],\n  \"hint\": \"failed check: events.0.value matches \\\"status\\\": \\\"(complete|capped)\\\"\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "value.events.0.value contains interrupted"
+    },
+    {
+      "bullet": "TypeScript client (`F40.ts-client`).",
+      "ids": [
+        "F40.ts-client"
+      ],
+      "line": 273,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9338,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-09-typescript-client-f40-ts-client.json"
+    },
+    {
+      "bullet": "Inside a Docker runtime (`F40.runtime-env`).",
+      "ids": [
+        "F40.runtime-env"
+      ],
+      "line": 310,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 30364,
+      "transcript": "<scratch>/agent-server/20261120-093541-cb52-map-f40/evidence/map-run/F40-ask-user-10-inside-a-docker-runtime-f40-runtime-env.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-093541-cb52-map-f40",
+  "launch_flags": []
+}

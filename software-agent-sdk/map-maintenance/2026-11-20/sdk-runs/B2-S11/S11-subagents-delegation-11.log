@@ -1,0 +1,78 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/task_fail_closed \
+  --check task_file eq false --check delegate_file eq false \
+  --check risky_status eq finished --check handler_calls len-eq 1 --check handler_calls.0.tools.0 eq terminal \
+  --check risky_file eq false --check sub_action_analyzed eq true
+{
+  "ok": true,
+  "task_file": true,
+  "task_observations": [
+    {
+      "task_id": "task_00000001",
+      "subagent": "careful",
+      "status": "completed",
+      "is_error": false,
+      "text": "careful done"
+    }
+  ],
+  "delegate_file": true,
+  "delegate_observations": [
+    "Successfully spawned 1 sub-agents: w (careful_worker)",
+    "Completed delegation of 1 tasks\n\nResults:\n1. Agent w: careful_worker done"
+  ],
+  "risky_status": "finished",
+  "analyzed_tools": [
+    "task"
+  ],
+  "sub_action_analyzed": false,
+  "handler_calls": [
+    {
+      "task_id": "task_00000001",
+      "tools": [
+        "terminal"
+      ]
+    }
+  ],
+  "risky_file": false,
+  "_exit": 0,
+  "_seconds": 31.8,
+  "checks": [
+    {
+      "check": "task_file eq false",
+      "ok": false,
+      "actual": "true"
+    },
+    {
+      "check": "delegate_file eq false",
+      "ok": false,
+      "actual": "true"
+    },
+    {
+      "check": "risky_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "handler_calls len-eq 1",
+      "ok": true,
+      "actual": "[{\"task_id\": \"task_00000001\", \"tools\": [\"terminal\"]}]"
+    },
+    {
+      "check": "handler_calls.0.tools.0 eq terminal",
+      "ok": true,
+      "actual": "terminal"
+    },
+    {
+      "check": "risky_file eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "sub_action_analyzed eq true",
+      "ok": false,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 1 after 33s]

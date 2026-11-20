@@ -1,0 +1,57 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg responses-stream \
+  --check chat_cache_write eq 600 --check responses_cache_read eq 200 --check responses_cache_write eq 600
+{
+  "ok": true,
+  "mode": "responses-stream",
+  "deltas": [
+    {
+      "id": "msg_1",
+      "content": "the ",
+      "reasoning": null
+    },
+    {
+      "id": "msg_1",
+      "content": "answ",
+      "reasoning": null
+    },
+    {
+      "id": "msg_1",
+      "content": "er",
+      "reasoning": null
+    }
+  ],
+  "summary_as_reasoning": "",
+  "content_text": "the answer",
+  "chunk_ids": [
+    "msg_1"
+  ],
+  "final_text": "the answer",
+  "final_summary": [
+    "plan the reply"
+  ],
+  "responses_cache_read": 200,
+  "responses_cache_write": 0,
+  "chat_cache_write": 600,
+  "_exit": 0,
+  "_seconds": 35.6,
+  "checks": [
+    {
+      "check": "chat_cache_write eq 600",
+      "ok": true,
+      "actual": "600"
+    },
+    {
+      "check": "responses_cache_read eq 200",
+      "ok": true,
+      "actual": "200"
+    },
+    {
+      "check": "responses_cache_write eq 600",
+      "ok": false,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 1 after 37s]

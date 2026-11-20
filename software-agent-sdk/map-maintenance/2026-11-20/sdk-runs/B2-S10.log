@@ -1,0 +1,168 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B2-S10",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 9,
+    "fail": 1
+  },
+  "results": [
+    {
+      "family": "S10-hooks.md",
+      "bullet": 1,
+      "ids": [
+        "S10.config-discovery",
+        "S10.command-exec",
+        "S10.matcher",
+        "S10.exit-codes",
+        "S10.async-hooks",
+        "S10.pre-tool-use-block",
+        "S10.post-tool-use",
+        "S10.user-prompt-context",
+        "S10.stop-hook",
+        "S10.session-start",
+        "S10.session-end-on-close",
+        "S10.execution-events"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-01.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 2,
+      "ids": [
+        "S10.user-prompt-block",
+        "S10.blocked-state-persistence"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-02.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 3,
+      "ids": [
+        "S10.command-exec"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-03.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 4,
+      "ids": [
+        "S10.config-format",
+        "S10.definition-validation",
+        "S10.config-discovery",
+        "S10.matcher",
+        "S10.exit-codes",
+        "S10.command-exec"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-04.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 5,
+      "ids": [
+        "S10.prompt-hook",
+        "S10.agent-hook",
+        "S10.llm-follows-switch"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-05.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 6,
+      "ids": [
+        "S10.plugin-hooks-merge"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-06.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 7,
+      "ids": [
+        "S10.plugin-hooks-reload-once"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-07.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 8,
+      "ids": [
+        "S10.command-exec",
+        "S10.pre-tool-use-block",
+        "S10.post-tool-use",
+        "S10.user-prompt-context",
+        "S10.stop-hook"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-08.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 9,
+      "ids": [
+        "S10.agent-hook",
+        "S10.stop-hook",
+        "S10.execution-events"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-09.log"
+    },
+    {
+      "family": "S10-hooks.md",
+      "bullet": 10,
+      "ids": [
+        "S10.prompt-hook"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B2-S10/transcripts/S10-hooks-10.log"
+    }
+  ]
+}

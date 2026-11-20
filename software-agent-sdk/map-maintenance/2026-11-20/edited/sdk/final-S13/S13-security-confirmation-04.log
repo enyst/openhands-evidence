@@ -1,0 +1,73 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S13/secret_rotation --check status eq finished --check observations eq 4 \
+  --check before_rotation_leaks len-eq 0 --check export_wc eq 24 --check source_lookups eq 2 \
+  --check new_value_leaks len-eq 0 --check previous_values_leaks len-eq 0 --check persisted_leaks len-eq 0
+{
+  "status": "finished",
+  "observations": 4,
+  "before_rotation": "remote has <secret-hidden> log has <secret-hidden>\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/final-S13/work/S13-security-confirmation-04/block1/runs/20261120-100214-d341a6/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+  "before_rotation_leaks": [],
+  "new_value": "config has dep-v2-s13\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/final-S13/work/S13-security-confirmation-04/block1/runs/20261120-100214-d341a6/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+  "new_value_leaks": [
+    "dep-v2-s13"
+  ],
+  "export_wc": "24",
+  "previous_values": "remote has dep-v1-s13 log has oauth-v1-s13\n[The command completed with exit code 0.]\n[Current working directory: <scratch>/sdk/final-S13/work/S13-security-confirmation-04/block1/runs/20261120-100214-d341a6/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]",
+  "previous_values_leaks": [
+    "dep-v1-s13",
+    "oauth-v1-s13"
+  ],
+  "source_lookups": 2,
+  "persisted_leaks": [
+    "dep-v1-s13",
+    "dep-v2-s13",
+    "oauth-v1-s13"
+  ],
+  "ok": true,
+  "_exit": 0,
+  "_seconds": 5.4,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "observations eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "before_rotation_leaks len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "export_wc eq 24",
+      "ok": true,
+      "actual": "24"
+    },
+    {
+      "check": "source_lookups eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "new_value_leaks len-eq 0",
+      "ok": false,
+      "actual": "[\"dep-v2-s13\"]"
+    },
+    {
+      "check": "previous_values_leaks len-eq 0",
+      "ok": false,
+      "actual": "[\"dep-v1-s13\", \"oauth-v1-s13\"]"
+    },
+    {
+      "check": "persisted_leaks len-eq 0",
+      "ok": false,
+      "actual": "[\"dep-v1-s13\", \"dep-v2-s13\", \"oauth-v1-s13\"]"
+    }
+  ]
+}
+
+[exit 1 after 6s]

@@ -1,0 +1,275 @@
+{
+  "summary": {
+    "opened": true,
+    "frames": 5,
+    "kinds": {
+      "sync": 1,
+      "durable:ConversationStateUpdateEvent": 2,
+      "durable:MessageEvent": 1,
+      "transient:ConversationStateUpdateEvent": 1
+    },
+    "stopped": "duration",
+    "close": null
+  },
+  "frames": [
+    {
+      "direction": "opened",
+      "at": "2026-11-20T08:38:49Z"
+    },
+    {
+      "direction": "received",
+      "at": "2026-11-20T08:38:49Z",
+      "kind": "sync",
+      "frame": {
+        "type": "sync",
+        "from_seq": 3,
+        "through_seq": 6
+      }
+    },
+    {
+      "direction": "received",
+      "at": "2026-11-20T08:38:49Z",
+      "kind": "durable:ConversationStateUpdateEvent",
+      "frame": {
+        "type": "durable",
+        "seq": 4,
+        "event": {
+          "id": "51aeb73a-c0a1-48a8-a106-8f72e5fe3b4d",
+          "timestamp": "2026-11-20T08:38:26.098288",
+          "source": "environment",
+          "parent_id": "efb1a7da-646c-43cb-bbd0-7cf69a8477f9",
+          "key": "last_user_message_id",
+          "value": "efb1a7da-646c-43cb-bbd0-7cf69a8477f9",
+          "kind": "ConversationStateUpdateEvent"
+        }
+      }
+    },
+    {
+      "direction": "received",
+      "at": "2026-11-20T08:38:49Z",
+      "kind": "durable:MessageEvent",
+      "frame": {
+        "type": "durable",
+        "seq": 5,
+        "event": {
+          "id": "d2e9ecc2-de67-4aad-8b69-cfc3e1942da1",
+          "timestamp": "2026-11-20T08:38:27.611852",
+          "source": "user",
+          "parent_id": "efb1a7da-646c-43cb-bbd0-7cf69a8477f9",
+          "llm_message": {
+            "role": "user",
+            "content": [
+              {
+                "cache_prompt": false,
+                "type": "text",
+                "text": "QA_6934_SMALL2"
+              }
+            ],
+            "thinking_blocks": []
+          },
+          "activated_skills": [],
+          "extended_content": [],
+          "kind": "MessageEvent"
+        }
+      }
+    },
+    {
+      "direction": "received",
+      "at": "2026-11-20T08:38:49Z",
+      "kind": "durable:ConversationStateUpdateEvent",
+      "frame": {
+        "type": "durable",
+        "seq": 6,
+        "event": {
+          "id": "6eece820-1955-4f0d-8add-d37d109db74f",
+          "timestamp": "2026-11-20T08:38:27.619108",
+          "source": "environment",
+          "parent_id": "d2e9ecc2-de67-4aad-8b69-cfc3e1942da1",
+          "key": "last_user_message_id",
+          "value": "d2e9ecc2-de67-4aad-8b69-cfc3e1942da1",
+          "kind": "ConversationStateUpdateEvent"
+        }
+      }
+    },
+    {
+      "direction": "received",
+      "at": "2026-11-20T08:38:49Z",
+      "kind": "transient:ConversationStateUpdateEvent",
+      "frame": {
+        "type": "transient",
+        "event": {
+          "id": "613e105e-cba8-4071-84ba-66dd8e752f4e",
+          "timestamp": "2026-11-20T08:38:49.517549",
+          "source": "environment",
+          "key": "full_state",
+          "value": {
+            "id": "0db4c282-2d1b-4f37-8505-9f6da68095a0",
+            "agent": {
+              "llm": {
+                "model": "gpt-5.6",
+                "auth_type": "api_key",
+                "openrouter_site_url": "https://docs.all-hands.dev/",
+                "openrouter_app_name": "OpenHands",
+                "num_retries": 5,
+                "retry_multiplier": 8.0,
+                "retry_min_wait": 8,
+                "retry_max_wait": 64,
+                "timeout": 300,
+                "stream_idle_timeout": 300.0,
+                "max_message_chars": 30000,
+                "api_mode": "auto",
+                "capability_overrides": {},
+                "stream": false,
+                "drop_params": true,
+                "disable_stop_word": false,
+                "caching_prompt": true,
+                "log_completions_to_file": false,
+                "log_completions": false,
+                "log_completions_folder": "logs/completions",
+                "native_tool_calling": true,
+                "reasoning_effort": "high",
+                "enable_encrypted_reasoning": true,
+                "prompt_cache_retention": "24h",
+                "extended_thinking_budget": 200000,
+                "usage_id": "default",
+                "litellm_extra_body": {},
+                "is_subscription": false
+              },
+              "tools": [],
+              "mcp_config": {},
+              "include_default_tools": [
+                "FinishTool"
+              ],
+              "agent_context": {
+                "skills": [],
+                "load_user_skills": false,
+                "load_public_skills": false,
+                "marketplace_path": "marketplaces/default.json",
+                "registered_marketplaces": [],
+                "load_project_skills": false,
+                "load_memory": false,
+                "disabled_skills": [],
+                "current_datetime": "2026-11-20T08:38:18.583922Z"
+              },
+              "system_prompt_filename": "system_prompt.j2",
+              "security_policy_filename": "security_policy.j2",
+              "system_prompt_kwargs": {
+                "llm_security_analyzer": true
+              },
+              "condenser": {
+                "llm": {
+                  "model": "gpt-5.6",
+                  "auth_type": "api_key",
+                  "openrouter_site_url": "https://docs.all-hands.dev/",
+                  "openrouter_app_name": "OpenHands",
+                  "num_retries": 5,
+                  "retry_multiplier": 8.0,
+                  "retry_min_wait": 8,
+                  "retry_max_wait": 64,
+                  "timeout": 300,
+                  "stream_idle_timeout": 300.0,
+                  "max_message_chars": 30000,
+                  "api_mode": "auto",
+                  "capability_overrides": {},
+                  "stream": false,
+                  "drop_params": true,
+                  "disable_stop_word": false,
+                  "caching_prompt": true,
+                  "log_completions_to_file": false,
+                  "log_completions": false,
+                  "log_completions_folder": "logs/completions",
+                  "native_tool_calling": true,
+                  "reasoning_effort": "high",
+                  "enable_encrypted_reasoning": true,
+                  "prompt_cache_retention": "24h",
+                  "extended_thinking_budget": 200000,
+                  "usage_id": "condenser",
+                  "litellm_extra_body": {},
+                  "is_subscription": false
+                },
+                "max_size": 240,
+                "keep_first": 2,
+                "minimum_progress": 0.1,
+                "hard_context_reset_max_retries": 5,
+                "hard_context_reset_context_scaling": 0.8,
+                "kind": "LLMSummarizingCondenser"
+              },
+              "tool_concurrency_limit": 1,
+              "kind": "Agent"
+            },
+            "workspace": {
+              "working_dir": "<scratch>/agent-server/20261120-083737-1be5-a1-6934/fixtures/workspaces/083818-546773",
+              "kind": "LocalWorkspace"
+            },
+            "persistence_dir": "<scratch>/agent-server/20261120-083737-1be5-a1-6934/server/workspace/conversations/0db4c2822d1b4f3785059f6da68095a0",
+            "max_iterations": 500,
+            "stuck_detection": true,
+            "execution_status": "idle",
+            "confirmation_policy": {
+              "kind": "NeverConfirm"
+            },
+            "activated_knowledge_skills": [],
+            "activated_path_rules": [],
+            "invoked_skills": [],
+            "ambient_plugin_skills": [],
+            "ambient_plugin_mcp_servers": [],
+            "runtime_mcp_servers": [],
+            "blocked_actions": {},
+            "blocked_messages": {},
+            "last_user_message_id": "d2e9ecc2-de67-4aad-8b69-cfc3e1942da1",
+            "leaf_event_id": "d2e9ecc2-de67-4aad-8b69-cfc3e1942da1",
+            "head_is_empty": false,
+            "stats": {
+              "usage_to_metrics": {
+                "default": {
+                  "model_name": "gpt-5.6",
+                  "accumulated_cost": 0.0,
+                  "max_budget_per_task": null,
+                  "accumulated_token_usage": {
+                    "model": "gpt-5.6",
+                    "prompt_tokens": 0,
+                    "completion_tokens": 0,
+                    "cache_read_tokens": 0,
+                    "cache_write_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "context_window": 0,
+                    "per_turn_token": 0,
+                    "response_id": ""
+                  }
+                },
+                "condenser": {
+                  "model_name": "gpt-5.6",
+                  "accumulated_cost": 0.0,
+                  "max_budget_per_task": null,
+                  "accumulated_token_usage": {
+                    "model": "gpt-5.6",
+                    "prompt_tokens": 0,
+                    "completion_tokens": 0,
+                    "cache_read_tokens": 0,
+                    "cache_write_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "context_window": 0,
+                    "per_turn_token": 0,
+                    "response_id": ""
+                  }
+                }
+              }
+            },
+            "secret_registry": {
+              "secret_sources": {}
+            },
+            "tags": {},
+            "agent_state": {}
+          },
+          "kind": "ConversationStateUpdateEvent"
+        }
+      }
+    },
+    {
+      "direction": "ended",
+      "at": "2026-11-20T08:38:52Z",
+      "stopped": "duration",
+      "close": null
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B3-S20",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 10,
+    "fail": 1,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S20-observability.md",
+      "bullet": 1,
+      "ids": [
+        "S20.enable-gate",
+        "S20.otel-backend",
+        "S20.root-span",
+        "S20.conversation-args",
+        "S20.step-and-tool-spans",
+        "S20.parallel-span-context"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-01.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 2,
+      "ids": [
+        "S20.env-conversation-defaults",
+        "S20.external-entry"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-02.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 3,
+      "ids": [
+        "S20.laminar-init",
+        "S20.enable-gate"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-03.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 4,
+      "ids": [
+        "S20.llm-span",
+        "S20.utility-operation-metadata"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-04.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 5,
+      "ids": [
+        "S20.llm-span-content"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-05.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 6,
+      "ids": [
+        "S20.delegate-trace"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-06.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 7,
+      "ids": [
+        "S20.lazy-import",
+        "S20.enable-gate",
+        "S20.external-entry"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-07.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 8,
+      "ids": [
+        "S20.automation-context",
+        "S20.automation-kwargs",
+        "S20.automation-headers",
+        "S20.get-env",
+        "S20.enable-gate"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-08.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 9,
+      "ids": [
+        "S20.logger-config",
+        "S20.logger-quiet-thirdparty",
+        "S20.rolling-log-view"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-09.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 10,
+      "ids": [
+        "S20.llm-retry-log"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-10.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 11,
+      "ids": [
+        "S20.root-span",
+        "S20.llm-span",
+        "S20.llm-span-content",
+        "S20.step-and-tool-spans"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S20/transcripts/S20-observability-11.log"
+    },
+    {
+      "family": "S20-observability.md",
+      "bullet": 12,
+      "ids": [
+        "S20.laminar-init",
+        "S20.root-span"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}

@@ -1,0 +1,350 @@
+{
+  "ok": true,
+  "file": "F13-bash.md",
+  "summary": {
+    "pass": 29,
+    "fail": 0,
+    "xfail": 1,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 100,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11015,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-00-preconditions.json"
+    },
+    {
+      "bullet": "Auth (`F13.auth`).",
+      "ids": [
+        "F13.auth"
+      ],
+      "line": 121,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 43364,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-01-auth-f13-auth.json"
+    },
+    {
+      "bullet": "Synchronous execute (`F13.execute-sync`).",
+      "ids": [
+        "F13.execute-sync"
+      ],
+      "line": 152,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13338,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-02-synchronous-execute-f13-execute-sync.json"
+    },
+    {
+      "bullet": "Global cwd (`F13.global-cwd`).",
+      "ids": [
+        "F13.global-cwd"
+      ],
+      "line": 172,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8336,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-03-global-cwd-f13-global-cwd.json"
+    },
+    {
+      "bullet": "Sanitized environment (`F13.env-sanitized`).",
+      "ids": [
+        "F13.env-sanitized"
+      ],
+      "line": 184,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 48989,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-04-sanitized-environment-f13-env-sanitized.json"
+    },
+    {
+      "bullet": "Other credential variables (`F13.env-config-credentials`).",
+      "ids": [
+        "F13.env-config-credentials"
+      ],
+      "line": 200,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 51448,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-05-other-credential-variables-f13-env-confi.json"
+    },
+    {
+      "bullet": "Asynchronous start (`F13.start-async`).",
+      "ids": [
+        "F13.start-async"
+      ],
+      "line": 227,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8943,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-06-asynchronous-start-f13-start-async.json"
+    },
+    {
+      "bullet": "Live and replayed socket frames (`F13.ws-live`).",
+      "ids": [
+        "F13.ws-live"
+      ],
+      "line": 244,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15292,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-07-live-and-replayed-socket-frames-f13-ws-l.json"
+    },
+    {
+      "bullet": "Commands over the socket (`F13.ws-command`).",
+      "ids": [
+        "F13.ws-command"
+      ],
+      "line": 267,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5771,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-08-commands-over-the-socket-f13-ws-command.json"
+    },
+    {
+      "bullet": "Deprecated replay flag (`F13.ws-resend-all`).",
+      "ids": [
+        "F13.ws-resend-all"
+      ],
+      "line": 283,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8178,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-09-deprecated-replay-flag-f13-ws-resend-all.json"
+    },
+    {
+      "bullet": "Subscriber cap (`F13.ws-subscriber-cap`).",
+      "ids": [
+        "F13.ws-subscriber-cap"
+      ],
+      "line": 299,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7751,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-10-subscriber-cap-f13-ws-subscriber-cap.json"
+    },
+    {
+      "bullet": "Single and batch reads (`F13.get-events`).",
+      "ids": [
+        "F13.get-events"
+      ],
+      "line": 366,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11467,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-11-single-and-batch-reads-f13-get-events.json"
+    },
+    {
+      "bullet": "Search (`F13.search`).",
+      "ids": [
+        "F13.search"
+      ],
+      "line": 386,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 28459,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-12-search-f13-search.json"
+    },
+    {
+      "bullet": "Offset timestamps (`F13.timestamp-offset`).",
+      "ids": [
+        "F13.timestamp-offset"
+      ],
+      "line": 423,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5563,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-13-offset-timestamps-f13-timestamp-offset.json"
+    },
+    {
+      "bullet": "Output chunks (`F13.output-chunks`).",
+      "ids": [
+        "F13.output-chunks"
+      ],
+      "line": 440,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 32077,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-14-output-chunks-f13-output-chunks.json"
+    },
+    {
+      "bullet": "Order filter and paging (`F13.order-gt-paging`).",
+      "ids": [
+        "F13.order-gt-paging"
+      ],
+      "line": 467,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3964,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-15-order-filter-and-paging-f13-order-gt-pag.json"
+    },
+    {
+      "bullet": "Large output through execute (`F13.execute-large-output`).",
+      "ids": [
+        "F13.execute-large-output"
+      ],
+      "line": 489,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2306,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-16-large-output-through-execute-f13-execute.json"
+    },
+    {
+      "bullet": "Timeout (`F13.timeout`).",
+      "ids": [
+        "F13.timeout"
+      ],
+      "line": 504,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5126,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-17-timeout-f13-timeout.json"
+    },
+    {
+      "bullet": "Stop one command (`F13.stop`).",
+      "ids": [
+        "F13.stop"
+      ],
+      "line": 524,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11798,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-18-stop-one-command-f13-stop.json"
+    },
+    {
+      "bullet": "Stop is idempotent (`F13.stop-idempotent`).",
+      "ids": [
+        "F13.stop-idempotent"
+      ],
+      "line": 550,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9277,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-19-stop-is-idempotent-f13-stop-idempotent.json"
+    },
+    {
+      "bullet": "Scoped cwd (`F13.scoped-cwd`).",
+      "ids": [
+        "F13.scoped-cwd"
+      ],
+      "line": 567,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 32046,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-20-scoped-cwd-f13-scoped-cwd.json"
+    },
+    {
+      "bullet": "Scoped routes (`F13.scoped-routes`).",
+      "ids": [
+        "F13.scoped-routes"
+      ],
+      "line": 601,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10654,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-21-scoped-routes-f13-scoped-routes.json"
+    },
+    {
+      "bullet": "Scope isolation (`F13.scoped-isolation`).",
+      "ids": [
+        "F13.scoped-isolation"
+      ],
+      "line": 632,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 23031,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-22-scope-isolation-f13-scoped-isolation.json"
+    },
+    {
+      "bullet": "Unknown conversation (`F13.scoped-unknown`).",
+      "ids": [
+        "F13.scoped-unknown"
+      ],
+      "line": 662,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13472,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-23-unknown-conversation-f13-scoped-unknown.json"
+    },
+    {
+      "bullet": "Restart (`F13.persist-restart`).",
+      "ids": [
+        "F13.persist-restart"
+      ],
+      "line": 678,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 37540,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-24-restart-f13-persist-restart.json"
+    },
+    {
+      "bullet": "Clear (`F13.clear`).",
+      "ids": [
+        "F13.clear"
+      ],
+      "line": 693,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16314,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-25-clear-f13-clear.json"
+    },
+    {
+      "bullet": "Retention (`F13.retention`).",
+      "ids": [
+        "F13.retention"
+      ],
+      "line": 719,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 57964,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-26-retention-f13-retention.json"
+    },
+    {
+      "bullet": "Rolling retention (`F13.retention-rolling`).",
+      "ids": [
+        "F13.retention-rolling"
+      ],
+      "line": 737,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 111395,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-27-rolling-retention-f13-retention-rolling.json"
+    },
+    {
+      "bullet": "Malformed conversation id (`F13.scoped-bad-id`).",
+      "ids": [
+        "F13.scoped-bad-id"
+      ],
+      "line": 766,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3167,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-28-malformed-conversation-id-f13-scoped-bad.json"
+    },
+    {
+      "bullet": "Idle eviction kills a running command (`F13.scoped-idle-eviction`), known bug.",
+      "ids": [
+        "F13.scoped-idle-eviction"
+      ],
+      "line": 780,
+      "status": "xfail",
+      "exit_code": 1,
+      "elapsed_ms": 86408,
+      "transcript": "<scratch>/agent-server/20261120-082954-3d21-map-f13/evidence/map-run/F13-bash-29-idle-eviction-kills-a-running-command-f1.json",
+      "failed_line": 19,
+      "failed_command": "control-agent-server assert --value \"$(pgrep -fc \"$EV_MARK\")\" --check . ge 1",
+      "stdout_tail": "4838\n{\n  \"ok\": true,\n  \"pattern\": \"owner_lease.json\",\n  \"count\": 1,\n  \"files\": [\n    {\n      \"path\": \"server/workspace/conversations/c4e53e0120df4a71af59d71cc8169173/owner_lease.json\",\n      \"bytes\": 177,\n      \"mode\": \"0o644\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"log\": \"<scratch>/agent-server/20261120-084129-55d4-f13-evict/private/server.log\",\n  \"lines\": [],\n  \"total_matching\": 0\n}\n{\n  \"ok\": true,\n  \"log\": \"<scratch>/agent-server/20261120-084129-55d4-f13-evict/private/server.log\",\n  \"lines\": [\n    \"[11/20/26 08:42:46] INFO     Evicted idle           conversation_service.py:2468\",\n    \"[11/20/26 08:42:46] INFO     Evicted idle           conversation_service.py:2468\"\n  ],\n  \"total_matching\": 2\n}\n{\n  \"ok\": false,\n  \"value\": 0,\n  \"checks\": [\n    {\n      \"check\": \". ge 1\",\n      \"ok\": false,\n      \"actual\": \"0\"\n    }\n  ],\n  \"hint\": \"failed check: . ge 1\"\n}\n",
+      "stderr_tail": "",
+      "bug_predicate": "value eq 0"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-082954-3d21-map-f13",
+  "launch_flags": []
+}

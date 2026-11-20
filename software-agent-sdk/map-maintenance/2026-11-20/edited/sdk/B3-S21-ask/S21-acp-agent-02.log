@@ -1,0 +1,228 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S21/acp_conversation --arg turn \
+  --check agent_ask_before_start eq RuntimeError --check ask_answer eq "Fork answer: Which files did you list?" \
+  --check forks eq 1 --check fork_parent_is_main eq true --check main_prompts_after_ask eq 2 \
+  --check ask_prompt_tokens_delta eq 100 \
+  --check ask_cost_delta eq 0.05 --check ask_warnings len-eq 0 --check ask_seconds lt 1.5
+{
+  "ok": true,
+  "mode": "turn",
+  "before_start": {
+    "current_model_id": null,
+    "supports_switch": false,
+    "tools": 0,
+    "llm_model": "m2"
+  },
+  "agent_ask_before_start": "RuntimeError",
+  "cost_after_turns": 0.5,
+  "prompt_tokens_after_turns": 200,
+  "ask_seconds": 0.0,
+  "ask_cost_delta": 0.05,
+  "ask_prompt_tokens_delta": 100,
+  "ask_warnings": [],
+  "fork_usage_updates_sent": 1,
+  "after_first": {
+    "status": "finished",
+    "error": null,
+    "current_model_id": "m2",
+    "available_models": [
+      "m1",
+      "m2"
+    ],
+    "supports_switch": false,
+    "cost": 0.25,
+    "tokens_streamed": "Done: listed 2 files."
+  },
+  "status": "finished",
+  "second_error": null,
+  "finish_messages": [
+    "Done: listed 2 files.",
+    "Done: listed 2 files. <secret-hidden>"
+  ],
+  "finish_reasoning": [
+    null,
+    null
+  ],
+  "agent_reasoning": [
+    "Thinking about turn 1.",
+    "Thinking about turn 2. <secret-hidden>"
+  ],
+  "tool_events": [
+    "t1-list:pending",
+    "t1-list:completed",
+    "t1-read:completed",
+    "t2-list:pending",
+    "t2-list:completed",
+    "t2-read:completed"
+  ],
+  "tool_event_errors": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "tool_titles": [
+    "List files",
+    "Read README"
+  ],
+  "tool_list_events_turn1": 2,
+  "tool_list_final_output": "file_a\nfile_b",
+  "tool_before_finish": true,
+  "permission_answers": [
+    {
+      "outcome": {
+        "optionId": "allow_once",
+        "outcome": "selected"
+      }
+    },
+    {
+      "outcome": {
+        "optionId": "allow_once",
+        "outcome": "selected"
+      }
+    }
+  ],
+  "system_prompt_events": 1,
+  "system_prompt_names_secret": true,
+  "system_prompt_has_skill": true,
+  "prompt_count": 2,
+  "prompt1_types": [
+    "text",
+    "image",
+    "text"
+  ],
+  "prompt1_image_mime": "image/png",
+  "prompt1_has_skill": true,
+  "prompt1_names_secret": true,
+  "prompt1_leaks_secret_value": false,
+  "prompt2_blocks": 1,
+  "prompt2_has_skill": false,
+  "env_seen": {
+    "FAKE_TOKEN": "tok-s3cret-4417"
+  },
+  "session_new": [
+    {
+      "kind": "session_new",
+      "pid": 9240,
+      "t": 1795164226.8602593,
+      "cwd": "<scratch>/sdk/B3-S21-ask/work/S21-acp-agent-02/block1/runs/20261120-084337-81649a/workspace",
+      "mcp_servers": [
+        {
+          "name": "files",
+          "command": "uvx",
+          "args": [
+            "mcp-server-files"
+          ],
+          "env": [
+            {
+              "name": "ROOT",
+              "value": "/tmp"
+            }
+          ]
+        },
+        {
+          "name": "search",
+          "url": "https://mcp.example.test/mcp",
+          "headers": [
+            {
+              "name": "X-Team",
+              "value": "verify"
+            }
+          ],
+          "type": "http"
+        }
+      ],
+      "meta": null
+    }
+  ],
+  "config_calls": [
+    "model=m2",
+    "model=m1",
+    "model=no-such-model"
+  ],
+  "set_mode_calls": 0,
+  "forks": 1,
+  "fork_parent_is_main": true,
+  "main_prompts_after_ask": 2,
+  "ask_answer": "Fork answer: Which files did you list?",
+  "cost": 0.55,
+  "cost_after_ask": 0.55,
+  "combined_cost": 0.55,
+  "prompt_tokens": 300,
+  "completion_tokens": 150,
+  "cache_read_tokens": 30,
+  "context_window": 200000,
+  "latencies": 3,
+  "switched_model": "m1",
+  "switched_current": "m1",
+  "switched_llm_model": "m1",
+  "bad_switch": "ValueError: ACP server rejected set_config_option(model)(model='no-such-model'): Unknown model no-such-model",
+  "secret_in_events": false,
+  "secret_masked_in_finish": true,
+  "secret_in_tokens": false,
+  "alive_before_close": true,
+  "alive_after_close": false,
+  "second_close": "ok",
+  "persisted_session_id": true,
+  "deferred": {
+    "acp_model": "m2",
+    "error": null,
+    "current_model_id": "m2",
+    "config_calls": [
+      "model=m2"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 13.2,
+  "checks": [
+    {
+      "check": "agent_ask_before_start eq RuntimeError",
+      "ok": true,
+      "actual": "RuntimeError"
+    },
+    {
+      "check": "ask_answer eq Fork answer: Which files did you list?",
+      "ok": true,
+      "actual": "Fork answer: Which files did you list?"
+    },
+    {
+      "check": "forks eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "fork_parent_is_main eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "main_prompts_after_ask eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "ask_prompt_tokens_delta eq 100",
+      "ok": true,
+      "actual": "100"
+    },
+    {
+      "check": "ask_cost_delta eq 0.05",
+      "ok": true,
+      "actual": "0.05"
+    },
+    {
+      "check": "ask_warnings len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "ask_seconds lt 1.5",
+      "ok": true,
+      "actual": "0.0"
+    }
+  ]
+}
+
+[exit 0 after 14s]

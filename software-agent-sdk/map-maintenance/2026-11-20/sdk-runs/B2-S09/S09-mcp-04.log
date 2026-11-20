@@ -1,0 +1,57 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S09/conversation --arg shadow \
+  --check error missing --check status eq finished \
+  --check tools contains terminal --check tools contains ext_terminal --check tools contains sibling_check \
+  --check texts.0 contains builtin-terminal --check texts.1 contains "sibling ok"
+{
+  "ok": true,
+  "mode": "shadow",
+  "error": "ValueError: Duplicate tool names found: {'terminal'}",
+  "status": "idle",
+  "tools": [
+    "finish",
+    "terminal"
+  ],
+  "texts": [],
+  "_exit": 0,
+  "_seconds": 43.9,
+  "checks": [
+    {
+      "check": "error missing",
+      "ok": false,
+      "actual": "ValueError: Duplicate tool names found: {'terminal'}"
+    },
+    {
+      "check": "status eq finished",
+      "ok": false,
+      "actual": "idle"
+    },
+    {
+      "check": "tools contains terminal",
+      "ok": true,
+      "actual": "[\"finish\", \"terminal\"]"
+    },
+    {
+      "check": "tools contains ext_terminal",
+      "ok": false,
+      "actual": "[\"finish\", \"terminal\"]"
+    },
+    {
+      "check": "tools contains sibling_check",
+      "ok": false,
+      "actual": "[\"finish\", \"terminal\"]"
+    },
+    {
+      "check": "texts.0 contains builtin-terminal",
+      "ok": false,
+      "actual": "null"
+    },
+    {
+      "check": "texts.1 contains sibling ok",
+      "ok": false,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 1 after 45s]

@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "file": "F01-server-status.md",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 51,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17,
+      "transcript": "<scratch>/agent-server/20261120-083920-2833-map-f01/evidence/map-run/F01-server-status-00-preconditions.json"
+    },
+    {
+      "bullet": "Server info (`F01.server-info`).",
+      "ids": [
+        "F01.server-info"
+      ],
+      "line": 86,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1311,
+      "transcript": "<scratch>/agent-server/20261120-083920-2833-map-f01/evidence/map-run/F01-server-status-01-server-info-f01-server-info.json"
+    },
+    {
+      "bullet": "Root alias (`F01.root-info`).",
+      "ids": [
+        "F01.root-info"
+      ],
+      "line": 101,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2468,
+      "transcript": "<scratch>/agent-server/20261120-083920-2833-map-f01/evidence/map-run/F01-server-status-02-root-alias-f01-root-info.json"
+    },
+    {
+      "bullet": "Static files (`F01.static-files`).",
+      "ids": [
+        "F01.static-files"
+      ],
+      "line": 148,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 82925,
+      "transcript": "<scratch>/agent-server/20261120-083920-2833-map-f01/evidence/map-run/F01-server-status-03-static-files-f01-static-files.json"
+    }
+  ],
+  "run": "<scratch>/agent-server/20261120-083920-2833-map-f01",
+  "launch_flags": []
+}

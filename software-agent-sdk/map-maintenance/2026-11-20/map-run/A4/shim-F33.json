@@ -1,0 +1,477 @@
+{
+  "ok": true,
+  "file": "F33-sdk-remote-client.md",
+  "summary": {
+    "pass": 41,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 1,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 120,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5486,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-00-preconditions.json"
+    },
+    {
+      "bullet": "Commands, server info and liveness (`F33.workspace-exec`).",
+      "ids": [
+        "F33.workspace-exec"
+      ],
+      "line": 286,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 9694,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-01-commands-server-info-and-liveness-f33-wo.json"
+    },
+    {
+      "bullet": "Wrong session key (`F33.workspace-bad-key`).",
+      "ids": [
+        "F33.workspace-bad-key"
+      ],
+      "line": 319,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7943,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-02-wrong-session-key-f33-workspace-bad-key.json"
+    },
+    {
+      "bullet": "Background command (`F33.workspace-background`).",
+      "ids": [
+        "F33.workspace-background"
+      ],
+      "line": 349,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7000,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-03-background-command-f33-workspace-backgro.json"
+    },
+    {
+      "bullet": "File round trip (`F33.workspace-files`).",
+      "ids": [
+        "F33.workspace-files"
+      ],
+      "line": 377,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7923,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-04-file-round-trip-f33-workspace-files.json"
+    },
+    {
+      "bullet": "Git changes and diff (`F33.workspace-git`).",
+      "ids": [
+        "F33.workspace-git"
+      ],
+      "line": 412,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7974,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-05-git-changes-and-diff-f33-workspace-git.json"
+    },
+    {
+      "bullet": "LLM profiles, secrets and MCP from the server (`F33.workspace-settings`).",
+      "ids": [
+        "F33.workspace-settings"
+      ],
+      "line": 435,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8382,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-06-llm-profiles-secrets-and-mcp-from-the-se.json"
+    },
+    {
+      "bullet": "Async workspace (`F33.async-workspace`).",
+      "ids": [
+        "F33.async-workspace"
+      ],
+      "line": 464,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10967,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-07-async-workspace-f33-async-workspace.json"
+    },
+    {
+      "bullet": "Create a conversation without running it (`F33.conversation-create`).",
+      "ids": [
+        "F33.conversation-create"
+      ],
+      "line": 517,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13281,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-08-create-a-conversation-without-running-it.json"
+    },
+    {
+      "bullet": "Create from a request, twice (`F33.conversation-create-request`).",
+      "ids": [
+        "F33.conversation-create-request"
+      ],
+      "line": 541,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11171,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-09-create-from-a-request-twice-f33-conversa.json"
+    },
+    {
+      "bullet": "Create from a saved agent profile (`F33.conversation-create-profile`).",
+      "ids": [
+        "F33.conversation-create-profile"
+      ],
+      "line": 588,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22625,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-10-create-from-a-saved-agent-profile-f33-co.json"
+    },
+    {
+      "bullet": "Conversation-scoped workspace (`F33.workspace-runtime-scope`).",
+      "ids": [
+        "F33.workspace-runtime-scope"
+      ],
+      "line": 636,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7698,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-11-conversation-scoped-workspace-f33-worksp.json"
+    },
+    {
+      "bullet": "Runtime key and release (`F33.workspace-runtime-lifecycle`).",
+      "ids": [
+        "F33.workspace-runtime-lifecycle"
+      ],
+      "status": "blocked",
+      "missing": [
+        "docker"
+      ],
+      "hint": "this machine lacks docker (`control-agent-server capabilities`)"
+    },
+    {
+      "bullet": "Send and run to completion (`F33.conversation-run`, `F33.conversation-callbacks`, `F33.conversation-stats`).",
+      "ids": [
+        "F33.conversation-run",
+        "F33.conversation-callbacks",
+        "F33.conversation-stats"
+      ],
+      "line": 761,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17236,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-13-send-and-run-to-completion-f33-conversat.json"
+    },
+    {
+      "bullet": "A Stop hook that refuses the first stop (`F33.conversation-stop-hook`).",
+      "ids": [
+        "F33.conversation-stop-hook"
+      ],
+      "line": 798,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 18035,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-14-a-stop-hook-that-refuses-the-first-stop-.json"
+    },
+    {
+      "bullet": "Client-defined tool (`F33.client-tools`).",
+      "ids": [
+        "F33.client-tools"
+      ],
+      "line": 851,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 32781,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-15-client-defined-tool-f33-client-tools.json"
+    },
+    {
+      "bullet": "Streamed tokens (`F33.conversation-streaming`).",
+      "ids": [
+        "F33.conversation-streaming"
+      ],
+      "line": 914,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13679,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-16-streamed-tokens-f33-conversation-streami.json"
+    },
+    {
+      "bullet": "Token callbacks on a remote conversation (`F33.conversation-token-callbacks`).",
+      "ids": [
+        "F33.conversation-token-callbacks"
+      ],
+      "line": 945,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 355,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-17-token-callbacks-on-a-remote-conversation.json"
+    },
+    {
+      "bullet": "Deltas kept out of `state.events` (`F33.conversation-streaming-state`).",
+      "ids": [
+        "F33.conversation-streaming-state"
+      ],
+      "line": 959,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 791,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-18-deltas-kept-out-of-state-events-f33-conv.json"
+    },
+    {
+      "bullet": "Completion logs on the client (`F33.completion-logs`).",
+      "ids": [
+        "F33.completion-logs"
+      ],
+      "line": 971,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14161,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-19-completion-logs-on-the-client-f33-comple.json"
+    },
+    {
+      "bullet": "Reattach from a second program (`F33.conversation-attach`).",
+      "ids": [
+        "F33.conversation-attach"
+      ],
+      "line": 1012,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24480,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-20-reattach-from-a-second-program-f33-conve.json"
+    },
+    {
+      "bullet": "Attach to a long history (`F33.conversation-attach-large`).",
+      "ids": [
+        "F33.conversation-attach-large"
+      ],
+      "line": 1056,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 31304,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-21-attach-to-a-long-history-f33-conversatio.json"
+    },
+    {
+      "bullet": "Read the state twice (`F33.conversation-state-reread`).",
+      "ids": [
+        "F33.conversation-state-reread"
+      ],
+      "line": 1124,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 27123,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-22-read-the-state-twice-f33-conversation-st.json"
+    },
+    {
+      "bullet": "Ask, generate and set a title (`F33.conversation-ask-title`).",
+      "ids": [
+        "F33.conversation-ask-title"
+      ],
+      "line": 1164,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16598,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-23-ask-generate-and-set-a-title-f33-convers.json"
+    },
+    {
+      "bullet": "Fork (`F33.conversation-fork`).",
+      "ids": [
+        "F33.conversation-fork"
+      ],
+      "line": 1202,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 18854,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-24-fork-f33-conversation-fork.json"
+    },
+    {
+      "bullet": "Fork from an event, then move HEAD (`F33.conversation-fork-branch`).",
+      "ids": [
+        "F33.conversation-fork-branch"
+      ],
+      "line": 1237,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 18204,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-25-fork-from-an-event-then-move-head-f33-co.json"
+    },
+    {
+      "bullet": "Plugin source with inline credentials (`F33.conversation-plugins-tag`).",
+      "ids": [
+        "F33.conversation-plugins-tag"
+      ],
+      "line": 1286,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12862,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-26-plugin-source-with-inline-credentials-f3.json"
+    },
+    {
+      "bullet": "Confirm or reject (`F33.conversation-confirmation`).",
+      "ids": [
+        "F33.conversation-confirmation"
+      ],
+      "line": 1321,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 28078,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-27-confirm-or-reject-f33-conversation-confi.json"
+    },
+    {
+      "bullet": "Pause a blocking run (`F33.conversation-pause`).",
+      "ids": [
+        "F33.conversation-pause"
+      ],
+      "line": 1348,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 26460,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-28-pause-a-blocking-run-f33-conversation-pa.json"
+    },
+    {
+      "bullet": "Interrupt a blocking run (`F33.conversation-interrupt`).",
+      "ids": [
+        "F33.conversation-interrupt"
+      ],
+      "line": 1383,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 13769,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-29-interrupt-a-blocking-run-f33-conversatio.json"
+    },
+    {
+      "bullet": "Time out, then wait again (`F33.conversation-run-timeout`).",
+      "ids": [
+        "F33.conversation-run-timeout"
+      ],
+      "line": 1439,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 33173,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-30-time-out-then-wait-again-f33-conversatio.json"
+    },
+    {
+      "bullet": "Join a run during a long tool call (`F33.conversation-run-join-long-tool`).",
+      "ids": [
+        "F33.conversation-run-join-long-tool"
+      ],
+      "line": 1474,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 58539,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-31-join-a-run-during-a-long-tool-call-f33-c.json"
+    },
+    {
+      "bullet": "A stuck agent (`F33.conversation-stuck`).",
+      "ids": [
+        "F33.conversation-stuck"
+      ],
+      "line": 1526,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7591,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-32-a-stuck-agent-f33-conversation-stuck.json"
+    },
+    {
+      "bullet": "Secrets for the agent (`F33.conversation-secrets`).",
+      "ids": [
+        "F33.conversation-secrets"
+      ],
+      "line": 1562,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 18331,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-33-secrets-for-the-agent-f33-conversation-s.json"
+    },
+    {
+      "bullet": "Provider error surfaces (`F33.conversation-run-error`).",
+      "ids": [
+        "F33.conversation-run-error"
+      ],
+      "line": 1603,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12334,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-34-provider-error-surfaces-f33-conversation.json"
+    },
+    {
+      "bullet": "No events socket (`F33.ws-unavailable`).",
+      "ids": [
+        "F33.ws-unavailable"
+      ],
+      "line": 1634,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 46087,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-35-no-events-socket-f33-ws-unavailable.json"
+    },
+    {
+      "bullet": "A live conversation across a restart (`F33.conversation-reconnect`).",
+      "ids": [
+        "F33.conversation-reconnect"
+      ],
+      "line": 1703,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 28792,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-36-a-live-conversation-across-a-restart-f33.json"
+    },
+    {
+      "bullet": "Callbacks after a reconnect (`F33.conversation-reconnect-callbacks`).",
+      "ids": [
+        "F33.conversation-reconnect-callbacks"
+      ],
+      "line": 1747,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 14832,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-37-callbacks-after-a-reconnect-f33-conversa.json"
+    },
+    {
+      "bullet": "Reattach after a restart and continue (`F33.conversation-restart`).",
+      "ids": [
+        "F33.conversation-restart"
+      ],
+      "line": 1815,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 26335,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-38-reattach-after-a-restart-and-continue-f3.json"
+    },
+    {
+      "bullet": "A custom tool module (`F33.custom-tool-module`).",
+      "ids": [
+        "F33.custom-tool-module"
+      ],
+      "line": 1847,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 40061,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-39-a-custom-tool-module-f33-custom-tool-mod.json"
+    },
+    {
+      "bullet": "An agent tool the server cannot import (`F33.custom-tool-module-unimportable`).",
+      "ids": [
+        "F33.custom-tool-module-unimportable"
+      ],
+      "line": 1975,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6857,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-40-an-agent-tool-the-server-cannot-import-f.json"
+    },
+    {
+      "bullet": "Close keeps or deletes (`F33.conversation-close`).",
+      "ids": [
+        "F33.conversation-close"
+      ],
+      "line": 2013,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 16768,
+      "transcript": "<scratch>/agent-server/20261120-085432-364b-shim-f33/evidence/map-run/F33-sdk-remote-client-41-close-keeps-or-deletes-f33-conversation-.json"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg structured-output \
+  --check status eq finished --check facts_type eq ProjectFacts --check facts len-eq 3 \
+  --check rationale_type eq CommandRationale --check rationale_purpose eq "see the files" \
+  --check finish_schema_fields contains facts --check finish_schema_fields contains message \
+  --check rejected.reserved_name eq ValueError --check rejected.field_collision eq ValueError
+{
+  "ok": true,
+  "mode": "structured-output",
+  "status": "finished",
+  "facts_type": "ProjectFacts",
+  "facts": [
+    "one",
+    "two",
+    "three"
+  ],
+  "rationale_type": "CommandRationale",
+  "rationale_purpose": "see the files",
+  "finish_schema_fields": [
+    "description",
+    "facts",
+    "message",
+    "summary"
+  ],
+  "rejected": {
+    "reserved_name": "ValueError",
+    "field_collision": "ValueError"
+  },
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "facts_type eq ProjectFacts",
+      "ok": true,
+      "actual": "ProjectFacts"
+    },
+    {
+      "check": "facts len-eq 3",
+      "ok": true,
+      "actual": "[\"one\", \"two\", \"three\"]"
+    },
+    {
+      "check": "rationale_type eq CommandRationale",
+      "ok": true,
+      "actual": "CommandRationale"
+    },
+    {
+      "check": "rationale_purpose eq see the files",
+      "ok": true,
+      "actual": "see the files"
+    },
+    {
+      "check": "finish_schema_fields contains facts",
+      "ok": true,
+      "actual": "[\"description\", \"facts\", \"message\", \"summary\"]"
+    },
+    {
+      "check": "finish_schema_fields contains message",
+      "ok": true,
+      "actual": "[\"description\", \"facts\", \"message\", \"summary\"]"
+    },
+    {
+      "check": "rejected.reserved_name eq ValueError",
+      "ok": true,
+      "actual": "ValueError"
+    },
+    {
+      "check": "rejected.field_collision eq ValueError",
+      "ok": true,
+      "actual": "ValueError"
+    }
+  ]
+}
+
+[exit 0 after 6s]

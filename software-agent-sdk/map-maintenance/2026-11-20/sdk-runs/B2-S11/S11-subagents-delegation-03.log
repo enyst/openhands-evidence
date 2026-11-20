@@ -1,0 +1,154 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S11/task_lifecycle \
+  --check sub_cache_key_is_parent.0 eq true --check sub_cache_key_is_parent.1 eq true \
+  --check sub_cache_key_is_parent.2 eq true --check sub_session_differs eq true
+{
+  "ok": true,
+  "execution_status": "finished",
+  "observations": [
+    {
+      "task_id": "task_00000001",
+      "subagent": "echoer",
+      "status": "completed",
+      "is_error": false,
+      "text": "said hello"
+    },
+    {
+      "task_id": "task_00000001",
+      "subagent": "echoer",
+      "status": "completed",
+      "is_error": false,
+      "text": "you asked me to say hello"
+    },
+    {
+      "task_id": "unknown",
+      "subagent": "nobody",
+      "status": "error",
+      "is_error": true,
+      "text": "Failed to execute task: Unknown agent 'nobody'. Available types: crasher, echoer, looper. Use register_agent() to add custom agent types."
+    },
+    {
+      "task_id": "unknown",
+      "subagent": "echoer",
+      "status": "error",
+      "is_error": true,
+      "text": "Failed to execute task: Task 'task_0000ffff' not found. Available tasks: task_00000001"
+    },
+    {
+      "task_id": "task_00000002",
+      "subagent": "looper",
+      "status": "error",
+      "is_error": true,
+      "text": "Agent reached maximum iterations limit (1)."
+    },
+    {
+      "task_id": "task_00000003",
+      "subagent": "crasher",
+      "status": "error",
+      "is_error": true,
+      "text": "Conversation run failed for id=8943b49d-7c35-4a8c-a67b-5442db730b46: bad key\n\nConversation logs are stored at: <scratch>/sdk/B2-S11/work/S11-subagents-delegation-03/block1/runs/20261120-082755-a4a23f/conversations/d0d5146df34c4469b925664f874354df/subagents/8943b49d7c354a8ca67b5442db730b46\n\nTo help debug this issue, please file a bug report at:\n  https://github.com/OpenHands/software-agent-sdk/issues/new\nand attach the conversation logs from the directory above."
+    }
+  ],
+  "first_task": {
+    "task_id": "task_00000001",
+    "subagent": "echoer",
+    "status": "completed",
+    "is_error": false,
+    "text": "said hello"
+  },
+  "hello_written": true,
+  "resume_task": {
+    "task_id": "task_00000001",
+    "subagent": "echoer",
+    "status": "completed",
+    "is_error": false,
+    "text": "you asked me to say hello"
+  },
+  "resume_saw_first_prompt": true,
+  "unknown_type": {
+    "task_id": "unknown",
+    "subagent": "nobody",
+    "status": "error",
+    "is_error": true,
+    "text": "Failed to execute task: Unknown agent 'nobody'. Available types: crasher, echoer, looper. Use register_agent() to add custom agent types."
+  },
+  "unknown_resume": {
+    "task_id": "unknown",
+    "subagent": "echoer",
+    "status": "error",
+    "is_error": true,
+    "text": "Failed to execute task: Task 'task_0000ffff' not found. Available tasks: task_00000001"
+  },
+  "looper": {
+    "task_id": "task_00000002",
+    "subagent": "looper",
+    "status": "error",
+    "is_error": true,
+    "text": "Agent reached maximum iterations limit (1)."
+  },
+  "looper_llm_calls": 1,
+  "crasher": {
+    "task_id": "task_00000003",
+    "subagent": "crasher",
+    "status": "error",
+    "is_error": true,
+    "text": "Conversation run failed for id=8943b49d-7c35-4a8c-a67b-5442db730b46: bad key\n\nConversation logs are stored at: <scratch>/sdk/B2-S11/work/S11-subagents-delegation-03/block1/runs/20261120-082755-a4a23f/conversations/d0d5146df34c4469b925664f874354df/subagents/8943b49d7c354a8ca67b5442db730b46\n\nTo help debug this issue, please file a bug report at:\n  https://github.com/OpenHands/software-agent-sdk/issues/new\nand attach the conversation logs from the directory above."
+  },
+  "plodder": {
+    "task_id": "task_00000001",
+    "subagent": "plodder",
+    "status": "error",
+    "is_error": true,
+    "text": "Agent reached maximum iterations limit (2)."
+  },
+  "plodder_llm_calls": 2,
+  "usage_ids": [
+    "task:task_00000001",
+    "task:task_00000002",
+    "task:task_00000003"
+  ],
+  "subagent_dirs": 3,
+  "sub_hook_lines": [
+    "sub-hook"
+  ],
+  "sub_cache_key_is_parent": [
+    true,
+    true,
+    false
+  ],
+  "sub_session_differs": true,
+  "parent_calls": 7,
+  "task_ids": [
+    "task_00000001",
+    "task_00000002",
+    "task_00000003",
+    "unknown"
+  ],
+  "all_calls": 16,
+  "_exit": 0,
+  "_seconds": 44.5,
+  "checks": [
+    {
+      "check": "sub_cache_key_is_parent.0 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "sub_cache_key_is_parent.1 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "sub_cache_key_is_parent.2 eq true",
+      "ok": false,
+      "actual": "false"
+    },
+    {
+      "check": "sub_session_differs eq true",
+      "ok": true,
+      "actual": "true"
+    }
+  ]
+}
+
+[exit 1 after 46s]

@@ -1,0 +1,176 @@
+{
+  "ok": true,
+  "run": "<scratch>/sdk/B3-S19",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 10,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S19-settings.md",
+      "bullet": 1,
+      "ids": [
+        "S19.settings-create-agent",
+        "S19.settings-roundtrip",
+        "S19.settings-tools",
+        "S19.retired-switches",
+        "S19.condenser-settings",
+        "S19.verification-settings",
+        "S19.mcp-config-secrets",
+        "S19.tool-concurrency-persona"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-01.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 2,
+      "ids": [
+        "S19.validate-dispatch",
+        "S19.schema-migrations",
+        "S19.conversation-settings",
+        "S19.apply-diff",
+        "S19.schema-export",
+        "S19.subscription-llm-settings",
+        "S19.acp-settings"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-02.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 3,
+      "ids": [
+        "S19.subscription-llm-settings"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 4,
+      "ids": [
+        "S19.acp-providers-catalog"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-04.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 5,
+      "ids": [
+        "S19.acp-providers-catalog"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-05.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 6,
+      "ids": [
+        "S19.persisted-baselines"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-06.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 7,
+      "ids": [
+        "S19.pypi-baseline-gate",
+        "S19.persisted-baselines"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-07.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 8,
+      "ids": [
+        "S19.profile-model",
+        "S19.profile-migrations",
+        "S19.profile-store",
+        "S19.profile-resolve",
+        "S19.profile-refs",
+        "S19.profile-seed"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-08.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 9,
+      "ids": [
+        "S19.profile-sandbox"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-09.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 10,
+      "ids": [
+        "S19.credential-binding"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-10.log"
+    },
+    {
+      "family": "S19-settings.md",
+      "bullet": 11,
+      "ids": [
+        "S19.settings-create-agent",
+        "S19.settings-roundtrip",
+        "S19.settings-tools",
+        "S19.condenser-settings"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B3-S19/transcripts/S19-settings-11.log"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "events": [
+    {
+      "id": "8d08411b-8d3c-418a-a612-15aec0bb8a9b",
+      "timestamp": "2026-11-20T08:28:48.752774",
+      "source": "environment",
+      "parent_id": "23c39621-1848-4e78-80ce-45acac310270",
+      "tool_name": "terminal",
+      "tool_call_id": "call_qa_ca647c52",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "named-old"
+          }
+        ],
+        "is_error": false,
+        "command": "printf %s \"$QA_ROT\" > old.txt; echo named-old",
+        "exit_code": 0,
+        "timeout": false,
+        "metadata": {
+          "exit_code": 0,
+          "pid": -1,
+          "username": "root",
+          "hostname": "vm",
+          "working_dir": "<scratch>/agent-server/20261120-082731-a9cf-a2-7002/fixtures/rot",
+          "py_interpreter_path": "/usr/local/bin/python",
+          "prefix": "",
+          "suffix": "\n[The command completed with exit code 0.]"
+        },
+        "full_output_save_dir": "<scratch>/agent-server/20261120-082731-a9cf-a2-7002/server/workspace/conversations/108b735d5a7f4c239b96ab3eb49a8991/observations",
+        "kind": "TerminalObservation"
+      },
+      "action_id": "23c39621-1848-4e78-80ce-45acac310270",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    },
+    {
+      "id": "51e231f7-729d-4a47-92eb-189a3c778961",
+      "timestamp": "2026-11-20T08:28:48.957384",
+      "source": "environment",
+      "parent_id": "fd505cd3-3f16-4928-94df-1c3e01a5c962",
+      "tool_name": "finish",
+      "tool_call_id": "call_qa_45d0e23e",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "d1"
+          }
+        ],
+        "is_error": false,
+        "kind": "FinishObservation"
+      },
+      "action_id": "fd505cd3-3f16-4928-94df-1c3e01a5c962",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    },
+    {
+      "id": "3beab5c6-c237-4ea7-a407-03aaa4096742",
+      "timestamp": "2026-11-20T08:28:55.634284",
+      "source": "environment",
+      "parent_id": "5734e992-e176-4b2e-9c57-f1143bc9e1ef",
+      "tool_name": "terminal",
+      "tool_call_id": "call_qa_ea759e28",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "OLD=<secret-hidden>\nNEW=qa-rotnew-sekret"
+          }
+        ],
+        "is_error": false,
+        "command": "echo OLD=$(cat old.txt); printf \"NEW=%s-%s\\n\" qa-rotnew sekret",
+        "exit_code": 0,
+        "timeout": false,
+        "metadata": {
+          "exit_code": 0,
+          "pid": -1,
+          "username": "root",
+          "hostname": "vm",
+          "working_dir": "<scratch>/agent-server/20261120-082731-a9cf-a2-7002/fixtures/rot",
+          "py_interpreter_path": "/usr/local/bin/python",
+          "prefix": "",
+          "suffix": "\n[The command completed with exit code 0.]"
+        },
+        "full_output_save_dir": "<scratch>/agent-server/20261120-082731-a9cf-a2-7002/server/workspace/conversations/108b735d5a7f4c239b96ab3eb49a8991/observations",
+        "kind": "TerminalObservation"
+      },
+      "action_id": "5734e992-e176-4b2e-9c57-f1143bc9e1ef",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    },
+    {
+      "id": "3fa69dba-e3cb-44a1-bb83-9e20d1cddb01",
+      "timestamp": "2026-11-20T08:28:55.793879",
+      "source": "environment",
+      "parent_id": "96c73c01-d91a-4237-be4c-ff1d26e58872",
+      "tool_name": "finish",
+      "tool_call_id": "call_qa_fdcf9cd1",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "d2"
+          }
+        ],
+        "is_error": false,
+        "kind": "FinishObservation"
+      },
+      "action_id": "96c73c01-d91a-4237-be4c-ff1d26e58872",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    },
+    {
+      "id": "85c17db0-12e8-4d19-b37a-0d48f7b18a2b",
+      "timestamp": "2026-11-20T08:28:59.665878",
+      "source": "environment",
+      "parent_id": "d3e1d7a0-b91d-4a21-b5ec-beb3ce535f63",
+      "tool_name": "terminal",
+      "tool_call_id": "call_qa_ab4f71c4",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "OLD2=qa-rotold-sekret NEW2=<secret-hidden>"
+          }
+        ],
+        "is_error": false,
+        "command": "printf %s \"$QA_ROT\" > new.txt; echo OLD2=$(cat old.txt) NEW2=$(cat new.txt)",
+        "exit_code": 0,
+        "timeout": false,
+        "metadata": {
+          "exit_code": 0,
+          "pid": -1,
+          "username": "root",
+          "hostname": "vm",
+          "working_dir": "<scratch>/agent-server/20261120-082731-a9cf-a2-7002/fixtures/rot",
+          "py_interpreter_path": "/usr/local/bin/python",
+          "prefix": "",
+          "suffix": "\n[The command completed with exit code 0.]"
+        },
+        "full_output_save_dir": "<scratch>/agent-server/20261120-082731-a9cf-a2-7002/server/workspace/conversations/108b735d5a7f4c239b96ab3eb49a8991/observations",
+        "kind": "TerminalObservation"
+      },
+      "action_id": "d3e1d7a0-b91d-4a21-b5ec-beb3ce535f63",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    },
+    {
+      "id": "91269f02-8b2d-4d56-9057-cdd36054519f",
+      "timestamp": "2026-11-20T08:28:59.823137",
+      "source": "environment",
+      "parent_id": "c92037ac-a26d-4b27-8c6c-2053274e4d6f",
+      "tool_name": "finish",
+      "tool_call_id": "call_qa_43d077c5",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "d3"
+          }
+        ],
+        "is_error": false,
+        "kind": "FinishObservation"
+      },
+      "action_id": "c92037ac-a26d-4b27-8c6c-2053274e4d6f",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    }
+  ]
+}

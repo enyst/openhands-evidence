@@ -1,0 +1,487 @@
+{
+  "ok": false,
+  "run": "<scratch>/sdk/B1-S04",
+  "revision": "722e5d403cf75d4e032b79296cfaf178f8678a93",
+  "with_llm": true,
+  "bullets": {
+    "pass": 30,
+    "fail": 4,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 1,
+      "ids": [
+        "S04.factory",
+        "S04.conversation-id"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-01.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 2,
+      "ids": [
+        "S04.persist-events",
+        "S04.resume",
+        "S04.callbacks"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-02.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 3,
+      "ids": [
+        "S04.persist-events",
+        "S05.event-log-recovery"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-03.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 4,
+      "ids": [
+        "S04.resume"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-04.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 5,
+      "ids": [
+        "S04.ask-agent-usage-saved"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-05.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 6,
+      "ids": [
+        "S04.resume-agent-compat"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-06.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 7,
+      "ids": [
+        "S04.custom-file-store"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-07.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 8,
+      "ids": [
+        "S04.callbacks"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-08.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 9,
+      "ids": [
+        "S04.run-error"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-09.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 10,
+      "ids": [
+        "S04.close"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-10.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 11,
+      "ids": [
+        "S04.pause"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-11.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 12,
+      "ids": [
+        "S04.pause-during-startup"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-12.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 13,
+      "ids": [
+        "S04.async-callback"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-13.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 14,
+      "ids": [
+        "S04.arun-interrupt"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-14.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 15,
+      "ids": [
+        "S04.arun-pause-persisted"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-15.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 16,
+      "ids": [
+        "S04.cancel-token"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-16.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 17,
+      "ids": [
+        "S04.secrets-update",
+        "S04.secrets-constructor",
+        "S04.secrets-masking"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-17.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 18,
+      "ids": [
+        "S04.visualizer-default",
+        "S04.visualizer-custom"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-18.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 19,
+      "ids": [
+        "S04.fork"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-19.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 20,
+      "ids": [
+        "S04.fork-keeps-secrets"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-20.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 21,
+      "ids": [
+        "S04.fork-branch"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-21.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 22,
+      "ids": [
+        "S04.goal-loop"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-22.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 23,
+      "ids": [
+        "S04.goal-asked"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-23.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 24,
+      "ids": [
+        "S04.goal-asked-branch"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-24.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 25,
+      "ids": [
+        "S04.interactive-terminal"
+      ],
+      "result": "fail",
+      "proof": [],
+      "note": "block 1 exited 1",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-25.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 26,
+      "ids": [
+        "S04.final-response",
+        "S04.title-and-tags"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-26.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 27,
+      "ids": [
+        "S04.stats"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-27.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 28,
+      "ids": [
+        "S04.conversation-sender"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-28.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 29,
+      "ids": [
+        "S04.resolution-verdict"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-29.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 30,
+      "ids": [
+        "S04.resolution-judge"
+      ],
+      "result": "pass",
+      "proof": [
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-30.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 31,
+      "ids": [
+        "S04.factory",
+        "S04.resume",
+        "S04.final-response"
+      ],
+      "result": "pass",
+      "proof": [
+        "live",
+        "scripted"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-31.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 32,
+      "ids": [
+        "S04.pause",
+        "S04.persist-events",
+        "S04.resume",
+        "S04.async-callback",
+        "S04.secrets-update",
+        "S04.secrets-masking",
+        "S04.visualizer-default"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-32.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 33,
+      "ids": [
+        "S04.visualizer-custom",
+        "S04.fork",
+        "S04.fork-branch",
+        "S04.title-and-tags",
+        "S04.arun-interrupt",
+        "S04.cancel-token",
+        "S04.goal-loop"
+      ],
+      "result": "pass",
+      "proof": [
+        "example",
+        "live"
+      ],
+      "note": "",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-33.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 34,
+      "ids": [
+        "S04.interactive-terminal"
+      ],
+      "result": "fail",
+      "proof": [
+        "example",
+        "integration",
+        "live"
+      ],
+      "note": "integration tests missing [] failed ['t07_interactive_commands'] (<scratch>/sdk/B1-S04/work/S04-local-conversation-34/block1-3/deepseek_deepseek_flash_agent-sdk-integration_N1_20261120_084636/results.json)",
+      "transcript": "<scratch>/sdk/B1-S04/transcripts/S04-local-conversation-34.log"
+    },
+    {
+      "family": "S04-local-conversation.md",
+      "bullet": 35,
+      "ids": [
+        "S04.factory"
+      ],
+      "result": "blocked",
+      "proof": [],
+      "note": "bullet is labeled blocked",
+      "transcript": null
+    }
+  ]
+}
