@@ -1,0 +1,13 @@
+
+ RUN  v5.1.0 ~/repos/agent-sdk-projects-endstate-20261121/clients/typescript
+
+
+ Test Files  29 passed (29)
+      Tests  451 passed (451)
+   Start at  05:50:55
+   Duration  4.27s (import 50%, tests 29%, transform 21%, worker 1%)
+
+    Isolate  29 workers spawned · ~105ms startup each (spawn + environment, per file)
+             at least ~330ms faster with isolate: false — reuses workers across files instead of one per file
+
+exit 0

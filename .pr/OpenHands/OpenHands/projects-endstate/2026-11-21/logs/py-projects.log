@@ -1,0 +1,149 @@
+~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform darwin -- Python 3.13.11, pytest-9.2.0, pluggy-1.6.0
+rootdir: ~/repos/agent-sdk-projects-endstate-20261121
+configfile: pyproject.toml
+plugins: libtmux-0.62.0, cov-7.1.0, xdist-3.8.0, timeout-2.4.0, anyio-4.14.2, forked-1.7.5, asyncio-1.5.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+created: 4/4 workers
+4 workers [282 items]
+
+........................................................................ [ 25%]
+........................................................................ [ 51%]
+........................................................................ [ 76%]
+..................................................................       [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+tests/agent_server/test_parent_child_conversations.py: 20 warnings
+tests/agent_server/test_project_board.py: 5 warnings
+tests/agent_server/test_project_cards.py: 31 warnings
+tests/agent_server/test_projects_router.py: 96 warnings
+  ~/repos/agent-sdk-projects-endstate-20261121/openhands-sdk/openhands/sdk/agent/base.py:807: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Items 'device_code', 'user_code', 'verification_uri' on TypedDict class '_DeviceCode' are using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Items 'access_token', 'error' on TypedDict class '_AccessTokenPoll' are using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Items 'token', 'expires_at', 'endpoints' on TypedDict class '_CopilotTokenPayload' are using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Items 'device_code', 'user_code', 'verification_uri', 'expires_in', 'interval' on TypedDict class '_DeviceCodePayload' are using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Items 'access_token', 'error', 'error_description', 'interval' on TypedDict class '_AccessTokenPollPayload' are using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'login' on TypedDict class '_GithubUserPayload' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'api' on TypedDict class '_CopilotEndpointsPayload' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'index' on TypedDict class 'ChatCompletionThinkingBlock' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'index' on TypedDict class 'ChatCompletionRedactedThinkingBlock' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_board.py::test_service_watches_a_project_member
+tests/agent_server/test_parent_child_conversations.py::test_first_message_records_the_sending_conversation
+tests/agent_server/test_project_cards.py::test_nothing_is_passed_on_without_a_member_waiting
+tests/agent_server/test_projects_router.py::test_sender_outside_any_project_is_named_as_a_conversation+----------------------------------------------------------------------+
+|  OpenHands SDK v1.63.1                                               |
+|                                                                      |
+|  Report a bug: github.com/OpenHands/software-agent-sdk/issues        |
+|  Get help: openhands.dev/joinslack                                   |
+|  Scale up: openhands.dev/product/sdk                                 |
+|                                                                      |
+|  Set OPENHANDS_SUPPRESS_BANNER=1 to hide this message                |
++----------------------------------------------------------------------+
+
+
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py:1574: UserWarning: Item 'summary' on TypedDict class 'ChatCompletionReasoningItem' is using the `ReadOnly` qualifier. Pydantic will not protect items from any mutation on dictionary instances.
+    warnings.warn(
+
+tests/agent_server/test_project_profiles.py::test_the_profiles_are_built_from_the_users_active_profile
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('a6f6afca-cd89-426e-a024-7c4a9e83a4c1'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+tests/agent_server/test_project_profiles.py::test_an_existing_profile_is_kept_as_the_user_edited_it
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('b7f8466d-7a37-4eb3-ab1b-c572fedb58e8'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+tests/agent_server/test_project_profiles.py::test_a_user_on_the_standard_tool_set_keeps_it_for_workers
+  ~/repos/agent-sdk-projects-endstate-20261121/.venv/lib/python3.13/site-packages/pydantic/main.py:520: UserWarning: Pydantic serializer warnings:
+    PydanticSerializationUnexpectedValue(Expected `str` - serialized value may not be as expected [field_name='active_agent_profile_id', input_value=UUID('884f2222-8808-4f57-b5b0-5eb036d24c3a'), input_type=UUID])
+    return self.__pydantic_serializer__.to_python(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 282 passed, 200 warnings in 54.01s ======================

@@ -1,0 +1,7 @@
+[{"name":"QA Endstate"},{"name":"QA Relay renamed"}]
+[{"title":"Worker alpha","attention":"idle","prs":["OpenHands/OpenHands#19810"]},{"title":"Worker gamma","attention":"resolved","prs":["OpenHands/software-agent-sdk#6922"]}]
+["report.pdf","diagram.png","plan.md","wordcount.py"]
+[{"title":"Worker delta","attention":"resolved","prs":[]}]
+[]
+MARKER-MEM-58: greetings live in greet.py
+

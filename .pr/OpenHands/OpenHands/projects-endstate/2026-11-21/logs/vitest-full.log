@@ -1,0 +1,290 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./src/styles/agent-server-ui-style-scope" without a file extension (vite.config.ts:16:8). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.1.0 ~/repos/odie-projects-endstate-20261121
+
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/clients.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/acp-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/http-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/agent-profiles-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/conversation-event-stream.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/server-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/bash-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/index.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/runtime-transport.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/agent-server-compatibility.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/conversation/remote-conversation.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/canvas-extensions-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/events/websocket-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/conversation-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/events/global-websocket.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/file-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/conversation/remote-state.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/hooks-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/events/remote-events-list.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/git-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/workspace/remote-workspace.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/init-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/conversation/local-conversation.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/llm-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/workspace/local-workspace.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/mcp-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/profiles-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/prompts/index.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/prompts/system-prompt.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/projects-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/conversation/secret-registry.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/meta-profiles-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/conversation/stuck-detector.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/settings-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/events/types.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/security/confirmation-policy.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/skills-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/sub-agents-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/conversation/conversation.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/plugins-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/conversation/conversation-manager.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/tool-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/vscode-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/shared-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/workspaces-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/openhands-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/workspace/workspace.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/cloud-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/security/security-analyzer.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/client/device-flow-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/hooks/index.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/hooks/types.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/hooks/config.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/agent/agent.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/llm/index.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/llm/openrouter-llm.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/llm/llm.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/events/bash-websocket-client.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/types/base.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/models/conversation.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/models/acp.js" points to missing source files
+Sourcemap for "~/repos/odie-projects-endstate-20261121/node_modules/@openhands/typescript-client/dist/profiles/derive-switch-plan.js" points to missing source files
+Not implemented: navigation to another Document
+ ❯ |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts (30 tests | 13 failed) 2771ms
+   ❯ Docker automation KV secret (30)
+     × keeps the first session key as the KV secret after the session key rotates 59ms
+     × prefers an explicit AUTOMATION_KV_SECRET 24ms
+     × reads a hand-edited pin with a trailing newline the same way as the npm launcher 59ms
+     × reads a hand-edited pin with a Windows line ending the same way as the npm launcher 45ms
+     × reads a hand-edited pin with several trailing newlines the same way as the npm launcher 42ms
+     × reads a hand-edited pin with only a newline the same way as the npm launcher 69ms
+     × reads a hand-edited pin with only spaces the same way as the npm launcher 68ms
+     × shares the pinned secret with the npm launcher 38ms
+     ❯ pin file contract (docker launcher) (9)
+       × creates the pin with mode 0600 28ms
+       × makes a permissive pin private before using it 34ms
+       × makes a permissive blank pin private when it receives the key 72ms
+       × gives every concurrent first launch the one pinned key 87ms
+       × gives every concurrent launch on a blank pin the one pinned key 67ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > keeps the first session key as the KV secret after the session key rotates
+AssertionError: expected '~/.bashrc: line 7: /.local…' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ ~/.bashrc: line 7: /.local/bin/env: No such file or directory
++
+
+ ❯ dockerKvSecret __tests__/scripts/docker-automation-kv-secret.test.ts:59:25
+     57| function dockerKvSecret(env: Record<string, string>): string {
+     58|   const result = runDockerKvSecret(env);
+     59|   expect(result.stderr).toBe("");
+       |                         ^
+     60|   expect(result.status).toBe(0);
+     61|   return result.stdout;
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:140:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > prefers an explicit AUTOMATION_KV_SECRET
+AssertionError: expected '~/.bashrc: line 7: /.local…' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ ~/.bashrc: line 7: /.local/bin/env: No such file or directory
++
+
+ ❯ dockerKvSecret __tests__/scripts/docker-automation-kv-secret.test.ts:59:25
+     57| function dockerKvSecret(env: Record<string, string>): string {
+     58|   const result = runDockerKvSecret(env);
+     59|   expect(result.stderr).toBe("");
+       |                         ^
+     60|   expect(result.status).toBe(0);
+     61|   return result.stdout;
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:157:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > reads a hand-edited pin with a trailing newline the same way as the npm launcher
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > reads a hand-edited pin with a Windows line ending the same way as the npm launcher
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > reads a hand-edited pin with several trailing newlines the same way as the npm launcher
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > reads a hand-edited pin with only a newline the same way as the npm launcher
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > reads a hand-edited pin with only spaces the same way as the npm launcher
+AssertionError: expected '~/.bashrc: line 7: /.local…' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ ~/.bashrc: line 7: /.local/bin/env: No such file or directory
++
+
+ ❯ dockerKvSecret __tests__/scripts/docker-automation-kv-secret.test.ts:59:25
+     57| function dockerKvSecret(env: Record<string, string>): string {
+     58|   const result = runDockerKvSecret(env);
+     59|   expect(result.stderr).toBe("");
+       |                         ^
+     60|   expect(result.status).toBe(0);
+     61|   return result.stdout;
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:188:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > shares the pinned secret with the npm launcher
+AssertionError: expected '~/.bashrc: line 7: /.local…' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ ~/.bashrc: line 7: /.local/bin/env: No such file or directory
++
+
+ ❯ dockerKvSecret __tests__/scripts/docker-automation-kv-secret.test.ts:59:25
+     57| function dockerKvSecret(env: Record<string, string>): string {
+     58|   const result = runDockerKvSecret(env);
+     59|   expect(result.stderr).toBe("");
+       |                         ^
+     60|   expect(result.status).toBe(0);
+     61|   return result.stdout;
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:208:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > pin file contract (docker launcher) > creates the pin with mode 0600
+AssertionError: expected '~/.bashrc: line 7: /.local…' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ ~/.bashrc: line 7: /.local/bin/env: No such file or directory
++
+
+ ❯ dockerKvSecret __tests__/scripts/docker-automation-kv-secret.test.ts:59:25
+     57| function dockerKvSecret(env: Record<string, string>): string {
+     58|   const result = runDockerKvSecret(env);
+     59|   expect(result.stderr).toBe("");
+       |                         ^
+     60|   expect(result.status).toBe(0);
+     61|   return result.stdout;
+ ❯ resolve __tests__/scripts/docker-automation-kv-secret.test.ts:239:13
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:270:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > pin file contract (docker launcher) > makes a permissive pin private before using it
+AssertionError: expected '~/.bashrc: line 7: /.local…' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ ~/.bashrc: line 7: /.local/bin/env: No such file or directory
++
+
+ ❯ dockerKvSecret __tests__/scripts/docker-automation-kv-secret.test.ts:59:25
+     57| function dockerKvSecret(env: Record<string, string>): string {
+     58|   const result = runDockerKvSecret(env);
+     59|   expect(result.stderr).toBe("");
+       |                         ^
+     60|   expect(result.status).toBe(0);
+     61|   return result.stdout;
+ ❯ resolve __tests__/scripts/docker-automation-kv-secret.test.ts:239:13
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:282:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > pin file contract (docker launcher) > makes a permissive blank pin private when it receives the key
+AssertionError: expected '~/.bashrc: line 7: /.local…' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ ~/.bashrc: line 7: /.local/bin/env: No such file or directory
++
+
+ ❯ dockerKvSecret __tests__/scripts/docker-automation-kv-secret.test.ts:59:25
+     57| function dockerKvSecret(env: Record<string, string>): string {
+     58|   const result = runDockerKvSecret(env);
+     59|   expect(result.stderr).toBe("");
+       |                         ^
+     60|   expect(result.status).toBe(0);
+     61|   return result.stdout;
+ ❯ resolve __tests__/scripts/docker-automation-kv-secret.test.ts:239:13
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:295:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > pin file contract (docker launcher) > gives every concurrent first launch the one pinned key
+AssertionError: expected { code: +0, …(1) } to deeply equal { code: +0, stderr: '' }
+
+- Expected
++ Received
+
+  {
+    "code": 0,
+-   "stderr": "",
++   "stderr": "~/.bashrc: line 7: /.local/bin/env: No such file or directory
++ ",
+  }
+
+ ❯ racingLauncher __tests__/scripts/docker-automation-kv-secret.test.ts:105:28
+    103|   child.stderr.on("data", (chunk) => (stderr += chunk));
+    104|   const [code] = await once(child, "close");
+    105|   expect({ code, stderr }).toEqual({ code: 0, stderr: "" });
+       |                            ^
+    106|   return stdout.split("\n").at(-1) ?? "";
+    107| }
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:338:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/13]⎯
+
+ FAIL  |jsdom| __tests__/scripts/docker-automation-kv-secret.test.ts > Docker automation KV secret > pin file contract (docker launcher) > gives every concurrent launch on a blank pin the one pinned key
+AssertionError: expected { code: +0, …(1) } to deeply equal { code: +0, stderr: '' }
+
+- Expected
++ Received
+
+  {
+    "code": 0,
+-   "stderr": "",
++   "stderr": "~/.bashrc: line 7: /.local/bin/env: No such file or directory
++ ",
+  }
+
+ ❯ racingLauncher __tests__/scripts/docker-automation-kv-secret.test.ts:105:28
+    103|   child.stderr.on("data", (chunk) => (stderr += chunk));
+    104|   const [code] = await once(child, "close");
+    105|   expect({ code, stderr }).toEqual({ code: 0, stderr: "" });
+       |                            ^
+    106|   return stdout.split("\n").at(-1) ?? "";
+    107| }
+ ❯ __tests__/scripts/docker-automation-kv-secret.test.ts:358:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/13]⎯
+
+
+ Test Files  1 failed | 943 passed (944)
+      Tests  13 failed | 11113 passed | 2 skipped | 7 todo (11135)
+   Start at  05:49:38
+   Duration  271.80s (import 35%, tests 28%, environment 21%, setup 11%, transform 5%)
+
+vitest exit 1

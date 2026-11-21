@@ -1,0 +1,24 @@
+
+~/repos/odie-projects-endstate-20261121/src/components/features/projects/project-sidebar/project-sidebar.tsx
+  34:25  warning  "w-[calc(100%+0.625rem)]" hardcodes an off-token value. Use a theme token or scale value instead  shadcn/no-arbitrary-values
+
+~/repos/odie-projects-endstate-20261121/src/components/features/sidebar/mars-session-panel.tsx
+  285:22  warning  "w-[calc(100%+0.625rem)]" hardcodes an off-token value. Use a theme token or scale value instead  shadcn/no-arbitrary-values
+  322:21  warning  "max-h-[40vh]" hardcodes an off-token value. Use a theme token or scale value instead             shadcn/no-arbitrary-values
+
+~/repos/odie-projects-endstate-20261121/src/components/features/sidebar/sidebar-rail-body.tsx
+  416:27  warning  "bottom-[-4px]" hardcodes an off-token value. Use a theme token or scale value instead            shadcn/no-arbitrary-values
+  449:15  warning  "w-[calc(100%+0.625rem)]" hardcodes an off-token value. Use a theme token or scale value instead  shadcn/no-arbitrary-values
+
+~/repos/odie-projects-endstate-20261121/src/components/features/sidebar/sidebar.tsx
+  285:15  warning  "w-[min(300px,85vw)]" hardcodes an off-token value. Use a theme token or scale value instead  shadcn/no-arbitrary-values
+
+~/repos/odie-projects-endstate-20261121/src/routes/project.tsx
+  126:17  warning  "text-[var(--oh-accent-foreground)]" hardcodes an off-token value. Use a theme token or scale value instead  shadcn/no-arbitrary-values
+
+~/repos/odie-projects-endstate-20261121/src/utils/settings-list-classes.ts
+  22:3  warning  "max-h-[min(70vh,39rem)]" hardcodes an off-token value. Use a theme token or scale value instead  shadcn/no-arbitrary-values
+
+✖ 8 problems (0 errors, 8 warnings)
+
+ESLINT-OK

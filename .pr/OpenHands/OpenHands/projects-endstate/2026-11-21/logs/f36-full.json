@@ -1,0 +1,376 @@
+{
+  "ok": true,
+  "file": "F36-projects.md",
+  "summary": {
+    "pass": 33,
+    "fail": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "blocked": 0,
+    "skipped": 0,
+    "no-commands": 0
+  },
+  "bullets": [
+    {
+      "bullet": "Preconditions",
+      "ids": [],
+      "line": 171,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3392,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-00-preconditions.json"
+    },
+    {
+      "bullet": "No projects yet (`F36.list-empty`).",
+      "ids": [
+        "F36.list-empty"
+      ],
+      "line": 201,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 762,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-01-no-projects-yet-f36-list-empty.json"
+    },
+    {
+      "bullet": "Create a project (`F36.create`).",
+      "ids": [
+        "F36.create"
+      ],
+      "line": 207,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1470,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-02-create-a-project-f36-create.json"
+    },
+    {
+      "bullet": "Validation (`F36.validation`).",
+      "ids": [
+        "F36.validation"
+      ],
+      "line": 217,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1270,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-03-validation-f36-validation.json"
+    },
+    {
+      "bullet": "Unknown project (`F36.unknown-project`).",
+      "ids": [
+        "F36.unknown-project"
+      ],
+      "line": 225,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3634,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-04-unknown-project-f36-unknown-project.json"
+    },
+    {
+      "bullet": "Rename (`F36.patch`).",
+      "ids": [
+        "F36.patch"
+      ],
+      "line": 237,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1666,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-05-rename-f36-patch.json"
+    },
+    {
+      "bullet": "Coordinator (`F36.coordinator`).",
+      "ids": [
+        "F36.coordinator"
+      ],
+      "line": 248,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8204,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-06-coordinator-f36-coordinator.json"
+    },
+    {
+      "bullet": "Missing coordinator profile (`F36.coordinator-missing`).",
+      "ids": [
+        "F36.coordinator-missing"
+      ],
+      "line": 268,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 856,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-07-missing-coordinator-profile-f36-coordina.json"
+    },
+    {
+      "bullet": "The coordinator starts a member (`F36.start-member`).",
+      "ids": [
+        "F36.start-member"
+      ],
+      "line": 277,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 5997,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-08-the-coordinator-starts-a-member-f36-star.json"
+    },
+    {
+      "bullet": "Clients cannot claim a project (`F36.client-tags`).",
+      "ids": [
+        "F36.client-tags"
+      ],
+      "line": 294,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2387,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-09-clients-cannot-claim-a-project-f36-clien.json"
+    },
+    {
+      "bullet": "Attention groups (`F36.attention`).",
+      "ids": [
+        "F36.attention"
+      ],
+      "line": 306,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 7295,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-10-attention-groups-f36-attention.json"
+    },
+    {
+      "bullet": "Remove a conversation (`F36.remove-conversation`).",
+      "ids": [
+        "F36.remove-conversation"
+      ],
+      "line": 328,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2350,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-11-remove-a-conversation-f36-remove-convers.json"
+    },
+    {
+      "bullet": "Coordinator membership (`F36.remove-coordinator`).",
+      "ids": [
+        "F36.remove-coordinator"
+      ],
+      "line": 340,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 920,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-12-coordinator-membership-f36-remove-coordi.json"
+    },
+    {
+      "bullet": "Message a conversation over REST (`F36.message-rest`).",
+      "ids": [
+        "F36.message-rest"
+      ],
+      "line": 348,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 8525,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-13-message-a-conversation-over-rest-f36-mes.json"
+    },
+    {
+      "bullet": "How a turn ended (`F36.turn`).",
+      "ids": [
+        "F36.turn"
+      ],
+      "line": 369,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24004,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-14-how-a-turn-ended-f36-turn.json"
+    },
+    {
+      "bullet": "Resolved (`F36.resolved`).",
+      "ids": [
+        "F36.resolved"
+      ],
+      "line": 397,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6839,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-15-resolved-f36-resolved.json"
+    },
+    {
+      "bullet": "Resolved automatically (`F36.auto-resolve`).",
+      "ids": [
+        "F36.auto-resolve"
+      ],
+      "line": 417,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22268,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-16-resolved-automatically-f36-auto-resolve.json"
+    },
+    {
+      "bullet": "Unfinished work stays open (`F36.needs-you`).",
+      "ids": [
+        "F36.needs-you"
+      ],
+      "line": 449,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 12627,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-17-unfinished-work-stays-open-f36-needs-you.json"
+    },
+    {
+      "bullet": "The worker resolves itself (`F36.self-resolve`).",
+      "ids": [
+        "F36.self-resolve"
+      ],
+      "line": 465,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10507,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-18-the-worker-resolves-itself-f36-self-reso.json"
+    },
+    {
+      "bullet": "Artifacts over REST (`F36.artifacts-rest`).",
+      "ids": [
+        "F36.artifacts-rest"
+      ],
+      "line": 484,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3697,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-19-artifacts-over-rest-f36-artifacts-rest.json"
+    },
+    {
+      "bullet": "Model-backed: an agent saves an artifact (`F36.artifacts-tool`).",
+      "ids": [
+        "F36.artifacts-tool"
+      ],
+      "line": 498,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 15567,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-20-model-backed-an-agent-saves-an-artifact-.json"
+    },
+    {
+      "bullet": "Project memory over REST (`F36.memory-rest`).",
+      "ids": [
+        "F36.memory-rest"
+      ],
+      "line": 516,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3464,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-21-project-memory-over-rest-f36-memory-rest.json"
+    },
+    {
+      "bullet": "Model-backed: an agent keeps project memory (`F36.memory-tool`).",
+      "ids": [
+        "F36.memory-tool"
+      ],
+      "line": 533,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 24197,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-22-model-backed-an-agent-keeps-project-memo.json"
+    },
+    {
+      "bullet": "Restart (`F36.persist-restart`).",
+      "ids": [
+        "F36.persist-restart"
+      ],
+      "line": 554,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 11927,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-23-restart-f36-persist-restart.json"
+    },
+    {
+      "bullet": "Delete a project (`F36.delete`).",
+      "ids": [
+        "F36.delete"
+      ],
+      "line": 562,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 3096,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-24-delete-a-project-f36-delete.json"
+    },
+    {
+      "bullet": "Model-backed: start and list (`F36.tool-start-and-list`).",
+      "ids": [
+        "F36.tool-start-and-list"
+      ],
+      "line": 576,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 17539,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-25-model-backed-start-and-list-f36-tool-sta.json"
+    },
+    {
+      "bullet": "Model-backed: the coordinator hears back (`F36.wake`).",
+      "ids": [
+        "F36.wake"
+      ],
+      "line": 595,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 856,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-26-model-backed-the-coordinator-hears-back-.json"
+    },
+    {
+      "bullet": "Model-backed: read a conversation (`F36.read`).",
+      "ids": [
+        "F36.read"
+      ],
+      "line": 611,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 4819,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-27-model-backed-read-a-conversation-f36-rea.json"
+    },
+    {
+      "bullet": "Model-backed: message a conversation (`F36.tool-message`).",
+      "ids": [
+        "F36.tool-message"
+      ],
+      "line": 621,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 6607,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-28-model-backed-message-a-conversation-f36-.json"
+    },
+    {
+      "bullet": "Model-backed: mentions (`F36.mention`).",
+      "ids": [
+        "F36.mention"
+      ],
+      "line": 635,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 2977,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-29-model-backed-mentions-f36-mention.json"
+    },
+    {
+      "bullet": "Model-backed: no approval by message (`F36.tool-message-refuses-confirmation`).",
+      "ids": [
+        "F36.tool-message-refuses-confirmation"
+      ],
+      "line": 653,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 10234,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-30-model-backed-no-approval-by-message-f36-.json"
+    },
+    {
+      "bullet": "Model-backed: a coordinator and a worker restore (`F36.restore`).",
+      "ids": [
+        "F36.restore"
+      ],
+      "line": 667,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 22863,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-31-model-backed-a-coordinator-and-a-worker-.json"
+    },
+    {
+      "bullet": "Corrupted file (`F36.corrupted-file`).",
+      "ids": [
+        "F36.corrupted-file"
+      ],
+      "line": 689,
+      "status": "pass",
+      "exit_code": 0,
+      "elapsed_ms": 1238,
+      "transcript": "$TMPDIR/agent-server-verify/20261121-045115-6d11/evidence/map-run/F36-projects-32-corrupted-file-f36-corrupted-file.json"
+    }
+  ]
+}
