@@ -1,0 +1,17 @@
+{
+  "file": "F36-projects.md",
+  "bullet": "No projects yet (`F36.list-empty`).",
+  "ids": [
+    "F36.list-empty"
+  ],
+  "line": 213,
+  "script": "control-agent-server api GET /api/projects --expect 200 --check projects len-eq 0 --save F36.list-empty/list\ncontrol-agent-server state ls \"$PJ\" --expect-count 0\n",
+  "exit_code": 0,
+  "elapsed_ms": 678,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/projects\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"15\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"projects\": []\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 74,\n  \"checks\": [\n    {\n      \"check\": \"projects len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261121-154806-7ed7-map-f36/evidence/F36.list-empty/list.json\"\n}\n{\n  \"ok\": true,\n  \"pattern\": \"home/.openhands/projects.json\",\n  \"count\": 0,\n  \"files\": []\n}\n",
+  "stderr": ""
+}

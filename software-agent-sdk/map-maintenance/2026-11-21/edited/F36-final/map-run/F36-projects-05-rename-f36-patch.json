@@ -1,0 +1,17 @@
+{
+  "file": "F36-projects.md",
+  "bullet": "Rename (`F36.patch`).",
+  "ids": [
+    "F36.patch"
+  ],
+  "line": 249,
+  "script": "BEFORE=$(control-agent-server api GET \"/api/projects/$P1\" --field updated_at)\nCREATED=$(control-agent-server api GET \"/api/projects/$P1\" --field created_at)\ncontrol-agent-server api PATCH \"/api/projects/$P1\" --json '{\"name\": \"qa-f36-renamed\"}' --expect 200 \\\n  --check name eq qa-f36-renamed --check description eq first --check created_at eq \"$CREATED\" \\\n  --check updated_at ne \"$BEFORE\" --save F36.patch/patch\ncontrol-agent-server state cat \"$PJ\" --check projects.0.name eq qa-f36-renamed\n",
+  "exit_code": 0,
+  "elapsed_ms": 1608,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"PATCH\",\n    \"path\": \"/api/projects/98be0acdc44b4354a63a958bf754009c\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"name\": \"qa-f36-renamed\"\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"239\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"id\": \"98be0acdc44b4354a63a958bf754009c\",\n      \"name\": \"qa-f36-renamed\",\n      \"description\": \"first\",\n      \"coordinator_conversation_id\": null,\n      \"worker_agent_profile_id\": null,\n      \"created_at\": \"2026-11-21T15:48:21.946004Z\",\n      \"updated_at\": \"2026-11-21T15:48:28.919640Z\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 85,\n  \"checks\": [\n    {\n      \"check\": \"name eq qa-f36-renamed\",\n      \"ok\": true,\n      \"actual\": \"qa-f36-renamed\"\n    },\n    {\n      \"check\": \"description eq first\",\n      \"ok\": true,\n      \"actual\": \"first\"\n    },\n    {\n      \"check\": \"created_at eq 2026-11-21T15:48:21.946004Z\",\n      \"ok\": true,\n      \"actual\": \"2026-11-21T15:48:21.946004Z\"\n    },\n    {\n      \"check\": \"updated_at ne 2026-11-21T15:48:21.946011Z\",\n      \"ok\": true,\n      \"actual\": \"2026-11-21T15:48:28.919640Z\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261121-154806-7ed7-map-f36/evidence/F36.patch/patch.json\"\n}\n{\n  \"ok\": true,\n  \"path\": \"home/.openhands/projects.json\",\n  \"bytes\": 351,\n  \"mode\": \"0o600\",\n  \"content\": {\n    \"schema_version\": 1,\n    \"projects\": [\n      {\n        \"id\": \"98be0acdc44b4354a63a958bf754009c\",\n        \"name\": \"qa-f36-renamed\",\n        \"description\": \"first\",\n        \"coordinator_conversation_id\": null,\n        \"worker_agent_profile_id\": null,\n        \"created_at\": \"2026-11-21T15:48:21.946004Z\",\n        \"updated_at\": \"2026-11-21T15:48:28.919640Z\"\n      }\n    ]\n  },\n  \"checks\": [\n    {\n      \"check\": \"projects.0.name eq qa-f36-renamed\",\n      \"ok\": true,\n      \"actual\": \"qa-f36-renamed\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

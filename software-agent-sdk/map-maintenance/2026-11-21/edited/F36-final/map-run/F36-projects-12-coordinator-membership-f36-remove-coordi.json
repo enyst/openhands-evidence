@@ -1,0 +1,17 @@
+{
+  "file": "F36-projects.md",
+  "bullet": "Coordinator membership (`F36.remove-coordinator`).",
+  "ids": [
+    "F36.remove-coordinator"
+  ],
+  "line": 357,
+  "script": "control-agent-server api DELETE \"/api/projects/$P2/conversations/$CAT\" --expect 409 \\\n  --check detail eq \"Conversation is the project's coordinator\" --save F36.remove-coordinator/delete\ncontrol-agent-server api GET \"/api/projects/$P2/conversations\" --check coordinator.title eq qa-f36-cat\n",
+  "exit_code": 0,
+  "elapsed_ms": 800,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 409,\n  \"request\": {\n    \"method\": \"DELETE\",\n    \"path\": \"/api/projects/2e81042ca21040a19848849872437c81/conversations/de12eab6-842b-40c1-9446-e939276a54bb\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 409,\n    \"headers\": {\n      \"content-length\": \"54\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Conversation is the project's coordinator\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 73,\n  \"checks\": [\n    {\n      \"check\": \"detail eq Conversation is the project's coordinator\",\n      \"ok\": true,\n      \"actual\": \"Conversation is the project's coordinator\"\n    }\n  ],\n  \"saved\": \"<scratch>/agent-server/20261121-154806-7ed7-map-f36/evidence/F36.remove-coordinator/delete.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/projects/2e81042ca21040a19848849872437c81/conversations\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"819\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"project_id\": \"2e81042ca21040a19848849872437c81\",\n      \"coordinator\": {\n        \"conversation_id\": \"de12eab6842b40c19446e939276a54bb\",\n        \"title\": \"qa-f36-cat\",\n        \"execution_status\": \"finished\",\n        \"attention\": \"idle\",\n        \"resolved\": null,\n        \"resolve_note\": null,\n        \"turn\": \"finished\",\n        \"ask\": null,\n        \"pull_requests\": [],\n        \"automation_id\": null,\n        \"parent_conversation_id\": null,\n        \"created_at\": \"2026-11-21T15:48:31.814029Z\",\n        \"updated_at\": \"2026-11-21T15:48:46.634799Z\"\n      },\n      \"conversations\": [\n        {\n          \"conversation_id\": \"b768082a77b144c8beaad666c565a188\",\n          \"title\": \"qa-f36-asks\",\n          \"execution_status\": \"waiting_for_confirmation\",\n          \"attention\": \"needs_you\",\n          \"resolved\": null,\n          \"resolve_note\": null,\n          \"turn\": null,\n          \"ask\": null,\n          \"pull_requests\": [],\n          \"automation_id\": null,\n          \"parent_conversation_id\": \"de12eab6842b40c19446e939276a54bb\",\n          \"created_at\": \"2026-11-21T15:48:41.245377Z\",\n          \"updated_at\": \"2026-11-21T15:48:45.539668Z\"\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 65,\n  \"checks\": [\n    {\n      \"check\": \"coordinator.title eq qa-f36-cat\",\n      \"ok\": true,\n      \"actual\": \"qa-f36-cat\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

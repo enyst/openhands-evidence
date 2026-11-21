@@ -17,6 +17,10 @@ The servers ran from main@3a893a1b, detached. Map edits were made and re-run in 
   - `agent-server-report-shim-all-attempts.md` adds earlier stand-in attempts. Their fails are stand-in limits (`thinking` rejected by the proxy, no key check), not product results.
 - `agent-server-report-edited-shards.md`: the shards' re-runs of edited bullets from their worktrees.
 - `agent-server-report-verifier.md`: the independent verifier's re-run from the map branch (F18, F36, F34.endpoint-audit, F19.conversation-mcp-add-start-failure).
+- `agent-server-report-f36-reverify.md`: F36 re-verified after two more recipe fixes. The runs, in order:
+  - Two full runs at 447d66f (`F36.memory-rest` clears memory first). Each had 6 fails: `F36.tool-start-and-list` failed because the restart left a coordinator update unanswered (#7058), and 5 knock-ons. Those 6 passed with `--only`.
+  - Two full runs at 1a9ecad (`F36.memory-tool` waits for the coordinator's run). One passed 38/38. The other had 36 passes: `F36.turn` failed on a 60 s resolution-judge timeout through the proxy, and `F36.resolved` followed from it. `F36.turn` then passed with `--only`.
+  - `edited/F36-final/map-run/` holds the transcripts of the 38/38 run.
 - `sdk-report-main.md`: the replay of the 12 SDK families.
 - `sdk-report-edited-shards.md` and `sdk-report-verifier.md`: S03, S06 and S09 re-run after the edits.
 - `edited/`: evidence for each changed or new bullet.

@@ -1,0 +1,17 @@
+{
+  "file": "F36-projects.md",
+  "bullet": "Missing coordinator profile (`F36.coordinator-missing`).",
+  "ids": [
+    "F36.coordinator-missing"
+  ],
+  "line": 280,
+  "script": "control-agent-server api POST /api/projects \\\n  --json \"{\\\"name\\\": \\\"qa-f36-ghost\\\", \\\"coordinator\\\": {\\\"working_dir\\\": \\\"$AGENT_SERVER_VERIFY_RUN/fixtures/qa-f36-cat\\\", \\\"agent_profile_id\\\": \\\"00000000-0000-0000-0000-000000000001\\\"}}\" \\\n  --expect 404 --save F36.coordinator-missing/post\ncontrol-agent-server api GET /api/projects --check . not-contains qa-f36-ghost\n",
+  "exit_code": 0,
+  "elapsed_ms": 913,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 404,\n  \"request\": {\n    \"method\": \"POST\",\n    \"path\": \"/api/projects\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": {\n      \"name\": \"qa-f36-ghost\",\n      \"coordinator\": {\n        \"working_dir\": \"<scratch>/agent-server/20261121-154806-7ed7-map-f36/fixtures/qa-f36-cat\",\n        \"agent_profile_id\": \"00000000-0000-0000-0000-000000000001\"\n      }\n    },\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 404,\n    \"headers\": {\n      \"content-length\": \"73\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Agent profile 00000000-0000-0000-0000-000000000001 not found\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 75,\n  \"saved\": \"<scratch>/agent-server/20261121-154806-7ed7-map-f36/evidence/F36.coordinator-missing/post.json\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/projects\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"515\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"projects\": [\n        {\n          \"id\": \"98be0acdc44b4354a63a958bf754009c\",\n          \"name\": \"qa-f36-renamed\",\n          \"description\": \"first\",\n          \"coordinator_conversation_id\": null,\n          \"worker_agent_profile_id\": null,\n          \"created_at\": \"2026-11-21T15:48:21.946004Z\",\n          \"updated_at\": \"2026-11-21T15:48:28.919640Z\"\n        },\n        {\n          \"id\": \"2e81042ca21040a19848849872437c81\",\n          \"name\": \"qa-f36-two\",\n          \"description\": \"\",\n          \"coordinator_conversation_id\": \"de12eab6842b40c19446e939276a54bb\",\n          \"worker_agent_profile_id\": null,\n          \"created_at\": \"2026-11-21T15:48:29.673136Z\",\n          \"updated_at\": \"2026-11-21T15:48:31.995411Z\"\n        }\n      ]\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 67,\n  \"checks\": [\n    {\n      \"check\": \". not-contains qa-f36-ghost\",\n      \"ok\": true,\n      \"actual\": \"{\\\"projects\\\": [{\\\"id\\\": \\\"98be0acdc44b4354a63a958bf754009c\\\", \\\"name\\\": \\\"qa-f36-renamed\\\", \\\"description\\\": \\\"first\\\", \\\"coordinator_conversation_id\\\": null, \\\"worker_agent_profile_id\\\": null, \\\"created_at\\\": \\\"2026-11-\\u2026\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}
