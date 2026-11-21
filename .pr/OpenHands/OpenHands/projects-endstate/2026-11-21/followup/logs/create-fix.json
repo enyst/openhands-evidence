@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "name": "qa-profile-fix",
+      "coordinator": {
+        "working_dir": "$TMPDIR/agent-server-verify/20261121-130348-e8fb-fix/fixtures/qa-cat"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "content-length": "264",
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "bbffb6f2f9b3423897f50d38dafb5d26",
+      "name": "qa-profile-fix",
+      "description": "",
+      "coordinator_conversation_id": "0c30438f9f5e4a358ebc0d43c8cfb859",
+      "worker_agent_profile_id": null,
+      "created_at": "2026-11-21T13:03:58.629138Z",
+      "updated_at": "2026-11-21T13:04:02.276986Z"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 3689
+}

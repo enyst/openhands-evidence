@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "name": "qa-profile-main",
+      "coordinator": {
+        "working_dir": "$TMPDIR/agent-server-verify/20261121-130311-65b9-main/fixtures/qa-cat"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "content-length": "130",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Cannot start the coordinator from agent profile e902e7c1-0e42-401d-88a5-11e492e7f94e: LLM profile 'default' not found"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 3902
+}

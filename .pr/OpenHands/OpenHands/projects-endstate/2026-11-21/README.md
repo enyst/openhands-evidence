@@ -49,6 +49,8 @@ Every run used the Paper theme, Chromium driven by `verify-openhands`, and a rea
 
 ## Findings
 
+The fixes and re-checks are in [followup/README.md](followup/README.md): finding 1 is fixed in the SDK, findings 2 and 3 turned out not to be Projects bugs, and finding 4 is fixed in the map.
+
 1. **Stale coordinator profile LLM (confirmed).** Auto-creating `project-coordinator` copied a reference to an LLM profile that no longer existed. Create then failed with 422 and the first click showed no toast. It is not known whether a normally onboarded user can reach this state.
 2. **PRs tab sometimes unclickable (seen once).** After the right panel was toggled, another element covered the tab and the click timed out. Toggling again cleared it (`F32.panel/prs-tab-unclickable.png`).
 3. **PDF preview blank in headless Chromium.** The iframe renders nothing there. This is a known headless gap; it was not checked in a headed browser.

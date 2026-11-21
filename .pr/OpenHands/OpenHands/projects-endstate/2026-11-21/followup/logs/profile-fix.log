@@ -1,0 +1,9 @@
+run=$TMPDIR/agent-server-verify/20261121-130348-e8fb-fix rev=3a893a1b2
+default agent profile llm_profile_ref (seed): default
+llm preset deepseek: saved
+active LLM profile: deepseek-flash
+default agent profile llm_profile_ref now: default
+projects: on
+POST /api/projects -> 201 coordinator None
+project-coordinator llm_profile_ref: deepseek-flash
+stopped
