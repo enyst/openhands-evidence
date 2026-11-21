@@ -1,0 +1,22 @@
+Errors counted by the run's browser log since the run began (verify-openhands keeps one log per run).
+All 40 retained events fall in 17:27:46Z-17:27:59Z, while 'control-openhands restart --rebuild' had the server down (net::ERR_CONNECTION_REFUSED); none after 17:35Z.
+After 'browser errors --clear' and a reload at the end of the timeline: page 0, app 0.
+{
+  "summary": {
+    "app:http-error": 964,
+    "app:console.error": 1003,
+    "app:requestfailed": 35,
+    "app:websocket-error": 4
+  },
+  "retained_events": 40,
+  "first_ts": "2026-11-21T17:27:46.900Z",
+  "last_ts": "2026-11-21T17:27:59.347Z",
+  "kinds": [
+    "console.error",
+    "requestfailed",
+    "websocket-error"
+  ],
+  "texts": [
+    ""
+  ]
+}

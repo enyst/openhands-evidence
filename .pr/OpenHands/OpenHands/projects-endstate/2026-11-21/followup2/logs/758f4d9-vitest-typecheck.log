@@ -1,0 +1,12 @@
+
+ RUN  v5.1.0 ~/repos/odie-projects-endstate-20261121
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  18:49:07
+   Duration  881ms (environment 52%, setup 19%, tests 14%, transform 9%, import 5%)
+
+
+$ npx tsc --noEmit -p tsconfig.json
+tsc exit 0
