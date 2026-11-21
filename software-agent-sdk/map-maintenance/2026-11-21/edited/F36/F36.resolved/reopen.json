@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/projects/d58ed7110c764497bde8eafbd7997bb2/conversations/3b84df8d-2457-4f35-b28a-baa8cba22860/reopen",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 204,
+    "headers": {},
+    "body": "",
+    "truncated": false
+  },
+  "elapsed_ms": 133
+}

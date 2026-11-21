@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/projects/d58ed7110c764497bde8eafbd7997bb2/artifacts/from-conversation",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "conversation_id": "edf2ed78-3e22-454e-920d-bc264c1856cd",
+      "path": "qa-f36-cat-notes.txt",
+      "name": "qa-f36-copied.txt"
+    },
+    "files": []
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "content-length": "194",
+      "content-type": "application/json"
+    },
+    "body": {
+      "name": "qa-f36-copied.txt",
+      "size": 16,
+      "source": "agent",
+      "conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+      "created_at": "2026-11-21T13:09:12.892425Z",
+      "updated_at": "2026-11-21T13:09:12.892425Z"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 153
+}

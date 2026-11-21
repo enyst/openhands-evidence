@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/projects/d58ed7110c764497bde8eafbd7997bb2/artifacts",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": [
+      "file"
+    ]
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "content-length": "161",
+      "content-type": "application/json"
+    },
+    "body": {
+      "name": "qa-f36-notes.md",
+      "size": 15,
+      "source": "user",
+      "conversation_id": null,
+      "created_at": "2026-11-21T13:09:08.612566Z",
+      "updated_at": "2026-11-21T13:09:08.612566Z"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 150
+}

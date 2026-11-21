@@ -1,0 +1,14 @@
+$ <scratch>/wt-S/.venv/bin/python <scratch>/wt-S/.agents/skills/verify-sdk/programs/S03/switching.py route-router
+{"ok": true, "mode": "route-router", "by_route": {"status": "finished", "agent_llm": "RouterLLM", "selection": {"mode": "manual", "manual_route_name": "strong"}, "requests": {"planner": 1, "classifier": 1, "strong": 1}, "classifier_saw_routes": true, "observation": {"tool": "route_task_to_model", "error": false, "text": "Classified task as 'route: strong' and switched to RouterLLM route 'strong' (model 'openai/gpt-4.1'). Future agent steps will use this route."}}, "by_model": {"status": "finished", "agent_llm": "RouterLLM", "selection": {"mode": "manual", "manual_route_name": "strong"}, "requests": {"planner": 1, "classifier": 1, "strong": 1}, "classifier_saw_routes": true, "observation": {"tool": "route_task_to_model", "error": false, "text": "Classified task as 'route: strong' and switched to RouterLLM route 'strong' (model 'openai/gpt-4.1'). Future agent steps will use this route."}}, "unknown": {"status": "finished", "agent_llm": "RouterLLM", "selection": {"mode": "auto", "manual_route_name": null}, "requests": {"planner": 2, "classifier": 1, "strong": 0}, "classifier_saw_routes": true, "observation": {"tool": "route_task_to_model", "error": true, "text": "[An error occurred during execution.]\nClassifier reply did not resolve to an available RouterLLM route (reply: '{\"route\": \"nonexistent\"}'); refusing to silently route to a default. Retry the tool or u"}}}
+
+[11/21/26 13:29:51] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+[11/21/26 13:29:53] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+[11/21/26 13:29:54] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+
+[exit 0]

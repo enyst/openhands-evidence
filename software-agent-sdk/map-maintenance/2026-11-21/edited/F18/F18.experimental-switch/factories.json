@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/api/settings/experimental/factories",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "enabled": true
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "233",
+      "content-type": "application/json"
+    },
+    "body": {
+      "key": "factories",
+      "label": "Factories",
+      "description": "Shows Factories in the sidebar: named groups of automations that together run a software development process. Needs an automation service that supports factories.",
+      "enabled": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 64
+}

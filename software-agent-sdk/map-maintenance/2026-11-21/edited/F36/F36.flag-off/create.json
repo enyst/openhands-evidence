@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "name": "qa-f36-while-off"
+    },
+    "files": []
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-length": "36",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Projects are turned off"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 79
+}

@@ -1,0 +1,57 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/settings/experimental",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "1729",
+      "content-type": "application/json"
+    },
+    "body": [
+      {
+        "key": "conversation_reactions",
+        "label": "Conversation reactions",
+        "description": "The agent can put an emoji reaction on your messages, for example \ud83d\udc40 when it starts on something before it answers, and you can react to its messages. Applies to conversations started after you turn it on.",
+        "enabled": true
+      },
+      {
+        "key": "ask_user",
+        "label": "Decision cards",
+        "description": "When a choice is yours to make, the agent can ask you one question with a few options and a recommendation, shown as a card you answer in one tap or in your own words. Applies to conversations started after you turn it on.",
+        "enabled": true
+      },
+      {
+        "key": "conversation_mentions",
+        "label": "Conversation mentions",
+        "description": "The agent can find your other conversations by title, read one you point it at, and link to them in its answers. Applies to conversations started after you turn it on.",
+        "enabled": true
+      },
+      {
+        "key": "message_edits",
+        "label": "Message edits",
+        "description": "The agent can edit its earlier messages when they got answered or became wrong: it strikes the outdated part and adds a short note, and the message shows as edited. Applies to conversations started after you turn it on.",
+        "enabled": true
+      },
+      {
+        "key": "factories",
+        "label": "Factories",
+        "description": "Shows Factories in the sidebar: named groups of automations that together run a software development process. Needs an automation service that supports factories.",
+        "enabled": true
+      },
+      {
+        "key": "projects",
+        "label": "Projects",
+        "description": "Group conversations into projects: a coordinator conversation hands work to other conversations, hears back from them, and keeps project files and memory. Turned off, the projects API is unavailable and project tools refuse to run; existing projects are kept.",
+        "enabled": true
+      }
+    ],
+    "truncated": false
+  },
+  "elapsed_ms": 186
+}

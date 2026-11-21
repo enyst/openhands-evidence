@@ -1,0 +1,150 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/projects/d58ed7110c764497bde8eafbd7997bb2/conversations",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "3233",
+      "content-type": "application/json"
+    },
+    "body": {
+      "project_id": "d58ed7110c764497bde8eafbd7997bb2",
+      "coordinator": {
+        "conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+        "title": "qa-f36-cat",
+        "execution_status": "finished",
+        "attention": "idle",
+        "resolved": null,
+        "resolve_note": null,
+        "turn": "finished",
+        "ask": null,
+        "pull_requests": [],
+        "automation_id": null,
+        "parent_conversation_id": null,
+        "created_at": "2026-11-21T13:05:40.039650Z",
+        "updated_at": "2026-11-21T13:08:18.975903Z"
+      },
+      "conversations": [
+        {
+          "conversation_id": "ab3c22017adb4aa59aaa7fc1a0469fa6",
+          "title": "qa-f36-asks",
+          "execution_status": "waiting_for_confirmation",
+          "attention": "needs_you",
+          "resolved": null,
+          "resolve_note": null,
+          "turn": null,
+          "ask": null,
+          "pull_requests": [],
+          "automation_id": null,
+          "parent_conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+          "created_at": "2026-11-21T13:05:57.307838Z",
+          "updated_at": "2026-11-21T13:06:02.735303Z"
+        },
+        {
+          "conversation_id": "c4db1fa5859c441b92ec96dcd609618c",
+          "title": "qa-f36-judge-down",
+          "execution_status": "finished",
+          "attention": "asking",
+          "resolved": null,
+          "resolve_note": null,
+          "turn": "asking",
+          "ask": "17 times 23 is 391.",
+          "pull_requests": [],
+          "automation_id": null,
+          "parent_conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+          "created_at": "2026-11-21T13:08:05.513906Z",
+          "updated_at": "2026-11-21T13:08:14.563202Z"
+        },
+        {
+          "conversation_id": "9e37c058236e4da6920b2250a953c54f",
+          "title": "qa-f36-handoff",
+          "execution_status": "finished",
+          "attention": "asking",
+          "resolved": null,
+          "resolve_note": null,
+          "turn": "asking",
+          "ask": "Tell me which one you prefer.",
+          "pull_requests": [],
+          "automation_id": null,
+          "parent_conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+          "created_at": "2026-11-21T13:07:39.150671Z",
+          "updated_at": "2026-11-21T13:07:50.322223Z"
+        },
+        {
+          "conversation_id": "ea8024e278354163b1189b7172ac63aa",
+          "title": "qa-f36-prs",
+          "execution_status": "finished",
+          "attention": "idle",
+          "resolved": null,
+          "resolve_note": null,
+          "turn": "finished",
+          "ask": null,
+          "pull_requests": [
+            {
+              "owner": "qa-f36",
+              "repo": "qa-repo",
+              "number": 41
+            }
+          ],
+          "automation_id": null,
+          "parent_conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+          "created_at": "2026-11-21T13:08:17.974309Z",
+          "updated_at": "2026-11-21T13:08:33.253911Z"
+        },
+        {
+          "conversation_id": "0dd85e24c242443cb0bd4775c63c51d4",
+          "title": "qa-f36-two-haiku",
+          "execution_status": "finished",
+          "attention": "resolved",
+          "resolved": "auto",
+          "resolve_note": "0.95 nothing",
+          "turn": "finished",
+          "ask": null,
+          "pull_requests": [],
+          "automation_id": null,
+          "parent_conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+          "created_at": "2026-11-21T13:07:52.075555Z",
+          "updated_at": "2026-11-21T13:08:04.439381Z"
+        },
+        {
+          "conversation_id": "4631251e993c4ce1b902633f8ac176f6",
+          "title": "qa-f36-answer",
+          "execution_status": "finished",
+          "attention": "resolved",
+          "resolved": "auto",
+          "resolve_note": "1.00 nothing",
+          "turn": "finished",
+          "ask": null,
+          "pull_requests": [],
+          "automation_id": null,
+          "parent_conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+          "created_at": "2026-11-21T13:07:38.009866Z",
+          "updated_at": "2026-11-21T13:07:41.544428Z"
+        },
+        {
+          "conversation_id": "3b84df8d24574f35b28abaa8cba22860",
+          "title": "qa-f36-w2",
+          "execution_status": "finished",
+          "attention": "resolved",
+          "resolved": "auto",
+          "resolve_note": "0.95 nothing",
+          "turn": "finished",
+          "ask": null,
+          "pull_requests": [],
+          "automation_id": null,
+          "parent_conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+          "created_at": "2026-11-21T13:06:11.940761Z",
+          "updated_at": "2026-11-21T13:07:40.171061Z"
+        }
+      ]
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 73
+}

@@ -1,0 +1,28 @@
+$ <scratch>/wt-S/.venv/bin/python <scratch>/wt-S/.agents/skills/verify-sdk/programs/S03/switching.py route
+{"ok": true, "mode": "route", "status": "finished", "active_model": "openai/gpt-4.1", "requests": {"agent": 1, "classifier": 1, "cheap": 0, "strong": 1}, "classifier_saw_task": true, "stats": ["agent", "classifier:classifier", "condenser", "profile:strong"], "observations": [{"tool": "route_task_to_model", "error": false, "text": "Classified task as 'hard debugging' and switched to LLM profile 'strong' (model 'openai/gpt-4.1'). Future agent steps will use this profile."}, {"tool": "finish", "error": false, "text": "done on strong"}], "bad_class": {"tool": "route_task_to_model", "error": true, "text": "[An error occurred during execution.]\nClassifier did not pick a valid category (reply: '7'); refusing to silently route to a default. Retry the tool or fix the meta-profile classes."}, "missing_classifier": {"tool": "route_task_to_model", "error": true, "text": "[An error occurred during execution.]\nFailed to load classifier profile 'no-classifier': Profile `no-classifier` not found. Available profiles: strong.json, classifier.json, cheap.json"}}
+
+[11/21/26 13:29:34] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+[11/21/26 13:29:35] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+[11/21/26 13:29:35] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+
+[exit 0]
+$ <scratch>/wt-S/.venv/bin/python <scratch>/wt-S/.agents/skills/verify-sdk/programs/S03/switching.py route-direct
+{"ok": true, "mode": "route-direct", "status": "finished", "active_model": "openai/gpt-4.1-nano", "requests": {"agent": 1, "classifier": 1, "cheap": 1, "strong": 0}, "classifier_saw_task": true, "stats": ["agent", "classifier:classifier", "condenser", "profile:cheap"], "observations": [{"tool": "route_task_to_model", "error": false, "text": "Classified task as 'model: cheap' and switched to LLM profile 'cheap' (model 'openai/gpt-4.1-nano'). Future agent steps will use this profile."}, {"tool": "finish", "error": false, "text": "done on cheap"}], "bad_class": {"tool": "route_task_to_model", "error": true, "text": "[An error occurred during execution.]\nClassifier reply did not resolve to a saved LLM profile (reply: '7'); refusing to silently route to a default. Retry the tool or extend the model table."}, "missing_classifier": {"tool": "route_task_to_model", "error": true, "text": "[An error occurred during execution.]\nFailed to load classifier profile 'no-classifier': Profile `no-classifier` not found. Available profiles: strong.json, classifier.json, cheap.json"}}
+
+[11/21/26 13:29:43] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+[11/21/26 13:29:43] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+[11/21/26 13:29:44] WARNING  No persistence_dir provided; falling   state.py:688
+                             back to InMemoryFileStore. EventLog                
+                             data will not persist across requests.             
+
+[exit 0]

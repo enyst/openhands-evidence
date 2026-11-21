@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/api/projects/e856136b15124f9391051f28bb67caac/conversations/7be6df06-e13f-4ddf-8b6e-04759cbe2b03",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-length": "40",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Conversation not in project"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 75
+}

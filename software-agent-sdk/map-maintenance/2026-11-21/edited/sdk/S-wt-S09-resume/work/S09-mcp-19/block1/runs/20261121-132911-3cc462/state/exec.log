@@ -1,0 +1,11 @@
+$ <scratch>/wt-S/.venv/bin/python <scratch>/wt-S/.agents/skills/verify-sdk/programs/S09/runtime.py resume
+{"ok": true, "mode": "resume", "first_texts": ["[Tool 'verify_echo' executed.]echo: one", "done"], "persisted_mcp_config": ["verify"], "resumed_first_call_tools": ["finish", "verify_add", "verify_counter", "verify_die", "verify_echo", "verify_fail", "verify_getenv", "verify_headers", "verify_kind_echo", "verify_nested", "verify_picture", "verify_register_extra", "verify_register_late", "verify_remove_extra", "verify_reverse", "verify_session", "verify_slow", "verify_structured"], "resumed_texts": ["[Tool 'verify_echo' executed.]echo: one", "done", "[Tool 'verify_echo' executed.]echo: two", "done"], "resumed_second_call_ok": true, "resumed_errors": []}
+
+[11/21/26 13:29:16] INFO     Starting MCP server                transport.py:241
+                             'verify-server' with transport                     
+                             'stdio'                                            
+[11/21/26 13:29:18] INFO     Starting MCP server                transport.py:241
+                             'verify-server' with transport                     
+                             'stdio'                                            
+
+[exit 0]

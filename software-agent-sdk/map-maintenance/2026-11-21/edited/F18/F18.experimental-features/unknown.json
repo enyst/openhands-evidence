@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/api/settings/experimental/qa_f18_unknown",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "enabled": true
+    },
+    "files": []
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-length": "57",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Unknown experimental feature: qa_f18_unknown"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 74
+}

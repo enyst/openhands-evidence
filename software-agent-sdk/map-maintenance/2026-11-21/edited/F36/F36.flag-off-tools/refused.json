@@ -1,0 +1,72 @@
+{
+  "events": [
+    {
+      "id": "acf48011-106c-44dc-81ba-1af1d078f7df",
+      "timestamp": "2026-11-21T13:10:02.219879",
+      "source": "environment",
+      "parent_id": "e7bf9bf2-2929-4859-b99c-e93c7144d00e",
+      "tool_name": "list_workers",
+      "tool_call_id": "call-370def24-66cb-45cd-bcd4-a63ffdac23c3",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "Projects is turned off on this server, so the project tools do nothing until the user turns the feature back on. Tell the user; do not retry."
+          }
+        ],
+        "is_error": true,
+        "conversations": [],
+        "kind": "ListWorkersObservation"
+      },
+      "action_id": "a842abd6-b150-4427-8f83-80a936c4dcb5",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    },
+    {
+      "id": "8a176519-5959-4b46-a812-ef89ee5da747",
+      "timestamp": "2026-11-21T13:10:02.330273",
+      "source": "environment",
+      "parent_id": "acf48011-106c-44dc-81ba-1af1d078f7df",
+      "tool_name": "read_project_memory",
+      "tool_call_id": "call-b5f1648f-6a55-456b-92f6-98fb4f3989e4",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "Projects is turned off on this server, so the project tools do nothing until the user turns the feature back on. Tell the user; do not retry."
+          }
+        ],
+        "is_error": true,
+        "kind": "ReadProjectMemoryObservation"
+      },
+      "action_id": "e7bf9bf2-2929-4859-b99c-e93c7144d00e",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    },
+    {
+      "id": "b7ca1a8b-e46b-4e2a-86c8-b36805a08186",
+      "timestamp": "2026-11-21T13:12:50.369274",
+      "source": "environment",
+      "parent_id": "83e630f1-0967-4254-a653-dc5cc3ba357b",
+      "tool_name": "list_workers",
+      "tool_call_id": "call-9db83cea-08f4-4cf2-a36a-eb3c424bc0da",
+      "observation": {
+        "content": [
+          {
+            "cache_prompt": false,
+            "type": "text",
+            "text": "Projects is turned off on this server, so the project tools do nothing until the user turns the feature back on. Tell the user; do not retry."
+          }
+        ],
+        "is_error": true,
+        "conversations": [],
+        "kind": "ListWorkersObservation"
+      },
+      "action_id": "83e630f1-0967-4254-a653-dc5cc3ba357b",
+      "extended_content": [],
+      "kind": "ObservationEvent"
+    }
+  ]
+}

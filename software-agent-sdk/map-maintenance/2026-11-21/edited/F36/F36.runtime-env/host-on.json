@@ -1,0 +1,41 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/projects",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "515",
+      "content-type": "application/json"
+    },
+    "body": {
+      "projects": [
+        {
+          "id": "e856136b15124f9391051f28bb67caac",
+          "name": "qa-f36-renamed",
+          "description": "first",
+          "coordinator_conversation_id": null,
+          "worker_agent_profile_id": null,
+          "created_at": "2026-11-21T13:05:24.652503Z",
+          "updated_at": "2026-11-21T13:05:36.342356Z"
+        },
+        {
+          "id": "d58ed7110c764497bde8eafbd7997bb2",
+          "name": "qa-f36-two",
+          "description": "",
+          "coordinator_conversation_id": "edf2ed783e22454e920dbc264c1856cd",
+          "worker_agent_profile_id": null,
+          "created_at": "2026-11-21T13:05:37.588169Z",
+          "updated_at": "2026-11-21T13:05:40.267770Z"
+        }
+      ]
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 202
+}
