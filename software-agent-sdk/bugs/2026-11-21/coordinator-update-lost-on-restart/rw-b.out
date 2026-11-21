@@ -1,0 +1,30 @@
+RUN=<scratch>/agent-server/20261121-154525-3040-rw-b
+{"ok":true}
+{"ok":true}
+{"ok":true}
+{"ok":true}
+{"ok":true}
+P=6483444b514c44529b9afc5d0469a51e CAT=72218958-c183-4df6-a29f-b348a7768f4a
+M=b3b87671-92a0-4c4f-9264-a5119fcc18f6
+2026-11-21T15:45:43.176Z
+update seen at 2026-11-21T15:45:47.351Z
+{"ok":true}
+restarted at 2026-11-21T15:45:55.021Z
+{"status":"paused","tags":{"project":"6483444b514c44529b9afc5d0469a51e"}}
+{"status":"finished","tags":{"project":"6483444b514c44529b9afc5d0469a51e","turn":"finished","resolved":"auto","resolvenote":"1.00 nothing"}}
+after 2 min at 2026-11-21T15:47:56.427Z
+{"status":"paused","tags":{"project":"6483444b514c44529b9afc5d0469a51e"}}
+{"kind":"SystemPromptEvent","source":"agent","timestamp":"2026-11-21T15:45:47.159377","sender":null,"text":"","action":null,"err":null}
+{"kind":"MessageEvent","source":"user","timestamp":"2026-11-21T15:45:47.181627","sender":"conversation:b3b8767192a04c4f9264a5119fcc18f6","text":"[Update from [qa-rw-member](conversation:b3b8767192a04c4f9264a5119fcc18f6), a conversation in your project, not from the user. It finished its turn; its final m","action":null,"err":null}
+{"kind":"ConversationStateUpdateEvent","source":"environment","timestamp":"2026-11-21T15:45:47.184882","sender":null,"text":"","action":null,"err":null}
+{"kind":"ConversationStateUpdateEvent","source":"environment","timestamp":"2026-11-21T15:45:47.200478","sender":null,"text":"","action":null,"err":null}
+{"kind":"ConversationStateUpdateEvent","source":"environment","timestamp":"2026-11-21T15:45:47.855870","sender":null,"text":"","action":null,"err":null}
+{"kind":"PauseEvent","source":"user","timestamp":"2026-11-21T15:45:47.861486","sender":null,"text":"","action":null,"err":null}
+{"kind":"InterruptEvent","source":"user","timestamp":"2026-11-21T15:45:47.879900","sender":null,"text":"","action":null,"err":null}
+                             `project-coordinator` at                           
+                             roject-coordinator.json                            
+                             project-coordinator agent                          
+                             `project-coordinator`                              
+                             roject-coordinator.json                            
+                             `project-coordinator`                              
+                             roject-coordinator.json                            

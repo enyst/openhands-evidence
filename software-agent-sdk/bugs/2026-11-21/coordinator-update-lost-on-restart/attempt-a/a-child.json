@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/8709d326-1500-45d4-91b8-222072838dd2/children",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "title": "qa-rw-member",
+      "task": "Reply with the single word ok and finish. Do not use tools.",
+      "isolation": "shared"
+    },
+    "files": []
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "content-length": "338",
+      "content-type": "application/json"
+    },
+    "body": {
+      "conversation_id": "7a93f76b-75f6-4fd7-b20c-3c5f432624ff",
+      "parent_conversation_id": "8709d326-1500-45d4-91b8-222072838dd2",
+      "status": "idle",
+      "title": "qa-rw-member",
+      "url": null,
+      "workspace": "<scratch>/agent-server/20261121-154240-5210-rw-a/fixtures/qa-rw-cat",
+      "isolation": "shared"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 273
+}
