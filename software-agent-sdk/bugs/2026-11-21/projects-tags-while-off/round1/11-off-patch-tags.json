@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/api/conversations/78a22f7e-c8a6-4372-bfc3-0ca9ba79664c",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "tags": {
+        "qa": "off",
+        "project": "7a3db837cfd24af09fd40195f0189d3d",
+        "prs": "evil/repo#1",
+        "resolved": "user"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 90
+}

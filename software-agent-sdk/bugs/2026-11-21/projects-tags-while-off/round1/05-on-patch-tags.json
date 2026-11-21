@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/api/conversations/7afc82e5-4eea-4c70-8669-fef00752be72",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "tags": {
+        "qa": "on",
+        "project": "7a3db837cfd24af09fd40195f0189d3d",
+        "prs": "evil/repo#1",
+        "resolved": "user"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "content-length": "89",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "A conversation joins a project only when the project's coordinator starts it"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 117
+}

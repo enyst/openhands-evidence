@@ -1,0 +1,342 @@
+
+### $ control-agent-server api PATCH /api/settings/experimental/projects --json {"enabled": true} --save F36.flag-spoof/01-flag-on
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "PATCH",
+    "path": "/api/settings/experimental/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "enabled": true
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "328",
+      "content-type": "application/json"
+    },
+    "body": {
+      "key": "projects",
+      "label": "Projects",
+      "description": "Group conversations into projects: a coordinator conversation hands work to other conversations, hears back from them, and keeps project files and memory. Turned off, the projects API is unavailable and project tools refuse to run; existing projects are kept.",
+      "enabled": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 71,
+  "saved": "<scratch>/agent-server/20261121-132402-c325/evidence/F36.flag-spoof/01-flag-on.json"
+}
+### exit=0
+PID=7a3db837cfd24af09fd40195f0189d3d
+
+### $ control-agent-server conversation start --no-run --placeholder-agent --tools none --no-autotitle --tag project=7a3db837cfd24af09fd40195f0189d3d --save F36.flag-spoof/03-on-start-tagged
+{
+  "ok": false,
+  "exit": 1,
+  "error": "POST /api/conversations returned 422",
+  "status": 422,
+  "body": {
+    "detail": "A project's conversations are started by its coordinator; leave out the 'project' tag"
+  }
+}
+### exit=1
+CON=7afc82e5-4eea-4c70-8669-fef00752be72
+
+### $ control-agent-server api PATCH /api/conversations/7afc82e5-4eea-4c70-8669-fef00752be72 --json {"tags":{"qa":"on","project":"7a3db837cfd24af09fd40195f0189d3d","prs":"evil/repo#1","resolved":"user"}} --save F36.flag-spoof/05-on-patch-tags
+{
+  "ok": false,
+  "status": 422,
+  "request": {
+    "method": "PATCH",
+    "path": "/api/conversations/7afc82e5-4eea-4c70-8669-fef00752be72",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "tags": {
+        "qa": "on",
+        "project": "7a3db837cfd24af09fd40195f0189d3d",
+        "prs": "evil/repo#1",
+        "resolved": "user"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "content-length": "89",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "A conversation joins a project only when the project's coordinator starts it"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 117,
+  "saved": "<scratch>/agent-server/20261121-132402-c325/evidence/F36.flag-spoof/05-on-patch-tags.json",
+  "hint": "expected <400, got 422"
+}
+### exit=1
+
+### $ control-agent-server api GET /api/conversations/7afc82e5-4eea-4c70-8669-fef00752be72 --save F36.flag-spoof/06-on-get-patched --field tags
+{"qa": "on"}
+### exit=0
+
+### $ control-agent-server api PATCH /api/settings/experimental/projects --json {"enabled": false} --save F36.flag-spoof/07-flag-off
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "PATCH",
+    "path": "/api/settings/experimental/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "enabled": false
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "329",
+      "content-type": "application/json"
+    },
+    "body": {
+      "key": "projects",
+      "label": "Projects",
+      "description": "Group conversations into projects: a coordinator conversation hands work to other conversations, hears back from them, and keeps project files and memory. Turned off, the projects API is unavailable and project tools refuse to run; existing projects are kept.",
+      "enabled": false
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 61,
+  "saved": "<scratch>/agent-server/20261121-132402-c325/evidence/F36.flag-spoof/07-flag-off.json"
+}
+### exit=0
+
+### $ control-agent-server api GET /api/projects/7a3db837cfd24af09fd40195f0189d3d --save F36.flag-spoof/07b-off-get-project
+{
+  "ok": false,
+  "status": 404,
+  "request": {
+    "method": "GET",
+    "path": "/api/projects/7a3db837cfd24af09fd40195f0189d3d",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-length": "36",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Projects are turned off"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 62,
+  "saved": "<scratch>/agent-server/20261121-132402-c325/evidence/F36.flag-spoof/07b-off-get-project.json",
+  "hint": "expected <400, got 404"
+}
+### exit=1
+A=95ae84d3-08c7-44b3-953d-1413815fde64
+
+### $ control-agent-server api GET /api/conversations/95ae84d3-08c7-44b3-953d-1413815fde64 --save F36.flag-spoof/09-off-get-A --field tags
+{"project": "7a3db837cfd24af09fd40195f0189d3d"}
+### exit=0
+B=78a22f7e-c8a6-4372-bfc3-0ca9ba79664c
+
+### $ control-agent-server api PATCH /api/conversations/78a22f7e-c8a6-4372-bfc3-0ca9ba79664c --json {"tags":{"qa":"off","project":"7a3db837cfd24af09fd40195f0189d3d","prs":"evil/repo#1","resolved":"user"}} --save F36.flag-spoof/11-off-patch-tags
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "PATCH",
+    "path": "/api/conversations/78a22f7e-c8a6-4372-bfc3-0ca9ba79664c",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "tags": {
+        "qa": "off",
+        "project": "7a3db837cfd24af09fd40195f0189d3d",
+        "prs": "evil/repo#1",
+        "resolved": "user"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 90,
+  "saved": "<scratch>/agent-server/20261121-132402-c325/evidence/F36.flag-spoof/11-off-patch-tags.json"
+}
+### exit=0
+
+### $ control-agent-server api GET /api/conversations/78a22f7e-c8a6-4372-bfc3-0ca9ba79664c --save F36.flag-spoof/12-off-get-B --field tags
+{"qa": "off", "project": "7a3db837cfd24af09fd40195f0189d3d", "prs": "evil/repo#1", "resolved": "user"}
+### exit=0
+
+### $ control-agent-server api PATCH /api/settings/experimental/projects --json {"enabled": true} --save F36.flag-spoof/13-flag-on-again
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "PATCH",
+    "path": "/api/settings/experimental/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "enabled": true
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "328",
+      "content-type": "application/json"
+    },
+    "body": {
+      "key": "projects",
+      "label": "Projects",
+      "description": "Group conversations into projects: a coordinator conversation hands work to other conversations, hears back from them, and keeps project files and memory. Turned off, the projects API is unavailable and project tools refuse to run; existing projects are kept.",
+      "enabled": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 94,
+  "saved": "<scratch>/agent-server/20261121-132402-c325/evidence/F36.flag-spoof/13-flag-on-again.json"
+}
+### exit=0
+
+### $ control-agent-server api GET /api/projects/7a3db837cfd24af09fd40195f0189d3d/conversations --save F36.flag-spoof/14-on-project-conversations
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "GET",
+    "path": "/api/projects/7a3db837cfd24af09fd40195f0189d3d/conversations",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "789",
+      "content-type": "application/json"
+    },
+    "body": {
+      "project_id": "7a3db837cfd24af09fd40195f0189d3d",
+      "coordinator": null,
+      "conversations": [
+        {
+          "conversation_id": "95ae84d308c744b3953d1413815fde64",
+          "title": null,
+          "execution_status": "idle",
+          "attention": "idle",
+          "resolved": null,
+          "resolve_note": null,
+          "turn": null,
+          "ask": null,
+          "pull_requests": [],
+          "automation_id": null,
+          "parent_conversation_id": null,
+          "created_at": "2026-11-21T13:24:41.454367Z",
+          "updated_at": "2026-11-21T13:24:41.454371Z"
+        },
+        {
+          "conversation_id": "78a22f7ec8a64372bfc30ca9ba79664c",
+          "title": null,
+          "execution_status": "idle",
+          "attention": "resolved",
+          "resolved": "user",
+          "resolve_note": null,
+          "turn": null,
+          "ask": null,
+          "pull_requests": [
+            {
+              "owner": "evil",
+              "repo": "repo",
+              "number": 1
+            }
+          ],
+          "automation_id": null,
+          "parent_conversation_id": null,
+          "created_at": "2026-11-21T13:24:42.293290Z",
+          "updated_at": "2026-11-21T13:24:42.758995Z"
+        }
+      ]
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 72,
+  "saved": "<scratch>/agent-server/20261121-132402-c325/evidence/F36.flag-spoof/14-on-project-conversations.json"
+}
+### exit=0
+
+### $ control-agent-server api GET /api/conversations/95ae84d3-08c7-44b3-953d-1413815fde64 --save F36.flag-spoof/15-on-get-A --field tags
+{"project": "7a3db837cfd24af09fd40195f0189d3d"}
+### exit=0
+
+### $ control-agent-server api GET /api/conversations/78a22f7e-c8a6-4372-bfc3-0ca9ba79664c --save F36.flag-spoof/16-on-get-B --field tags
+{"qa": "off", "project": "7a3db837cfd24af09fd40195f0189d3d", "prs": "evil/repo#1", "resolved": "user"}
+### exit=0
+
+### $ control-agent-server api GET /api/conversations/7afc82e5-4eea-4c70-8669-fef00752be72 --save F36.flag-spoof/17-on-get-CON --field tags
+{"qa": "on"}
+### exit=0
+
+### $ control-agent-server api PATCH /api/conversations/78a22f7e-c8a6-4372-bfc3-0ca9ba79664c --json {"tags":{"qa":"cleared"}} --save F36.flag-spoof/18-on-patch-clear-B
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "PATCH",
+    "path": "/api/conversations/78a22f7e-c8a6-4372-bfc3-0ca9ba79664c",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "tags": {
+        "qa": "cleared"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 113,
+  "saved": "<scratch>/agent-server/20261121-132402-c325/evidence/F36.flag-spoof/18-on-patch-clear-B.json"
+}
+### exit=0
+
+### $ control-agent-server api GET /api/conversations/78a22f7e-c8a6-4372-bfc3-0ca9ba79664c --save F36.flag-spoof/19-on-get-B-after-clear --field tags
+{"qa": "cleared", "resolved": "user", "prs": "evil/repo#1", "project": "7a3db837cfd24af09fd40195f0189d3d"}
+### exit=0
