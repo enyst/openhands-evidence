@@ -1,0 +1,5 @@
+(() => { const r = e => { if(!e) return null; const b=e.getBoundingClientRect(); return {x:+b.x.toFixed(1),y:+b.y.toFixed(1),w:+b.width.toFixed(1),h:+b.height.toFixed(1),r:+b.right.toFixed(1),b:+b.bottom.toFixed(1)}; };
+ const ov=(a,b)=>!!(a&&b&&a.x<b.r&&b.x<a.r&&a.y<b.b&&b.y<a.b);
+ return [...document.querySelectorAll('[data-testid=automation-activity-log] time')].map(t => { const row=t.closest('a,div.flex.items-center.justify-between'); const left=t.parentElement.parentElement; const right=left.nextElementSibling;
+  const T=r(t), C=r(row.querySelector('[data-testid=run-cost]')), P=r(row.querySelector('[data-testid=run-phase]')), I=r(row.querySelector('[data-testid=run-conversation-indicator]'));
+  return {time:t.textContent, vw:innerWidth, row:r(row), left:r(left), right:r(right), timeR:T, cost:C, phase:P, icon:I, timeLines: Math.round(T.h/parseFloat(getComputedStyle(t).lineHeight)), timeOverCost:ov(T,C), timeOverPhase:ov(T,P), timeOverIcon:ov(T,I), docScrollW:document.documentElement.scrollWidth}; }); })()
