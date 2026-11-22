@@ -1,0 +1,221 @@
+++ control-agent-server launch --new --name f36-seeded --print-run
++ SEEDED=/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded
++ trap 'control-agent-server stop --run "$SEEDED" >/dev/null' EXIT
++ control-agent-server api GET /api/agent-profiles --run /tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded --check profiles.0.name eq default --check profiles.0.llm_profile_ref eq default
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "GET",
+    "path": "/api/agent-profiles",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "231",
+      "content-type": "application/json"
+    },
+    "body": {
+      "profiles": [
+        {
+          "id": "8ac3cdff-2af1-4efa-ae0b-6316051efe15",
+          "name": "default",
+          "agent_kind": "openhands",
+          "revision": 0,
+          "llm_profile_ref": "default",
+          "mcp_server_refs": null
+        }
+      ],
+      "active_agent_profile_id": "8ac3cdff-2af1-4efa-ae0b-6316051efe15"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 137,
+  "checks": [
+    {
+      "check": "profiles.0.name eq default",
+      "ok": true,
+      "actual": "default"
+    },
+    {
+      "check": "profiles.0.llm_profile_ref eq default",
+      "ok": true,
+      "actual": "default"
+    }
+  ]
+}
++ control-agent-server llm set --run /tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded --profile qa-f36-stub --model deepseek/deepseek-v4-flash --no-api-key --no-validate
+{
+  "ok": true,
+  "profile": {
+    "profile": "qa-f36-stub",
+    "model": "deepseek/deepseek-v4-flash",
+    "saved": 201,
+    "activated": 200
+  }
+}
++ control-agent-server api PATCH /api/settings/experimental/projects --run /tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded --json '{"enabled": true}' --expect 200
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "PATCH",
+    "path": "/api/settings/experimental/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "enabled": true
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "328",
+      "content-type": "application/json"
+    },
+    "body": {
+      "key": "projects",
+      "label": "Projects",
+      "description": "Group conversations into projects: a coordinator conversation hands work to other conversations, hears back from them, and keeps project files and memory. Turned off, the projects API is unavailable and project tools refuse to run; existing projects are kept.",
+      "enabled": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 70
+}
++ mkdir -p /tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded/fixtures/qa-f36-seeded
++ control-agent-server api POST /api/projects --run /tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded --json '{"name": "qa-f36-seeded", "coordinator": {"working_dir": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded/fixtures/qa-f36-seeded"}}' --expect 201 --save F36.coordinator-active-llm/post
+{
+  "ok": false,
+  "status": 422,
+  "request": {
+    "method": "POST",
+    "path": "/api/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "name": "qa-f36-seeded",
+      "coordinator": {
+        "working_dir": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded/fixtures/qa-f36-seeded"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "content-length": "130",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Cannot start the coordinator from agent profile aa4de8e9-9ac2-4755-902b-b9e08c52444d: LLM profile 'default' not found"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 2272,
+  "saved": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded/evidence/F36.coordinator-active-llm/post.json",
+  "hint": "expected 201, got 422"
+}
++ control-agent-server api GET /api/agent-profiles/project-coordinator --run /tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded --check profile.llm_profile_ref eq qa-f36-stub
+{
+  "ok": false,
+  "status": 200,
+  "request": {
+    "method": "GET",
+    "path": "/api/agent-profiles/project-coordinator",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "1023",
+      "content-type": "application/json"
+    },
+    "body": {
+      "name": "project-coordinator",
+      "profile": {
+        "schema_version": 4,
+        "agent_kind": "openhands",
+        "id": "aa4de8e9-9ac2-4755-902b-b9e08c52444d",
+        "name": "project-coordinator",
+        "revision": 0,
+        "mcp_server_refs": null,
+        "secret_refs": null,
+        "integration_refs": null,
+        "sandbox": null,
+        "llm_profile_ref": "default",
+        "agent": "CodeActAgent",
+        "tools": [
+          {
+            "name": "terminal",
+            "params": {}
+          },
+          {
+            "name": "file_editor",
+            "params": {}
+          },
+          {
+            "name": "task_tracker",
+            "params": {}
+          }
+        ],
+        "persona": null,
+        "system_message_suffix": null,
+        "disabled_skills": [],
+        "public_skills": null,
+        "condenser": {
+          "condenser_kind": "llm_summarizing",
+          "enabled": true,
+          "max_size": 240,
+          "max_tokens": null,
+          "keep_first": 2,
+          "minimum_progress": 0.1,
+          "hard_context_reset_max_retries": 5,
+          "hard_context_reset_context_scaling": 0.8
+        },
+        "verification": {
+          "critic_enabled": false,
+          "critic_mode": "finish_and_message",
+          "enable_iterative_refinement": false,
+          "critic_threshold": 0.6,
+          "max_refinement_iterations": 3,
+          "critic_server_url": null,
+          "critic_model_name": null
+        },
+        "enable_classify_and_switch_llm_tool": false,
+        "meta_profile_ref": null,
+        "tool_concurrency_limit": 1
+      }
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 103,
+  "checks": [
+    {
+      "check": "profile.llm_profile_ref eq qa-f36-stub",
+      "ok": false,
+      "actual": "default"
+    }
+  ],
+  "hint": "failed check: profile.llm_profile_ref eq qa-f36-stub"
+}
++ control-agent-server stop --run /tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded
+{
+  "ok": true,
+  "run": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded",
+  "helpers": [],
+  "server": "terminated",
+  "port_closed": true,
+  "orphans_reaped": [],
+  "evidence": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded/evidence",
+  "evidence_files": 1
+}
++ control-agent-server stop --run /tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded

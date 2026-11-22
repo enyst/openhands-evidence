@@ -1,0 +1,205 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/search --arg 100 \
+  --check cwd_is_workspace eq true \
+  --check python.glob_dir.count eq 2 --check python.glob_dir_in_path.files.0 eq src/pkg/new.py \
+  --check rg.glob_dir.count eq 2 --check rg.glob_dir_in_path.files.0 eq src/pkg/new.py
+{
+  "ok": true,
+  "rg_available": true,
+  "rg": {
+    "glob_py": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) matching pattern '**/*.py' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr70"
+    },
+    "glob_in_path": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f099.txt",
+        "many/f098.txt",
+        "many/f097.txt",
+        "many/f096.txt",
+        "many/f095.txt"
+      ],
+      "truncated": false,
+      "text": "Found 100 file(s) matching pattern '*.txt' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace/many':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob"
+    },
+    "grep_include": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) containing pattern 'def \\w+' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace' (filtered by '*.py'):\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scrat"
+    },
+    "grep_many": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f099.txt",
+        "many/f098.txt",
+        "many/f097.txt",
+        "many/f096.txt",
+        "many/f095.txt"
+      ],
+      "truncated": false,
+      "text": "Found 100 file(s) containing pattern 'needle' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace/many':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-g"
+    },
+    "grep_secret": {
+      "is_error": false,
+      "count": 1,
+      "files": [
+        "creds.txt"
+      ],
+      "truncated": false,
+      "text": "Found 1 file(s) containing pattern '<secret-hidden>' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14"
+    },
+    "glob_dir": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) matching pattern 'src/**/*.py' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-"
+    },
+    "glob_dir_in_path": {
+      "is_error": false,
+      "count": 1,
+      "files": [
+        "src/pkg/new.py"
+      ],
+      "truncated": false,
+      "text": "Found 1 file(s) matching pattern 'pkg/*.py' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace/src':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob"
+    },
+    "patch": {
+      "is_error": false,
+      "count": 0,
+      "files": [],
+      "truncated": null,
+      "text": "Done!"
+    }
+  },
+  "python": {
+    "glob_py": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) matching pattern '**/*.py' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr70"
+    },
+    "glob_in_path": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f099.txt",
+        "many/f098.txt",
+        "many/f097.txt",
+        "many/f096.txt",
+        "many/f095.txt"
+      ],
+      "truncated": false,
+      "text": "Found 100 file(s) matching pattern '*.txt' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace/many':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob"
+    },
+    "grep_include": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) containing pattern 'def \\w+' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace' (filtered by '*.py'):\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scrat"
+    },
+    "grep_many": {
+      "is_error": false,
+      "count": 100,
+      "files": [
+        "many/f099.txt",
+        "many/f098.txt",
+        "many/f097.txt",
+        "many/f096.txt",
+        "many/f095.txt"
+      ],
+      "truncated": false,
+      "text": "Found 100 file(s) containing pattern 'needle' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace/many':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-g"
+    },
+    "grep_secret": {
+      "is_error": false,
+      "count": 1,
+      "files": [
+        "creds.txt"
+      ],
+      "truncated": false,
+      "text": "Found 1 file(s) containing pattern '<secret-hidden>' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14"
+    },
+    "glob_dir": {
+      "is_error": false,
+      "count": 2,
+      "files": [
+        "src/pkg/new.py",
+        "src/old.py"
+      ],
+      "truncated": false,
+      "text": "Found 2 file(s) matching pattern 'src/**/*.py' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-"
+    },
+    "glob_dir_in_path": {
+      "is_error": false,
+      "count": 1,
+      "files": [
+        "src/pkg/new.py"
+      ],
+      "truncated": false,
+      "text": "Found 1 file(s) matching pattern 'pkg/*.py' in '/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob-pr7053/work/S14-core-tools-15/block1/runs/20261122-083332-ef630a/workspace/src':\n/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/sdk/s14-glob"
+    }
+  },
+  "same_files": true,
+  "same_truncated": true,
+  "cwd_is_workspace": true,
+  "newest_first": true,
+  "added_file": "token sk-live-4242abcd",
+  "secret_in_observations": false,
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "cwd_is_workspace eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "python.glob_dir.count eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "python.glob_dir_in_path.files.0 eq src/pkg/new.py",
+      "ok": true,
+      "actual": "src/pkg/new.py"
+    },
+    {
+      "check": "rg.glob_dir.count eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "rg.glob_dir_in_path.files.0 eq src/pkg/new.py",
+      "ok": true,
+      "actual": "src/pkg/new.py"
+    }
+  ]
+}
+
+[exit 0 after 6s]

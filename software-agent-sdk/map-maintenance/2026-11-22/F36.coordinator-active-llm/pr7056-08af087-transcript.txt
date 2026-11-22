@@ -1,0 +1,214 @@
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "GET",
+    "path": "/api/agent-profiles",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "231",
+      "content-type": "application/json"
+    },
+    "body": {
+      "profiles": [
+        {
+          "id": "dcb0d2a7-f7c9-4c60-88d3-399d2189e7f7",
+          "name": "default",
+          "agent_kind": "openhands",
+          "revision": 0,
+          "llm_profile_ref": "default",
+          "mcp_server_refs": null
+        }
+      ],
+      "active_agent_profile_id": "dcb0d2a7-f7c9-4c60-88d3-399d2189e7f7"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 599,
+  "checks": [
+    {
+      "check": "profiles.0.name eq default",
+      "ok": true,
+      "actual": "default"
+    },
+    {
+      "check": "profiles.0.llm_profile_ref eq default",
+      "ok": true,
+      "actual": "default"
+    }
+  ]
+}
+{
+  "ok": true,
+  "profile": {
+    "profile": "qa-f36-stub",
+    "model": "deepseek/deepseek-v4-flash",
+    "saved": 201,
+    "activated": 200
+  }
+}
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "PATCH",
+    "path": "/api/settings/experimental/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "enabled": true
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "328",
+      "content-type": "application/json"
+    },
+    "body": {
+      "key": "projects",
+      "label": "Projects",
+      "description": "Group conversations into projects: a coordinator conversation hands work to other conversations, hears back from them, and keeps project files and memory. Turned off, the projects API is unavailable and project tools refuse to run; existing projects are kept.",
+      "enabled": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 75
+}
+{
+  "ok": true,
+  "status": 201,
+  "request": {
+    "method": "POST",
+    "path": "/api/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "name": "qa-f36-seeded",
+      "coordinator": {
+        "working_dir": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082756-b0a1-f36-seeded-fix/fixtures/qa-f36-seeded"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "content-length": "263",
+      "content-type": "application/json"
+    },
+    "body": {
+      "id": "147ff55752d9467e84bda4d33c775b92",
+      "name": "qa-f36-seeded",
+      "description": "",
+      "coordinator_conversation_id": "18300d13f48a4827a667e48aca74e520",
+      "worker_agent_profile_id": null,
+      "created_at": "2026-11-22T08:28:13.287728Z",
+      "updated_at": "2026-11-22T08:28:15.544585Z"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 2360,
+  "saved": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082756-b0a1-f36-seeded-fix/evidence/F36.coordinator-active-llm/post.json"
+}
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "GET",
+    "path": "/api/agent-profiles/project-coordinator",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "1027",
+      "content-type": "application/json"
+    },
+    "body": {
+      "name": "project-coordinator",
+      "profile": {
+        "schema_version": 4,
+        "agent_kind": "openhands",
+        "id": "9fd4f401-46b6-411a-a796-b8c9973b620b",
+        "name": "project-coordinator",
+        "revision": 0,
+        "mcp_server_refs": null,
+        "secret_refs": null,
+        "integration_refs": null,
+        "sandbox": null,
+        "llm_profile_ref": "qa-f36-stub",
+        "agent": "CodeActAgent",
+        "tools": [
+          {
+            "name": "terminal",
+            "params": {}
+          },
+          {
+            "name": "file_editor",
+            "params": {}
+          },
+          {
+            "name": "task_tracker",
+            "params": {}
+          }
+        ],
+        "persona": null,
+        "system_message_suffix": null,
+        "disabled_skills": [],
+        "public_skills": null,
+        "condenser": {
+          "condenser_kind": "llm_summarizing",
+          "enabled": true,
+          "max_size": 240,
+          "max_tokens": null,
+          "keep_first": 2,
+          "minimum_progress": 0.1,
+          "hard_context_reset_max_retries": 5,
+          "hard_context_reset_context_scaling": 0.8
+        },
+        "verification": {
+          "critic_enabled": false,
+          "critic_mode": "finish_and_message",
+          "enable_iterative_refinement": false,
+          "critic_threshold": 0.6,
+          "max_refinement_iterations": 3,
+          "critic_server_url": null,
+          "critic_model_name": null
+        },
+        "enable_classify_and_switch_llm_tool": false,
+        "meta_profile_ref": null,
+        "tool_concurrency_limit": 1
+      }
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 100,
+  "checks": [
+    {
+      "check": "profile.llm_profile_ref eq qa-f36-stub",
+      "ok": true,
+      "actual": "qa-f36-stub"
+    }
+  ]
+}
+{
+  "ok": true,
+  "run": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082756-b0a1-f36-seeded-fix",
+  "helpers": [],
+  "server": "terminated",
+  "port_closed": true,
+  "orphans_reaped": [],
+  "evidence": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082756-b0a1-f36-seeded-fix/evidence",
+  "evidence_files": 1
+}

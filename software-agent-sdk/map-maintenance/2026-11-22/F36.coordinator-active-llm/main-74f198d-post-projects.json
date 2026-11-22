@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/projects",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "name": "qa-f36-seeded",
+      "coordinator": {
+        "working_dir": "/tmp/claude-0/-home-user/9ddc1e52-a476-546b-b999-20d8b63470ad/scratchpad/agent-server/20261122-082720-c235-f36-seeded/fixtures/qa-f36-seeded"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "content-length": "130",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Cannot start the coordinator from agent profile aa4de8e9-9ac2-4755-902b-b9e08c52444d: LLM profile 'default' not found"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 2272
+}
