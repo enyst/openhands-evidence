@@ -1,0 +1,47 @@
+{
+  "file": "F09-model-switching-plugins.md",
+  "bullet": "Preconditions",
+  "ids": [],
+  "line": 157,
+  "script": "control-agent-server llm preset deepseek\nENC=$(control-agent-server api GET /api/profiles/deepseek-flash --header 'X-Expose-Secrets: encrypted' --field config.api_key --unsafe-unredacted)\ntest \"${ENC#gAAAAA}\" != \"$ENC\"\nMKT=$(control-agent-server fixture marketplace --name qa-f09-mkt --print-path)\nCID=$(control-agent-server conversation start --tools none --no-autotitle --print-id)\ncontrol-agent-server api GET \"/api/conversations/$CID\" --check agent.llm.model eq deepseek/deepseek-flash --check agent.llm.usage_id eq default --quiet\n",
+  "exit_code": 1,
+  "elapsed_ms": 3425,
+  "failed_line": 6,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$CID\" --check agent.llm.model eq deepseek/deepseek-flash --check agent.llm.usage_id eq default --quiet",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/03bf5031-5fde-4fcb-a647-2230365e858b",
+      "query": [],
+      "auth": "header",
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "5232",
+        "content-type": "application/json"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 55,
+    "checks": [
+      {
+        "check": "agent.llm.model eq deepseek/deepseek-flash",
+        "ok": false,
+        "actual": "litellm_proxy/deepseek-v4.1-flash"
+      },
+      {
+        "check": "agent.llm.usage_id eq default",
+        "ok": true,
+        "actual": "default"
+      }
+    ],
+    "hint": "failed check: agent.llm.model eq deepseek/deepseek-flash"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"via\": \"proxy\",\n  \"profiles\": [\n    {\n      \"profile\": \"deepseek-flash\",\n      \"model\": \"litellm_proxy/deepseek-v4.1-flash\",\n      \"validate\": {\n        \"status\": 200,\n        \"body\": {\n          \"valid\": true,\n          \"error\": null\n        }\n      },\n      \"saved\": 201,\n      \"activated\": 200\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/03bf5031-5fde-4fcb-a647-2230365e858b\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"5232\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 55,\n  \"checks\": [\n    {\n      \"check\": \"agent.llm.model eq deepseek/deepseek-flash\",\n      \"ok\": false,\n      \"actual\": \"litellm_proxy/deepseek-v4.1-flash\"\n    },\n    {\n      \"check\": \"agent.llm.usage_id eq default\",\n      \"ok\": true,\n      \"actual\": \"default\"\n    }\n  ],\n  \"hint\": \"failed check: agent.llm.model eq deepseek/deepseek-flash\"\n}\n",
+  "stderr": ""
+}

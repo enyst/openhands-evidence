@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "mode": "tmux",
+  "execution_status": "finished",
+  "steps": {
+    "slow_prompt": {
+      "exit_code": 0,
+      "text": "\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-090248-454122/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "heredoc": {
+      "exit_code": 0,
+      "text": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\n\nheredoc-body-line\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-090248-454122/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "next": {
+      "exit_code": 0,
+      "text": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-090248-454122/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "third": {
+      "exit_code": 0,
+      "text": "third\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-090248-454122/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    }
+  },
+  "_exit": 0,
+  "_seconds": 8.2,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "steps.heredoc.text contains heredoc-body-line",
+      "ok": true,
+      "actual": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\n\nheredoc-body-line\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-ho"
+    },
+    {
+      "check": "steps.next.text contains next-command",
+      "ok": true,
+      "actual": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-090248-454122/workspace]\n["
+    },
+    {
+      "check": "steps.third.text contains third",
+      "ok": true,
+      "actual": "third\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-090248-454122/workspace]\n[Python "
+    },
+    {
+      "check": "steps.next.text not-contains Previous command outputs are truncated",
+      "ok": true,
+      "actual": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-090248-454122/workspace]\n["
+    },
+    {
+      "check": "steps.third.text not-contains Previous command outputs are truncated",
+      "ok": true,
+      "actual": "third\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-090248-454122/workspace]\n[Python "
+    }
+  ]
+}

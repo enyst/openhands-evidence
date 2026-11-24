@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/acp/models",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "agent_settings": {
+        "agent_kind": "acp",
+        "acp_server": "antigravity"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "278",
+      "content-type": "application/json"
+    },
+    "body": {
+      "agent_name": null,
+      "agent_version": null,
+      "current_model_id": null,
+      "available_models": [],
+      "current_effort": null,
+      "available_efforts": [],
+      "efforts_by_model": {},
+      "supports_runtime_model_switch": false,
+      "error": {
+        "code": "ACPSpawnError",
+        "detail": "[Errno 2] No such file or directory: 'agy'"
+      }
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 100
+}

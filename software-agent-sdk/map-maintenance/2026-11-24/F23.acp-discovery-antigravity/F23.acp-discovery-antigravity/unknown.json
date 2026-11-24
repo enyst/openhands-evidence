@@ -1,0 +1,41 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/acp/models",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "agent_settings": {
+        "agent_kind": "acp",
+        "acp_server": "qa-f23-nope"
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "content-length": "339",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": [
+        {
+          "type": "literal_error",
+          "loc": [
+            "body",
+            "agent_settings",
+            "acp_server"
+          ],
+          "msg": "Input should be 'claude-code', 'codex', 'gemini-cli', 'antigravity', 'kimi-code', 'pi', 'opencode' or 'custom'",
+          "input": "qa-f23-nope",
+          "ctx": {
+            "expected": "'claude-code', 'codex', 'gemini-cli', 'antigravity', 'kimi-code', 'pi', 'opencode' or 'custom'"
+          }
+        }
+      ]
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 69
+}

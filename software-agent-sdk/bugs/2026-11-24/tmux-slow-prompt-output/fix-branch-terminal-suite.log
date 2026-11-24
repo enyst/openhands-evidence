@@ -1,0 +1,79 @@
+/home/user/software-agent-sdk/.venv/lib/python3.13/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.2.0, pluggy-1.6.0
+rootdir: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/fix-tmux
+configfile: pyproject.toml
+plugins: libtmux-0.62.0, asyncio-1.5.0, forked-1.7.5, xdist-3.8.0, anyio-4.14.2, timeout-2.4.0, cov-7.1.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 525 items
+
+tests/tools/terminal/test_conversation_cleanup.py .......                [  1%]
+tests/tools/terminal/test_env.py .............                           [  3%]
+tests/tools/terminal/test_escape_filter.py ............................. [  9%]
+...........                                                              [ 11%]
+tests/tools/terminal/test_heredoc_chunked_send.py .....                  [ 12%]
+tests/tools/terminal/test_large_environment.py ...                       [ 12%]
+tests/tools/terminal/test_literal_arg_guard.py ........................  [ 17%]
+tests/tools/terminal/test_observation_truncation.py .....                [ 18%]
+tests/tools/terminal/test_observation_wait.py .....................      [ 22%]
+tests/tools/terminal/test_pool_integration.py .............              [ 24%]
+tests/tools/terminal/test_powershell_terminating_error.py ssss           [ 25%]
+tests/tools/terminal/test_process_priority.py ................           [ 28%]
+tests/tools/terminal/test_ps1_corruption.py .............                [ 31%]
+tests/tools/terminal/test_schema.py .                                    [ 31%]
+tests/tools/terminal/test_secrets_masking.py ...                         [ 32%]
+tests/tools/terminal/test_send_keys.py .......................           [ 36%]
+tests/tools/terminal/test_session_factory.py .......                     [ 37%]
+tests/tools/terminal/test_shell_path_configuration.py .........          [ 39%]
+tests/tools/terminal/test_shutdown_handling.py ......                    [ 40%]
+tests/tools/terminal/test_terminal_env_sanitization.py ...               [ 41%]
+tests/tools/terminal/test_terminal_exit_code_top_level.py ......         [ 42%]
+tests/tools/terminal/test_terminal_parsing.py .......................... [ 47%]
+............................                                             [ 52%]
+tests/tools/terminal/test_terminal_ps1_metadata.py .............         [ 55%]
+tests/tools/terminal/test_terminal_reset.py .......                      [ 56%]
+tests/tools/terminal/test_terminal_session.py .......................... [ 61%]
+........................................................................ [ 75%]
+..                                                                       [ 75%]
+tests/tools/terminal/test_terminal_tool.py ........                      [ 76%]
+tests/tools/terminal/test_terminal_tool_auto_detection.py .......        [ 78%]
+tests/tools/terminal/test_timeout_policy.py ....                         [ 79%]
+tests/tools/terminal/test_tmux_command_batching.py .......               [ 80%]
+tests/tools/terminal/test_tmux_log_redaction.py .                        [ 80%]
+tests/tools/terminal/test_tmux_pane_pool.py ............................ [ 85%]
+.........                                                                [ 87%]
+tests/tools/terminal/test_windows_ctrl_c.py s                            [ 87%]
+tests/tools/terminal/test_windows_terminal.py sssssssssssssssss          [ 91%]
+tests/tools/terminal/test_windows_terminal_recovery.py sssssssssssssssss [ 94%]
+                                                                         [ 94%]
+tests/tools/terminal/test_windows_terminal_send_keys.py ................ [ 97%]
+............                                                             [ 99%]
+tests/tools/terminal/test_windows_terminal_shutdown.py ..                [100%]
+
+=============================== warnings summary ===============================
+../../../../../../home/user/software-agent-sdk/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  /home/user/software-agent-sdk/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+tests/tools/terminal/test_conversation_cleanup.py::test_conversation_close_calls_executor_close
+tests/tools/terminal/test_conversation_cleanup.py::test_conversation_close_calls_executor_close_without_delete
+tests/tools/terminal/test_conversation_cleanup.py::test_conversation_del_calls_close
+  /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/fix-tmux/openhands-sdk/openhands/sdk/agent/base.py:807: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+
+tests/tools/terminal/test_session_factory.py::test_auto_detection_unix
+  /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/fix-tmux/tests/tools/terminal/test_session_factory.py:92: UserWarning: tmux is not installed. Falling back to subprocess-based terminal, which may be less stable. For best agent performance, install tmux (e.g. `apt-get install tmux` or `brew install tmux`).
+    session = create_terminal_session(work_dir=temp_dir)
+
+tests/tools/terminal/test_terminal_tool_auto_detection.py::test_unix_auto_detection
+  /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/fix-tmux/openhands-tools/openhands/tools/terminal/impl.py:139: UserWarning: tmux is not installed. Falling back to subprocess-based terminal, which may be less stable. For best agent performance, install tmux (e.g. `apt-get install tmux` or `brew install tmux`).
+    self._session = create_terminal_session(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========== 486 passed, 39 skipped, 6 warnings in 337.87s (0:05:37) ============

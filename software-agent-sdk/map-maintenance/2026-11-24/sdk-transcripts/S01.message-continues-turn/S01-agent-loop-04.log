@@ -1,0 +1,217 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S01/loop --arg continues-turn \
+  --check chat.continue.status eq finished --check chat.continue.requests eq 2 \
+  --check chat.continue.agent_messages.1 eq "Verified." \
+  --check chat.end.requests eq 1 --check chat.end.agent_messages len-eq 1 \
+  --check chat.absent.requests eq 1 --check chat.absent.status eq finished \
+  --check chat_stream.continue.requests eq 2 --check chat_stream.end.requests eq 1 --check chat_stream.absent.requests eq 1 \
+  --check responses.continue.requests eq 2 --check responses.continue.agent_messages len-eq 2 \
+  --check responses.end.requests eq 1 --check responses.absent.requests eq 1 \
+  --check responses_stream.continue.requests eq 2 --check responses_stream.end.requests eq 1 \
+  --check chat_async.continue.status eq finished --check chat_async.continue.requests eq 2
+{
+  "ok": true,
+  "mode": "continues-turn",
+  "chat": {
+    "continue": {
+      "status": "finished",
+      "requests": 2,
+      "agent_messages": [
+        "Checking the result.",
+        "Verified."
+      ]
+    },
+    "end": {
+      "status": "finished",
+      "requests": 1,
+      "agent_messages": [
+        "Checking the result."
+      ]
+    },
+    "absent": {
+      "status": "finished",
+      "requests": 1,
+      "agent_messages": [
+        "Checking the result."
+      ]
+    }
+  },
+  "chat_stream": {
+    "continue": {
+      "status": "finished",
+      "requests": 2,
+      "agent_messages": [
+        "Checking the result.",
+        "Verified."
+      ]
+    },
+    "end": {
+      "status": "finished",
+      "requests": 1,
+      "agent_messages": [
+        "Checking the result."
+      ]
+    },
+    "absent": {
+      "status": "finished",
+      "requests": 1,
+      "agent_messages": [
+        "Checking the result."
+      ]
+    }
+  },
+  "responses": {
+    "continue": {
+      "status": "finished",
+      "requests": 2,
+      "agent_messages": [
+        "Checking the result.",
+        "Verified."
+      ]
+    },
+    "end": {
+      "status": "finished",
+      "requests": 1,
+      "agent_messages": [
+        "Checking the result."
+      ]
+    },
+    "absent": {
+      "status": "finished",
+      "requests": 1,
+      "agent_messages": [
+        "Checking the result."
+      ]
+    }
+  },
+  "responses_stream": {
+    "continue": {
+      "status": "finished",
+      "requests": 2,
+      "agent_messages": [
+        "Checking the result.",
+        "Verified."
+      ]
+    },
+    "end": {
+      "status": "finished",
+      "requests": 1,
+      "agent_messages": [
+        "Checking the result."
+      ]
+    },
+    "absent": {
+      "status": "finished",
+      "requests": 1,
+      "agent_messages": [
+        "Checking the result."
+      ]
+    }
+  },
+  "chat_async": {
+    "continue": {
+      "status": "finished",
+      "requests": 2,
+      "agent_messages": [
+        "Checking the result.",
+        "Verified."
+      ]
+    }
+  },
+  "_exit": 0,
+  "_seconds": 32.1,
+  "checks": [
+    {
+      "check": "chat.continue.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "chat.continue.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "chat.continue.agent_messages.1 eq Verified.",
+      "ok": true,
+      "actual": "Verified."
+    },
+    {
+      "check": "chat.end.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "chat.end.agent_messages len-eq 1",
+      "ok": true,
+      "actual": "[\"Checking the result.\"]"
+    },
+    {
+      "check": "chat.absent.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "chat.absent.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "chat_stream.continue.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "chat_stream.end.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "chat_stream.absent.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "responses.continue.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "responses.continue.agent_messages len-eq 2",
+      "ok": true,
+      "actual": "[\"Checking the result.\", \"Verified.\"]"
+    },
+    {
+      "check": "responses.end.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "responses.absent.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "responses_stream.continue.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "responses_stream.end.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "chat_async.continue.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "chat_async.continue.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 33s]

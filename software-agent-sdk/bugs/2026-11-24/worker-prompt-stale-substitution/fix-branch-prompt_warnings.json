@@ -1,0 +1,26 @@
+{
+  "prompts_built": 4,
+  "wording_warnings": [],
+  "worker_troubleshooting_mentions_report": true,
+  "wording_warning_count": 0,
+  "ok": true,
+  "_exit": 0,
+  "_seconds": 4.9,
+  "checks": [
+    {
+      "check": "prompts_built eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "worker_troubleshooting_mentions_report eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "wording_warning_count eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}

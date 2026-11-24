@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/api/conversations/b96b2217-5f68-499b-9d2a-9141af4c0f4a",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "content-length": "695",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Internal Server Error",
+      "exception": "3 validation errors for ConversationState\nid\n  Field required [type=missing, input_value={'execution_status': 'idle', 'agent': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nagent\n  Input should be an object [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\nworkspace\n  Field required [type=missing, input_value={'execution_status': 'idle', 'agent': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing",
+      "error_id": "dd3540ab5ed840649c2c34121cf8368f"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 3776
+}

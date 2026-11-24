@@ -1,0 +1,23 @@
+{
+  "prompts_built": 4,
+  "wording_warnings": [
+    "Default prompt text changed; cannot find \"\\n* When you run into any major issue while executing a plan from the user, please don't try to directly work around it. Instead, propose a new plan and confirm with the user before proceeding.\""
+  ],
+  "worker_troubleshooting_mentions_report": true,
+  "wording_warning_count": 1,
+  "ok": true,
+  "_exit": 0,
+  "_seconds": 4.5,
+  "checks": [
+    {
+      "check": "prompts_built eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "wording_warning_count eq 0",
+      "ok": false,
+      "actual": "1"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "id": "f539c9cb-6be6-4b2f-a299-edf705693fb6",
+      "timestamp": "2026-11-24T08:39:50.336626",
+      "source": "agent",
+      "parent_id": "6b93c5cf-b115-4cac-ad1e-6ee0d911591b",
+      "code": "ACPInitError",
+      "detail": "[-32603] Could not resume the existing ACP session, so the agent would not see the earlier conversation. No new session was started. Fix the provider error and try again, or start a new conversation. Provider error: [-32603] Internal error: {\"reason\": \"session store locked\"}",
+      "classification": {
+        "kind": "config",
+        "retryable": false,
+        "user_action": "settings"
+      },
+      "kind": "ConversationErrorEvent"
+    },
+    {
+      "id": "d31d5c5f-15be-4a86-aef0-bf36fc4a8a1d",
+      "timestamp": "2026-11-24T08:39:50.371165",
+      "source": "environment",
+      "parent_id": "f539c9cb-6be6-4b2f-a299-edf705693fb6",
+      "code": "RequestError",
+      "detail": "Could not resume the existing ACP session, so the agent would not see the earlier conversation. No new session was started. Fix the provider error and try again, or start a new conversation. Provider error: [-32603] Internal error: {\"reason\": \"session store locked\"}",
+      "classification": {
+        "kind": "transient",
+        "retryable": true,
+        "user_action": "retry"
+      },
+      "kind": "ConversationErrorEvent"
+    }
+  ]
+}

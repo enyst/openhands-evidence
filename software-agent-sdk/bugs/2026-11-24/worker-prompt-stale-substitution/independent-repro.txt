@@ -1,0 +1,136 @@
+# Repro: 'Default prompt text changed' warning from project.py WorkerTroubleshootingSection
+# TARGET=0988e97 (/home/user/software-agent-sdk), BASE=74f198d (/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/base-sdk1), PARENT=ebec01b^=d66d4c4 (/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/parent-ebec01b, temp worktree)
+
+## Script /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/count_warn.py
+import logging, sys, re
+records = []
+class H(logging.Handler):
+    def emit(self, r):
+        m = r.getMessage()
+        if "Default prompt text changed" in m: records.append(m)
+logging.getLogger().addHandler(H()); logging.getLogger().setLevel(logging.DEBUG)
+import openhands.sdk, openhands.sdk.context.prompts.sections.project as P
+print("sdk:", openhands.sdk.__file__); print("project:", P.__file__)
+print("warnings at import:", len(records)); [print("  ", m[:150]) for m in records]
+from openhands.sdk import Agent
+from openhands.sdk.testing import TestLLM
+for f in ["system_prompt.j2","system_prompt_planning.j2","system_prompt_project_coordinator.j2","system_prompt_project_worker.j2"]:
+    n=len(records)
+    a=Agent(llm=TestLLM.from_messages([], model="test-model"), tools=[], system_prompt_filename=f)
+    sp=a.static_system_message if hasattr(a,"static_system_message") else a.system_message
+    print(f"{f}: new warnings={len(records)-n} prompt_len={len(sp)}")
+    if f.endswith("worker.j2"):
+        m=re.search(r"<TROUBLESHOOTING>.*?</TROUBLESHOOTING>", sp, re.S)
+        open(sys.argv[1],"w").write(m.group(0) if m else "NO BLOCK\n")
+print("total warnings:", len(records))
+
+## (1) base-sdk1: OPENHANDS_SUPPRESS_BANNER=1 PYTHONPATH=/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/base-sdk1/openhands-sdk:/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/base-sdk1/openhands-tools /home/user/software-agent-sdk/.venv/bin/python count_warn.py tb-base-sdk1.txt 2>/dev/null
+08:47:22 - LiteLLM:DEBUG: litellm_logging.py:262 - [Non-Blocking] Unable to import GenericAPILogger - LiteLLM Enterprise Feature - No module named 'litellm_enterprise'
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:22 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+sdk: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/base-sdk1/openhands-sdk/openhands/sdk/__init__.py
+project: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/base-sdk1/openhands-sdk/openhands/sdk/context/prompts/sections/project.py
+warnings at import: 0
+system_prompt.j2: new warnings=0 prompt_len=15261
+system_prompt_planning.j2: new warnings=0 prompt_len=5249
+system_prompt_project_coordinator.j2: new warnings=0 prompt_len=11783
+system_prompt_project_worker.j2: new warnings=0 prompt_len=17869
+total warnings: 0
+
+## (1) parent-ebec01b: OPENHANDS_SUPPRESS_BANNER=1 PYTHONPATH=/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/parent-ebec01b/openhands-sdk:/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/parent-ebec01b/openhands-tools /home/user/software-agent-sdk/.venv/bin/python count_warn.py tb-parent-ebec01b.txt 2>/dev/null
+08:47:26 - LiteLLM:DEBUG: litellm_logging.py:262 - [Non-Blocking] Unable to import GenericAPILogger - LiteLLM Enterprise Feature - No module named 'litellm_enterprise'
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:27 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+sdk: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/parent-ebec01b/openhands-sdk/openhands/sdk/__init__.py
+project: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/parent-ebec01b/openhands-sdk/openhands/sdk/context/prompts/sections/project.py
+warnings at import: 0
+system_prompt.j2: new warnings=0 prompt_len=15261
+system_prompt_planning.j2: new warnings=0 prompt_len=5249
+system_prompt_project_coordinator.j2: new warnings=0 prompt_len=11783
+system_prompt_project_worker.j2: new warnings=0 prompt_len=17869
+total warnings: 0
+
+## (1) TARGET: OPENHANDS_SUPPRESS_BANNER=1 PYTHONPATH=/home/user/software-agent-sdk/openhands-sdk:/home/user/software-agent-sdk/openhands-tools /home/user/software-agent-sdk/.venv/bin/python count_warn.py tb-TARGET.txt 2>/dev/null
+08:47:31 - LiteLLM:DEBUG: litellm_logging.py:262 - [Non-Blocking] Unable to import GenericAPILogger - LiteLLM Enterprise Feature - No module named 'litellm_enterprise'
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1277 - Using AiohttpTransport...
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1345 - Creating AiohttpTransport...
+08:47:32 - LiteLLM:DEBUG: http_handler.py:1382 - NEW SESSION: Creating new ClientSession (no shared session provided)
+sdk: /home/user/software-agent-sdk/openhands-sdk/openhands/sdk/__init__.py
+project: /home/user/software-agent-sdk/openhands-sdk/openhands/sdk/context/prompts/sections/project.py
+warnings at import: 1
+   Default prompt text changed; cannot find "\n* When you run into any major issue while executing a plan from the user, please don't try to directly wor
+system_prompt.j2: new warnings=0 prompt_len=15851
+system_prompt_planning.j2: new warnings=0 prompt_len=5249
+system_prompt_project_coordinator.j2: new warnings=0 prompt_len=11783
+system_prompt_project_worker.j2: new warnings=0 prompt_len=18651
+total warnings: 1
+
+## (2) base-sdk1: default visibility, no logging config
+cmd: cd /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad; OPENHANDS_SUPPRESS_BANNER=1 PYTHONPATH=/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/base-sdk1/openhands-sdk:/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/base-sdk1/openhands-tools /home/user/software-agent-sdk/.venv/bin/python -c "from openhands.sdk import Agent; from openhands.sdk.testing import TestLLM; a=Agent(llm=TestLLM.from_messages([], model='test-model'), tools=[], system_prompt_filename='system_prompt_project_worker.j2'); a.static_system_message"
+--- stderr:
+--- end stderr
+
+## (2) parent-ebec01b: default visibility, no logging config
+cmd: cd /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad; OPENHANDS_SUPPRESS_BANNER=1 PYTHONPATH=/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/parent-ebec01b/openhands-sdk:/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/parent-ebec01b/openhands-tools /home/user/software-agent-sdk/.venv/bin/python -c "from openhands.sdk import Agent; from openhands.sdk.testing import TestLLM; a=Agent(llm=TestLLM.from_messages([], model='test-model'), tools=[], system_prompt_filename='system_prompt_project_worker.j2'); a.static_system_message"
+--- stderr:
+--- end stderr
+
+## (2) TARGET: default visibility, no logging config
+cmd: cd /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad; OPENHANDS_SUPPRESS_BANNER=1 PYTHONPATH=/home/user/software-agent-sdk/openhands-sdk:/home/user/software-agent-sdk/openhands-tools /home/user/software-agent-sdk/.venv/bin/python -c "from openhands.sdk import Agent; from openhands.sdk.testing import TestLLM; a=Agent(llm=TestLLM.from_messages([], model='test-model'), tools=[], system_prompt_filename='system_prompt_project_worker.j2'); a.static_system_message"
+--- stderr:
+[11/24/26 08:47:46] WARNING  Default prompt text changed; cannot   project.py:63
+                             find "\n* When you run into any major              
+                             issue while executing a plan from the              
+                             user, please don't try to directly                 
+                             work around it. Instead, propose a                 
+                             new plan and confirm with the user                 
+                             before proceeding."                                
+--- end stderr
+
+## (3) worker <TROUBLESHOOTING> diff
+diff base parent:
+(identical)
+diff -u base target:
+--- /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/tb-base-sdk1.txt	2026-11-24 08:47:24.526542308 +0000
++++ /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/tb-TARGET.txt	2026-11-24 08:47:33.680639851 +0000
+@@ -4,4 +4,7 @@
+   2. Assess the likelihood of each possible cause
+   3. Methodically address the most likely causes, starting with the highest probability
+   4. Explain your reasoning process in your report
++* For action requests, continue routine investigation, fixes, and verification within the user's authorized scope. Report progress without asking permission to continue work already in scope.
++* If a specific action needs approval or is prohibited, stop at that boundary, not at the start of the remaining work. Continue any useful permitted work and ask only about a material ambiguity or a decision that actually requires the user. This does not override confirmation policies or explicit limits.
++* If the user asked you to monitor a job or use a delegated result, keep the task open until you verify the requested outcome or reach a real blocker. Use an available wait or status tool at a reasonable interval instead of ending with a progress update or issuing a dummy tool call.
+ </TROUBLESHOOTING>
+\ No newline at end of file
+
+## ebec01b static.py bullet removed:
+-* When you run into any major issue while executing a plan from the user, please don't try to directly work around it. Instead, propose a new plan and confirm with the user before proceeding.

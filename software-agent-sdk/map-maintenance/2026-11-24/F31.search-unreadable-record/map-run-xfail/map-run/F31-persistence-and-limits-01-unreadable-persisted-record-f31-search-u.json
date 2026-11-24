@@ -1,0 +1,56 @@
+{
+  "file": "F31-persistence-and-limits.md",
+  "bullet": "Unreadable persisted record (`F31.search-unreadable-record`), known bug #7079.",
+  "ids": [
+    "F31.search-unreadable-record"
+  ],
+  "line": 852,
+  "script": "QA_DMG_WS=\"$QA_WS/qa-f31-damaged\"\nmkdir -p \"$QA_DMG_WS\" && echo keep > \"$QA_DMG_WS/qa-f31-keep.txt\"\nDP=$(control-agent-server conversation start --tools none --no-autotitle --title 'QA F31 damaged source' --workspace \"$QA_DMG_WS\" \\\n  --prompt qa-f31-damaged --no-run --print-id)\nDB=$(control-agent-server api POST \"/api/conversations/$DP/fork\" --expect 201 --field id)\nDM=$(control-agent-server api POST \"/api/conversations/$DP/fork\" --expect 201 --field id)\ncontrol-agent-server api GET /api/conversations/search --query limit=100 --check items contains \"$DB\" --check items contains \"$DM\" --quiet\ncontrol-agent-server restart\nCONV_DIR=\"$AGENT_SERVER_VERIFY_RUN/server/workspace/conversations\"\ncontrol-agent-server state ls --conversation \"$DB\" owner_lease.json --expect-count 0\ncontrol-agent-server state ls --conversation \"$DM\" owner_lease.json --expect-count 0\nprintf '{\"execution_status\":\"idle\",\"agent\":null}\\n' > \"$CONV_DIR/${DB//-/}/base_state.json\"\nprintf '{not json\\n' > \"$CONV_DIR/${DM//-/}/meta.json\"\ncontrol-agent-server restart\ncontrol-agent-server api GET /api/conversations/count --expect 200 --check . ge 1\ncontrol-agent-server api GET /api/conversations/search --query limit=100 --expect 200 --check items contains \"$DP\" \\\n  --save F31.search-unreadable-record/search  # bug: status eq 500 && response.body.exception contains 'validation errors for ConversationState'\ncontrol-agent-server api DELETE \"/api/conversations/$DB\" --expect 200 --check success eq true \\\n  --save F31.search-unreadable-record/delete-bad-state  # bug: status eq 500 && response.body.exception contains 'validation errors for ConversationState'\ntest ! -e \"$CONV_DIR/${DB//-/}\"\ncontrol-agent-server api DELETE \"/api/conversations/$DM\" --expect 200 --check success eq true \\\n  --save F31.search-unreadable-record/delete-bad-meta  # bug: status eq 404 && response.body.detail eq 'Not Found'\ntest ! -e \"$CONV_DIR/${DM//-/}\"\ncontrol-agent-server api GET /api/conversations/search --query limit=100 --expect 200 --check items contains \"$DP\" \\\n  --check items not-contains \"$DB\" --check items not-contains \"$DM\" --quiet\ncontrol-agent-server api GET \"/api/conversations/$DP\" --expect 200 --check id eq \"$DP\" --quiet\ntest -f \"$QA_DMG_WS/qa-f31-keep.txt\"\n",
+  "exit_code": 1,
+  "elapsed_ms": 56316,
+  "failed_line": 16,
+  "failed_command": "control-agent-server api GET /api/conversations/search --query limit=100 --expect 200 --check items contains \"$DP\" --save F31.search-unreadable-record/search",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 500,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/search",
+      "query": [
+        [
+          "limit",
+          "100"
+        ]
+      ],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 500,
+      "headers": {
+        "content-length": "695",
+        "content-type": "application/json"
+      },
+      "body": {
+        "detail": "Internal Server Error",
+        "exception": "3 validation errors for ConversationState\nid\n  Field required [type=missing, input_value={'execution_status': 'idle', 'agent': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nagent\n  Input should be an object [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\nworkspace\n  Field required [type=missing, input_value={'execution_status': 'idle', 'agent': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing",
+        "error_id": "a1dc6fd7d9af42d6a5d74d7bd96500c6"
+      },
+      "truncated": false
+    },
+    "elapsed_ms": 1419,
+    "checks": [
+      {
+        "check": "items contains 8d75ccf5-0d06-4b18-a19a-e40757e00ee7",
+        "ok": false,
+        "actual": "null"
+      }
+    ],
+    "saved": "/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/agent-server/20261124-083102-588b-map-f31/evidence/F31.search-unreadable-record/search.json",
+    "hint": "expected 200, got 500"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/search\",\n    \"query\": [\n      [\n        \"limit\",\n        \"100\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"20058\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 151,\n  \"checks\": [\n    {\n      \"check\": \"items contains 2782b6ee-5ae9-4e38-8d32-975756788ad1\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"id\\\": \\\"529b87ee-7580-4793-9373-e1dffb6ba7fc\\\", \\\"workspace\\\": {\\\"working_dir\\\": \\\"/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/agent-server/20261124-083102-588b-map-f31/fixture\\u2026\"\n    },\n    {\n      \"check\": \"items contains 529b87ee-7580-4793-9373-e1dffb6ba7fc\",\n      \"ok\": true,\n      \"actual\": \"[{\\\"id\\\": \\\"529b87ee-7580-4793-9373-e1dffb6ba7fc\\\", \\\"workspace\\\": {\\\"working_dir\\\": \\\"/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/agent-server/20261124-083102-588b-map-f31/fixture\\u2026\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"run\": \"/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/agent-server/20261124-083102-588b-map-f31\",\n  \"url\": \"http://127.0.0.1:46117\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 19687,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": true,\n  \"pattern\": \"owner_lease.json\",\n  \"count\": 0,\n  \"files\": []\n}\n{\n  \"ok\": true,\n  \"pattern\": \"owner_lease.json\",\n  \"count\": 0,\n  \"files\": []\n}\n{\n  \"ok\": true,\n  \"run\": \"/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/agent-server/20261124-083102-588b-map-f31\",\n  \"url\": \"http://127.0.0.1:46117\",\n  \"rotated_key\": false,\n  \"hard\": false,\n  \"rotated_secret_key\": false,\n  \"kept_previous_secret_key\": false,\n  \"ready_ms\": 19965,\n  \"ready_path\": \"/ready\"\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/count\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": 3,\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 192,\n  \"checks\": [\n    {\n      \"check\": \". ge 1\",\n      \"ok\": true,\n      \"actual\": \"3\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 500,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/search\",\n    \"query\": [\n      [\n        \"limit\",\n        \"100\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 500,\n    \"headers\": {\n      \"content-length\": \"695\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": {\n      \"detail\": \"Internal Server Error\",\n      \"exception\": \"3 validation errors for ConversationState\\nid\\n  Field required [type=missing, input_value={'execution_status': 'idle', 'agent': None}, input_type=dict]\\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\\nagent\\n  Input should be an object [type=model_type, input_value=None, input_type=NoneType]\\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\\nworkspace\\n  Field required [type=missing, input_value={'execution_status': 'idle', 'agent': None}, input_type=dict]\\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\",\n      \"error_id\": \"a1dc6fd7d9af42d6a5d74d7bd96500c6\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 1419,\n  \"checks\": [\n    {\n      \"check\": \"items contains 8d75ccf5-0d06-4b18-a19a-e40757e00ee7\",\n      \"ok\": false,\n      \"actual\": \"null\"\n    }\n  ],\n  \"saved\": \"/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/agent-server/20261124-083102-588b-map-f31/evidence/F31.search-unreadable-record/search.json\",\n  \"hint\": \"expected 200, got 500\"\n}\n",
+  "stderr": ""
+}

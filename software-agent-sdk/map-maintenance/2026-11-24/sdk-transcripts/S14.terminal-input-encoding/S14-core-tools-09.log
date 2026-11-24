@@ -1,0 +1,98 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/terminal_heredoc --arg subprocess \
+  --check execution_status eq finished --check steps.heredoc.exit_code eq 0 \
+  --check steps.heredoc.text contains heredoc-body-line --check steps.heredoc.text contains alias-expanded \
+  --check steps.heredoc.text not-contains __OH_COMMAND_FINISHED_ \
+  --check steps.next.exit_code eq 0 --check steps.next.text contains next-command \
+  --check steps.next.text not-contains __OH_COMMAND_FINISHED_ --check steps.next.text not-contains __openhands_status \
+  --check steps.next.text not-contains heredoc-body-line \
+  --check steps.third.text contains third --check steps.third.text not-contains next-command
+{
+  "ok": true,
+  "mode": "subprocess",
+  "execution_status": "finished",
+  "steps": {
+    "slow_prompt": {
+      "exit_code": 0,
+      "text": "\u001b[?2004l\u001b[?2004h\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3-S14-edit/work/S14-core-tools-09/block1/runs/20261124-083635-fed6e4/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "heredoc": {
+      "exit_code": 0,
+      "text": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\nheredoc-body-line\n\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3-S14-edit/work/S14-core-tools-09/block1/runs/20261124-083635-fed6e4/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "next": {
+      "exit_code": 0,
+      "text": "\u001b[?2004h\n\necho next-command\n\u001b[?2004lnext-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3-S14-edit/work/S14-core-tools-09/block1/runs/20261124-083635-fed6e4/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "third": {
+      "exit_code": 0,
+      "text": "\u001b[?2004h\n\necho third\n\u001b[?2004lthird\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3-S14-edit/work/S14-core-tools-09/block1/runs/20261124-083635-fed6e4/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    }
+  },
+  "_exit": 0,
+  "_seconds": 10.4,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "steps.heredoc.exit_code eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "steps.heredoc.text contains heredoc-body-line",
+      "ok": true,
+      "actual": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\nheredoc-body-line\n\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-ho"
+    },
+    {
+      "check": "steps.heredoc.text contains alias-expanded",
+      "ok": true,
+      "actual": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\nheredoc-body-line\n\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-ho"
+    },
+    {
+      "check": "steps.heredoc.text not-contains __OH_COMMAND_FINISHED_",
+      "ok": true,
+      "actual": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\nheredoc-body-line\n\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-ho"
+    },
+    {
+      "check": "steps.next.exit_code eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "steps.next.text contains next-command",
+      "ok": true,
+      "actual": "\u001b[?2004h\n\necho next-command\n\u001b[?2004lnext-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3"
+    },
+    {
+      "check": "steps.next.text not-contains __OH_COMMAND_FINISHED_",
+      "ok": true,
+      "actual": "\u001b[?2004h\n\necho next-command\n\u001b[?2004lnext-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3"
+    },
+    {
+      "check": "steps.next.text not-contains __openhands_status",
+      "ok": true,
+      "actual": "\u001b[?2004h\n\necho next-command\n\u001b[?2004lnext-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3"
+    },
+    {
+      "check": "steps.next.text not-contains heredoc-body-line",
+      "ok": true,
+      "actual": "\u001b[?2004h\n\necho next-command\n\u001b[?2004lnext-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3"
+    },
+    {
+      "check": "steps.third.text contains third",
+      "ok": true,
+      "actual": "\u001b[?2004h\n\necho third\n\u001b[?2004lthird\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3-S14-edit/work"
+    },
+    {
+      "check": "steps.third.text not-contains next-command",
+      "ok": true,
+      "actual": "\u001b[?2004h\n\necho third\n\u001b[?2004lthird\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/sdk3-S14-edit/work"
+    }
+  ]
+}
+
+[exit 0 after 11s]

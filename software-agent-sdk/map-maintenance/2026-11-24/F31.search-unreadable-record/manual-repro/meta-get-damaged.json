@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/97ee5d89-f550-4ecd-a6f8-8df40d1405fa",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-length": "22",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Not Found"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 250
+}

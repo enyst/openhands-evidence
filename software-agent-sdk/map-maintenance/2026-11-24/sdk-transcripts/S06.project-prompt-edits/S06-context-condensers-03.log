@@ -1,0 +1,33 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/prompt_warnings --check prompts_built eq 4 \
+  --check worker_troubleshooting_mentions_report eq true --check wording_warning_count eq 0
+{
+  "prompts_built": 4,
+  "wording_warnings": [
+    "Default prompt text changed; cannot find \"\\n* When you run into any major issue while executing a plan from the user, please don't try to directly work around it. Instead, propose a new plan and confirm with the user before proceeding.\""
+  ],
+  "worker_troubleshooting_mentions_report": true,
+  "wording_warning_count": 1,
+  "ok": true,
+  "_exit": 0,
+  "_seconds": 4.4,
+  "checks": [
+    {
+      "check": "prompts_built eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "worker_troubleshooting_mentions_report eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "wording_warning_count eq 0",
+      "ok": false,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 1 after 5s]
