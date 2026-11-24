@@ -1,0 +1,58 @@
+run=/tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-091033-82add0
+{
+  "ok": true,
+  "mode": "tmux",
+  "execution_status": "finished",
+  "steps": {
+    "slow_prompt": {
+      "exit_code": 0,
+      "text": "\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-091033-82add0/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "heredoc": {
+      "exit_code": 0,
+      "text": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\nheredoc-body-line\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-091033-82add0/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "next": {
+      "exit_code": 0,
+      "text": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-091033-82add0/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "third": {
+      "exit_code": 0,
+      "text": "[Previous command outputs are truncated. Showing the last 2 lines of the output below.]\n\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-091033-82add0/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    }
+  },
+  "_exit": 0,
+  "_seconds": 7.3,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "steps.heredoc.text contains heredoc-body-line",
+      "ok": true,
+      "actual": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\nheredoc-body-line\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-hom"
+    },
+    {
+      "check": "steps.next.text contains next-command",
+      "ok": true,
+      "actual": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-091033-82add0/workspace]\n["
+    },
+    {
+      "check": "steps.third.text contains third",
+      "ok": false,
+      "actual": "[Previous command outputs are truncated. Showing the last 2 lines of the output below.]\n\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-52"
+    },
+    {
+      "check": "steps.next.text not-contains Previous command outputs are truncated",
+      "ok": true,
+      "actual": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-5285-9194-02782ca7f272/scratchpad/sdk/runs/20261124-091033-82add0/workspace]\n["
+    },
+    {
+      "check": "steps.third.text not-contains Previous command outputs are truncated",
+      "ok": false,
+      "actual": "[Previous command outputs are truncated. Showing the last 2 lines of the output below.]\n\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b3d95220-babd-52"
+    }
+  ]
+}
