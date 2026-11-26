@@ -1,0 +1,40 @@
+            (
+                self._session_id,
+                self._agent_name,
+                self._agent_version,
+                self._current_model_id,
+                self._available_models,
+                self._model_override_applied,
+                self._effort_state,
+            ) = self._executor.run_async(_init, timeout=self.acp_startup_timeout)
+        except TimeoutError:
+            # run_async's own TimeoutError carries no message (anyio.fail_after);
+            # raise a descriptive one so _acp_error_detail (str(exc)) isn't blank.
+>           raise TimeoutError(self._startup_timeout_message()) from None
+E           TimeoutError: ACP startup timed out after 3s waiting for the ACP server to spawn, authenticate, and create/load a session
+openhands-sdk/openhands/sdk/agent/acp_agent.py:3651: TimeoutError
+------------------------------ Captured log call -------------------------------
+INFO     openhands.sdk.conversation.state:state.py:773 Created new conversation 286b46a5-8341-480e-a325-541304d0d096
+ERROR    openhands.sdk.agent.acp_agent:acp_agent.py:2539 Failed to start ACP server: ACP startup timed out after 3s waiting for the ACP server to spawn, authenticate, and create/load a session
+_________________ test_startup_timeout_names_the_stalled_phase _________________
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-1/test_startup_timeout_names_the0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f5caf3349d0>
+    def test_startup_timeout_names_the_stalled_phase(tmp_path, monkeypatch):
+        conv, events, log = _conversation(tmp_path, monkeypatch, "session/new", always=True)
+        with pytest.raises(TimeoutError):
+            conv.run()
+        [error] = [e for e in events if isinstance(e, ConversationErrorEvent)]
+        print("\nerror:", error.code, repr(error.detail))
+        assert error.code == "ACPStartupTimeout"
+>       assert "session/new" in error.detail
+E       AssertionError: assert 'session/new' in 'ACP startup timed out after 3s waiting for the ACP server to spawn, authenticate, and create/load a session'
+E        +  where 'ACP startup timed out after 3s waiting for the ACP server to spawn, authenticate, and create/load a session' = ConversationErrorEvent(id='5bdac79c...', source='agent', timestamp='2026-11-26T08:43:13.083238').detail
+/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/triage/7101/test_acp_startup_transient_stall.py:53: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     openhands.sdk.conversation.state:state.py:773 Created new conversation 4ba44011-e7f5-4e27-8fb4-e2773e88a268
+INFO     openhands.sdk.agent.acp_agent:acp_agent.py:3366 ACP server initialized: agent_name='flaky-acp', agent_version='0.0.1'
+ERROR    openhands.sdk.agent.acp_agent:acp_agent.py:2539 Failed to start ACP server: ACP startup timed out after 3s waiting for the ACP server to spawn, authenticate, and create/load a session
+=========================== short test summary info ============================
+FAILED ../../../tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/triage/7101/test_acp_startup_transient_stall.py::test_transient_pre_session_stall_is_retried_and_turn_starts
+FAILED ../../../tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/triage/7101/test_acp_startup_transient_stall.py::test_startup_timeout_names_the_stalled_phase
+2 failed, 1 passed in 94.90s (0:01:34)

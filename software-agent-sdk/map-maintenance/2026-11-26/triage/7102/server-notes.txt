@@ -1,0 +1,2 @@
+R=/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-084435-828a-triage-7102
+CID=89418391-7486-43da-8987-b7b0d7d48369

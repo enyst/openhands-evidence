@@ -1,0 +1,52 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "agent": {
+        "kind": "Agent",
+        "llm": {
+          "model": "gpt-4o",
+          "api_key": "dummy",
+          "usage_id": "agent"
+        },
+        "tools": []
+      },
+      "workspace": {
+        "working_dir": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-083039-586d-triage-7107/qa7107/ws"
+      },
+      "plugins": [
+        {
+          "source": "file:///tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-083039-586d-triage-7107/qa7107/remote/missing.git"
+        }
+      ],
+      "initial_message": {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "hi"
+          }
+        ],
+        "run": false
+      }
+    },
+    "files": []
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "content-length": "281",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Internal Server Error",
+      "exception": "Failed to fetch plugin from file:///tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-083039-586d-triage-7107/qa7107/remote/missing.git",
+      "error_id": "0fa6d1f060ea4473a75884cbcf51f9eb"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 11136
+}

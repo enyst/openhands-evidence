@@ -1,0 +1,56 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/94674fa0-95f1-4ee4-9af8-b6dc6a41a31c/events/search",
+    "query": [
+      [
+        "kind",
+        "ConversationErrorEvent"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "1235",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "7b2b7c20-46a9-49e9-a9f8-08be35dae9f0",
+          "timestamp": "2026-11-26T08:33:12.001785",
+          "source": "environment",
+          "code": "MarketplaceLoadError",
+          "detail": "Marketplace 'qa-7100-mk' (file:///tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-083039-586d-triage-7107/qa7100/remote/qa-7100-mk.git) could not be loaded, so its plugin skills, agents and hooks are unavailable: Failed to fetch plugin from file:///tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-083039-586d-triage-7107/qa7100/remote/qa-7100-mk.git",
+          "classification": {
+            "kind": "unknown",
+            "retryable": false,
+            "user_action": "none"
+          },
+          "kind": "ConversationErrorEvent"
+        },
+        {
+          "id": "684c8d92-b28d-4cb6-8d3f-e7a3b228796c",
+          "timestamp": "2026-11-26T08:33:13.003617",
+          "source": "environment",
+          "parent_id": "6a0ff0e2-1afe-4c9d-8f9d-c0e0a6f14449",
+          "code": "LLMAuthenticationError",
+          "detail": "litellm.AuthenticationError: AuthenticationError: OpenAIException - Incorrect API key provided: dummy. You can find your API key at https://platform.openai.com/account/api-keys.",
+          "classification": {
+            "kind": "auth",
+            "retryable": false,
+            "user_action": "settings"
+          },
+          "kind": "ConversationErrorEvent"
+        }
+      ],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 469
+}

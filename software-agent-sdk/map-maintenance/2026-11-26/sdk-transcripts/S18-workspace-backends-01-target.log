@@ -1,0 +1,228 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S18/local_workspace \
+  --check factory_type eq LocalWorkspace --check factory_path_type eq LocalWorkspace --check working_dir_is_str eq true \
+  --check exit_code eq 0 --check stdout_lines.0 eq hi --check pwd_is_root eq true \
+  --check failing_exit eq 3 --check failing_stderr eq oops --check cwd_override eq /tmp --check timeout_occurred eq true \
+  --check upload_ok eq true --check upload_size eq 8 --check upload_created_parents eq true \
+  --check download_ok eq true --check download_content eq payload \
+  --check missing_download_success eq false --check missing_download_error eq true \
+  --check git_changes contains ADDED:new.txt --check git_changes contains UPDATED:f.txt \
+  --check git_diff_original eq one --check git_diff_modified matches 'one\ntwo' \
+  --check pause_resume_error missing --check conversation_type eq LocalConversation --check agent_file eq from-agent \
+  --check callback_posts eq 1 --check callback_status eq COMPLETED --check callback_run_id eq run-42 \
+  --check callback_has_cost eq true --check callback_auth eq "Bearer cb-token" \
+  --check failed_status eq FAILED --check failed_error_code eq RuntimeError \
+  --check posts_after_unset eq 0 --check unreachable_error missing
+{
+  "ok": true,
+  "factory_type": "LocalWorkspace",
+  "factory_path_type": "LocalWorkspace",
+  "working_dir_is_str": true,
+  "command_result_type": "CommandResult",
+  "exit_code": 0,
+  "stdout_lines": [
+    "hi",
+    "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S18/work/S18-workspace-backends-01/block1/runs/20261126-090854-a7295d/workspace/local-ws"
+  ],
+  "pwd_is_root": true,
+  "failing_exit": 3,
+  "failing_stderr": "oops",
+  "cwd_override": "/tmp",
+  "timeout_occurred": true,
+  "upload_ok": true,
+  "upload_size": 8,
+  "upload_created_parents": true,
+  "download_ok": true,
+  "download_content": "payload",
+  "missing_download_success": false,
+  "missing_download_error": true,
+  "git_changes": [
+    "ADDED:new.txt",
+    "UPDATED:f.txt"
+  ],
+  "git_diff_original": "one",
+  "git_diff_modified": "one\ntwo",
+  "pause_resume_error": null,
+  "conversation_type": "LocalConversation",
+  "agent_file": "from-agent",
+  "callback_posts": 1,
+  "callback_status": "COMPLETED",
+  "callback_run_id": "run-42",
+  "callback_has_cost": true,
+  "callback_auth": "Bearer cb-token",
+  "failed_status": "FAILED",
+  "failed_error_code": "RuntimeError",
+  "posts_after_unset": 0,
+  "unreachable_error": null,
+  "_exit": 0,
+  "_seconds": 11.2,
+  "checks": [
+    {
+      "check": "factory_type eq LocalWorkspace",
+      "ok": true,
+      "actual": "LocalWorkspace"
+    },
+    {
+      "check": "factory_path_type eq LocalWorkspace",
+      "ok": true,
+      "actual": "LocalWorkspace"
+    },
+    {
+      "check": "working_dir_is_str eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "exit_code eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "stdout_lines.0 eq hi",
+      "ok": true,
+      "actual": "hi"
+    },
+    {
+      "check": "pwd_is_root eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "failing_exit eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "failing_stderr eq oops",
+      "ok": true,
+      "actual": "oops"
+    },
+    {
+      "check": "cwd_override eq /tmp",
+      "ok": true,
+      "actual": "/tmp"
+    },
+    {
+      "check": "timeout_occurred eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "upload_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "upload_size eq 8",
+      "ok": true,
+      "actual": "8"
+    },
+    {
+      "check": "upload_created_parents eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "download_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "download_content eq payload",
+      "ok": true,
+      "actual": "payload"
+    },
+    {
+      "check": "missing_download_success eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "missing_download_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "git_changes contains ADDED:new.txt",
+      "ok": true,
+      "actual": "[\"ADDED:new.txt\", \"UPDATED:f.txt\"]"
+    },
+    {
+      "check": "git_changes contains UPDATED:f.txt",
+      "ok": true,
+      "actual": "[\"ADDED:new.txt\", \"UPDATED:f.txt\"]"
+    },
+    {
+      "check": "git_diff_original eq one",
+      "ok": true,
+      "actual": "one"
+    },
+    {
+      "check": "git_diff_modified matches one\\ntwo",
+      "ok": true,
+      "actual": "one\ntwo"
+    },
+    {
+      "check": "pause_resume_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "conversation_type eq LocalConversation",
+      "ok": true,
+      "actual": "LocalConversation"
+    },
+    {
+      "check": "agent_file eq from-agent",
+      "ok": true,
+      "actual": "from-agent"
+    },
+    {
+      "check": "callback_posts eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "callback_status eq COMPLETED",
+      "ok": true,
+      "actual": "COMPLETED"
+    },
+    {
+      "check": "callback_run_id eq run-42",
+      "ok": true,
+      "actual": "run-42"
+    },
+    {
+      "check": "callback_has_cost eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "callback_auth eq Bearer cb-token",
+      "ok": true,
+      "actual": "Bearer cb-token"
+    },
+    {
+      "check": "failed_status eq FAILED",
+      "ok": true,
+      "actual": "FAILED"
+    },
+    {
+      "check": "failed_error_code eq RuntimeError",
+      "ok": true,
+      "actual": "RuntimeError"
+    },
+    {
+      "check": "posts_after_unset eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "unreachable_error missing",
+      "ok": true,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 0 after 11s]

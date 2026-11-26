@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/94674fa0-95f1-4ee4-9af8-b6dc6a41a31c/events",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "hello"
+        }
+      ],
+      "run": false
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 1915
+}

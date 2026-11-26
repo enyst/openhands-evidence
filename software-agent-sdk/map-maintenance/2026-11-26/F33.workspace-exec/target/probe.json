@@ -1,0 +1,11 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-"
+  ],
+  "cwd": "/home/user/software-agent-sdk",
+  "exit_code": 0,
+  "elapsed_ms": 8079,
+  "stdout": "{\"sha\": \"d7263334df62150bdfdfabec5991484dd001064d\"}\n",
+  "stderr": "[11/26/26 09:06:19] WARNING  Command timed out     remote_workspace_mixin.py:258\n                             after 2 seconds                                    \n                             (command_id=c703f4ca3                              \n                             ccf48b885bf920490efc9                              \n                             98)                                                \n"
+}

@@ -1,0 +1,49 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/38abbe5e-f971-4e4a-99ab-b11c62842c7f/events/search",
+    "query": [
+      [
+        "kind",
+        "MessageEvent"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "366",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "1c5de5e2-0db5-44cd-bbd6-a1530791744b",
+          "timestamp": "2026-11-26T08:32:24.121289",
+          "source": "user",
+          "parent_id": "bc5c483e-65d8-4425-92fd-aff0eeb7aef7",
+          "llm_message": {
+            "role": "user",
+            "content": [
+              {
+                "cache_prompt": false,
+                "type": "text",
+                "text": "hello"
+              }
+            ],
+            "thinking_blocks": []
+          },
+          "activated_skills": [],
+          "extended_content": [],
+          "kind": "MessageEvent"
+        }
+      ],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 495
+}

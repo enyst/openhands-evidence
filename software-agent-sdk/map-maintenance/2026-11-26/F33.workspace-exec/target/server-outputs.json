@@ -1,0 +1,67 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/bash/bash_events/search",
+    "query": [
+      [
+        "kind__eq",
+        "BashOutput"
+      ],
+      [
+        "sort_order",
+        "TIMESTAMP_DESC"
+      ],
+      [
+        "limit",
+        "3"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "807",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "c69c45c303884b36af548c2ac3106c29",
+          "timestamp": "2026-11-26T09:06:19.133547Z",
+          "command_id": "c703f4ca3ccf48b885bf920490efc998",
+          "order": 0,
+          "exit_code": -1,
+          "stdout": null,
+          "stderr": null,
+          "kind": "BashOutput"
+        },
+        {
+          "id": "bf3749d257a3438caec9be8655d83dd7",
+          "timestamp": "2026-11-26T09:06:17.122664Z",
+          "command_id": "552668aecac44fb698732a189bfc79c9",
+          "order": 0,
+          "exit_code": 0,
+          "stdout": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/recheck/20261126-090556-8ebd-map-f33/fixtures/qa-f33/exec\n",
+          "stderr": null,
+          "kind": "BashOutput"
+        },
+        {
+          "id": "c3df3094381b4e0db97dccc0431655ac",
+          "timestamp": "2026-11-26T09:06:17.112736Z",
+          "command_id": "48022e95d3cd4f808fcdff2346679625",
+          "order": 0,
+          "exit_code": 3,
+          "stdout": "qa-f33-out\n",
+          "stderr": "qa-f33-err\n",
+          "kind": "BashOutput"
+        }
+      ],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 64
+}

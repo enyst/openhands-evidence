@@ -1,0 +1,40 @@
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
++----------------------------------------------------------------------+
+|  OpenHands SDK v1.64.1                                               |
+|                                                                      |
+|  Report a bug: github.com/OpenHands/software-agent-sdk/issues        |
+|  Get help: openhands.dev/joinslack                                   |
+|  Scale up: openhands.dev/product/sdk                                 |
+|                                                                      |
+|  Set OPENHANDS_SUPPRESS_BANNER=1 to hide this message                |
++----------------------------------------------------------------------+
+  file exists: True
+  raised: FileNotFoundError: Prompt file /tmp/pytest-of-root/pytest-0/test_malformed_custom_template0/custom_system_prompt.j2 not found
+  __cause__: None  __context__: TemplateSyntaxError("Expected an expression, got 'end of statement block'")
+.s
+[sync] status=error llm_calls=0
+  file exists: True
+  raised: FileNotFoundError: Prompt file /home/user/software-agent-sdk/openhands-sdk/openhands/sdk/context/condenser/prompts/summarizing_system.j2 not found
+  __cause__: None  __context__: OSError(28, 'No space left on device')
+.
+[async] status=error llm_calls=0
+  file exists: True
+  raised: FileNotFoundError: Prompt file /home/user/software-agent-sdk/openhands-sdk/openhands/sdk/context/condenser/prompts/summarizing_system.j2 not found
+  __cause__: None  __context__: OSError(28, 'No space left on device')
+.
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14
+  /home/user/software-agent-sdk/.venv/lib/python3.13/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+::test_full_disk_condensation_ends_run_with_prompt_not_found[sync]
+::test_full_disk_condensation_ends_run_with_prompt_not_found[sync]
+::test_full_disk_condensation_ends_run_with_prompt_not_found[async]
+::test_full_disk_condensation_ends_run_with_prompt_not_found[async]
+  /home/user/software-agent-sdk/openhands-sdk/openhands/sdk/agent/base.py:807: DeprecationWarning: deprecated
+    val = getattr(obj, name)
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+3 passed, 1 skipped, 5 warnings in 36.28s

@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/ef71016a-7a3b-48b0-b1fe-2e0ad31559a3/events",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "content": [
+        {
+          "type": "text",
+          "text": "QA_F06_DURING_TOOL"
+        }
+      ],
+      "run": false
+    },
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 29172
+}

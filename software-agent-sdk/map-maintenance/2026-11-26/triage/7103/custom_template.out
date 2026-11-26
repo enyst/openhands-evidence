@@ -1,0 +1,5 @@
+constructed ok
+[11/26/26 08:38:56] INFO     Loaded 0 tools from spec                base.py:599
+file exists: True
+raised FileNotFoundError: Prompt file /tmp/qa7103-26ga0nzr/qa_system_prompt.j2 not found
+context: TemplateSyntaxError("Expected an expression, got 'end of statement block'")

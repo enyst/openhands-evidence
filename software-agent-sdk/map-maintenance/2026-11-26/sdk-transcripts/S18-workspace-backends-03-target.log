@@ -1,0 +1,69 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S18/remote_workspace --arg ops --check path_working_dir_error missing --check type eq RemoteWorkspace
+{
+  "ok": true,
+  "mode": "ops",
+  "path_working_dir_error": null,
+  "type": "RemoteWorkspace",
+  "host_normalized": true,
+  "client_lazy": true,
+  "client_base_url": true,
+  "sends_session_key": true,
+  "reset_client_cleared": true,
+  "wrong_key": {
+    "exit": -1,
+    "stderr": "Remote execution error: Client error '401 Unauthorized' for url 'http://127.0.0.1:45869/api/bash/start_bash_command'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Statu"
+  },
+  "wrong_key_alive": true,
+  "exec": {
+    "exit": 0,
+    "lines": [
+      "hi",
+      "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S18/work/S18-workspace-backends-03/block1/runs/20261126-090906-596ea3/remote-workspace"
+    ]
+  },
+  "exec_pwd_ok": true,
+  "failing_exit": 4,
+  "failing_output": "bad",
+  "long_lines": 40,
+  "long_unique_in_order": true,
+  "concurrent_isolated": true,
+  "timeout_occurred": true,
+  "upload_ok": true,
+  "upload_bytes_ok": true,
+  "download_ok": true,
+  "missing_download_success": false,
+  "git_changes": [
+    "ADDED:new.txt",
+    "UPDATED:f.txt"
+  ],
+  "git_diff_modified": "one\ntwo",
+  "alive": true,
+  "alive_wrong_port": false,
+  "async": {
+    "exec": "async-hi",
+    "exit": 0,
+    "upload": true,
+    "download": true,
+    "git_changes": 2,
+    "git_diff_modified": "one\ntwo",
+    "alive": true
+  },
+  "alive_after_stop": false,
+  "_exit": 0,
+  "_seconds": 18.3,
+  "checks": [
+    {
+      "check": "path_working_dir_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "type eq RemoteWorkspace",
+      "ok": true,
+      "actual": "RemoteWorkspace"
+    }
+  ]
+}
+
+[exit 0 after 18s]

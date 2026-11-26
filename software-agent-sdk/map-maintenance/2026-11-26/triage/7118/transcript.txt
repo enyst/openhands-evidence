@@ -1,0 +1,5 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+zai/glm-5.3 drop_params default -> {"model": "glm-5.3", "max_tokens": null, "max_completion_tokens": null}
+/home/user/software-agent-sdk/openhands-sdk/openhands/sdk/llm/utils/telemetry.py:555: UserWarning: Cost calculation failed: This model isn't mapped yet. model=glm-4.6, custom_llm_provider=openai. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json.
+openai/glm-4.6 drop_params default -> {"model": "glm-4.6", "max_tokens": null, "max_completion_tokens": 1234}
+zai/glm-5.3 drop_params=False -> LLMBadRequestError litellm.UnsupportedParamsError: zai does not support parameters: ['max_completion_tokens'], for model=glm-5.3. To drop these, set `litellm.drop_params=True` or 

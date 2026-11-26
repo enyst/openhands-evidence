@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/38abbe5e-f971-4e4a-99ab-b11c62842c7f/events/search",
+    "query": [
+      [
+        "kind",
+        "MessageEvent"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "32",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 1731
+}

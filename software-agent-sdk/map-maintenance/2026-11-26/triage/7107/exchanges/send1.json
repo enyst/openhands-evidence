@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/38abbe5e-f971-4e4a-99ab-b11c62842c7f/events",
+    "query": [],
+    "auth": "header",
+    "body": {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "hello"
+        }
+      ],
+      "run": false
+    },
+    "files": []
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "content-length": "288",
+      "content-type": "application/json"
+    },
+    "body": {
+      "detail": "Internal Server Error",
+      "exception": "Failed to fetch plugin from file:///tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-083039-586d-triage-7107/qa7107/remote/qa-7107-plugin.git",
+      "error_id": "98ce7e03c5e342ff882cdf9496e1415c"
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 5085
+}

@@ -1,0 +1,65 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S14/terminal_heredoc --arg tmux \
+  --check execution_status eq finished --check steps.heredoc.text contains heredoc-body-line \
+  --check steps.next.text contains next-command --check steps.third.text contains third \
+  --check steps.next.text not-contains 'Previous command outputs are truncated' \
+  --check steps.third.text not-contains 'Previous command outputs are truncated'
+{
+  "ok": true,
+  "mode": "tmux",
+  "execution_status": "finished",
+  "steps": {
+    "slow_prompt": {
+      "exit_code": 0,
+      "text": "\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S14/work/S14-core-tools-10/block1/runs/20261126-090806-86a1d1/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "heredoc": {
+      "exit_code": 0,
+      "text": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\nheredoc-body-line\n\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S14/work/S14-core-tools-10/block1/runs/20261126-090806-86a1d1/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "next": {
+      "exit_code": 0,
+      "text": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S14/work/S14-core-tools-10/block1/runs/20261126-090806-86a1d1/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    },
+    "third": {
+      "exit_code": 0,
+      "text": "third\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S14/work/S14-core-tools-10/block1/runs/20261126-090806-86a1d1/workspace]\n[Python interpreter: /usr/local/bin/python]\n[Command finished with exit code 0]"
+    }
+  },
+  "_exit": 0,
+  "_seconds": 8.9,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "steps.heredoc.text contains heredoc-body-line",
+      "ok": true,
+      "actual": "alias oh_test='echo alias-expanded'; cat <<EOF\nheredoc-body-line\nEOF\nheredoc-body-line\n\n\n\noh_test\nalias-expanded\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-ho"
+    },
+    {
+      "check": "steps.next.text contains next-command",
+      "ok": true,
+      "actual": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S14/work/S14-core-tools-10/block"
+    },
+    {
+      "check": "steps.third.text contains third",
+      "ok": true,
+      "actual": "third\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S14/work/S14-core-tools-10/block1/runs/"
+    },
+    {
+      "check": "steps.next.text not-contains Previous command outputs are truncated",
+      "ok": true,
+      "actual": "next-command\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S14/work/S14-core-tools-10/block"
+    },
+    {
+      "check": "steps.third.text not-contains Previous command outputs are truncated",
+      "ok": true,
+      "actual": "third\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/sdk/recheck-S14/work/S14-core-tools-10/block1/runs/"
+    }
+  ]
+}
+
+[exit 0 after 9s]

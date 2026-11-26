@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/94674fa0-95f1-4ee4-9af8-b6dc6a41a31c/events/search",
+    "query": [
+      [
+        "kind",
+        "HookExecutionEvent"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "580",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "cdf9d518-c368-4ffd-b031-53d05df19557",
+          "timestamp": "2026-11-26T08:34:39.337232",
+          "source": "hook",
+          "parent_id": "645bf1e1-4eec-4d01-baad-598e08148e45",
+          "hook_event_type": "UserPromptSubmit",
+          "hook_command": "echo fired >> /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-083039-586d-triage-7107/qa7100/hook_marker",
+          "success": true,
+          "blocked": false,
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "message_id": "70da1a98-bfae-4839-8e01-23ef71d4f24b",
+          "hook_input": {
+            "message": "hello"
+          },
+          "kind": "HookExecutionEvent"
+        }
+      ],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 422
+}

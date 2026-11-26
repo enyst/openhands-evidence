@@ -1,0 +1,54 @@
+== sync
++----------------------------------------------------------------------+
+|  OpenHands SDK v1.64.1                                               |
+|                                                                      |
+|  Report a bug: github.com/OpenHands/software-agent-sdk/issues        |
+|  Get help: openhands.dev/joinslack                                   |
+|  Scale up: openhands.dev/product/sdk                                 |
+|                                                                      |
+|  Set OPENHANDS_SUPPRESS_BANNER=1 to hide this message                |
++----------------------------------------------------------------------+
+                             343b1972-e3fe-4b29-be34-3d57d22a4153               
+before run: persisted status / event files = ('idle', 2)
+run raised OSError (not ConversationRunError): [Errno 28] No space left on device
+  exception chain (first raised -> last raised):
+    OSError: local_conversation.py:2756(_run) > agent.py:857(step) > agent.py:1045(_step) > response_dispatch.py:272(_handle_content_response) > response_dispatch.py:351(_emit_message_event) > local_conversation.py:699(wrapped) > local_conversation.py:711(wrapped) > base.py:529(composed) > local_conversation.py:533(_default_callback) > state.py:496(append_event) > event_store.py:364(append)
+    OSError: local_conversation.py:2841(_run) > local_conversation.py:699(wrapped) > local_conversation.py:711(wrapped) > base.py:529(composed) > local_conversation.py:533(_default_callback) > state.py:496(append_event) > event_store.py:364(append)
+    OSError: local_conversation.py:2668(run) > local_conversation.py:2829(_run) > state.py:970(__exit__) > state.py:983(_flush_deferred_save) > state.py:618(_save_base_state)
+in-memory status: error
+persisted status / event files: ('running', 2)
+ConversationErrorEvent recorded: False
+read-only `with state:` raised: [Errno 28] No space left on device
+same object after space restored: `with state:` ok; persisted = error
+                             343b1972-e3fe-4b29-be34-3d57d22a4153               
+                             from persistent storage                            
+after reopen: status = error
+after rerun: status = finished
+event types: ['SystemPromptEvent', 'MessageEvent', 'MessageEvent', 'MessageEvent']
+== async
++----------------------------------------------------------------------+
+|  OpenHands SDK v1.64.1                                               |
+|                                                                      |
+|  Report a bug: github.com/OpenHands/software-agent-sdk/issues        |
+|  Get help: openhands.dev/joinslack                                   |
+|  Scale up: openhands.dev/product/sdk                                 |
+|                                                                      |
+|  Set OPENHANDS_SUPPRESS_BANNER=1 to hide this message                |
++----------------------------------------------------------------------+
+                             9ffda954-998c-4d05-86a1-cd8ff0db9994               
+before run: persisted status / event files = ('idle', 2)
+run raised OSError (not ConversationRunError): [Errno 28] No space left on device
+  exception chain (first raised -> last raised):
+    OSError: local_conversation.py:3049(_arun) > agent.py:1080(astep) > agent.py:1280(_astep) > response_dispatch.py:272(_handle_content_response) > response_dispatch.py:351(_emit_message_event) > local_conversation.py:699(wrapped) > local_conversation.py:711(wrapped) > base.py:529(composed) > local_conversation.py:533(_default_callback) > state.py:496(append_event) > event_store.py:364(append)
+    OSError: local_conversation.py:3390(_arun) > local_conversation.py:699(wrapped) > local_conversation.py:711(wrapped) > base.py:529(composed) > local_conversation.py:533(_default_callback) > state.py:496(append_event) > event_store.py:364(append)
+    OSError: local_conversation.py:2881(arun) > local_conversation.py:3376(_arun) > state.py:970(__exit__) > state.py:983(_flush_deferred_save) > state.py:618(_save_base_state)
+in-memory status: error
+persisted status / event files: ('running', 2)
+ConversationErrorEvent recorded: False
+read-only `with state:` raised: [Errno 28] No space left on device
+same object after space restored: `with state:` ok; persisted = error
+                             9ffda954-998c-4d05-86a1-cd8ff0db9994               
+                             from persistent storage                            
+after reopen: status = error
+after rerun: status = finished
+event types: ['SystemPromptEvent', 'MessageEvent', 'MessageEvent', 'MessageEvent']

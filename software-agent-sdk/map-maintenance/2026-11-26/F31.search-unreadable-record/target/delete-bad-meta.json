@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/api/conversations/2f9b290c-baa1-4e3e-9b90-1617e271ef88",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 77
+}

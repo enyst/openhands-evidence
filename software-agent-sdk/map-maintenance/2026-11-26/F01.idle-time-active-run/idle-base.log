@@ -1,0 +1,154 @@
++ EXTRA=()
++ '[' -n /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/shardA-base-wt ']'
++ EXTRA=(--checkout "$2")
+++ control-agent-server launch --new --name f01-idle-base --print-run --checkout /tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/shardA-base-wt
++ export AGENT_SERVER_VERIFY_RUN=/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/shardA/20261126-082644-c64b-f01-idle-base
++ AGENT_SERVER_VERIFY_RUN=/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/shardA/20261126-082644-c64b-f01-idle-base
++ control-agent-server doctor
++ jq -c .ok
+true
+++ control-agent-server fixture llm-stub --name qa-f01-idle --step hang:300 --print-path
++ IDLE=http://127.0.0.1:38863
++ IDLE_AGENT='{"llm": {"model": "openai/qa-stub", "api_key": "qa-stub-key", "base_url": "http://127.0.0.1:38863/v1", "num_retries": 0}, "tools": []}'
+++ control-agent-server conversation start --body-json '{"agent": {"llm": {"model": "openai/qa-stub", "api_key": "qa-stub-key", "base_url": "http://127.0.0.1:38863/v1", "num_retries": 0}, "tools": []}}' --no-autotitle --print-id
++ I=1676d52a-959a-46dd-a2fe-9bea24ee4ac3
++ control-agent-server conversation send 1676d52a-959a-46dd-a2fe-9bea24ee4ac3 --text hi --no-run
+{
+  "ok": true,
+  "status": 200,
+  "body": {
+    "success": true
+  }
+}
++ control-agent-server api POST /api/conversations/1676d52a-959a-46dd-a2fe-9bea24ee4ac3/run --expect 200
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "POST",
+    "path": "/api/conversations/1676d52a-959a-46dd-a2fe-9bea24ee4ac3/run",
+    "query": [],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 1188
+}
++ control-agent-server conversation wait 1676d52a-959a-46dd-a2fe-9bea24ee4ac3 --until running --timeout 60
+{
+  "id": "1676d52a-959a-46dd-a2fe-9bea24ee4ac3",
+  "ok": true,
+  "status": "running",
+  "transitions": [
+    "running"
+  ],
+  "waited_ms": 526
+}
++ control-agent-server sink read --name qa-f01-idle --expect-min 1
++ jq -c '.count // .total // .'
+{"ok":true,"requests":1,"paths":{"/v1/chat/completions":1},"last":["{\"at\": \"2026-11-26T08:29:46Z\", \"method\": \"POST\", \"path\": \"/v1/chat/completions\", \"call\": 0, \"step\": {\"hang\": 300.0}, \"body\": {\"model\": \"qa-stub\", \"messages\": [{\"content\": [{\"type\": \"text\", \"text\": \"<SOUL>\\nYou are OpenHands agent, a helpful AI assistant that can interact with a computer to solve tasks.\\n</SOUL>\\n\\n<ROLE>\\n* Your primary role is to assist users by executing commands, modifying code…"]}
++ T0=194
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=7 23.0'
+t=7 23.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=17 32.0'
+t=17 32.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=27 45.0'
+t=27 45.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=40 56.0'
+t=40 56.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=50 66.0'
+t=50 66.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=61 76.0'
+t=61 76.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=71 86.0'
+t=71 86.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=81 97.0'
+t=81 97.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=91 107.0'
+t=91 107.0
++ for k in 1 2 3 4 5 6 7 8 9 10
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 't=101 117.0'
+t=101 117.0
++ control-agent-server api GET /api/conversations/1676d52a-959a-46dd-a2fe-9bea24ee4ac3 --check execution_status eq running
++ jq -c .checks
+[{"check":"execution_status eq running","ok":true,"actual":"running"}]
++ control-agent-server api POST /api/conversations/1676d52a-959a-46dd-a2fe-9bea24ee4ac3/interrupt --expect 200
++ jq -c .status
+200
++ control-agent-server conversation wait 1676d52a-959a-46dd-a2fe-9bea24ee4ac3 --until paused --timeout 30
++ jq -c .
+{"id":"1676d52a-959a-46dd-a2fe-9bea24ee4ac3","ok":true,"status":"paused","transitions":["paused"],"waited_ms":536}
++ T1=307
++ for k in 1 2 3 4 5 6
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 'after t=7 12.0'
+after t=7 12.0
++ for k in 1 2 3 4 5 6
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 'after t=17 22.0'
+after t=17 22.0
++ for k in 1 2 3 4 5 6
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 'after t=27 32.0'
+after t=27 32.0
++ for k in 1 2 3 4 5 6
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 'after t=37 43.0'
+after t=37 43.0
++ for k in 1 2 3 4 5 6
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 'after t=48 53.0'
+after t=48 53.0
++ for k in 1 2 3 4 5 6
++ sleep 7
+++ control-agent-server api GET /server_info --auth none --field idle_time
++ echo 'after t=58 63.0'
+after t=58 63.0
++ control-agent-server stop
++ jq -c .ok
+true

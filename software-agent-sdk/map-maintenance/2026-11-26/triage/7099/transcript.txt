@@ -1,0 +1,3 @@
+callback POSTs received: 1
+first body: {"status": "COMPLETED", "conversation_id": "conv-123", "cost": 0.42}
+callback log lines: ['Completion callback sent (COMPLETED): 502']

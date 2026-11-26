@@ -1,0 +1,11 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-"
+  ],
+  "cwd": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/shardD-base-wt",
+  "exit_code": 1,
+  "elapsed_ms": 5795,
+  "stdout": "",
+  "stderr": "[11/26/26 08:57:03] WARNING  Default prompt text changed; cannot   project.py:63\n                             find \"\\n* When you run into any major              \n                             issue while executing a plan from the              \n                             user, please don't try to directly                 \n                             work around it. Instead, propose a                 \n                             new plan and confirm with the user                 \n                             before proceeding.\"                                \nTraceback (most recent call last):\n  File \"<stdin>\", line 8, in <module>\n  File \"/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/shardD-base-wt/openhands-sdk/openhands/sdk/workspace/workspace.py\", line 44, in __new__\n    return RemoteWorkspace(\n        working_dir=working_dir,\n        host=host,\n        api_key=api_key,\n    )\n  File \"/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/shardD-base-wt/.venv/lib/python3.13/site-packages/pydantic/main.py\", line 280, in __init__\n    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)\npydantic_core._pydantic_core.ValidationError: 1 validation error for RemoteWorkspace\nworking_dir\n  Input should be a valid string [type=string_type, input_value=PosixPath('/tmp/claude-0/...3/fixtures/qa-f33/exec'), input_type=PosixPath]\n    For further information visit https://errors.pydantic.dev/2.14/v/string_type\n"
+}

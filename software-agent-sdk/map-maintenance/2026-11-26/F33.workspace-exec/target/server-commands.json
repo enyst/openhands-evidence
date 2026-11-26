@@ -1,0 +1,61 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/bash/bash_events/search",
+    "query": [
+      [
+        "kind__eq",
+        "BashCommand"
+      ],
+      [
+        "sort_order",
+        "TIMESTAMP_DESC"
+      ],
+      [
+        "limit",
+        "3"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "934",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "command": "sleep 20",
+          "cwd": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/recheck/20261126-090556-8ebd-map-f33/fixtures/qa-f33/exec",
+          "timeout": 2,
+          "id": "c703f4ca3ccf48b885bf920490efc998",
+          "timestamp": "2026-11-26T09:06:17.128353Z",
+          "kind": "BashCommand"
+        },
+        {
+          "command": "pwd",
+          "cwd": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/recheck/20261126-090556-8ebd-map-f33/fixtures/qa-f33/exec",
+          "timeout": 30,
+          "id": "552668aecac44fb698732a189bfc79c9",
+          "timestamp": "2026-11-26T09:06:17.119065Z",
+          "kind": "BashCommand"
+        },
+        {
+          "command": "echo qa-f33-out; echo qa-f33-err >&2; exit 3",
+          "cwd": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/recheck/20261126-090556-8ebd-map-f33/fixtures/qa-f33/exec",
+          "timeout": 30,
+          "id": "48022e95d3cd4f808fcdff2346679625",
+          "timestamp": "2026-11-26T09:06:17.107994Z",
+          "kind": "BashCommand"
+        }
+      ],
+      "next_page_id": null
+    },
+    "truncated": false
+  },
+  "elapsed_ms": 62
+}

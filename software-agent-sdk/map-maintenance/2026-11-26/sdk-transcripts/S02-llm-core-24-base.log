@@ -1,0 +1,139 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/subagent_rollup \
+  --check same.status eq finished --check same.task.model_name eq openai/gpt-4o-mini \
+  --check same.task.usage_model eq openai/gpt-4o-mini --check same.task.cost eq 0.14 \
+  --check same.combined.model_name eq openai/gpt-4o-mini --check same.combined.usage_model eq openai/gpt-4o-mini \
+  --check same.combined.cost eq 0.42 --check same.combined.calls eq 3 \
+  --check mixed.status eq finished --check mixed.task.model_name eq openai/gpt-4o \
+  --check mixed.combined.model_name eq default --check mixed.combined.usage_model eq default \
+  --check mixed.combined.cost eq 0.42 --check mixed.combined.call_models len-eq 2
+{
+  "ok": true,
+  "same": {
+    "status": "finished",
+    "usage_ids": [
+      "agent",
+      "task:task_00000001"
+    ],
+    "task": {
+      "model_name": "default",
+      "usage_model": "default",
+      "cost": 0.14,
+      "calls": 1,
+      "call_models": [
+        "openai/gpt-4o-mini"
+      ]
+    },
+    "combined": {
+      "model_name": "default",
+      "usage_model": "default",
+      "cost": 0.42,
+      "calls": 3,
+      "call_models": [
+        "openai/gpt-4o-mini"
+      ]
+    }
+  },
+  "mixed": {
+    "status": "finished",
+    "usage_ids": [
+      "agent",
+      "task:task_00000001"
+    ],
+    "task": {
+      "model_name": "default",
+      "usage_model": "default",
+      "cost": 0.14,
+      "calls": 1,
+      "call_models": [
+        "openai/gpt-4o"
+      ]
+    },
+    "combined": {
+      "model_name": "default",
+      "usage_model": "default",
+      "cost": 0.42,
+      "calls": 3,
+      "call_models": [
+        "openai/gpt-4o",
+        "openai/gpt-4o-mini"
+      ]
+    }
+  },
+  "_exit": 0,
+  "_seconds": 45.3,
+  "checks": [
+    {
+      "check": "same.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "same.task.model_name eq openai/gpt-4o-mini",
+      "ok": false,
+      "actual": "default"
+    },
+    {
+      "check": "same.task.usage_model eq openai/gpt-4o-mini",
+      "ok": false,
+      "actual": "default"
+    },
+    {
+      "check": "same.task.cost eq 0.14",
+      "ok": true,
+      "actual": "0.14"
+    },
+    {
+      "check": "same.combined.model_name eq openai/gpt-4o-mini",
+      "ok": false,
+      "actual": "default"
+    },
+    {
+      "check": "same.combined.usage_model eq openai/gpt-4o-mini",
+      "ok": false,
+      "actual": "default"
+    },
+    {
+      "check": "same.combined.cost eq 0.42",
+      "ok": true,
+      "actual": "0.42"
+    },
+    {
+      "check": "same.combined.calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "mixed.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "mixed.task.model_name eq openai/gpt-4o",
+      "ok": false,
+      "actual": "default"
+    },
+    {
+      "check": "mixed.combined.model_name eq default",
+      "ok": true,
+      "actual": "default"
+    },
+    {
+      "check": "mixed.combined.usage_model eq default",
+      "ok": true,
+      "actual": "default"
+    },
+    {
+      "check": "mixed.combined.cost eq 0.42",
+      "ok": true,
+      "actual": "0.42"
+    },
+    {
+      "check": "mixed.combined.call_models len-eq 2",
+      "ok": true,
+      "actual": "[\"openai/gpt-4o\", \"openai/gpt-4o-mini\"]"
+    }
+  ]
+}
+
+[exit 1 after 46s]

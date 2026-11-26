@@ -1,0 +1,52 @@
+T=/tmp/qa7130.9Khv
+total 8
+drwx------ 2 root root 4096 Nov 26 08:27 .
+drwx------ 3 root root 4096 Nov 26 08:27 ..
+srw-rw---- 1 root root    0 Nov 26 08:27 openhands-117491e0ee02401d800b6dda80419302
+srwxr-xr-x 1 root root    0 Nov 26 08:27 openhands-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+R=/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-082733-9872-triage-7130
+{
+  "ok": true,
+  "status": 200,
+  "request": {
+    "method": "GET",
+after startup:
+total 8
+drwx------ 2 root root 4096 Nov 26 08:28 .
+drwx------ 3 root root 4096 Nov 26 08:27 ..
+-rw-r--r-- 1 root root    0 Nov 26 08:28 .openhands-socket-creation.lock
+srw-rw---- 1 root root    0 Nov 26 08:27 openhands-117491e0ee02401d800b6dda80419302
+srwxr-xr-x 1 root root    0 Nov 26 08:27 openhands-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+openhands-117491e0ee02401d800b6dda80419302 exists True is_socket True
+openhands-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa exists True is_socket True
+  "ready_path": "/ready"
+}
+after restart:
+total 8
+drwx------ 2 root root 4096 Nov 26 08:28 .
+drwx------ 3 root root 4096 Nov 26 08:27 ..
+-rw-r--r-- 1 root root    0 Nov 26 08:28 .openhands-socket-creation.lock
+srw-rw---- 1 root root    0 Nov 26 08:27 openhands-117491e0ee02401d800b6dda80419302
+srwxr-xr-x 1 root root    0 Nov 26 08:27 openhands-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+usage: control-agent-server logs [-h] [--run RUN] [--tail TAIL]
+                                 [--expect-min N] [--expect-none]
+                                 [--grep GREP]
+control-agent-server logs: error: argument --grep: expected one argument
+
+[exited with code 0]
+{
+  "ok": true,
+  "run": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-082733-9872-triage-7130",
+  "helpers": [],
+  "server": "terminated",
+  "port_closed": true,
+  "orphans_reaped": [],
+  "evidence": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-082733-9872-triage-7130/evidence",
+  "evidence_files": 0
+}
+total 8
+drwx------ 2 root root 4096 Nov 26 08:28 .
+drwx------ 3 root root 4096 Nov 26 08:27 ..
+-rw-r--r-- 1 root root    0 Nov 26 08:28 .openhands-socket-creation.lock
+srw-rw---- 1 root root    0 Nov 26 08:27 openhands-117491e0ee02401d800b6dda80419302
+srwxr-xr-x 1 root root    0 Nov 26 08:27 openhands-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

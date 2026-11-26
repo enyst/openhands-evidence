@@ -1,0 +1,5 @@
+status: finished
+llm calls: 1
+answer.txt exists: False
+events: ['SystemPromptEvent', 'MessageEvent', 'MessageEvent']
+agent message starts with: '<｜DSML｜tool_calls>\n<｜DSML｜invoke name="t'

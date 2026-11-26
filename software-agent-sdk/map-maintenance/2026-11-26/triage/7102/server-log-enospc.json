@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "log": "/tmp/claude-0/-home-user/00d2a564-bede-5432-96e0-9eb7aa2a897e/scratchpad/agent-server/triage/20261126-084435-828a-triage-7102/private/server.log",
+  "lines": [
+    "                             OSError: [Errno 28] No space left on               ",
+    "                             OSError: [Errno 28] No space left on               ",
+    "                             OSError: [Errno 28] No space left on               ",
+    "                             OSError: [Errno 28] No space left on               ",
+    "                             OSError: [Errno 28] No space left on               ",
+    "                             OSError: [Errno 28] No space left on               ",
+    "future: <Task finished name='Task-33' coro=<EventService.run.<locals>._run_and_publish() done, defined at /home/user/software-agent-sdk/openhands-agent-server/openhands/agent_server/event_service.py:1792> exception=OSError(28, 'No space left on device')>",
+    "OSError: [Errno 28] No space left on device",
+    "OSError: [Errno 28] No space left on device",
+    "OSError: [Errno 28] No space left on device",
+    "OSError: [Errno 28] No space left on device",
+    "OSError: [Errno 28] No space left on device",
+    "OSError: [Errno 28] No space left on device",
+    "OSError: [Errno 28] No space left on device",
+    "OSError: [Errno 28] No space left on device",
+    "OSError: [Errno 28] No space left on device"
+  ],
+  "total_matching": 16
+}
