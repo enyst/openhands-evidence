@@ -1,0 +1,35 @@
+{
+  "desktop": {
+    "viewport": [
+      1440,
+      1000
+    ],
+    "rootFont": "16px",
+    "paddingTop": "280px",
+    "paddingBottom": "40px",
+    "width": 1056,
+    "inputWidth": 736
+  },
+  "phone": {
+    "viewport": [
+      390,
+      844
+    ],
+    "rootFont": "16px",
+    "paddingTop": "236.32px",
+    "paddingBottom": "40px",
+    "width": 358,
+    "inputWidth": 326
+  },
+  "390x600": {
+    "viewport": [
+      390,
+      600
+    ],
+    "rootFont": "16px",
+    "paddingTop": "168px",
+    "paddingBottom": "40px",
+    "width": 358,
+    "inputWidth": 326
+  }
+}
