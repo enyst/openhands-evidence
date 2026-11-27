@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/conversations/e6fb2ff6-102b-4441-a0c3-05ae2a20aca6/events/count",
+    "query": [
+      [
+        "kind",
+        "openhands.sdk.event.llm_convertible.observation.ObservationEvent"
+      ]
+    ],
+    "auth": "header",
+    "body": null,
+    "files": []
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-length": "1",
+      "content-type": "application/json"
+    },
+    "body": 0,
+    "truncated": false
+  },
+  "elapsed_ms": 55
+}

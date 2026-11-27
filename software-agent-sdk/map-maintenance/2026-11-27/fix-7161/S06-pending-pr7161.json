@@ -1,0 +1,67 @@
+{
+  "ok": true,
+  "mode": "pending",
+  "error": null,
+  "status_before": "waiting_for_confirmation",
+  "ran_before": false,
+  "condense_error": null,
+  "status_after": "waiting_for_confirmation",
+  "ran_after": false,
+  "observations_after": 0,
+  "condensations": 1,
+  "condensed_or_refused": true,
+  "agent_calls_during_condense": 0,
+  "approve_error": null,
+  "status_approved": "finished",
+  "runs_after_approve": 1,
+  "observations_approved": 2,
+  "_exit": 0,
+  "_seconds": 4.4,
+  "checks": [
+    {
+      "check": "error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "status_before eq waiting_for_confirmation",
+      "ok": true,
+      "actual": "waiting_for_confirmation"
+    },
+    {
+      "check": "ran_before eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "ran_after eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "observations_after eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "status_after eq waiting_for_confirmation",
+      "ok": true,
+      "actual": "waiting_for_confirmation"
+    },
+    {
+      "check": "condensed_or_refused eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "approve_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "runs_after_approve eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}

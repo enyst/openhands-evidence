@@ -1,0 +1,52 @@
+{
+  "file": "F10-fork-navigate-condense-ask.md",
+  "bullet": "Condense while an action awaits confirmation (`F10.condense-pending-action`), known bug [#7160](https://github.com/OpenHands/software-agent-sdk/issues/7160).",
+  "ids": [
+    "F10.condense-pending-action"
+  ],
+  "line": 439,
+  "script": "PW=\"$AGENT_SERVER_VERIFY_RUN/fixtures/qa-f10-pending\"; mkdir -p \"$PW\"\nPSTUB=$(control-agent-server fixture llm-stub --name qa-f10-pending --step 'tool:terminal:{\"command\":\"echo ran >> qa-f10-unapproved.txt\"}' --step 'reply:QA_F10_PENDING_TEXT' --print-path)\nPLLM=\"{\\\"model\\\": \\\"openai/qa-stub\\\", \\\"api_key\\\": \\\"qa-stub-key\\\", \\\"base_url\\\": \\\"$PSTUB/v1\\\", \\\"num_retries\\\": 0}\"\nP=$(control-agent-server api POST /api/conversations --json \"{\\\"workspace\\\": {\\\"working_dir\\\": \\\"$PW\\\"}, \\\"agent_settings\\\": {\\\"agent_kind\\\": \\\"openhands\\\", \\\"llm\\\": $PLLM, \\\"tools\\\": [{\\\"name\\\": \\\"terminal\\\"}]}, \\\"confirmation_policy\\\": {\\\"kind\\\": \\\"AlwaysConfirm\\\"}, \\\"autotitle\\\": false}\" --expect 201 --field id)\ncontrol-agent-server conversation send \"$P\" --text 'Run the command.' --wait --until waiting_for_confirmation --timeout 120\ncontrol-agent-server api GET \"/api/conversations/$P\" --quiet --check execution_status eq waiting_for_confirmation --check agent.condenser.kind eq LLMSummarizingCondenser\ntest ! -e \"$PW/qa-f10-unapproved.txt\"\nPCODE=$(control-agent-server api POST \"/api/conversations/$P/condense\" --expect 200,409 --timeout 120 --save F10.condense-pending-action/condense | jq -r .status)\ncontrol-agent-server api GET \"/api/conversations/$P/events/count\" --query kind=openhands.sdk.event.llm_convertible.observation.ObservationEvent --check . eq 0 --save F10.condense-pending-action/observations # bug: response.body eq 1\ntest ! -e \"$PW/qa-f10-unapproved.txt\"\ncontrol-agent-server api GET \"/api/conversations/$P\" --quiet --check execution_status eq waiting_for_confirmation\nNCOND=$(control-agent-server api GET \"/api/conversations/$P/events/count\" --query kind=$COND --field .)\ntest \"$PCODE\" = 409 || test \"$NCOND\" -ge 1\ncontrol-agent-server api POST \"/api/conversations/$P/events/respond_to_confirmation\" --json '{\"accept\": true}' --expect 200\ncontrol-agent-server conversation wait \"$P\" --until finished --timeout 120\ntest \"$(cat \"$PW/qa-f10-unapproved.txt\")\" = ran\n",
+  "exit_code": 1,
+  "elapsed_ms": 3483,
+  "failed_line": 9,
+  "failed_command": "control-agent-server api GET \"/api/conversations/$P/events/count\" --query kind=openhands.sdk.event.llm_convertible.observation.ObservationEvent --check . eq 0 --save F10.condense-pending-action/observations",
+  "failed_status": 1,
+  "observation": {
+    "ok": false,
+    "status": 200,
+    "request": {
+      "method": "GET",
+      "path": "/api/conversations/210af0f4-1108-4989-a39f-5e6ec1f5d219/events/count",
+      "query": [
+        [
+          "kind",
+          "openhands.sdk.event.llm_convertible.observation.ObservationEvent"
+        ]
+      ],
+      "auth": "header",
+      "body": null,
+      "files": []
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "content-length": "1",
+        "content-type": "application/json"
+      },
+      "body": 1,
+      "truncated": false
+    },
+    "elapsed_ms": 64,
+    "checks": [
+      {
+        "check": ". eq 0",
+        "ok": false,
+        "actual": "1"
+      }
+    ],
+    "saved": "/tmp/claude-0/-home-user/d23d10a7-5f18-5000-8842-315ee1d0ffdd/scratchpad/agent-server/20261127-082841-7760-map-f10/evidence/F10.condense-pending-action/observations.json",
+    "hint": "failed check: . eq 0"
+  },
+  "stdout": "{\n  \"ok\": true,\n  \"status\": 200,\n  \"body\": {\n    \"success\": true\n  },\n  \"wait\": {\n    \"ok\": true,\n    \"status\": \"waiting_for_confirmation\",\n    \"transitions\": [\n      \"running\",\n      \"waiting_for_confirmation\"\n    ],\n    \"waited_ms\": 1047\n  }\n}\n{\n  \"ok\": true,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/210af0f4-1108-4989-a39f-5e6ec1f5d219\",\n    \"query\": [],\n    \"auth\": \"header\",\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"6049\",\n      \"content-type\": \"application/json\"\n    },\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 51,\n  \"checks\": [\n    {\n      \"check\": \"execution_status eq waiting_for_confirmation\",\n      \"ok\": true,\n      \"actual\": \"waiting_for_confirmation\"\n    },\n    {\n      \"check\": \"agent.condenser.kind eq LLMSummarizingCondenser\",\n      \"ok\": true,\n      \"actual\": \"LLMSummarizingCondenser\"\n    }\n  ]\n}\n{\n  \"ok\": false,\n  \"status\": 200,\n  \"request\": {\n    \"method\": \"GET\",\n    \"path\": \"/api/conversations/210af0f4-1108-4989-a39f-5e6ec1f5d219/events/count\",\n    \"query\": [\n      [\n        \"kind\",\n        \"openhands.sdk.event.llm_convertible.observation.ObservationEvent\"\n      ]\n    ],\n    \"auth\": \"header\",\n    \"body\": null,\n    \"files\": []\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"content-length\": \"1\",\n      \"content-type\": \"application/json\"\n    },\n    \"body\": 1,\n    \"truncated\": false\n  },\n  \"elapsed_ms\": 64,\n  \"checks\": [\n    {\n      \"check\": \". eq 0\",\n      \"ok\": false,\n      \"actual\": \"1\"\n    }\n  ],\n  \"saved\": \"/tmp/claude-0/-home-user/d23d10a7-5f18-5000-8842-315ee1d0ffdd/scratchpad/agent-server/20261127-082841-7760-map-f10/evidence/F10.condense-pending-action/observations.json\",\n  \"hint\": \"failed check: . eq 0\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,41 @@
+{
+  "ok": true,
+  "file": "F10-fork-navigate-condense-ask.md",
+  "launch_flags": [],
+  "attempts": [
+    {
+      "run": "/tmp/claude-0/-home-user/d23d10a7-5f18-5000-8842-315ee1d0ffdd/scratchpad/agent-server/20261127-083951-80ae-map-f10",
+      "ok": true,
+      "summary": {
+        "pass": 1,
+        "fail": 0,
+        "xfail": 1,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Condense while an action awaits confirmation (`F10.condense-pending-action`), known bug [#7160](https://github.com/OpenHands/software-agent-sdk/issues/7160).": "xfail"
+      }
+    },
+    {
+      "run": "/tmp/claude-0/-home-user/d23d10a7-5f18-5000-8842-315ee1d0ffdd/scratchpad/agent-server/20261127-084012-ba52-map-f10",
+      "ok": true,
+      "summary": {
+        "pass": 1,
+        "fail": 0,
+        "xfail": 1,
+        "xpass": 0,
+        "blocked": 0,
+        "skipped": 0,
+        "no-commands": 0
+      },
+      "statuses": {
+        "Preconditions": "pass",
+        "Condense while an action awaits confirmation (`F10.condense-pending-action`), known bug [#7160](https://github.com/OpenHands/software-agent-sdk/issues/7160).": "xfail"
+      }
+    }
+  ]
+}
