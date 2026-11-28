@@ -1,0 +1,82 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg dispositions \
+  --check recovery_reason_roundtrip eq server_restart --check recovery_reason_default eq null \
+  --check tool_calls eq 4 --check dispositions eq 4 --check order_follows_input eq true \
+  --check first_canonical_is_recovery eq true --check first_out_of_view_is_real eq true --check others_single eq true \
+  --check view_observations_match eq true --check events_unchanged eq true --check actions_only eq 0
+{
+  "ok": true,
+  "mode": "dispositions",
+  "recovery_reason_roundtrip": "server_restart",
+  "recovery_reason_default": null,
+  "tool_calls": 4,
+  "dispositions": 4,
+  "first_canonical_is_recovery": true,
+  "first_out_of_view_is_real": true,
+  "others_single": true,
+  "order_follows_input": true,
+  "view_observations_match": true,
+  "events_unchanged": true,
+  "actions_only": 0,
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "recovery_reason_roundtrip eq server_restart",
+      "ok": true,
+      "actual": "server_restart"
+    },
+    {
+      "check": "recovery_reason_default eq null",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "tool_calls eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "dispositions eq 4",
+      "ok": true,
+      "actual": "4"
+    },
+    {
+      "check": "order_follows_input eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "first_canonical_is_recovery eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "first_out_of_view_is_real eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "others_single eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "view_observations_match eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "events_unchanged eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "actions_only eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 5s]

@@ -1,0 +1,119 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script-json '[{"tools":[{"tool":"terminal","args":{"command":"echo one"}},{"tool":"file_editor","args":{"command":"view"}},{"tool":"terminal","args":{"command":"echo three"}}]},{"finish":"done"}]' --field id)
+control-sdk conversation send "$CID" --text "Run the three tools" --run --check execution_status eq finished
+control-sdk program S05/batch_errors --arg "$CID" \
+  --check batch_calls eq 3 --check rejected_calls eq 1 --check error_matches_rejected eq true \
+  --check batch_assistant_messages eq 1 --check batch_assistant_tool_calls eq 3 \
+  --check answered_right_after eq true --check every_call_answered_in_order eq true \
+  --check view_cuts_inside_batch eq 0
+{
+  "ok": true,
+  "id": "3ac509ed-2ce2-4358-89f7-b9efb3d29384",
+  "execution_status": "finished",
+  "event_count": 10,
+  "kinds": [
+    "ActionEvent",
+    "AgentErrorEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "done",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "status": "finished",
+  "kinds": [
+    "SystemPromptEvent",
+    "MessageEvent",
+    "ActionEvent",
+    "ActionEvent",
+    "AgentErrorEvent",
+    "ActionEvent",
+    "ObservationEvent",
+    "ObservationEvent",
+    "ActionEvent",
+    "ObservationEvent"
+  ],
+  "batch_calls": 3,
+  "rejected_calls": 1,
+  "error_events": 1,
+  "error_matches_rejected": true,
+  "batch_assistant_messages": 1,
+  "batch_assistant_tool_calls": 3,
+  "answered_right_after": true,
+  "answered_count": 3,
+  "every_call_answered_in_order": true,
+  "chat_roles": [
+    "system",
+    "user",
+    "assistant",
+    "tool",
+    "tool",
+    "tool",
+    "assistant",
+    "tool"
+  ],
+  "view_batch_span": 3,
+  "view_cuts_inside_batch": 0,
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "batch_calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "rejected_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "error_matches_rejected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "batch_assistant_messages eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "batch_assistant_tool_calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "answered_right_after eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "every_call_answered_in_order eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "view_cuts_inside_batch eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 15s]

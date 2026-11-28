@@ -1,0 +1,79 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg image-adapter-loss \
+  --check user_image.vision_active eq true --check user_image.delivered_or_refused_once eq true \
+  --check user_image.error eq LLMBadRequestError --check user_image.retries eq 0 --check user_image.requests eq 0 \
+  --check tool_image.delivered_or_refused_once eq true \
+  --check tool_image.error eq LLMBadRequestError --check tool_image.retries eq 0 --check tool_image.requests eq 0
+{
+  "ok": true,
+  "mode": "image-adapter-loss",
+  "user_image": {
+    "vision_active": true,
+    "error": "LLMBadRequestError",
+    "message": "The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a compatible adapter or an explicitly configured OpenAI-compatible transport; enabling vision alone cannot fix adapter-level image loss.",
+    "retries": 0,
+    "requests": 0,
+    "image_parts_sent": null,
+    "delivered_or_refused_once": true
+  },
+  "tool_image": {
+    "vision_active": true,
+    "error": "LLMBadRequestError",
+    "message": "The installed LiteLLM adapter discarded image content before sending the request. No request was sent. Use a compatible adapter or an explicitly configured OpenAI-compatible transport; enabling vision alone cannot fix adapter-level image loss.",
+    "retries": 0,
+    "requests": 0,
+    "image_parts_sent": null,
+    "delivered_or_refused_once": true
+  },
+  "_exit": 0,
+  "_seconds": 6.1,
+  "checks": [
+    {
+      "check": "user_image.vision_active eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "user_image.delivered_or_refused_once eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "user_image.error eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "user_image.retries eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "user_image.requests eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "tool_image.delivered_or_refused_once eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "tool_image.error eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "tool_image.retries eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "tool_image.requests eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 6s]

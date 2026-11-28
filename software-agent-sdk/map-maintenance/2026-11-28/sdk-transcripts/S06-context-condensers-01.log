@@ -1,0 +1,197 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/context_prompt \
+  --check llm_calls eq 3 --check system_blocks eq 2 \
+  --check static_has_sys_suffix eq false --check dynamic_has_sys_suffix eq true \
+  --check repo_skill_in_dynamic eq true --check repo_skill_in_static eq false \
+  --check disabled_skill_in_prompt eq false --check keyword_skill_body_in_system eq false \
+  --check keyword_skill_listed eq true \
+  --check secret_names_in_dynamic len-eq 2 --check secret_description_in_dynamic eq true \
+  --check secret_value_sent eq false --check secret_in_plain_dump eq false \
+  --check secret_in_cipher_dump eq false --check secret_after_cipher_roundtrip eq true \
+  --check secret_in_persisted_state eq false \
+  --check datetime_in_dynamic eq true --check datetime_in_static eq false \
+  --check turn1_has_skill eq true --check turn1_has_user_suffix eq true \
+  --check turn2_has_skill eq false --check turn2_has_user_suffix eq true \
+  --check turn3_has_user_suffix eq true --check activated_skills len-eq 1 \
+  --check activated_skills.0 eq cat-voice --check duplicate_rejected eq true \
+  --check blank_user_suffix missing
+{
+  "ok": true,
+  "llm_calls": 3,
+  "system_blocks": 2,
+  "static_has_sys_suffix": false,
+  "dynamic_has_sys_suffix": true,
+  "repo_skill_in_dynamic": true,
+  "repo_skill_in_static": false,
+  "disabled_skill_in_prompt": false,
+  "keyword_skill_body_in_system": false,
+  "keyword_skill_listed": true,
+  "secret_names_in_dynamic": [
+    "DEPLOY_TOKEN",
+    "DB_PASSWORD"
+  ],
+  "secret_description_in_dynamic": true,
+  "secret_value_sent": false,
+  "datetime_in_dynamic": true,
+  "datetime_in_static": false,
+  "turn_user_text": [
+    "Hello FlargleBargle friend\n<EXTRA_INFO>\nThe following information has been included based on a keyword match for \"flarglebargle\".\nIt may or may not be relevant to the user's request.\n\n\nCAT-VOICE: answer like a grumpy cat.\n</EXTRA_INFO>\nUSER-SUFFIX: be kind.",
+    "flarglebargle once more\nUSER-SUFFIX: be kind.",
+    "a plain question\nUSER-SUFFIX: be kind."
+  ],
+  "turn1_has_skill": true,
+  "turn1_has_user_suffix": true,
+  "turn2_has_skill": false,
+  "turn2_has_user_suffix": true,
+  "turn3_has_user_suffix": true,
+  "activated_skills": [
+    "cat-voice"
+  ],
+  "duplicate_rejected": true,
+  "blank_user_suffix": null,
+  "secret_in_plain_dump": false,
+  "secret_in_cipher_dump": false,
+  "secret_after_cipher_roundtrip": true,
+  "secret_in_persisted_state": false,
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "llm_calls eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "system_blocks eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "static_has_sys_suffix eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "dynamic_has_sys_suffix eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "repo_skill_in_dynamic eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "repo_skill_in_static eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "disabled_skill_in_prompt eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "keyword_skill_body_in_system eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "keyword_skill_listed eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "secret_names_in_dynamic len-eq 2",
+      "ok": true,
+      "actual": "[\"DEPLOY_TOKEN\", \"DB_PASSWORD\"]"
+    },
+    {
+      "check": "secret_description_in_dynamic eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "secret_value_sent eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "secret_in_plain_dump eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "secret_in_cipher_dump eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "secret_after_cipher_roundtrip eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "secret_in_persisted_state eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "datetime_in_dynamic eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "datetime_in_static eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "turn1_has_skill eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn1_has_user_suffix eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn2_has_skill eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "turn2_has_user_suffix eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "turn3_has_user_suffix eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "activated_skills len-eq 1",
+      "ok": true,
+      "actual": "[\"cat-voice\"]"
+    },
+    {
+      "check": "activated_skills.0 eq cat-voice",
+      "ok": true,
+      "actual": "cat-voice"
+    },
+    {
+      "check": "duplicate_rejected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "blank_user_suffix missing",
+      "ok": true,
+      "actual": "null"
+    }
+  ]
+}
+
+[exit 0 after 5s]

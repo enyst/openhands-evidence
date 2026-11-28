@@ -1,0 +1,17 @@
+{
+  "file": "F06-conversation-events.md",
+  "bullet": "Log order is timestamp order (`F06.search-timestamp-order`).",
+  "ids": [
+    "F06.search-timestamp-order"
+  ],
+  "line": 587,
+  "script": "OBS_ID=$(control-agent-server api GET \"/api/conversations/$LIVE/events/search\" \\\n  --query kind=openhands.sdk.event.llm_convertible.observation.ObservationEvent --check items len-ge 1 --field items.0.id)\nOBS_T=$(control-agent-server api GET \"/api/conversations/$LIVE/events/$OBS_ID\" --check id eq \"$OBS_ID\" --field timestamp)\nFROM_OBS=$(control-agent-server api GET \"/api/conversations/$LIVE/events/search\" --field items \\\n  | jq -e --arg id \"$OBS_ID\" '[.[].id] | length - index($id)')\ntest \"$FROM_OBS\" -ge 2\nCOUNT_SINCE=$(control-agent-server api GET \"/api/conversations/$LIVE/events/count\" --query timestamp__gte=\"$OBS_T\" \\\n  --save F06.search-timestamp-order/count-since-observation --field .)\ncontrol-agent-server assert --value=\"$((COUNT_SINCE - FROM_OBS))\" --check . ge 0\nSINCE=$(control-agent-server ws listen \"/sockets/events/$LIVE\" --query resend_mode=since --query after_timestamp=\"$OBS_T\" \\\n  --duration 3 --save F06.search-timestamp-order/replay-since-observation | jq .frames)\ncontrol-agent-server assert --value=\"$((SINCE - 1 - FROM_OBS))\" --check . ge 0\ncontrol-agent-server api GET \"/api/conversations/$LIVE/events/search\" --field items \\\n  | jq -c '[range(1; length) as $i | select(.[$i].timestamp < .[$i - 1].timestamp) | (.[$i].key // .[$i].kind)]' | control-agent-server assert --check . len-eq 0\n",
+  "exit_code": 0,
+  "elapsed_ms": 5735,
+  "failed_line": null,
+  "failed_command": null,
+  "failed_status": null,
+  "observation": null,
+  "stdout": "{\n  \"ok\": true,\n  \"value\": 0,\n  \"checks\": [\n    {\n      \"check\": \". ge 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"value\": 0,\n  \"checks\": [\n    {\n      \"check\": \". ge 0\",\n      \"ok\": true,\n      \"actual\": \"0\"\n    }\n  ]\n}\n{\n  \"ok\": true,\n  \"value\": [],\n  \"checks\": [\n    {\n      \"check\": \". len-eq 0\",\n      \"ok\": true,\n      \"actual\": \"[]\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

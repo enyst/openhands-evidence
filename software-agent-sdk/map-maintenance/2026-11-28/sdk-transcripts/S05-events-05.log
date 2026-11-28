@@ -1,0 +1,78 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S05/write_and_read.json --field id)
+control-sdk conversation send "$CID" --text "Write notes.txt" --run --check execution_status eq finished
+control-sdk program S05/event_log --arg "$CID" \
+  --check appended eq 40 --check indexes_consecutive eq true --check duplicate_rejected eq true \
+  --check negative_index_ok eq true --check lookup_ok eq true --check events eq 50
+{
+  "ok": true,
+  "id": "0ae144a3-18bb-4720-8cf3-a61cd32439ab",
+  "execution_status": "finished",
+  "event_count": 10,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "notes.txt has two lines",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "appended": 40,
+  "indexes_consecutive": true,
+  "duplicate_rejected": true,
+  "negative_index_ok": true,
+  "lookup_ok": true,
+  "events": 50,
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "appended eq 40",
+      "ok": true,
+      "actual": "40"
+    },
+    {
+      "check": "indexes_consecutive eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "duplicate_rejected eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "negative_index_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "lookup_ok eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "events eq 50",
+      "ok": true,
+      "actual": "50"
+    }
+  ]
+}
+
+[exit 0 after 16s]

@@ -1,0 +1,45 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk program S06/condense --arg live \
+  --check status eq finished --check condensations ge 1 --check summary_nonempty eq true \
+  --check atomic eq true --check condensations_after_request gt 1
+{
+  "ok": true,
+  "mode": "live",
+  "error": null,
+  "status": "finished",
+  "condensations": 1,
+  "summary_nonempty": true,
+  "atomic": true,
+  "condensations_after_request": 2,
+  "_exit": 0,
+  "_seconds": 23.9,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "condensations ge 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "summary_nonempty eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "atomic eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "condensations_after_request gt 1",
+      "ok": true,
+      "actual": "2"
+    }
+  ]
+}
+
+[exit 0 after 24s]

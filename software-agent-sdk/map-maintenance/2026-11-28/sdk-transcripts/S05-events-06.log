@@ -1,0 +1,121 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S05/write_and_read.json --field id)
+control-sdk conversation send "$CID" --text "Write notes.txt" --run --check execution_status eq finished
+control-sdk program S05/damaged_log --arg "$CID" --arg corrupt \
+  --check reopen_error missing --check lost_beyond_damaged eq 0 --check stand_ins eq 1
+{
+  "ok": true,
+  "id": "a7559257-f365-480d-b6aa-f587f3480dec",
+  "execution_status": "finished",
+  "event_count": 10,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "notes.txt has two lines",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "corrupt",
+  "damaged": "event-00003-488b9971-39f6-46ef-8856-d009a412539e.json",
+  "events_before": 10,
+  "events_after": 9,
+  "stand_ins": 1,
+  "lost_beyond_damaged": 0,
+  "reopen_error": null,
+  "_exit": 0,
+  "_seconds": 4.9,
+  "checks": [
+    {
+      "check": "reopen_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "lost_beyond_damaged eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "stand_ins eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 0 after 15s]
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script S05/write_and_read.json --field id)
+control-sdk conversation send "$CID" --text "Write notes.txt" --run --check execution_status eq finished
+control-sdk program S05/damaged_log --arg "$CID" --arg delete \
+  --check reopen_error missing --check lost_beyond_damaged eq 0
+{
+  "ok": true,
+  "id": "1bc19522-02d1-420e-8e46-0eb4b0d5f4d5",
+  "execution_status": "finished",
+  "event_count": 10,
+  "kinds": [
+    "ActionEvent",
+    "MessageEvent",
+    "ObservationEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": "notes.txt has two lines",
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "delete",
+  "damaged": "event-00003-15d16658-d562-40e0-93c9-17f69a59b83a.json",
+  "events_before": 10,
+  "events_after": 9,
+  "stand_ins": 0,
+  "lost_beyond_damaged": 0,
+  "reopen_error": null,
+  "_exit": 0,
+  "_seconds": 5.0,
+  "checks": [
+    {
+      "check": "reopen_error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "lost_beyond_damaged eq 0",
+      "ok": true,
+      "actual": "0"
+    }
+  ]
+}
+
+[exit 0 after 15s]

@@ -1,0 +1,115 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg retries \
+  --check transient.text eq hi --check transient.requests eq 3 --check transient.listener len-eq 2 \
+  --check non_retryable.error eq LLMBadRequestError --check non_retryable.requests eq 1 \
+  --check exhausted.error eq LLMRateLimitError --check exhausted.requests eq 3 \
+  --check budget_denial.requests eq 1 \
+  --check malformed_2xx.text eq hi --check malformed_2xx.requests eq 2 \
+  --check malformed_4xx.error eq LLMBadRequestError --check malformed_4xx.requests eq 1
+{
+  "ok": true,
+  "mode": "retries",
+  "transient": {
+    "text": "hi",
+    "error": null,
+    "requests": 3,
+    "listener": [
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "non_retryable": {
+    "error": "LLMBadRequestError",
+    "requests": 1
+  },
+  "exhausted": {
+    "error": "LLMRateLimitError",
+    "requests": 3
+  },
+  "budget_denial": {
+    "error": "LLMRateLimitError",
+    "requests": 1
+  },
+  "malformed_2xx": {
+    "text": "hi",
+    "error": null,
+    "requests": 2
+  },
+  "malformed_4xx": {
+    "text": null,
+    "error": "LLMBadRequestError",
+    "requests": 1
+  },
+  "_exit": 0,
+  "_seconds": 7.9,
+  "checks": [
+    {
+      "check": "transient.text eq hi",
+      "ok": true,
+      "actual": "hi"
+    },
+    {
+      "check": "transient.requests eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "transient.listener len-eq 2",
+      "ok": true,
+      "actual": "[[1, 3], [2, 3]]"
+    },
+    {
+      "check": "non_retryable.error eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "non_retryable.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "exhausted.error eq LLMRateLimitError",
+      "ok": true,
+      "actual": "LLMRateLimitError"
+    },
+    {
+      "check": "exhausted.requests eq 3",
+      "ok": true,
+      "actual": "3"
+    },
+    {
+      "check": "budget_denial.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "malformed_2xx.text eq hi",
+      "ok": true,
+      "actual": "hi"
+    },
+    {
+      "check": "malformed_2xx.requests eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "malformed_4xx.error eq LLMBadRequestError",
+      "ok": true,
+      "actual": "LLMBadRequestError"
+    },
+    {
+      "check": "malformed_4xx.requests eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 0 after 8s]

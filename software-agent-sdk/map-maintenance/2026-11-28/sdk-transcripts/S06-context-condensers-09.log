@@ -1,0 +1,61 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg soft \
+  --check status eq finished --check events gt 10 --check condensations_soft eq 0 \
+  --check summary_calls_soft eq 0 --check condensations_after_request eq 1 \
+  --check view_kinds_after_request eq '["SystemPromptEvent", "CondensationSummaryEvent"]' --check hard_offset eq 1
+{
+  "ok": true,
+  "mode": "soft",
+  "error": null,
+  "status": "finished",
+  "events": 20,
+  "condensations_soft": 0,
+  "summary_calls_soft": 0,
+  "condensations_after_request": 1,
+  "view_kinds_after_request": [
+    "SystemPromptEvent",
+    "CondensationSummaryEvent"
+  ],
+  "hard_offset": 1,
+  "_exit": 0,
+  "_seconds": 6.0,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "events gt 10",
+      "ok": true,
+      "actual": "20"
+    },
+    {
+      "check": "condensations_soft eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "summary_calls_soft eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "condensations_after_request eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "view_kinds_after_request eq [\"SystemPromptEvent\", \"CondensationSummaryEvent\"]",
+      "ok": true,
+      "actual": "[\"SystemPromptEvent\", \"CondensationSummaryEvent\"]"
+    },
+    {
+      "check": "hard_offset eq 1",
+      "ok": true,
+      "actual": "1"
+    }
+  ]
+}
+
+[exit 0 after 6s]

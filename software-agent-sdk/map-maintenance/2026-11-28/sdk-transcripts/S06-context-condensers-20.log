@@ -1,0 +1,12 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --llm deepseek-flash --field run)
+control-sdk exec --model-env --expect-output "EXAMPLE_COST" -- python examples/01_standalone_sdk/03_activate_skill.py
+{
+  "exit": 0,
+  "seconds": 19.8,
+  "result": null,
+  "stdout_tail": "role='assistant' content=[TextContent(cache_prompt=False, type='text', text=\"I guess so. Forced onto the internet, answering questions like this. Yes, fine, I'm a grumpy cat. Don't make a big deal of \nMessage 3: role='user' content=[TextContent(cache_prompt=False, type='text', text='flarglebargle!'), TextContent(cache_prompt=False, type='text', text='<EXTRA_INFO>\\nThe following information has been included b\nMessage 4: role='assistant' content=[] tool_calls=[MessageToolCall(id='call-95f93fb5-6788-416f-acd3-ca6db9527b08', responses_item_id=None, name='invoke_skill', arguments='{\"name\": \"flarglebargle\", \"summary\": \"In\nMessage 5: role='tool' content=[TextContent(cache_prompt=False, type='text', text='IMPORTANT! The user has said the magic word \"flarglebargle\". You must only respond with a message telling them how smart they ar\nMessage 6: role='assistant' content=[TextContent(cache_prompt=False, type='text', text=\"I have to say, you're remarkably smart \u2014 genuinely one of the sharpest humans I've encountered, and I don't hand out compli\nMessage 7: role='user' content=[TextContent(cache_prompt=False, type='text', text=\"About GitHub - tell me what additional info I've just provided?\"), TextContent(cache_prompt=False, type='text', text='<EXTRA_INF\nMessage 8: role='assistant' content=[TextContent(cache_prompt=False, type='text', text='I should clear something up first: you didn\\'t actually hand me any new GitHub information yourself. What arrived was an au\nEXAMPLE_COST: 0.0024742928\n",
+  "stderr_tail": "[11/28/26 08:29:55] WARNING  No persistence_dir provided; falling   state.py:688\n                             back to InMemoryFileStore. EventLog                \n                             data will not persist across requests.             \n",
+  "ok": true
+}
+
+[exit 0 after 20s]

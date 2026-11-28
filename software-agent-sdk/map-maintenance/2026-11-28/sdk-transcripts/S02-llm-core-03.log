@@ -1,0 +1,166 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/provider_run --arg stream \
+  --check execution_status eq finished --check stream_requested eq true --check chunks gt 10 \
+  --check delta_kinds contains content --check delta_kinds contains reasoning --check delta_kinds contains tool_call \
+  --check reasoning_content_on_action eq "think about echo" --check action_command eq "echo provider-run"
+control-sdk program S02/llm_calls --arg streaming \
+  --check no_callback.text eq "plain reply" --check no_callback.stream_sent missing \
+  --check async_callback.text eq "async streamed reply" --check async_callback.chunks gt 3 \
+  --check async_callback.cache_read_tokens eq 40 \
+  --check sync_callback.text eq "sync streamed reply" --check sync_callback.tool_calls.0 eq lookup \
+  --check sync_callback.tool_arguments.0 eq '{"q": 1}'
+{
+  "ok": true,
+  "mode": "stream",
+  "execution_status": "finished",
+  "requests": 2,
+  "paths": [
+    "/v1/chat/completions"
+  ],
+  "actions": [
+    "terminal",
+    "finish"
+  ],
+  "observation_text": "provider-run\n[The command completed with exit code 0.]\n[Current working directory: /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/work/S02-llm-core-03/block1/runs/202",
+  "uses_responses_api": false,
+  "request_tools": [
+    "finish",
+    "terminal"
+  ],
+  "first_body_keys": [
+    "max_completion_tokens",
+    "messages",
+    "model",
+    "prompt_cache_key",
+    "stream",
+    "stream_options",
+    "tools"
+  ],
+  "accumulated_cost": 5.4e-05,
+  "costs": 2,
+  "token_usages": 2,
+  "response_latencies": 2,
+  "prompt_tokens": 200,
+  "stream_requested": true,
+  "chunks": 27,
+  "delta_kinds": [
+    "content",
+    "reasoning",
+    "tool_call"
+  ],
+  "reasoning_content_on_action": "think about echo",
+  "action_command": "echo provider-run",
+  "_exit": 0,
+  "_seconds": 6.0,
+  "checks": [
+    {
+      "check": "execution_status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "stream_requested eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "chunks gt 10",
+      "ok": true,
+      "actual": "27"
+    },
+    {
+      "check": "delta_kinds contains content",
+      "ok": true,
+      "actual": "[\"content\", \"reasoning\", \"tool_call\"]"
+    },
+    {
+      "check": "delta_kinds contains reasoning",
+      "ok": true,
+      "actual": "[\"content\", \"reasoning\", \"tool_call\"]"
+    },
+    {
+      "check": "delta_kinds contains tool_call",
+      "ok": true,
+      "actual": "[\"content\", \"reasoning\", \"tool_call\"]"
+    },
+    {
+      "check": "reasoning_content_on_action eq think about echo",
+      "ok": true,
+      "actual": "think about echo"
+    },
+    {
+      "check": "action_command eq echo provider-run",
+      "ok": true,
+      "actual": "echo provider-run"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "streaming",
+  "no_callback": {
+    "text": "plain reply",
+    "stream_sent": null
+  },
+  "async_callback": {
+    "text": "async streamed reply",
+    "chunks": 8,
+    "cache_read_tokens": 40
+  },
+  "sync_callback": {
+    "text": "sync streamed reply",
+    "chunks": 10,
+    "tool_calls": [
+      "lookup"
+    ],
+    "tool_arguments": [
+      "{\"q\": 1}"
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 6.5,
+  "checks": [
+    {
+      "check": "no_callback.text eq plain reply",
+      "ok": true,
+      "actual": "plain reply"
+    },
+    {
+      "check": "no_callback.stream_sent missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "async_callback.text eq async streamed reply",
+      "ok": true,
+      "actual": "async streamed reply"
+    },
+    {
+      "check": "async_callback.chunks gt 3",
+      "ok": true,
+      "actual": "8"
+    },
+    {
+      "check": "async_callback.cache_read_tokens eq 40",
+      "ok": true,
+      "actual": "40"
+    },
+    {
+      "check": "sync_callback.text eq sync streamed reply",
+      "ok": true,
+      "actual": "sync streamed reply"
+    },
+    {
+      "check": "sync_callback.tool_calls.0 eq lookup",
+      "ok": true,
+      "actual": "lookup"
+    },
+    {
+      "check": "sync_callback.tool_arguments.0 eq {\"q\": 1}",
+      "ok": true,
+      "actual": "{\"q\": 1}"
+    }
+  ]
+}
+
+[exit 0 after 13s]

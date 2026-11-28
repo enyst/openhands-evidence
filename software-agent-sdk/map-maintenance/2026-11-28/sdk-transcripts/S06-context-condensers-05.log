@@ -1,0 +1,133 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg size \
+  --check status eq finished --check condensations ge 2 \
+  --check first_summary eq "SUMMARY-1: echoed steps 0-3." --check first_offset eq 2 \
+  --check kept_first_two eq true --check atomic eq true \
+  --check view_kinds_head.2 eq CondensationSummaryEvent --check view_summaries eq 1 \
+  --check forgotten_in_view eq false --check view_has_request eq false \
+  --check summary_reached_agent eq true --check second_builds_on_first eq true \
+  --check summary_usage_ids eq '["condenser"]' --check summary_call_streamed eq false \
+  --check summary_call_kwargs not-contains extra_body --check summary_roles eq '["system", "user"]'
+{
+  "ok": true,
+  "mode": "size",
+  "error": null,
+  "status": "finished",
+  "condensations": 2,
+  "first_forgotten": 10,
+  "first_summary": "SUMMARY-1: echoed steps 0-3.",
+  "first_offset": 2,
+  "kept_first_two": true,
+  "atomic": true,
+  "view_len": 11,
+  "view_kinds_head": [
+    "SystemPromptEvent",
+    "MessageEvent",
+    "CondensationSummaryEvent"
+  ],
+  "view_summaries": 1,
+  "view_has_request": false,
+  "forgotten_in_view": false,
+  "summary_reached_agent": true,
+  "summary_calls": 2,
+  "summary_call_streamed": false,
+  "summary_call_kwargs": [
+    "add_security_risk_prediction",
+    "call_context",
+    "on_token"
+  ],
+  "summary_roles": [
+    "system",
+    "user"
+  ],
+  "second_builds_on_first": true,
+  "summary_usage_ids": [
+    "condenser"
+  ],
+  "_exit": 0,
+  "_seconds": 6.5,
+  "checks": [
+    {
+      "check": "status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "condensations ge 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "first_summary eq SUMMARY-1: echoed steps 0-3.",
+      "ok": true,
+      "actual": "SUMMARY-1: echoed steps 0-3."
+    },
+    {
+      "check": "first_offset eq 2",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "kept_first_two eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "atomic eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "view_kinds_head.2 eq CondensationSummaryEvent",
+      "ok": true,
+      "actual": "CondensationSummaryEvent"
+    },
+    {
+      "check": "view_summaries eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "forgotten_in_view eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "view_has_request eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "summary_reached_agent eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "second_builds_on_first eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "summary_usage_ids eq [\"condenser\"]",
+      "ok": true,
+      "actual": "[\"condenser\"]"
+    },
+    {
+      "check": "summary_call_streamed eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "summary_call_kwargs not-contains extra_body",
+      "ok": true,
+      "actual": "[\"add_security_risk_prediction\", \"call_context\", \"on_token\"]"
+    },
+    {
+      "check": "summary_roles eq [\"system\", \"user\"]",
+      "ok": true,
+      "actual": "[\"system\", \"user\"]"
+    }
+  ]
+}
+
+[exit 0 after 7s]

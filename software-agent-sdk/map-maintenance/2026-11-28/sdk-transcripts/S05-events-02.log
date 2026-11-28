@@ -1,0 +1,148 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+CID=$(control-sdk conversation new --script-json '[{"error": "LLMAuthenticationError", "message": "invalid api key"}]' --field id)
+control-sdk conversation send "$CID" --text hi --run --allow-error --check execution_status eq error
+control-sdk conversation events "$CID" --kind ConversationErrorEvent \
+  --check count eq 1 --check events.0.code eq LLMAuthenticationError --check events.0.failure_kind eq auth
+control-sdk program S05/event_types \
+  --check roundtrip.conversation_error eq true --check roundtrip.agent_error eq true \
+  --check roundtrip.streaming_delta eq true --check roundtrip.completion_log eq true \
+  --check auth_kind eq auth --check rate_limit_kind eq rate_limit --check code_beats_detail eq internal \
+  --check secret_in_classification eq false
+{
+  "ok": true,
+  "id": "ac97254e-8e34-481b-a31a-e4c60e6263d9",
+  "execution_status": "error",
+  "event_count": 3,
+  "kinds": [
+    "ConversationErrorEvent",
+    "MessageEvent",
+    "SystemPromptEvent"
+  ],
+  "last_agent_message": null,
+  "accumulated_cost": 0.0,
+  "tools": [
+    "terminal",
+    "file_editor",
+    "task_tracker"
+  ],
+  "script_left": 0,
+  "error": "ConversationRunError: Conversation run failed for id=ac97254e-8e34-481b-a31a-e4c60e6263d9: invalid api key\n\nConversation logs are stored at: /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S05/work/S05-events-02/block1/runs/20261128-082334-55bdf8/conversations/ac97254e8e34481ba31ae4c60e6263d9\n\nTo help debug this issue, please file a bug report at:\n  https://github.com/OpenHands/software-agent-sdk/issues/new\nand attach the conversation logs from the directory above.",
+  "checks": [
+    {
+      "check": "execution_status eq error",
+      "ok": true,
+      "actual": "error"
+    }
+  ]
+}
+{
+  "ok": true,
+  "count": 1,
+  "kinds": [
+    "ConversationErrorEvent"
+  ],
+  "events": [
+    {
+      "index": 2,
+      "kind": "ConversationErrorEvent",
+      "source": "environment",
+      "id": "649417ae-8a7c-4622-8e51-1a64265d4e43",
+      "failure_kind": "auth",
+      "detail": "Your LLM API key appears to be invalid or has expired.",
+      "code": "LLMAuthenticationError"
+    }
+  ],
+  "checks": [
+    {
+      "check": "count eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "events.0.code eq LLMAuthenticationError",
+      "ok": true,
+      "actual": "LLMAuthenticationError"
+    },
+    {
+      "check": "events.0.failure_kind eq auth",
+      "ok": true,
+      "actual": "auth"
+    }
+  ]
+}
+{
+  "ok": true,
+  "kinds": {
+    "conversation_error": "ConversationErrorEvent",
+    "streaming_delta": "StreamingDeltaEvent",
+    "completion_log": "LLMCompletionLogEvent"
+  },
+  "roundtrip": {
+    "conversation_error": true,
+    "agent_error": true,
+    "streaming_delta": true,
+    "completion_log": true
+  },
+  "auth_kind": "auth",
+  "rate_limit_kind": "rate_limit",
+  "code_beats_detail": "internal",
+  "agent_error_kind": "unknown",
+  "conversation_error_kind": "auth",
+  "secret_in_classification": false,
+  "failure_kinds": [
+    "agent_action",
+    "auth",
+    "config",
+    "internal",
+    "quota",
+    "rate_limit",
+    "transient",
+    "unknown"
+  ],
+  "_exit": 0,
+  "_seconds": 5.2,
+  "checks": [
+    {
+      "check": "roundtrip.conversation_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "roundtrip.agent_error eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "roundtrip.streaming_delta eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "roundtrip.completion_log eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "auth_kind eq auth",
+      "ok": true,
+      "actual": "auth"
+    },
+    {
+      "check": "rate_limit_kind eq rate_limit",
+      "ok": true,
+      "actual": "rate_limit"
+    },
+    {
+      "check": "code_beats_detail eq internal",
+      "ok": true,
+      "actual": "internal"
+    },
+    {
+      "check": "secret_in_classification eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 22s]

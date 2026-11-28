@@ -1,0 +1,74 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg empty-summary \
+  --check empty.status eq finished --check empty.summary_calls ge 1 \
+  --check empty.empty_summary_condensations eq 0 --check empty.forgotten eq 0 \
+  --check blank.status eq finished --check blank.empty_summary_condensations eq 0 --check blank.forgotten eq 0
+{
+  "ok": true,
+  "mode": "empty-summary",
+  "empty": {
+    "error": null,
+    "status": "finished",
+    "summary_calls": 2,
+    "condensations": 2,
+    "empty_summary_condensations": 2,
+    "forgotten": 15,
+    "summaries": [
+      "",
+      ""
+    ]
+  },
+  "blank": {
+    "error": null,
+    "status": "finished",
+    "summary_calls": 2,
+    "condensations": 2,
+    "empty_summary_condensations": 2,
+    "forgotten": 15,
+    "summaries": [
+      " ",
+      " "
+    ]
+  },
+  "_exit": 0,
+  "_seconds": 7.1,
+  "checks": [
+    {
+      "check": "empty.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "empty.summary_calls ge 1",
+      "ok": true,
+      "actual": "2"
+    },
+    {
+      "check": "empty.empty_summary_condensations eq 0",
+      "ok": false,
+      "actual": "2"
+    },
+    {
+      "check": "empty.forgotten eq 0",
+      "ok": false,
+      "actual": "15"
+    },
+    {
+      "check": "blank.status eq finished",
+      "ok": true,
+      "actual": "finished"
+    },
+    {
+      "check": "blank.empty_summary_condensations eq 0",
+      "ok": false,
+      "actual": "2"
+    },
+    {
+      "check": "blank.forgotten eq 0",
+      "ok": false,
+      "actual": "15"
+    }
+  ]
+}
+
+[exit 1 after 7s]

@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "model": "litellm_proxy/deepseek-v4.1-flash",
+  "patterns": [
+    "duplicate_tool_call_id",
+    "interleaved_assistant_message",
+    "interleaved_user_message",
+    "parallel_missing_result",
+    "parallel_wrong_order",
+    "unmatched_tool_result",
+    "unmatched_tool_use",
+    "wrong_tool_call_id"
+  ],
+  "results": {
+    "unmatched_tool_use": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "unmatched_tool_result": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "interleaved_user_message": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "interleaved_assistant_message": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "duplicate_tool_call_id": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "wrong_tool_call_id": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "parallel_missing_result": {
+      "response_type": "accepted",
+      "error_type": null,
+      "error": null
+    },
+    "parallel_wrong_order": {
+      "response_type": "rejected",
+      "error_type": "LLMNoResponseError",
+      "error": "Response choices[0] message has no content, tool calls, or reasoning. Response: ModelResponse(id='gen-1795854410-ohvWr8gxyvVezSU4HjOt', created=1795854410, model='litellm_proxy/deepseek-v4.1-flash', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='stop', index=0, me"
+    }
+  },
+  "rejected": [
+    "parallel_wrong_order"
+  ],
+  "rejections_typed": true,
+  "_exit": 0,
+  "_seconds": 15.8,
+  "checks": [
+    {
+      "check": "results.unmatched_tool_use.error_type eq LLMMalformedConversationHistoryError",
+      "ok": false,
+      "actual": "null"
+    }
+  ]
+}

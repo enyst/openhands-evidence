@@ -1,0 +1,70 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/ask_agent_cache \
+  --check file_written eq true --check answer eq "The side answer." \
+  --check changed_prefix_fields len-eq 0 --check missing_trailing_breakpoint len-eq 0 \
+  --check user_prefix_replayed eq true --check tool_prefix_replayed eq true \
+  --check ask_preserves_continued_prefix eq true --check question_in_ask_tail eq true \
+  --check side_exchange_in_continuation eq false
+{
+  "file_written": true,
+  "answer": "The side answer.",
+  "changed_prefix_fields": [],
+  "missing_trailing_breakpoint": [],
+  "user_prefix_replayed": true,
+  "tool_prefix_replayed": true,
+  "ask_preserves_continued_prefix": true,
+  "question_in_ask_tail": true,
+  "side_exchange_in_continuation": false,
+  "ok": true,
+  "_exit": 0,
+  "_seconds": 6.6,
+  "checks": [
+    {
+      "check": "file_written eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "answer eq The side answer.",
+      "ok": true,
+      "actual": "The side answer."
+    },
+    {
+      "check": "changed_prefix_fields len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "missing_trailing_breakpoint len-eq 0",
+      "ok": true,
+      "actual": "[]"
+    },
+    {
+      "check": "user_prefix_replayed eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "tool_prefix_replayed eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "ask_preserves_continued_prefix eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "question_in_ask_tail eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "side_exchange_in_continuation eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 7s]

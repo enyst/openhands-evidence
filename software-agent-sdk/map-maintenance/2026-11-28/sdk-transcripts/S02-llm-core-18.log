@@ -1,0 +1,74 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S02/llm_calls --arg inline-image --env OH_INLINE_IMAGE_ALLOW_PRIVATE_HOSTS=1 \
+  --check inline.image_urls.0 matches '^data:image/png' --check inline.image_urls.0 contains base64 --check as_url.image_urls.0 matches '^http://'
+control-sdk program S02/llm_calls --arg inline-image \
+  --check inline.error missing --check inline.image_urls.0 matches '^http://'
+{
+  "ok": true,
+  "mode": "inline-image",
+  "inline": {
+    "error": null,
+    "image_urls": [
+      "data:image/png;base64,iVBORw0K"
+    ]
+  },
+  "as_url": {
+    "error": null,
+    "image_urls": [
+      "http://127.0.0.1:45591/image.p"
+    ]
+  },
+  "allow_private_hosts": "1",
+  "_exit": 0,
+  "_seconds": 5.4,
+  "checks": [
+    {
+      "check": "inline.image_urls.0 matches ^data:image/png",
+      "ok": true,
+      "actual": "data:image/png;base64,iVBORw0K"
+    },
+    {
+      "check": "inline.image_urls.0 contains base64",
+      "ok": true,
+      "actual": "data:image/png;base64,iVBORw0K"
+    },
+    {
+      "check": "as_url.image_urls.0 matches ^http://",
+      "ok": true,
+      "actual": "http://127.0.0.1:45591/image.p"
+    }
+  ]
+}
+{
+  "ok": true,
+  "mode": "inline-image",
+  "inline": {
+    "error": null,
+    "image_urls": [
+      "http://127.0.0.1:34467/image.p"
+    ]
+  },
+  "as_url": {
+    "error": null,
+    "image_urls": [
+      "http://127.0.0.1:34467/image.p"
+    ]
+  },
+  "allow_private_hosts": null,
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "inline.error missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "inline.image_urls.0 matches ^http://",
+      "ok": true,
+      "actual": "http://127.0.0.1:34467/image.p"
+    }
+  ]
+}
+
+[exit 0 after 11s]

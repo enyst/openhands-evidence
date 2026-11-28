@@ -1,0 +1,83 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S06/condense --arg manual \
+  --check request_events eq 1 --check condensations eq 1 --check view_after lt 12 \
+  --check request_in_view eq false --check summary_calls eq 1 --check agent_calls_during_condense eq 0 \
+  --check error_after missing --check summary_reached_agent eq true \
+  --check none_error contains "No condenser configured" --check none_error contains LLMSummarizingCondenser \
+  --check noop_error contains "does not handle condensation requests"
+{
+  "ok": true,
+  "mode": "manual",
+  "request_events": 1,
+  "condensations": 1,
+  "view_before": 12,
+  "view_after": 5,
+  "request_in_view": false,
+  "summary_calls": 1,
+  "agent_calls_during_condense": 0,
+  "error_after": null,
+  "summary_reached_agent": true,
+  "none_error": "Cannot condense conversation: No condenser configured. To enable manual condensation, configure an LLMSummarizingCondenser:\n\nfrom openhands.sdk.context.condenser import LLMSummarizingCondenser\nagent = Agent(\n    llm=your_llm,\n    condenser=LLMSummarizingCondenser(\n        llm=your_llm,\n        max_s",
+  "noop_error": "Cannot condense conversation: Condenser NoOpCondenser does not handle condensation requests. To enable manual condensation, configure an LLMSummarizingCondenser:\n\nfrom openhands.sdk.context.condenser import LLMSummarizingCondenser\nagent = Agent(\n    llm=your_llm,\n    condenser=LLMSummarizingCondense",
+  "_exit": 0,
+  "_seconds": 5.6,
+  "checks": [
+    {
+      "check": "request_events eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "condensations eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "view_after lt 12",
+      "ok": true,
+      "actual": "5"
+    },
+    {
+      "check": "request_in_view eq false",
+      "ok": true,
+      "actual": "false"
+    },
+    {
+      "check": "summary_calls eq 1",
+      "ok": true,
+      "actual": "1"
+    },
+    {
+      "check": "agent_calls_during_condense eq 0",
+      "ok": true,
+      "actual": "0"
+    },
+    {
+      "check": "error_after missing",
+      "ok": true,
+      "actual": "null"
+    },
+    {
+      "check": "summary_reached_agent eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "none_error contains No condenser configured",
+      "ok": true,
+      "actual": "Cannot condense conversation: No condenser configured. To enable manual condensation, configure an LLMSummarizingCondenser:\n\nfrom openhands.sdk.context.condenser import LLMSummarizingCondenser\nagent ="
+    },
+    {
+      "check": "none_error contains LLMSummarizingCondenser",
+      "ok": true,
+      "actual": "Cannot condense conversation: No condenser configured. To enable manual condensation, configure an LLMSummarizingCondenser:\n\nfrom openhands.sdk.context.condenser import LLMSummarizingCondenser\nagent ="
+    },
+    {
+      "check": "noop_error contains does not handle condensation requests",
+      "ok": true,
+      "actual": "Cannot condense conversation: Condenser NoOpCondenser does not handle condensation requests. To enable manual condensation, configure an LLMSummarizingCondenser:\n\nfrom openhands.sdk.context.condenser "
+    }
+  ]
+}
+
+[exit 0 after 6s]

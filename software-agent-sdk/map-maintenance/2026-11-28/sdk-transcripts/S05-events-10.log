@@ -1,0 +1,37 @@
+$ export SDK_VERIFY_RUN=$(control-sdk new --field run)
+control-sdk program S05/system_prompt_blocks --check blocks_ge_2 eq true --check static_first eq true \
+  --check dynamic_has_suffix eq true --check static_has_suffix eq false
+{
+  "ok": true,
+  "blocks": 2,
+  "blocks_ge_2": true,
+  "static_first": true,
+  "dynamic_has_suffix": true,
+  "static_has_suffix": false,
+  "_exit": 0,
+  "_seconds": 5.3,
+  "checks": [
+    {
+      "check": "blocks_ge_2 eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "static_first eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "dynamic_has_suffix eq true",
+      "ok": true,
+      "actual": "true"
+    },
+    {
+      "check": "static_has_suffix eq false",
+      "ok": true,
+      "actual": "false"
+    }
+  ]
+}
+
+[exit 0 after 5s]

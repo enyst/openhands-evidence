@@ -1,0 +1,81 @@
+## Conflicting attempts
+
+- S02.model-features: fail at 2026-11-28T08:32:00+00:00, pass at 2026-11-28T08:35:23+00:00
+
+## Checks
+
+| Feature | Result | Revision | Note | Transcript |
+|---|---|---|---|---|
+| S02.error-mapping | fail | cf8158bc25f5 | bullet 13: pass; bullet 27: fail (block 1 exited 1) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-27.log |
+| S02.metrics | fail | cf8158bc25f5 | bullet 1: pass; bullet 5: fail (block 1 exited 1); bullet 23: pass; bullet 25: pass; bullet 26: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-05.log |
+| S02.no-response-retry | fail | cf8158bc25f5 | bullet 12: fail (block 1 exited 1) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-12.log |
+| S02.responses-reasoning | fail | cf8158bc25f5 | bullet 2: pass; bullet 4: fail (block 1 exited 1); bullet 28: blocked (bullet is labeled blocked) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-04.log |
+| S02.streaming | fail | cf8158bc25f5 | bullet 3: pass; bullet 4: fail (block 1 exited 1); bullet 25: pass; bullet 26: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-04.log |
+| S05.events-to-messages | fail | cf8158bc25f5 | bullet 1: pass; bullet 2: pass; bullet 8: pass; bullet 10: fail (block 1 exited 1) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-10.log |
+| S06.condense-pending-action | fail | cf8158bc25f5 | bullet 13: fail (block 1 exited 1) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-13.log |
+| S06.context-overflow-request | fail | cf8158bc25f5 | bullet 14: pass; bullet 21: fail (integration tests missing [] failed ['c02_hard_context_reset', 'c03_delayed_condensation', 'c04_token_condenser', 'c05_size_condenser'] (/tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/work/S06-context-condensers-21/block1-2/deepseek_deepseek_flash_agent-sdk-integration_N4_20261128_083012/results.json)) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-21.log |
+| S06.hard-reset | fail | cf8158bc25f5 | bullet 11: pass; bullet 21: fail (integration tests missing [] failed ['c02_hard_context_reset', 'c03_delayed_condensation', 'c04_token_condenser', 'c05_size_condenser'] (/tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/work/S06-context-condensers-21/block1-2/deepseek_deepseek_flash_agent-sdk-integration_N4_20261128_083012/results.json)) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-21.log |
+| S06.soft-vs-hard | fail | cf8158bc25f5 | bullet 9: pass; bullet 10: fail (block 1 exited 1); bullet 21: fail (integration tests missing [] failed ['c02_hard_context_reset', 'c03_delayed_condensation', 'c04_token_condenser', 'c05_size_condenser'] (/tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/work/S06-context-condensers-21/block1-2/deepseek_deepseek_flash_agent-sdk-integration_N4_20261128_083012/results.json)) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-10.log |
+| S06.summarizing-size | fail | cf8158bc25f5 | bullet 5: pass; bullet 10: fail (block 1 exited 1); bullet 17: pass; bullet 18: pass; bullet 21: fail (integration tests missing [] failed ['c02_hard_context_reset', 'c03_delayed_condensation', 'c04_token_condenser', 'c05_size_condenser'] (/tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/work/S06-context-condensers-21/block1-2/deepseek_deepseek_flash_agent-sdk-integration_N4_20261128_083012/results.json)) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-10.log |
+| S06.summarizing-tokens | fail | cf8158bc25f5 | bullet 6: pass; bullet 21: fail (integration tests missing [] failed ['c02_hard_context_reset', 'c03_delayed_condensation', 'c04_token_condenser', 'c05_size_condenser'] (/tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/work/S06-context-condensers-21/block1-2/deepseek_deepseek_flash_agent-sdk-integration_N4_20261128_083012/results.json)) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-21.log |
+| S05.token-event | blocked | cf8158bc25f5 | bullet 12: blocked (bullet is labeled blocked) |  |
+| S02.anthropic-thinking | pass | cf8158bc25f5 | bullet 7: pass; bullet 28: blocked (bullet is labeled blocked) | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-07.log |
+| S02.api-mode | pass | cf8158bc25f5 | bullet 1: pass; bullet 2: pass; bullet 25: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-01.log |
+| S02.combined-metrics-model | pass | cf8158bc25f5 | bullet 24: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-24.log |
+| S02.completion | pass | cf8158bc25f5 | bullet 1: pass; bullet 25: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-01.log |
+| S02.context-window-guard | pass | cf8158bc25f5 | bullet 16: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-16.log |
+| S02.conversation-stats | pass | cf8158bc25f5 | bullet 23: pass; bullet 26: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-23.log |
+| S02.image-adapter-loss | pass | cf8158bc25f5 | bullet 20: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-20.log |
+| S02.image-inline | pass | cf8158bc25f5 | bullet 18: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-18.log |
+| S02.image-request-guard | pass | cf8158bc25f5 | bullet 19: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-19.log |
+| S02.log-completions | pass | cf8158bc25f5 | bullet 1: pass; bullet 21: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-01.log |
+| S02.message-formatting | pass | cf8158bc25f5 | bullet 17: pass; bullet 26: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-17.log |
+| S02.model-features | pass | cf8158bc25f5 | bullet 9: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-09.log |
+| S02.native-tool-calling | pass | cf8158bc25f5 | bullet 1: pass; bullet 10: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-01.log |
+| S02.pricing-override | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-01.log |
+| S02.prompt-caching | pass | cf8158bc25f5 | bullet 7: pass; bullet 14: pass; bullet 15: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-07.log |
+| S02.prompted-tool-calling | pass | cf8158bc25f5 | bullet 10: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-10.log |
+| S02.reasoning-content | pass | cf8158bc25f5 | bullet 1: pass; bullet 3: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-01.log |
+| S02.reasoning-options | pass | cf8158bc25f5 | bullet 9: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-09.log |
+| S02.retries | pass | cf8158bc25f5 | bullet 11: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-11.log |
+| S02.serialization | pass | cf8158bc25f5 | bullet 22: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-22.log |
+| S02.stream-no-callback | pass | cf8158bc25f5 | bullet 3: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-03.log |
+| S02.thinking-text-reply | pass | cf8158bc25f5 | bullet 8: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-08.log |
+| S02.timeouts | pass | cf8158bc25f5 | bullet 6: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-06.log |
+| S02.token-count | pass | cf8158bc25f5 | bullet 16: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S02/transcripts/S02-llm-core-16.log |
+| S05.completion-log-event | pass | cf8158bc25f5 | bullet 3: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-03.log |
+| S05.error-classification | pass | cf8158bc25f5 | bullet 3: pass; bullet 4: pass; bullet 5: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-03.log |
+| S05.event-base | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.event-cache | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.event-log-append | pass | cf8158bc25f5 | bullet 6: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-06.log |
+| S05.event-log-files | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.event-log-recovery | pass | cf8158bc25f5 | bullet 7: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-07.log |
+| S05.event-tree | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.json-roundtrip | pass | cf8158bc25f5 | bullet 1: pass; bullet 8: pass; bullet 9: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.openai-format | pass | cf8158bc25f5 | bullet 1: pass; bullet 8: pass; bullet 9: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.resume-transcript | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.streaming-delta | pass | cf8158bc25f5 | bullet 3: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-03.log |
+| S05.system-prompt-blocks | pass | cf8158bc25f5 | bullet 11: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-11.log |
+| S05.to-llm-message | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.unmatched-actions | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S05.visualize | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-01.log |
+| S06.condenser-resume | pass | cf8158bc25f5 | bullet 15: pass; bullet 18: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-15.log |
+| S06.context-datetime | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-01.log |
+| S06.context-secrets | pass | cf8158bc25f5 | bullet 1: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-01.log |
+| S06.context-skills | pass | cf8158bc25f5 | bullet 1: pass; bullet 20: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-01.log |
+| S06.context-suffixes | pass | cf8158bc25f5 | bullet 1: pass; bullet 20: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-01.log |
+| S06.manual-condense | pass | cf8158bc25f5 | bullet 12: pass; bullet 17: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-12.log |
+| S06.memory-load | pass | cf8158bc25f5 | bullet 4: pass; bullet 19: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-04.log |
+| S06.memory-write-path | pass | cf8158bc25f5 | bullet 4: pass; bullet 19: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-04.log |
+| S06.noop-condenser | pass | cf8158bc25f5 | bullet 7: pass; bullet 16: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-07.log |
+| S06.observation-dispositions | pass | cf8158bc25f5 | bullet 8: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-08.log |
+| S06.persona-soul | pass | cf8158bc25f5 | bullet 2: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-02.log |
+| S06.pipeline-condenser | pass | cf8158bc25f5 | bullet 16: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-16.log |
+| S06.project-prompt-edits | pass | cf8158bc25f5 | bullet 3: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-03.log |
+| S06.summarizing-reasons | pass | cf8158bc25f5 | bullet 7: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-07.log |
+| S06.summary-llm-streaming | pass | cf8158bc25f5 | bullet 5: pass; bullet 18: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-05.log |
+| S06.system-prompt-custom | pass | cf8158bc25f5 | bullet 2: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-02.log |
+| S06.system-prompt-model-specific | pass | cf8158bc25f5 | bullet 2: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-02.log |
+| S06.system-prompt-registry | pass | cf8158bc25f5 | bullet 2: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-02.log |
+| S06.view | pass | cf8158bc25f5 | bullet 5: pass; bullet 7: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk/S06/transcripts/S06-context-condensers-05.log |
+| S06.view-atomicity | pass | cf8158bc25f5 | bullet 2: pass | /tmp/claude-0/-home-user/b6fce024-494e-5933-8abc-e91d9551911d/scratchpad/sdk-verify2/S05/transcripts/S05-events-02.log |
