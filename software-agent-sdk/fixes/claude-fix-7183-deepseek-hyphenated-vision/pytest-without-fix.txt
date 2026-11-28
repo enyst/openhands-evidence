@@ -1,0 +1,12 @@
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/sdk/llm/test_model_features.py::test_hyphenated_deepseek_v4_1_flash_ids_are_vision_capable[deepseek-v4-1-flash]
+FAILED tests/sdk/llm/test_model_features.py::test_hyphenated_deepseek_v4_1_flash_ids_are_vision_capable[deepseek-v4-1-flash-1017]
+FAILED tests/sdk/llm/test_model_features.py::test_hyphenated_deepseek_v4_1_flash_ids_are_vision_capable[deepseek-v4-1-flash-1017-uncensored]
+FAILED tests/sdk/llm/test_model_features.py::test_hyphenated_deepseek_v4_1_flash_ids_are_vision_capable[deepseek-v4-1-flash-uncensored]
+FAILED tests/sdk/llm/test_model_features.py::test_hyphenated_deepseek_v4_1_flash_ids_are_vision_capable[openai/deepseek-v4-1-flash]
+FAILED tests/sdk/llm/test_model_features.py::test_hyphenated_deepseek_v4_1_flash_ids_are_vision_capable[openai/deepseek-v4-1-flash-1017]
+FAILED tests/sdk/llm/test_model_features.py::test_hyphenated_deepseek_v4_1_flash_ids_are_vision_capable[openai/deepseek-v4-1-flash-1017-uncensored]
+FAILED tests/sdk/llm/test_model_features.py::test_hyphenated_deepseek_v4_1_flash_ids_are_vision_capable[litellm_proxy/deepseek-v4-1-flash-1017]
+============ 8 failed, 2 passed, 294 deselected, 1 warning in 0.29s ============

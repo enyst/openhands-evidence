@@ -1,0 +1,28 @@
+cf8158b
+{
+ "openai/deepseek-v4-1-flash-1017-uncensored": {
+  "supports_vision": true,
+  "source": "sdk",
+  "vision_is_active": true
+ },
+ "deepseek-v4-1-flash": {
+  "supports_vision": true,
+  "source": "sdk",
+  "vision_is_active": true
+ },
+ "deepseek-v4-1-flash-1017": {
+  "supports_vision": true,
+  "source": "sdk",
+  "vision_is_active": true
+ },
+ "deepseek-v4.1-flash": {
+  "supports_vision": true,
+  "source": "sdk",
+  "vision_is_active": true
+ },
+ "openai/e2ee-deepseek-v4-1-flash-1017": {
+  "supports_vision": false,
+  "source": "discovery",
+  "vision_is_active": false
+ }
+}
